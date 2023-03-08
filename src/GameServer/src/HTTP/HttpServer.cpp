@@ -68,6 +68,36 @@ void HttpServer::start(string ip, int port)
 		res.set_content(resJson.dump(), "application/json");
         });
 
+	svr.Post("/TestMakeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
+		vector<string> scenes;
+		scenes.push_back("test");
+		
+		shared_ptr<OfficeRoom> room = make_shared<OfficeRoom>(scenes);
+
+		room->modeType = 1;
+		room->creatorId = "test";
+		room->currentHostId = "test";
+		room->password = "test";
+		room->isPassword = false;
+		room->personnel = 10;
+		room->observer = 10;
+		room->isWaitingRoom = false;
+		room->runningTime = 100;
+
+		room->AUTO_DESTROY = true;
+		room->DESTROY_WHEN_EMPTY = true;
+
+		room->Init();
+
+		GRoomManager->AddRoom(room);
+
+		nlohmann::json resJson;
+		resJson["result"] = "SUCCESS";
+		resJson["roomId"] = room->roomId;
+
+		res.set_content(resJson.dump(), "application/json");
+		});
+
     svr.Post("/Stop", [&](const httplib::Request& req, httplib::Response& res) {
         svr.stop();
         });

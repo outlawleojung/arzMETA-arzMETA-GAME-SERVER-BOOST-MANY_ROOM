@@ -31,8 +31,6 @@ void Acceptor::RegisterAccept()
 			return;
 
 		session->ProcessConnect();
-		session->OnConnected();
-		session->RegisterRecv();
 		this->RegisterAccept();
 		});
 }
