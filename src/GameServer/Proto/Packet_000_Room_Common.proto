@@ -1,0 +1,53 @@
+syntax = "proto3";
+package Protocol;
+
+message C_ENTER
+{
+	string roomId = 1;
+	string clientId = 2;
+	string nickname = 3;
+
+	//for office
+	string password = 4;
+	bool isObserver = 5;
+}
+
+message S_ENTER
+{
+	string result = 1;
+}
+
+message C_REENTER
+{
+	string clientId = 1;
+}
+
+message S_REENTER
+{
+	bool success = 1;
+}
+
+message C_LEAVE
+{
+}
+
+message C_SET_NICKNAME
+{
+	string nickname = 1;
+}
+
+message S_SET_NICKNAME
+{
+	bool success = 1;
+}
+
+message S_SET_NICKNAME_NOTICE
+{
+	string clientId = 1;
+	string nickname = 2;
+}
+
+message S_DISCONNECT
+{
+	string code = 1;
+}

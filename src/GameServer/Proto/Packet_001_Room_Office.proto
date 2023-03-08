@@ -1,0 +1,183 @@
+syntax = "proto3";
+package Protocol;
+
+message C_OFFICE_GET_WAITING_LIST
+{
+}
+
+message WaitClient
+{
+	bool isObserver = 1;
+	string clientId = 2;
+	string nickname = 3;
+}
+
+message S_OFFICE_ADD_WAITING_CLIENT
+{
+	repeated WaitClient clients = 1;
+}
+
+message S_OFFICE_REMOVE_WAITING_CLIENT
+{
+	repeated string clients = 1;
+}
+
+message C_OFFICE_ACCEPT_WAIT
+{
+	string clientId = 1;
+	bool isAccepted = 2;
+}
+
+message S_OFFICE_ACCEPT_WAIT
+{
+	bool success = 1;
+}
+
+message S_OFFICE_ACCEPT_WAIT_NOTICE
+{
+	bool isAccepted = 1;
+}
+
+message C_OFFICE_GET_CLIENT
+{
+}
+
+message S_OFFICE_ADD_CLIENT
+{
+	message MeetingModuleClientInfo
+	{
+		string clientId = 1;
+		string nickname = 2;
+	}
+	repeated MeetingModuleClientInfo clientInfos = 1;
+}
+
+message S_OFFICE_REMOVE_CLIENT
+{
+	repeated string clientIds = 1;
+}
+
+message C_OFFICE_GET_HOST
+{
+}
+
+message S_OFFICE_GET_HOST
+{
+	string clientId = 1;
+}
+
+message C_OFFICE_BREAK
+{
+}
+
+message S_OFFICE_BREAK
+{
+	bool success = 1;
+}
+
+message C_OFFICE_KICK
+{
+	string clientId = 1;
+}
+
+message S_OFFICE_KICK
+{
+	bool success = 1;
+}
+
+message USER_PERMISSION
+{
+	string clientId = 1;
+	bool screenPermission = 2;
+	bool chatPermission = 3;
+	bool voicePermission = 4;
+	bool videoPermission = 5;
+	int32 type = 6;
+}
+
+message C_OFFICE_GET_PERMISSION
+{
+	string clientId = 1;
+}
+
+message S_OFFICE_GET_PERMISSION
+{
+	repeated USER_PERMISSION permissions = 1;
+}
+
+message C_OFFICE_SET_PERMISSION
+{
+	repeated USER_PERMISSION permissions = 1;
+}
+
+message S_OFFICE_SET_PERMISSION
+{
+	bool success = 1;
+}
+
+message S_OFFICE_SET_PERMISSION_NOTICE
+{
+	bool screenPermission = 1;
+	bool chatPermission = 2;
+	bool voicePermission = 3;
+	bool videoPermission = 4;
+	int32 type = 5;
+}
+
+message C_OFFICE_SET_ROOM_INFO
+{
+	int32 personnel = 1;
+	string password = 2;
+	bool isShutdown = 3; 
+	bool isAdvertising = 4;
+	bool isWaitingRoom = 5;
+}
+
+message S_OFFICE_SET_ROOM_INFO
+{
+	bool success = 1;
+}
+
+message C_OFFICE_GET_ROOM_INFO
+{
+}
+
+message S_OFFICE_GET_ROOM_INFO
+{
+	string roomName = 1;
+	string description = 2;
+	int32 topicType = 3;
+	string password = 4;
+	string spaceInfoId = 5;
+	int32 personnel = 6;
+	int32 currentPersonnel = 7;
+	bool isAdvertising = 8;
+	string thumbnail = 9;
+	bool isWaitingRoom = 10;
+	bool isShutdown = 11;
+	int32 runningTime = 12;
+	int32 passedTime = 13;
+	string roomcode = 14;
+	string hostNickname = 15;
+}
+
+message C_OFFICE_VIDEO_STREAM
+{
+	string clientid = 1;
+	string url = 2;
+	float volume = 3;
+	float time = 4;
+	bool play = 5;
+	bool seek = 6;
+	int32 mediaPlayerState = 7;
+}
+
+message S_OFFICE_VIDEO_STREAM
+{
+	string url = 1;
+	float volume = 2;
+	float time = 3;
+	bool play = 4;
+	bool seek = 5;
+	int32 mediaPlayerState = 6;
+}

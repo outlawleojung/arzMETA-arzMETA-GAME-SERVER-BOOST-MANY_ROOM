@@ -1,0 +1,11 @@
+{
+"modeType" : 0,
+"creatorId" : "test",
+"currentHostId" : "test",
+"password" : "test",
+"isPassword" : false,
+"personnel" : 2,
+"observer" : 1,
+"isWaitingRoom" : false,
+"runningTime" : 100
+}

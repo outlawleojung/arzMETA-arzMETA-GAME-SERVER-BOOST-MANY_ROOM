@@ -1,0 +1,49 @@
+syntax = "proto3";
+package Protocol;
+
+message C_INTERACTION_GET_ITEMS 
+{
+}
+
+message S_INTERACTION_GET_ITEMS 
+{
+	message Item
+	{
+		string id = 1;
+		string state = 2;
+	}
+
+	repeated Item items = 1;
+}
+
+message C_INTERACTION_SET_ITEM
+{
+	string id = 1;
+	string state = 2;
+}
+
+message S_INTERACTION_SET_ITEM
+{
+	bool success = 1;
+}
+
+message S_INTERACTION_SET_ITEM_NOTICE
+{
+	string id = 1;
+	string state = 2;
+}
+
+message C_INTERACTION_REMOVE_ITEM
+{
+	string id = 1;
+}
+
+message S_INTERACTION_REMOVE_ITEM
+{
+	bool success = 1;
+}
+
+message S_INTERACTION_REMOVE_ITEM_NOTICE
+{
+	string id = 1;
+}
