@@ -95,7 +95,7 @@ int main()
 			tmpAddrPtr = &((struct sockaddr_in*)ifa->ifa_addr)->sin_addr;
 			char addressBuffer[INET_ADDRSTRLEN];
 			inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
-			if (strcmp(ifa->ifa_name, "eth0"))
+			if (strcmp(ifa->ifa_name, "eth0") == 0)
 			{
 				localHostIp = addressBuffer;
 			}
