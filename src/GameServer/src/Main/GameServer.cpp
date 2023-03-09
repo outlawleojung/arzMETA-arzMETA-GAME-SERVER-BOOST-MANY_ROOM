@@ -95,7 +95,11 @@ int main()
 			tmpAddrPtr = &((struct sockaddr_in*)ifa->ifa_addr)->sin_addr;
 			char addressBuffer[INET_ADDRSTRLEN];
 			inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
-			printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
+			if (strcmp(ifa->ifa_name, "eth0"))
+			{
+				localHostIp = addressBuffer;
+			}
+			//printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
 		}
 	}
 	if (ifAddrStruct != NULL) freeifaddrs(ifAddrStruct);
