@@ -10,6 +10,13 @@
 #include "../Room/OfficeRoom.h"
 #include "../HTTP/HttpServer.h"
 
+#ifdef linux
+#include <sys/types.h>
+#include <ifaddrs.h>
+#include <netinet/in.h> 
+#include <arpa/inet.h>
+#endif
+
 using namespace std;
 using namespace boost::asio;
 
@@ -72,6 +79,27 @@ int main()
 
 	string localHostIp;
 
+#ifdef linux
+	struct ifaddrs* ifAddrStruct = NULL;
+	struct ifaddrs* ifa = NULL;
+	void* tmpAddrPtr = NULL;
+
+	getifaddrs(&ifAddrStruct);
+
+	for (ifa = ifAddrStruct; ifa != NULL; ifa = ifa->ifa_next) {
+		if (!ifa->ifa_addr) {
+			continue;
+		}
+		if (ifa->ifa_addr->sa_family == AF_INET) { // check it is IP4
+			// is a valid IP4 Address
+			tmpAddrPtr = &((struct sockaddr_in*)ifa->ifa_addr)->sin_addr;
+			char addressBuffer[INET_ADDRSTRLEN];
+			inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
+			printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
+		}
+	}
+	if (ifAddrStruct != NULL) freeifaddrs(ifAddrStruct);
+#elif _WIN32
 	{
 		boost::asio::io_service io_service;
 		boost::asio::ip::tcp::resolver resolver(io_service);
@@ -82,11 +110,12 @@ int main()
 			boost::asio::ip::tcp::endpoint ep = *iter++;
 			if (ep.protocol() == boost::asio::ip::tcp::v4() && ep.address().to_string() != "127.0.0.1") {
 				localHostIp = ep.address().to_string();
-				//std::cout << "Local IP address: " << ep.address().to_string() << std::endl;
 				break;
+				//std::cout << "Local IP address: " << ep.address().to_string() << std::endl;
 			}
 		}
 	}
+#endif
 
 	GLogManager->Log("Local Host IP : ", localHostIp);
 
