@@ -80,10 +80,10 @@ int main()
 		boost::asio::ip::tcp::resolver::iterator end;
 		while (iter != end) {
 			boost::asio::ip::tcp::endpoint ep = *iter++;
-			if (ep.protocol() == boost::asio::ip::tcp::v4()) {
+			if (ep.protocol() == boost::asio::ip::tcp::v4() && ep.address().to_string() != "127.0.0.1") {
 				localHostIp = ep.address().to_string();
-				break;
 				//std::cout << "Local IP address: " << ep.address().to_string() << std::endl;
+				break;
 			}
 		}
 	}
