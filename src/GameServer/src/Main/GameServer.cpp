@@ -88,6 +88,8 @@ int main()
 		}
 	}
 
+	GLogManager->Log("Local Host IP : ", localHostIp);
+
 	if (localHostIp.empty())
 		return 0;
 
@@ -100,6 +102,8 @@ int main()
 		);
 
 	service->Start();
+
+	GLogManager->Log("Game Server Started with IP ", localHostIp);
 
 	for (int i = 0; i < 5; i++)
 	{
