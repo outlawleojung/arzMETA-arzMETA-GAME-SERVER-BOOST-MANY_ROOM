@@ -114,9 +114,6 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 		currentPersonnel++;
 
-		for (auto it = C_ENTER_Handlers.begin(); it != C_ENTER_Handlers.end(); it++)
-			(*it)(session, pkt);
-
 		return;
 	}
 
@@ -178,9 +175,6 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		currentObserver++;
 	else
 		currentPersonnel++;
-			
-	for (auto it = C_ENTER_Handlers.begin(); it != C_ENTER_Handlers.end(); it++)
-		(*it)(session, pkt);
 }
 
 void OfficeRoom::ReEnter(shared_ptr<GameSession> session, string clientId)

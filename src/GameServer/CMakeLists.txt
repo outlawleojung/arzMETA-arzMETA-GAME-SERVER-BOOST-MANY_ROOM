@@ -15,8 +15,6 @@ if (WIN32)
 
     execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/Room/RoomBase --extension=h --recv=C_ --send=S_ --template RoomBase.h
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/Room/RoomHandler --extension=cpp --recv=C_ --send=S_ --template RoomHandler.cpp
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
     execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/ClientPacketHandler --extension=h --recv=C_ --send=S_ --template ClientPacketHandler.h
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
     execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/ClientPacketHandler --extension=cpp --recv=C_ --send=S_ --template PacketHandler.cpp

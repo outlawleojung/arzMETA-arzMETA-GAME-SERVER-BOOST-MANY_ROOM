@@ -38,26 +38,8 @@ public:
 	std::atomic<RoomState> state;
 	std::function<void(std::shared_ptr<GameSession>)> onDisconnected;
 
-protected:
-	
-{%- for pkt in parser.recv_pkt %}
-	std::vector<std::function<void(shared_ptr<GameSession>&, Protocol::{{pkt.name}}&)>> {{pkt.name}}_Handlers;
-{%- endfor %}
-
 public:
 {%- for pkt in parser.recv_pkt %}
-	virtual void Handle_{{pkt.name}}(shared_ptr<GameSession>& session, Protocol::{{pkt.name}}& pkt);
-{%- endfor %}
-
-{%- for pkt in parser.recv_pkt %}
-	template<typename T>
-	void AddHandler(shared_ptr<T> owner, void(T::* handler)(shared_ptr<GameSession>&, Protocol::{{pkt.name}}& pkt))
-	{
-		{{pkt.name}}_Handlers.push_back([owner, handler](std::shared_ptr<GameSession>& session, Protocol::{{pkt.name}}& pkt)
-			{
-				(owner.get()->*handler)(session, pkt);
-			}
-    	);
-	}
+	virtual void Handle_{{pkt.name}}(shared_ptr<GameSession>& session, Protocol::{{pkt.name}}&pkt) {};
 {%- endfor %}
 };
