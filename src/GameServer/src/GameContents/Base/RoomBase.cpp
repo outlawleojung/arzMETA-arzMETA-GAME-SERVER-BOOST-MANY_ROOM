@@ -1,5 +1,6 @@
 #include "RoomBase.h"
-#include "RoomManager.h"
+#include "../RoomManager.h"
+#include "ClientBase.h"
 
 RoomBase::RoomBase()
 	: state(RoomState::Idle)
@@ -26,4 +27,9 @@ void RoomBase::Close()
 	HandleClose();
 
 	GRoomManager->RemoveRoom(roomId);
+}
+
+void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE& pkt)
+{
+	client->DoAsync(&ClientBase::Leave, string("Leaved"));
 }

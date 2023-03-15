@@ -1,9 +1,10 @@
 #include "OfficeRoom.h"
-//#include <httplib.h>
 
-#include "../ClientPacketHandler.h"
+#include "OfficeClient.h"
+#include "../../Session/GameSession.h"
+#include "../../ClientPacketHandler.h"
 
-#include "../Session/GameSession.h"
+#include "../ClientManager.h"
 
 OfficeRoom::OfficeRoom(vector<string> sceneIds)
 	: GameRoom(sceneIds)
@@ -14,7 +15,9 @@ OfficeRoom::OfficeRoom(vector<string> sceneIds)
 	, isAdvertising(false)
 	, isShutdown(false)
 	, passedTime(0)
-{}
+{
+	disconnectedSessionWaitTime = 10000;
+}
 
 void OfficeRoom::Init()
 {
@@ -39,46 +42,37 @@ void OfficeRoom::Init()
 void OfficeRoom::HandleClose()
 {
 	for (auto client = waitingList.begin(); client != waitingList.end(); client++)
-		client->second.second->session->Disconnect("CLOSING");
+		client->second.second->DoAsync(&ClientBase::Leave, string("Closing"));
 
 	for (auto client = clients.begin(); client != clients.end(); client++)
-		client->second->session->Disconnect("CLOSING");
-
-	//waitingList.clear();
-	//clients.clear();
+		client->second->DoAsync(&ClientBase::Leave, string("Closing"));
 
 	GameRoom::HandleClose();
 
 	state = RoomState::Closed;
-
-	//Main 의 http 서버의 종료, 이걸 여기서 해야 하나?
-	//httplib::Client httpClient(localHostIp, 8080);
-	//httpClient.Post("/Stop");
 }
 
 void OfficeRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&OfficeRoom::Enter, session, pkt); }
-void OfficeRoom::Handle_C_REENTER(shared_ptr<GameSession>& session, Protocol::C_REENTER& pkt) { DoAsync(&OfficeRoom::ReEnter, session, pkt.clientid()); }
-void OfficeRoom::Handle_C_LEAVE(shared_ptr<GameSession>& session, Protocol::C_LEAVE& pkt) { DoAsync(&OfficeRoom::Leave, session); }
-void OfficeRoom::Handle_C_SET_NICKNAME(shared_ptr<GameSession>& session, Protocol::C_SET_NICKNAME& pkt) { DoAsync(&OfficeRoom::SetNickname, session, pkt.nickname()); }
 
-void OfficeRoom::Handle_C_BASE_SET_SCENE(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_SCENE& pkt) { DoAsync(&OfficeRoom::SetScene, session, pkt.sceneid()); }
-void OfficeRoom::Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) { DoAsync(&OfficeRoom::InstantiateObject, session, pkt); }
+void OfficeRoom::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt) { DoAsync(&OfficeRoom::SetNickname, client, pkt.nickname()); }
 
-void OfficeRoom::Handle_C_INTERACTION_SET_ITEM(shared_ptr<GameSession>& session, Protocol::C_INTERACTION_SET_ITEM& pkt)
-{
-}
+void OfficeRoom::Handle_C_BASE_SET_SCENE(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_SCENE& pkt) { DoAsync(&OfficeRoom::SetScene, client, pkt.sceneid()); }
+void OfficeRoom::Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) { DoAsync(&OfficeRoom::InstantiateObject, client, pkt); }
 
-void OfficeRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&OfficeRoom::GetWaitingList, session); }
-void OfficeRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<GameSession>& session, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&OfficeRoom::AcceptWait, session, pkt.clientid(), pkt.isaccepted()); } 
-void OfficeRoom::Handle_C_OFFICE_GET_CLIENT(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_CLIENT& pkt) { DoAsync(&OfficeRoom::GetClient, session); }
-void OfficeRoom::Handle_C_OFFICE_GET_HOST(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_HOST& pkt) { DoAsync(&OfficeRoom::GetHost, session); }
-void OfficeRoom::Handle_C_OFFICE_BREAK(shared_ptr<GameSession>& session, Protocol::C_OFFICE_BREAK& pkt) { DoAsync(&OfficeRoom::Break, session); }
-void OfficeRoom::Handle_C_OFFICE_KICK(shared_ptr<GameSession>& session, Protocol::C_OFFICE_KICK& pkt) { DoAsync(&OfficeRoom::Kick, session, pkt.clientid()); }
-void OfficeRoom::Handle_C_OFFICE_GET_PERMISSION(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_PERMISSION& pkt) { DoAsync(&OfficeRoom::GetPermission, session, pkt.clientid()); }
-void OfficeRoom::Handle_C_OFFICE_SET_PERMISSION(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_PERMISSION& pkt) { DoAsync(&OfficeRoom::SetPermission, session, pkt); }
-void OfficeRoom::Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { DoAsync(&OfficeRoom::SetRoomInfo, session, pkt); }
-void OfficeRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { DoAsync(&OfficeRoom::GetRoomInfo, session); }
-void OfficeRoom::Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::C_OFFICE_VIDEO_STREAM& pkt) { DoAsync(&OfficeRoom::HandleVideoStream, pkt.url(), pkt.volume(), pkt.time(), pkt.play(), pkt.seek(), pkt.mediaplayerstate()); }
+//TODO
+void OfficeRoom::Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_SET_ITEM& pkt) {}
+
+void OfficeRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&OfficeRoom::GetWaitingList, client); }
+void OfficeRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&OfficeRoom::AcceptWait, client, pkt.clientid(), pkt.isaccepted()); } 
+void OfficeRoom::Handle_C_OFFICE_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_CLIENT& pkt) { DoAsync(&OfficeRoom::GetClient, client); }
+void OfficeRoom::Handle_C_OFFICE_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_HOST& pkt) { DoAsync(&OfficeRoom::GetHost, client); }
+void OfficeRoom::Handle_C_OFFICE_BREAK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_BREAK& pkt) { DoAsync(&OfficeRoom::Break, client); }
+void OfficeRoom::Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_KICK& pkt) { DoAsync(&OfficeRoom::Kick, client, pkt.clientid()); }
+void OfficeRoom::Handle_C_OFFICE_GET_PERMISSION(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_PERMISSION& pkt) { DoAsync(&OfficeRoom::GetPermission, client, pkt.clientid()); }
+void OfficeRoom::Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_PERMISSION& pkt) { DoAsync(&OfficeRoom::SetPermission, client, pkt); }
+void OfficeRoom::Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { DoAsync(&OfficeRoom::SetRoomInfo, client, pkt); }
+void OfficeRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { DoAsync(&OfficeRoom::GetRoomInfo, client); }
+void OfficeRoom::Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_VIDEO_STREAM& pkt) { DoAsync(&OfficeRoom::HandleVideoStream, pkt.url(), pkt.volume(), pkt.time(), pkt.play(), pkt.seek(), pkt.mediaplayerstate()); }
 
 void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 {
@@ -90,29 +84,36 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		res.set_result("DUPLICATED");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		session->Disconnect("ENTER_FAIL");
+		session->Disconnect();
 	}
 
 	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
 
-	auto officeRoomSession = make_shared<OfficeRoomSession>();
-	officeRoomSession->session = session;
+	auto client = make_shared<OfficeClient>();
+	
 	if(pkt.isobserver())
-		officeRoomSession->type = OfficeRoomUserType::Observer;
+		client->type = OfficeRoomUserType::Observer;
 	else
 		if (modeType == 1)
-			officeRoomSession->type = OfficeRoomUserType::Guest;
+			client->type = OfficeRoomUserType::Guest;
 		else if (modeType == 2)
-			officeRoomSession->type = OfficeRoomUserType::Audience;
+			client->type = OfficeRoomUserType::Audience;
 
 	if (clients.size() == 0 && creatorId == pkt.clientid())
 	{
-		res.set_result("SUCCESS");
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		officeRoomSession->type = OfficeRoomUserType::Host;
-		clients.insert({ pkt.clientid(), officeRoomSession });
+		session->owner = client;
+		client->session = session;
+		client->clientId = pkt.clientid();
+		client->nickname = pkt.nickname();
+		client->enteredRoom = static_pointer_cast<OfficeRoom>(shared_from_this());
+
+		client->type = OfficeRoomUserType::Host;
+		clients.insert({ pkt.clientid(), client });
 
 		currentPersonnel++;
+
+		res.set_result("SUCCESS");
+		session->Send(ClientPacketHandler::MakeSendBuffer(res));
 
 		return;
 	}
@@ -121,7 +122,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		res.set_result("HOST_NOT_ENTERED");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		session->Disconnect("ENTER_FAIL");
+		session->Disconnect();
 		return;
 	}
 
@@ -129,7 +130,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		res.set_result("ROOM_IS_SHUTDONW");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		session->Disconnect("ENTER_FAIL");
+		session->Disconnect();
 		return;
 	}
 
@@ -137,16 +138,22 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		res.set_result("PASSWORD_FAIL");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		session->Disconnect("ENTER_FAIL");
+		session->Disconnect();
 		return;
 	}
 
 	if (isWaitingRoom)
-	{
+	{		
+		session->owner = client;
+		client->session = session;
+		client->clientId = pkt.clientid();
+		client->nickname = pkt.nickname();
+		client->enteredRoom = static_pointer_cast<OfficeRoom>(shared_from_this());
+
+		waitingList.insert({ pkt.clientid(), { pkt.isobserver(),client } });
+
 		res.set_result("WAITING");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		
-		waitingList.insert({ pkt.clientid(), { pkt.isobserver(),officeRoomSession } });
 
 		Protocol::S_OFFICE_ADD_WAITING_CLIENT addWaitingClient;
 		auto waitingClient = addWaitingClient.add_clients();
@@ -162,36 +169,38 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		res.set_result("ROOM_IS_FULL");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		session->Disconnect("ENTER_FAIL");
+		session->Disconnect();
 		return;
 	}
+
+	session->owner = client;
+	client->session = session;
+	client->clientId = pkt.clientid();
+	client->nickname = pkt.nickname();
+	client->enteredRoom = static_pointer_cast<OfficeRoom>(shared_from_this());
+
+	clients.insert({ pkt.clientid(), client });
 
 	res.set_result("SUCCESS");
 	session->Send(ClientPacketHandler::MakeSendBuffer(res));
 
-	clients.insert({ pkt.clientid(), officeRoomSession });
-		
 	if (pkt.isobserver())
 		currentObserver++;
 	else
 		currentPersonnel++;
 }
 
-void OfficeRoom::ReEnter(shared_ptr<GameSession> session, string clientId)
-{	
-}
-
-void OfficeRoom::Leave(shared_ptr<GameSession> session)
+void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 {
-	session->Disconnect("LEAVED");
+	auto oClient = static_pointer_cast<OfficeClient>(_client);
 
 	//대기열 먼저 확인, 존재했으면 지우고 호스트에게 알림
 	{
-		auto client = waitingList.find(session->clientId);
+		auto client = waitingList.find(_client->clientId);
 		if (client != waitingList.end())
 		{
 			Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
-			removeWaitingClient.add_clients(client->second.second->session->clientId);
+			removeWaitingClient.add_clients(client->second.second->clientId);
 			clients.find(currentHostId)->second->session->Send(ClientPacketHandler::MakeSendBuffer(removeWaitingClient));
 
 			waitingList.erase(client);
@@ -200,7 +209,7 @@ void OfficeRoom::Leave(shared_ptr<GameSession> session)
 	}
 	
 	//대기열에도 없고, clients 에도 없으면 거기에서 끝
-	auto client = clients.find(session->clientId);
+	auto client = clients.find(oClient->clientId);
 	if (client == clients.end())
 		return;
 
@@ -213,78 +222,76 @@ void OfficeRoom::Leave(shared_ptr<GameSession> session)
 	//clients 에서 삭제
 	clients.erase(client);
 
-	GameRoom::Leave(session);
-
-	GLogManager->Log("Session Leaved :			", session->clientId);
+	GameRoom::Leave(_client);
 
 	if (DESTROY_WHEN_EMPTY)
-		if (clients.size() == 0 || session->clientId == currentHostId)
+		if (clients.size() == 0 || _client->clientId == currentHostId)
 			Close();
 }
 
-void OfficeRoom::SetNickname(shared_ptr<GameSession> session, string nickname)
+void OfficeRoom::SetNickname(shared_ptr<ClientBase> _client, string nickname)
 {
-	auto client = clients.find(session->clientId);
+	auto client = clients.find(_client->clientId);
 	if (client == clients.end())
 		return;
 
-	client->second->session->nickname = nickname;
+	client->second->nickname = nickname;
 
 	{
 		Protocol::S_SET_NICKNAME setNickname;
 		setNickname.set_success(true);
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(setNickname);
-		session->Send(sendBuffer);
+		_client->Send(sendBuffer);
 	}
 
 	{
 		Protocol::S_SET_NICKNAME_NOTICE setNicknameNotice;
-		setNicknameNotice.set_clientid(session->clientId);
+		setNicknameNotice.set_clientid(client->second->clientId);
 		setNicknameNotice.set_nickname(nickname);
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(setNicknameNotice);
 		this->DoAsync(&OfficeRoom::Broadcast, sendBuffer);
 	}
 }
 
-void OfficeRoom::GetClient(shared_ptr<GameSession> session)
+void OfficeRoom::GetClient(shared_ptr<ClientBase> _client)
 {
 	Protocol::S_OFFICE_ADD_CLIENT res;
 
 	for (auto& client : clients)
 	{
 		auto clientInfo = res.add_clientinfos();
-		clientInfo->set_clientid(client.second->session->clientId);
-		clientInfo->set_nickname(client.second->session->nickname);
+		clientInfo->set_clientid(client.second->clientId);
+		clientInfo->set_nickname(client.second->nickname);
 	}
 
 	if (res.clientinfos_size() > 0)
 	{
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(res);
-		session->Send(sendBuffer);
+		_client->Send(sendBuffer);
 	}
 }
 
-void OfficeRoom::GetHost(shared_ptr<GameSession> session)
+void OfficeRoom::GetHost(shared_ptr<ClientBase> client)
 {
 	Protocol::S_OFFICE_GET_HOST res;
 	res.set_clientid(currentHostId);
-	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 }
 
-void OfficeRoom::Break(shared_ptr<GameSession> session)
+void OfficeRoom::Break(shared_ptr<ClientBase> client)
 {
-	if (session->clientId != currentHostId) return;
+	if (client->clientId != currentHostId) return;
 
 	Protocol::S_OFFICE_BREAK res;
 	res.set_success(true);
-	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 
 	Close();
 }
 
-void OfficeRoom::Kick(shared_ptr<GameSession> session, string clientId)
+void OfficeRoom::Kick(shared_ptr<ClientBase> client, string clientId)
 {
-	if (session->clientId != currentHostId) return;
+	if (client->clientId != currentHostId) return;
 
 	Protocol::S_OFFICE_KICK res;
 
@@ -293,24 +300,19 @@ void OfficeRoom::Kick(shared_ptr<GameSession> session, string clientId)
 	if (kickedClient == clients.end())
 	{
 		res.set_success(false);
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		client->Send(ClientPacketHandler::MakeSendBuffer(res));
 		return;
 	}
 
-	if (!kickedClient->second->session->Disconnect("KICKED"))
-	{
-		res.set_success(false);
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		return;
-	}
+	kickedClient->second->DoAsync(&ClientBase::Leave, string("Kicked"));
 
 	res.set_success(true);
-	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 }
 
-void OfficeRoom::GetPermission(shared_ptr<GameSession> session, string clientId)
+void OfficeRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 {
-	if (session->clientId != currentHostId) return;
+	if (_client->clientId != currentHostId) return;
 
 	Protocol::S_OFFICE_GET_PERMISSION getPermission;
 
@@ -319,7 +321,7 @@ void OfficeRoom::GetPermission(shared_ptr<GameSession> session, string clientId)
 		for (auto client = clients.begin(); client != clients.end(); client++)
 		{
 			auto permission = getPermission.add_permissions();
-			permission->set_clientid(client->second->session->clientId);
+			permission->set_clientid(client->second->clientId);
 			permission->set_screenpermission(client->second->screenPermission);
 			permission->set_chatpermission(client->second->chatPermission);
 			permission->set_voicepermission(client->second->voicePermission);
@@ -333,7 +335,7 @@ void OfficeRoom::GetPermission(shared_ptr<GameSession> session, string clientId)
 		if (client != clients.end())
 		{
 			auto permission = getPermission.add_permissions();
-			permission->set_clientid(client->second->session->clientId);
+			permission->set_clientid(client->second->clientId);
 			permission->set_screenpermission(client->second->screenPermission);
 			permission->set_chatpermission(client->second->chatPermission);
 			permission->set_voicepermission(client->second->voicePermission);
@@ -345,13 +347,13 @@ void OfficeRoom::GetPermission(shared_ptr<GameSession> session, string clientId)
 	if (getPermission.permissions_size() > 0)
 	{
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(getPermission);
-		session->Send(sendBuffer);
+		_client->Send(sendBuffer);
 	}
 }
 
-void OfficeRoom::SetPermission(shared_ptr<GameSession> session, Protocol::C_OFFICE_SET_PERMISSION pkt)
+void OfficeRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_SET_PERMISSION pkt)
 {
-	if (session->clientId != currentHostId) return;
+	if (_client->clientId != currentHostId) return;
 
 	//예외 상황에 대비해야 함
 	//예를 들어, 새로운 호스트를 설정하려고 했는데 그 호스트가 없던 상황이었던 경우 등
@@ -376,7 +378,7 @@ void OfficeRoom::SetPermission(shared_ptr<GameSession> session, Protocol::C_OFFI
 			client->second->type = static_cast<OfficeRoomUserType>(permission.type());
 
 			if (client->second->type == OfficeRoomUserType::Host)
-				currentHostId = client->second->session->clientId;
+				currentHostId = client->second->clientId;
 		}
 	}
 
@@ -386,7 +388,7 @@ void OfficeRoom::SetPermission(shared_ptr<GameSession> session, Protocol::C_OFFI
 		Protocol::S_OFFICE_SET_PERMISSION permission;
 		permission.set_success(true);
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(permission);
-		session->Send(sendBuffer);
+		_client->Send(sendBuffer);
 	}
 
 	{
@@ -405,12 +407,12 @@ void OfficeRoom::SetPermission(shared_ptr<GameSession> session, Protocol::C_OFFI
 			permissionNotice.set_type(client->second->type);
 
 			auto sendBuffer = ClientPacketHandler::MakeSendBuffer(permissionNotice);
-			client->second->session->Send(sendBuffer);
+			client->second->Send(sendBuffer);
 		}
 	}
 }
 
-void OfficeRoom::GetRoomInfo(shared_ptr<GameSession> session)
+void OfficeRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 {
 	Protocol::S_OFFICE_GET_ROOM_INFO roomInfo;
 
@@ -431,14 +433,14 @@ void OfficeRoom::GetRoomInfo(shared_ptr<GameSession> session)
 		
 	auto host = clients.find(currentHostId);
 	if (host != clients.end())
-		roomInfo.set_hostnickname(host->second->session->nickname);
+		roomInfo.set_hostnickname(host->second->nickname);
 
-	session->Send(ClientPacketHandler::MakeSendBuffer(roomInfo));
+	client->Send(ClientPacketHandler::MakeSendBuffer(roomInfo));
 }
 
-void OfficeRoom::SetRoomInfo(shared_ptr<GameSession> session, Protocol::C_OFFICE_SET_ROOM_INFO pkt)
+void OfficeRoom::SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_SET_ROOM_INFO pkt)
 {
-	if (session->clientId != currentHostId) return;
+	if (client->clientId != currentHostId) return;
 
 	personnel = pkt.personnel();
 	password = pkt.password();
@@ -452,7 +454,7 @@ void OfficeRoom::SetRoomInfo(shared_ptr<GameSession> session, Protocol::C_OFFICE
 
 	Protocol::S_OFFICE_SET_ROOM_INFO roomInfo;
 	roomInfo.set_success(true);
-	session->Send(ClientPacketHandler::MakeSendBuffer(roomInfo));
+	client->Send(ClientPacketHandler::MakeSendBuffer(roomInfo));
 }
 
 void OfficeRoom::HandleVideoStream(string url, float volume, float time, bool play, bool seek, int mediaplayerstate)
@@ -470,23 +472,23 @@ void OfficeRoom::HandleVideoStream(string url, float volume, float time, bool pl
 	this->DoAsync(&OfficeRoom::Broadcast, sendBuffer);
 }
 
-void OfficeRoom::GetWaitingList(shared_ptr<GameSession> session)
+void OfficeRoom::GetWaitingList(shared_ptr<ClientBase> _client)
 {
 	Protocol::S_OFFICE_ADD_WAITING_CLIENT waitingListPkt;
 	for (auto wait = waitingList.begin(); wait != waitingList.end(); wait++)
 	{
 		auto client = waitingListPkt.add_clients();
 		client->set_isobserver(wait->second.first);
-		client->set_clientid(wait->second.second->session->clientId);
-		client->set_nickname(wait->second.second->session->nickname);
+		client->set_clientid(wait->second.second->clientId);
+		client->set_nickname(wait->second.second->nickname);
 	}
 
-	session->Send(ClientPacketHandler::MakeSendBuffer(waitingListPkt));
+	_client->Send(ClientPacketHandler::MakeSendBuffer(waitingListPkt));
 }
 
-void OfficeRoom::AcceptWait(shared_ptr<GameSession> session, string clientId, bool isAccepted)
+void OfficeRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bool isAccepted)
 {
-	if (session->clientId != currentHostId) return;
+	if (_client->clientId != currentHostId) return;
 
 	Protocol::S_OFFICE_ACCEPT_WAIT acceptWait;
 
@@ -495,7 +497,7 @@ void OfficeRoom::AcceptWait(shared_ptr<GameSession> session, string clientId, bo
 	{
 		acceptWait.set_success(false);
 		//set result as "no client with clientid ~"
-		session->Send(ClientPacketHandler::MakeSendBuffer(acceptWait));
+		_client->Send(ClientPacketHandler::MakeSendBuffer(acceptWait));
 		return;
 	}
 	
@@ -507,18 +509,18 @@ void OfficeRoom::AcceptWait(shared_ptr<GameSession> session, string clientId, bo
 		{
 			acceptWait.set_success(false);
 			//set result as "room is full"
-			session->Send(ClientPacketHandler::MakeSendBuffer(acceptWait));
+			_client->Send(ClientPacketHandler::MakeSendBuffer(acceptWait));
 			return;
 		}
 	}
 
 	//이외의 경우 성공, 호스트에게 관련 메시지 전송
 	acceptWait.set_success(true);
-	session->Send(ClientPacketHandler::MakeSendBuffer(acceptWait));
+	_client->Send(ClientPacketHandler::MakeSendBuffer(acceptWait));
 
 	Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
-	removeWaitingClient.add_clients(client->second.second->session->clientId);
-	session->Send(ClientPacketHandler::MakeSendBuffer(removeWaitingClient));
+	removeWaitingClient.add_clients(client->second.second->clientId);
+	_client->Send(ClientPacketHandler::MakeSendBuffer(removeWaitingClient));
 
 	//대상 클라이언트에게 성공/실패 메시지 전송
 	Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
@@ -528,7 +530,7 @@ void OfficeRoom::AcceptWait(shared_ptr<GameSession> session, string clientId, bo
 	//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
 	if (isAccepted)
 	{
-		clients.insert({ client->second.second->session->clientId, client->second.second });
+		clients.insert({ client->second.second->clientId, client->second.second });
 
 		if (client->second.first)
 			currentObserver++;
@@ -536,59 +538,59 @@ void OfficeRoom::AcceptWait(shared_ptr<GameSession> session, string clientId, bo
 			currentPersonnel++;
 	}
 
-	//대기열에서 대상 클라이언트 삭제
-	waitingList.erase(client);
+	//대기열에서 대상 퇴장
+	client->second.second->DoAsync(&ClientBase::Leave, string("Waiting_Rejected"));
 }
 
 void OfficeRoom::Broadcast(shared_ptr<SendBuffer> sendBuffer)
 {
 	for (auto client = clients.begin(); client != clients.end(); client++)
-		client->second->session->Send(sendBuffer);
+		client->second->Send(sendBuffer);
 }
 
-void OfficeRoom::SetScene(shared_ptr<GameSession> session, string sceneId)
+void OfficeRoom::SetScene(shared_ptr<ClientBase> _client, string sceneId)
 {
-	auto client = clients.find(session->clientId);
+	auto client = clients.find(_client->clientId);
 	if (client == clients.end())
 		return;
 
-	GameRoom::SetScene(session, sceneId);
+	GameRoom::SetScene(_client, sceneId);
 }
 
-void OfficeRoom::InstantiateObject(shared_ptr<GameSession> session, Protocol::C_BASE_INSTANTIATE_OBJECT pkt)
+void OfficeRoom::InstantiateObject(shared_ptr<ClientBase> _client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt)
 {
-	auto client = clients.find(session->clientId);
-	if (client == clients.end())
-		return;
-
-	if (client->second->type == OfficeRoomUserType::Observer)
-		return;
-
-	GameRoom::Handle_C_BASE_INSTANTIATE_OBJECT(session, pkt);
-}
-
-void OfficeRoom::SetState(shared_ptr<GameSession> session, Protocol::C_INTERACTION_SET_ITEM pkt)
-{
-	auto client = clients.find(session->clientId);
+	auto client = clients.find(_client->clientId);
 	if (client == clients.end())
 		return;
 
 	if (client->second->type == OfficeRoomUserType::Observer)
 		return;
 
-	GameRoom::Handle_C_INTERACTION_SET_ITEM(session, pkt);
+	GameRoom::Handle_C_BASE_INSTANTIATE_OBJECT(_client, pkt);
 }
 
-void OfficeRoom::RemoveState(shared_ptr<GameSession> session, Protocol::C_INTERACTION_REMOVE_ITEM pkt)
+void OfficeRoom::SetState(shared_ptr<ClientBase> _client, Protocol::C_INTERACTION_SET_ITEM pkt)
 {
-	auto client = clients.find(session->clientId);
+	auto client = clients.find(_client->clientId);
 	if (client == clients.end())
 		return;
 
 	if (client->second->type == OfficeRoomUserType::Observer)
 		return;
 
-	GameRoom::Handle_C_INTERACTION_REMOVE_ITEM(session, pkt);
+	GameRoom::Handle_C_INTERACTION_SET_ITEM(_client, pkt);
+}
+
+void OfficeRoom::RemoveState(shared_ptr<ClientBase> _client, Protocol::C_INTERACTION_REMOVE_ITEM pkt)
+{
+	auto client = clients.find(_client->clientId);
+	if (client == clients.end())
+		return;
+
+	if (client->second->type == OfficeRoomUserType::Observer)
+		return;
+
+	GameRoom::Handle_C_INTERACTION_REMOVE_ITEM(_client, pkt);
 }
 
 void OfficeRoom::Countdown()

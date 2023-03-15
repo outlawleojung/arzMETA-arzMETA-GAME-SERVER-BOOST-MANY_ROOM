@@ -1,9 +1,7 @@
 #include "Scene.h"
 #include "GameObject.h"
-
-#include "../ClientPacketHandler.h"
-
-#include "../Session/GameSession.h"
+#include "GameClient.h"
+#include "../../ClientPacketHandler.h"
 
 Scene::Scene(string id)
 	: id(id)
@@ -14,20 +12,20 @@ Scene::~Scene()
 
 void Scene::Clear()
 {
-	for (auto client = sessions.begin(); client != sessions.end(); client++)
+	for (auto client = clients.begin(); client != clients.end(); client++)
 	{
 		client->second->gameObjectIds.clear();
 		client->second->scene = nullptr;
 	}
 
 	gameObjects.clear();
-	sessions.clear();
+	clients.clear();
 }
 
-void Scene::Leave(shared_ptr<GameSession> session)
+void Scene::Leave(shared_ptr<GameClient> client)
 {
 	Protocol::S_BASE_REMOVE_OBJECT removeObject;
-	for (auto gameObjectId = session->gameObjectIds.begin(); gameObjectId != session->gameObjectIds.end(); gameObjectId++)
+	for (auto gameObjectId = client->gameObjectIds.begin(); gameObjectId != client->gameObjectIds.end(); gameObjectId++)
 	{
 		auto scene_gameObject = gameObjects.find(*gameObjectId);
 		//if (scene_gameObject == gameObjects.end())
@@ -35,43 +33,38 @@ void Scene::Leave(shared_ptr<GameSession> session)
 		gameObjects.erase(scene_gameObject);
 		removeObject.add_gameobjects(*gameObjectId);
 	}
-	session->gameObjectIds.clear();
+	client->gameObjectIds.clear();
 
-	sessions.erase(sessions.find(session->clientId));
-
-	//auto sessionEntry = sessions.find(session->clientId);
-	//if(sessionEntry != sessions.end())
-	//	sessions.erase(sessionEntry);
-
-	session->scene = nullptr;
+	clients.erase(clients.find(client->clientId));
+	client->scene = nullptr;
 
 	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(removeObject);
-	for (auto _session = sessions.begin(); _session != sessions.end(); _session++)
+	for (auto _session = clients.begin(); _session != clients.end(); _session++)
 		_session->second->Send(sendBuffer);
 }
 
-void Scene::AddSession(shared_ptr<GameSession> session)
+void Scene::AddClient(shared_ptr<GameClient> client)
 {
-	sessions.insert({ session->clientId, session });
+	clients.insert({ client->clientId, client });
 }
 
-void Scene::InstantiateObject(shared_ptr<GameSession> session, Protocol::C_BASE_INSTANTIATE_OBJECT pkt)
+void Scene::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt)
 {
-	auto gameObject = make_shared<GameObject>(session->scene->idGenerator++);
+	auto gameObject = make_shared<GameObject>(idGenerator++);
 	gameObject->prefabName = pkt.prefabname();
 	gameObject->objectData = pkt.objectdata();
 	gameObject->SetPosition(pkt.position().x(), pkt.position().y(), pkt.position().z());
 	gameObject->SetRotation(pkt.rotation().x(), pkt.rotation().y(), pkt.rotation().z());
-	gameObject->ownerId = session->clientId;
+	gameObject->ownerId = client->clientId;
 	
 	gameObjects.insert({ gameObject->objectId, gameObject });
-	session->gameObjectIds.push_back(gameObject->objectId);
+	client->gameObjectIds.push_back(gameObject->objectId);
 
 	{
 		Protocol::S_BASE_INSTANTIATE_OBJECT res;
 		res.set_success(true);
 		res.set_objectid(gameObject->objectId);
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		client->Send(ClientPacketHandler::MakeSendBuffer(res));
 	}
 
 	{
@@ -83,7 +76,7 @@ void Scene::InstantiateObject(shared_ptr<GameSession> session, Protocol::C_BASE_
 	}
 }
 
-void Scene::GetObjects(shared_ptr<GameSession> session)
+void Scene::GetObjects(shared_ptr<GameClient> client)
 {
 	Protocol::S_BASE_ADD_OBJECT res;
 
@@ -94,10 +87,10 @@ void Scene::GetObjects(shared_ptr<GameSession> session)
 	}
 
 	if (res.gameobjects_size() > 0)
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		client->Send(ClientPacketHandler::MakeSendBuffer(res));
 }
 
-void Scene::SetTransfrom(shared_ptr<GameSession> session, int objectId, float position_x, float position_y, float position_z, float rotation_x, float rotation_y, float rotation_z)
+void Scene::SetTransfrom(int objectId, float position_x, float position_y, float position_z, float rotation_x, float rotation_y, float rotation_z)
 {
 	auto gameObject = gameObjects.find(objectId);
 	if (gameObject == gameObjects.end())
@@ -112,7 +105,7 @@ void Scene::SetTransfrom(shared_ptr<GameSession> session, int objectId, float po
 	Broadcast(sendBuffer);
 }
 
-void Scene::SetAnimation(shared_ptr<GameSession> session, int objectId, string animationId, string animationValue)
+void Scene::SetAnimation(int objectId, string animationId, string animationValue)
 {
 	auto gameObject = gameObjects.find(objectId);
 	if (gameObject == gameObjects.end())
@@ -132,7 +125,7 @@ void Scene::SetAnimation(shared_ptr<GameSession> session, int objectId, string a
 	Broadcast(sendBuffer);
 }
 
-void Scene::SetAnimationOnce(shared_ptr<GameSession> session, int objectId, string animationId, bool isLoop, float blend)
+void Scene::SetAnimationOnce(int objectId, string animationId, bool isLoop, float blend)
 {
 	auto gameObject = gameObjects.find(objectId);
 	if (gameObject == gameObjects.end())
@@ -147,7 +140,7 @@ void Scene::SetAnimationOnce(shared_ptr<GameSession> session, int objectId, stri
 	Broadcast(sendBuffer);
 }
 
-void Scene::GetStates(shared_ptr<GameSession> session)
+void Scene::GetStates(shared_ptr<GameClient> client)
 {
 	Protocol::S_INTERACTION_GET_ITEMS res;
 
@@ -158,10 +151,10 @@ void Scene::GetStates(shared_ptr<GameSession> session)
 		item->set_state(state->second);
 	}
 
-	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 }
 
-void Scene::SetState(shared_ptr<GameSession> session, string id, string value)
+void Scene::SetState(shared_ptr<GameClient> client, string id, string value)
 {
 	Protocol::S_INTERACTION_SET_ITEM res;
 
@@ -171,7 +164,7 @@ void Scene::SetState(shared_ptr<GameSession> session, string id, string value)
 		if (state->second == value)
 		{
 			res.set_success(false);
-			session->Send(ClientPacketHandler::MakeSendBuffer(res));
+			client->Send(ClientPacketHandler::MakeSendBuffer(res));
 			return;
 		}
 
@@ -183,7 +176,7 @@ void Scene::SetState(shared_ptr<GameSession> session, string id, string value)
 	}
 
 	res.set_success(true);
-	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 
 	Protocol::S_INTERACTION_SET_ITEM_NOTICE notice;
 	notice.set_id(id);
@@ -191,7 +184,7 @@ void Scene::SetState(shared_ptr<GameSession> session, string id, string value)
 	Broadcast(ClientPacketHandler::MakeSendBuffer(notice));
 }
 
-void Scene::RemoveState(shared_ptr<GameSession> session, string id)
+void Scene::RemoveState(shared_ptr<GameClient> client, string id)
 {
 	Protocol::S_INTERACTION_REMOVE_ITEM res;
 
@@ -199,14 +192,14 @@ void Scene::RemoveState(shared_ptr<GameSession> session, string id)
 	if (state == states.end())
 	{
 		res.set_success(false);
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		client->Send(ClientPacketHandler::MakeSendBuffer(res));
 		return;
 	}
 
 	states.erase(state);
 
 	res.set_success(true);
-	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 
 	Protocol::S_INTERACTION_REMOVE_ITEM_NOTICE notice;
 	notice.set_id(id);
@@ -215,6 +208,6 @@ void Scene::RemoveState(shared_ptr<GameSession> session, string id)
 
 void Scene::Broadcast(shared_ptr<SendBuffer> sendBuffer)
 {
-	for (auto client = sessions.begin(); client != sessions.end(); client++)
+	for (auto client = clients.begin(); client != clients.end(); client++)
 		client->second->Send(sendBuffer);
 }

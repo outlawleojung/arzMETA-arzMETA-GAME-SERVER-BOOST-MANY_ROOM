@@ -29,6 +29,8 @@ public:
 
 	shared_ptr<ip::tcp::socket> GetSocket() { return _socket; }
 
+	void Disconnect();
+
 	void Send(std::shared_ptr<SendBuffer> sendBuffer);
 	void SendMany(std::shared_ptr<std::vector<std::shared_ptr<SendBuffer>>> sendBuffers);
 	
@@ -39,8 +41,9 @@ public:
 
 	virtual void OnConnected() {};
 
+	bool IsConnected() { return _isConnected; }
+
 protected:
-	void Disconnect();
 	virtual void OnDisconnected() {};
 	virtual int OnRecv(unsigned char* buffer, int len) { return len; }
 

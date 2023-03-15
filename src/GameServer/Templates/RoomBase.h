@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../Util/pch.h"
-#include "../Util/Protocols.h"
+#include "../../Util/pch.h"
+#include "../../Util/Protocols.h"
 
 #include <nlohmann/json.hpp>
 
 class GameSession;
+class ClientBase;
 
 enum class RoomState
 {
@@ -27,8 +28,7 @@ public:
 	virtual void Clear() = 0;
 	
 	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) = 0;
-	virtual void ReEnter(shared_ptr<GameSession> session, string clientId) = 0;	
-	virtual void Leave(shared_ptr<GameSession> session) = 0;
+	virtual void Leave(shared_ptr<ClientBase> session) = 0;
 
 	virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer) = 0;
 
@@ -36,10 +36,16 @@ public:
 	
 	string roomId;
 	std::atomic<RoomState> state;
-	std::function<void(std::shared_ptr<GameSession>)> onDisconnected;
+
+	int disconnectedSessionWaitTime = 0;
 
 public:
+	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER &pkt) {};
+	virtual void Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE &pkt);
+
 {%- for pkt in parser.recv_pkt %}
-	virtual void Handle_{{pkt.name}}(shared_ptr<GameSession>& session, Protocol::{{pkt.name}}&pkt) {};
+	{%- if (pkt.name != 'C_ENTER') and (pkt.name != 'C_REENTER') and (pkt.name != 'C_LEAVE') %}
+	virtual void Handle_{{pkt.name}}(shared_ptr<ClientBase>& client, Protocol::{{pkt.name}}&pkt) {};
+	{%- endif %}
 {%- endfor %}
 };

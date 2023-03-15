@@ -11,6 +11,7 @@ using namespace boost::asio;
 
 Session::~Session()
 {
+	GLogManager->Log("Socket Destroyed");
 }
 
 void Session::Disconnect()
@@ -36,7 +37,9 @@ void Session::RegisterRecv()
 {
 	mutable_buffer buffer(reinterpret_cast<char*>(_recvBuffer.WritePos()), _recvBuffer.FreeSize());
 
-	_socket->async_receive(buffer, [this](const boost::system::error_code& error, std::size_t bytes_transferred) {
+	auto ref = shared_from_this();
+
+	_socket->async_receive(buffer, [this, ref](const boost::system::error_code& error, std::size_t bytes_transferred) {
 
 		if (bytes_transferred == 0)
 		{
@@ -119,7 +122,9 @@ void Session::RegisterSend()
 	for (shared_ptr<SendBuffer> sendBuffer : sendBufferRefs)
 		sendBuffers.emplace_back(sendBuffer->Buffer(), sendBuffer->WriteSize());
 
-	_socket->async_send(sendBuffers, [this](const boost::system::error_code& error, std::size_t bytes_transferred) {
+	auto ref = shared_from_this();
+
+	_socket->async_send(sendBuffers, [this, ref](const boost::system::error_code& error, std::size_t bytes_transferred) {
 		
 		sendBufferRefs.clear();
 

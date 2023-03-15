@@ -1,7 +1,8 @@
 #include "ClientPacketHandler.h"
-#include "./Room/RoomBase.h"
-#include "./Room/RoomManager.h"
 #include "./Session/GameSession.h"
+#include "GameContents/Base/ClientBase.h"
+#include "GameContents/Base/RoomBase.h"
+#include "GameContents/RoomManager.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
@@ -12,9 +13,6 @@ bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int
 
 bool Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt)
 {
-	session->clientId = pkt.clientid();
-	session->nickname = pkt.nickname();
-
 	auto room = GRoomManager->rooms.find(pkt.roomid());
 	if (room == GRoomManager->rooms.end())
 	{
@@ -24,251 +22,330 @@ bool Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt)
 		return false;
 	}
 
-	session->enteredRoom = room->second;
-	session->enteredRoom->Handle_C_ENTER(session, pkt);
+	room->second->Handle_C_ENTER(session, pkt);
 
 	return true;
 }
+
 bool Handle_C_REENTER(shared_ptr<GameSession>& session, Protocol::C_REENTER& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
-		return true;
-	
-	session->enteredRoom->Handle_C_REENTER(session, pkt);
-	
+	//find client
+	//if client does not exist, return false
+	//client->handle reenter
+
 	return true;
 }
+
+
 bool Handle_C_LEAVE(shared_ptr<GameSession>& session, Protocol::C_LEAVE& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_LEAVE(session, pkt);
+	session->owner->enteredRoom->Handle_C_LEAVE(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_SET_NICKNAME(shared_ptr<GameSession>& session, Protocol::C_SET_NICKNAME& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_SET_NICKNAME(session, pkt);
+	session->owner->enteredRoom->Handle_C_SET_NICKNAME(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_WAITING_LIST& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_GET_WAITING_LIST(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_GET_WAITING_LIST(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<GameSession>& session, Protocol::C_OFFICE_ACCEPT_WAIT& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_ACCEPT_WAIT(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_ACCEPT_WAIT(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_GET_CLIENT(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_CLIENT& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_GET_CLIENT(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_GET_CLIENT(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_GET_HOST(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_HOST& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_GET_HOST(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_GET_HOST(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_BREAK(shared_ptr<GameSession>& session, Protocol::C_OFFICE_BREAK& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_BREAK(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_BREAK(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_KICK(shared_ptr<GameSession>& session, Protocol::C_OFFICE_KICK& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_KICK(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_KICK(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_GET_PERMISSION(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_PERMISSION& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_GET_PERMISSION(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_GET_PERMISSION(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_SET_PERMISSION(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_PERMISSION& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_SET_PERMISSION(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_SET_PERMISSION(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_ROOM_INFO& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_SET_ROOM_INFO(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_SET_ROOM_INFO(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_GET_ROOM_INFO(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_GET_ROOM_INFO(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::C_OFFICE_VIDEO_STREAM& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_OFFICE_VIDEO_STREAM(session, pkt);
+	session->owner->enteredRoom->Handle_C_OFFICE_VIDEO_STREAM(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_MYROOM_GET_ROOMINFO(shared_ptr<GameSession>& session, Protocol::C_MYROOM_GET_ROOMINFO& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_MYROOM_GET_ROOMINFO(session, pkt);
+	session->owner->enteredRoom->Handle_C_MYROOM_GET_ROOMINFO(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_MYROOM_SET_ROOMINFO(shared_ptr<GameSession>& session, Protocol::C_MYROOM_SET_ROOMINFO& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_MYROOM_SET_ROOMINFO(session, pkt);
+	session->owner->enteredRoom->Handle_C_MYROOM_SET_ROOMINFO(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_MYROOM_OTHER_ROOM_LIST(shared_ptr<GameSession>& session, Protocol::C_MYROOM_OTHER_ROOM_LIST& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_MYROOM_OTHER_ROOM_LIST(session, pkt);
+	session->owner->enteredRoom->Handle_C_MYROOM_OTHER_ROOM_LIST(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_BASE_SET_SCENE(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_SCENE& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_BASE_SET_SCENE(session, pkt);
+	session->owner->enteredRoom->Handle_C_BASE_SET_SCENE(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_BASE_INSTANTIATE_OBJECT(session, pkt);
+	session->owner->enteredRoom->Handle_C_BASE_INSTANTIATE_OBJECT(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_BASE_GET_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_GET_OBJECT& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_BASE_GET_OBJECT(session, pkt);
+	session->owner->enteredRoom->Handle_C_BASE_GET_OBJECT(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_BASE_SET_OBJECT_DATA(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_OBJECT_DATA& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_BASE_SET_OBJECT_DATA(session, pkt);
+	session->owner->enteredRoom->Handle_C_BASE_SET_OBJECT_DATA(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_BASE_SET_TRANSFORM(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_TRANSFORM& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_BASE_SET_TRANSFORM(session, pkt);
+	session->owner->enteredRoom->Handle_C_BASE_SET_TRANSFORM(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_BASE_SET_ANIMATION(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_ANIMATION& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_BASE_SET_ANIMATION(session, pkt);
+	session->owner->enteredRoom->Handle_C_BASE_SET_ANIMATION(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_BASE_SET_ANIMATION_ONCE(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_ANIMATION_ONCE& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_BASE_SET_ANIMATION_ONCE(session, pkt);
+	session->owner->enteredRoom->Handle_C_BASE_SET_ANIMATION_ONCE(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_INTERACTION_GET_ITEMS(shared_ptr<GameSession>& session, Protocol::C_INTERACTION_GET_ITEMS& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_INTERACTION_GET_ITEMS(session, pkt);
+	session->owner->enteredRoom->Handle_C_INTERACTION_GET_ITEMS(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_INTERACTION_SET_ITEM(shared_ptr<GameSession>& session, Protocol::C_INTERACTION_SET_ITEM& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_INTERACTION_SET_ITEM(session, pkt);
+	session->owner->enteredRoom->Handle_C_INTERACTION_SET_ITEM(session->owner, pkt);
 	
 	return true;
 }
 bool Handle_C_INTERACTION_REMOVE_ITEM(shared_ptr<GameSession>& session, Protocol::C_INTERACTION_REMOVE_ITEM& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_C_INTERACTION_REMOVE_ITEM(session, pkt);
+	session->owner->enteredRoom->Handle_C_INTERACTION_REMOVE_ITEM(session->owner, pkt);
 	
 	return true;
 }

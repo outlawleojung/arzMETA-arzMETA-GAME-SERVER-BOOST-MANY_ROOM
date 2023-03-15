@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Util/pch.h"
-#include "../Util/Protocols.h"
+#include "../../Util/pch.h"
+#include "../../Util/Protocols.h"
 
 class GameObject
 {

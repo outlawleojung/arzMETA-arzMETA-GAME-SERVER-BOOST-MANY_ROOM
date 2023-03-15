@@ -2,9 +2,7 @@
 #include <httplib.h>
 #include <nlohmann/json.hpp>
 
-#include "../Room/RoomBase.h"
-#include "../Room/OfficeRoom.h"
-#include "../Room/RoomManager.h"
+#include "../GameContents/GameContents.h"
 
 void HttpServer::start(string ip, int port)
 {

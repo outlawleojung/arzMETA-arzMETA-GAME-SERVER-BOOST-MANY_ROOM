@@ -1,7 +1,8 @@
 #include "ClientPacketHandler.h"
-#include "./Room/RoomBase.h"
-#include "./Room/RoomManager.h"
 #include "./Session/GameSession.h"
+#include "GameContents/Base/ClientBase.h"
+#include "GameContents/Base/RoomBase.h"
+#include "GameContents/RoomManager.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
@@ -12,9 +13,6 @@ bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int
 
 bool Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt)
 {
-	session->clientId = pkt.clientid();
-	session->nickname = pkt.nickname();
-
 	auto room = GRoomManager->rooms.find(pkt.roomid());
 	if (room == GRoomManager->rooms.end())
 	{
@@ -24,20 +22,31 @@ bool Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt)
 		return false;
 	}
 
-	session->enteredRoom = room->second;
-	session->enteredRoom->Handle_C_ENTER(session, pkt);
+	room->second->Handle_C_ENTER(session, pkt);
 
 	return true;
 }
 
-{%- for pkt in parser.recv_pkt %}
-	{%- if (pkt.name != 'C_ENTER') %}
+bool Handle_C_REENTER(shared_ptr<GameSession>& session, Protocol::C_REENTER& pkt)
+{
+	//find client
+	//if client does not exist, return false
+	//client->handle reenter
+
+	return true;
+}
+
+{% for pkt in parser.recv_pkt %}
+	{%- if (pkt.name != 'C_ENTER') and (pkt.name != 'C_REENTER') %}
 bool Handle_{{pkt.name}}(shared_ptr<GameSession>& session, Protocol::{{pkt.name}}& pkt)
 {
-	if (session->enteredRoom->state != RoomState::Running)
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
 		return true;
 	
-	session->enteredRoom->Handle_{{pkt.name}}(session, pkt);
+	session->owner->enteredRoom->Handle_{{pkt.name}}(session->owner, pkt);
 	
 	return true;
 }

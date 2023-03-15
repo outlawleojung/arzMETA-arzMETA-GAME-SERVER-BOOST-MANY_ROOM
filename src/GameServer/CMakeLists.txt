@@ -13,7 +13,7 @@ if (WIN32)
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}) 
     endforeach(__proto_file)
 
-    execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/Room/RoomBase --extension=h --recv=C_ --send=S_ --template RoomBase.h
+    execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/GameContents/Base/RoomBase --extension=h --recv=C_ --send=S_ --template RoomBase.h
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
     execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/ClientPacketHandler --extension=h --recv=C_ --send=S_ --template ClientPacketHandler.h
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

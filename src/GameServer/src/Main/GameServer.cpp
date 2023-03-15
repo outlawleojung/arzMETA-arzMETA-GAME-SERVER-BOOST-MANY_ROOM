@@ -5,9 +5,7 @@
 #include "../Util/pch.h"
 #include "../ClientPacketHandler.h"
 #include "../Session/GameSession.h"
-#include "../Room/RoomManager.h"
-#include "../Room/RoomBase.h"
-#include "../Room/OfficeRoom.h"
+#include "../GameContents/RoomManager.h"
 #include "../HTTP/HttpServer.h"
 
 #ifdef linux
