@@ -10,6 +10,9 @@ void GameSession::OnConnected()
 
 void GameSession::OnDisconnected()
 {
+	if (owner == nullptr)
+		return;
+
 	owner->DoAsync(&ClientBase::OnDisconnected);
 }
 
