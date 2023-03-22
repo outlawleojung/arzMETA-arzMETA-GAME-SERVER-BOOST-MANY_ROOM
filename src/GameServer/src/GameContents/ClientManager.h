@@ -13,7 +13,7 @@ class ClientManager
 {
 public:
 	template<typename T>
-	shared_ptr<ClientBase> MakeCilent(shared_ptr<GameSession> session, string clientId, string nickname, shared_ptr<RoomBase>& room)
+	shared_ptr<ClientBase> MakeCilent(shared_ptr<GameSession> session, string clientId, string nickname, shared_ptr<RoomBase> room)
 	{
 		boost::lock_guard<boost::recursive_mutex> lock(mtx);
 
