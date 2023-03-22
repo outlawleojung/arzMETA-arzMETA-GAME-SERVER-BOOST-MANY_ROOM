@@ -20,13 +20,19 @@ void ClientBase::Leave(string code)
 	disconnect.set_code(code);
 	Send(ClientPacketHandler::MakeSendBuffer(disconnect));
 
-	session->Disconnect();
-	session->owner = nullptr;
-	session = nullptr;
+	if (session != nullptr)
+	{
+		session->Disconnect();
+		session->owner = nullptr;
+		session = nullptr;
+	}
 }
 
 void ClientBase::Send(shared_ptr<SendBuffer> sendBuffer)
 {
+	if (session == nullptr)
+		return;
+
 	session->Send(sendBuffer);
 }
 
@@ -52,8 +58,10 @@ void ClientBase::OnDisconnected()
 	if (state == ClientState::LEAVING)
 		return;
 
+	session = nullptr;
+
 	this->DoTimer(enteredRoom->disconnectedSessionWaitTime, [this]() {
-		if (session->IsConnected())
+		if (session != nullptr)
 			return;
 
 		DoAsync(&ClientBase::Leave, string("Disconnected"));
