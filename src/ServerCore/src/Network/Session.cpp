@@ -20,8 +20,8 @@ void Session::Disconnect()
 		return;
 
 	_socket->close();
-
 	_service->ReleaseSession(shared_from_this());
+
 	OnDisconnected();
 }
 
@@ -78,6 +78,8 @@ void Session::Send(std::shared_ptr<SendBuffer> sendBuffer)
 
 		if (_isSendRegistered.exchange(true) == false)
 			registerSend = true;
+
+		lock.unlock();
 	}
 
 	if (registerSend)
@@ -96,6 +98,8 @@ void Session::SendMany(std::shared_ptr<std::vector<std::shared_ptr<SendBuffer>>>
 
 		if (_isSendRegistered.exchange(true) == false)
 			registerSend = true;
+
+		lock.unlock();
 	}
 
 	if (registerSend)

@@ -22,6 +22,8 @@ void HttpServer::start(string ip, int port)
 
         nlohmann::json body = nlohmann::json::parse(bodyStr);
 
+		cout << body.dump() << endl;
+
 		vector<string> scenes;
 		auto scenesJson = body["scenes"];
 		if (!scenesJson.is_null())
@@ -33,18 +35,29 @@ void HttpServer::start(string ip, int port)
 		if (body["type"] == "office")
 		{
 			room = make_shared<OfficeRoom>(scenes);
-			static_pointer_cast<OfficeRoom>(room)->modeType = body["modeType"];
+
+			static_pointer_cast<OfficeRoom>(room)->roomName = body["roomName"];
+			static_pointer_cast<OfficeRoom>(room)->description = body["description"];
+			static_pointer_cast<OfficeRoom>(room)->spaceInfoId = body["spaceInfoId"];
+			static_pointer_cast<OfficeRoom>(room)->thumbnail = body["thumbnail"];
+			static_pointer_cast<OfficeRoom>(room)->modeType = body["modeType"];			
 			static_pointer_cast<OfficeRoom>(room)->creatorId = body["creatorId"];
-			static_pointer_cast<OfficeRoom>(room)->currentHostId = body["currentHostId"];
+			
 			static_pointer_cast<OfficeRoom>(room)->password = body["password"];
-			static_pointer_cast<OfficeRoom>(room)->isPassword = body["isPassword"];
+			if (body["password"] == "")
+				static_pointer_cast<OfficeRoom>(room)->isPassword = false;
+			else
+				static_pointer_cast<OfficeRoom>(room)->isPassword = true;
+
 			static_pointer_cast<OfficeRoom>(room)->personnel = body["personnel"];
 			static_pointer_cast<OfficeRoom>(room)->observer = body["observer"];
 			static_pointer_cast<OfficeRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
+			static_pointer_cast<OfficeRoom>(room)->isAdvertising = body["isAdvertising"];
 			static_pointer_cast<OfficeRoom>(room)->runningTime = body["runningTime"];
 
 			static_pointer_cast<OfficeRoom>(room)->AUTO_DESTROY = true;
 			static_pointer_cast<OfficeRoom>(room)->DESTROY_WHEN_EMPTY = true;
+
 		}
 		else
 		{

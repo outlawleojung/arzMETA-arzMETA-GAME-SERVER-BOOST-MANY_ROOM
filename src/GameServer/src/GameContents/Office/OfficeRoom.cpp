@@ -78,39 +78,49 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 {
 	Protocol::S_ENTER res;
 
-	//중복 로그인 체크
-	if (waitingList.find(pkt.clientid()) != waitingList.end()
-		|| clients.find(pkt.clientid()) != clients.end())
+	if (state != RoomState::Running)
 	{
-		res.set_result("DUPLICATED");
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
 		session->Disconnect();
+		return;
+	}
+
+	{
+		auto client = waitingList.find(pkt.clientid());
+		if (client != waitingList.end())
+		{
+			client->second.second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
+			DoTimer(1000, &OfficeRoom::Enter, session, pkt);
+			return;
+		}
+	}
+
+	{
+		auto client = clients.find(pkt.clientid());
+		if (client != clients.end())
+		{
+			client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
+			DoTimer(1000, &OfficeRoom::Enter, session, pkt);
+			return;
+		}
 	}
 
 	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
-
-	auto client = make_shared<OfficeClient>();
 	
-	if(pkt.isobserver())
-		client->type = OfficeRoomUserType::Observer;
-	else
-		if (modeType == 1)
-			client->type = OfficeRoomUserType::Guest;
-		else if (modeType == 2)
-			client->type = OfficeRoomUserType::Audience;
-
 	if (clients.size() == 0 && creatorId == pkt.clientid())
 	{
-		session->owner = client;
-		client->session = session;
-		client->clientId = pkt.clientid();
-		client->nickname = pkt.nickname();
-		client->enteredRoom = static_pointer_cast<OfficeRoom>(shared_from_this());
+		auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
 
 		client->type = OfficeRoomUserType::Host;
+
+		client->chatPermission = true;
+		client->screenPermission = true;
+		client->videoPermission = true;
+		client->voicePermission = true;
+
 		clients.insert({ pkt.clientid(), client });
 
 		currentPersonnel++;
+		currentHostId = pkt.clientid();
 
 		res.set_result("SUCCESS");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
@@ -144,11 +154,20 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 	if (isWaitingRoom)
 	{		
-		session->owner = client;
-		client->session = session;
-		client->clientId = pkt.clientid();
-		client->nickname = pkt.nickname();
-		client->enteredRoom = static_pointer_cast<OfficeRoom>(shared_from_this());
+		auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
+
+		if (pkt.isobserver())
+			client->type = OfficeRoomUserType::Observer;
+		else
+			if (modeType == 1)
+				client->type = OfficeRoomUserType::Guest;
+			else if (modeType == 2)
+				client->type = OfficeRoomUserType::Audience;
+
+		client->chatPermission = false;
+		client->screenPermission = false;
+		client->videoPermission = false;
+		client->voicePermission = false;
 
 		waitingList.insert({ pkt.clientid(), { pkt.isobserver(),client } });
 
@@ -173,11 +192,26 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		return;
 	}
 
-	session->owner = client;
-	client->session = session;
-	client->clientId = pkt.clientid();
-	client->nickname = pkt.nickname();
-	client->enteredRoom = static_pointer_cast<OfficeRoom>(shared_from_this());
+	auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
+
+	if (pkt.isobserver())
+	{
+		client->type = OfficeRoomUserType::Observer;
+		client->chatPermission = false;
+	}
+	else
+	{
+		if (modeType == 1)
+			client->type = OfficeRoomUserType::Guest;
+		else if (modeType == 2)
+			client->type = OfficeRoomUserType::Audience;
+
+		client->chatPermission = true;
+	}
+
+	client->screenPermission = false;
+	client->videoPermission = false;
+	client->voicePermission = false;
 
 	clients.insert({ pkt.clientid(), client });
 
@@ -530,6 +564,15 @@ void OfficeRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, boo
 	//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
 	if (isAccepted)
 	{
+		if (client->second.second->type == OfficeRoomUserType::Observer)
+			client->second.second->chatPermission = false;
+		else
+			client->second.second->chatPermission = true;
+
+		client->second.second->screenPermission = false;
+		client->second.second->videoPermission = false;
+		client->second.second->voicePermission = false;
+
 		clients.insert({ client->second.second->clientId, client->second.second });
 
 		if (client->second.first)

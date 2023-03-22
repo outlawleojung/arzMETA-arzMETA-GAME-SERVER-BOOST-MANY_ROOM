@@ -2,6 +2,7 @@
 #include "RoomBase.h"
 #include "../../Session/GameSession.h"
 #include "../../ClientPacketHandler.h"
+#include "../ClientManager.h"
 
 void ClientBase::Leave(string code)
 {
@@ -9,6 +10,8 @@ void ClientBase::Leave(string code)
 		return;
 
 	state = ClientState::LEAVING;
+
+	GClientManager->RemoveClient(static_pointer_cast<ClientBase>(shared_from_this()));
 
 	enteredRoom->DoAsync(&RoomBase::Leave, static_pointer_cast<ClientBase>(shared_from_this()));
 	enteredRoom = nullptr;

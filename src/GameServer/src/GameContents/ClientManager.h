@@ -2,6 +2,7 @@
 
 #include "../Util/pch.h"
 #include "Base/ClientBase.h"
+#include "Base/RoomBase.h"
 #include "../Session/GameSession.h"
 
 #include <boost/asio.hpp>
@@ -12,31 +13,61 @@ class ClientManager
 {
 public:
 	template<typename T>
-	shared_ptr<ClientBase> GetCilent(shared_ptr<GameSession> session, string clientId, string nickName)
+	shared_ptr<ClientBase> MakeCilent(shared_ptr<GameSession> session, string clientId, string nickname, shared_ptr<RoomBase>& room)
 	{
-		shared_ptr<ClientBase> client = make_shared<T>();
+		boost::lock_guard<boost::recursive_mutex> lock(mtx);
 
-		session->owner = client;
-		
-		client->session = session;
-		client->clientId = clientId;
+		//session id 가 최신인지 확인
+		//최신이 아니라면 return nullptr
 
 		{
-			boost::unique_lock<boost::recursive_mutex> lock(mtx);
-
-			if (clients.find(clientId) != clients.end())
+			auto client = clients.find(clientId);
+			if (client != clients.end())
 			{
-				session->owner = null;
-				client->session = null;
-				return null;
+				//client 의 session id 가 자신과 동일하지 않다면 Duplicated
+				//client 의 session id 가 자신과 동일하다면 뭐라고 하지?
+				client->second->DoAsync(&ClientBase::Leave, string("LEAVED"));
+				clients.erase(client);
 			}
-
-			clients.insert({ clientId, client });
-
-			lock.unlock();
 		}
 
+		shared_ptr<ClientBase> client = make_shared<T>();
+
+		client->session = session;
+		client->clientId = clientId;
+		client->nickname = nickname;
+		client->enteredRoom = room;
+
+		session->owner = client;
+
+		clients.insert({ clientId, client });
+
 		return client;
+	}
+
+	void RemoveClient(shared_ptr<ClientBase> _client)
+	{
+		boost::lock_guard<boost::recursive_mutex> lock(mtx);
+
+		auto client = clients.find(_client->clientId);
+		if (client == clients.end())
+			return;
+
+		if (_client->enteredRoom->roomId != client->second->enteredRoom->roomId)
+			return;
+
+		clients.erase(client);
+	}
+
+	shared_ptr<ClientBase> GetClient(string clientId)
+	{
+		boost::lock_guard<boost::recursive_mutex> lock(mtx);
+
+		auto client = clients.find(clientId);
+		if (client == clients.end())
+			return nullptr;
+
+		return client->second;
 	}
 
 private:

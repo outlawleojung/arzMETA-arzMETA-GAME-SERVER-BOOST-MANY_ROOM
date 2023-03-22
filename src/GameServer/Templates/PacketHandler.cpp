@@ -1,5 +1,6 @@
 #include "ClientPacketHandler.h"
 #include "./Session/GameSession.h"
+#include "GameContents/ClientManager.h"
 #include "GameContents/Base/ClientBase.h"
 #include "GameContents/Base/RoomBase.h"
 #include "GameContents/RoomManager.h"
@@ -29,10 +30,16 @@ bool Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt)
 
 bool Handle_C_REENTER(shared_ptr<GameSession>& session, Protocol::C_REENTER& pkt)
 {
-	//find client
-	//if client does not exist, return false
-	//client->handle reenter
-
+	auto client = GClientManager->GetClient(pkt.clientid());
+	if (client == nullptr)
+	{
+		Protocol::S_REENTER res;
+		res.set_success(false);
+		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		return false;
+	}
+	client->DoAsync(&ClientBase::ReEnter, session);
+	
 	return true;
 }
 
