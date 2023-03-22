@@ -29,6 +29,14 @@ void RoomBase::Close()
 	GRoomManager->RemoveRoom(roomId);
 }
 
+void RoomBase::HandleClose()
+{
+	for (auto client = clients.begin(); client != clients.end(); client++)
+		client->second->DoAsync(&ClientBase::Leave, string("Closing"));
+
+	state = RoomState::Closed;
+}
+
 void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE& pkt)
 {
 	client->DoAsync(&ClientBase::Leave, string("Leaved"));

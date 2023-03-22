@@ -13,7 +13,10 @@ public :
 	virtual void HandleClose() override;
 	virtual void Clear() override;
 
+	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
 	virtual void Leave(shared_ptr<ClientBase> session) override;
+
+	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) override;
 
 	virtual void Handle_C_BASE_SET_SCENE(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_SCENE& pkt) override;
 	virtual void Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) override;

@@ -1,6 +1,8 @@
 #include "GameRoom.h"
 
 #include "../../ClientPacketHandler.h"
+#include "../../Session/GameSession.h"
+#include "../ClientManager.h"
 #include "GameClient.h"
 #include "Scene.h"
 
@@ -8,11 +10,13 @@ GameRoom::GameRoom(vector<string> sceneIds)
 {
 	for (auto sceneId = sceneIds.begin(); sceneId != sceneIds.end(); sceneId++)
 		scenes.insert({ *sceneId, make_shared<Scene>(*sceneId) });
+
+	maxPlayerNumber = 10;
 }
 
 void GameRoom::HandleClose()
 {
-	//Clear();
+	RoomBase::HandleClose();
 }
 
 void GameRoom::Clear()
@@ -23,6 +27,42 @@ void GameRoom::Clear()
 	scenes.clear();
 }
 
+void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
+{
+	Protocol::S_ENTER res;
+
+	if (state != RoomState::Running)
+	{
+		session->Disconnect();
+		return;
+	}
+
+	{
+		auto client = clients.find(pkt.clientid());
+		if (client != clients.end())
+		{
+			client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
+			DoTimer(1000, &GameRoom::Enter, session, pkt);
+			return;
+		}
+	}
+
+	if (clients.size() >= maxPlayerNumber)
+	{
+		res.set_result("ROOM_IS_FULL");
+		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		session->Disconnect();
+		return;
+	}
+
+	auto client = static_pointer_cast<GameClient>(GClientManager->MakeCilent<GameClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
+
+	clients.insert({ pkt.clientid(), client });
+
+	res.set_result("SUCCESS");
+	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+}
+
 void GameRoom::Leave(shared_ptr<ClientBase> client)
 {
 	auto gClient = static_pointer_cast<GameClient>(client);
@@ -31,6 +71,8 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 		//Scene 의 Leave 는 직접 호출할 수 없고 DoAsync 를 이용해야 함
 		gClient->scene->DoAsync(&Scene::Leave, gClient);
 }
+
+void GameRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&GameRoom::Enter, session, pkt); }
 
 void GameRoom::Handle_C_BASE_SET_SCENE(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_SCENE& pkt) { DoAsync(&GameRoom::SetScene, client, pkt.sceneid()); }
 void GameRoom::Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt)

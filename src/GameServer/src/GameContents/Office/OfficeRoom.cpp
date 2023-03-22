@@ -44,12 +44,7 @@ void OfficeRoom::HandleClose()
 	for (auto client = waitingList.begin(); client != waitingList.end(); client++)
 		client->second.second->DoAsync(&ClientBase::Leave, string("Closing"));
 
-	for (auto client = clients.begin(); client != clients.end(); client++)
-		client->second->DoAsync(&ClientBase::Leave, string("Closing"));
-
 	GameRoom::HandleClose();
-
-	state = RoomState::Closed;
 }
 
 void OfficeRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&OfficeRoom::Enter, session, pkt); }
@@ -184,7 +179,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		return;	
 	}
 
-	if ((!pkt.isobserver() && (personnel <= currentPersonnel)) || (pkt.isobserver() && (observer <= currentObserver)))
+	if ((!pkt.isobserver() && (maxPlayerNumber <= currentPersonnel)) || (pkt.isobserver() && (observer <= currentObserver)))
 	{
 		res.set_result("ROOM_IS_FULL");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
@@ -248,7 +243,7 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 		return;
 
 	//인원수 조정
-	if (client->second->type == OfficeRoomUserType::Observer)
+	if (oClient->type == OfficeRoomUserType::Observer)
 		currentObserver--;
 	else
 		currentPersonnel--;
@@ -355,12 +350,15 @@ void OfficeRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 		for (auto client = clients.begin(); client != clients.end(); client++)
 		{
 			auto permission = getPermission.add_permissions();
-			permission->set_clientid(client->second->clientId);
-			permission->set_screenpermission(client->second->screenPermission);
-			permission->set_chatpermission(client->second->chatPermission);
-			permission->set_voicepermission(client->second->voicePermission);
-			permission->set_videopermission(client->second->videoPermission);
-			permission->set_type(client->second->type);
+
+			auto oClient = static_pointer_cast<OfficeClient>(client->second);
+
+			permission->set_clientid(oClient->clientId);
+			permission->set_screenpermission(oClient->screenPermission);
+			permission->set_chatpermission(oClient->chatPermission);
+			permission->set_voicepermission(oClient->voicePermission);
+			permission->set_videopermission(oClient->videoPermission);
+			permission->set_type(oClient->type);
 		}
 	}
 	else
@@ -369,12 +367,15 @@ void OfficeRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 		if (client != clients.end())
 		{
 			auto permission = getPermission.add_permissions();
-			permission->set_clientid(client->second->clientId);
-			permission->set_screenpermission(client->second->screenPermission);
-			permission->set_chatpermission(client->second->chatPermission);
-			permission->set_voicepermission(client->second->voicePermission);
-			permission->set_videopermission(client->second->videoPermission);
-			permission->set_type(client->second->type);
+			
+			auto oClient = static_pointer_cast<OfficeClient>(client->second);
+
+			permission->set_clientid(oClient->clientId);
+			permission->set_screenpermission(oClient->screenPermission);
+			permission->set_chatpermission(oClient->chatPermission);
+			permission->set_voicepermission(oClient->voicePermission);
+			permission->set_videopermission(oClient->videoPermission);
+			permission->set_type(oClient->type);
 		}
 	}
 
@@ -405,13 +406,15 @@ void OfficeRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFIC
 			if (client == clients.end())
 				continue;
 
-			client->second->screenPermission = permission.screenpermission();
-			client->second->chatPermission = permission.chatpermission();
-			client->second->voicePermission = permission.voicepermission();
-			client->second->videoPermission = permission.videopermission();
-			client->second->type = static_cast<OfficeRoomUserType>(permission.type());
+			auto oClient = static_pointer_cast<OfficeClient>(client->second);
 
-			if (client->second->type == OfficeRoomUserType::Host)
+			oClient->screenPermission = permission.screenpermission();
+			oClient->chatPermission = permission.chatpermission();
+			oClient->voicePermission = permission.voicepermission();
+			oClient->videoPermission = permission.videopermission();
+			oClient->type = static_cast<OfficeRoomUserType>(permission.type());
+
+			if (oClient->type == OfficeRoomUserType::Host)
 				currentHostId = client->second->clientId;
 		}
 	}
@@ -432,13 +435,15 @@ void OfficeRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFIC
 			if (client == clients.end())
 				continue;
 
+			auto oClient = static_pointer_cast<OfficeClient>(client->second);
+
 			Protocol::S_OFFICE_SET_PERMISSION_NOTICE permissionNotice;
 
-			permissionNotice.set_screenpermission(client->second->screenPermission);
-			permissionNotice.set_chatpermission(client->second->chatPermission);
-			permissionNotice.set_voicepermission(client->second->voicePermission);
-			permissionNotice.set_videopermission(client->second->videoPermission);
-			permissionNotice.set_type(client->second->type);
+			permissionNotice.set_screenpermission(oClient->screenPermission);
+			permissionNotice.set_chatpermission(oClient->chatPermission);
+			permissionNotice.set_voicepermission(oClient->voicePermission);
+			permissionNotice.set_videopermission(oClient->videoPermission);
+			permissionNotice.set_type(oClient->type);
 
 			auto sendBuffer = ClientPacketHandler::MakeSendBuffer(permissionNotice);
 			client->second->Send(sendBuffer);
@@ -455,7 +460,7 @@ void OfficeRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_topictype(topicType);
 	roomInfo.set_password(password);
 	roomInfo.set_spaceinfoid(spaceInfoId);
-	roomInfo.set_personnel(personnel);
+	roomInfo.set_personnel(maxPlayerNumber);
 	roomInfo.set_currentpersonnel(currentPersonnel);
 	roomInfo.set_isadvertising(isAdvertising);
 	roomInfo.set_thumbnail(thumbnail);
@@ -476,7 +481,7 @@ void OfficeRoom::SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_S
 {
 	if (client->clientId != currentHostId) return;
 
-	personnel = pkt.personnel();
+	maxPlayerNumber = pkt.personnel();
 	password = pkt.password();
 	if (password == "")
 		isPassword = false;
@@ -536,7 +541,7 @@ void OfficeRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, boo
 	}
 	
 	//인원이 꽉 찬 상태에서 수락하려고 하는 경우 실패 처리
-	if ( !client->second.first && personnel <= currentPersonnel
+	if ( !client->second.first && maxPlayerNumber <= currentPersonnel
 		|| client->second.first && observer <= currentObserver)
 	{
 		if (isAccepted)
@@ -606,7 +611,9 @@ void OfficeRoom::InstantiateObject(shared_ptr<ClientBase> _client, Protocol::C_B
 	if (client == clients.end())
 		return;
 
-	if (client->second->type == OfficeRoomUserType::Observer)
+	auto oClient = static_pointer_cast<OfficeClient>(client->second);
+
+	if (oClient->type == OfficeRoomUserType::Observer)
 		return;
 
 	GameRoom::Handle_C_BASE_INSTANTIATE_OBJECT(_client, pkt);
@@ -618,7 +625,9 @@ void OfficeRoom::SetState(shared_ptr<ClientBase> _client, Protocol::C_INTERACTIO
 	if (client == clients.end())
 		return;
 
-	if (client->second->type == OfficeRoomUserType::Observer)
+	auto oClient = static_pointer_cast<OfficeClient>(client->second);
+
+	if (oClient->type == OfficeRoomUserType::Observer)
 		return;
 
 	GameRoom::Handle_C_INTERACTION_SET_ITEM(_client, pkt);
@@ -630,7 +639,9 @@ void OfficeRoom::RemoveState(shared_ptr<ClientBase> _client, Protocol::C_INTERAC
 	if (client == clients.end())
 		return;
 
-	if (client->second->type == OfficeRoomUserType::Observer)
+	auto oClient = static_pointer_cast<OfficeClient>(client->second);
+
+	if (oClient->type == OfficeRoomUserType::Observer)
 		return;
 
 	GameRoom::Handle_C_INTERACTION_REMOVE_ITEM(_client, pkt);
@@ -657,41 +668,27 @@ nlohmann::json OfficeRoom::ToJson()
 {
 	nlohmann::json json;
 
-	/*nlohmann::json modulesJson = nlohmann::json::array();
+	json["RoomId"] = roomId;
 
-	for (auto module = modules.begin(); module != modules.end(); module++)
-	{
-		auto moduleJson = (*module)->ToJson();
-		if (!moduleJson.empty())
-			modulesJson.push_back(moduleJson);
-		else
-			return nlohmann::json::object();
-	}
-
-	json["Modules"] = modulesJson;
-
-	json["roomName"] = roomName;
-	json["roomCode"] = roomId;
-	json["description"] = description;
-	json["spaceInfoId"] = spaceInfoId;
-	json["modeType"] = modeType;
-	json["topicType"] = topicType;
-	json["thumbnail"] = thumbnail;
+	json["RoomName"] = roomName;
+	json["Description"] = description;
+	json["SpaceInfoId"] = spaceInfoId;
+	json["ModeType"] = modeType;
+	json["TopicType"] = topicType;
+	json["Thumbnail"] = thumbnail;
 	
-	auto host = clients.find(hostId);
+	auto host = clients.find(currentHostId);
 	if (host != clients.end())
-		json["host"] = host->second->session->nickname;
+		json["Host"] = host->second->nickname;
 	else
-		json["host"] = "";
+		json["Host"] = "";
 
-	json["personnel"] = personnel;
-	json["currentPersonnel"] = currentPersonnel;
-	json["isPassword"] = isPassword;
-	json["isAdvertising"] = isAdvertising;
-	json["isShutdown"] = isShutdown;
-	json["isObserver"] = (observer > 0) ? true : false;
-
-	cout << "test : " << json.dump() << endl;*/
+	json["Personnel"] = maxPlayerNumber;
+	json["CurrentPersonnel"] = currentPersonnel;
+	json["IsPassword"] = isPassword;
+	json["IsAdvertising"] = isAdvertising;
+	json["IsShutdown"] = isShutdown;
+	json["IsObserver"] = (observer > 0) ? true : false;
 
 	return json;
 }

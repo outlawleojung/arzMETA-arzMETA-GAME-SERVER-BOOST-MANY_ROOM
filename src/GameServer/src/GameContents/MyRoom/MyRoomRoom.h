@@ -5,5 +5,10 @@
 class MyRoomRoom : public GameRoom
 {
 public:
-	string owner;
+	MyRoomRoom(vector<string> sceneIds);
+
+	virtual void Init() override;
+
+	string ownerId;
+	string roomInfo;
 };

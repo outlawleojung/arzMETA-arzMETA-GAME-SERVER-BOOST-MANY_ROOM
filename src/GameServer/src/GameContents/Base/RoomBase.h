@@ -16,6 +16,13 @@ enum class RoomState
 	Closed
 };
 
+enum class RoomType
+{
+	Main,
+	MyRoom,
+	Office
+};
+
 class RoomBase : public JobQueue
 {
 public:
@@ -24,7 +31,7 @@ public:
 
 	virtual void Init();
 	virtual void Close();
-	virtual void HandleClose() = 0;
+	virtual void HandleClose();
 	virtual void Clear() = 0;
 	
 	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) = 0;
@@ -38,6 +45,12 @@ public:
 	std::atomic<RoomState> state;
 
 	int disconnectedSessionWaitTime = 0;
+
+	int maxPlayerNumber = 0;
+
+	map<string, shared_ptr<ClientBase>> clients;
+
+	RoomType type;
 
 public:
 	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER &pkt) {};

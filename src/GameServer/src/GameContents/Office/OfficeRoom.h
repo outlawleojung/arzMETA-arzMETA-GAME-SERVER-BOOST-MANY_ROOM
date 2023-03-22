@@ -23,7 +23,7 @@ public:
 
 	virtual void Init() override;
 
-	void HandleClose();
+	virtual void HandleClose() override;
 
 	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) override;
 
@@ -88,7 +88,7 @@ public:
 	string subHostMemberCode;
 	bool isPassword;
 	string password;
-	int personnel;
+	//int personnel
 	int currentPersonnel;
 	int observer;
 	int currentObserver;
@@ -105,7 +105,7 @@ public:
 	string createdTimeString;
 	string endTimeString;
 
-	std::map<string, std::shared_ptr<OfficeClient>> clients;
+	//std::map<string, std::shared_ptr<OfficeClient>> clients;
 
 	bool AUTO_DESTROY = false;
 	bool DESTROY_WHEN_EMPTY = false;

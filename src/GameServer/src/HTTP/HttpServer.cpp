@@ -8,8 +8,14 @@ void HttpServer::start(string ip, int port)
 {
     httplib::Server svr;
 
-    svr.Get("/Rooms", [](const httplib::Request&, httplib::Response& res) {
-        res.set_content("this is test method", "text/plain");
+    svr.Get("/Rooms", [](const httplib::Request& req, httplib::Response& res) {
+
+		map<string, string> query;
+
+		for (auto param = req.params.begin(); param != req.params.end(); param++)
+			query[param->first] = param->second;
+
+        res.set_content(GRoomManager->GetRoom(query).dump(), "text/plain");
         });
 
     svr.Post("/MakeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
@@ -36,6 +42,8 @@ void HttpServer::start(string ip, int port)
 		{
 			room = make_shared<OfficeRoom>(scenes);
 
+			room->type = RoomType::Office;
+
 			static_pointer_cast<OfficeRoom>(room)->roomName = body["roomName"];
 			static_pointer_cast<OfficeRoom>(room)->description = body["description"];
 			static_pointer_cast<OfficeRoom>(room)->spaceInfoId = body["spaceInfoId"];
@@ -49,7 +57,7 @@ void HttpServer::start(string ip, int port)
 			else
 				static_pointer_cast<OfficeRoom>(room)->isPassword = true;
 
-			static_pointer_cast<OfficeRoom>(room)->personnel = body["personnel"];
+			static_pointer_cast<OfficeRoom>(room)->maxPlayerNumber = body["personnel"];
 			static_pointer_cast<OfficeRoom>(room)->observer = body["observer"];
 			static_pointer_cast<OfficeRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
 			static_pointer_cast<OfficeRoom>(room)->isAdvertising = body["isAdvertising"];
@@ -79,18 +87,20 @@ void HttpServer::start(string ip, int port)
 		res.set_content(resJson.dump(), "application/json");
         });
 
-	svr.Post("/TestMakeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
+	svr.Post("/TestOfficeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
 		vector<string> scenes;
 		scenes.push_back("test");
 		
 		shared_ptr<OfficeRoom> room = make_shared<OfficeRoom>(scenes);
+
+		room->type = RoomType::Office;
 
 		room->modeType = 1;
 		room->creatorId = "test";
 		room->currentHostId = "test";
 		room->password = "test";
 		room->isPassword = false;
-		room->personnel = 10;
+		room->maxPlayerNumber = 10;
 		room->observer = 10;
 		room->isWaitingRoom = false;
 		room->runningTime = 100;
