@@ -11,6 +11,7 @@ class GameSession : public PacketSession
 public:
 	GameSession(io_context& ioc) : PacketSession(ioc)
 	{}
+	~GameSession() { owner = nullptr; }
 
 	virtual void OnConnected() override;
 	virtual void OnDisconnected() override;

@@ -23,7 +23,6 @@ void ClientBase::Leave(string code)
 	if (session != nullptr)
 	{
 		session->Disconnect();
-		session->owner = nullptr;
 		session = nullptr;
 	}
 }
