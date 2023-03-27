@@ -20,9 +20,7 @@ class Session : public enable_shared_from_this<Session>
 	};
 
 public:
-	Session(io_context& context) : _socket(make_shared<ip::tcp::socket>(context)),
-		_recvBuffer(BUFFER_SIZE)
-	{}
+	Session(io_context& context);
 	virtual ~Session();
 
 	void SerService(shared_ptr<Service> service) { _service = service; }

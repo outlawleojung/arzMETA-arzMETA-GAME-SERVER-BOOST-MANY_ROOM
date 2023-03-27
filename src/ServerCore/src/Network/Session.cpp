@@ -9,6 +9,11 @@
 using namespace std;
 using namespace boost::asio;
 
+Session::Session(io_context& context) : _socket(make_shared<ip::tcp::socket>(context)),
+_recvBuffer(BUFFER_SIZE)
+{
+}
+
 Session::~Session()
 {
 	GLogManager->Log("Socket Destroyed");
@@ -27,6 +32,9 @@ void Session::Disconnect()
 
 void Session::ProcessConnect()
 {
+	boost::asio::socket_base::linger option(true, 100);
+	_socket->set_option(option);
+
 	_isConnected.store(true);
 	_service->AddSession(shared_from_this());
 	OnConnected();
@@ -131,6 +139,9 @@ void Session::RegisterSend()
 	_socket->async_send(sendBuffers, [this, ref](const boost::system::error_code& error, std::size_t bytes_transferred) {
 		
 		sendBufferRefs.clear();
+
+		if (!_isConnected)
+			return;
 
 		if (error)
 			return;
