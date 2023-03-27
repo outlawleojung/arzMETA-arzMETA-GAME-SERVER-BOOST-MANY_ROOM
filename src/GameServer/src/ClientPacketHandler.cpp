@@ -14,10 +14,18 @@ bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int
 
 bool Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt)
 {
+	Protocol::S_ENTER res;
+
+	if (session->owner != nullptr)
+	{
+		res.set_result("ALREADY_ENTERED");
+		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		return false;
+	}
+
 	auto room = GRoomManager->rooms.find(pkt.roomid());
 	if (room == GRoomManager->rooms.end())
 	{
-		Protocol::S_ENTER res;
 		res.set_result("WRONG_ROOM_ID");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
 		return false;

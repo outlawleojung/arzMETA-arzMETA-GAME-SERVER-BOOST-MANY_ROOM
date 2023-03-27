@@ -2,6 +2,7 @@
 #include "RoomManager.h"
 #include "Base/RoomBase.h"
 #include "MyRoom/MyRoomRoom.h"
+#include "Office/OfficeRoom.h"
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 {
@@ -48,7 +49,7 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     {
         if (query["type"] == "Main")
         {
-            if (room->second->type != RoomType::Main)
+            if (room->second->type != RoomType::ArzLand)
                 continue;
 
             res.push_back(room->second->ToJson());
@@ -56,6 +57,11 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
         else if (query["type"] == "Office")
         {
             if (room->second->type != RoomType::Office)
+                continue;
+
+            auto officeRoom = static_pointer_cast<OfficeRoom>(room->second);
+
+            if (query.find("RoomCode") != query.end() && officeRoom->roomCode != query["RoomCode"])
                 continue;
 
             res.push_back(room->second->ToJson());
@@ -67,7 +73,7 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
 
             auto myRoom = static_pointer_cast<MyRoomRoom>(room->second);
 
-            if (query.find("Owner") != query.end() && myRoom->ownerId != query["Owner"])
+            if (query.find("ownerId") != query.end() && myRoom->ownerId != query["ownerId"])
                 continue;
 
             res.push_back(room->second->ToJson());

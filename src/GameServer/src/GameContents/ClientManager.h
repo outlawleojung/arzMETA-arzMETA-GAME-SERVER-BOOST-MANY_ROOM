@@ -26,7 +26,7 @@ public:
 			{
 				//client 의 session id 가 자신과 동일하지 않다면 Duplicated
 				//client 의 session id 가 자신과 동일하다면 뭐라고 하지?
-				client->second->DoAsync(&ClientBase::Leave, string("LEAVED"));
+				client->second->DoAsync(&ClientBase::Leave, string("SERVER_CHANGE"));
 				clients.erase(client);
 			}
 		}
