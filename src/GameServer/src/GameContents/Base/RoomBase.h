@@ -18,7 +18,7 @@ enum class RoomState
 
 enum class RoomType
 {
-	Main,
+	ArzLand,
 	MyRoom,
 	Office
 };
@@ -35,9 +35,9 @@ public:
 	virtual void Clear() = 0;
 	
 	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) = 0;
-	virtual void Leave(shared_ptr<ClientBase> session) = 0;
+	virtual void Leave(shared_ptr<ClientBase> session);
 
-	virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer) = 0;
+	virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer);
 
 	virtual nlohmann::json ToJson() = 0;
 	

@@ -70,6 +70,8 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 	if (gClient->scene != nullptr)
 		//Scene 의 Leave 는 직접 호출할 수 없고 DoAsync 를 이용해야 함
 		gClient->scene->DoAsync(&Scene::Leave, gClient);
+
+	RoomBase::Leave(client);
 }
 
 void GameRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&GameRoom::Enter, session, pkt); }
@@ -143,13 +145,28 @@ void GameRoom::Handle_C_INTERACTION_REMOVE_ITEM(shared_ptr<ClientBase>& client, 
 	gClient->scene->DoAsync(&Scene::RemoveState, gClient, pkt.id());
 }
 
+nlohmann::json GameRoom::ToJson()
+{
+	nlohmann::json json;
+
+	json["RoomId"] = roomId;
+
+	return json;
+}
+
 void GameRoom::SetScene(shared_ptr<ClientBase> client, string sceneId)
 {
 	auto gClient = static_pointer_cast<GameClient>(client);
 
+	Protocol::S_BASE_SET_SCENE res;
+
 	auto scene = scenes.find(sceneId);
 	if (scene == scenes.end())
+	{
+		res.set_success(false);
+		client->Send(ClientPacketHandler::MakeSendBuffer(res));
 		return;
+	}
 
 	//기존에 입장한 Scene 이 있을 경우 Leave
 	if (gClient->scene != nullptr)
@@ -158,7 +175,6 @@ void GameRoom::SetScene(shared_ptr<ClientBase> client, string sceneId)
 	gClient->scene = scene->second;
 	scene->second->DoAsync(&Scene::AddClient, gClient);
 
-	Protocol::S_BASE_SET_SCENE res;
 	res.set_success(true);
 	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 }

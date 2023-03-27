@@ -37,6 +37,21 @@ void RoomBase::HandleClose()
 	state = RoomState::Closed;
 }
 
+void RoomBase::Leave(shared_ptr<ClientBase> _client)
+{
+	auto client = clients.find(_client->clientId);
+	if (client == clients.end())
+		return;
+
+	clients.erase(client);
+}
+
+void RoomBase::Broadcast(shared_ptr<SendBuffer> sendBuffer)
+{
+	for (auto client = clients.begin(); client != clients.end(); client++)
+		client->second->Send(sendBuffer);
+}
+
 void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE& pkt)
 {
 	client->DoAsync(&ClientBase::Leave, string("Leaved"));

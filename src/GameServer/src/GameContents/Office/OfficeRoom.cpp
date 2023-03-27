@@ -237,19 +237,11 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 		}
 	}
 	
-	//대기열에도 없고, clients 에도 없으면 거기에서 끝
-	auto client = clients.find(oClient->clientId);
-	if (client == clients.end())
-		return;
-
 	//인원수 조정
 	if (oClient->type == OfficeRoomUserType::Observer)
 		currentObserver--;
 	else
 		currentPersonnel--;
-	
-	//clients 에서 삭제
-	clients.erase(client);
 
 	GameRoom::Leave(_client);
 
@@ -590,12 +582,6 @@ void OfficeRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, boo
 	client->second.second->DoAsync(&ClientBase::Leave, string("Waiting_Rejected"));
 }
 
-void OfficeRoom::Broadcast(shared_ptr<SendBuffer> sendBuffer)
-{
-	for (auto client = clients.begin(); client != clients.end(); client++)
-		client->second->Send(sendBuffer);
-}
-
 void OfficeRoom::SetScene(shared_ptr<ClientBase> _client, string sceneId)
 {
 	auto client = clients.find(_client->clientId);
@@ -668,27 +654,27 @@ nlohmann::json OfficeRoom::ToJson()
 {
 	nlohmann::json json;
 
-	json["RoomId"] = roomId;
+	json["roomId"] = roomId;
 
-	json["RoomName"] = roomName;
-	json["Description"] = description;
-	json["SpaceInfoId"] = spaceInfoId;
-	json["ModeType"] = modeType;
-	json["TopicType"] = topicType;
-	json["Thumbnail"] = thumbnail;
+	json["roomName"] = roomName;
+	json["description"] = description;
+	json["spaceInfoId"] = spaceInfoId;
+	json["modeType"] = modeType;
+	json["topicType"] = topicType;
+	json["thumbnail"] = thumbnail;
 	
 	auto host = clients.find(currentHostId);
 	if (host != clients.end())
-		json["Host"] = host->second->nickname;
+		json["host"] = host->second->nickname;
 	else
-		json["Host"] = "";
+		json["host"] = "";
 
-	json["Personnel"] = maxPlayerNumber;
-	json["CurrentPersonnel"] = currentPersonnel;
-	json["IsPassword"] = isPassword;
-	json["IsAdvertising"] = isAdvertising;
-	json["IsShutdown"] = isShutdown;
-	json["IsObserver"] = (observer > 0) ? true : false;
+	json["personnel"] = maxPlayerNumber;
+	json["currentPersonnel"] = currentPersonnel;
+	json["isPassword"] = isPassword;
+	json["isAdvertising"] = isAdvertising;
+	json["isShutdown"] = isShutdown;
+	json["isObserver"] = (observer > 0) ? true : false;
 
 	return json;
 }

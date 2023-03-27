@@ -72,11 +72,11 @@ public:
 
 	void Countdown();
 
-	virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer) override;
-
 	virtual nlohmann::json ToJson() override;
 
 	string creatorId;
+
+	string roomCode;
 
 	string roomName;
 	string description;

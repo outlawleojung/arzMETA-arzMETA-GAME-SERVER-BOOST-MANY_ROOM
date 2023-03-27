@@ -15,13 +15,13 @@ void MyRoomRoom::Init()
 {
 	state = RoomState::Running;
 	
-	this->DoTimer(30000, std::function<void()>(
-		[this]() {
-			if (this->state != RoomState::Running)
-				return;
+	//this->DoTimer(30000, std::function<void()>(
+	//	[this]() {
+	//		if (this->state != RoomState::Running)
+	//			return;
 
-			if (this->clients.size() == 0)
-				Close();
-		}
-	));
+	//		if (this->clients.size() == 0)
+	//			Close();
+	//	}
+	//));
 }

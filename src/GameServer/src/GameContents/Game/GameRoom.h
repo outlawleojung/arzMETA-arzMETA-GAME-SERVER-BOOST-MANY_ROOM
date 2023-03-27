@@ -29,6 +29,8 @@ public :
 	virtual void Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& session, Protocol::C_INTERACTION_SET_ITEM& pkt) override;
 	virtual void Handle_C_INTERACTION_REMOVE_ITEM(shared_ptr<ClientBase>& session, Protocol::C_INTERACTION_REMOVE_ITEM& pkt) override;
 
+	virtual nlohmann::json ToJson() override;
+
 protected:
 	std::map<string, shared_ptr<Scene>> scenes;
 

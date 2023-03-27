@@ -1,4 +1,5 @@
 #include "RoomManager.h"
 #include "Base/RoomBase.h"
 #include "Game/GameRoom.h"
+#include "MyRoom/MyRoomRoom.h"
 #include "Office/OfficeRoom.h"
