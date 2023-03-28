@@ -47,7 +47,7 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
 
     for (auto room = rooms.begin(); room != rooms.end(); room++)
     {
-        if (query["type"] == "Main")
+        if (query["type"] == "ArzLand")
         {
             if (room->second->type != RoomType::ArzLand)
                 continue;
