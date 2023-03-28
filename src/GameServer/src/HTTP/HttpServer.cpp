@@ -173,7 +173,10 @@ void HttpServer::start(string ip, int port)
 
 	svr.Post("/TestArzLandRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
 		vector<string> scenes;
-		scenes.push_back("test");
+		scenes.push_back("ArzLand");
+		scenes.push_back("GameZone");
+		scenes.push_back("VoteZone");
+		scenes.push_back("CTFZone");
 
 		shared_ptr<GameRoom> room = make_shared<GameRoom>(scenes);
 
