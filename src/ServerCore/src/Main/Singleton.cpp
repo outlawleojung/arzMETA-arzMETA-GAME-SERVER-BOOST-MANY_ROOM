@@ -7,15 +7,11 @@ GlobalQueue* GGlobalQueue = nullptr;
 JobTimer* GJobTimer = nullptr;
 shared_ptr<LogManager> GLogManager = nullptr;
 
-bool isRunning;
-
 class CoreGlobal
 {
 public:
 	CoreGlobal()
 	{
-		isRunning = true;
-
 		GThreadManager = new ThreadManager();
 		GSendBufferManager = new SendBufferManager();
 		GGlobalQueue = new GlobalQueue();
@@ -25,8 +21,6 @@ public:
 
 	~CoreGlobal()
 	{
-		isRunning = false;
-
 		delete GThreadManager;
 		delete GSendBufferManager;
 		delete GGlobalQueue;

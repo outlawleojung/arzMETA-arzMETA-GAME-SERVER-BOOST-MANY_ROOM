@@ -2,7 +2,8 @@
 
 #include "../Util/pch.h"
 #include "nlohmann/json.hpp"
-#include <boost/thread.hpp>
+
+#include <shared_mutex>
 
 class RoomBase;
 
@@ -14,5 +15,5 @@ public:
 	nlohmann::json GetRoom(map<string, string> query);
 
 	map<string, shared_ptr<RoomBase>> rooms;
-	boost::mutex _mutex;
+	shared_mutex _mutex;
 };

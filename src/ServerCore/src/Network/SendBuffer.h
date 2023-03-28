@@ -62,6 +62,6 @@ private:
 	static void PushGlobal(SendBufferChunk* buffer);
 
 private:
-	boost::recursive_mutex _mtx;
+	mutex _mtx;
 	vector<shared_ptr<SendBufferChunk>> _sendBufferChunks;
 };

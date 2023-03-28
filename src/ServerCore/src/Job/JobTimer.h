@@ -41,7 +41,7 @@ public:
 	void Clear();
 
 private:
-	boost::recursive_mutex _mtx;
+	mutex _mtx;
 	priority_queue<TimerItem> _items;
 	atomic<bool> _distributing = { false };
 };

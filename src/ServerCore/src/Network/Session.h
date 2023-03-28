@@ -3,6 +3,7 @@
 #include "RecvBuffer.h"
 #include "SendBuffer.h"
 
+#include <mutex>
 #include <queue>
 #include <atomic>
 #include <boost/asio.hpp>
@@ -54,7 +55,7 @@ private:
 	atomic<bool> _isSendRegistered = { false };
 	atomic<bool> _isConnected = { false };
 
-	boost::recursive_mutex _mtx;
+	recursive_mutex _mtx;
 };
 
 struct PacketHeader

@@ -80,14 +80,12 @@ void Session::Send(std::shared_ptr<SendBuffer> sendBuffer)
 	bool registerSend = false;
 
 	{
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<recursive_mutex> lock(_mtx);
 
 		_sendQueue.push(sendBuffer);
 
 		if (_isSendRegistered.exchange(true) == false)
 			registerSend = true;
-
-		lock.unlock();
 	}
 
 	if (registerSend)
@@ -99,15 +97,13 @@ void Session::SendMany(std::shared_ptr<std::vector<std::shared_ptr<SendBuffer>>>
 	bool registerSend = false;
 
 	{
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<recursive_mutex> lock(_mtx);
 
 		for (auto it = sendBuffers->begin(); it != sendBuffers->end(); it++)
 			_sendQueue.push(*it);
 
 		if (_isSendRegistered.exchange(true) == false)
 			registerSend = true;
-
-		lock.unlock();
 	}
 
 	if (registerSend)
@@ -118,7 +114,7 @@ void Session::RegisterSend()
 {
 	//shared_ptr<SendBuffer>s 를 이용해 sendbuffer 의 레퍼런스 관리, send 작업이 완료될 때까지 버퍼의 내용이 사라지지 않도록 한다
 	{
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<recursive_mutex> lock(_mtx);
 
 		sendBufferRefs.reserve(_sendQueue.size());
 
@@ -153,7 +149,7 @@ void Session::RegisterSend()
 		}
 
 		{
-			boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+			lock_guard<recursive_mutex> lock(_mtx);
 			if (_sendQueue.empty())
 				_isSendRegistered.store(false);
 			else

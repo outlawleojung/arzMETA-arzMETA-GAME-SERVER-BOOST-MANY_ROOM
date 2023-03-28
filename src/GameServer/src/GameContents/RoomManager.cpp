@@ -6,7 +6,7 @@
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 {
-    boost::lock_guard<boost::mutex> lock(_mutex);
+    std::unique_lock<shared_mutex> lock;
 
     static int idGenerator = 0;
     room->roomId = to_string(idGenerator++);
@@ -18,7 +18,7 @@ void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 
 bool RoomManager::RemoveRoom(string roomId)
 {
-    boost::lock_guard<boost::mutex> lock(_mutex);
+    std::unique_lock<shared_mutex> lock;
 
     auto room = rooms.find(roomId);
     if (room == rooms.end())
@@ -33,7 +33,7 @@ bool RoomManager::RemoveRoom(string roomId)
 
 nlohmann::json RoomManager::GetRoom(map<string, string> query)
 {
-    boost::lock_guard<boost::mutex> lock(_mutex);
+    std::shared_lock<shared_mutex> lock;
 
     nlohmann::json res = nlohmann::json::array();
 

@@ -19,10 +19,6 @@
 #include <map>
 #include <iostream>
 
-#include <condition_variable>
-
-//extern condition_variable isProcessRunning;
-
 #ifdef linux
 #include <sys/time.h>
 static unsigned long long GetTickCount()

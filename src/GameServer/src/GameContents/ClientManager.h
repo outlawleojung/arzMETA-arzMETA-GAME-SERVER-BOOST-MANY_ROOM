@@ -15,7 +15,8 @@ public:
 	template<typename T>
 	shared_ptr<ClientBase> MakeCilent(shared_ptr<GameSession> session, string clientId, string nickname, shared_ptr<RoomBase> room)
 	{
-		boost::lock_guard<boost::recursive_mutex> lock(mtx);
+		lock_guard<mutex> lock(mtx);
+		//boost::lock_guard<boost::recursive_mutex> lock(mtx);
 
 		//session id 가 최신인지 확인
 		//최신이 아니라면 return nullptr
@@ -47,7 +48,10 @@ public:
 
 	void RemoveClient(shared_ptr<ClientBase> _client)
 	{
-		boost::lock_guard<boost::recursive_mutex> lock(mtx);
+		lock_guard<mutex> lock(mtx);
+		//boost::lock_guard<boost::recursive_mutex> lock(mtx);
+
+		//lock<mutex> lock(mtx);
 
 		auto client = clients.find(_client->clientId);
 		if (client == clients.end())
@@ -61,7 +65,8 @@ public:
 
 	shared_ptr<ClientBase> GetClient(string clientId)
 	{
-		boost::lock_guard<boost::recursive_mutex> lock(mtx);
+		lock_guard<mutex> lock(mtx);
+		//boost::lock_guard<boost::recursive_mutex> lock(mtx);
 
 		auto client = clients.find(clientId);
 		if (client == clients.end())
@@ -73,5 +78,5 @@ public:
 private:
 	map<string, shared_ptr<ClientBase>> clients;
 
-	boost::recursive_mutex mtx;
+	mutex mtx;
 };

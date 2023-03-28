@@ -2,7 +2,7 @@
 
 #include <queue>
 #include <vector>
-#include <boost/thread.hpp>
+#include <mutex>
 
 using namespace std;
 
@@ -12,15 +12,13 @@ class LockQueue
 public:
 	void Push(T item)
 	{
-		//boost::unique_lock<boost::shared_mutex> lock(_mtx);
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<recursive_mutex> lock(_mtx);
 		_items.push(item);
 	}
 
 	T Pop()
 	{
-		//boost::unique_lock<boost::shared_mutex> lock(_mtx);
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<recursive_mutex> lock(_mtx);
 		if (_items.empty())
 			return T();
 
@@ -31,21 +29,18 @@ public:
 
 	void PopAll(std::vector<T>& items)
 	{
-		//boost::unique_lock<boost::shared_mutex> lock(_mtx);
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<recursive_mutex> lock(_mtx);
 		while (T item = Pop())
 			items.push_back(item);
 	}
 
 	void Clear()
 	{
-		//boost::unique_lock<boost::shared_mutex> lock(_mtx);
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<recursive_mutex> lock(_mtx);
 		_items = queue<T>();
 	}
 
 private:
-	//boost::shared_mutex _mtx;
-	boost::recursive_mutex _mtx;
+	recursive_mutex _mtx;
 	queue<T> _items;
 };

@@ -12,7 +12,8 @@ void JobTimer::Reserve(unsigned long long tickAfter, weak_ptr<JobQueue> owner, s
 	//JobData* jobData = ObjectPool<JobData>::Pop(owner, job);
 	JobData* jobData = new JobData(owner, job);
 
-	boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+	lock_guard<mutex> lock(_mtx);
+	//boost::unique_lock<boost::recursive_mutex> lock(_mtx);
 
 	_items.push(TimerItem{ executeTick, jobData });
 }
@@ -26,7 +27,8 @@ void JobTimer::Distribute(unsigned long long now)
 	vector<TimerItem> items;
 
 	{
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<mutex> lock(_mtx);
+		//boost::unique_lock<boost::recursive_mutex> lock(_mtx);
 
 		while (_items.empty() == false)
 		{
@@ -54,7 +56,8 @@ void JobTimer::Distribute(unsigned long long now)
 
 void JobTimer::Clear()
 {
-	boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+	lock_guard<mutex> lock(_mtx);
+	//boost::unique_lock<boost::recursive_mutex> lock(_mtx);
 
 	while (_items.empty() == false)
 	{

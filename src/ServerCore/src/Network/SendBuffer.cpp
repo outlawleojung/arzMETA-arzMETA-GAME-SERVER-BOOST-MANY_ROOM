@@ -39,7 +39,7 @@ shared_ptr<SendBuffer> SendBufferChunk::Open(unsigned int allocSize)
 		return nullptr;
 
 	_open = true;
-	//return ObjectPool<SendBuffer>::MakeShared(shared_from_this(), Buffer(), allocSize);
+	
 	return make_shared<SendBuffer>(shared_from_this(), Buffer(), allocSize);
 }
 
@@ -69,7 +69,7 @@ shared_ptr<SendBuffer> SendBufferManager::Open(unsigned int size)
 shared_ptr<SendBufferChunk> SendBufferManager::Pop()
 {
 	{
-		boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+		lock_guard<mutex> lock(_mtx);
 		if (_sendBufferChunks.empty() == false)
 		{
 			shared_ptr<SendBufferChunk> sendBufferChunk = _sendBufferChunks.back();
@@ -78,20 +78,16 @@ shared_ptr<SendBufferChunk> SendBufferManager::Pop()
 		}
 	}
 
-	//return shared_ptr<SendBufferChunk>(xnew<SendBufferChunk>(), PushGlobal);
-	//return ObjectPool<SendBufferChunk>::MakeShared();
-	//return make_shared<SendBufferChunk>();
 	return shared_ptr<SendBufferChunk>(new SendBufferChunk, PushGlobal);
 }
 
 void SendBufferManager::Push(shared_ptr<SendBufferChunk> buffer)
 {
-	boost::unique_lock<boost::recursive_mutex> lock(_mtx);
+	lock_guard<mutex> lock(_mtx);
 	_sendBufferChunks.push_back(buffer);
 }
 
 void SendBufferManager::PushGlobal(SendBufferChunk* buffer)
 {
-	if(isRunning)
-		GSendBufferManager->Push(shared_ptr<SendBufferChunk>(buffer, PushGlobal));
+	GSendBufferManager->Push(shared_ptr<SendBufferChunk>(buffer, PushGlobal));
 }
