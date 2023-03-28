@@ -31,6 +31,7 @@ public :
 
 	string id;
 	map<int, shared_ptr<GameObject>> gameObjects;
+	map<string, vector<int>> client_gameObject;
 
 	//게임 내 인터렉션 가능한 사항들에 대한 정보
 	map<string, string> states;

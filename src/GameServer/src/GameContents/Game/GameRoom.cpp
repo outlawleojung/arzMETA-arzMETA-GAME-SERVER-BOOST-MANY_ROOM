@@ -170,10 +170,17 @@ void GameRoom::SetScene(shared_ptr<ClientBase> client, string sceneId)
 
 	//기존에 입장한 Scene 이 있을 경우 Leave
 	if (gClient->scene != nullptr)
-		gClient->scene->DoAsync(&Scene::Leave, gClient);
-
-	gClient->scene = scene->second;
-	scene->second->DoAsync(&Scene::AddClient, gClient);
+	{
+		auto prevScene = gClient->scene;
+		gClient->scene = scene->second;
+		prevScene->DoAsync(&Scene::Leave, gClient);
+		scene->second->DoAsync(&Scene::AddClient, gClient);
+	}
+	else
+	{
+		gClient->scene = scene->second;
+		scene->second->DoAsync(&Scene::AddClient, gClient);
+	}
 
 	res.set_success(true);
 	client->Send(ClientPacketHandler::MakeSendBuffer(res));

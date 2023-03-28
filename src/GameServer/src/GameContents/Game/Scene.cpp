@@ -13,10 +13,7 @@ Scene::~Scene()
 void Scene::Clear()
 {
 	for (auto client = clients.begin(); client != clients.end(); client++)
-	{
-		client->second->gameObjectIds.clear();
 		client->second->scene = nullptr;
-	}
 
 	gameObjects.clear();
 	clients.clear();
@@ -25,18 +22,25 @@ void Scene::Clear()
 void Scene::Leave(shared_ptr<GameClient> client)
 {
 	Protocol::S_BASE_REMOVE_OBJECT removeObject;
-	for (auto gameObjectId = client->gameObjectIds.begin(); gameObjectId != client->gameObjectIds.end(); gameObjectId++)
+
+	auto _client_gameObjects = client_gameObject.find(client->clientId);
+	if (_client_gameObjects != client_gameObject.end())
 	{
-		auto scene_gameObject = gameObjects.find(*gameObjectId);
-		//if (scene_gameObject == gameObjects.end())
-		//	continue;
-		gameObjects.erase(scene_gameObject);
-		removeObject.add_gameobjects(*gameObjectId);
+		for (auto gameObjectId = _client_gameObjects->second.begin(); gameObjectId != _client_gameObjects->second.end(); gameObjectId++)
+		{
+			auto scene_gameObject = gameObjects.find(*gameObjectId);
+			//if (scene_gameObject == gameObjects.end())
+			//	continue;
+			gameObjects.erase(scene_gameObject);
+			removeObject.add_gameobjects(*gameObjectId);
+		}
+
+		client_gameObject.erase(_client_gameObjects);
 	}
-	client->gameObjectIds.clear();
 
 	clients.erase(clients.find(client->clientId));
-	client->scene = nullptr;
+	if(client->scene->id == id)
+		client->scene = nullptr;
 
 	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(removeObject);
 	for (auto _session = clients.begin(); _session != clients.end(); _session++)
@@ -58,7 +62,9 @@ void Scene::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_IN
 	gameObject->ownerId = client->clientId;
 	
 	gameObjects.insert({ gameObject->objectId, gameObject });
-	client->gameObjectIds.push_back(gameObject->objectId);
+	if (client_gameObject.find(client->clientId) == client_gameObject.end())
+		client_gameObject.insert({ client->clientId, vector<int>() });
+	client_gameObject.find(client->clientId)->second.push_back(gameObject->objectId);
 
 	{
 		Protocol::S_BASE_INSTANTIATE_OBJECT res;
