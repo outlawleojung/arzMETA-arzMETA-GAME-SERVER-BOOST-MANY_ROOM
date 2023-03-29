@@ -16,7 +16,7 @@ public :
 
 	void Leave(shared_ptr<GameClient> client);
 
-	void AddClient(shared_ptr<GameClient> client);
+	void Enter(shared_ptr<GameClient> client);
 	void InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt);
 	void GetObjects(shared_ptr<GameClient> client);
 	void SetTransfrom(int objectId, float position_x, float position_y, float position_z, float rotation_x, float rotation_y, float rotation_z);
@@ -31,7 +31,7 @@ public :
 
 	string id;
 	map<int, shared_ptr<GameObject>> gameObjects;
-	map<string, vector<int>> client_gameObject;
+	map<string, vector<int>> client_gameObjects;
 
 	//게임 내 인터렉션 가능한 사항들에 대한 정보
 	map<string, string> states;

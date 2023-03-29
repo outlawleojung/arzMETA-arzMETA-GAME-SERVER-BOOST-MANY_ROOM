@@ -26,8 +26,6 @@ public:
 	virtual void HandleClose() override;
 
 	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) override;
-
-	virtual void Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& session, Protocol::C_SET_NICKNAME& pkt) override;
 	
 	virtual void Handle_C_BASE_SET_SCENE(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_SCENE& pkt) override;
 	virtual void Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) override;
@@ -36,7 +34,6 @@ public:
 
 	virtual void Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) override;
 	virtual void Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) override;
-	virtual void Handle_C_OFFICE_GET_CLIENT(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_CLIENT& pkt) override;
 	virtual void Handle_C_OFFICE_GET_HOST(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_HOST& pkt) override;
 	virtual void Handle_C_OFFICE_BREAK(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_BREAK& pkt) override;
 	virtual void Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_KICK& pkt) override;
@@ -48,8 +45,6 @@ public:
 
 	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
 	virtual void Leave(shared_ptr<ClientBase> session) override;
-	
-	void SetNickname(shared_ptr<ClientBase> session, string nickname);
 
 	void SetScene(shared_ptr<ClientBase> session, string sceneId);
 	void InstantiateObject(shared_ptr<ClientBase> session, Protocol::C_BASE_INSTANTIATE_OBJECT pkt);
@@ -57,7 +52,6 @@ public:
 	void SetState(shared_ptr<ClientBase> session, Protocol::C_INTERACTION_SET_ITEM pkt);
 	void RemoveState(shared_ptr<ClientBase> session, Protocol::C_INTERACTION_REMOVE_ITEM pkt);
 
-	void GetClient(shared_ptr<ClientBase> session);
 	void GetHost(shared_ptr<ClientBase> session);
 	void Break(shared_ptr<ClientBase> session);
 	void Kick(shared_ptr<ClientBase> session, string clientId);

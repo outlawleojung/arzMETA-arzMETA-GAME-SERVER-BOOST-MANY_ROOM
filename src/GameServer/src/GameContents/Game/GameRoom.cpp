@@ -149,7 +149,10 @@ nlohmann::json GameRoom::ToJson()
 {
 	nlohmann::json json;
 
-	json["RoomId"] = roomId;
+	json["roomId"] = roomId;
+
+	json["ip"] = "192.168.0.47";
+	json["port"] = 7777;
 
 	return json;
 }
@@ -170,17 +173,9 @@ void GameRoom::SetScene(shared_ptr<ClientBase> client, string sceneId)
 
 	//기존에 입장한 Scene 이 있을 경우 Leave
 	if (gClient->scene != nullptr)
-	{
-		auto prevScene = gClient->scene;
-		gClient->scene = scene->second;
-		prevScene->DoAsync(&Scene::Leave, gClient);
-		scene->second->DoAsync(&Scene::AddClient, gClient);
-	}
-	else
-	{
-		gClient->scene = scene->second;
-		scene->second->DoAsync(&Scene::AddClient, gClient);
-	}
+		gClient->scene->DoAsync(&Scene::Leave, gClient);
+
+	scene->second->DoAsync(&Scene::Enter, gClient);
 
 	res.set_success(true);
 	client->Send(ClientPacketHandler::MakeSendBuffer(res));

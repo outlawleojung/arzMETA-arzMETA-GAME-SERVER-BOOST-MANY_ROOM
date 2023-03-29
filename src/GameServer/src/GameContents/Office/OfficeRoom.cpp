@@ -15,6 +15,8 @@ OfficeRoom::OfficeRoom(vector<string> sceneIds)
 	, isAdvertising(false)
 	, isShutdown(false)
 	, passedTime(0)
+	, topicType(0)
+	, currentHostId("")
 {
 	disconnectedSessionWaitTime = 10000;
 }
@@ -49,17 +51,13 @@ void OfficeRoom::HandleClose()
 
 void OfficeRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&OfficeRoom::Enter, session, pkt); }
 
-void OfficeRoom::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt) { DoAsync(&OfficeRoom::SetNickname, client, pkt.nickname()); }
-
 void OfficeRoom::Handle_C_BASE_SET_SCENE(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_SCENE& pkt) { DoAsync(&OfficeRoom::SetScene, client, pkt.sceneid()); }
 void OfficeRoom::Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) { DoAsync(&OfficeRoom::InstantiateObject, client, pkt); }
 
-//TODO
 void OfficeRoom::Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_SET_ITEM& pkt) {}
 
 void OfficeRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&OfficeRoom::GetWaitingList, client); }
 void OfficeRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&OfficeRoom::AcceptWait, client, pkt.clientid(), pkt.isaccepted()); } 
-void OfficeRoom::Handle_C_OFFICE_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_CLIENT& pkt) { DoAsync(&OfficeRoom::GetClient, client); }
 void OfficeRoom::Handle_C_OFFICE_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_HOST& pkt) { DoAsync(&OfficeRoom::GetHost, client); }
 void OfficeRoom::Handle_C_OFFICE_BREAK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_BREAK& pkt) { DoAsync(&OfficeRoom::Break, client); }
 void OfficeRoom::Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_KICK& pkt) { DoAsync(&OfficeRoom::Kick, client, pkt.clientid()); }
@@ -101,7 +99,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
 	
-	if (clients.size() == 0 && creatorId == pkt.clientid())
+	if (currentHostId.empty() && creatorId == pkt.clientid())
 	{
 		auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
 
@@ -123,13 +121,13 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		return;
 	}
 
-	if (clients.size() == 0)
-	{
-		res.set_result("HOST_NOT_ENTERED");
-		session->Send(ClientPacketHandler::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
+	//if (clients.size() == 0)
+	//{
+	//	res.set_result("HOST_NOT_ENTERED");
+	//	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+	//	session->Disconnect();
+	//	return;
+	//}
 
 	if (isShutdown)
 	{
@@ -248,48 +246,6 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 	if (DESTROY_WHEN_EMPTY)
 		if (clients.size() == 0 || _client->clientId == currentHostId)
 			Close();
-}
-
-void OfficeRoom::SetNickname(shared_ptr<ClientBase> _client, string nickname)
-{
-	auto client = clients.find(_client->clientId);
-	if (client == clients.end())
-		return;
-
-	client->second->nickname = nickname;
-
-	{
-		Protocol::S_SET_NICKNAME setNickname;
-		setNickname.set_success(true);
-		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(setNickname);
-		_client->Send(sendBuffer);
-	}
-
-	{
-		Protocol::S_SET_NICKNAME_NOTICE setNicknameNotice;
-		setNicknameNotice.set_clientid(client->second->clientId);
-		setNicknameNotice.set_nickname(nickname);
-		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(setNicknameNotice);
-		this->DoAsync(&OfficeRoom::Broadcast, sendBuffer);
-	}
-}
-
-void OfficeRoom::GetClient(shared_ptr<ClientBase> _client)
-{
-	Protocol::S_OFFICE_ADD_CLIENT res;
-
-	for (auto& client : clients)
-	{
-		auto clientInfo = res.add_clientinfos();
-		clientInfo->set_clientid(client.second->clientId);
-		clientInfo->set_nickname(client.second->nickname);
-	}
-
-	if (res.clientinfos_size() > 0)
-	{
-		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(res);
-		_client->Send(sendBuffer);
-	}
 }
 
 void OfficeRoom::GetHost(shared_ptr<ClientBase> client)
@@ -675,6 +631,9 @@ nlohmann::json OfficeRoom::ToJson()
 	json["isAdvertising"] = isAdvertising;
 	json["isShutdown"] = isShutdown;
 	json["isObserver"] = (observer > 0) ? true : false;
+
+	json["ip"] = "192.168.0.47";
+	json["port"] = 7777;
 
 	return json;
 }

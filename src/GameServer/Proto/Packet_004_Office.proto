@@ -38,25 +38,6 @@ message S_OFFICE_ACCEPT_WAIT_NOTICE
 	bool isAccepted = 1;
 }
 
-message C_OFFICE_GET_CLIENT
-{
-}
-
-message S_OFFICE_ADD_CLIENT
-{
-	message MeetingModuleClientInfo
-	{
-		string clientId = 1;
-		string nickname = 2;
-	}
-	repeated MeetingModuleClientInfo clientInfos = 1;
-}
-
-message S_OFFICE_REMOVE_CLIENT
-{
-	repeated string clientIds = 1;
-}
-
 message C_OFFICE_GET_HOST
 {
 }

@@ -19,37 +19,34 @@ void Scene::Clear()
 	clients.clear();
 }
 
+void Scene::Enter(shared_ptr<GameClient> client)
+{
+	client->scene = static_pointer_cast<Scene>(shared_from_this());
+	clients.insert({ client->clientId, client });
+}
+
 void Scene::Leave(shared_ptr<GameClient> client)
 {
 	Protocol::S_BASE_REMOVE_OBJECT removeObject;
 
-	auto _client_gameObjects = client_gameObject.find(client->clientId);
-	if (_client_gameObjects != client_gameObject.end())
+	auto client_gameObject = client_gameObjects.find(client->clientId);
+	if (client_gameObject != client_gameObjects.end())
 	{
-		for (auto gameObjectId = _client_gameObjects->second.begin(); gameObjectId != _client_gameObjects->second.end(); gameObjectId++)
+		for (auto gameObjectId = client_gameObject->second.begin(); gameObjectId != client_gameObject->second.end(); gameObjectId++)
 		{
 			auto scene_gameObject = gameObjects.find(*gameObjectId);
-			//if (scene_gameObject == gameObjects.end())
-			//	continue;
 			gameObjects.erase(scene_gameObject);
 			removeObject.add_gameobjects(*gameObjectId);
 		}
 
-		client_gameObject.erase(_client_gameObjects);
+		client_gameObjects.erase(client_gameObject);
 	}
 
 	clients.erase(clients.find(client->clientId));
-	if(client->scene->id == id)
-		client->scene = nullptr;
 
 	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(removeObject);
 	for (auto _session = clients.begin(); _session != clients.end(); _session++)
 		_session->second->Send(sendBuffer);
-}
-
-void Scene::AddClient(shared_ptr<GameClient> client)
-{
-	clients.insert({ client->clientId, client });
 }
 
 void Scene::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt)
@@ -62,9 +59,10 @@ void Scene::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_IN
 	gameObject->ownerId = client->clientId;
 	
 	gameObjects.insert({ gameObject->objectId, gameObject });
-	if (client_gameObject.find(client->clientId) == client_gameObject.end())
-		client_gameObject.insert({ client->clientId, vector<int>() });
-	client_gameObject.find(client->clientId)->second.push_back(gameObject->objectId);
+	
+	if (client_gameObjects.find(client->clientId) == client_gameObjects.end())
+		client_gameObjects.insert({ client->clientId, vector<int>() });
+	client_gameObjects.find(client->clientId)->second.push_back(gameObject->objectId);
 
 	{
 		Protocol::S_BASE_INSTANTIATE_OBJECT res;

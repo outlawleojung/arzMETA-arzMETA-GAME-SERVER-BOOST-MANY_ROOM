@@ -31,6 +31,25 @@ message C_LEAVE
 {
 }
 
+message C_GET_CLIENT
+{
+}
+
+message S_ADD_CLIENT
+{
+	message ClientInfo
+	{
+		string clientId = 1;
+		string nickname = 2;
+	}
+	repeated ClientInfo clientInfos = 1;
+}
+
+message S_REMOVE_CLIENT
+{
+	repeated string clientIds = 1;
+}
+
 message C_SET_NICKNAME
 {
 	string nickname = 1;
