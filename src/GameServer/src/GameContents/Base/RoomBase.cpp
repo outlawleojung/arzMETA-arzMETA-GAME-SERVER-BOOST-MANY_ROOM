@@ -49,6 +49,9 @@ void RoomBase::Leave(shared_ptr<ClientBase> _client)
 		return;
 
 	clients.erase(client);
+
+	if (clients.size() == 0)
+		Close();
 }
 
 void RoomBase::SetNickname(shared_ptr<ClientBase> _client, string nickname)

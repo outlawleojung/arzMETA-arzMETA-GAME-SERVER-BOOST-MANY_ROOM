@@ -27,26 +27,8 @@ void Scene::Enter(shared_ptr<GameClient> client)
 
 void Scene::Leave(shared_ptr<GameClient> client)
 {
-	Protocol::S_BASE_REMOVE_OBJECT removeObject;
-
-	auto client_gameObject = client_gameObjects.find(client->clientId);
-	if (client_gameObject != client_gameObjects.end())
-	{
-		for (auto gameObjectId = client_gameObject->second.begin(); gameObjectId != client_gameObject->second.end(); gameObjectId++)
-		{
-			auto scene_gameObject = gameObjects.find(*gameObjectId);
-			gameObjects.erase(scene_gameObject);
-			removeObject.add_gameobjects(*gameObjectId);
-		}
-
-		client_gameObjects.erase(client_gameObject);
-	}
-
 	clients.erase(clients.find(client->clientId));
-
-	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(removeObject);
-	for (auto _session = clients.begin(); _session != clients.end(); _session++)
-		_session->second->Send(sendBuffer);
+	RemoveObject(client);
 }
 
 void Scene::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt)
@@ -78,6 +60,31 @@ void Scene::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_IN
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(instantiateObjectNotice);
 		Broadcast(sendBuffer);
 	}
+}
+
+void Scene::RemoveObject(shared_ptr<GameClient> client)
+{
+	Protocol::S_BASE_REMOVE_OBJECT removeObject;
+
+	auto client_gameObject = client_gameObjects.find(client->clientId);
+	if (client_gameObject != client_gameObjects.end())
+	{
+		for (auto gameObjectId = client_gameObject->second.begin(); gameObjectId != client_gameObject->second.end(); gameObjectId++)
+		{
+			auto scene_gameObject = gameObjects.find(*gameObjectId);
+			gameObjects.erase(scene_gameObject);
+			removeObject.add_gameobjects(*gameObjectId);
+		}
+
+		client_gameObjects.erase(client_gameObject);
+	}
+
+	if (removeObject.gameobjects().size() <= 0)
+		return;
+
+	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(removeObject);
+	for (auto _session = clients.begin(); _session != clients.end(); _session++)
+		_session->second->Send(sendBuffer);
 }
 
 void Scene::GetObjects(shared_ptr<GameClient> client)

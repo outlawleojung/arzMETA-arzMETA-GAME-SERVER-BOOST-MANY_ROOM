@@ -243,9 +243,12 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 
 	GameRoom::Leave(_client);
 
-	if (DESTROY_WHEN_EMPTY)
-		if (clients.size() == 0 || _client->clientId == currentHostId)
-			Close();
+	if (_client->clientId == currentHostId)
+		Close();
+
+	//if (DESTROY_WHEN_EMPTY)
+	//	if (clients.size() == 0 || _client->clientId == currentHostId)
+	//		Close();
 }
 
 void OfficeRoom::GetHost(shared_ptr<ClientBase> client)

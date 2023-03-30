@@ -95,6 +95,18 @@ public class PacketManager
 	    PKT_S_OFFICE_GET_ROOM_INFO = 420,
 	    PKT_C_OFFICE_VIDEO_STREAM = 421,
 	    PKT_S_OFFICE_VIDEO_STREAM = 422,
+	    PKT_C_MATCHING_START = 500,
+	    PKT_S_MATCHING_START = 501,
+	    PKT_S_MATCHING_FINISH = 502,
+	    PKT_S_MATCHING_HOST = 503,
+	    PKT_S_MATCHING_ROUND_START = 504,
+	    PKT_S_MATCHING_ROUND_FINISH = 505,
+	    PKT_S_MATCHING_TILES = 506,
+	    PKT_S_MATCHING_HINT = 507,
+	    PKT_S_MATCHING_PROBLEM = 508,
+	    PKT_S_MATCHING_DESTROY = 509,
+	    PKT_S_MATCHING_QUIZ_DISAPPEAR = 510,
+	    PKT_C_MATCHING_DIE = 511,
 	}
 
 	public void Register()
@@ -173,6 +185,26 @@ public class PacketManager
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_GET_ROOM_INFO, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_VIDEO_STREAM, MakePacket<S_OFFICE_VIDEO_STREAM>);
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_VIDEO_STREAM, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_START, MakePacket<S_MATCHING_START>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_START, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_FINISH, MakePacket<S_MATCHING_FINISH>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_FINISH, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_HOST, MakePacket<S_MATCHING_HOST>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_HOST, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_ROUND_START, MakePacket<S_MATCHING_ROUND_START>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_ROUND_START, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_ROUND_FINISH, MakePacket<S_MATCHING_ROUND_FINISH>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_ROUND_FINISH, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_TILES, MakePacket<S_MATCHING_TILES>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_TILES, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_HINT, MakePacket<S_MATCHING_HINT>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_HINT, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_PROBLEM, MakePacket<S_MATCHING_PROBLEM>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_PROBLEM, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_DESTROY, MakePacket<S_MATCHING_DESTROY>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_DESTROY, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_QUIZ_DISAPPEAR, MakePacket<S_MATCHING_QUIZ_DISAPPEAR>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_QUIZ_DISAPPEAR, new Dictionary<object, Action<PacketSession, IMessage>>());
 	}
 
 	public void AddHandler(MsgId msgId, object obj, Action<PacketSession, IMessage> handler)

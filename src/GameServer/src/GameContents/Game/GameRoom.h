@@ -13,9 +13,6 @@ public :
 	virtual void HandleClose() override;
 	virtual void Clear() override;
 
-	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
-	virtual void Leave(shared_ptr<ClientBase> session) override;
-
 	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) override;
 
 	virtual void Handle_C_BASE_SET_SCENE(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_SCENE& pkt) override;
@@ -28,6 +25,11 @@ public :
 	virtual void Handle_C_INTERACTION_GET_ITEMS(shared_ptr<ClientBase>& session, Protocol::C_INTERACTION_GET_ITEMS& pkt) override;
 	virtual void Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& session, Protocol::C_INTERACTION_SET_ITEM& pkt) override;
 	virtual void Handle_C_INTERACTION_REMOVE_ITEM(shared_ptr<ClientBase>& session, Protocol::C_INTERACTION_REMOVE_ITEM& pkt) override;
+
+	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
+	virtual void Leave(shared_ptr<ClientBase> client) override;
+
+	void RemoveObject(shared_ptr<ClientBase> client);
 
 	virtual nlohmann::json ToJson() override;
 

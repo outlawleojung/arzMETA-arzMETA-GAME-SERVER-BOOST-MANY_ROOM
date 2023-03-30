@@ -1,2 +1,55 @@
 syntax = "proto3";
 package Protocol;
+
+message C_MATCHING_START
+{
+}
+
+message S_MATCHING_START
+{
+}
+
+message S_MATCHING_FINISH
+{
+}
+
+message S_MATCHING_HOST
+{
+}
+
+message S_MATCHING_ROUND_START
+{
+}
+
+message S_MATCHING_ROUND_FINISH
+{
+}
+
+message S_MATCHING_TILES
+{
+	repeated string tiles = 1;
+}
+
+message S_MATCHING_HINT
+{
+	repeated bool hints = 1;
+}
+
+message S_MATCHING_PROBLEM
+{
+	string problem = 1;
+	int32 timeToDestroy = 2;
+}
+
+message S_MATCHING_DESTROY
+{
+
+}
+
+message S_MATCHING_QUIZ_DISAPPEAR
+{
+}
+
+message C_MATCHING_DIE
+{
+}

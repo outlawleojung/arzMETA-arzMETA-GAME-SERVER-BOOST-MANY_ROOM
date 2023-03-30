@@ -18,6 +18,7 @@ public :
 
 	void Enter(shared_ptr<GameClient> client);
 	void InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt);
+	void RemoveObject(shared_ptr<GameClient> client);
 	void GetObjects(shared_ptr<GameClient> client);
 	void SetTransfrom(int objectId, float position_x, float position_y, float position_z, float rotation_x, float rotation_y, float rotation_z);
 	void SetAnimation(int objectId, string animationId, string animation);

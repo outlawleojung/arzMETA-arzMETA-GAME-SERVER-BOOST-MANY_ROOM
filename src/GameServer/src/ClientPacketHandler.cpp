@@ -356,3 +356,27 @@ bool Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::C_
 	
 	return true;
 }
+bool Handle_C_MATCHING_START(shared_ptr<GameSession>& session, Protocol::C_MATCHING_START& pkt)
+{
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
+		return true;
+	
+	session->owner->enteredRoom->Handle_C_MATCHING_START(session->owner, pkt);
+	
+	return true;
+}
+bool Handle_C_MATCHING_DIE(shared_ptr<GameSession>& session, Protocol::C_MATCHING_DIE& pkt)
+{
+	if(session->owner == nullptr)
+		return false;
+
+	if (session->owner->enteredRoom->state != RoomState::Running)
+		return true;
+	
+	session->owner->enteredRoom->Handle_C_MATCHING_DIE(session->owner, pkt);
+	
+	return true;
+}

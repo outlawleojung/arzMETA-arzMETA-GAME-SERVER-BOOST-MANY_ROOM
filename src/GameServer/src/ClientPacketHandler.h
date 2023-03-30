@@ -75,6 +75,18 @@ enum : unsigned short
 	PKT_S_OFFICE_GET_ROOM_INFO = 420,
 	PKT_C_OFFICE_VIDEO_STREAM = 421,
 	PKT_S_OFFICE_VIDEO_STREAM = 422,
+	PKT_C_MATCHING_START = 500,
+	PKT_S_MATCHING_START = 501,
+	PKT_S_MATCHING_FINISH = 502,
+	PKT_S_MATCHING_HOST = 503,
+	PKT_S_MATCHING_ROUND_START = 504,
+	PKT_S_MATCHING_ROUND_FINISH = 505,
+	PKT_S_MATCHING_TILES = 506,
+	PKT_S_MATCHING_HINT = 507,
+	PKT_S_MATCHING_PROBLEM = 508,
+	PKT_S_MATCHING_DESTROY = 509,
+	PKT_S_MATCHING_QUIZ_DISAPPEAR = 510,
+	PKT_C_MATCHING_DIE = 511,
 };
 
 bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int len);
@@ -106,6 +118,8 @@ bool Handle_C_OFFICE_SET_PERMISSION(shared_ptr<GameSession>& session, Protocol::
 bool Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_ROOM_INFO& pkt);
 bool Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt);
 bool Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::C_OFFICE_VIDEO_STREAM& pkt);
+bool Handle_C_MATCHING_START(shared_ptr<GameSession>& session, Protocol::C_MATCHING_START& pkt);
+bool Handle_C_MATCHING_DIE(shared_ptr<GameSession>& session, Protocol::C_MATCHING_DIE& pkt);
 
 class ClientPacketHandler
 {
@@ -142,6 +156,8 @@ public:
 		GPacketHandler[PKT_C_OFFICE_SET_ROOM_INFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_OFFICE_SET_ROOM_INFO>(Handle_C_OFFICE_SET_ROOM_INFO, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_GET_ROOM_INFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_OFFICE_GET_ROOM_INFO>(Handle_C_OFFICE_GET_ROOM_INFO, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_VIDEO_STREAM] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_OFFICE_VIDEO_STREAM>(Handle_C_OFFICE_VIDEO_STREAM, session, buffer, len); };
+		GPacketHandler[PKT_C_MATCHING_START] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_MATCHING_START>(Handle_C_MATCHING_START, session, buffer, len); };
+		GPacketHandler[PKT_C_MATCHING_DIE] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_MATCHING_DIE>(Handle_C_MATCHING_DIE, session, buffer, len); };
 	}
 
 	static bool HandlePacket(shared_ptr<GameSession>& session, unsigned char* buffer, int len)
@@ -186,6 +202,16 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_SET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_SET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_GET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_GET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_VIDEO_STREAM& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_VIDEO_STREAM); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_START& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_START); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_FINISH& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_FINISH); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_HOST& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_HOST); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_ROUND_START& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_ROUND_START); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_ROUND_FINISH& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_ROUND_FINISH); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_TILES& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_TILES); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_HINT& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_HINT); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_PROBLEM& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_PROBLEM); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_DESTROY& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_DESTROY); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MATCHING_QUIZ_DISAPPEAR& pkt) { return MakeSendBuffer(pkt, PKT_S_MATCHING_QUIZ_DISAPPEAR); }
 
 private:
 	template<typename PacketType, typename ProcessFunc>

@@ -74,6 +74,14 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 	RoomBase::Leave(client);
 }
 
+void GameRoom::RemoveObject(shared_ptr<ClientBase> client)
+{
+	auto gClient = static_pointer_cast<GameClient>(client);
+
+	if (gClient->scene != nullptr)
+		gClient->scene->DoAsync(&Scene::RemoveObject, gClient);
+}
+
 void GameRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&GameRoom::Enter, session, pkt); }
 
 void GameRoom::Handle_C_BASE_SET_SCENE(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_SCENE& pkt) { DoAsync(&GameRoom::SetScene, client, pkt.sceneid()); }

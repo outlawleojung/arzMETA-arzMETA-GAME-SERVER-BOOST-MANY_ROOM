@@ -15,5 +15,6 @@ public:
 	nlohmann::json GetRoom(map<string, string> query);
 
 	map<string, shared_ptr<RoomBase>> rooms;
+	map<string, shared_ptr<RoomBase>> visibleRooms;
 	shared_mutex _mutex;
 };
