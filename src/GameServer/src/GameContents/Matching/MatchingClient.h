@@ -5,5 +5,5 @@
 class MatchingClient : public GameClient
 {
 public :
-	chrono::system_clock::time_point enteredTime;
+	std::chrono::system_clock::time_point enteredTime;
 };
