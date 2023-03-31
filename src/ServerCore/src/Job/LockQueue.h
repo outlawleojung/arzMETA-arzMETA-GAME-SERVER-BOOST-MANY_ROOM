@@ -3,6 +3,7 @@
 #include <queue>
 #include <vector>
 #include <mutex>
+#include <memory>
 
 using namespace std;
 
