@@ -6,7 +6,11 @@
 #include "../../Session/GameSession.h"
 
 #include <functional>
-#include <mysql.h>
+
+#include <mysql_driver.h>
+#include <mysql_connection.h>
+#include <cppconn/prepared_statement.h>
+#include <cppconn/resultset.h>
 
 matching::GameData::GameData() 
 	: gameState(GameState::Idle)
@@ -20,35 +24,24 @@ matching::GameData::GameData()
 
 bool matching::GameData::Init()
 {
-	MYSQL connect;
-	mysql_init(&connect);
+	sql::Driver* driver;
+	sql::Connection* con;
+	sql::PreparedStatement* prep_stmt;
+	sql::ResultSet* res;
 
-	if (mysql_real_connect(
-		&connect,                 /* pointer to connection handler */
-		"dev-arowana-mysql.mariadb.database.azure.com",       /* host to connect to */
-		"frontishub@dev-arowana-mysql",       /* user name */
-		"rkskekfk123!@!@",          /* password */
-		//"codegate_db",          /* database to use */
-		"dev_arzmeta_db",          /* database to use */
-		0,          /* port (use default) */
-		NULL,   /* socket (use default) */
-		0)                                 /* flags (none) */
-		) {
-	}
-	else
-		return false;
+	driver = get_driver_instance();
 
-	if (mysql_query(&connect, "SELECT * FROM jumpingmatchinglevel"))
-	{
-		mysql_close(&connect);
-		return false;
-	}
+	con = driver->connect(
+		"dev-arowana-mysql.mariadb.database.azure.com", 
+		"frontishub@dev-arowana-mysql", 
+		"rkskekfk123!@!@"
+	);
+	con->setSchema("dev_arzmeta_db");
 
-	MYSQL_RES* result = mysql_store_result(&connect);
+	prep_stmt = con->prepareStatement("SELECT * FROM jumpingmatchinglevel");
+	res = prep_stmt->executeQuery();
 
-	roundTotal = result->row_count;
-
-	MYSQL_ROW row;
+	roundTotal = res->rowsCount();
 
 	hintToHintIntervals.clear();
 	quizToDestroyIntervals.clear();
@@ -59,19 +52,19 @@ bool matching::GameData::Init()
 	paintConditions.clear();
 	hintTemplates.clear();
 
-	while ((row = mysql_fetch_row(result)))
+	while (res->next())
 	{
-		hintToHintIntervals.push_back(std::stoi(row[2]));
-		quizToDestroyIntervals.push_back(std::stoi(row[3]));
-		destroyToFinishIntervals.push_back(std::stoi(row[4]));
-		toNextRoundIntervals.push_back(std::stoi(row[5]));
-		showQuizTimes.push_back(std::stoi(row[6]));
+		hintToHintIntervals.push_back(std::stoi(res->getString(2)));
+		quizToDestroyIntervals.push_back(std::stoi(res->getString(3)));
+		destroyToFinishIntervals.push_back(std::stoi(res->getString(4)));
+		toNextRoundIntervals.push_back(std::stoi(res->getString(5)));
+		showQuizTimes.push_back(std::stoi(res->getString(6)));
 
-		int paintNumber = std::stoi(row[8]);
+		int paintNumber = std::stoi(res->getString(8));
 
-		paintConditions.push_back({ paintNumber, std::stoi(row[9]) });
+		paintConditions.push_back({ paintNumber, std::stoi(res->getString(9)) });
 
-		string hintTemplateString = string(row[10]);
+		string hintTemplateString = string(res->getString(10));
 
 		vector<vector<bool>> hintTemplatesForRound;
 
@@ -91,9 +84,10 @@ bool matching::GameData::Init()
 		hintTemplates.push_back(hintTemplatesForRound);
 	}
 
-	mysql_free_result(result);
-
-	mysql_close(&connect);
+	delete res;
+	delete prep_stmt;
+	delete con;
+	//delete driver 는 하지 않아도 되나?
 
 	for (int i = 1; i <= pictureNumber; i++)
 		pictureNames.push_back(std::to_string(i));
