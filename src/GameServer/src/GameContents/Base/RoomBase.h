@@ -20,7 +20,8 @@ enum class RoomType
 {
 	ArzLand,
 	MyRoom,
-	Office
+	Office,
+	Matching
 };
 
 class RoomBase : public JobQueue

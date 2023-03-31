@@ -98,6 +98,17 @@ void HttpServer::start(string ip, int port)
 
 			room->type = RoomType::ArzLand;
 		}
+		else if (body["roomType"] == "JumpingMatching")
+		{
+			scenes.push_back("JumpingMatching");
+			
+			room = make_shared<MatchingRoom>(scenes);
+			
+			room->type = RoomType::Matching;
+
+			room->maxPlayerNumber = body["maxPlayerNumber"];
+			static_pointer_cast<MatchingRoom>(room)->roomName = body["roomName"];
+		}
 		else
 		{
 			nlohmann::json resJson;
