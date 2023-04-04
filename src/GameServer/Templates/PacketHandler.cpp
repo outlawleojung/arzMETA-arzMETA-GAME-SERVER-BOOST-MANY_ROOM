@@ -47,12 +47,9 @@ bool Handle_C_REENTER(shared_ptr<GameSession>& session, Protocol::C_REENTER& pkt
 	{%- if (pkt.name != 'C_ENTER') and (pkt.name != 'C_REENTER') %}
 bool Handle_{{pkt.name}}(shared_ptr<GameSession>& session, Protocol::{{pkt.name}}& pkt)
 {
-	if(session->owner == nullptr)
+	if(session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
 		return false;
 
-	if (session->owner->enteredRoom->state != RoomState::Running)
-		return true;
-	
 	session->owner->enteredRoom->Handle_{{pkt.name}}(session->owner, pkt);
 	
 	return true;
