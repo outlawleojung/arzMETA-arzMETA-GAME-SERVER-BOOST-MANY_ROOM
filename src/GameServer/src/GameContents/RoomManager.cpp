@@ -3,6 +3,7 @@
 #include "Base/RoomBase.h"
 #include "MyRoom/MyRoomRoom.h"
 #include "Office/OfficeRoom.h"
+#include "Matching/MatchingRoom.h"
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 {
@@ -75,6 +76,15 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
 
             if (query.find("ownerId") != query.end() && myRoom->ownerId != query["ownerId"])
                 continue;
+
+            res.push_back(room->second->ToJson());
+        }
+        else if (query["type"] == "JumpingMatching")
+        {
+            if (room->second->type != RoomType::Matching)
+                continue;
+
+            auto myRoom = static_pointer_cast<MatchingRoom>(room->second);
 
             res.push_back(room->second->ToJson());
         }
