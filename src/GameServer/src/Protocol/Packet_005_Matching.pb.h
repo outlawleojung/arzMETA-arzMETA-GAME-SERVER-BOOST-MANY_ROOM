@@ -456,9 +456,10 @@ class S_MATCHING_FINISH final :
 // -------------------------------------------------------------------
 
 class S_MATCHING_HOST final :
-    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.S_MATCHING_HOST) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_MATCHING_HOST) */ {
  public:
   inline S_MATCHING_HOST() : S_MATCHING_HOST(nullptr) {}
+  ~S_MATCHING_HOST() override;
   explicit PROTOBUF_CONSTEXPR S_MATCHING_HOST(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   S_MATCHING_HOST(const S_MATCHING_HOST& from);
@@ -531,15 +532,29 @@ class S_MATCHING_HOST final :
   S_MATCHING_HOST* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<S_MATCHING_HOST>(arena);
   }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const S_MATCHING_HOST& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_MATCHING_HOST& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_MATCHING_HOST& from) {
+    S_MATCHING_HOST::MergeImpl(*this, from);
   }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const S_MATCHING_HOST& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
-  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_MATCHING_HOST* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
@@ -560,6 +575,23 @@ class S_MATCHING_HOST final :
 
   // accessors -------------------------------------------------------
 
+  enum : int {
+    kClientIdFieldNumber = 1,
+  };
+  // string clientId = 1;
+  void clear_clientid();
+  const std::string& clientid() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_clientid(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_clientid();
+  PROTOBUF_NODISCARD std::string* release_clientid();
+  void set_allocated_clientid(std::string* clientid);
+  private:
+  const std::string& _internal_clientid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_clientid(const std::string& value);
+  std::string* _internal_mutable_clientid();
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_MATCHING_HOST)
  private:
   class _Internal;
@@ -568,7 +600,10 @@ class S_MATCHING_HOST final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientid_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_Packet_5f005_5fMatching_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1671,6 +1706,56 @@ class C_MATCHING_DIE final :
 // -------------------------------------------------------------------
 
 // S_MATCHING_HOST
+
+// string clientId = 1;
+inline void S_MATCHING_HOST::clear_clientid() {
+  _impl_.clientid_.ClearToEmpty();
+}
+inline const std::string& S_MATCHING_HOST::clientid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MATCHING_HOST.clientId)
+  return _internal_clientid();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_MATCHING_HOST::set_clientid(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.clientid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_MATCHING_HOST.clientId)
+}
+inline std::string* S_MATCHING_HOST::mutable_clientid() {
+  std::string* _s = _internal_mutable_clientid();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_MATCHING_HOST.clientId)
+  return _s;
+}
+inline const std::string& S_MATCHING_HOST::_internal_clientid() const {
+  return _impl_.clientid_.Get();
+}
+inline void S_MATCHING_HOST::_internal_set_clientid(const std::string& value) {
+  
+  _impl_.clientid_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_MATCHING_HOST::_internal_mutable_clientid() {
+  
+  return _impl_.clientid_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_MATCHING_HOST::release_clientid() {
+  // @@protoc_insertion_point(field_release:Protocol.S_MATCHING_HOST.clientId)
+  return _impl_.clientid_.Release();
+}
+inline void S_MATCHING_HOST::set_allocated_clientid(std::string* clientid) {
+  if (clientid != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.clientid_.SetAllocated(clientid, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.clientid_.IsDefault()) {
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_MATCHING_HOST.clientId)
+}
 
 // -------------------------------------------------------------------
 

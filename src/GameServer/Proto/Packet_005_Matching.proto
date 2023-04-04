@@ -15,6 +15,7 @@ message S_MATCHING_FINISH
 
 message S_MATCHING_HOST
 {
+	string clientId = 1;
 }
 
 message S_MATCHING_ROUND_START
@@ -43,7 +44,6 @@ message S_MATCHING_PROBLEM
 
 message S_MATCHING_DESTROY
 {
-
 }
 
 message S_MATCHING_QUIZ_DISAPPEAR

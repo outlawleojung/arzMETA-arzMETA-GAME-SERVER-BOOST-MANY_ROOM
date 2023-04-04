@@ -55,7 +55,9 @@ struct S_MATCHING_FINISHDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_MATCHING_FINISHDefaultTypeInternal _S_MATCHING_FINISH_default_instance_;
 PROTOBUF_CONSTEXPR S_MATCHING_HOST::S_MATCHING_HOST(
-    ::_pbi::ConstantInitialized) {}
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct S_MATCHING_HOSTDefaultTypeInternal {
   PROTOBUF_CONSTEXPR S_MATCHING_HOSTDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -190,6 +192,7 @@ const uint32_t TableStruct_Packet_5f005_5fMatching_2eproto::offsets[] PROTOBUF_S
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_MATCHING_HOST, _impl_.clientid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_MATCHING_ROUND_START, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -248,14 +251,14 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 6, -1, -1, sizeof(::Protocol::S_MATCHING_START)},
   { 12, -1, -1, sizeof(::Protocol::S_MATCHING_FINISH)},
   { 18, -1, -1, sizeof(::Protocol::S_MATCHING_HOST)},
-  { 24, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_START)},
-  { 30, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_FINISH)},
-  { 36, -1, -1, sizeof(::Protocol::S_MATCHING_TILES)},
-  { 43, -1, -1, sizeof(::Protocol::S_MATCHING_HINT)},
-  { 50, -1, -1, sizeof(::Protocol::S_MATCHING_PROBLEM)},
-  { 58, -1, -1, sizeof(::Protocol::S_MATCHING_DESTROY)},
-  { 64, -1, -1, sizeof(::Protocol::S_MATCHING_QUIZ_DISAPPEAR)},
-  { 70, -1, -1, sizeof(::Protocol::C_MATCHING_DIE)},
+  { 25, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_START)},
+  { 31, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_FINISH)},
+  { 37, -1, -1, sizeof(::Protocol::S_MATCHING_TILES)},
+  { 44, -1, -1, sizeof(::Protocol::S_MATCHING_HINT)},
+  { 51, -1, -1, sizeof(::Protocol::S_MATCHING_PROBLEM)},
+  { 59, -1, -1, sizeof(::Protocol::S_MATCHING_DESTROY)},
+  { 65, -1, -1, sizeof(::Protocol::S_MATCHING_QUIZ_DISAPPEAR)},
+  { 71, -1, -1, sizeof(::Protocol::C_MATCHING_DIE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -276,18 +279,18 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_Packet_5f005_5fMatching_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\031Packet_005_Matching.proto\022\010Protocol\"\022\n"
   "\020C_MATCHING_START\"\022\n\020S_MATCHING_START\"\023\n"
-  "\021S_MATCHING_FINISH\"\021\n\017S_MATCHING_HOST\"\030\n"
-  "\026S_MATCHING_ROUND_START\"\031\n\027S_MATCHING_RO"
-  "UND_FINISH\"!\n\020S_MATCHING_TILES\022\r\n\005tiles\030"
-  "\001 \003(\t\" \n\017S_MATCHING_HINT\022\r\n\005hints\030\001 \003(\010\""
-  "<\n\022S_MATCHING_PROBLEM\022\017\n\007problem\030\001 \001(\t\022\025"
-  "\n\rtimeToDestroy\030\002 \001(\005\"\024\n\022S_MATCHING_DEST"
-  "ROY\"\033\n\031S_MATCHING_QUIZ_DISAPPEAR\"\020\n\016C_MA"
-  "TCHING_DIEb\006proto3"
+  "\021S_MATCHING_FINISH\"#\n\017S_MATCHING_HOST\022\020\n"
+  "\010clientId\030\001 \001(\t\"\030\n\026S_MATCHING_ROUND_STAR"
+  "T\"\031\n\027S_MATCHING_ROUND_FINISH\"!\n\020S_MATCHI"
+  "NG_TILES\022\r\n\005tiles\030\001 \003(\t\" \n\017S_MATCHING_HI"
+  "NT\022\r\n\005hints\030\001 \003(\010\"<\n\022S_MATCHING_PROBLEM\022"
+  "\017\n\007problem\030\001 \001(\t\022\025\n\rtimeToDestroy\030\002 \001(\005\""
+  "\024\n\022S_MATCHING_DESTROY\"\033\n\031S_MATCHING_QUIZ"
+  "_DISAPPEAR\"\020\n\016C_MATCHING_DIEb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f005_5fMatching_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f005_5fMatching_2eproto = {
-    false, false, 378, descriptor_table_protodef_Packet_5f005_5fMatching_2eproto,
+    false, false, 396, descriptor_table_protodef_Packet_5f005_5fMatching_2eproto,
     "Packet_005_Matching.proto",
     &descriptor_table_Packet_5f005_5fMatching_2eproto_once, nullptr, 0, 12,
     schemas, file_default_instances, TableStruct_Packet_5f005_5fMatching_2eproto::offsets,
@@ -430,31 +433,194 @@ class S_MATCHING_HOST::_Internal {
 
 S_MATCHING_HOST::S_MATCHING_HOST(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:Protocol.S_MATCHING_HOST)
 }
 S_MATCHING_HOST::S_MATCHING_HOST(const S_MATCHING_HOST& from)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
   S_MATCHING_HOST* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.clientid_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.clientid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_clientid().empty()) {
+    _this->_impl_.clientid_.Set(from._internal_clientid(), 
+      _this->GetArenaForAllocation());
+  }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_MATCHING_HOST)
 }
 
+inline void S_MATCHING_HOST::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.clientid_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.clientid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
 
+S_MATCHING_HOST::~S_MATCHING_HOST() {
+  // @@protoc_insertion_point(destructor:Protocol.S_MATCHING_HOST)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
 
+inline void S_MATCHING_HOST::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.clientid_.Destroy();
+}
 
+void S_MATCHING_HOST::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_MATCHING_HOST::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_MATCHING_HOST)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.clientid_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_MATCHING_HOST::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string clientId = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_clientid();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_MATCHING_HOST.clientId"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_MATCHING_HOST::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_MATCHING_HOST)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string clientId = 1;
+  if (!this->_internal_clientid().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_clientid().data(), static_cast<int>(this->_internal_clientid().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Protocol.S_MATCHING_HOST.clientId");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_clientid(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_MATCHING_HOST)
+  return target;
+}
+
+size_t S_MATCHING_HOST::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_MATCHING_HOST)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string clientId = 1;
+  if (!this->_internal_clientid().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_clientid());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_MATCHING_HOST::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_MATCHING_HOST::MergeImpl
 };
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_MATCHING_HOST::GetClassData() const { return &_class_data_; }
 
 
+void S_MATCHING_HOST::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_MATCHING_HOST*>(&to_msg);
+  auto& from = static_cast<const S_MATCHING_HOST&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_MATCHING_HOST)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
+  if (!from._internal_clientid().empty()) {
+    _this->_internal_set_clientid(from._internal_clientid());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
 
+void S_MATCHING_HOST::CopyFrom(const S_MATCHING_HOST& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_MATCHING_HOST)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
+bool S_MATCHING_HOST::IsInitialized() const {
+  return true;
+}
 
+void S_MATCHING_HOST::InternalSwap(S_MATCHING_HOST* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.clientid_, lhs_arena,
+      &other->_impl_.clientid_, rhs_arena
+  );
+}
 
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_HOST::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
