@@ -7,10 +7,11 @@
 
 #include <functional>
 
-#include <mysql_driver.h>
 #include <mysql_connection.h>
-#include <cppconn/prepared_statement.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
 #include <cppconn/resultset.h>
+#include <cppconn/statement.h>
 
 matching::GameData::GameData() 
 	: gameState(GameState::Idle)
@@ -26,7 +27,7 @@ bool matching::GameData::Init()
 {
 	sql::Driver* driver;
 	sql::Connection* con;
-	sql::PreparedStatement* prep_stmt;
+	sql::Statement* stmt;
 	sql::ResultSet* res;
 
 	driver = get_driver_instance();
@@ -38,8 +39,8 @@ bool matching::GameData::Init()
 	);
 	con->setSchema("dev_arzmeta_db");
 
-	prep_stmt = con->prepareStatement("SELECT * FROM jumpingmatchinglevel");
-	res = prep_stmt->executeQuery();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT * FROM jumpingmatchinglevel");
 
 	roundTotal = res->rowsCount();
 
@@ -54,17 +55,17 @@ bool matching::GameData::Init()
 
 	while (res->next())
 	{
-		hintToHintIntervals.push_back(std::stoi(res->getString(2)));
-		quizToDestroyIntervals.push_back(std::stoi(res->getString(3)));
-		destroyToFinishIntervals.push_back(std::stoi(res->getString(4)));
-		toNextRoundIntervals.push_back(std::stoi(res->getString(5)));
-		showQuizTimes.push_back(std::stoi(res->getString(6)));
+		hintToHintIntervals.push_back(std::stoi(res->getString(3)));
+		quizToDestroyIntervals.push_back(std::stoi(res->getString(4)));
+		destroyToFinishIntervals.push_back(std::stoi(res->getString(5)));
+		toNextRoundIntervals.push_back(std::stoi(res->getString(6)));
+		showQuizTimes.push_back(std::stoi(res->getString(7)));
 
-		int paintNumber = std::stoi(res->getString(8));
+		int paintNumber = std::stoi(res->getString(9));
 
-		paintConditions.push_back({ paintNumber, std::stoi(res->getString(9)) });
+		paintConditions.push_back({ paintNumber, std::stoi(res->getString(10)) });
 
-		string hintTemplateString = string(res->getString(10));
+		string hintTemplateString = string(res->getString(11));
 
 		vector<vector<bool>> hintTemplatesForRound;
 
@@ -85,9 +86,8 @@ bool matching::GameData::Init()
 	}
 
 	delete res;
-	delete prep_stmt;
+	delete stmt;
 	delete con;
-	//delete driver 는 하지 않아도 되나?
 
 	for (int i = 1; i <= pictureNumber; i++)
 		pictureNames.push_back(std::to_string(i));
