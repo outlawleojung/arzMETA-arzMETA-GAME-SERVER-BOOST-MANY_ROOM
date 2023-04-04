@@ -54,6 +54,17 @@ struct S_MATCHING_FINISHDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_MATCHING_FINISHDefaultTypeInternal _S_MATCHING_FINISH_default_instance_;
+PROTOBUF_CONSTEXPR C_MATCHING_GET_HOST::C_MATCHING_GET_HOST(
+    ::_pbi::ConstantInitialized) {}
+struct C_MATCHING_GET_HOSTDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_MATCHING_GET_HOSTDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_MATCHING_GET_HOSTDefaultTypeInternal() {}
+  union {
+    C_MATCHING_GET_HOST _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_MATCHING_GET_HOSTDefaultTypeInternal _C_MATCHING_GET_HOST_default_instance_;
 PROTOBUF_CONSTEXPR S_MATCHING_HOST::S_MATCHING_HOST(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -163,7 +174,7 @@ struct C_MATCHING_DIEDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_MATCHING_DIEDefaultTypeInternal _C_MATCHING_DIE_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_5f005_5fMatching_2eproto[12];
+static ::_pb::Metadata file_level_metadata_Packet_5f005_5fMatching_2eproto[13];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_5f005_5fMatching_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_5f005_5fMatching_2eproto = nullptr;
 
@@ -182,6 +193,12 @@ const uint32_t TableStruct_Packet_5f005_5fMatching_2eproto::offsets[] PROTOBUF_S
   ~0u,  // no _inlined_string_donated_
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_MATCHING_FINISH, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_MATCHING_GET_HOST, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
@@ -250,21 +267,23 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 0, -1, -1, sizeof(::Protocol::C_MATCHING_START)},
   { 6, -1, -1, sizeof(::Protocol::S_MATCHING_START)},
   { 12, -1, -1, sizeof(::Protocol::S_MATCHING_FINISH)},
-  { 18, -1, -1, sizeof(::Protocol::S_MATCHING_HOST)},
-  { 25, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_START)},
-  { 31, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_FINISH)},
-  { 37, -1, -1, sizeof(::Protocol::S_MATCHING_TILES)},
-  { 44, -1, -1, sizeof(::Protocol::S_MATCHING_HINT)},
-  { 51, -1, -1, sizeof(::Protocol::S_MATCHING_PROBLEM)},
-  { 59, -1, -1, sizeof(::Protocol::S_MATCHING_DESTROY)},
-  { 65, -1, -1, sizeof(::Protocol::S_MATCHING_QUIZ_DISAPPEAR)},
-  { 71, -1, -1, sizeof(::Protocol::C_MATCHING_DIE)},
+  { 18, -1, -1, sizeof(::Protocol::C_MATCHING_GET_HOST)},
+  { 24, -1, -1, sizeof(::Protocol::S_MATCHING_HOST)},
+  { 31, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_START)},
+  { 37, -1, -1, sizeof(::Protocol::S_MATCHING_ROUND_FINISH)},
+  { 43, -1, -1, sizeof(::Protocol::S_MATCHING_TILES)},
+  { 50, -1, -1, sizeof(::Protocol::S_MATCHING_HINT)},
+  { 57, -1, -1, sizeof(::Protocol::S_MATCHING_PROBLEM)},
+  { 65, -1, -1, sizeof(::Protocol::S_MATCHING_DESTROY)},
+  { 71, -1, -1, sizeof(::Protocol::S_MATCHING_QUIZ_DISAPPEAR)},
+  { 77, -1, -1, sizeof(::Protocol::C_MATCHING_DIE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_C_MATCHING_START_default_instance_._instance,
   &::Protocol::_S_MATCHING_START_default_instance_._instance,
   &::Protocol::_S_MATCHING_FINISH_default_instance_._instance,
+  &::Protocol::_C_MATCHING_GET_HOST_default_instance_._instance,
   &::Protocol::_S_MATCHING_HOST_default_instance_._instance,
   &::Protocol::_S_MATCHING_ROUND_START_default_instance_._instance,
   &::Protocol::_S_MATCHING_ROUND_FINISH_default_instance_._instance,
@@ -279,20 +298,21 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_Packet_5f005_5fMatching_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\031Packet_005_Matching.proto\022\010Protocol\"\022\n"
   "\020C_MATCHING_START\"\022\n\020S_MATCHING_START\"\023\n"
-  "\021S_MATCHING_FINISH\"#\n\017S_MATCHING_HOST\022\020\n"
-  "\010clientId\030\001 \001(\t\"\030\n\026S_MATCHING_ROUND_STAR"
-  "T\"\031\n\027S_MATCHING_ROUND_FINISH\"!\n\020S_MATCHI"
-  "NG_TILES\022\r\n\005tiles\030\001 \003(\t\" \n\017S_MATCHING_HI"
-  "NT\022\r\n\005hints\030\001 \003(\010\"<\n\022S_MATCHING_PROBLEM\022"
-  "\017\n\007problem\030\001 \001(\t\022\025\n\rtimeToDestroy\030\002 \001(\005\""
-  "\024\n\022S_MATCHING_DESTROY\"\033\n\031S_MATCHING_QUIZ"
-  "_DISAPPEAR\"\020\n\016C_MATCHING_DIEb\006proto3"
+  "\021S_MATCHING_FINISH\"\025\n\023C_MATCHING_GET_HOS"
+  "T\"#\n\017S_MATCHING_HOST\022\020\n\010clientId\030\001 \001(\t\"\030"
+  "\n\026S_MATCHING_ROUND_START\"\031\n\027S_MATCHING_R"
+  "OUND_FINISH\"!\n\020S_MATCHING_TILES\022\r\n\005tiles"
+  "\030\001 \003(\t\" \n\017S_MATCHING_HINT\022\r\n\005hints\030\001 \003(\010"
+  "\"<\n\022S_MATCHING_PROBLEM\022\017\n\007problem\030\001 \001(\t\022"
+  "\025\n\rtimeToDestroy\030\002 \001(\005\"\024\n\022S_MATCHING_DES"
+  "TROY\"\033\n\031S_MATCHING_QUIZ_DISAPPEAR\"\020\n\016C_M"
+  "ATCHING_DIEb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f005_5fMatching_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f005_5fMatching_2eproto = {
-    false, false, 396, descriptor_table_protodef_Packet_5f005_5fMatching_2eproto,
+    false, false, 419, descriptor_table_protodef_Packet_5f005_5fMatching_2eproto,
     "Packet_005_Matching.proto",
-    &descriptor_table_Packet_5f005_5fMatching_2eproto_once, nullptr, 0, 12,
+    &descriptor_table_Packet_5f005_5fMatching_2eproto_once, nullptr, 0, 13,
     schemas, file_default_instances, TableStruct_Packet_5f005_5fMatching_2eproto::offsets,
     file_level_metadata_Packet_5f005_5fMatching_2eproto, file_level_enum_descriptors_Packet_5f005_5fMatching_2eproto,
     file_level_service_descriptors_Packet_5f005_5fMatching_2eproto,
@@ -423,6 +443,46 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_MATCHING_FINISH::GetClassDat
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
       file_level_metadata_Packet_5f005_5fMatching_2eproto[2]);
+}
+
+// ===================================================================
+
+class C_MATCHING_GET_HOST::_Internal {
+ public:
+};
+
+C_MATCHING_GET_HOST::C_MATCHING_GET_HOST(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
+  // @@protoc_insertion_point(arena_constructor:Protocol.C_MATCHING_GET_HOST)
+}
+C_MATCHING_GET_HOST::C_MATCHING_GET_HOST(const C_MATCHING_GET_HOST& from)
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  C_MATCHING_GET_HOST* const _this = this; (void)_this;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:Protocol.C_MATCHING_GET_HOST)
+}
+
+
+
+
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_MATCHING_GET_HOST::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_MATCHING_GET_HOST::GetClassData() const { return &_class_data_; }
+
+
+
+
+
+
+
+::PROTOBUF_NAMESPACE_ID::Metadata C_MATCHING_GET_HOST::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[3]);
 }
 
 // ===================================================================
@@ -625,7 +685,7 @@ void S_MATCHING_HOST::InternalSwap(S_MATCHING_HOST* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_HOST::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[3]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[4]);
 }
 
 // ===================================================================
@@ -665,7 +725,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_MATCHING_ROUND_START::GetCla
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_ROUND_START::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[4]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[5]);
 }
 
 // ===================================================================
@@ -705,7 +765,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_MATCHING_ROUND_FINISH::GetCl
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_ROUND_FINISH::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[5]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[6]);
 }
 
 // ===================================================================
@@ -895,7 +955,7 @@ void S_MATCHING_TILES::InternalSwap(S_MATCHING_TILES* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_TILES::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[6]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[7]);
 }
 
 // ===================================================================
@@ -1079,7 +1139,7 @@ void S_MATCHING_HINT::InternalSwap(S_MATCHING_HINT* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_HINT::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[7]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[8]);
 }
 
 // ===================================================================
@@ -1309,7 +1369,7 @@ void S_MATCHING_PROBLEM::InternalSwap(S_MATCHING_PROBLEM* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_PROBLEM::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[8]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[9]);
 }
 
 // ===================================================================
@@ -1349,7 +1409,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_MATCHING_DESTROY::GetClassDa
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_DESTROY::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[9]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[10]);
 }
 
 // ===================================================================
@@ -1389,7 +1449,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_MATCHING_QUIZ_DISAPPEAR::Get
 ::PROTOBUF_NAMESPACE_ID::Metadata S_MATCHING_QUIZ_DISAPPEAR::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[10]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[11]);
 }
 
 // ===================================================================
@@ -1429,7 +1489,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_MATCHING_DIE::GetClassData()
 ::PROTOBUF_NAMESPACE_ID::Metadata C_MATCHING_DIE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f005_5fMatching_2eproto_getter, &descriptor_table_Packet_5f005_5fMatching_2eproto_once,
-      file_level_metadata_Packet_5f005_5fMatching_2eproto[11]);
+      file_level_metadata_Packet_5f005_5fMatching_2eproto[12]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -1446,6 +1506,10 @@ Arena::CreateMaybeMessage< ::Protocol::S_MATCHING_START >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Protocol::S_MATCHING_FINISH*
 Arena::CreateMaybeMessage< ::Protocol::S_MATCHING_FINISH >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_MATCHING_FINISH >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::C_MATCHING_GET_HOST*
+Arena::CreateMaybeMessage< ::Protocol::C_MATCHING_GET_HOST >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_MATCHING_GET_HOST >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Protocol::S_MATCHING_HOST*
 Arena::CreateMaybeMessage< ::Protocol::S_MATCHING_HOST >(Arena* arena) {

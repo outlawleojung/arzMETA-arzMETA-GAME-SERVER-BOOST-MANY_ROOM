@@ -13,6 +13,10 @@ message S_MATCHING_FINISH
 {
 }
 
+message C_MATCHING_GET_HOST
+{
+}
+
 message S_MATCHING_HOST
 {
 	string clientId = 1;

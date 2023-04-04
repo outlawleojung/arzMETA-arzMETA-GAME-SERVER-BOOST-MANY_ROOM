@@ -226,6 +226,7 @@ void MatchingRoom::Init()
 }
 
 void MatchingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&MatchingRoom::Enter, session, pkt); }
+void MatchingRoom::Handle_C_MATCHING_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_GET_HOST&) { DoAsync(&MatchingRoom::GetHost, client); }
 void MatchingRoom::Handle_C_MATCHING_START(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_START& pkt) { DoAsync(&MatchingRoom::Start, client); }
 void MatchingRoom::Handle_C_MATCHING_DIE(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_DIE& pkt) { DoAsync(&MatchingRoom::Die, client); }
 
@@ -268,18 +269,22 @@ void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	}
 
 	auto client = static_pointer_cast<MatchingClient>(GClientManager->MakeCilent<MatchingClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-
-	if (clients.size() == 0)
-	{
-		currentHostId = client->clientId;
-		//set room visible
-		DoAsync(&MatchingRoom::SetHost, client->clientId);
-	}
-
+	
 	clients.insert({ pkt.clientid(), client });
 
 	res.set_result("SUCCESS");
 	session->Send(ClientPacketHandler::MakeSendBuffer(res));
+
+	Protocol::S_ADD_CLIENT addClient;
+	auto clientInfo = addClient.add_clientinfos();
+	clientInfo->set_clientid(pkt.clientid());
+	clientInfo->set_nickname(pkt.nickname());
+
+	if (currentHostId.empty())
+	{
+		//set room visible
+		DoAsync(&MatchingRoom::SetHost, client->clientId);
+	}
 }
 
 void MatchingRoom::Leave(shared_ptr<ClientBase> client)
@@ -298,6 +303,13 @@ void MatchingRoom::Leave(shared_ptr<ClientBase> client)
 		Die(client);
 
 	GameRoom::Leave(client);
+}
+
+void MatchingRoom::GetHost(shared_ptr<ClientBase> client)
+{
+	Protocol::S_MATCHING_HOST host;
+	host.set_clientid(currentHostId);
+	client->Send(ClientPacketHandler::MakeSendBuffer(host));
 }
 
 void MatchingRoom::Start(shared_ptr<ClientBase> client)
@@ -334,14 +346,14 @@ void MatchingRoom::SetHost(string clientId)
 	if (currentHostId == clientId)
 		return;
 
-	if (!currentHostId.empty())
-	{
-		auto prevHost = clients.find(currentHostId);
-		if (prevHost != clients.end())
-		{
-			//do somthing
-		}
-	}
+	//if (!currentHostId.empty())
+	//{
+	//	auto prevHost = clients.find(currentHostId);
+	//	if (prevHost != clients.end())
+	//	{
+	//		//do somthing
+	//	}
+	//}
 
 	currentHostId = clientId;
 

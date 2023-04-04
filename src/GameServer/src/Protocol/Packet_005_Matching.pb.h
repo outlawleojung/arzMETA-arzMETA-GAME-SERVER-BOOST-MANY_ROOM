@@ -49,6 +49,9 @@ namespace Protocol {
 class C_MATCHING_DIE;
 struct C_MATCHING_DIEDefaultTypeInternal;
 extern C_MATCHING_DIEDefaultTypeInternal _C_MATCHING_DIE_default_instance_;
+class C_MATCHING_GET_HOST;
+struct C_MATCHING_GET_HOSTDefaultTypeInternal;
+extern C_MATCHING_GET_HOSTDefaultTypeInternal _C_MATCHING_GET_HOST_default_instance_;
 class C_MATCHING_START;
 struct C_MATCHING_STARTDefaultTypeInternal;
 extern C_MATCHING_STARTDefaultTypeInternal _C_MATCHING_START_default_instance_;
@@ -85,6 +88,7 @@ extern S_MATCHING_TILESDefaultTypeInternal _S_MATCHING_TILES_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::C_MATCHING_DIE* Arena::CreateMaybeMessage<::Protocol::C_MATCHING_DIE>(Arena*);
+template<> ::Protocol::C_MATCHING_GET_HOST* Arena::CreateMaybeMessage<::Protocol::C_MATCHING_GET_HOST>(Arena*);
 template<> ::Protocol::C_MATCHING_START* Arena::CreateMaybeMessage<::Protocol::C_MATCHING_START>(Arena*);
 template<> ::Protocol::S_MATCHING_DESTROY* Arena::CreateMaybeMessage<::Protocol::S_MATCHING_DESTROY>(Arena*);
 template<> ::Protocol::S_MATCHING_FINISH* Arena::CreateMaybeMessage<::Protocol::S_MATCHING_FINISH>(Arena*);
@@ -455,6 +459,124 @@ class S_MATCHING_FINISH final :
 };
 // -------------------------------------------------------------------
 
+class C_MATCHING_GET_HOST final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.C_MATCHING_GET_HOST) */ {
+ public:
+  inline C_MATCHING_GET_HOST() : C_MATCHING_GET_HOST(nullptr) {}
+  explicit PROTOBUF_CONSTEXPR C_MATCHING_GET_HOST(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_MATCHING_GET_HOST(const C_MATCHING_GET_HOST& from);
+  C_MATCHING_GET_HOST(C_MATCHING_GET_HOST&& from) noexcept
+    : C_MATCHING_GET_HOST() {
+    *this = ::std::move(from);
+  }
+
+  inline C_MATCHING_GET_HOST& operator=(const C_MATCHING_GET_HOST& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_MATCHING_GET_HOST& operator=(C_MATCHING_GET_HOST&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_MATCHING_GET_HOST& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_MATCHING_GET_HOST* internal_default_instance() {
+    return reinterpret_cast<const C_MATCHING_GET_HOST*>(
+               &_C_MATCHING_GET_HOST_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(C_MATCHING_GET_HOST& a, C_MATCHING_GET_HOST& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_MATCHING_GET_HOST* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_MATCHING_GET_HOST* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_MATCHING_GET_HOST* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_MATCHING_GET_HOST>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const C_MATCHING_GET_HOST& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const C_MATCHING_GET_HOST& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+  public:
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_MATCHING_GET_HOST";
+  }
+  protected:
+  explicit C_MATCHING_GET_HOST(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_MATCHING_GET_HOST)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+  };
+  friend struct ::TableStruct_Packet_5f005_5fMatching_2eproto;
+};
+// -------------------------------------------------------------------
+
 class S_MATCHING_HOST final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_MATCHING_HOST) */ {
  public:
@@ -503,7 +625,7 @@ class S_MATCHING_HOST final :
                &_S_MATCHING_HOST_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(S_MATCHING_HOST& a, S_MATCHING_HOST& b) {
     a.Swap(&b);
@@ -655,7 +777,7 @@ class S_MATCHING_ROUND_START final :
                &_S_MATCHING_ROUND_START_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(S_MATCHING_ROUND_START& a, S_MATCHING_ROUND_START& b) {
     a.Swap(&b);
@@ -773,7 +895,7 @@ class S_MATCHING_ROUND_FINISH final :
                &_S_MATCHING_ROUND_FINISH_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(S_MATCHING_ROUND_FINISH& a, S_MATCHING_ROUND_FINISH& b) {
     a.Swap(&b);
@@ -892,7 +1014,7 @@ class S_MATCHING_TILES final :
                &_S_MATCHING_TILES_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(S_MATCHING_TILES& a, S_MATCHING_TILES& b) {
     a.Swap(&b);
@@ -1055,7 +1177,7 @@ class S_MATCHING_HINT final :
                &_S_MATCHING_HINT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(S_MATCHING_HINT& a, S_MATCHING_HINT& b) {
     a.Swap(&b);
@@ -1216,7 +1338,7 @@ class S_MATCHING_PROBLEM final :
                &_S_MATCHING_PROBLEM_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(S_MATCHING_PROBLEM& a, S_MATCHING_PROBLEM& b) {
     a.Swap(&b);
@@ -1379,7 +1501,7 @@ class S_MATCHING_DESTROY final :
                &_S_MATCHING_DESTROY_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(S_MATCHING_DESTROY& a, S_MATCHING_DESTROY& b) {
     a.Swap(&b);
@@ -1497,7 +1619,7 @@ class S_MATCHING_QUIZ_DISAPPEAR final :
                &_S_MATCHING_QUIZ_DISAPPEAR_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(S_MATCHING_QUIZ_DISAPPEAR& a, S_MATCHING_QUIZ_DISAPPEAR& b) {
     a.Swap(&b);
@@ -1615,7 +1737,7 @@ class C_MATCHING_DIE final :
                &_C_MATCHING_DIE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(C_MATCHING_DIE& a, C_MATCHING_DIE& b) {
     a.Swap(&b);
@@ -1702,6 +1824,10 @@ class C_MATCHING_DIE final :
 // -------------------------------------------------------------------
 
 // S_MATCHING_FINISH
+
+// -------------------------------------------------------------------
+
+// C_MATCHING_GET_HOST
 
 // -------------------------------------------------------------------
 
@@ -1984,6 +2110,8 @@ inline void S_MATCHING_PROBLEM::set_timetodestroy(int32_t value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

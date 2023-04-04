@@ -287,6 +287,15 @@ bool Handle_C_MATCHING_START(shared_ptr<GameSession>& session, Protocol::C_MATCH
 	
 	return true;
 }
+bool Handle_C_MATCHING_GET_HOST(shared_ptr<GameSession>& session, Protocol::C_MATCHING_GET_HOST& pkt)
+{
+	if(session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_MATCHING_GET_HOST(session->owner, pkt);
+	
+	return true;
+}
 bool Handle_C_MATCHING_DIE(shared_ptr<GameSession>& session, Protocol::C_MATCHING_DIE& pkt)
 {
 	if(session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)

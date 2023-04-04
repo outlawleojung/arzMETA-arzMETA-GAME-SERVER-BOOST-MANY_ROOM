@@ -88,14 +88,16 @@ public:
 
 	virtual void Handle_C_ENTER(shared_ptr<GameSession>&, Protocol::C_ENTER&) override;
 
+	virtual void Handle_C_MATCHING_GET_HOST(shared_ptr<ClientBase>&, Protocol::C_MATCHING_GET_HOST&) override;
 	virtual void Handle_C_MATCHING_START(shared_ptr<ClientBase>&, Protocol::C_MATCHING_START&) override;
 	virtual void Handle_C_MATCHING_DIE(shared_ptr<ClientBase>&, Protocol::C_MATCHING_DIE&) override;
 
 	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
-	virtual void Leave(shared_ptr<ClientBase> session) override;
+	virtual void Leave(shared_ptr<ClientBase> client) override;
 
-	void Start(shared_ptr<ClientBase> session);
-	void Die(shared_ptr<ClientBase> session);
+	void GetHost(shared_ptr<ClientBase> client);
+	void Start(shared_ptr<ClientBase> client);
+	void Die(shared_ptr<ClientBase> client);
 
 	void SetHost(string clientId);
 

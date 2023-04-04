@@ -78,15 +78,16 @@ enum : unsigned short
 	PKT_C_MATCHING_START = 500,
 	PKT_S_MATCHING_START = 501,
 	PKT_S_MATCHING_FINISH = 502,
-	PKT_S_MATCHING_HOST = 503,
-	PKT_S_MATCHING_ROUND_START = 504,
-	PKT_S_MATCHING_ROUND_FINISH = 505,
-	PKT_S_MATCHING_TILES = 506,
-	PKT_S_MATCHING_HINT = 507,
-	PKT_S_MATCHING_PROBLEM = 508,
-	PKT_S_MATCHING_DESTROY = 509,
-	PKT_S_MATCHING_QUIZ_DISAPPEAR = 510,
-	PKT_C_MATCHING_DIE = 511,
+	PKT_C_MATCHING_GET_HOST = 503,
+	PKT_S_MATCHING_HOST = 504,
+	PKT_S_MATCHING_ROUND_START = 505,
+	PKT_S_MATCHING_ROUND_FINISH = 506,
+	PKT_S_MATCHING_TILES = 507,
+	PKT_S_MATCHING_HINT = 508,
+	PKT_S_MATCHING_PROBLEM = 509,
+	PKT_S_MATCHING_DESTROY = 510,
+	PKT_S_MATCHING_QUIZ_DISAPPEAR = 511,
+	PKT_C_MATCHING_DIE = 512,
 };
 
 bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int len);
@@ -119,6 +120,7 @@ bool Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C
 bool Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt);
 bool Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::C_OFFICE_VIDEO_STREAM& pkt);
 bool Handle_C_MATCHING_START(shared_ptr<GameSession>& session, Protocol::C_MATCHING_START& pkt);
+bool Handle_C_MATCHING_GET_HOST(shared_ptr<GameSession>& session, Protocol::C_MATCHING_GET_HOST& pkt);
 bool Handle_C_MATCHING_DIE(shared_ptr<GameSession>& session, Protocol::C_MATCHING_DIE& pkt);
 
 class ClientPacketHandler
@@ -157,6 +159,7 @@ public:
 		GPacketHandler[PKT_C_OFFICE_GET_ROOM_INFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_OFFICE_GET_ROOM_INFO>(Handle_C_OFFICE_GET_ROOM_INFO, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_VIDEO_STREAM] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_OFFICE_VIDEO_STREAM>(Handle_C_OFFICE_VIDEO_STREAM, session, buffer, len); };
 		GPacketHandler[PKT_C_MATCHING_START] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_MATCHING_START>(Handle_C_MATCHING_START, session, buffer, len); };
+		GPacketHandler[PKT_C_MATCHING_GET_HOST] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_MATCHING_GET_HOST>(Handle_C_MATCHING_GET_HOST, session, buffer, len); };
 		GPacketHandler[PKT_C_MATCHING_DIE] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::C_MATCHING_DIE>(Handle_C_MATCHING_DIE, session, buffer, len); };
 	}
 
