@@ -126,8 +126,8 @@ void HttpServer::start(string ip, int port)
 		resJson["result"] = "SUCCESS";
 		resJson["roomId"] = room->roomId;
 
-		resJson["ip"] = "192.168.0.47";
-		resJson["port"] = 7777;
+		resJson["ip"] = localHostIp;
+		resJson["port"] = tcpPort;
 
 		cout << resJson.dump() << endl;
 
@@ -164,8 +164,8 @@ void HttpServer::start(string ip, int port)
 		resJson["result"] = "SUCCESS";
 		resJson["roomId"] = room->roomId;
 
-		resJson["ip"] = "192.168.0.47";
-		resJson["port"] = 7777;
+		resJson["ip"] = localHostIp;
+		resJson["port"] = tcpPort;
 
 		res.set_content(resJson.dump(), "application/json");
 		});
@@ -199,8 +199,8 @@ void HttpServer::start(string ip, int port)
 		resJson["result"] = "SUCCESS";
 		resJson["roomId"] = room->roomId;
 
-		resJson["ip"] = "192.168.0.47";
-		resJson["port"] = 7777;
+		resJson["ip"] = localHostIp;
+		resJson["port"] = tcpPort;
 
 		res.set_content(resJson.dump(), "application/json");
 		});
@@ -224,8 +224,8 @@ void HttpServer::start(string ip, int port)
 		resJson["result"] = "SUCCESS";
 		resJson["roomId"] = room->roomId;
 
-		resJson["ip"] = "192.168.0.47";
-		resJson["port"] = 7777;
+		resJson["ip"] = localHostIp;
+		resJson["port"] = tcpPort;
 
 		res.set_content(resJson.dump(), "application/json");
 		});

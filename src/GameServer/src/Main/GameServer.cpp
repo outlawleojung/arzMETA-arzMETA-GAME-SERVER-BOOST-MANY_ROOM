@@ -75,8 +75,6 @@ int main()
 {
 	ClientPacketHandler::Init();
 
-	string localHostIp;
-
 #ifdef linux
 	struct ifaddrs* ifAddrStruct = NULL;
 	struct ifaddrs* ifa = NULL;
@@ -126,7 +124,7 @@ int main()
 
 	shared_ptr<Service> service = make_shared<Service>(
 		ip::address_v4::from_string(localHostIp),
-		7777,
+		tcpPort,
 		[](io_context& ioc) {
 			return make_shared<GameSession>(ioc);
 		}
@@ -144,10 +142,10 @@ int main()
 			});
 	}
 
-	GThreadManager->Launch([localHostIp]()
+	GThreadManager->Launch([]()
 		{
 			HttpServer server;
-			server.start(localHostIp, 8080);
+			server.start(localHostIp, httpPort);
 		});
 
 	//시작 처리

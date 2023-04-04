@@ -159,8 +159,8 @@ nlohmann::json GameRoom::ToJson()
 
 	json["roomId"] = roomId;
 
-	json["ip"] = "192.168.0.47";
-	json["port"] = 7777;
+	json["ip"] = localHostIp;
+	json["port"] = tcpPort;
 
 	return json;
 }

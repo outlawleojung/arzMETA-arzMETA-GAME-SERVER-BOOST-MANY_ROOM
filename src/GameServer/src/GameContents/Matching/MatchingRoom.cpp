@@ -346,7 +346,8 @@ void MatchingRoom::SetHost(string clientId)
 	currentHostId = clientId;
 
 	Protocol::S_MATCHING_HOST hostPkt;
-	client->second->Send(ClientPacketHandler::MakeSendBuffer(hostPkt));
+	hostPkt.set_clientid(currentHostId);
+	Broadcast(ClientPacketHandler::MakeSendBuffer(hostPkt));
 }
 
 void MatchingRoom::GameLogic()
@@ -498,8 +499,8 @@ nlohmann::json MatchingRoom::ToJson()
 		roomInfo["host"] = "";
 	roomInfo["isPlaying"] = (gameData.gameState == matching::GameState::Playing);
 
-	roomInfo["ip"] = "192.168.0.47";
-	roomInfo["port"] = 7777;
+	roomInfo["ip"] = localHostIp;
+	roomInfo["port"] = tcpPort;
 
 	return roomInfo;
 }

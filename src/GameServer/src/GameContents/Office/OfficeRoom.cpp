@@ -635,8 +635,8 @@ nlohmann::json OfficeRoom::ToJson()
 	json["isShutdown"] = isShutdown;
 	json["isObserver"] = (observer > 0) ? true : false;
 
-	json["ip"] = "192.168.0.47";
-	json["port"] = 7777;
+	json["ip"] = localHostIp;
+	json["port"] = tcpPort;
 
 	return json;
 }
