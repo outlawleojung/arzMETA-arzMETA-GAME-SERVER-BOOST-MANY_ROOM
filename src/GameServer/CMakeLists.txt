@@ -46,7 +46,4 @@ if (UNIX)
     find_package(Protobuf REQUIRED)
     include_directories(${Protobuf_INCLUDE_DIRS})
     target_link_libraries(GameServer_Boost PRIVATE ${Protobuf_LIBRARIES})
-
-    target_link_directories(GameServer_Boost PRIVATE /usr/lib/x86_64-linux-gnu)
-    target_link_libraries(GameServer_Boost PRIVATE mysqlcppconn)
 endif (UNIX)
