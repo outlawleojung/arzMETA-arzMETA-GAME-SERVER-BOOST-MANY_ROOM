@@ -20,6 +20,9 @@ if (WIN32)
     execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/src/ClientPacketHandler --extension=cpp --recv=C_ --send=S_ --template PacketHandler.cpp
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
+    execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/Dummy/ServerPacketHandler --extension=h --recv=S_ --send=C_ --template ServerPacketHandler.h
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
     execute_process(COMMAND GenPackets.exe --path=${CMAKE_CURRENT_SOURCE_DIR}/Proto --output=${CMAKE_CURRENT_SOURCE_DIR}/CSharp/PacketManager --extension=cs --recv=C_ --send=S_ --template PacketManager.cs
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif (WIN32)
