@@ -88,6 +88,16 @@ enum : unsigned short
 	PKT_S_MATCHING_DESTROY = 510,
 	PKT_S_MATCHING_QUIZ_DISAPPEAR = 511,
 	PKT_C_MATCHING_DIE = 512,
+	PKT_C_OX_START = 500,
+	PKT_S_OX_START = 501,
+	PKT_S_OX_FINISH = 502,
+	PKT_C_OX_GET_HOST = 503,
+	PKT_S_OX_HOST = 504,
+	PKT_S_OX_ROUND_START = 505,
+	PKT_S_OX_ROUND_FINISH = 506,
+	PKT_S_OX_QUIZ = 507,
+	PKT_S_OX_DESTROY = 508,
+	PKT_C_OX_DIE = 509,
 };
 
 bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int len);
@@ -138,6 +148,13 @@ bool Handle_S_MATCHING_HINT(shared_ptr<GameSession>& session, Protocol::S_MATCHI
 bool Handle_S_MATCHING_PROBLEM(shared_ptr<GameSession>& session, Protocol::S_MATCHING_PROBLEM& pkt);
 bool Handle_S_MATCHING_DESTROY(shared_ptr<GameSession>& session, Protocol::S_MATCHING_DESTROY& pkt);
 bool Handle_S_MATCHING_QUIZ_DISAPPEAR(shared_ptr<GameSession>& session, Protocol::S_MATCHING_QUIZ_DISAPPEAR& pkt);
+bool Handle_S_OX_START(shared_ptr<GameSession>& session, Protocol::S_OX_START& pkt);
+bool Handle_S_OX_FINISH(shared_ptr<GameSession>& session, Protocol::S_OX_FINISH& pkt);
+bool Handle_S_OX_HOST(shared_ptr<GameSession>& session, Protocol::S_OX_HOST& pkt);
+bool Handle_S_OX_ROUND_START(shared_ptr<GameSession>& session, Protocol::S_OX_ROUND_START& pkt);
+bool Handle_S_OX_ROUND_FINISH(shared_ptr<GameSession>& session, Protocol::S_OX_ROUND_FINISH& pkt);
+bool Handle_S_OX_QUIZ(shared_ptr<GameSession>& session, Protocol::S_OX_QUIZ& pkt);
+bool Handle_S_OX_DESTROY(shared_ptr<GameSession>& session, Protocol::S_OX_DESTROY& pkt);
 
 class ServerPacketHandler
 {
@@ -193,6 +210,13 @@ public:
 		GPacketHandler[PKT_S_MATCHING_PROBLEM] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_MATCHING_PROBLEM>(Handle_S_MATCHING_PROBLEM, session, buffer, len); };
 		GPacketHandler[PKT_S_MATCHING_DESTROY] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_MATCHING_DESTROY>(Handle_S_MATCHING_DESTROY, session, buffer, len); };
 		GPacketHandler[PKT_S_MATCHING_QUIZ_DISAPPEAR] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_MATCHING_QUIZ_DISAPPEAR>(Handle_S_MATCHING_QUIZ_DISAPPEAR, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_START] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OX_START>(Handle_S_OX_START, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_FINISH] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OX_FINISH>(Handle_S_OX_FINISH, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_HOST] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OX_HOST>(Handle_S_OX_HOST, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_ROUND_START] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OX_ROUND_START>(Handle_S_OX_ROUND_START, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_ROUND_FINISH] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OX_ROUND_FINISH>(Handle_S_OX_ROUND_FINISH, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_QUIZ] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OX_QUIZ>(Handle_S_OX_QUIZ, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_DESTROY] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OX_DESTROY>(Handle_S_OX_DESTROY, session, buffer, len); };
 	}
 
 	static bool HandlePacket(shared_ptr<GameSession>& session, unsigned char* buffer, int len)
@@ -231,6 +255,9 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_START& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_START); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_GET_HOST& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_GET_HOST); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_DIE& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_DIE); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OX_START& pkt) { return MakeSendBuffer(pkt, PKT_C_OX_START); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OX_GET_HOST& pkt) { return MakeSendBuffer(pkt, PKT_C_OX_GET_HOST); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OX_DIE& pkt) { return MakeSendBuffer(pkt, PKT_C_OX_DIE); }
 
 private:
 	template<typename PacketType, typename ProcessFunc>

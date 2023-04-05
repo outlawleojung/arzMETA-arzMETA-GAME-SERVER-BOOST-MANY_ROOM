@@ -305,3 +305,30 @@ bool Handle_C_MATCHING_DIE(shared_ptr<GameSession>& session, Protocol::C_MATCHIN
 	
 	return true;
 }
+bool Handle_C_OX_START(shared_ptr<GameSession>& session, Protocol::C_OX_START& pkt)
+{
+	if(session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_OX_START(session->owner, pkt);
+	
+	return true;
+}
+bool Handle_C_OX_GET_HOST(shared_ptr<GameSession>& session, Protocol::C_OX_GET_HOST& pkt)
+{
+	if(session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_OX_GET_HOST(session->owner, pkt);
+	
+	return true;
+}
+bool Handle_C_OX_DIE(shared_ptr<GameSession>& session, Protocol::C_OX_DIE& pkt)
+{
+	if(session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_OX_DIE(session->owner, pkt);
+	
+	return true;
+}

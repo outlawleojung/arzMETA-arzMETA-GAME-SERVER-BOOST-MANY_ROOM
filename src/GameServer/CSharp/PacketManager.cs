@@ -108,6 +108,16 @@ public class PacketManager
 	    PKT_S_MATCHING_DESTROY = 510,
 	    PKT_S_MATCHING_QUIZ_DISAPPEAR = 511,
 	    PKT_C_MATCHING_DIE = 512,
+	    PKT_C_OX_START = 500,
+	    PKT_S_OX_START = 501,
+	    PKT_S_OX_FINISH = 502,
+	    PKT_C_OX_GET_HOST = 503,
+	    PKT_S_OX_HOST = 504,
+	    PKT_S_OX_ROUND_START = 505,
+	    PKT_S_OX_ROUND_FINISH = 506,
+	    PKT_S_OX_QUIZ = 507,
+	    PKT_S_OX_DESTROY = 508,
+	    PKT_C_OX_DIE = 509,
 	}
 
 	public void Register()
@@ -206,6 +216,20 @@ public class PacketManager
 		_handler.Add((ushort)MsgId.PKT_S_MATCHING_DESTROY, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_QUIZ_DISAPPEAR, MakePacket<S_MATCHING_QUIZ_DISAPPEAR>);
 		_handler.Add((ushort)MsgId.PKT_S_MATCHING_QUIZ_DISAPPEAR, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_START, MakePacket<S_OX_START>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_START, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_FINISH, MakePacket<S_OX_FINISH>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_FINISH, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_HOST, MakePacket<S_OX_HOST>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_HOST, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_ROUND_START, MakePacket<S_OX_ROUND_START>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_ROUND_START, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_ROUND_FINISH, MakePacket<S_OX_ROUND_FINISH>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_ROUND_FINISH, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_QUIZ, MakePacket<S_OX_QUIZ>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_QUIZ, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_DESTROY, MakePacket<S_OX_DESTROY>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_DESTROY, new Dictionary<object, Action<PacketSession, IMessage>>());
 	}
 
 	public void AddHandler(MsgId msgId, object obj, Action<PacketSession, IMessage> handler)

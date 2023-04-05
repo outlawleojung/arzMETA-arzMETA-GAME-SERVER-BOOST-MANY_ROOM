@@ -86,4 +86,7 @@ public:
 	virtual void Handle_C_MATCHING_START(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_START&pkt) {};
 	virtual void Handle_C_MATCHING_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_GET_HOST&pkt) {};
 	virtual void Handle_C_MATCHING_DIE(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_DIE&pkt) {};
+	virtual void Handle_C_OX_START(shared_ptr<ClientBase>& client, Protocol::C_OX_START&pkt) {};
+	virtual void Handle_C_OX_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_OX_GET_HOST&pkt) {};
+	virtual void Handle_C_OX_DIE(shared_ptr<ClientBase>& client, Protocol::C_OX_DIE&pkt) {};
 };

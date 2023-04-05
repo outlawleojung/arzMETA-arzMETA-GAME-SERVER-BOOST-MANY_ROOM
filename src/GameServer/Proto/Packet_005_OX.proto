@@ -1,0 +1,48 @@
+syntax = "proto3";
+package Protocol;
+
+message C_OX_START
+{
+}
+
+message S_OX_START
+{
+}
+
+message S_OX_FINISH
+{
+}
+
+message C_OX_GET_HOST
+{
+}
+
+message S_OX_HOST
+{
+	string clientId = 1;
+}
+
+message S_OX_ROUND_START
+{
+	string mode = 1;
+}
+
+message S_OX_ROUND_FINISH
+{
+}
+
+message S_OX_QUIZ
+{
+	int32 quiz = 1;
+	bool answer = 2;
+	int32 timeToDestory = 3;
+	repeated int32 panel = 4;
+}
+
+message S_OX_DESTROY
+{
+}
+
+message C_OX_DIE
+{
+}
