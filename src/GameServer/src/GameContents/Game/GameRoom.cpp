@@ -169,11 +169,10 @@ void GameRoom::SetScene(shared_ptr<ClientBase> client, string sceneId)
 {
 	auto gClient = static_pointer_cast<GameClient>(client);
 
-	Protocol::S_BASE_SET_SCENE res;
-
 	auto scene = scenes.find(sceneId);
 	if (scene == scenes.end())
 	{
+		Protocol::S_BASE_SET_SCENE res;
 		res.set_success(false);
 		client->Send(ClientPacketHandler::MakeSendBuffer(res));
 		return;
@@ -184,7 +183,4 @@ void GameRoom::SetScene(shared_ptr<ClientBase> client, string sceneId)
 		gClient->scene->DoAsync(&Scene::Leave, gClient);
 
 	scene->second->DoAsync(&Scene::Enter, gClient);
-
-	res.set_success(true);
-	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 }

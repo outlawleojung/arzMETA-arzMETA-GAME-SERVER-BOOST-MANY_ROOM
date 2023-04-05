@@ -23,6 +23,10 @@ void Scene::Enter(shared_ptr<GameClient> client)
 {
 	client->scene = static_pointer_cast<Scene>(shared_from_this());
 	clients.insert({ client->clientId, client });
+
+	Protocol::S_BASE_SET_SCENE res;
+	res.set_success(true);
+	client->Send(ClientPacketHandler::MakeSendBuffer(res));
 }
 
 void Scene::Leave(shared_ptr<GameClient> client)
