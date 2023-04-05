@@ -269,7 +269,7 @@ void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	}
 
 	auto client = static_pointer_cast<MatchingClient>(GClientManager->MakeCilent<MatchingClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-	
+	client->enteredTime = std::chrono::system_clock::now();
 	clients.insert({ pkt.clientid(), client });
 
 	res.set_result("SUCCESS");
@@ -279,6 +279,7 @@ void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	auto clientInfo = addClient.add_clientinfos();
 	clientInfo->set_clientid(pkt.clientid());
 	clientInfo->set_nickname(pkt.nickname());
+	Broadcast(ClientPacketHandler::MakeSendBuffer(addClient));
 
 	if (currentHostId.empty())
 	{
@@ -289,20 +290,20 @@ void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 void MatchingRoom::Leave(shared_ptr<ClientBase> client)
 {
+	if(gameData.gameState == matching::GameState::Playing)
+		Die(client);
+
+	GameRoom::Leave(client);
+
 	if (client->clientId == currentHostId)
 	{
-		auto nextHost = std::min_element(clients.begin(), clients.end(), 
+		auto nextHost = std::min_element(clients.begin(), clients.end(),
 			[](const auto& a, const auto& b) { 	return std::static_pointer_cast<MatchingClient>(a.second)->enteredTime < std::static_pointer_cast<MatchingClient>(b.second)->enteredTime; }
 		);
 
 		if (nextHost != clients.end())
 			SetHost(nextHost->second->clientId);
 	}
-
-	if(gameData.gameState == matching::GameState::Playing)
-		Die(client);
-
-	GameRoom::Leave(client);
 }
 
 void MatchingRoom::GetHost(shared_ptr<ClientBase> client)

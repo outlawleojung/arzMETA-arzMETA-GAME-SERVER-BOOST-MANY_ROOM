@@ -50,6 +50,10 @@ void RoomBase::Leave(shared_ptr<ClientBase> _client)
 
 	clients.erase(client);
 
+	Protocol::S_REMOVE_CLIENT removeClient;
+	removeClient.add_clientids(_client->clientId);
+	Broadcast(ClientPacketHandler::MakeSendBuffer(removeClient));
+
 	if (clients.size() == 0)
 		Close();
 }
