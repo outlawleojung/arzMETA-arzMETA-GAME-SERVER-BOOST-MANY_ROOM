@@ -4,6 +4,7 @@
 #include "MyRoom/MyRoomRoom.h"
 #include "Office/OfficeRoom.h"
 #include "Matching/MatchingRoom.h"
+#include "OX/OXRoom.h"
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 {
@@ -85,6 +86,15 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
                 continue;
 
             auto myRoom = static_pointer_cast<MatchingRoom>(room->second);
+
+            res.push_back(room->second->ToJson());
+        }
+        else if (query["type"] == "OX")
+        {
+            if (room->second->type != RoomType::OX)
+                continue;
+
+            auto myRoom = static_pointer_cast<OXRoom>(room->second);
 
             res.push_back(room->second->ToJson());
         }

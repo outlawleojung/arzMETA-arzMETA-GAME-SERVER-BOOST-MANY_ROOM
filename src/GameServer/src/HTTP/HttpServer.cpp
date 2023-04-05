@@ -109,6 +109,17 @@ void HttpServer::start(string ip, int port)
 			room->maxPlayerNumber = body["maxPlayerNumber"];
 			static_pointer_cast<MatchingRoom>(room)->roomName = body["roomName"];
 		}
+		else if (body["roomType"] == "OX")
+		{
+			scenes.push_back("OX");
+
+			room = make_shared<OXRoom>(scenes);
+
+			room->type = RoomType::OX;
+
+			room->maxPlayerNumber = body["maxPlayerNumber"];
+			static_pointer_cast<MatchingRoom>(room)->roomName = body["roomName"];
+		}
 		else
 		{
 			nlohmann::json resJson;
