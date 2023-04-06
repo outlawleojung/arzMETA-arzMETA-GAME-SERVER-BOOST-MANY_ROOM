@@ -118,7 +118,7 @@ void HttpServer::start(string ip, int port)
 			room->type = RoomType::OX;
 
 			room->maxPlayerNumber = body["maxPlayerNumber"];
-			static_pointer_cast<MatchingRoom>(room)->roomName = body["roomName"];
+			static_pointer_cast<OXRoom>(room)->roomName = body["roomName"];
 		}
 		else
 		{
@@ -129,9 +129,9 @@ void HttpServer::start(string ip, int port)
 			return;
 		}
 
-		room->Init();
-
 		GRoomManager->AddRoom(room);
+
+		room->Init();
 
 		nlohmann::json resJson;
 		resJson["result"] = "SUCCESS";
@@ -145,105 +145,105 @@ void HttpServer::start(string ip, int port)
 		res.set_content(resJson.dump(), "application/json");
         });
 
-	svr.Post("/TestOfficeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
-		vector<string> scenes;
-		scenes.push_back("Office");
-		
-		shared_ptr<OfficeRoom> room = make_shared<OfficeRoom>(scenes);
+	//svr.Post("/TestOfficeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
+	//	vector<string> scenes;
+	//	scenes.push_back("Office");
+	//	
+	//	shared_ptr<OfficeRoom> room = make_shared<OfficeRoom>(scenes);
 
-		room->type = RoomType::Office;
+	//	//room->type = RoomType::Office;
 
-		room->roomCode = "test";
-		room->modeType = 1;
-		room->creatorId = "test";
-		room->currentHostId = "test";
-		room->password = "test";
-		room->isPassword = false;
-		room->maxPlayerNumber = 10;
-		room->observer = 10;
-		room->isWaitingRoom = false;
-		room->runningTime = 100;
+	//	room->roomCode = "test";
+	//	room->modeType = 1;
+	//	room->creatorId = "test";
+	//	room->currentHostId = "test";
+	//	room->password = "test";
+	//	room->isPassword = false;
+	//	room->maxPlayerNumber = 10;
+	//	room->observer = 10;
+	//	room->isWaitingRoom = false;
+	//	room->runningTime = 100;
 
-		room->AUTO_DESTROY = false;
-		room->DESTROY_WHEN_EMPTY = true;
+	//	room->AUTO_DESTROY = false;
+	//	room->DESTROY_WHEN_EMPTY = true;
 
-		room->Init();
+	//	room->Init();
 
-		GRoomManager->AddRoom(room);
+	//	GRoomManager->AddRoom(room);
 
-		nlohmann::json resJson;
-		resJson["result"] = "SUCCESS";
-		resJson["roomId"] = room->roomId;
+	//	nlohmann::json resJson;
+	//	resJson["result"] = "SUCCESS";
+	//	resJson["roomId"] = room->roomId;
 
-		resJson["ip"] = localHostIp;
-		resJson["port"] = tcpPort;
+	//	resJson["ip"] = localHostIp;
+	//	resJson["port"] = tcpPort;
 
-		res.set_content(resJson.dump(), "application/json");
-		});
+	//	res.set_content(resJson.dump(), "application/json");
+	//	});
 
-	svr.Post("/TestMyRoomRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
-		vector<string> scenes;
-		scenes.push_back("MyRoom");
-
-		std::string bodyStr;
-		content_reader([&](const char* data, size_t data_length) {
-			bodyStr.append(data, data_length);
-			return true;
-			});
-
-		nlohmann::json body = nlohmann::json::parse(bodyStr);
-
-		shared_ptr<MyRoomRoom> room = make_shared<MyRoomRoom>(scenes);
-
-		room->type = RoomType::MyRoom;
-
-		if(body.contains("ownerId"))
-			room->ownerId = body["ownerId"];
-		else
-			room->ownerId = "test";
-
-		room->Init();
-
-		GRoomManager->AddRoom(room);
-
-		nlohmann::json resJson;
-		resJson["result"] = "SUCCESS";
-		resJson["roomId"] = room->roomId;
-
-		resJson["ip"] = localHostIp;
-		resJson["port"] = tcpPort;
-
-		res.set_content(resJson.dump(), "application/json");
-		});
-
-	svr.Post("/TestArzLandRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
-		vector<string> scenes;
-		scenes.push_back("ArzLand");
-		scenes.push_back("GameZone");
-		scenes.push_back("VoteZone");
-		scenes.push_back("CTFZone");
-
-		shared_ptr<GameRoom> room = make_shared<GameRoom>(scenes);
-
-		room->type = RoomType::ArzLand;
-
-		room->Init();
-
-		GRoomManager->AddRoom(room);
-
-		nlohmann::json resJson;
-		resJson["result"] = "SUCCESS";
-		resJson["roomId"] = room->roomId;
-
-		resJson["ip"] = localHostIp;
-		resJson["port"] = tcpPort;
-
-		res.set_content(resJson.dump(), "application/json");
-		});
-
-    svr.Post("/Stop", [&](const httplib::Request& req, httplib::Response& res) {
-        svr.stop();
-        });
+//	svr.Post("/TestMyRoomRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
+//		vector<string> scenes;
+//		scenes.push_back("MyRoom");
+//
+//		std::string bodyStr;
+//		content_reader([&](const char* data, size_t data_length) {
+//			bodyStr.append(data, data_length);
+//			return true;
+//			});
+//
+//		nlohmann::json body = nlohmann::json::parse(bodyStr);
+//
+//		shared_ptr<MyRoomRoom> room = make_shared<MyRoomRoom>(scenes);
+//
+//		//room->type = RoomType::MyRoom;
+//
+//		if(body.contains("ownerId"))
+//			room->ownerId = body["ownerId"];
+//		else
+//			room->ownerId = "test";
+//
+//		room->Init();
+//
+//		GRoomManager->AddRoom(room);
+//
+//		nlohmann::json resJson;
+//		resJson["result"] = "SUCCESS";
+//		resJson["roomId"] = room->roomId;
+//
+//		resJson["ip"] = localHostIp;
+//		resJson["port"] = tcpPort;
+//
+//		res.set_content(resJson.dump(), "application/json");
+//		});
+//
+//	svr.Post("/TestArzLandRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
+//		vector<string> scenes;
+//		scenes.push_back("ArzLand");
+//		scenes.push_back("GameZone");
+//		scenes.push_back("VoteZone");
+//		scenes.push_back("CTFZone");
+//
+//		shared_ptr<GameRoom> room = make_shared<GameRoom>(scenes);
+//
+//		//room->type = RoomType::ArzLand;
+//
+//		room->Init();
+//
+//		GRoomManager->AddRoom(room);
+//
+//		nlohmann::json resJson;
+//		resJson["result"] = "SUCCESS";
+//		resJson["roomId"] = room->roomId;
+//
+//		resJson["ip"] = localHostIp;
+//		resJson["port"] = tcpPort;
+//
+//		res.set_content(resJson.dump(), "application/json");
+//		});
+//
+//    svr.Post("/Stop", [&](const httplib::Request& req, httplib::Response& res) {
+//        svr.stop();
+//        });
 
     svr.listen(ip.c_str(), port);
 }

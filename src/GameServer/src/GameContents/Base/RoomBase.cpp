@@ -27,7 +27,7 @@ void RoomBase::Close()
 
 	HandleClose();
 
-	GRoomManager->RemoveRoom(roomId);
+	GRoomManager->RemoveRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
 void RoomBase::HandleClose()

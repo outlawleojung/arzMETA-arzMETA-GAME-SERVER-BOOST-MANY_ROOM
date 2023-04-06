@@ -107,6 +107,7 @@ public:
 
 	matching::GameData gameData;
 
+	string roomCode;
 	string roomName;
 	string currentHostId;
 };

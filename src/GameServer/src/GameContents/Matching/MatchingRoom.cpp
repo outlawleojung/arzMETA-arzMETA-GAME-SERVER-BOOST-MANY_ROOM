@@ -5,6 +5,8 @@
 #include "../../ClientPacketHandler.h"
 #include "../../Session/GameSession.h"
 
+#include "../RoomManager.h"
+
 #include <functional>
 
 #include <mysql_connection.h>
@@ -55,15 +57,15 @@ bool matching::GameData::Init()
 
 	while (res->next())
 	{
-		hintToHintIntervals.push_back(std::stoi(res->getString(3)));
-		quizToDestroyIntervals.push_back(std::stoi(res->getString(4)));
-		destroyToFinishIntervals.push_back(std::stoi(res->getString(5)));
-		toNextRoundIntervals.push_back(std::stoi(res->getString(6)));
-		showQuizTimes.push_back(std::stoi(res->getString(7)));
+		hintToHintIntervals.push_back(res->getInt(3));
+		quizToDestroyIntervals.push_back(res->getInt(4));
+		destroyToFinishIntervals.push_back(res->getInt(5));
+		toNextRoundIntervals.push_back(res->getInt(6));
+		showQuizTimes.push_back(res->getInt(7));
 
-		int paintNumber = std::stoi(res->getString(9));
+		int paintNumber = res->getInt(9);
 
-		paintConditions.push_back({ paintNumber, std::stoi(res->getString(10)) });
+		paintConditions.push_back({ paintNumber, res->getInt(10) });
 
 		string hintTemplateString = string(res->getString(11));
 
@@ -214,6 +216,8 @@ void MatchingRoom::Init()
 	if(!gameData.Init())
 		Close();
 
+	roomCode = roomId;
+
 	//this->DoTimer(30000, std::function<void()>(
 	//	[this]() {
 	//		if (this->state != RoomState::Running)
@@ -284,6 +288,7 @@ void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	if (currentHostId.empty())
 	{
 		//set room visible
+		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 		DoAsync(&MatchingRoom::SetHost, client->clientId);
 	}
 }

@@ -4,6 +4,8 @@
 #include "../../Session/GameSession.h"
 #include "../../ClientPacketHandler.h"
 
+#include "../RoomManager.h"
+
 #include "../ClientManager.h"
 
 OfficeRoom::OfficeRoom(vector<string> sceneIds)
@@ -118,16 +120,18 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		res.set_result("SUCCESS");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
 
+		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+
 		return;
 	}
 
-	//if (clients.size() == 0)
-	//{
-	//	res.set_result("HOST_NOT_ENTERED");
-	//	session->Send(ClientPacketHandler::MakeSendBuffer(res));
-	//	session->Disconnect();
-	//	return;
-	//}
+	if (clients.size() == 0)
+	{
+		res.set_result("HOST_NOT_ENTERED");
+		session->Send(ClientPacketHandler::MakeSendBuffer(res));
+		session->Disconnect();
+		return;
+	}
 
 	if (isShutdown)
 	{

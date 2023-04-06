@@ -5,6 +5,7 @@
 #include "../ClientManager.h"
 #include "GameClient.h"
 #include "Scene.h"
+#include "../RoomManager.h"
 
 GameRoom::GameRoom(vector<string> sceneIds)
 {
@@ -12,6 +13,13 @@ GameRoom::GameRoom(vector<string> sceneIds)
 		scenes.insert({ *sceneId, make_shared<Scene>(*sceneId) });
 
 	maxPlayerNumber = 10;
+}
+
+void GameRoom::Init()
+{
+	state = RoomState::Running;
+
+	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
 void GameRoom::HandleClose()

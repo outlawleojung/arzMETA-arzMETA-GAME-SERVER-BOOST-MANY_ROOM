@@ -10,6 +10,7 @@ class GameRoom : public RoomBase
 public :
 	GameRoom(vector<string> scenes);
 
+	virtual void Init() override;
 	virtual void HandleClose() override;
 	virtual void Clear() override;
 

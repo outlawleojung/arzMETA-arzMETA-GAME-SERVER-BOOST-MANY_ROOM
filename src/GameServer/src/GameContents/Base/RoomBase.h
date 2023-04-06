@@ -3,6 +3,8 @@
 #include "../../Util/pch.h"
 #include "../../Util/Protocols.h"
 
+#include "../RoomTypes.h"
+
 #include <nlohmann/json.hpp>
 
 class GameSession;
@@ -14,15 +16,6 @@ enum class RoomState
 	Running,
 	Closing,
 	Closed
-};
-
-enum class RoomType
-{
-	ArzLand,
-	MyRoom,
-	Office,
-	Matching,
-	OX
 };
 
 class RoomBase : public JobQueue

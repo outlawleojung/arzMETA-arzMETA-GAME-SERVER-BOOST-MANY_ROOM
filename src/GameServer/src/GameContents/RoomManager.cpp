@@ -18,15 +18,78 @@ void RoomManager::AddRoom(shared_ptr<RoomBase> room)
     GLogManager->Log("Total Room Number :	        	", to_string(rooms.size()));
 }
 
-bool RoomManager::RemoveRoom(string roomId)
+void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
 {
     std::unique_lock<shared_mutex> lock;
 
-    auto room = rooms.find(roomId);
-    if (room == rooms.end())
-        return false;
+    switch (room->type)
+    {
+    case RoomType::ArzLand :
+    {
+        arzLandRooms.insert({ room->roomId, room });
+        break;
+    }
+    case RoomType::MyRoom:
+    {
+        myRoomRooms.insert({ static_pointer_cast<MyRoomRoom>(room)->ownerId, room });
+        break;
+    }
+    case RoomType::Office:
+    {
+        officeRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        break;
+    }
+    case RoomType::Matching:
+    {
+        matchingRooms.insert({ static_pointer_cast<MatchingRoom>(room)->roomCode, room });
+        break;
+    }
+    case RoomType::OX:
+    {
+        oxRooms.insert({ static_pointer_cast<OXRoom>(room)->roomCode, room });
+        break;
+    }
+    default:
+        break;
+    }
+}
 
-    rooms.erase(room);
+bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
+{
+    std::unique_lock<shared_mutex> lock;
+
+    rooms.erase(rooms.find(room->roomId));
+
+    switch (room->type)
+    {
+    case RoomType::ArzLand:
+    {
+        arzLandRooms.erase(room->roomId);
+        break;
+    }
+    case RoomType::MyRoom:
+    {
+        myRoomRooms.erase(static_pointer_cast<MyRoomRoom>(room)->ownerId);
+        break;
+    }
+    case RoomType::Office:
+    {
+        officeRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        break;
+    }
+    case RoomType::Matching:
+    {
+        matchingRooms.erase(static_pointer_cast<MatchingRoom>(room)->roomCode);
+        break;
+    }
+    case RoomType::OX:
+    {
+        oxRooms.erase(static_pointer_cast<OXRoom>(room)->roomCode);
+        break;
+    }
+    default:
+        break;
+    }
 
     GLogManager->Log("Total Room Number :	         	", to_string(rooms.size()));
 
@@ -47,57 +110,43 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
         return res;
     }
 
-    for (auto room = rooms.begin(); room != rooms.end(); room++)
+    if (query["type"] == "ArzLand")
     {
-        if (query["type"] == "ArzLand")
-        {
-            if (room->second->type != RoomType::ArzLand)
-                continue;
+        for (auto arzLandRoom = arzLandRooms.begin(); arzLandRoom != arzLandRooms.end(); arzLandRoom++)
+            res.push_back(arzLandRoom->second->ToJson());
+    }
+    else if (query["type"] == "MyRoom")
+    {
+        if (query.find("ownerId") != query.end() && myRoomRooms.find(query["ownerId"]) != myRoomRooms.end())
+            res.push_back(myRoomRooms.find(query["ownerId"])->second->ToJson());
+        else
+            for (auto myRoomRoom = myRoomRooms.begin(); myRoomRoom != myRoomRooms.end(); myRoomRoom++)
+                res.push_back(myRoomRoom->second->ToJson());
+    }
+    else if (query["type"] == "Office")
+    {
+        if (query.find("roomCode") != query.end() && officeRooms.find(query["roomCode"]) != officeRooms.end())
+            res.push_back(officeRooms.find(query["roomCode"])->second->ToJson());
+        else
+            for (auto officeRoom = officeRooms.begin(); officeRoom != officeRooms.end(); officeRoom++)
+                res.push_back(officeRoom->second->ToJson());
+    }
+    else if (query["type"] == "JumpingMatching")
+    {
+        if (query.find("roomCode") != query.end() && matchingRooms.find(query["roomCode"]) != matchingRooms.end())
+            res.push_back(matchingRooms.find(query["roomCode"])->second->ToJson());
+        else
+            for (auto matchingRoom = matchingRooms.begin(); matchingRoom != matchingRooms.end(); matchingRoom++)
+                res.push_back(matchingRoom->second->ToJson());
 
-            res.push_back(room->second->ToJson());
-        }
-        else if (query["type"] == "Office")
-        {
-            if (room->second->type != RoomType::Office)
-                continue;
-
-            auto officeRoom = static_pointer_cast<OfficeRoom>(room->second);
-
-            if (query.find("RoomCode") != query.end() && officeRoom->roomCode != query["RoomCode"])
-                continue;
-
-            res.push_back(room->second->ToJson());
-        }
-        else if (query["type"] == "MyRoom")
-        {
-            if (room->second->type != RoomType::MyRoom)
-                continue;
-
-            auto myRoom = static_pointer_cast<MyRoomRoom>(room->second);
-
-            if (query.find("ownerId") != query.end() && myRoom->ownerId != query["ownerId"])
-                continue;
-
-            res.push_back(room->second->ToJson());
-        }
-        else if (query["type"] == "JumpingMatching")
-        {
-            if (room->second->type != RoomType::Matching)
-                continue;
-
-            auto myRoom = static_pointer_cast<MatchingRoom>(room->second);
-
-            res.push_back(room->second->ToJson());
-        }
-        else if (query["type"] == "OX")
-        {
-            if (room->second->type != RoomType::OX)
-                continue;
-
-            auto myRoom = static_pointer_cast<OXRoom>(room->second);
-
-            res.push_back(room->second->ToJson());
-        }
+    }
+    else if (query["type"] == "OX")
+    {
+        if (query.find("roomCode") != query.end() && oxRooms.find(query["roomCode"]) != oxRooms.end())
+            res.push_back(oxRooms.find(query["roomCode"])->second->ToJson());
+        else
+            for (auto oxRoom = oxRooms.begin(); oxRoom != oxRooms.end(); oxRoom++)
+                res.push_back(oxRoom->second->ToJson());
     }
 
     return res;
