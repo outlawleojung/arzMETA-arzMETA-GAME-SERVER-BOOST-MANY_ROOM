@@ -92,6 +92,7 @@ public:
 
 	ox::GameData gameData;
 
+	string roomCode;
 	string roomName;
 	string currentHostId;
 };

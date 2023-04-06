@@ -5,6 +5,8 @@
 #include "../../ClientPacketHandler.h"
 #include "../../Session/GameSession.h"
 
+#include "../RoomManager.h"
+
 #include <functional>
 
 #include <mysql_connection.h>
@@ -47,8 +49,8 @@ bool ox::GameData::Init()
 
 		while (res->next())
 		{
-			int answerTypeId = stoi(res->getString(0));
-			string answerType = res->getString(1);
+			int answerTypeId = res->getInt(1);
+			string answerType = res->getString(2);
 
 			if (answerType._Equal("O"))
 				answerTypes.insert({ answerTypeId, true });
@@ -64,8 +66,8 @@ bool ox::GameData::Init()
 
 		while (res->next())
 		{
-			int quizId = stoi(res->getString(1));
-			int answerTypeId = stoi(res->getString(2));
+			int quizId = res->getInt(2);
+			int answerTypeId = res->getInt(3);
 
 			auto answerType = answerTypes.find(answerTypeId);
 			if (answerType == answerTypes.end())
@@ -85,8 +87,8 @@ bool ox::GameData::Init()
 
 		while (res->next())
 		{
-			waitingIntervals.push_back(stoi(res->getString(1)));
-			playingIntervals.push_back(stoi(res->getString(2)));
+			waitingIntervals.push_back(res->getInt(2));
+			playingIntervals.push_back(res->getInt(3));
 		}
 	}
 
@@ -96,8 +98,8 @@ bool ox::GameData::Init()
 
 		while (res->next())
 		{
-			int quizTimeTypeId = stoi(res->getString(0));
-			int quizTime = stoi(res->getString(1));
+			int quizTimeTypeId = res->getInt(1);
+			int quizTime = res->getInt(2);
 
 			quizTimeTypes.insert({ quizTimeTypeId , quizTime });
 		}
@@ -109,7 +111,7 @@ bool ox::GameData::Init()
 
 		while (res->next())
 		{
-			int quizTimeTypeId = stoi(res->getString(1));
+			int quizTimeTypeId = res->getInt(2);
 
 			auto quizTimeType = quizTimeTypes.find(quizTimeTypeId);
 			if (quizTimeType == quizTimeTypes.end())
@@ -227,6 +229,8 @@ void OXRoom::Init()
 	if(!gameData.Init())
 		Close();
 
+	roomCode = roomId;
+
 	//DoTimer(30000, std::function<void()>(
 	//	[this]() {
 	//		if (this->state != RoomState::Running)
@@ -297,6 +301,7 @@ void OXRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	if (currentHostId.empty())
 	{
 		//set room visible
+		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 		DoAsync(&OXRoom::SetHost, client->clientId);
 	}
 }
@@ -321,7 +326,7 @@ void OXRoom::Leave(shared_ptr<ClientBase> client)
 
 void OXRoom::GetHost(shared_ptr<ClientBase> client)
 {
-	Protocol::S_MATCHING_HOST host;
+	Protocol::S_OX_HOST host;
 	host.set_clientid(currentHostId);
 	client->Send(ClientPacketHandler::MakeSendBuffer(host));
 }
@@ -331,7 +336,7 @@ void OXRoom::Start(shared_ptr<ClientBase> client)
 	if (gameData.gameState != ox::GameState::Idle)
 		return;
 
-	Protocol::S_MATCHING_START start;
+	Protocol::S_OX_START start;
 	DoAsync(&OXRoom::Broadcast, ClientPacketHandler::MakeSendBuffer(start));
 
 	gameData.gameState = ox::GameState::Playing;
@@ -362,7 +367,7 @@ void OXRoom::SetHost(string clientId)
 
 	currentHostId = clientId;
 
-	Protocol::S_MATCHING_HOST hostPkt;
+	Protocol::S_OX_HOST hostPkt;
 	hostPkt.set_clientid(currentHostId);
 	Broadcast(ClientPacketHandler::MakeSendBuffer(hostPkt));
 }
@@ -441,14 +446,14 @@ void OXRoom::GameLogic()
 	}
 	case ox::RoundState::Finish:
 	{
-		Protocol::S_MATCHING_ROUND_FINISH roundFinish;
+		Protocol::S_OX_ROUND_FINISH roundFinish;
 		DoAsync(&OXRoom::Broadcast, ClientPacketHandler::MakeSendBuffer(roundFinish));
 
 		gameData.roundCount++;
 		
 		if (gameData.players.size() == 0 || (!gameData.isSoloplay && gameData.players.size() == 1) || gameData.roundCount >= gameData.roundTotal)
 		{
-			Protocol::S_MATCHING_FINISH finish;
+			Protocol::S_OX_FINISH finish;
 			DoAsync(&OXRoom::Broadcast, ClientPacketHandler::MakeSendBuffer(finish));
 
 			gameData.Clear();
