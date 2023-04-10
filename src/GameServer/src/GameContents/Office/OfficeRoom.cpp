@@ -27,6 +27,25 @@ void OfficeRoom::Init()
 {
 	state = RoomState::Running;
 
+	roomInfoJson["roomId"] = roomId;
+	roomInfoJson["roomName"] = roomName;
+	roomInfoJson["description"] = description;
+	roomInfoJson["spaceInfoId"] = spaceInfoId;
+	roomInfoJson["modeType"] = modeType;
+	roomInfoJson["topicType"] = topicType;
+	roomInfoJson["thumbnail"] = thumbnail;
+	roomInfoJson["host"] = "";
+	roomInfoJson["personnel"] = maxPlayerNumber;
+	roomInfoJson["currentPersonnel"] = 0;
+	roomInfoJson["isPassword"] = isPassword;
+	roomInfoJson["isAdvertising"] = isAdvertising;
+	roomInfoJson["isShutdown"] = isShutdown;
+	roomInfoJson["isObserver"] = (observer > 0) ? true : false;
+	roomInfoJson["ip"] = localHostIp;
+	roomInfoJson["port"] = tcpPort;
+
+	roomInfo = roomInfoJson.dump();
+
 	if (AUTO_DESTROY)
 	{
 		this->DoTimer(30000, std::function<void()>(
@@ -39,8 +58,6 @@ void OfficeRoom::Init()
 			}
 		));
 	}
-
-	this->DoAsync(&OfficeRoom::Countdown);
 }
 
 void OfficeRoom::HandleClose()
@@ -117,10 +134,16 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		currentPersonnel++;
 		currentHostId = pkt.clientid();
 
+		roomInfoJson["host"] = client->clientId;
+		roomInfoJson["currentPersonnel"] = currentPersonnel;
+		roomInfo = roomInfoJson.dump();
+
 		res.set_result("SUCCESS");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
 
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+
+		this->DoAsync(&OfficeRoom::Countdown);
 
 		return;
 	}
@@ -216,9 +239,15 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	session->Send(ClientPacketHandler::MakeSendBuffer(res));
 
 	if (pkt.isobserver())
+	{
 		currentObserver++;
+	}
 	else
+	{
 		currentPersonnel++;
+		roomInfoJson["currentPersonnel"] = currentPersonnel;
+		roomInfo = roomInfoJson.dump();
+	}
 }
 
 void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
@@ -243,7 +272,11 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 	if (oClient->type == OfficeRoomUserType::Observer)
 		currentObserver--;
 	else
+	{
 		currentPersonnel--;
+		roomInfoJson["currentPersonnel"] = currentPersonnel;
+		roomInfo = roomInfoJson.dump();
+	}
 
 	GameRoom::Leave(_client);
 
@@ -446,6 +479,12 @@ void OfficeRoom::SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_S
 	isShutdown = pkt.isshutdown();
 	isWaitingRoom = pkt.iswaitingroom();
 
+	roomInfoJson["personnel"] = maxPlayerNumber;
+	roomInfoJson["isPassword"] = isPassword;
+	roomInfoJson["isAdvertising"] = isAdvertising;
+	roomInfoJson["isShutdown"] = isShutdown;
+	roomInfo = roomInfoJson.dump();
+
 	Protocol::S_OFFICE_SET_ROOM_INFO roomInfo;
 	roomInfo.set_success(true);
 	client->Send(ClientPacketHandler::MakeSendBuffer(roomInfo));
@@ -538,7 +577,11 @@ void OfficeRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, boo
 		if (client->second.first)
 			currentObserver++;
 		else
+		{
 			currentPersonnel++;
+			roomInfoJson["currentPersonnel"] = currentPersonnel;
+			roomInfo = roomInfoJson.dump();
+		}
 	}
 
 	//대기열에서 대상 퇴장

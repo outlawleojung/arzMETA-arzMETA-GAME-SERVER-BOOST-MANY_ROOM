@@ -49,6 +49,9 @@ public:
 
 	RoomType type;
 
+	nlohmann::json roomInfoJson;
+	string roomInfo;
+
 public:
 	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER &pkt) {};
 	virtual void Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE &pkt);

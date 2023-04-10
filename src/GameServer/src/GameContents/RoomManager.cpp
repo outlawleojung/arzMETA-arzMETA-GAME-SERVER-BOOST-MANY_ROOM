@@ -105,7 +105,7 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     if (query.size() == 0)
     {
         for (auto room = rooms.begin(); room != rooms.end(); room++)
-            res.push_back(room->second->ToJson());
+            res.push_back(room->second->roomInfoJson);
 
         return res;
     }
@@ -113,40 +113,40 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     if (query["type"] == "ArzLand")
     {
         for (auto arzLandRoom = arzLandRooms.begin(); arzLandRoom != arzLandRooms.end(); arzLandRoom++)
-            res.push_back(arzLandRoom->second->ToJson());
+            res.push_back(arzLandRoom->second->roomInfoJson);
     }
     else if (query["type"] == "MyRoom")
     {
         if (query.find("ownerId") != query.end() && myRoomRooms.find(query["ownerId"]) != myRoomRooms.end())
-            res.push_back(myRoomRooms.find(query["ownerId"])->second->ToJson());
+            res.push_back(myRoomRooms.find(query["ownerId"])->second->roomInfoJson);
         else
             for (auto myRoomRoom = myRoomRooms.begin(); myRoomRoom != myRoomRooms.end(); myRoomRoom++)
-                res.push_back(myRoomRoom->second->ToJson());
+                res.push_back(myRoomRoom->second->roomInfoJson);
     }
     else if (query["type"] == "Office")
     {
         if (query.find("roomCode") != query.end() && officeRooms.find(query["roomCode"]) != officeRooms.end())
-            res.push_back(officeRooms.find(query["roomCode"])->second->ToJson());
+            res.push_back(officeRooms.find(query["roomCode"])->second->roomInfoJson);
         else
             for (auto officeRoom = officeRooms.begin(); officeRoom != officeRooms.end(); officeRoom++)
-                res.push_back(officeRoom->second->ToJson());
+                res.push_back(officeRoom->second->roomInfoJson);
     }
     else if (query["type"] == "JumpingMatching")
     {
         if (query.find("roomCode") != query.end() && matchingRooms.find(query["roomCode"]) != matchingRooms.end())
-            res.push_back(matchingRooms.find(query["roomCode"])->second->ToJson());
+            res.push_back(matchingRooms.find(query["roomCode"])->second->roomInfoJson);
         else
             for (auto matchingRoom = matchingRooms.begin(); matchingRoom != matchingRooms.end(); matchingRoom++)
-                res.push_back(matchingRoom->second->ToJson());
+                res.push_back(matchingRoom->second->roomInfoJson);
 
     }
     else if (query["type"] == "OX")
     {
         if (query.find("roomCode") != query.end() && oxRooms.find(query["roomCode"]) != oxRooms.end())
-            res.push_back(oxRooms.find(query["roomCode"])->second->ToJson());
+            res.push_back(oxRooms.find(query["roomCode"])->second->roomInfoJson);
         else
             for (auto oxRoom = oxRooms.begin(); oxRoom != oxRooms.end(); oxRoom++)
-                res.push_back(oxRoom->second->ToJson());
+                res.push_back(oxRoom->second->roomInfoJson);
     }
 
     return res;

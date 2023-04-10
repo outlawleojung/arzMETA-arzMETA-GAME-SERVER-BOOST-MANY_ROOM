@@ -20,6 +20,12 @@ void GameRoom::Init()
 	state = RoomState::Running;
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+
+	roomInfoJson["roomId"] = roomId;
+	roomInfoJson["ip"] = localHostIp;
+	roomInfoJson["port"] = tcpPort;
+
+	roomInfo = roomInfoJson.dump();
 }
 
 void GameRoom::HandleClose()

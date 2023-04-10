@@ -231,6 +231,16 @@ void OXRoom::Init()
 
 	roomCode = roomId;
 
+	roomInfoJson["roomId"] = roomId;
+	roomInfoJson["roomName"] = roomName;
+	roomInfoJson["maxPlayerNumber"] = maxPlayerNumber;
+	roomInfoJson["currentPlayerNumber"] = 0;
+	roomInfoJson["host"] = "";
+	roomInfoJson["isPlaying"] = false;
+	roomInfoJson["ip"] = localHostIp;
+	roomInfoJson["port"] = tcpPort;
+	roomInfo = roomInfoJson.dump();
+
 	//DoTimer(30000, std::function<void()>(
 	//	[this]() {
 	//		if (this->state != RoomState::Running)
@@ -298,11 +308,14 @@ void OXRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	clientInfo->set_nickname(pkt.nickname());
 	Broadcast(ClientPacketHandler::MakeSendBuffer(addClient));
 
+	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"] + 1;
+	roomInfo = roomInfoJson.dump();
+
 	if (currentHostId.empty())
 	{
+		SetHost(client->clientId);
 		//set room visible
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
-		DoAsync(&OXRoom::SetHost, client->clientId);
 	}
 }
 
@@ -312,6 +325,9 @@ void OXRoom::Leave(shared_ptr<ClientBase> client)
 		Die(client);
 
 	GameRoom::Leave(client);
+
+	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"] - 1;
+	roomInfo = roomInfoJson.dump();
 
 	if (client->clientId == currentHostId)
 	{
@@ -342,6 +358,9 @@ void OXRoom::Start(shared_ptr<ClientBase> client)
 	gameData.gameState = ox::GameState::Playing;
 	gameData.roundState = ox::RoundState::Idle;
 
+	roomInfoJson["isPlaying"] = true;
+	roomInfo = roomInfoJson.dump();
+
 	DoAsync(&OXRoom::GameLogic);
 }
 
@@ -366,6 +385,9 @@ void OXRoom::SetHost(string clientId)
 		return;
 
 	currentHostId = clientId;
+
+	roomInfoJson["host"] = client->second->nickname;
+	roomInfo = roomInfoJson.dump();
 
 	Protocol::S_OX_HOST hostPkt;
 	hostPkt.set_clientid(currentHostId);
@@ -457,6 +479,9 @@ void OXRoom::GameLogic()
 			DoAsync(&OXRoom::Broadcast, ClientPacketHandler::MakeSendBuffer(finish));
 
 			gameData.Clear();
+
+			roomInfoJson["isPlaying"] = false;
+			roomInfo = roomInfoJson.dump();
 		}
 		else
 		{

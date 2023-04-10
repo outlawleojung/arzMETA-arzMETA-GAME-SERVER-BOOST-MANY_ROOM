@@ -218,6 +218,17 @@ void MatchingRoom::Init()
 
 	roomCode = roomId;
 
+	roomInfoJson["roomId"] = roomId;
+	roomInfoJson["roomName"] = roomName;
+	roomInfoJson["maxPlayerNumber"] = maxPlayerNumber;
+	roomInfoJson["currentPlayerNumber"] = 0;
+	roomInfoJson["host"] = "";
+	roomInfoJson["isPlaying"] = false;
+	roomInfoJson["ip"] = localHostIp;
+	roomInfoJson["port"] = tcpPort;
+
+	roomInfo = roomInfoJson.dump();
+
 	//this->DoTimer(30000, std::function<void()>(
 	//	[this]() {
 	//		if (this->state != RoomState::Running)
@@ -285,11 +296,14 @@ void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	clientInfo->set_nickname(pkt.nickname());
 	Broadcast(ClientPacketHandler::MakeSendBuffer(addClient));
 
+	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"] + 1;
+	roomInfo = roomInfoJson.dump();
+
 	if (currentHostId.empty())
 	{
+		SetHost(client->clientId);
 		//set room visible
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
-		DoAsync(&MatchingRoom::SetHost, client->clientId);
 	}
 }
 
@@ -299,6 +313,9 @@ void MatchingRoom::Leave(shared_ptr<ClientBase> client)
 		Die(client);
 
 	GameRoom::Leave(client);
+
+	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"] - 1;
+	roomInfo = roomInfoJson.dump();
 
 	if (client->clientId == currentHostId)
 	{
@@ -329,6 +346,9 @@ void MatchingRoom::Start(shared_ptr<ClientBase> client)
 	gameData.gameState = matching::GameState::Playing;
 	gameData.roundState = matching::RoundState::Idle;
 
+	roomInfoJson["isPlaying"] = true;
+	roomInfo = roomInfoJson.dump();
+
 	this->DoAsync(&MatchingRoom::GameLogic);
 }
 
@@ -352,16 +372,10 @@ void MatchingRoom::SetHost(string clientId)
 	if (currentHostId == clientId)
 		return;
 
-	//if (!currentHostId.empty())
-	//{
-	//	auto prevHost = clients.find(currentHostId);
-	//	if (prevHost != clients.end())
-	//	{
-	//		//do somthing
-	//	}
-	//}
-
 	currentHostId = clientId;
+
+	roomInfoJson["host"] = client->second->nickname;
+	roomInfo = roomInfoJson.dump();
 
 	Protocol::S_MATCHING_HOST hostPkt;
 	hostPkt.set_clientid(currentHostId);
@@ -490,6 +504,9 @@ void MatchingRoom::GameLogic()
 			DoAsync(&MatchingRoom::Broadcast, ClientPacketHandler::MakeSendBuffer(finish));
 
 			gameData.Clear();
+
+			roomInfoJson["isPlaying"] = false;
+			roomInfo = roomInfoJson.dump();
 		}
 		else
 		{
