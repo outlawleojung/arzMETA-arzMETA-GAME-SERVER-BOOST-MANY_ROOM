@@ -21,6 +21,8 @@ OfficeRoom::OfficeRoom(vector<string> sceneIds)
 	, currentHostId("")
 {
 	disconnectedSessionWaitTime = 10000;
+
+
 }
 
 void OfficeRoom::Init()
@@ -85,6 +87,7 @@ void OfficeRoom::Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& client, 
 void OfficeRoom::Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { DoAsync(&OfficeRoom::SetRoomInfo, client, pkt); }
 void OfficeRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { DoAsync(&OfficeRoom::GetRoomInfo, client); }
 void OfficeRoom::Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_VIDEO_STREAM& pkt) { DoAsync(&OfficeRoom::HandleVideoStream, pkt.url(), pkt.volume(), pkt.time(), pkt.play(), pkt.seek(), pkt.mediaplayerstate()); }
+void OfficeRoom::Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SHARE& pkt) { DoAsync(&OfficeRoom::HandleShare, session, pkt.isshared(), pkt.userid()); }
 
 void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 {
@@ -141,9 +144,24 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		res.set_result("SUCCESS");
 		session->Send(ClientPacketHandler::MakeSendBuffer(res));
 
-		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+		{
+			auto now = std::chrono::system_clock::now();
+			std::time_t t = std::chrono::system_clock::to_time_t(now);
+			std::tm bt;
+
+			t += 32400;
+			{
+				localtime_s(&bt, &t);
+				char buffer[50];
+				strftime(buffer, 50, "%Y.%m.%d %p %I:%M", &bt);
+				createdTimeString = string(buffer);
+			}
+		}
 
 		this->DoAsync(&OfficeRoom::Countdown);
+
+		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+
 
 		return;
 	}
@@ -282,10 +300,6 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 
 	if (_client->clientId == currentHostId)
 		Close();
-
-	//if (DESTROY_WHEN_EMPTY)
-	//	if (clients.size() == 0 || _client->clientId == currentHostId)
-	//		Close();
 }
 
 void OfficeRoom::GetHost(shared_ptr<ClientBase> client)
@@ -454,6 +468,7 @@ void OfficeRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_thumbnail(thumbnail);
 	roomInfo.set_iswaitingroom(isWaitingRoom);
 	roomInfo.set_isshutdown(isShutdown);
+	roomInfo.set_starttime(createdTimeString);
 	roomInfo.set_runningtime(runningTime);
 	roomInfo.set_passedtime(passedTime);
 	roomInfo.set_roomcode(roomId);
@@ -503,6 +518,22 @@ void OfficeRoom::HandleVideoStream(string url, float volume, float time, bool pl
 
 	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(videoStream);
 	this->DoAsync(&OfficeRoom::Broadcast, sendBuffer);
+}
+
+void OfficeRoom::HandleShare(shared_ptr<ClientBase> session, bool isShared, int userId)
+{
+	Protocol::S_OFFICE_SHARE share;
+	share.set_isshared(isShared);
+	share.set_userid(userId);
+
+	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(share);
+	for (auto client = clients.begin(); client != clients.end(); client++)
+	{
+		if (client->second->clientId == session->clientId)
+			continue;
+
+		client->second->Send(sendBuffer);
+	}
 }
 
 void OfficeRoom::GetWaitingList(shared_ptr<ClientBase> _client)

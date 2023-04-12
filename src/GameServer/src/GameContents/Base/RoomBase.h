@@ -80,6 +80,7 @@ public:
 	virtual void Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_ROOM_INFO&pkt) {};
 	virtual void Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_ROOM_INFO&pkt) {};
 	virtual void Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_VIDEO_STREAM&pkt) {};
+	virtual void Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SHARE&pkt) {};
 	virtual void Handle_C_MATCHING_START(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_START&pkt) {};
 	virtual void Handle_C_MATCHING_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_GET_HOST&pkt) {};
 	virtual void Handle_C_MATCHING_DIE(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_DIE&pkt) {};

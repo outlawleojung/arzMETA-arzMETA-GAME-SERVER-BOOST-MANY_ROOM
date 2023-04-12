@@ -95,6 +95,8 @@ public class PacketManager
 	    PKT_S_OFFICE_GET_ROOM_INFO = 420,
 	    PKT_C_OFFICE_VIDEO_STREAM = 421,
 	    PKT_S_OFFICE_VIDEO_STREAM = 422,
+	    PKT_C_OFFICE_SHARE = 423,
+	    PKT_S_OFFICE_SHARE = 424,
 	    PKT_C_MATCHING_START = 500,
 	    PKT_S_MATCHING_START = 501,
 	    PKT_S_MATCHING_FINISH = 502,
@@ -196,6 +198,8 @@ public class PacketManager
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_GET_ROOM_INFO, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_VIDEO_STREAM, MakePacket<S_OFFICE_VIDEO_STREAM>);
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_VIDEO_STREAM, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_SHARE, MakePacket<S_OFFICE_SHARE>);
+		_handler.Add((ushort)MsgId.PKT_S_OFFICE_SHARE, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_START, MakePacket<S_MATCHING_START>);
 		_handler.Add((ushort)MsgId.PKT_S_MATCHING_START, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_FINISH, MakePacket<S_MATCHING_FINISH>);

@@ -322,6 +322,7 @@ PROTOBUF_CONSTEXPR S_OFFICE_GET_ROOM_INFO::S_OFFICE_GET_ROOM_INFO(
   , /*decltype(_impl_.password_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.spaceinfoid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.thumbnail_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.starttime_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.roomcode_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.hostnickname_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.topictype_)*/0
@@ -363,7 +364,8 @@ struct C_OFFICE_VIDEO_STREAMDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_VIDEO_STREAMDefaultTypeInternal _C_OFFICE_VIDEO_STREAM_default_instance_;
 PROTOBUF_CONSTEXPR S_OFFICE_VIDEO_STREAM::S_OFFICE_VIDEO_STREAM(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.volume_)*/0
   , /*decltype(_impl_.time_)*/0
   , /*decltype(_impl_.play_)*/false
@@ -379,8 +381,36 @@ struct S_OFFICE_VIDEO_STREAMDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_VIDEO_STREAMDefaultTypeInternal _S_OFFICE_VIDEO_STREAM_default_instance_;
+PROTOBUF_CONSTEXPR C_OFFICE_SHARE::C_OFFICE_SHARE(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.isshared_)*/false
+  , /*decltype(_impl_.userid_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct C_OFFICE_SHAREDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_OFFICE_SHAREDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_OFFICE_SHAREDefaultTypeInternal() {}
+  union {
+    C_OFFICE_SHARE _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_SHAREDefaultTypeInternal _C_OFFICE_SHARE_default_instance_;
+PROTOBUF_CONSTEXPR S_OFFICE_SHARE::S_OFFICE_SHARE(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.isshared_)*/false
+  , /*decltype(_impl_.userid_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct S_OFFICE_SHAREDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_OFFICE_SHAREDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_OFFICE_SHAREDefaultTypeInternal() {}
+  union {
+    S_OFFICE_SHARE _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_SHAREDefaultTypeInternal _S_OFFICE_SHARE_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_5f004_5fOffice_2eproto[25];
+static ::_pb::Metadata file_level_metadata_Packet_5f004_5fOffice_2eproto[27];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_5f004_5fOffice_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_5f004_5fOffice_2eproto = nullptr;
 
@@ -570,6 +600,7 @@ const uint32_t TableStruct_Packet_5f004_5fOffice_2eproto::offsets[] PROTOBUF_SEC
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.isshutdown_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.runningtime_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.passedtime_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.starttime_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.roomcode_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.hostnickname_),
   ~0u,  // no _has_bits_
@@ -591,12 +622,29 @@ const uint32_t TableStruct_Packet_5f004_5fOffice_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _impl_.clientid_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _impl_.url_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _impl_.volume_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _impl_.time_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _impl_.play_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _impl_.seek_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _impl_.mediaplayerstate_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SHARE, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SHARE, _impl_.isshared_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SHARE, _impl_.userid_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_SHARE, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_SHARE, _impl_.isshared_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_SHARE, _impl_.userid_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::C_OFFICE_GET_WAITING_LIST)},
@@ -622,8 +670,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 153, -1, -1, sizeof(::Protocol::S_OFFICE_SET_ROOM_INFO)},
   { 160, -1, -1, sizeof(::Protocol::C_OFFICE_GET_ROOM_INFO)},
   { 166, -1, -1, sizeof(::Protocol::S_OFFICE_GET_ROOM_INFO)},
-  { 187, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
-  { 200, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
+  { 188, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
+  { 201, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
+  { 214, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
+  { 222, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -652,6 +702,8 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_OFFICE_GET_ROOM_INFO_default_instance_._instance,
   &::Protocol::_C_OFFICE_VIDEO_STREAM_default_instance_._instance,
   &::Protocol::_S_OFFICE_VIDEO_STREAM_default_instance_._instance,
+  &::Protocol::_C_OFFICE_SHARE_default_instance_._instance,
+  &::Protocol::_S_OFFICE_SHARE_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Packet_5f004_5fOffice_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -688,28 +740,31 @@ const char descriptor_table_protodef_Packet_5f004_5fOffice_2eproto[] PROTOBUF_SE
   "Shutdown\030\003 \001(\010\022\025\n\risAdvertising\030\004 \001(\010\022\025\n"
   "\risWaitingRoom\030\005 \001(\010\")\n\026S_OFFICE_SET_ROO"
   "M_INFO\022\017\n\007success\030\001 \001(\010\"\030\n\026C_OFFICE_GET_"
-  "ROOM_INFO\"\314\002\n\026S_OFFICE_GET_ROOM_INFO\022\020\n\010"
+  "ROOM_INFO\"\337\002\n\026S_OFFICE_GET_ROOM_INFO\022\020\n\010"
   "roomName\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\022\021\n\tt"
   "opicType\030\003 \001(\005\022\020\n\010password\030\004 \001(\t\022\023\n\013spac"
   "eInfoId\030\005 \001(\t\022\021\n\tpersonnel\030\006 \001(\005\022\030\n\020curr"
   "entPersonnel\030\007 \001(\005\022\025\n\risAdvertising\030\010 \001("
   "\010\022\021\n\tthumbnail\030\t \001(\t\022\025\n\risWaitingRoom\030\n "
   "\001(\010\022\022\n\nisShutdown\030\013 \001(\010\022\023\n\013runningTime\030\014"
-  " \001(\005\022\022\n\npassedTime\030\r \001(\005\022\020\n\010roomcode\030\016 \001"
-  "(\t\022\024\n\014hostNickname\030\017 \001(\t\"\212\001\n\025C_OFFICE_VI"
+  " \001(\005\022\022\n\npassedTime\030\r \001(\005\022\021\n\tstartTime\030\016 "
+  "\001(\t\022\020\n\010roomcode\030\017 \001(\t\022\024\n\014hostNickname\030\020 "
+  "\001(\t\"\212\001\n\025C_OFFICE_VIDEO_STREAM\022\020\n\010clienti"
+  "d\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004"
+  "time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030"
+  "\n\020mediaPlayerState\030\007 \001(\005\"\212\001\n\025S_OFFICE_VI"
   "DEO_STREAM\022\020\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001("
   "\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030"
   "\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020mediaPlayerState\030"
-  "\007 \001(\005\"x\n\025S_OFFICE_VIDEO_STREAM\022\013\n\003url\030\001 "
-  "\001(\t\022\016\n\006volume\030\002 \001(\002\022\014\n\004time\030\003 \001(\002\022\014\n\004pla"
-  "y\030\004 \001(\010\022\014\n\004seek\030\005 \001(\010\022\030\n\020mediaPlayerStat"
-  "e\030\006 \001(\005b\006proto3"
+  "\007 \001(\005\"2\n\016C_OFFICE_SHARE\022\020\n\010isShared\030\001 \001("
+  "\010\022\016\n\006userId\030\002 \001(\005\"2\n\016S_OFFICE_SHARE\022\020\n\010i"
+  "sShared\030\001 \001(\010\022\016\n\006userId\030\002 \001(\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f004_5fOffice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f004_5fOffice_2eproto = {
-    false, false, 1935, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
+    false, false, 2077, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
     "Packet_004_Office.proto",
-    &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 25,
+    &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 27,
     schemas, file_default_instances, TableStruct_Packet_5f004_5fOffice_2eproto::offsets,
     file_level_metadata_Packet_5f004_5fOffice_2eproto, file_level_enum_descriptors_Packet_5f004_5fOffice_2eproto,
     file_level_service_descriptors_Packet_5f004_5fOffice_2eproto,
@@ -4764,6 +4819,7 @@ S_OFFICE_GET_ROOM_INFO::S_OFFICE_GET_ROOM_INFO(const S_OFFICE_GET_ROOM_INFO& fro
     , decltype(_impl_.password_){}
     , decltype(_impl_.spaceinfoid_){}
     , decltype(_impl_.thumbnail_){}
+    , decltype(_impl_.starttime_){}
     , decltype(_impl_.roomcode_){}
     , decltype(_impl_.hostnickname_){}
     , decltype(_impl_.topictype_){}
@@ -4817,6 +4873,14 @@ S_OFFICE_GET_ROOM_INFO::S_OFFICE_GET_ROOM_INFO(const S_OFFICE_GET_ROOM_INFO& fro
     _this->_impl_.thumbnail_.Set(from._internal_thumbnail(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.starttime_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.starttime_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_starttime().empty()) {
+    _this->_impl_.starttime_.Set(from._internal_starttime(), 
+      _this->GetArenaForAllocation());
+  }
   _impl_.roomcode_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.roomcode_.Set("", GetArenaForAllocation());
@@ -4849,6 +4913,7 @@ inline void S_OFFICE_GET_ROOM_INFO::SharedCtor(
     , decltype(_impl_.password_){}
     , decltype(_impl_.spaceinfoid_){}
     , decltype(_impl_.thumbnail_){}
+    , decltype(_impl_.starttime_){}
     , decltype(_impl_.roomcode_){}
     , decltype(_impl_.hostnickname_){}
     , decltype(_impl_.topictype_){0}
@@ -4881,6 +4946,10 @@ inline void S_OFFICE_GET_ROOM_INFO::SharedCtor(
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.thumbnail_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.starttime_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.starttime_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.roomcode_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.roomcode_.Set("", GetArenaForAllocation());
@@ -4907,6 +4976,7 @@ inline void S_OFFICE_GET_ROOM_INFO::SharedDtor() {
   _impl_.password_.Destroy();
   _impl_.spaceinfoid_.Destroy();
   _impl_.thumbnail_.Destroy();
+  _impl_.starttime_.Destroy();
   _impl_.roomcode_.Destroy();
   _impl_.hostnickname_.Destroy();
 }
@@ -4926,6 +4996,7 @@ void S_OFFICE_GET_ROOM_INFO::Clear() {
   _impl_.password_.ClearToEmpty();
   _impl_.spaceinfoid_.ClearToEmpty();
   _impl_.thumbnail_.ClearToEmpty();
+  _impl_.starttime_.ClearToEmpty();
   _impl_.roomcode_.ClearToEmpty();
   _impl_.hostnickname_.ClearToEmpty();
   ::memset(&_impl_.topictype_, 0, static_cast<size_t>(
@@ -5054,9 +5125,19 @@ const char* S_OFFICE_GET_ROOM_INFO::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
-      // string roomcode = 14;
+      // string startTime = 14;
       case 14:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 114)) {
+          auto str = _internal_mutable_starttime();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_OFFICE_GET_ROOM_INFO.startTime"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string roomcode = 15;
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           auto str = _internal_mutable_roomcode();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -5064,9 +5145,9 @@ const char* S_OFFICE_GET_ROOM_INFO::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
-      // string hostNickname = 15;
-      case 15:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
+      // string hostNickname = 16;
+      case 16:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 130)) {
           auto str = _internal_mutable_hostnickname();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -5201,24 +5282,34 @@ uint8_t* S_OFFICE_GET_ROOM_INFO::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(13, this->_internal_passedtime(), target);
   }
 
-  // string roomcode = 14;
+  // string startTime = 14;
+  if (!this->_internal_starttime().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_starttime().data(), static_cast<int>(this->_internal_starttime().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Protocol.S_OFFICE_GET_ROOM_INFO.startTime");
+    target = stream->WriteStringMaybeAliased(
+        14, this->_internal_starttime(), target);
+  }
+
+  // string roomcode = 15;
   if (!this->_internal_roomcode().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_roomcode().data(), static_cast<int>(this->_internal_roomcode().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_GET_ROOM_INFO.roomcode");
     target = stream->WriteStringMaybeAliased(
-        14, this->_internal_roomcode(), target);
+        15, this->_internal_roomcode(), target);
   }
 
-  // string hostNickname = 15;
+  // string hostNickname = 16;
   if (!this->_internal_hostnickname().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_hostnickname().data(), static_cast<int>(this->_internal_hostnickname().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_GET_ROOM_INFO.hostNickname");
     target = stream->WriteStringMaybeAliased(
-        15, this->_internal_hostnickname(), target);
+        16, this->_internal_hostnickname(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -5272,16 +5363,23 @@ size_t S_OFFICE_GET_ROOM_INFO::ByteSizeLong() const {
         this->_internal_thumbnail());
   }
 
-  // string roomcode = 14;
+  // string startTime = 14;
+  if (!this->_internal_starttime().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_starttime());
+  }
+
+  // string roomcode = 15;
   if (!this->_internal_roomcode().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_roomcode());
   }
 
-  // string hostNickname = 15;
+  // string hostNickname = 16;
   if (!this->_internal_hostnickname().empty()) {
-    total_size += 1 +
+    total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_hostnickname());
   }
@@ -5359,6 +5457,9 @@ void S_OFFICE_GET_ROOM_INFO::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
   if (!from._internal_thumbnail().empty()) {
     _this->_internal_set_thumbnail(from._internal_thumbnail());
   }
+  if (!from._internal_starttime().empty()) {
+    _this->_internal_set_starttime(from._internal_starttime());
+  }
   if (!from._internal_roomcode().empty()) {
     _this->_internal_set_roomcode(from._internal_roomcode());
   }
@@ -5427,6 +5528,10 @@ void S_OFFICE_GET_ROOM_INFO::InternalSwap(S_OFFICE_GET_ROOM_INFO* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.thumbnail_, lhs_arena,
       &other->_impl_.thumbnail_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.starttime_, lhs_arena,
+      &other->_impl_.starttime_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.roomcode_, lhs_arena,
@@ -5875,7 +5980,8 @@ S_OFFICE_VIDEO_STREAM::S_OFFICE_VIDEO_STREAM(const S_OFFICE_VIDEO_STREAM& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   S_OFFICE_VIDEO_STREAM* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.url_){}
+      decltype(_impl_.clientid_){}
+    , decltype(_impl_.url_){}
     , decltype(_impl_.volume_){}
     , decltype(_impl_.time_){}
     , decltype(_impl_.play_){}
@@ -5884,6 +5990,14 @@ S_OFFICE_VIDEO_STREAM::S_OFFICE_VIDEO_STREAM(const S_OFFICE_VIDEO_STREAM& from)
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.clientid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_clientid().empty()) {
+    _this->_impl_.clientid_.Set(from._internal_clientid(), 
+      _this->GetArenaForAllocation());
+  }
   _impl_.url_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.url_.Set("", GetArenaForAllocation());
@@ -5903,7 +6017,8 @@ inline void S_OFFICE_VIDEO_STREAM::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.url_){}
+      decltype(_impl_.clientid_){}
+    , decltype(_impl_.url_){}
     , decltype(_impl_.volume_){0}
     , decltype(_impl_.time_){0}
     , decltype(_impl_.play_){false}
@@ -5911,6 +6026,10 @@ inline void S_OFFICE_VIDEO_STREAM::SharedCtor(
     , decltype(_impl_.mediaplayerstate_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.clientid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.url_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.url_.Set("", GetArenaForAllocation());
@@ -5928,6 +6047,7 @@ S_OFFICE_VIDEO_STREAM::~S_OFFICE_VIDEO_STREAM() {
 
 inline void S_OFFICE_VIDEO_STREAM::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.clientid_.Destroy();
   _impl_.url_.Destroy();
 }
 
@@ -5941,6 +6061,7 @@ void S_OFFICE_VIDEO_STREAM::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.clientid_.ClearToEmpty();
   _impl_.url_.ClearToEmpty();
   ::memset(&_impl_.volume_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.mediaplayerstate_) -
@@ -5954,9 +6075,19 @@ const char* S_OFFICE_VIDEO_STREAM::_InternalParse(const char* ptr, ::_pbi::Parse
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string url = 1;
+      // string clientid = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_clientid();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_OFFICE_VIDEO_STREAM.clientid"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string url = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_url();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -5964,41 +6095,41 @@ const char* S_OFFICE_VIDEO_STREAM::_InternalParse(const char* ptr, ::_pbi::Parse
         } else
           goto handle_unusual;
         continue;
-      // float volume = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 21)) {
+      // float volume = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
           _impl_.volume_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // float time = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
+      // float time = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
           _impl_.time_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // bool play = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+      // bool play = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           _impl_.play_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // bool seek = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+      // bool seek = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
           _impl_.seek_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 mediaPlayerState = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+      // int32 mediaPlayerState = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
           _impl_.mediaplayerstate_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -6033,52 +6164,62 @@ uint8_t* S_OFFICE_VIDEO_STREAM::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string url = 1;
+  // string clientid = 1;
+  if (!this->_internal_clientid().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_clientid().data(), static_cast<int>(this->_internal_clientid().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Protocol.S_OFFICE_VIDEO_STREAM.clientid");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_clientid(), target);
+  }
+
+  // string url = 2;
   if (!this->_internal_url().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_url().data(), static_cast<int>(this->_internal_url().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_VIDEO_STREAM.url");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_url(), target);
+        2, this->_internal_url(), target);
   }
 
-  // float volume = 2;
+  // float volume = 3;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_volume = this->_internal_volume();
   uint32_t raw_volume;
   memcpy(&raw_volume, &tmp_volume, sizeof(tmp_volume));
   if (raw_volume != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(2, this->_internal_volume(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_volume(), target);
   }
 
-  // float time = 3;
+  // float time = 4;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_time = this->_internal_time();
   uint32_t raw_time;
   memcpy(&raw_time, &tmp_time, sizeof(tmp_time));
   if (raw_time != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_time(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_time(), target);
   }
 
-  // bool play = 4;
+  // bool play = 5;
   if (this->_internal_play() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_play(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_play(), target);
   }
 
-  // bool seek = 5;
+  // bool seek = 6;
   if (this->_internal_seek() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_seek(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(6, this->_internal_seek(), target);
   }
 
-  // int32 mediaPlayerState = 6;
+  // int32 mediaPlayerState = 7;
   if (this->_internal_mediaplayerstate() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(6, this->_internal_mediaplayerstate(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(7, this->_internal_mediaplayerstate(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -6097,14 +6238,21 @@ size_t S_OFFICE_VIDEO_STREAM::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string url = 1;
+  // string clientid = 1;
+  if (!this->_internal_clientid().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_clientid());
+  }
+
+  // string url = 2;
   if (!this->_internal_url().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_url());
   }
 
-  // float volume = 2;
+  // float volume = 3;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_volume = this->_internal_volume();
   uint32_t raw_volume;
@@ -6113,7 +6261,7 @@ size_t S_OFFICE_VIDEO_STREAM::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
-  // float time = 3;
+  // float time = 4;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_time = this->_internal_time();
   uint32_t raw_time;
@@ -6122,17 +6270,17 @@ size_t S_OFFICE_VIDEO_STREAM::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
-  // bool play = 4;
+  // bool play = 5;
   if (this->_internal_play() != 0) {
     total_size += 1 + 1;
   }
 
-  // bool seek = 5;
+  // bool seek = 6;
   if (this->_internal_seek() != 0) {
     total_size += 1 + 1;
   }
 
-  // int32 mediaPlayerState = 6;
+  // int32 mediaPlayerState = 7;
   if (this->_internal_mediaplayerstate() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_mediaplayerstate());
   }
@@ -6155,6 +6303,9 @@ void S_OFFICE_VIDEO_STREAM::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_clientid().empty()) {
+    _this->_internal_set_clientid(from._internal_clientid());
+  }
   if (!from._internal_url().empty()) {
     _this->_internal_set_url(from._internal_url());
   }
@@ -6201,6 +6352,10 @@ void S_OFFICE_VIDEO_STREAM::InternalSwap(S_OFFICE_VIDEO_STREAM* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.clientid_, lhs_arena,
+      &other->_impl_.clientid_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.url_, lhs_arena,
       &other->_impl_.url_, rhs_arena
   );
@@ -6216,6 +6371,428 @@ void S_OFFICE_VIDEO_STREAM::InternalSwap(S_OFFICE_VIDEO_STREAM* other) {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
       file_level_metadata_Packet_5f004_5fOffice_2eproto[24]);
+}
+
+// ===================================================================
+
+class C_OFFICE_SHARE::_Internal {
+ public:
+};
+
+C_OFFICE_SHARE::C_OFFICE_SHARE(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.C_OFFICE_SHARE)
+}
+C_OFFICE_SHARE::C_OFFICE_SHARE(const C_OFFICE_SHARE& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  C_OFFICE_SHARE* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.isshared_){}
+    , decltype(_impl_.userid_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&_impl_.isshared_, &from._impl_.isshared_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.userid_) -
+    reinterpret_cast<char*>(&_impl_.isshared_)) + sizeof(_impl_.userid_));
+  // @@protoc_insertion_point(copy_constructor:Protocol.C_OFFICE_SHARE)
+}
+
+inline void C_OFFICE_SHARE::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.isshared_){false}
+    , decltype(_impl_.userid_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+C_OFFICE_SHARE::~C_OFFICE_SHARE() {
+  // @@protoc_insertion_point(destructor:Protocol.C_OFFICE_SHARE)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void C_OFFICE_SHARE::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void C_OFFICE_SHARE::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void C_OFFICE_SHARE::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.C_OFFICE_SHARE)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.isshared_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.userid_) -
+      reinterpret_cast<char*>(&_impl_.isshared_)) + sizeof(_impl_.userid_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* C_OFFICE_SHARE::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool isShared = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.isshared_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 userId = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.userid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* C_OFFICE_SHARE::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.C_OFFICE_SHARE)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool isShared = 1;
+  if (this->_internal_isshared() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_isshared(), target);
+  }
+
+  // int32 userId = 2;
+  if (this->_internal_userid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_userid(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.C_OFFICE_SHARE)
+  return target;
+}
+
+size_t C_OFFICE_SHARE::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.C_OFFICE_SHARE)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bool isShared = 1;
+  if (this->_internal_isshared() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // int32 userId = 2;
+  if (this->_internal_userid() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_userid());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_OFFICE_SHARE::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    C_OFFICE_SHARE::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_OFFICE_SHARE::GetClassData() const { return &_class_data_; }
+
+
+void C_OFFICE_SHARE::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<C_OFFICE_SHARE*>(&to_msg);
+  auto& from = static_cast<const C_OFFICE_SHARE&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.C_OFFICE_SHARE)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_isshared() != 0) {
+    _this->_internal_set_isshared(from._internal_isshared());
+  }
+  if (from._internal_userid() != 0) {
+    _this->_internal_set_userid(from._internal_userid());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void C_OFFICE_SHARE::CopyFrom(const C_OFFICE_SHARE& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.C_OFFICE_SHARE)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool C_OFFICE_SHARE::IsInitialized() const {
+  return true;
+}
+
+void C_OFFICE_SHARE::InternalSwap(C_OFFICE_SHARE* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(C_OFFICE_SHARE, _impl_.userid_)
+      + sizeof(C_OFFICE_SHARE::_impl_.userid_)
+      - PROTOBUF_FIELD_OFFSET(C_OFFICE_SHARE, _impl_.isshared_)>(
+          reinterpret_cast<char*>(&_impl_.isshared_),
+          reinterpret_cast<char*>(&other->_impl_.isshared_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SHARE::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[25]);
+}
+
+// ===================================================================
+
+class S_OFFICE_SHARE::_Internal {
+ public:
+};
+
+S_OFFICE_SHARE::S_OFFICE_SHARE(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_OFFICE_SHARE)
+}
+S_OFFICE_SHARE::S_OFFICE_SHARE(const S_OFFICE_SHARE& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  S_OFFICE_SHARE* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.isshared_){}
+    , decltype(_impl_.userid_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&_impl_.isshared_, &from._impl_.isshared_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.userid_) -
+    reinterpret_cast<char*>(&_impl_.isshared_)) + sizeof(_impl_.userid_));
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_OFFICE_SHARE)
+}
+
+inline void S_OFFICE_SHARE::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.isshared_){false}
+    , decltype(_impl_.userid_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+S_OFFICE_SHARE::~S_OFFICE_SHARE() {
+  // @@protoc_insertion_point(destructor:Protocol.S_OFFICE_SHARE)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void S_OFFICE_SHARE::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void S_OFFICE_SHARE::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_OFFICE_SHARE::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_OFFICE_SHARE)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.isshared_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.userid_) -
+      reinterpret_cast<char*>(&_impl_.isshared_)) + sizeof(_impl_.userid_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_OFFICE_SHARE::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool isShared = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.isshared_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 userId = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.userid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_OFFICE_SHARE::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_OFFICE_SHARE)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool isShared = 1;
+  if (this->_internal_isshared() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_isshared(), target);
+  }
+
+  // int32 userId = 2;
+  if (this->_internal_userid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_userid(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_OFFICE_SHARE)
+  return target;
+}
+
+size_t S_OFFICE_SHARE::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_OFFICE_SHARE)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bool isShared = 1;
+  if (this->_internal_isshared() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // int32 userId = 2;
+  if (this->_internal_userid() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_userid());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_OFFICE_SHARE::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_OFFICE_SHARE::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_OFFICE_SHARE::GetClassData() const { return &_class_data_; }
+
+
+void S_OFFICE_SHARE::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_OFFICE_SHARE*>(&to_msg);
+  auto& from = static_cast<const S_OFFICE_SHARE&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_OFFICE_SHARE)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_isshared() != 0) {
+    _this->_internal_set_isshared(from._internal_isshared());
+  }
+  if (from._internal_userid() != 0) {
+    _this->_internal_set_userid(from._internal_userid());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_OFFICE_SHARE::CopyFrom(const S_OFFICE_SHARE& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_OFFICE_SHARE)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool S_OFFICE_SHARE::IsInitialized() const {
+  return true;
+}
+
+void S_OFFICE_SHARE::InternalSwap(S_OFFICE_SHARE* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_OFFICE_SHARE, _impl_.userid_)
+      + sizeof(S_OFFICE_SHARE::_impl_.userid_)
+      - PROTOBUF_FIELD_OFFSET(S_OFFICE_SHARE, _impl_.isshared_)>(
+          reinterpret_cast<char*>(&_impl_.isshared_),
+          reinterpret_cast<char*>(&other->_impl_.isshared_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_SHARE::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[26]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -6320,6 +6897,14 @@ Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_VIDEO_STREAM >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Protocol::S_OFFICE_VIDEO_STREAM*
 Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_VIDEO_STREAM >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_OFFICE_VIDEO_STREAM >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_SHARE*
+Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_SHARE >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_OFFICE_SHARE >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_OFFICE_SHARE*
+Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_SHARE >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_OFFICE_SHARE >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

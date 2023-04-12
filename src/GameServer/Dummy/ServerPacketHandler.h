@@ -75,6 +75,8 @@ enum : unsigned short
 	PKT_S_OFFICE_GET_ROOM_INFO = 420,
 	PKT_C_OFFICE_VIDEO_STREAM = 421,
 	PKT_S_OFFICE_VIDEO_STREAM = 422,
+	PKT_C_OFFICE_SHARE = 423,
+	PKT_S_OFFICE_SHARE = 424,
 	PKT_C_MATCHING_START = 500,
 	PKT_S_MATCHING_START = 501,
 	PKT_S_MATCHING_FINISH = 502,
@@ -138,6 +140,7 @@ bool Handle_S_OFFICE_SET_PERMISSION_NOTICE(shared_ptr<GameSession>& session, Pro
 bool Handle_S_OFFICE_SET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::S_OFFICE_SET_ROOM_INFO& pkt);
 bool Handle_S_OFFICE_GET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::S_OFFICE_GET_ROOM_INFO& pkt);
 bool Handle_S_OFFICE_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::S_OFFICE_VIDEO_STREAM& pkt);
+bool Handle_S_OFFICE_SHARE(shared_ptr<GameSession>& session, Protocol::S_OFFICE_SHARE& pkt);
 bool Handle_S_MATCHING_START(shared_ptr<GameSession>& session, Protocol::S_MATCHING_START& pkt);
 bool Handle_S_MATCHING_FINISH(shared_ptr<GameSession>& session, Protocol::S_MATCHING_FINISH& pkt);
 bool Handle_S_MATCHING_HOST(shared_ptr<GameSession>& session, Protocol::S_MATCHING_HOST& pkt);
@@ -200,6 +203,7 @@ public:
 		GPacketHandler[PKT_S_OFFICE_SET_ROOM_INFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OFFICE_SET_ROOM_INFO>(Handle_S_OFFICE_SET_ROOM_INFO, session, buffer, len); };
 		GPacketHandler[PKT_S_OFFICE_GET_ROOM_INFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OFFICE_GET_ROOM_INFO>(Handle_S_OFFICE_GET_ROOM_INFO, session, buffer, len); };
 		GPacketHandler[PKT_S_OFFICE_VIDEO_STREAM] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OFFICE_VIDEO_STREAM>(Handle_S_OFFICE_VIDEO_STREAM, session, buffer, len); };
+		GPacketHandler[PKT_S_OFFICE_SHARE] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_OFFICE_SHARE>(Handle_S_OFFICE_SHARE, session, buffer, len); };
 		GPacketHandler[PKT_S_MATCHING_START] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_MATCHING_START>(Handle_S_MATCHING_START, session, buffer, len); };
 		GPacketHandler[PKT_S_MATCHING_FINISH] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_MATCHING_FINISH>(Handle_S_MATCHING_FINISH, session, buffer, len); };
 		GPacketHandler[PKT_S_MATCHING_HOST] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket<Protocol::S_MATCHING_HOST>(Handle_S_MATCHING_HOST, session, buffer, len); };
@@ -252,6 +256,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_SET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_GET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_VIDEO_STREAM& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_VIDEO_STREAM); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_SHARE& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_SHARE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_START& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_START); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_GET_HOST& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_GET_HOST); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_DIE& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_DIE); }

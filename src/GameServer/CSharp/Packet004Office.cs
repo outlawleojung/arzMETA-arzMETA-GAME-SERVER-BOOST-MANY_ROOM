@@ -53,20 +53,24 @@ namespace Protocol {
             "GAEgASgFEhAKCHBhc3N3b3JkGAIgASgJEhIKCmlzU2h1dGRvd24YAyABKAgS",
             "FQoNaXNBZHZlcnRpc2luZxgEIAEoCBIVCg1pc1dhaXRpbmdSb29tGAUgASgI",
             "IikKFlNfT0ZGSUNFX1NFVF9ST09NX0lORk8SDwoHc3VjY2VzcxgBIAEoCCIY",
-            "ChZDX09GRklDRV9HRVRfUk9PTV9JTkZPIswCChZTX09GRklDRV9HRVRfUk9P",
+            "ChZDX09GRklDRV9HRVRfUk9PTV9JTkZPIt8CChZTX09GRklDRV9HRVRfUk9P",
             "TV9JTkZPEhAKCHJvb21OYW1lGAEgASgJEhMKC2Rlc2NyaXB0aW9uGAIgASgJ",
             "EhEKCXRvcGljVHlwZRgDIAEoBRIQCghwYXNzd29yZBgEIAEoCRITCgtzcGFj",
             "ZUluZm9JZBgFIAEoCRIRCglwZXJzb25uZWwYBiABKAUSGAoQY3VycmVudFBl",
             "cnNvbm5lbBgHIAEoBRIVCg1pc0FkdmVydGlzaW5nGAggASgIEhEKCXRodW1i",
             "bmFpbBgJIAEoCRIVCg1pc1dhaXRpbmdSb29tGAogASgIEhIKCmlzU2h1dGRv",
             "d24YCyABKAgSEwoLcnVubmluZ1RpbWUYDCABKAUSEgoKcGFzc2VkVGltZRgN",
-            "IAEoBRIQCghyb29tY29kZRgOIAEoCRIUCgxob3N0Tmlja25hbWUYDyABKAki",
-            "igEKFUNfT0ZGSUNFX1ZJREVPX1NUUkVBTRIQCghjbGllbnRpZBgBIAEoCRIL",
-            "CgN1cmwYAiABKAkSDgoGdm9sdW1lGAMgASgCEgwKBHRpbWUYBCABKAISDAoE",
-            "cGxheRgFIAEoCBIMCgRzZWVrGAYgASgIEhgKEG1lZGlhUGxheWVyU3RhdGUY",
-            "ByABKAUieAoVU19PRkZJQ0VfVklERU9fU1RSRUFNEgsKA3VybBgBIAEoCRIO",
-            "CgZ2b2x1bWUYAiABKAISDAoEdGltZRgDIAEoAhIMCgRwbGF5GAQgASgIEgwK",
-            "BHNlZWsYBSABKAgSGAoQbWVkaWFQbGF5ZXJTdGF0ZRgGIAEoBWIGcHJvdG8z"));
+            "IAEoBRIRCglzdGFydFRpbWUYDiABKAkSEAoIcm9vbWNvZGUYDyABKAkSFAoM",
+            "aG9zdE5pY2tuYW1lGBAgASgJIooBChVDX09GRklDRV9WSURFT19TVFJFQU0S",
+            "EAoIY2xpZW50aWQYASABKAkSCwoDdXJsGAIgASgJEg4KBnZvbHVtZRgDIAEo",
+            "AhIMCgR0aW1lGAQgASgCEgwKBHBsYXkYBSABKAgSDAoEc2VlaxgGIAEoCBIY",
+            "ChBtZWRpYVBsYXllclN0YXRlGAcgASgFIooBChVTX09GRklDRV9WSURFT19T",
+            "VFJFQU0SEAoIY2xpZW50aWQYASABKAkSCwoDdXJsGAIgASgJEg4KBnZvbHVt",
+            "ZRgDIAEoAhIMCgR0aW1lGAQgASgCEgwKBHBsYXkYBSABKAgSDAoEc2VlaxgG",
+            "IAEoCBIYChBtZWRpYVBsYXllclN0YXRlGAcgASgFIjIKDkNfT0ZGSUNFX1NI",
+            "QVJFEhAKCGlzU2hhcmVkGAEgASgIEg4KBnVzZXJJZBgCIAEoBSIyCg5TX09G",
+            "RklDRV9TSEFSRRIQCghpc1NoYXJlZBgBIAEoCBIOCgZ1c2VySWQYAiABKAVi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -92,9 +96,11 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SET_ROOM_INFO), global::Protocol.C_OFFICE_SET_ROOM_INFO.Parser, new[]{ "Personnel", "Password", "IsShutdown", "IsAdvertising", "IsWaitingRoom" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SET_ROOM_INFO), global::Protocol.S_OFFICE_SET_ROOM_INFO.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_GET_ROOM_INFO), global::Protocol.C_OFFICE_GET_ROOM_INFO.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_GET_ROOM_INFO), global::Protocol.S_OFFICE_GET_ROOM_INFO.Parser, new[]{ "RoomName", "Description", "TopicType", "Password", "SpaceInfoId", "Personnel", "CurrentPersonnel", "IsAdvertising", "Thumbnail", "IsWaitingRoom", "IsShutdown", "RunningTime", "PassedTime", "Roomcode", "HostNickname" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_GET_ROOM_INFO), global::Protocol.S_OFFICE_GET_ROOM_INFO.Parser, new[]{ "RoomName", "Description", "TopicType", "Password", "SpaceInfoId", "Personnel", "CurrentPersonnel", "IsAdvertising", "Thumbnail", "IsWaitingRoom", "IsShutdown", "RunningTime", "PassedTime", "StartTime", "Roomcode", "HostNickname" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_VIDEO_STREAM), global::Protocol.C_OFFICE_VIDEO_STREAM.Parser, new[]{ "Clientid", "Url", "Volume", "Time", "Play", "Seek", "MediaPlayerState" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_VIDEO_STREAM), global::Protocol.S_OFFICE_VIDEO_STREAM.Parser, new[]{ "Url", "Volume", "Time", "Play", "Seek", "MediaPlayerState" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_VIDEO_STREAM), global::Protocol.S_OFFICE_VIDEO_STREAM.Parser, new[]{ "Clientid", "Url", "Volume", "Time", "Play", "Seek", "MediaPlayerState" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SHARE), global::Protocol.C_OFFICE_SHARE.Parser, new[]{ "IsShared", "UserId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SHARE), global::Protocol.S_OFFICE_SHARE.Parser, new[]{ "IsShared", "UserId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -4706,6 +4712,7 @@ namespace Protocol {
       isShutdown_ = other.isShutdown_;
       runningTime_ = other.runningTime_;
       passedTime_ = other.passedTime_;
+      startTime_ = other.startTime_;
       roomcode_ = other.roomcode_;
       hostNickname_ = other.hostNickname_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -4873,8 +4880,20 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "startTime" field.</summary>
+    public const int StartTimeFieldNumber = 14;
+    private string startTime_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string StartTime {
+      get { return startTime_; }
+      set {
+        startTime_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "roomcode" field.</summary>
-    public const int RoomcodeFieldNumber = 14;
+    public const int RoomcodeFieldNumber = 15;
     private string roomcode_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -4886,7 +4905,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "hostNickname" field.</summary>
-    public const int HostNicknameFieldNumber = 15;
+    public const int HostNicknameFieldNumber = 16;
     private string hostNickname_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -4925,6 +4944,7 @@ namespace Protocol {
       if (IsShutdown != other.IsShutdown) return false;
       if (RunningTime != other.RunningTime) return false;
       if (PassedTime != other.PassedTime) return false;
+      if (StartTime != other.StartTime) return false;
       if (Roomcode != other.Roomcode) return false;
       if (HostNickname != other.HostNickname) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -4947,6 +4967,7 @@ namespace Protocol {
       if (IsShutdown != false) hash ^= IsShutdown.GetHashCode();
       if (RunningTime != 0) hash ^= RunningTime.GetHashCode();
       if (PassedTime != 0) hash ^= PassedTime.GetHashCode();
+      if (StartTime.Length != 0) hash ^= StartTime.GetHashCode();
       if (Roomcode.Length != 0) hash ^= Roomcode.GetHashCode();
       if (HostNickname.Length != 0) hash ^= HostNickname.GetHashCode();
       if (_unknownFields != null) {
@@ -5019,12 +5040,16 @@ namespace Protocol {
         output.WriteRawTag(104);
         output.WriteInt32(PassedTime);
       }
-      if (Roomcode.Length != 0) {
+      if (StartTime.Length != 0) {
         output.WriteRawTag(114);
+        output.WriteString(StartTime);
+      }
+      if (Roomcode.Length != 0) {
+        output.WriteRawTag(122);
         output.WriteString(Roomcode);
       }
       if (HostNickname.Length != 0) {
-        output.WriteRawTag(122);
+        output.WriteRawTag(130, 1);
         output.WriteString(HostNickname);
       }
       if (_unknownFields != null) {
@@ -5089,12 +5114,16 @@ namespace Protocol {
         output.WriteRawTag(104);
         output.WriteInt32(PassedTime);
       }
-      if (Roomcode.Length != 0) {
+      if (StartTime.Length != 0) {
         output.WriteRawTag(114);
+        output.WriteString(StartTime);
+      }
+      if (Roomcode.Length != 0) {
+        output.WriteRawTag(122);
         output.WriteString(Roomcode);
       }
       if (HostNickname.Length != 0) {
-        output.WriteRawTag(122);
+        output.WriteRawTag(130, 1);
         output.WriteString(HostNickname);
       }
       if (_unknownFields != null) {
@@ -5146,11 +5175,14 @@ namespace Protocol {
       if (PassedTime != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PassedTime);
       }
+      if (StartTime.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(StartTime);
+      }
       if (Roomcode.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Roomcode);
       }
       if (HostNickname.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(HostNickname);
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(HostNickname);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -5202,6 +5234,9 @@ namespace Protocol {
       }
       if (other.PassedTime != 0) {
         PassedTime = other.PassedTime;
+      }
+      if (other.StartTime.Length != 0) {
+        StartTime = other.StartTime;
       }
       if (other.Roomcode.Length != 0) {
         Roomcode = other.Roomcode;
@@ -5277,10 +5312,14 @@ namespace Protocol {
             break;
           }
           case 114: {
-            Roomcode = input.ReadString();
+            StartTime = input.ReadString();
             break;
           }
           case 122: {
+            Roomcode = input.ReadString();
+            break;
+          }
+          case 130: {
             HostNickname = input.ReadString();
             break;
           }
@@ -5352,10 +5391,14 @@ namespace Protocol {
             break;
           }
           case 114: {
-            Roomcode = input.ReadString();
+            StartTime = input.ReadString();
             break;
           }
           case 122: {
+            Roomcode = input.ReadString();
+            break;
+          }
+          case 130: {
             HostNickname = input.ReadString();
             break;
           }
@@ -5811,6 +5854,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_OFFICE_VIDEO_STREAM(S_OFFICE_VIDEO_STREAM other) : this() {
+      clientid_ = other.clientid_;
       url_ = other.url_;
       volume_ = other.volume_;
       time_ = other.time_;
@@ -5826,8 +5870,20 @@ namespace Protocol {
       return new S_OFFICE_VIDEO_STREAM(this);
     }
 
+    /// <summary>Field number for the "clientid" field.</summary>
+    public const int ClientidFieldNumber = 1;
+    private string clientid_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Clientid {
+      get { return clientid_; }
+      set {
+        clientid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "url" field.</summary>
-    public const int UrlFieldNumber = 1;
+    public const int UrlFieldNumber = 2;
     private string url_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5839,7 +5895,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "volume" field.</summary>
-    public const int VolumeFieldNumber = 2;
+    public const int VolumeFieldNumber = 3;
     private float volume_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5851,7 +5907,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "time" field.</summary>
-    public const int TimeFieldNumber = 3;
+    public const int TimeFieldNumber = 4;
     private float time_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5863,7 +5919,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "play" field.</summary>
-    public const int PlayFieldNumber = 4;
+    public const int PlayFieldNumber = 5;
     private bool play_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5875,7 +5931,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "seek" field.</summary>
-    public const int SeekFieldNumber = 5;
+    public const int SeekFieldNumber = 6;
     private bool seek_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5887,7 +5943,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "mediaPlayerState" field.</summary>
-    public const int MediaPlayerStateFieldNumber = 6;
+    public const int MediaPlayerStateFieldNumber = 7;
     private int mediaPlayerState_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5913,6 +5969,7 @@ namespace Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Clientid != other.Clientid) return false;
       if (Url != other.Url) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Volume, other.Volume)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Time, other.Time)) return false;
@@ -5926,6 +5983,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (Clientid.Length != 0) hash ^= Clientid.GetHashCode();
       if (Url.Length != 0) hash ^= Url.GetHashCode();
       if (Volume != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Volume);
       if (Time != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Time);
@@ -5950,28 +6008,32 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Url.Length != 0) {
+      if (Clientid.Length != 0) {
         output.WriteRawTag(10);
+        output.WriteString(Clientid);
+      }
+      if (Url.Length != 0) {
+        output.WriteRawTag(18);
         output.WriteString(Url);
       }
       if (Volume != 0F) {
-        output.WriteRawTag(21);
+        output.WriteRawTag(29);
         output.WriteFloat(Volume);
       }
       if (Time != 0F) {
-        output.WriteRawTag(29);
+        output.WriteRawTag(37);
         output.WriteFloat(Time);
       }
       if (Play != false) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteBool(Play);
       }
       if (Seek != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(48);
         output.WriteBool(Seek);
       }
       if (MediaPlayerState != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(56);
         output.WriteInt32(MediaPlayerState);
       }
       if (_unknownFields != null) {
@@ -5984,28 +6046,32 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Url.Length != 0) {
+      if (Clientid.Length != 0) {
         output.WriteRawTag(10);
+        output.WriteString(Clientid);
+      }
+      if (Url.Length != 0) {
+        output.WriteRawTag(18);
         output.WriteString(Url);
       }
       if (Volume != 0F) {
-        output.WriteRawTag(21);
+        output.WriteRawTag(29);
         output.WriteFloat(Volume);
       }
       if (Time != 0F) {
-        output.WriteRawTag(29);
+        output.WriteRawTag(37);
         output.WriteFloat(Time);
       }
       if (Play != false) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteBool(Play);
       }
       if (Seek != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(48);
         output.WriteBool(Seek);
       }
       if (MediaPlayerState != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(56);
         output.WriteInt32(MediaPlayerState);
       }
       if (_unknownFields != null) {
@@ -6018,6 +6084,9 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (Clientid.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Clientid);
+      }
       if (Url.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Url);
       }
@@ -6047,6 +6116,9 @@ namespace Protocol {
     public void MergeFrom(S_OFFICE_VIDEO_STREAM other) {
       if (other == null) {
         return;
+      }
+      if (other.Clientid.Length != 0) {
+        Clientid = other.Clientid;
       }
       if (other.Url.Length != 0) {
         Url = other.Url;
@@ -6082,26 +6154,30 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
+            Clientid = input.ReadString();
+            break;
+          }
+          case 18: {
             Url = input.ReadString();
             break;
           }
-          case 21: {
+          case 29: {
             Volume = input.ReadFloat();
             break;
           }
-          case 29: {
+          case 37: {
             Time = input.ReadFloat();
             break;
           }
-          case 32: {
+          case 40: {
             Play = input.ReadBool();
             break;
           }
-          case 40: {
+          case 48: {
             Seek = input.ReadBool();
             break;
           }
-          case 48: {
+          case 56: {
             MediaPlayerState = input.ReadInt32();
             break;
           }
@@ -6121,27 +6197,483 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
+            Clientid = input.ReadString();
+            break;
+          }
+          case 18: {
             Url = input.ReadString();
             break;
           }
-          case 21: {
+          case 29: {
             Volume = input.ReadFloat();
             break;
           }
-          case 29: {
+          case 37: {
             Time = input.ReadFloat();
             break;
           }
-          case 32: {
+          case 40: {
             Play = input.ReadBool();
             break;
           }
-          case 40: {
+          case 48: {
             Seek = input.ReadBool();
             break;
           }
-          case 48: {
+          case 56: {
             MediaPlayerState = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class C_OFFICE_SHARE : pb::IMessage<C_OFFICE_SHARE>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<C_OFFICE_SHARE> _parser = new pb::MessageParser<C_OFFICE_SHARE>(() => new C_OFFICE_SHARE());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<C_OFFICE_SHARE> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[25]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_OFFICE_SHARE() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_OFFICE_SHARE(C_OFFICE_SHARE other) : this() {
+      isShared_ = other.isShared_;
+      userId_ = other.userId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_OFFICE_SHARE Clone() {
+      return new C_OFFICE_SHARE(this);
+    }
+
+    /// <summary>Field number for the "isShared" field.</summary>
+    public const int IsSharedFieldNumber = 1;
+    private bool isShared_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsShared {
+      get { return isShared_; }
+      set {
+        isShared_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 2;
+    private int userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as C_OFFICE_SHARE);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(C_OFFICE_SHARE other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (IsShared != other.IsShared) return false;
+      if (UserId != other.UserId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (IsShared != false) hash ^= IsShared.GetHashCode();
+      if (UserId != 0) hash ^= UserId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (IsShared != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsShared);
+      }
+      if (UserId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(UserId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (IsShared != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsShared);
+      }
+      if (UserId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(UserId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (IsShared != false) {
+        size += 1 + 1;
+      }
+      if (UserId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(UserId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(C_OFFICE_SHARE other) {
+      if (other == null) {
+        return;
+      }
+      if (other.IsShared != false) {
+        IsShared = other.IsShared;
+      }
+      if (other.UserId != 0) {
+        UserId = other.UserId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            IsShared = input.ReadBool();
+            break;
+          }
+          case 16: {
+            UserId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            IsShared = input.ReadBool();
+            break;
+          }
+          case 16: {
+            UserId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class S_OFFICE_SHARE : pb::IMessage<S_OFFICE_SHARE>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_OFFICE_SHARE> _parser = new pb::MessageParser<S_OFFICE_SHARE>(() => new S_OFFICE_SHARE());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_OFFICE_SHARE> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[26]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_OFFICE_SHARE() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_OFFICE_SHARE(S_OFFICE_SHARE other) : this() {
+      isShared_ = other.isShared_;
+      userId_ = other.userId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_OFFICE_SHARE Clone() {
+      return new S_OFFICE_SHARE(this);
+    }
+
+    /// <summary>Field number for the "isShared" field.</summary>
+    public const int IsSharedFieldNumber = 1;
+    private bool isShared_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsShared {
+      get { return isShared_; }
+      set {
+        isShared_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 2;
+    private int userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_OFFICE_SHARE);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_OFFICE_SHARE other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (IsShared != other.IsShared) return false;
+      if (UserId != other.UserId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (IsShared != false) hash ^= IsShared.GetHashCode();
+      if (UserId != 0) hash ^= UserId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (IsShared != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsShared);
+      }
+      if (UserId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(UserId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (IsShared != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsShared);
+      }
+      if (UserId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(UserId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (IsShared != false) {
+        size += 1 + 1;
+      }
+      if (UserId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(UserId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_OFFICE_SHARE other) {
+      if (other == null) {
+        return;
+      }
+      if (other.IsShared != false) {
+        IsShared = other.IsShared;
+      }
+      if (other.UserId != 0) {
+        UserId = other.UserId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            IsShared = input.ReadBool();
+            break;
+          }
+          case 16: {
+            UserId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            IsShared = input.ReadBool();
+            break;
+          }
+          case 16: {
+            UserId = input.ReadInt32();
             break;
           }
         }
