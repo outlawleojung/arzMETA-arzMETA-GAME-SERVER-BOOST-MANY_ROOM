@@ -151,7 +151,11 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 			t += 32400;
 			{
+#ifdef linux
+				localtime_r(&t, &bt);
+#elif _WIN32
 				localtime_s(&bt, &t);
+#endif
 				char buffer[50];
 				strftime(buffer, 50, "%Y.%m.%d %p %I:%M", &bt);
 				createdTimeString = string(buffer);
