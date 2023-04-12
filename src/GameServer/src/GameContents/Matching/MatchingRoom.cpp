@@ -296,7 +296,7 @@ void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	clientInfo->set_nickname(pkt.nickname());
 	Broadcast(ClientPacketHandler::MakeSendBuffer(addClient));
 
-	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"] + 1;
+	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"].get<int>() + 1;
 	roomInfo = roomInfoJson.dump();
 
 	if (currentHostId.empty())
@@ -314,7 +314,7 @@ void MatchingRoom::Leave(shared_ptr<ClientBase> client)
 
 	GameRoom::Leave(client);
 
-	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"] - 1;
+	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"].get<int>() - 1;
 	roomInfo = roomInfoJson.dump();
 
 	if (client->clientId == currentHostId)
