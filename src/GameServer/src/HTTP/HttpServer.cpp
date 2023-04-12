@@ -79,6 +79,17 @@ void HttpServer::start(string ip, int port)
 		}
 		else if(body["roomType"] == "MyRoom")
 		{
+			map<string, string> query;
+			query.insert({ "type", "MyRoom" });
+			query.insert({ "ownerId", body["ownerId"]});
+			if (GRoomManager->GetRoom(query).size() > 0)
+			{
+				nlohmann::json resJson;
+				resJson["result"] = "MYROOM_ALREADY_EXISTS";
+				res.set_content(resJson.dump(), "application/json");
+				return;
+			}
+
 			scenes.push_back("MyRoom");
 
 			room = make_shared<MyRoomRoom>(scenes);
