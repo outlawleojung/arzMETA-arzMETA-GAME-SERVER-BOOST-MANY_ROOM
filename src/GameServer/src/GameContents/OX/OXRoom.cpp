@@ -326,7 +326,7 @@ void OXRoom::Leave(shared_ptr<ClientBase> client)
 
 	GameRoom::Leave(client);
 
-	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"] - 1;
+	roomInfoJson["currentPlayerNumber"] = roomInfoJson["currentPlayerNumber"].get<int>() - 1;
 	roomInfo = roomInfoJson.dump();
 
 	if (client->clientId == currentHostId)
