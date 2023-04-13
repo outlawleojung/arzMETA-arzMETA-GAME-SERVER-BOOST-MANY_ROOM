@@ -22,6 +22,9 @@ endif (WIN32)
 
 if (UNIX)
     find_package(Protobuf REQUIRED)
-    include_directories(${Protobuf_INCLUDE_DIRS})
+    target_include_directories(Server PRIVATE ${Protobuf_INCLUDE_DIRS})
     target_link_libraries(Server PRIVATE ${Protobuf_LIBRARIES})
+
+    target_link_directories(Server PRIVATE /usr/lib/x86_64-linux-gnu)
+    target_link_libraries(Server PRIVATE mysqlcppconn)
 endif (UNIX)
