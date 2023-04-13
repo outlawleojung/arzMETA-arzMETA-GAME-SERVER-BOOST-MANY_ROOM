@@ -159,7 +159,7 @@ int main()
 
 			Protocol::C_ENTER enter;
 			enter.set_clientid(client->clientId);
-			enter.set_roomid(0);
+			enter.set_roomid("0");
 			client->Send(PacketManager::MakeSendBuffer(enter));
 
 			continue;

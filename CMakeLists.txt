@@ -12,6 +12,7 @@ foreach(__proto_file ${_all_proto_files})
     if (WIN32)
         execute_process(COMMAND protoc -I=./ProtoFiles --cpp_out=${CMAKE_CURRENT_SOURCE_DIR}/src/Server/src/Protocol ${__current_proto} WORKING_DIRECTORY ${PROTOBUF_DIR}) 
         execute_process(COMMAND protoc -I=./ProtoFiles --cpp_out=${CMAKE_CURRENT_SOURCE_DIR}/src/DummyClient/src/Protocol ${__current_proto} WORKING_DIRECTORY ${PROTOBUF_DIR}) 
+        execute_process(COMMAND protoc -I=./ProtoFiles --csharp_out=${CMAKE_CURRENT_SOURCE_DIR}/src/Client/ ${__current_proto} WORKING_DIRECTORY ${PROTOBUF_DIR}) 
     endif (WIN32)
 endforeach(__proto_file)
 
@@ -23,6 +24,8 @@ if (WIN32)
 
     execute_process(COMMAND Generator.exe --path=./ProtoFiles --output=${CMAKE_CURRENT_SOURCE_DIR}/src/DummyClient/src/PacketManager.h --recv=S_ --send=C_ --template PacketManager.h WORKING_DIRECTORY ${PROTOBUF_DIR})
     execute_process(COMMAND Generator.exe --path=./ProtoFiles --output=${CMAKE_CURRENT_SOURCE_DIR}/src/DummyClient/src/Protocols.h --template Protocols.h WORKING_DIRECTORY ${PROTOBUF_DIR})
+
+    execute_process(COMMAND Generator.exe --path=./ProtoFiles --output=${CMAKE_CURRENT_SOURCE_DIR}/src/Client/PacketManager.cs --recv=C_ --send=S_ --template PacketManager.cs WORKING_DIRECTORY ${PROTOBUF_DIR})
 endif (WIN32)
 
 add_subdirectory (src/CoreLib)
