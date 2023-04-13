@@ -143,10 +143,20 @@ int main()
 			GLogManager->Log("move <client id> - Move game object by 1 in X direction. And send C_SET_TRANSFORM message");
 		}
 
+		if (command == "set")
+		{
+			string ip;
+			cin >> ip;
+
+			ep = ip::tcp::endpoint(ip::address_v4::from_string(ip), tcpPort);
+		}
+
 		if (command == "connect")
 		{
 			string clientId;
 			cin >> clientId;
+			string roomId;
+			cin >> roomId;
 
 			auto client = MakeClient(ioc, ep, clientId);
 			if (client == nullptr)
@@ -159,7 +169,7 @@ int main()
 
 			Protocol::C_ENTER enter;
 			enter.set_clientid(client->clientId);
-			enter.set_roomid("0");
+			enter.set_roomid(roomId);
 			client->Send(PacketManager::MakeSendBuffer(enter));
 
 			continue;
