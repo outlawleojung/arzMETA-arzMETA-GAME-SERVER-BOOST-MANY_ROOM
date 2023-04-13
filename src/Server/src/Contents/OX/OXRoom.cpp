@@ -52,7 +52,7 @@ bool ox::GameData::Init()
 			int answerTypeId = res->getInt(1);
 			string answerType = res->getString(2);
 
-			if (answerType == "0")
+			if (answerType == "O")
 				answerTypes.insert({ answerTypeId, true });
 			else
 				answerTypes.insert({ answerTypeId, false });
