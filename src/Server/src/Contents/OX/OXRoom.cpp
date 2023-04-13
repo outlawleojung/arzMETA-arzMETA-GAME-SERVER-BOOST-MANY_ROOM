@@ -240,15 +240,15 @@ void OXRoom::Init()
 	roomInfo["ip"] = localHostIp;
 	roomInfo["port"] = tcpPort;
 
-	//DoTimer(30000, std::function<void()>(
-	//	[this]() {
-	//		if (this->state != RoomState::Running)
-	//			return;
+	DoTimer(30000, std::function<void()>(
+		[this]() {
+			if (this->state != RoomState::Running)
+				return;
 
-	//		if (this->clients.size() == 0)
-	//			Close();
-	//	}
-	//));
+			if (this->clients.size() == 0)
+				Close();
+		}
+	));
 }
 
 void OXRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&OXRoom::Enter, session, pkt); }
