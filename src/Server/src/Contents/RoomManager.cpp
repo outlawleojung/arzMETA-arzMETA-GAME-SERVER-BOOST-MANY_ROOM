@@ -216,8 +216,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::MyRoom:
     {
-        if (query.find("ownerId") != query.end() && myRoomRooms.find(query["ownerId"]) != myRoomRooms.end())
-            res.push_back(myRoomRooms.find(query["ownerId"])->second->roomInfo);
+        if (query.find("ownerId") != query.end())
+        {
+            auto myroom = myRoomRooms.find(query["ownerId"]);
+            if (myroom != myRoomRooms.end())
+                res.push_back(myroom->second->roomInfo);
+        }
         else
             for (auto myRoomRoom = myRoomRooms.begin(); myRoomRoom != myRoomRooms.end(); myRoomRoom++)
                 res.push_back(myRoomRoom->second->roomInfo);
@@ -225,8 +229,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::Office:
     {
-        if (query.find("roomCode") != query.end() && officeRooms.find(query["roomCode"]) != officeRooms.end())
-            res.push_back(officeRooms.find(query["roomCode"])->second->roomInfo);
+        if (query.find("roomCode") != query.end())
+        {
+            auto officeRoom = officeRooms.find(query["roomCode"]);
+            if (officeRoom != officeRooms.end())
+                res.push_back(officeRoom->second->roomInfo);
+        }
         else
             for (auto officeRoom = officeRooms.begin(); officeRoom != officeRooms.end(); officeRoom++)
                 res.push_back(officeRoom->second->roomInfo);
@@ -234,8 +242,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::Meeting:
     {
-        if (query.find("roomCode") != query.end() && meetingRooms.find(query["roomCode"]) != meetingRooms.end())
-            res.push_back(meetingRooms.find(query["roomCode"])->second->roomInfo);
+        if (query.find("roomCode") != query.end())
+        {
+            auto meetingRoom = meetingRooms.find(query["roomCode"]);
+            if (meetingRoom != meetingRooms.end())
+                res.push_back(meetingRoom->second->roomInfo);
+        }
         else
             for (auto meetingRoom = meetingRooms.begin(); meetingRoom != meetingRooms.end(); meetingRoom++)
                 res.push_back(meetingRoom->second->roomInfo);
@@ -243,8 +255,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::Lecture:
     {
-        if (query.find("roomCode") != query.end() && lectureRooms.find(query["roomCode"]) != lectureRooms.end())
-            res.push_back(lectureRooms.find(query["roomCode"])->second->roomInfo);
+        if (query.find("roomCode") != query.end())
+        {
+            auto lectureRoom = lectureRooms.find(query["roomCode"]);
+            if (lectureRoom != lectureRooms.end())
+                res.push_back(lectureRoom->second->roomInfo);
+        }
         else
             for (auto lectureRoom = lectureRooms.begin(); lectureRoom != lectureRooms.end(); lectureRoom++)
                 res.push_back(lectureRoom->second->roomInfo);
@@ -252,8 +268,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::Counsel:
     {
-        if (query.find("roomCode") != query.end() && counselRooms.find(query["roomCode"]) != counselRooms.end())
-            res.push_back(counselRooms.find(query["roomCode"])->second->roomInfo);
+        if (query.find("roomCode") != query.end())
+        {
+            auto counselRoom = counselRooms.find(query["roomCode"]);
+            if (counselRoom != counselRooms.end())
+                res.push_back(counselRoom->second->roomInfo);
+        }
         else
             for (auto counselRoom = counselRooms.begin(); counselRoom != counselRooms.end(); counselRoom++)
                 res.push_back(counselRoom->second->roomInfo);
@@ -261,8 +281,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::JumpingMatching:
     {
-        if (query.find("roomCode") != query.end() && jumpingMatchingRooms.find(query["roomCode"]) != jumpingMatchingRooms.end())
-            res.push_back(jumpingMatchingRooms.find(query["roomCode"])->second->roomInfo);
+        if (query.find("roomCode") != query.end())
+        {
+            auto jumpingMatchingRoom = jumpingMatchingRooms.find(query["roomCode"]);
+            if (jumpingMatchingRoom != jumpingMatchingRooms.end())
+                res.push_back(jumpingMatchingRoom->second->roomInfo);
+        }
         else
             for (auto matchingRoom = jumpingMatchingRooms.begin(); matchingRoom != jumpingMatchingRooms.end(); matchingRoom++)
                 res.push_back(matchingRoom->second->roomInfo);
@@ -270,8 +294,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::OX:
     {
-        if (query.find("roomCode") != query.end() && oxRooms.find(query["roomCode"]) != oxRooms.end())
-            res.push_back(oxRooms.find(query["roomCode"])->second->roomInfo);
+        if (query.find("roomCode") != query.end())
+        {
+            auto oxRoom = oxRooms.find(query["roomCode"]);
+            if (oxRoom != oxRooms.end())
+                res.push_back(oxRoom->second->roomInfo);
+        }
         else
             for (auto oxRoom = oxRooms.begin(); oxRoom != oxRooms.end(); oxRoom++)
                 res.push_back(oxRoom->second->roomInfo);
