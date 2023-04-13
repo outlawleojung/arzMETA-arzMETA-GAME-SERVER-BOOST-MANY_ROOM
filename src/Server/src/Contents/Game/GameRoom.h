@@ -32,4 +32,6 @@ public :
 	void SetAnimationOnce(int objectId, string animationId, bool isLoop, float blend);
 
 	map<int, shared_ptr<GameObject>> gameObjects;
+
+	int idGenerator = 0;
 };

@@ -107,7 +107,6 @@ void GameRoom::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE
 {
 	if (state != RoomState::Running) return;
 
-	static int idGenerator = 0;
 	auto gameObject = make_shared<GameObject>(idGenerator++);
 	gameObject->prefabName = pkt.prefabname();
 	gameObject->objectData = pkt.objectdata();
