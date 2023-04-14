@@ -71,6 +71,7 @@ void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	if (clients.size() >= maxPlayerNumber)
 	{
 		res.set_result("ROOM_IS_FULL");
+		GLogManager->Log("Send Enter Fail : ", roomId);
 		session->Send(PacketManager::MakeSendBuffer(res));
 		session->Disconnect();
 		return;
@@ -81,6 +82,7 @@ void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	clients.insert({ pkt.clientid(), client });
 
 	res.set_result("SUCCESS");
+	GLogManager->Log("Send Enter Success : ", roomId);
 	session->Send(PacketManager::MakeSendBuffer(res));
 }
 
@@ -110,6 +112,7 @@ void GameRoom::RemoveObject(shared_ptr<GameClient> client)
 	if (removeObject.gameobjects_size() <= 0)
 		return;
 
+	GLogManager->Log("Send Remove Object : ", roomId);
 	Broadcast(PacketManager::MakeSendBuffer(removeObject));
 }
 
@@ -132,6 +135,7 @@ void GameRoom::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE
 		Protocol::S_BASE_INSTANTIATE_OBJECT res;
 		res.set_success(true);
 		res.set_objectid(gameObject->objectId);
+		GLogManager->Log("Send Instantiate Object OK : ", roomId);
 		client->Send(PacketManager::MakeSendBuffer(res));
 	}
 
@@ -139,6 +143,7 @@ void GameRoom::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE
 		Protocol::S_BASE_ADD_OBJECT instantiateObjectNotice;
 		auto gameObjectPacket = instantiateObjectNotice.add_gameobjects();
 		gameObject->MakeGameObjectInfo(gameObjectPacket);
+		GLogManager->Log("Send Add Object : ", roomId);
 		auto sendBuffer = PacketManager::MakeSendBuffer(instantiateObjectNotice);
 		Broadcast(sendBuffer);
 	}
@@ -157,7 +162,10 @@ void GameRoom::GetObjects(shared_ptr<GameClient> client)
 	}
 
 	if (res.gameobjects_size() > 0)
+	{
+		GLogManager->Log("Send Add Object : ", roomId);
 		client->Send(PacketManager::MakeSendBuffer(res));
+	}
 }
 
 void GameRoom::SetTransfrom(Protocol::C_BASE_SET_TRANSFORM pkt)
@@ -176,6 +184,7 @@ void GameRoom::SetTransfrom(Protocol::C_BASE_SET_TRANSFORM pkt)
 	res.set_allocated_position(pkt.release_position());
 	res.set_allocated_rotation(pkt.release_rotation());
 	auto sendBuffer = PacketManager::MakeSendBuffer(res);
+	GLogManager->Log("Send Set Tansform : ", roomId);
 	Broadcast(sendBuffer);
 }
 
@@ -198,6 +207,7 @@ void GameRoom::SetAnimation(int objectId, string animationId, string animationVa
 	res.set_animationid(animationId);
 	res.set_animation(animationValue);
 	auto sendBuffer = PacketManager::MakeSendBuffer(res);
+	GLogManager->Log("Send Set Animation : ", roomId);
 	Broadcast(sendBuffer);
 }
 
@@ -215,6 +225,7 @@ void GameRoom::SetAnimationOnce(int objectId, string animationId, bool isLoop, f
 	res.set_isloop(isLoop);
 	res.set_blend(blend);
 	auto sendBuffer = PacketManager::MakeSendBuffer(res);
+	GLogManager->Log("Send Set Animation Once : ", roomId);
 	Broadcast(sendBuffer);
 }
 
