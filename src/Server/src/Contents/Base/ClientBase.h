@@ -33,6 +33,5 @@ public:
 	shared_ptr<RoomBase> enteredRoom = nullptr;
 	ClientState state;
 
-private:
 	shared_ptr<GameSession> session;
 };

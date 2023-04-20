@@ -151,6 +151,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
+
 		return;
 	}
 
@@ -205,7 +206,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		waitingClient->set_isobserver(pkt.isobserver());
 		waitingClient->set_clientid(pkt.clientid());
 		waitingClient->set_nickname(pkt.nickname());
-		clients.find(currentHostId)->second->Send(PacketManager::MakeSendBuffer(addWaitingClient));
+		clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(addWaitingClient));
 
 		return;	
 	}
@@ -268,7 +269,7 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 		{
 			Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
 			removeWaitingClient.add_clients(client->second.second->clientId);
-			clients.find(currentHostId)->second->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
+			clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
 
 			waitingList.erase(client);
 			return;
@@ -598,7 +599,7 @@ void OfficeRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, boo
 	//대상 클라이언트에게 성공/실패 메시지 전송
 	Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
 	acceptWaitNotice.set_isaccepted(isAccepted);
-	client->second.second->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
+	client->second.second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
 
 	//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
 	if (isAccepted)
