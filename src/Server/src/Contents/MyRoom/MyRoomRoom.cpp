@@ -10,6 +10,10 @@ void MyRoomRoom::Init()
 {
 	state = RoomState::Running;
 	
+	roomInfo["roomId"] = roomId;
+	roomInfo["ip"] = localHostIp;
+	roomInfo["port"] = tcpPort;
+
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
 	this->DoTimer(30000, std::function<void()>(

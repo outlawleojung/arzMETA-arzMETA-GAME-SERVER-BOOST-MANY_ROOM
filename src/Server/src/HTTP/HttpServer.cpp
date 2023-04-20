@@ -15,7 +15,7 @@ void HttpServer::start(string ip, int port)
 		for (auto param = req.params.begin(); param != req.params.end(); param++)
 			query[param->first] = param->second;
 
-        res.set_content(GRoomManager->GetRoom(query).dump(), "text/plain");
+        res.set_content(GRoomManager->GetRoom(query).dump(), "application/json");
         });
 
 	svr.Post("/Rooms", [](const httplib::Request& req, httplib::Response& res) {
@@ -25,7 +25,7 @@ void HttpServer::start(string ip, int port)
 		for (auto param = req.params.begin(); param != req.params.end(); param++)
 			query[param->first] = param->second;
 
-		res.set_content(GRoomManager->GetRoom(query).dump(), "text/plain");
+		res.set_content(GRoomManager->GetRoom(query).dump(), "application/json");
 		});
 
     svr.Post("/MakeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {

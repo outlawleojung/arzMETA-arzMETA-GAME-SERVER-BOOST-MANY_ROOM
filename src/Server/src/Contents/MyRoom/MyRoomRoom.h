@@ -8,5 +8,5 @@ public:
 	virtual void Init() override;
 
 	string ownerId;
-	string roomInfo;
+	string myroomInfo;
 };
