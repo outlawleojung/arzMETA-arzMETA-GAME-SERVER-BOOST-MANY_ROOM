@@ -54,7 +54,6 @@ void RoomBase::Leave(shared_ptr<ClientBase> _client)
 
 	Protocol::S_REMOVE_CLIENT removeClient;
 	removeClient.add_clientids(_client->clientId);
-	GLogManager->Log("Send Remove Client : ", roomId);
 	Broadcast(PacketManager::MakeSendBuffer(removeClient));
 
 	if (clients.size() == 0)
@@ -97,7 +96,6 @@ void RoomBase::GetClient(shared_ptr<ClientBase> _client)
 	if (res.clientinfos_size() > 0)
 	{
 		auto sendBuffer = PacketManager::MakeSendBuffer(res);
-		GLogManager->Log("Send Get Client Client : ", roomId);
 		_client->Send(sendBuffer);
 	}
 }
