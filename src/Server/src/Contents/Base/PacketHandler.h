@@ -26,6 +26,10 @@ public:
 	virtual void Handle_C_MYROOM_GET_ROOMINFO(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_GET_ROOMINFO& pkt) {};
 	virtual void Handle_C_MYROOM_SET_ROOMINFO(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_SET_ROOMINFO& pkt) {};
 	virtual void Handle_C_MYROOM_OTHER_ROOM_LIST(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_OTHER_ROOM_LIST& pkt) {};
+	virtual void Handle_C_MYROOM_START_EDIT(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_START_EDIT& pkt) {};
+	virtual void Handle_C_MYROOM_END_EDIT(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_END_EDIT& pkt) {};
+	virtual void Handle_C_MYROOM_KICK(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_KICK& pkt) {};
+	virtual void Handle_C_MYROOM_SHUTDOWN(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_SHUTDOWN& pkt) {};
 	virtual void Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) {};
 	virtual void Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) {};
 	virtual void Handle_C_OFFICE_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_HOST& pkt) {};

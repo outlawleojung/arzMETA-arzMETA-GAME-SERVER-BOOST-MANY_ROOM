@@ -46,32 +46,64 @@ struct TableStruct_Packet_5f003_5fMyroom_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Packet_5f003_5fMyroom_2eproto;
 namespace Protocol {
+class C_MYROOM_END_EDIT;
+struct C_MYROOM_END_EDITDefaultTypeInternal;
+extern C_MYROOM_END_EDITDefaultTypeInternal _C_MYROOM_END_EDIT_default_instance_;
 class C_MYROOM_GET_ROOMINFO;
 struct C_MYROOM_GET_ROOMINFODefaultTypeInternal;
 extern C_MYROOM_GET_ROOMINFODefaultTypeInternal _C_MYROOM_GET_ROOMINFO_default_instance_;
+class C_MYROOM_KICK;
+struct C_MYROOM_KICKDefaultTypeInternal;
+extern C_MYROOM_KICKDefaultTypeInternal _C_MYROOM_KICK_default_instance_;
 class C_MYROOM_OTHER_ROOM_LIST;
 struct C_MYROOM_OTHER_ROOM_LISTDefaultTypeInternal;
 extern C_MYROOM_OTHER_ROOM_LISTDefaultTypeInternal _C_MYROOM_OTHER_ROOM_LIST_default_instance_;
 class C_MYROOM_SET_ROOMINFO;
 struct C_MYROOM_SET_ROOMINFODefaultTypeInternal;
 extern C_MYROOM_SET_ROOMINFODefaultTypeInternal _C_MYROOM_SET_ROOMINFO_default_instance_;
+class C_MYROOM_SHUTDOWN;
+struct C_MYROOM_SHUTDOWNDefaultTypeInternal;
+extern C_MYROOM_SHUTDOWNDefaultTypeInternal _C_MYROOM_SHUTDOWN_default_instance_;
+class C_MYROOM_START_EDIT;
+struct C_MYROOM_START_EDITDefaultTypeInternal;
+extern C_MYROOM_START_EDITDefaultTypeInternal _C_MYROOM_START_EDIT_default_instance_;
+class S_MYROOM_END_EDIT;
+struct S_MYROOM_END_EDITDefaultTypeInternal;
+extern S_MYROOM_END_EDITDefaultTypeInternal _S_MYROOM_END_EDIT_default_instance_;
 class S_MYROOM_GET_ROOMINFO;
 struct S_MYROOM_GET_ROOMINFODefaultTypeInternal;
 extern S_MYROOM_GET_ROOMINFODefaultTypeInternal _S_MYROOM_GET_ROOMINFO_default_instance_;
+class S_MYROOM_KICK;
+struct S_MYROOM_KICKDefaultTypeInternal;
+extern S_MYROOM_KICKDefaultTypeInternal _S_MYROOM_KICK_default_instance_;
 class S_MYROOM_OTHER_ROOM_LIST;
 struct S_MYROOM_OTHER_ROOM_LISTDefaultTypeInternal;
 extern S_MYROOM_OTHER_ROOM_LISTDefaultTypeInternal _S_MYROOM_OTHER_ROOM_LIST_default_instance_;
 class S_MYROOM_SET_ROOMINFO;
 struct S_MYROOM_SET_ROOMINFODefaultTypeInternal;
 extern S_MYROOM_SET_ROOMINFODefaultTypeInternal _S_MYROOM_SET_ROOMINFO_default_instance_;
+class S_MYROOM_SHUTDOWN;
+struct S_MYROOM_SHUTDOWNDefaultTypeInternal;
+extern S_MYROOM_SHUTDOWNDefaultTypeInternal _S_MYROOM_SHUTDOWN_default_instance_;
+class S_MYROOM_START_EDIT;
+struct S_MYROOM_START_EDITDefaultTypeInternal;
+extern S_MYROOM_START_EDITDefaultTypeInternal _S_MYROOM_START_EDIT_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
+template<> ::Protocol::C_MYROOM_END_EDIT* Arena::CreateMaybeMessage<::Protocol::C_MYROOM_END_EDIT>(Arena*);
 template<> ::Protocol::C_MYROOM_GET_ROOMINFO* Arena::CreateMaybeMessage<::Protocol::C_MYROOM_GET_ROOMINFO>(Arena*);
+template<> ::Protocol::C_MYROOM_KICK* Arena::CreateMaybeMessage<::Protocol::C_MYROOM_KICK>(Arena*);
 template<> ::Protocol::C_MYROOM_OTHER_ROOM_LIST* Arena::CreateMaybeMessage<::Protocol::C_MYROOM_OTHER_ROOM_LIST>(Arena*);
 template<> ::Protocol::C_MYROOM_SET_ROOMINFO* Arena::CreateMaybeMessage<::Protocol::C_MYROOM_SET_ROOMINFO>(Arena*);
+template<> ::Protocol::C_MYROOM_SHUTDOWN* Arena::CreateMaybeMessage<::Protocol::C_MYROOM_SHUTDOWN>(Arena*);
+template<> ::Protocol::C_MYROOM_START_EDIT* Arena::CreateMaybeMessage<::Protocol::C_MYROOM_START_EDIT>(Arena*);
+template<> ::Protocol::S_MYROOM_END_EDIT* Arena::CreateMaybeMessage<::Protocol::S_MYROOM_END_EDIT>(Arena*);
 template<> ::Protocol::S_MYROOM_GET_ROOMINFO* Arena::CreateMaybeMessage<::Protocol::S_MYROOM_GET_ROOMINFO>(Arena*);
+template<> ::Protocol::S_MYROOM_KICK* Arena::CreateMaybeMessage<::Protocol::S_MYROOM_KICK>(Arena*);
 template<> ::Protocol::S_MYROOM_OTHER_ROOM_LIST* Arena::CreateMaybeMessage<::Protocol::S_MYROOM_OTHER_ROOM_LIST>(Arena*);
 template<> ::Protocol::S_MYROOM_SET_ROOMINFO* Arena::CreateMaybeMessage<::Protocol::S_MYROOM_SET_ROOMINFO>(Arena*);
+template<> ::Protocol::S_MYROOM_SHUTDOWN* Arena::CreateMaybeMessage<::Protocol::S_MYROOM_SHUTDOWN>(Arena*);
+template<> ::Protocol::S_MYROOM_START_EDIT* Arena::CreateMaybeMessage<::Protocol::S_MYROOM_START_EDIT>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
@@ -953,6 +985,1135 @@ class S_MYROOM_OTHER_ROOM_LIST final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
 };
+// -------------------------------------------------------------------
+
+class C_MYROOM_START_EDIT final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.C_MYROOM_START_EDIT) */ {
+ public:
+  inline C_MYROOM_START_EDIT() : C_MYROOM_START_EDIT(nullptr) {}
+  explicit PROTOBUF_CONSTEXPR C_MYROOM_START_EDIT(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_MYROOM_START_EDIT(const C_MYROOM_START_EDIT& from);
+  C_MYROOM_START_EDIT(C_MYROOM_START_EDIT&& from) noexcept
+    : C_MYROOM_START_EDIT() {
+    *this = ::std::move(from);
+  }
+
+  inline C_MYROOM_START_EDIT& operator=(const C_MYROOM_START_EDIT& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_MYROOM_START_EDIT& operator=(C_MYROOM_START_EDIT&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_MYROOM_START_EDIT& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_MYROOM_START_EDIT* internal_default_instance() {
+    return reinterpret_cast<const C_MYROOM_START_EDIT*>(
+               &_C_MYROOM_START_EDIT_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(C_MYROOM_START_EDIT& a, C_MYROOM_START_EDIT& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_MYROOM_START_EDIT* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_MYROOM_START_EDIT* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_MYROOM_START_EDIT* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_MYROOM_START_EDIT>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const C_MYROOM_START_EDIT& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const C_MYROOM_START_EDIT& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+  public:
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_MYROOM_START_EDIT";
+  }
+  protected:
+  explicit C_MYROOM_START_EDIT(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_MYROOM_START_EDIT)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+  };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_MYROOM_START_EDIT final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.S_MYROOM_START_EDIT) */ {
+ public:
+  inline S_MYROOM_START_EDIT() : S_MYROOM_START_EDIT(nullptr) {}
+  explicit PROTOBUF_CONSTEXPR S_MYROOM_START_EDIT(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_MYROOM_START_EDIT(const S_MYROOM_START_EDIT& from);
+  S_MYROOM_START_EDIT(S_MYROOM_START_EDIT&& from) noexcept
+    : S_MYROOM_START_EDIT() {
+    *this = ::std::move(from);
+  }
+
+  inline S_MYROOM_START_EDIT& operator=(const S_MYROOM_START_EDIT& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_MYROOM_START_EDIT& operator=(S_MYROOM_START_EDIT&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_MYROOM_START_EDIT& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_MYROOM_START_EDIT* internal_default_instance() {
+    return reinterpret_cast<const S_MYROOM_START_EDIT*>(
+               &_S_MYROOM_START_EDIT_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(S_MYROOM_START_EDIT& a, S_MYROOM_START_EDIT& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_MYROOM_START_EDIT* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_MYROOM_START_EDIT* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_MYROOM_START_EDIT* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_MYROOM_START_EDIT>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const S_MYROOM_START_EDIT& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const S_MYROOM_START_EDIT& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+  public:
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_MYROOM_START_EDIT";
+  }
+  protected:
+  explicit S_MYROOM_START_EDIT(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_MYROOM_START_EDIT)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+  };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_MYROOM_END_EDIT final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_MYROOM_END_EDIT) */ {
+ public:
+  inline C_MYROOM_END_EDIT() : C_MYROOM_END_EDIT(nullptr) {}
+  ~C_MYROOM_END_EDIT() override;
+  explicit PROTOBUF_CONSTEXPR C_MYROOM_END_EDIT(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_MYROOM_END_EDIT(const C_MYROOM_END_EDIT& from);
+  C_MYROOM_END_EDIT(C_MYROOM_END_EDIT&& from) noexcept
+    : C_MYROOM_END_EDIT() {
+    *this = ::std::move(from);
+  }
+
+  inline C_MYROOM_END_EDIT& operator=(const C_MYROOM_END_EDIT& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_MYROOM_END_EDIT& operator=(C_MYROOM_END_EDIT&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_MYROOM_END_EDIT& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_MYROOM_END_EDIT* internal_default_instance() {
+    return reinterpret_cast<const C_MYROOM_END_EDIT*>(
+               &_C_MYROOM_END_EDIT_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(C_MYROOM_END_EDIT& a, C_MYROOM_END_EDIT& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_MYROOM_END_EDIT* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_MYROOM_END_EDIT* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_MYROOM_END_EDIT* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_MYROOM_END_EDIT>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C_MYROOM_END_EDIT& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const C_MYROOM_END_EDIT& from) {
+    C_MYROOM_END_EDIT::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C_MYROOM_END_EDIT* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_MYROOM_END_EDIT";
+  }
+  protected:
+  explicit C_MYROOM_END_EDIT(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIsChangedFieldNumber = 1,
+  };
+  // bool isChanged = 1;
+  void clear_ischanged();
+  bool ischanged() const;
+  void set_ischanged(bool value);
+  private:
+  bool _internal_ischanged() const;
+  void _internal_set_ischanged(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_MYROOM_END_EDIT)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool ischanged_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_MYROOM_END_EDIT final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_MYROOM_END_EDIT) */ {
+ public:
+  inline S_MYROOM_END_EDIT() : S_MYROOM_END_EDIT(nullptr) {}
+  ~S_MYROOM_END_EDIT() override;
+  explicit PROTOBUF_CONSTEXPR S_MYROOM_END_EDIT(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_MYROOM_END_EDIT(const S_MYROOM_END_EDIT& from);
+  S_MYROOM_END_EDIT(S_MYROOM_END_EDIT&& from) noexcept
+    : S_MYROOM_END_EDIT() {
+    *this = ::std::move(from);
+  }
+
+  inline S_MYROOM_END_EDIT& operator=(const S_MYROOM_END_EDIT& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_MYROOM_END_EDIT& operator=(S_MYROOM_END_EDIT&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_MYROOM_END_EDIT& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_MYROOM_END_EDIT* internal_default_instance() {
+    return reinterpret_cast<const S_MYROOM_END_EDIT*>(
+               &_S_MYROOM_END_EDIT_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(S_MYROOM_END_EDIT& a, S_MYROOM_END_EDIT& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_MYROOM_END_EDIT* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_MYROOM_END_EDIT* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_MYROOM_END_EDIT* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_MYROOM_END_EDIT>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_MYROOM_END_EDIT& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_MYROOM_END_EDIT& from) {
+    S_MYROOM_END_EDIT::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_MYROOM_END_EDIT* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_MYROOM_END_EDIT";
+  }
+  protected:
+  explicit S_MYROOM_END_EDIT(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIsChangedFieldNumber = 1,
+  };
+  // bool isChanged = 1;
+  void clear_ischanged();
+  bool ischanged() const;
+  void set_ischanged(bool value);
+  private:
+  bool _internal_ischanged() const;
+  void _internal_set_ischanged(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_MYROOM_END_EDIT)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool ischanged_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_MYROOM_KICK final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_MYROOM_KICK) */ {
+ public:
+  inline C_MYROOM_KICK() : C_MYROOM_KICK(nullptr) {}
+  ~C_MYROOM_KICK() override;
+  explicit PROTOBUF_CONSTEXPR C_MYROOM_KICK(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_MYROOM_KICK(const C_MYROOM_KICK& from);
+  C_MYROOM_KICK(C_MYROOM_KICK&& from) noexcept
+    : C_MYROOM_KICK() {
+    *this = ::std::move(from);
+  }
+
+  inline C_MYROOM_KICK& operator=(const C_MYROOM_KICK& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_MYROOM_KICK& operator=(C_MYROOM_KICK&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_MYROOM_KICK& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_MYROOM_KICK* internal_default_instance() {
+    return reinterpret_cast<const C_MYROOM_KICK*>(
+               &_C_MYROOM_KICK_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(C_MYROOM_KICK& a, C_MYROOM_KICK& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_MYROOM_KICK* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_MYROOM_KICK* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_MYROOM_KICK* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_MYROOM_KICK>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C_MYROOM_KICK& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const C_MYROOM_KICK& from) {
+    C_MYROOM_KICK::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C_MYROOM_KICK* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_MYROOM_KICK";
+  }
+  protected:
+  explicit C_MYROOM_KICK(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSessionIdFieldNumber = 1,
+  };
+  // string sessionId = 1;
+  void clear_sessionid();
+  const std::string& sessionid() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_sessionid(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_sessionid();
+  PROTOBUF_NODISCARD std::string* release_sessionid();
+  void set_allocated_sessionid(std::string* sessionid);
+  private:
+  const std::string& _internal_sessionid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_sessionid(const std::string& value);
+  std::string* _internal_mutable_sessionid();
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_MYROOM_KICK)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sessionid_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_MYROOM_KICK final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_MYROOM_KICK) */ {
+ public:
+  inline S_MYROOM_KICK() : S_MYROOM_KICK(nullptr) {}
+  ~S_MYROOM_KICK() override;
+  explicit PROTOBUF_CONSTEXPR S_MYROOM_KICK(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_MYROOM_KICK(const S_MYROOM_KICK& from);
+  S_MYROOM_KICK(S_MYROOM_KICK&& from) noexcept
+    : S_MYROOM_KICK() {
+    *this = ::std::move(from);
+  }
+
+  inline S_MYROOM_KICK& operator=(const S_MYROOM_KICK& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_MYROOM_KICK& operator=(S_MYROOM_KICK&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_MYROOM_KICK& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_MYROOM_KICK* internal_default_instance() {
+    return reinterpret_cast<const S_MYROOM_KICK*>(
+               &_S_MYROOM_KICK_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(S_MYROOM_KICK& a, S_MYROOM_KICK& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_MYROOM_KICK* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_MYROOM_KICK* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_MYROOM_KICK* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_MYROOM_KICK>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_MYROOM_KICK& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_MYROOM_KICK& from) {
+    S_MYROOM_KICK::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_MYROOM_KICK* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_MYROOM_KICK";
+  }
+  protected:
+  explicit S_MYROOM_KICK(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSuccessFieldNumber = 1,
+  };
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_MYROOM_KICK)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_MYROOM_SHUTDOWN final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_MYROOM_SHUTDOWN) */ {
+ public:
+  inline C_MYROOM_SHUTDOWN() : C_MYROOM_SHUTDOWN(nullptr) {}
+  ~C_MYROOM_SHUTDOWN() override;
+  explicit PROTOBUF_CONSTEXPR C_MYROOM_SHUTDOWN(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_MYROOM_SHUTDOWN(const C_MYROOM_SHUTDOWN& from);
+  C_MYROOM_SHUTDOWN(C_MYROOM_SHUTDOWN&& from) noexcept
+    : C_MYROOM_SHUTDOWN() {
+    *this = ::std::move(from);
+  }
+
+  inline C_MYROOM_SHUTDOWN& operator=(const C_MYROOM_SHUTDOWN& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_MYROOM_SHUTDOWN& operator=(C_MYROOM_SHUTDOWN&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_MYROOM_SHUTDOWN& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_MYROOM_SHUTDOWN* internal_default_instance() {
+    return reinterpret_cast<const C_MYROOM_SHUTDOWN*>(
+               &_C_MYROOM_SHUTDOWN_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(C_MYROOM_SHUTDOWN& a, C_MYROOM_SHUTDOWN& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_MYROOM_SHUTDOWN* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_MYROOM_SHUTDOWN* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_MYROOM_SHUTDOWN* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_MYROOM_SHUTDOWN>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C_MYROOM_SHUTDOWN& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const C_MYROOM_SHUTDOWN& from) {
+    C_MYROOM_SHUTDOWN::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C_MYROOM_SHUTDOWN* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_MYROOM_SHUTDOWN";
+  }
+  protected:
+  explicit C_MYROOM_SHUTDOWN(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIsShutdownFieldNumber = 1,
+  };
+  // bool isShutdown = 1;
+  void clear_isshutdown();
+  bool isshutdown() const;
+  void set_isshutdown(bool value);
+  private:
+  bool _internal_isshutdown() const;
+  void _internal_set_isshutdown(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_MYROOM_SHUTDOWN)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool isshutdown_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_MYROOM_SHUTDOWN final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_MYROOM_SHUTDOWN) */ {
+ public:
+  inline S_MYROOM_SHUTDOWN() : S_MYROOM_SHUTDOWN(nullptr) {}
+  ~S_MYROOM_SHUTDOWN() override;
+  explicit PROTOBUF_CONSTEXPR S_MYROOM_SHUTDOWN(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_MYROOM_SHUTDOWN(const S_MYROOM_SHUTDOWN& from);
+  S_MYROOM_SHUTDOWN(S_MYROOM_SHUTDOWN&& from) noexcept
+    : S_MYROOM_SHUTDOWN() {
+    *this = ::std::move(from);
+  }
+
+  inline S_MYROOM_SHUTDOWN& operator=(const S_MYROOM_SHUTDOWN& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_MYROOM_SHUTDOWN& operator=(S_MYROOM_SHUTDOWN&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_MYROOM_SHUTDOWN& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_MYROOM_SHUTDOWN* internal_default_instance() {
+    return reinterpret_cast<const S_MYROOM_SHUTDOWN*>(
+               &_S_MYROOM_SHUTDOWN_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  friend void swap(S_MYROOM_SHUTDOWN& a, S_MYROOM_SHUTDOWN& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_MYROOM_SHUTDOWN* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_MYROOM_SHUTDOWN* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_MYROOM_SHUTDOWN* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_MYROOM_SHUTDOWN>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_MYROOM_SHUTDOWN& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_MYROOM_SHUTDOWN& from) {
+    S_MYROOM_SHUTDOWN::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_MYROOM_SHUTDOWN* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_MYROOM_SHUTDOWN";
+  }
+  protected:
+  explicit S_MYROOM_SHUTDOWN(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIsShutdownFieldNumber = 1,
+  };
+  // bool isShutdown = 1;
+  void clear_isshutdown();
+  bool isshutdown() const;
+  void set_isshutdown(bool value);
+  private:
+  bool _internal_isshutdown() const;
+  void _internal_set_isshutdown(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_MYROOM_SHUTDOWN)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool isshutdown_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f003_5fMyroom_2eproto;
+};
 // ===================================================================
 
 
@@ -1204,9 +2365,207 @@ inline void S_MYROOM_OTHER_ROOM_LIST::set_allocated_roominfo(std::string* roomin
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_OTHER_ROOM_LIST.roomInfo)
 }
 
+// -------------------------------------------------------------------
+
+// C_MYROOM_START_EDIT
+
+// -------------------------------------------------------------------
+
+// S_MYROOM_START_EDIT
+
+// -------------------------------------------------------------------
+
+// C_MYROOM_END_EDIT
+
+// bool isChanged = 1;
+inline void C_MYROOM_END_EDIT::clear_ischanged() {
+  _impl_.ischanged_ = false;
+}
+inline bool C_MYROOM_END_EDIT::_internal_ischanged() const {
+  return _impl_.ischanged_;
+}
+inline bool C_MYROOM_END_EDIT::ischanged() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_MYROOM_END_EDIT.isChanged)
+  return _internal_ischanged();
+}
+inline void C_MYROOM_END_EDIT::_internal_set_ischanged(bool value) {
+  
+  _impl_.ischanged_ = value;
+}
+inline void C_MYROOM_END_EDIT::set_ischanged(bool value) {
+  _internal_set_ischanged(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_MYROOM_END_EDIT.isChanged)
+}
+
+// -------------------------------------------------------------------
+
+// S_MYROOM_END_EDIT
+
+// bool isChanged = 1;
+inline void S_MYROOM_END_EDIT::clear_ischanged() {
+  _impl_.ischanged_ = false;
+}
+inline bool S_MYROOM_END_EDIT::_internal_ischanged() const {
+  return _impl_.ischanged_;
+}
+inline bool S_MYROOM_END_EDIT::ischanged() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_END_EDIT.isChanged)
+  return _internal_ischanged();
+}
+inline void S_MYROOM_END_EDIT::_internal_set_ischanged(bool value) {
+  
+  _impl_.ischanged_ = value;
+}
+inline void S_MYROOM_END_EDIT::set_ischanged(bool value) {
+  _internal_set_ischanged(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_END_EDIT.isChanged)
+}
+
+// -------------------------------------------------------------------
+
+// C_MYROOM_KICK
+
+// string sessionId = 1;
+inline void C_MYROOM_KICK::clear_sessionid() {
+  _impl_.sessionid_.ClearToEmpty();
+}
+inline const std::string& C_MYROOM_KICK::sessionid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_MYROOM_KICK.sessionId)
+  return _internal_sessionid();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_MYROOM_KICK::set_sessionid(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.sessionid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_MYROOM_KICK.sessionId)
+}
+inline std::string* C_MYROOM_KICK::mutable_sessionid() {
+  std::string* _s = _internal_mutable_sessionid();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_MYROOM_KICK.sessionId)
+  return _s;
+}
+inline const std::string& C_MYROOM_KICK::_internal_sessionid() const {
+  return _impl_.sessionid_.Get();
+}
+inline void C_MYROOM_KICK::_internal_set_sessionid(const std::string& value) {
+  
+  _impl_.sessionid_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_MYROOM_KICK::_internal_mutable_sessionid() {
+  
+  return _impl_.sessionid_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_MYROOM_KICK::release_sessionid() {
+  // @@protoc_insertion_point(field_release:Protocol.C_MYROOM_KICK.sessionId)
+  return _impl_.sessionid_.Release();
+}
+inline void C_MYROOM_KICK::set_allocated_sessionid(std::string* sessionid) {
+  if (sessionid != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.sessionid_.SetAllocated(sessionid, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.sessionid_.IsDefault()) {
+    _impl_.sessionid_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_MYROOM_KICK.sessionId)
+}
+
+// -------------------------------------------------------------------
+
+// S_MYROOM_KICK
+
+// bool success = 1;
+inline void S_MYROOM_KICK::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool S_MYROOM_KICK::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool S_MYROOM_KICK::success() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_KICK.success)
+  return _internal_success();
+}
+inline void S_MYROOM_KICK::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void S_MYROOM_KICK::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_KICK.success)
+}
+
+// -------------------------------------------------------------------
+
+// C_MYROOM_SHUTDOWN
+
+// bool isShutdown = 1;
+inline void C_MYROOM_SHUTDOWN::clear_isshutdown() {
+  _impl_.isshutdown_ = false;
+}
+inline bool C_MYROOM_SHUTDOWN::_internal_isshutdown() const {
+  return _impl_.isshutdown_;
+}
+inline bool C_MYROOM_SHUTDOWN::isshutdown() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_MYROOM_SHUTDOWN.isShutdown)
+  return _internal_isshutdown();
+}
+inline void C_MYROOM_SHUTDOWN::_internal_set_isshutdown(bool value) {
+  
+  _impl_.isshutdown_ = value;
+}
+inline void C_MYROOM_SHUTDOWN::set_isshutdown(bool value) {
+  _internal_set_isshutdown(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_MYROOM_SHUTDOWN.isShutdown)
+}
+
+// -------------------------------------------------------------------
+
+// S_MYROOM_SHUTDOWN
+
+// bool isShutdown = 1;
+inline void S_MYROOM_SHUTDOWN::clear_isshutdown() {
+  _impl_.isshutdown_ = false;
+}
+inline bool S_MYROOM_SHUTDOWN::_internal_isshutdown() const {
+  return _impl_.isshutdown_;
+}
+inline bool S_MYROOM_SHUTDOWN::isshutdown() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_SHUTDOWN.isShutdown)
+  return _internal_isshutdown();
+}
+inline void S_MYROOM_SHUTDOWN::_internal_set_isshutdown(bool value) {
+  
+  _impl_.isshutdown_ = value;
+}
+inline void S_MYROOM_SHUTDOWN::set_isshutdown(bool value) {
+  _internal_set_isshutdown(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_SHUTDOWN.isShutdown)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

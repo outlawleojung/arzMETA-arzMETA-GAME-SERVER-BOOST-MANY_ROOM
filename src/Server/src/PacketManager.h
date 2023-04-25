@@ -50,6 +50,14 @@ enum : unsigned short
 	PKT_S_MYROOM_SET_ROOMINFO = 303,
 	PKT_C_MYROOM_OTHER_ROOM_LIST = 304,
 	PKT_S_MYROOM_OTHER_ROOM_LIST = 305,
+	PKT_C_MYROOM_START_EDIT = 306,
+	PKT_S_MYROOM_START_EDIT = 307,
+	PKT_C_MYROOM_END_EDIT = 308,
+	PKT_S_MYROOM_END_EDIT = 309,
+	PKT_C_MYROOM_KICK = 310,
+	PKT_S_MYROOM_KICK = 311,
+	PKT_C_MYROOM_SHUTDOWN = 312,
+	PKT_S_MYROOM_SHUTDOWN = 313,
 	PKT_C_OFFICE_GET_WAITING_LIST = 400,
 	PKT_S_OFFICE_ADD_WAITING_CLIENT = 401,
 	PKT_S_OFFICE_REMOVE_WAITING_CLIENT = 402,
@@ -118,6 +126,10 @@ bool Handle_C_INTERACTION_REMOVE_ITEM(shared_ptr<GameSession>& session, Protocol
 bool Handle_C_MYROOM_GET_ROOMINFO(shared_ptr<GameSession>& session, Protocol::C_MYROOM_GET_ROOMINFO& pkt);
 bool Handle_C_MYROOM_SET_ROOMINFO(shared_ptr<GameSession>& session, Protocol::C_MYROOM_SET_ROOMINFO& pkt);
 bool Handle_C_MYROOM_OTHER_ROOM_LIST(shared_ptr<GameSession>& session, Protocol::C_MYROOM_OTHER_ROOM_LIST& pkt);
+bool Handle_C_MYROOM_START_EDIT(shared_ptr<GameSession>& session, Protocol::C_MYROOM_START_EDIT& pkt);
+bool Handle_C_MYROOM_END_EDIT(shared_ptr<GameSession>& session, Protocol::C_MYROOM_END_EDIT& pkt);
+bool Handle_C_MYROOM_KICK(shared_ptr<GameSession>& session, Protocol::C_MYROOM_KICK& pkt);
+bool Handle_C_MYROOM_SHUTDOWN(shared_ptr<GameSession>& session, Protocol::C_MYROOM_SHUTDOWN& pkt);
 bool Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_WAITING_LIST& pkt);
 bool Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<GameSession>& session, Protocol::C_OFFICE_ACCEPT_WAIT& pkt);
 bool Handle_C_OFFICE_GET_HOST(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_HOST& pkt);
@@ -160,6 +172,10 @@ public:
 		GPacketHandler[PKT_C_MYROOM_GET_ROOMINFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_MYROOM_GET_ROOMINFO > (Handle_C_MYROOM_GET_ROOMINFO, session, buffer, len); };
 		GPacketHandler[PKT_C_MYROOM_SET_ROOMINFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_MYROOM_SET_ROOMINFO > (Handle_C_MYROOM_SET_ROOMINFO, session, buffer, len); };
 		GPacketHandler[PKT_C_MYROOM_OTHER_ROOM_LIST] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_MYROOM_OTHER_ROOM_LIST > (Handle_C_MYROOM_OTHER_ROOM_LIST, session, buffer, len); };
+		GPacketHandler[PKT_C_MYROOM_START_EDIT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_MYROOM_START_EDIT > (Handle_C_MYROOM_START_EDIT, session, buffer, len); };
+		GPacketHandler[PKT_C_MYROOM_END_EDIT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_MYROOM_END_EDIT > (Handle_C_MYROOM_END_EDIT, session, buffer, len); };
+		GPacketHandler[PKT_C_MYROOM_KICK] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_MYROOM_KICK > (Handle_C_MYROOM_KICK, session, buffer, len); };
+		GPacketHandler[PKT_C_MYROOM_SHUTDOWN] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_MYROOM_SHUTDOWN > (Handle_C_MYROOM_SHUTDOWN, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_GET_WAITING_LIST] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_GET_WAITING_LIST > (Handle_C_OFFICE_GET_WAITING_LIST, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_ACCEPT_WAIT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_ACCEPT_WAIT > (Handle_C_OFFICE_ACCEPT_WAIT, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_GET_HOST] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_GET_HOST > (Handle_C_OFFICE_GET_HOST, session, buffer, len); };
@@ -207,6 +223,10 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MYROOM_GET_ROOMINFO& pkt) { return MakeSendBuffer(pkt, PKT_S_MYROOM_GET_ROOMINFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MYROOM_SET_ROOMINFO& pkt) { return MakeSendBuffer(pkt, PKT_S_MYROOM_SET_ROOMINFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MYROOM_OTHER_ROOM_LIST& pkt) { return MakeSendBuffer(pkt, PKT_S_MYROOM_OTHER_ROOM_LIST); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MYROOM_START_EDIT& pkt) { return MakeSendBuffer(pkt, PKT_S_MYROOM_START_EDIT); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MYROOM_END_EDIT& pkt) { return MakeSendBuffer(pkt, PKT_S_MYROOM_END_EDIT); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MYROOM_KICK& pkt) { return MakeSendBuffer(pkt, PKT_S_MYROOM_KICK); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MYROOM_SHUTDOWN& pkt) { return MakeSendBuffer(pkt, PKT_S_MYROOM_SHUTDOWN); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_ADD_WAITING_CLIENT& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_ADD_WAITING_CLIENT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_REMOVE_WAITING_CLIENT& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_REMOVE_WAITING_CLIENT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_ACCEPT_WAIT& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_ACCEPT_WAIT); }

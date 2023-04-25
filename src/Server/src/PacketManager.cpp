@@ -176,6 +176,42 @@ bool Handle_C_MYROOM_OTHER_ROOM_LIST(shared_ptr<GameSession>& session, Protocol:
 
 	return true;
 }
+bool Handle_C_MYROOM_START_EDIT(shared_ptr<GameSession>& session, Protocol::C_MYROOM_START_EDIT& pkt)
+{
+	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_MYROOM_START_EDIT(session->owner, pkt);
+
+	return true;
+}
+bool Handle_C_MYROOM_END_EDIT(shared_ptr<GameSession>& session, Protocol::C_MYROOM_END_EDIT& pkt)
+{
+	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_MYROOM_END_EDIT(session->owner, pkt);
+
+	return true;
+}
+bool Handle_C_MYROOM_KICK(shared_ptr<GameSession>& session, Protocol::C_MYROOM_KICK& pkt)
+{
+	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_MYROOM_KICK(session->owner, pkt);
+
+	return true;
+}
+bool Handle_C_MYROOM_SHUTDOWN(shared_ptr<GameSession>& session, Protocol::C_MYROOM_SHUTDOWN& pkt)
+{
+	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_MYROOM_SHUTDOWN(session->owner, pkt);
+
+	return true;
+}
 bool Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_WAITING_LIST& pkt)
 {
 	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)

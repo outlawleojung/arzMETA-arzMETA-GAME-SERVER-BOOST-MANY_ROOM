@@ -70,6 +70,14 @@ public class PacketManager
 	    PKT_S_MYROOM_SET_ROOMINFO = 303,
 	    PKT_C_MYROOM_OTHER_ROOM_LIST = 304,
 	    PKT_S_MYROOM_OTHER_ROOM_LIST = 305,
+	    PKT_C_MYROOM_START_EDIT = 306,
+	    PKT_S_MYROOM_START_EDIT = 307,
+	    PKT_C_MYROOM_END_EDIT = 308,
+	    PKT_S_MYROOM_END_EDIT = 309,
+	    PKT_C_MYROOM_KICK = 310,
+	    PKT_S_MYROOM_KICK = 311,
+	    PKT_C_MYROOM_SHUTDOWN = 312,
+	    PKT_S_MYROOM_SHUTDOWN = 313,
 	    PKT_C_OFFICE_GET_WAITING_LIST = 400,
 	    PKT_S_OFFICE_ADD_WAITING_CLIENT = 401,
 	    PKT_S_OFFICE_REMOVE_WAITING_CLIENT = 402,
@@ -168,6 +176,14 @@ public class PacketManager
 		_handler.Add((ushort)MsgId.PKT_S_MYROOM_SET_ROOMINFO, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_MYROOM_OTHER_ROOM_LIST, MakePacket<S_MYROOM_OTHER_ROOM_LIST>);
 		_handler.Add((ushort)MsgId.PKT_S_MYROOM_OTHER_ROOM_LIST, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MYROOM_START_EDIT, MakePacket<S_MYROOM_START_EDIT>);
+		_handler.Add((ushort)MsgId.PKT_S_MYROOM_START_EDIT, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MYROOM_END_EDIT, MakePacket<S_MYROOM_END_EDIT>);
+		_handler.Add((ushort)MsgId.PKT_S_MYROOM_END_EDIT, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MYROOM_KICK, MakePacket<S_MYROOM_KICK>);
+		_handler.Add((ushort)MsgId.PKT_S_MYROOM_KICK, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MYROOM_SHUTDOWN, MakePacket<S_MYROOM_SHUTDOWN>);
+		_handler.Add((ushort)MsgId.PKT_S_MYROOM_SHUTDOWN, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_ADD_WAITING_CLIENT, MakePacket<S_OFFICE_ADD_WAITING_CLIENT>);
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_ADD_WAITING_CLIENT, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_REMOVE_WAITING_CLIENT, MakePacket<S_OFFICE_REMOVE_WAITING_CLIENT>);

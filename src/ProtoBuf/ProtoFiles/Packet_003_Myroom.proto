@@ -29,3 +29,41 @@ message S_MYROOM_OTHER_ROOM_LIST
 {
 	string roomInfo = 1;
 }
+
+message C_MYROOM_START_EDIT
+{
+}
+
+message S_MYROOM_START_EDIT
+{
+}
+
+message C_MYROOM_END_EDIT
+{
+	bool isChanged = 1;
+}
+
+message S_MYROOM_END_EDIT
+{
+	bool isChanged = 1;
+}
+
+message C_MYROOM_KICK
+{
+	string sessionId = 1;
+}
+
+message S_MYROOM_KICK
+{
+	bool success = 1;
+}
+
+message C_MYROOM_SHUTDOWN
+{
+	bool isShutdown = 1;
+}
+
+message S_MYROOM_SHUTDOWN
+{
+	bool isShutdown = 1;
+}
