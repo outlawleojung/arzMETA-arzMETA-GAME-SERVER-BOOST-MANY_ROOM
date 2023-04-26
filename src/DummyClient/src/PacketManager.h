@@ -21,7 +21,9 @@ enum : unsigned short
 	PKT_C_SET_NICKNAME = 8,
 	PKT_S_SET_NICKNAME = 9,
 	PKT_S_SET_NICKNAME_NOTICE = 10,
-	PKT_S_DISCONNECT = 11,
+	PKT_C_CHAT = 11,
+	PKT_S_CHAT = 12,
+	PKT_S_DISCONNECT = 13,
 	PKT_C_BASE_INSTANTIATE_OBJECT = 100,
 	PKT_S_BASE_INSTANTIATE_OBJECT = 101,
 	PKT_C_BASE_GET_OBJECT = 102,
@@ -115,6 +117,7 @@ bool Handle_S_ADD_CLIENT(shared_ptr<GameSession>& session, Protocol::S_ADD_CLIEN
 bool Handle_S_REMOVE_CLIENT(shared_ptr<GameSession>& session, Protocol::S_REMOVE_CLIENT& pkt);
 bool Handle_S_SET_NICKNAME(shared_ptr<GameSession>& session, Protocol::S_SET_NICKNAME& pkt);
 bool Handle_S_SET_NICKNAME_NOTICE(shared_ptr<GameSession>& session, Protocol::S_SET_NICKNAME_NOTICE& pkt);
+bool Handle_S_CHAT(shared_ptr<GameSession>& session, Protocol::S_CHAT& pkt);
 bool Handle_S_DISCONNECT(shared_ptr<GameSession>& session, Protocol::S_DISCONNECT& pkt);
 bool Handle_S_BASE_INSTANTIATE_OBJECT(shared_ptr<GameSession>& session, Protocol::S_BASE_INSTANTIATE_OBJECT& pkt);
 bool Handle_S_BASE_ADD_OBJECT(shared_ptr<GameSession>& session, Protocol::S_BASE_ADD_OBJECT& pkt);
@@ -181,6 +184,7 @@ public:
 		GPacketHandler[PKT_S_REMOVE_CLIENT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_REMOVE_CLIENT > (Handle_S_REMOVE_CLIENT, session, buffer, len); };
 		GPacketHandler[PKT_S_SET_NICKNAME] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_SET_NICKNAME > (Handle_S_SET_NICKNAME, session, buffer, len); };
 		GPacketHandler[PKT_S_SET_NICKNAME_NOTICE] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_SET_NICKNAME_NOTICE > (Handle_S_SET_NICKNAME_NOTICE, session, buffer, len); };
+		GPacketHandler[PKT_S_CHAT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_CHAT > (Handle_S_CHAT, session, buffer, len); };
 		GPacketHandler[PKT_S_DISCONNECT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_DISCONNECT > (Handle_S_DISCONNECT, session, buffer, len); };
 		GPacketHandler[PKT_S_BASE_INSTANTIATE_OBJECT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_BASE_INSTANTIATE_OBJECT > (Handle_S_BASE_INSTANTIATE_OBJECT, session, buffer, len); };
 		GPacketHandler[PKT_S_BASE_ADD_OBJECT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_BASE_ADD_OBJECT > (Handle_S_BASE_ADD_OBJECT, session, buffer, len); };
@@ -245,6 +249,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_LEAVE& pkt) { return MakeSendBuffer(pkt, PKT_C_LEAVE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_GET_CLIENT& pkt) { return MakeSendBuffer(pkt, PKT_C_GET_CLIENT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_SET_NICKNAME& pkt) { return MakeSendBuffer(pkt, PKT_C_SET_NICKNAME); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_CHAT& pkt) { return MakeSendBuffer(pkt, PKT_C_CHAT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_INSTANTIATE_OBJECT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_GET_OBJECT& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_GET_OBJECT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_SET_OBJECT_DATA& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_SET_OBJECT_DATA); }

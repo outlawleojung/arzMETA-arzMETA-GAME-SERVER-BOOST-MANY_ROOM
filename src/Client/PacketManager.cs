@@ -41,7 +41,9 @@ public class PacketManager
 	    PKT_C_SET_NICKNAME = 8,
 	    PKT_S_SET_NICKNAME = 9,
 	    PKT_S_SET_NICKNAME_NOTICE = 10,
-	    PKT_S_DISCONNECT = 11,
+	    PKT_C_CHAT = 11,
+	    PKT_S_CHAT = 12,
+	    PKT_S_DISCONNECT = 13,
 	    PKT_C_BASE_INSTANTIATE_OBJECT = 100,
 	    PKT_S_BASE_INSTANTIATE_OBJECT = 101,
 	    PKT_C_BASE_GET_OBJECT = 102,
@@ -142,6 +144,8 @@ public class PacketManager
 		_handler.Add((ushort)MsgId.PKT_S_SET_NICKNAME, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_SET_NICKNAME_NOTICE, MakePacket<S_SET_NICKNAME_NOTICE>);
 		_handler.Add((ushort)MsgId.PKT_S_SET_NICKNAME_NOTICE, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_CHAT, MakePacket<S_CHAT>);
+		_handler.Add((ushort)MsgId.PKT_S_CHAT, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_DISCONNECT, MakePacket<S_DISCONNECT>);
 		_handler.Add((ushort)MsgId.PKT_S_DISCONNECT, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_BASE_INSTANTIATE_OBJECT, MakePacket<S_BASE_INSTANTIATE_OBJECT>);

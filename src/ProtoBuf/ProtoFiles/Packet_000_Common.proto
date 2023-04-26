@@ -66,6 +66,17 @@ message S_SET_NICKNAME_NOTICE
 	string nickname = 2;
 }
 
+message C_CHAT
+{
+	string chat = 1;
+}
+
+message S_CHAT
+{
+	string clientId = 1;
+	string chat = 2;
+}
+
 message S_DISCONNECT
 {
 	string code = 1;

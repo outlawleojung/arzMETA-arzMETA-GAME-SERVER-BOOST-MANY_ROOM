@@ -41,6 +41,7 @@ void RoomBase::HandleClose()
 void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE& pkt) { client->DoAsync(&ClientBase::Leave, string("Leaved")); }
 void RoomBase::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt) { DoAsync(&RoomBase::SetNickname, client, pkt.nickname()); }
 void RoomBase::Handle_C_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_GET_CLIENT& pkt) { DoAsync(&RoomBase::GetClient, client); }
+void RoomBase::Handle_C_CHAT(shared_ptr<ClientBase>& client, Protocol::C_CHAT& pkt) { DoAsync(&RoomBase::HandleChat, client, pkt.chat()); }
 
 void RoomBase::Leave(shared_ptr<ClientBase> _client)
 {
@@ -98,6 +99,14 @@ void RoomBase::GetClient(shared_ptr<ClientBase> _client)
 		auto sendBuffer = PacketManager::MakeSendBuffer(res);
 		_client->Send(sendBuffer);
 	}
+}
+
+void RoomBase::HandleChat(shared_ptr<ClientBase> client, string chat)
+{
+	Protocol::S_CHAT res;
+	res.set_clientid(client->clientId);
+	res.set_chat(chat);
+	Broadcast(PacketManager::MakeSendBuffer(res));
 }
 
 void RoomBase::Broadcast(shared_ptr<SendBuffer> sendBuffer)

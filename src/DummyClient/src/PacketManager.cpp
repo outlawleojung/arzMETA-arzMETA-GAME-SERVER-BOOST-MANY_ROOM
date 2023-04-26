@@ -75,6 +75,11 @@ bool Handle_S_SET_NICKNAME_NOTICE(shared_ptr<GameSession>& session, Protocol::S_
 	return true;
 }
 
+bool Handle_S_CHAT(shared_ptr<GameSession>& session, Protocol::S_CHAT& pkt)
+{
+	return true;
+}
+
 bool Handle_S_DISCONNECT(shared_ptr<GameSession>& session, Protocol::S_DISCONNECT& pkt) 
 {
 	auto client = session->owner;
@@ -203,6 +208,26 @@ bool Handle_S_MYROOM_SET_ROOMINFO(shared_ptr<GameSession>& session, Protocol::S_
 }
 
 bool Handle_S_MYROOM_OTHER_ROOM_LIST(shared_ptr<GameSession>& session, Protocol::S_MYROOM_OTHER_ROOM_LIST& pkt) 
+{
+	return true;
+}
+
+bool Handle_S_MYROOM_START_EDIT(shared_ptr<GameSession>& session, Protocol::S_MYROOM_START_EDIT& pkt)
+{
+	return true;
+}
+
+bool Handle_S_MYROOM_END_EDIT(shared_ptr<GameSession>& session, Protocol::S_MYROOM_END_EDIT& pkt)
+{
+	return true;
+}
+
+bool Handle_S_MYROOM_KICK(shared_ptr<GameSession>& session, Protocol::S_MYROOM_KICK& pkt)
+{
+	return true;
+}
+
+bool Handle_S_MYROOM_SHUTDOWN(shared_ptr<GameSession>& session, Protocol::S_MYROOM_SHUTDOWN& pkt)
 {
 	return true;
 }
