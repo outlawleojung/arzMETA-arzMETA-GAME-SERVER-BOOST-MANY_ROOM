@@ -48,6 +48,8 @@ void HttpServer::start(string ip, int port)
 		case RoomType::GameZone :
 		case RoomType::CTFZone :
 		case RoomType::VoteZone :
+		case RoomType::StoreZone:
+		case RoomType::OfficeLobbyZone:
 		case RoomType::BusanLand :
 		{
 			room = make_shared<GameRoom>();

@@ -9,6 +9,8 @@ enum class RoomType
 	GameZone,
 	CTFZone,
 	VoteZone,
+	StoreZone,
+	OfficeLobbyZone,
 	BusanLand,
 	MyRoom,
 	Office,

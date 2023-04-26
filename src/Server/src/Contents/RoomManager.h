@@ -25,6 +25,8 @@ public:
     map<string, shared_ptr<RoomBase>> gameZoneRooms;
     map<string, shared_ptr<RoomBase>> ctfZoneRooms;
     map<string, shared_ptr<RoomBase>> voteZoneRooms;
+    map<string, shared_ptr<RoomBase>> storeZoneRooms;
+    map<string, shared_ptr<RoomBase>> officeLobbyZoneRooms;
     map<string, shared_ptr<RoomBase>> busanLandRooms;
     map<string, shared_ptr<RoomBase>> myRoomRooms;
     map<string, shared_ptr<RoomBase>> officeRooms;
