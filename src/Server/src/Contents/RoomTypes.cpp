@@ -6,6 +6,8 @@ RoomType stringToRoomType(const std::string& roomTypeStr) {
         {"GameZone", RoomType::GameZone},
         {"CTFZone", RoomType::CTFZone},
         {"VoteZone", RoomType::VoteZone},
+	{"StoreZone", RoomType::StoreZone},
+	{"OfficeLobbyZone", RoomType::OfficeRoomType},
         {"BusanLand", RoomType::BusanLand},
         {"MyRoom", RoomType::MyRoom},
         {"Office", RoomType::Office},
