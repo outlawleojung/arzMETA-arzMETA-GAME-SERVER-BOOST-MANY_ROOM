@@ -44,6 +44,16 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
         voteZoneRooms.insert({ room->roomId, room });
         break;
     }
+    case RoomType::StoreZone:
+    {
+        storeZoneRooms.insert({ room->roomId, room });
+        break;
+    }
+    case RoomType::OfficeLobbyZone:
+    {
+        officeLobbyZoneRooms.insert({ room->roomId, room });
+        break;
+    }
     case RoomType::BusanLand:
     {
         busanLandRooms.insert({ room->roomId, room });
@@ -115,6 +125,16 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
     case RoomType::VoteZone:
     {
         voteZoneRooms.erase(room->roomId);
+        break;
+    }
+    case RoomType::StoreZone:
+    {
+        storeZoneRooms.erase(room->roomId);
+        break;
+    }
+    case RoomType::OfficeLobbyZone:
+    {
+        officeLobbyZoneRooms.erase(room->roomId);
         break;
     }
     case RoomType::BusanLand:
@@ -206,6 +226,18 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     {
         for (auto voteZoneRoom = voteZoneRooms.begin(); voteZoneRoom != voteZoneRooms.end(); voteZoneRoom++)
             res.push_back(voteZoneRoom->second->roomInfo);
+        break;
+    }
+    case RoomType::StoreZone:
+    {
+        for (auto storeZoneRoom = storeZoneRooms.begin(); storeZoneRoom != storeZoneRooms.end(); storeZoneRoom++)
+            res.push_back(storeZoneRoom->second->roomInfo);
+        break;
+    }
+    case RoomType::OfficeLobbyZone:
+    {
+        for (auto officeLobbyZoneRoom = officeLobbyZoneRooms.begin(); officeLobbyZoneRoom != officeLobbyZoneRooms.end(); officeLobbyZoneRoom++)
+            res.push_back(officeLobbyZoneRoom->second->roomInfo);
         break;
     }
     case RoomType::BusanLand:
