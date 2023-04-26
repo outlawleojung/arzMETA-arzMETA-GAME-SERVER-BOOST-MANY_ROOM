@@ -37,9 +37,8 @@ void MyRoomRoom::Init()
 	con->setSchema("dev_arzmeta_db");
 
 	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT myRoomStateType FROM member WHERE memberId = '" + ownerId + "'");
+	res = stmt->executeQuery("SELECT myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
 
-	//shutdown 여부 확인
 	isShutdown = res->getInt(0) == 4;
 
 	this->DoTimer(30000, std::function<void()>(
