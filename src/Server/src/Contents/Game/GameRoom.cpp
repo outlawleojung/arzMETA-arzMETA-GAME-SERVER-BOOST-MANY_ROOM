@@ -82,6 +82,12 @@ void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 	res.set_result("SUCCESS");
 	session->Send(PacketManager::MakeSendBuffer(res));
+
+	Protocol::S_ADD_CLIENT addClient;
+	auto clientInfo = addClient.add_clientinfos();
+	clientInfo->set_clientid(pkt.clientid());
+	clientInfo->set_nickname(pkt.nickname());
+	Broadcast(PacketManager::MakeSendBuffer(addClient));
 }
 
 void GameRoom::Leave(shared_ptr<ClientBase> client)
