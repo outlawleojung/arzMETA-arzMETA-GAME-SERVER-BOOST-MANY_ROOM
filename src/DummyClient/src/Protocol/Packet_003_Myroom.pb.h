@@ -348,20 +348,20 @@ class S_MYROOM_GET_ROOMINFO final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRoomInfoFieldNumber = 1,
+    kOwnerNicknameFieldNumber = 1,
   };
-  // string roomInfo = 1;
-  void clear_roominfo();
-  const std::string& roominfo() const;
+  // string ownerNickname = 1;
+  void clear_ownernickname();
+  const std::string& ownernickname() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_roominfo(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_roominfo();
-  PROTOBUF_NODISCARD std::string* release_roominfo();
-  void set_allocated_roominfo(std::string* roominfo);
+  void set_ownernickname(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_ownernickname();
+  PROTOBUF_NODISCARD std::string* release_ownernickname();
+  void set_allocated_ownernickname(std::string* ownernickname);
   private:
-  const std::string& _internal_roominfo() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_roominfo(const std::string& value);
-  std::string* _internal_mutable_roominfo();
+  const std::string& _internal_ownernickname() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ownernickname(const std::string& value);
+  std::string* _internal_mutable_ownernickname();
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.S_MYROOM_GET_ROOMINFO)
@@ -372,7 +372,7 @@ class S_MYROOM_GET_ROOMINFO final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr roominfo_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ownernickname_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2129,54 +2129,54 @@ class S_MYROOM_SHUTDOWN final :
 
 // S_MYROOM_GET_ROOMINFO
 
-// string roomInfo = 1;
-inline void S_MYROOM_GET_ROOMINFO::clear_roominfo() {
-  _impl_.roominfo_.ClearToEmpty();
+// string ownerNickname = 1;
+inline void S_MYROOM_GET_ROOMINFO::clear_ownernickname() {
+  _impl_.ownernickname_.ClearToEmpty();
 }
-inline const std::string& S_MYROOM_GET_ROOMINFO::roominfo() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_GET_ROOMINFO.roomInfo)
-  return _internal_roominfo();
+inline const std::string& S_MYROOM_GET_ROOMINFO::ownernickname() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname)
+  return _internal_ownernickname();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void S_MYROOM_GET_ROOMINFO::set_roominfo(ArgT0&& arg0, ArgT... args) {
+void S_MYROOM_GET_ROOMINFO::set_ownernickname(ArgT0&& arg0, ArgT... args) {
  
- _impl_.roominfo_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_GET_ROOMINFO.roomInfo)
+ _impl_.ownernickname_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname)
 }
-inline std::string* S_MYROOM_GET_ROOMINFO::mutable_roominfo() {
-  std::string* _s = _internal_mutable_roominfo();
-  // @@protoc_insertion_point(field_mutable:Protocol.S_MYROOM_GET_ROOMINFO.roomInfo)
+inline std::string* S_MYROOM_GET_ROOMINFO::mutable_ownernickname() {
+  std::string* _s = _internal_mutable_ownernickname();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname)
   return _s;
 }
-inline const std::string& S_MYROOM_GET_ROOMINFO::_internal_roominfo() const {
-  return _impl_.roominfo_.Get();
+inline const std::string& S_MYROOM_GET_ROOMINFO::_internal_ownernickname() const {
+  return _impl_.ownernickname_.Get();
 }
-inline void S_MYROOM_GET_ROOMINFO::_internal_set_roominfo(const std::string& value) {
+inline void S_MYROOM_GET_ROOMINFO::_internal_set_ownernickname(const std::string& value) {
   
-  _impl_.roominfo_.Set(value, GetArenaForAllocation());
+  _impl_.ownernickname_.Set(value, GetArenaForAllocation());
 }
-inline std::string* S_MYROOM_GET_ROOMINFO::_internal_mutable_roominfo() {
+inline std::string* S_MYROOM_GET_ROOMINFO::_internal_mutable_ownernickname() {
   
-  return _impl_.roominfo_.Mutable(GetArenaForAllocation());
+  return _impl_.ownernickname_.Mutable(GetArenaForAllocation());
 }
-inline std::string* S_MYROOM_GET_ROOMINFO::release_roominfo() {
-  // @@protoc_insertion_point(field_release:Protocol.S_MYROOM_GET_ROOMINFO.roomInfo)
-  return _impl_.roominfo_.Release();
+inline std::string* S_MYROOM_GET_ROOMINFO::release_ownernickname() {
+  // @@protoc_insertion_point(field_release:Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname)
+  return _impl_.ownernickname_.Release();
 }
-inline void S_MYROOM_GET_ROOMINFO::set_allocated_roominfo(std::string* roominfo) {
-  if (roominfo != nullptr) {
+inline void S_MYROOM_GET_ROOMINFO::set_allocated_ownernickname(std::string* ownernickname) {
+  if (ownernickname != nullptr) {
     
   } else {
     
   }
-  _impl_.roominfo_.SetAllocated(roominfo, GetArenaForAllocation());
+  _impl_.ownernickname_.SetAllocated(ownernickname, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.roominfo_.IsDefault()) {
-    _impl_.roominfo_.Set("", GetArenaForAllocation());
+  if (_impl_.ownernickname_.IsDefault()) {
+    _impl_.ownernickname_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_GET_ROOMINFO.roomInfo)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname)
 }
 
 // -------------------------------------------------------------------

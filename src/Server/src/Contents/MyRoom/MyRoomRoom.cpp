@@ -37,10 +37,13 @@ void MyRoomRoom::Init()
 	con->setSchema("dev_arzmeta_db");
 
 	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
+	res = stmt->executeQuery("SELECT nickname myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
 
-	while(res->next())
-		isShutdown = res->getInt(1) == 4;
+	while (res->next())
+	{
+		ownerNickname = res->getString(1);
+		isShutdown = res->getInt(2) == 4;
+	}
 
 	delete res;
 	delete stmt;
@@ -57,6 +60,7 @@ void MyRoomRoom::Init()
 	));
 }
 
+void MyRoomRoom::Handle_C_MYROOM_GET_ROOMINFO(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_GET_ROOMINFO& pkt) { DoAsync(&MyRoomRoom::GetRoomInfo, client); }
 void MyRoomRoom::Handle_C_MYROOM_START_EDIT(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_START_EDIT& pkt) { DoAsync(&MyRoomRoom::HandleStartEdit, client); }
 void MyRoomRoom::Handle_C_MYROOM_END_EDIT(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_END_EDIT& pkt) { DoAsync(&MyRoomRoom::HandleEndEdit, client, pkt.ischanged()); }
 void MyRoomRoom::Handle_C_MYROOM_KICK(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_KICK& pkt) { DoAsync(&MyRoomRoom::Kick, client, pkt.clientid()); }
@@ -108,6 +112,15 @@ void MyRoomRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	clientInfo->set_clientid(pkt.clientid());
 	clientInfo->set_nickname(pkt.nickname());
 	Broadcast(PacketManager::MakeSendBuffer(addClient));
+}
+
+void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)
+{
+	if (state != RoomState::Running) return;
+
+	Protocol::S_MYROOM_GET_ROOMINFO res;
+	res.set_ownernickname(ownerNickname);
+	client->Send(PacketManager::MakeSendBuffer(res));
 }
 
 void MyRoomRoom::HandleStartEdit(shared_ptr<ClientBase> client)

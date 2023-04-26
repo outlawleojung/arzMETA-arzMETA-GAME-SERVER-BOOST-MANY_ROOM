@@ -34,7 +34,7 @@ struct C_MYROOM_GET_ROOMINFODefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_MYROOM_GET_ROOMINFODefaultTypeInternal _C_MYROOM_GET_ROOMINFO_default_instance_;
 PROTOBUF_CONSTEXPR S_MYROOM_GET_ROOMINFO::S_MYROOM_GET_ROOMINFO(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.roominfo_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.ownernickname_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct S_MYROOM_GET_ROOMINFODefaultTypeInternal {
   PROTOBUF_CONSTEXPR S_MYROOM_GET_ROOMINFODefaultTypeInternal()
@@ -215,7 +215,7 @@ const uint32_t TableStruct_Packet_5f003_5fMyroom_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_MYROOM_GET_ROOMINFO, _impl_.roominfo_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_MYROOM_GET_ROOMINFO, _impl_.ownernickname_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_MYROOM_SET_ROOMINFO, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -335,24 +335,24 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\027Packet_003_Myroom.proto\022\010Protocol\"\027\n\025C"
-  "_MYROOM_GET_ROOMINFO\")\n\025S_MYROOM_GET_ROO"
-  "MINFO\022\020\n\010roomInfo\030\001 \001(\t\")\n\025C_MYROOM_SET_"
-  "ROOMINFO\022\020\n\010roomInfo\030\001 \001(\t\"(\n\025S_MYROOM_S"
-  "ET_ROOMINFO\022\017\n\007success\030\001 \001(\010\",\n\030C_MYROOM"
-  "_OTHER_ROOM_LIST\022\020\n\010roomInfo\030\001 \001(\t\",\n\030S_"
-  "MYROOM_OTHER_ROOM_LIST\022\020\n\010roomInfo\030\001 \001(\t"
-  "\"\025\n\023C_MYROOM_START_EDIT\"\025\n\023S_MYROOM_STAR"
-  "T_EDIT\"&\n\021C_MYROOM_END_EDIT\022\021\n\tisChanged"
-  "\030\001 \001(\010\"&\n\021S_MYROOM_END_EDIT\022\021\n\tisChanged"
-  "\030\001 \001(\010\"!\n\rC_MYROOM_KICK\022\020\n\010clientId\030\001 \001("
-  "\t\" \n\rS_MYROOM_KICK\022\017\n\007success\030\001 \001(\010\"\'\n\021C"
-  "_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001(\010\"\'\n\021"
-  "S_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001(\010b\006p"
-  "roto3"
+  "_MYROOM_GET_ROOMINFO\".\n\025S_MYROOM_GET_ROO"
+  "MINFO\022\025\n\rownerNickname\030\001 \001(\t\")\n\025C_MYROOM"
+  "_SET_ROOMINFO\022\020\n\010roomInfo\030\001 \001(\t\"(\n\025S_MYR"
+  "OOM_SET_ROOMINFO\022\017\n\007success\030\001 \001(\010\",\n\030C_M"
+  "YROOM_OTHER_ROOM_LIST\022\020\n\010roomInfo\030\001 \001(\t\""
+  ",\n\030S_MYROOM_OTHER_ROOM_LIST\022\020\n\010roomInfo\030"
+  "\001 \001(\t\"\025\n\023C_MYROOM_START_EDIT\"\025\n\023S_MYROOM"
+  "_START_EDIT\"&\n\021C_MYROOM_END_EDIT\022\021\n\tisCh"
+  "anged\030\001 \001(\010\"&\n\021S_MYROOM_END_EDIT\022\021\n\tisCh"
+  "anged\030\001 \001(\010\"!\n\rC_MYROOM_KICK\022\020\n\010clientId"
+  "\030\001 \001(\t\" \n\rS_MYROOM_KICK\022\017\n\007success\030\001 \001(\010"
+  "\"\'\n\021C_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001("
+  "\010\"\'\n\021S_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001"
+  "(\010b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f003_5fMyroom_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f003_5fMyroom_2eproto = {
-    false, false, 565, descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto,
+    false, false, 570, descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto,
     "Packet_003_Myroom.proto",
     &descriptor_table_Packet_5f003_5fMyroom_2eproto_once, nullptr, 0, 14,
     schemas, file_default_instances, TableStruct_Packet_5f003_5fMyroom_2eproto::offsets,
@@ -423,16 +423,16 @@ S_MYROOM_GET_ROOMINFO::S_MYROOM_GET_ROOMINFO(const S_MYROOM_GET_ROOMINFO& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   S_MYROOM_GET_ROOMINFO* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.roominfo_){}
+      decltype(_impl_.ownernickname_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.roominfo_.InitDefault();
+  _impl_.ownernickname_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.roominfo_.Set("", GetArenaForAllocation());
+    _impl_.ownernickname_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_roominfo().empty()) {
-    _this->_impl_.roominfo_.Set(from._internal_roominfo(), 
+  if (!from._internal_ownernickname().empty()) {
+    _this->_impl_.ownernickname_.Set(from._internal_ownernickname(), 
       _this->GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_MYROOM_GET_ROOMINFO)
@@ -443,12 +443,12 @@ inline void S_MYROOM_GET_ROOMINFO::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.roominfo_){}
+      decltype(_impl_.ownernickname_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.roominfo_.InitDefault();
+  _impl_.ownernickname_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.roominfo_.Set("", GetArenaForAllocation());
+    _impl_.ownernickname_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -463,7 +463,7 @@ S_MYROOM_GET_ROOMINFO::~S_MYROOM_GET_ROOMINFO() {
 
 inline void S_MYROOM_GET_ROOMINFO::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.roominfo_.Destroy();
+  _impl_.ownernickname_.Destroy();
 }
 
 void S_MYROOM_GET_ROOMINFO::SetCachedSize(int size) const {
@@ -476,7 +476,7 @@ void S_MYROOM_GET_ROOMINFO::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.roominfo_.ClearToEmpty();
+  _impl_.ownernickname_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -486,13 +486,13 @@ const char* S_MYROOM_GET_ROOMINFO::_InternalParse(const char* ptr, ::_pbi::Parse
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string roomInfo = 1;
+      // string ownerNickname = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_roominfo();
+          auto str = _internal_mutable_ownernickname();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_MYROOM_GET_ROOMINFO.roomInfo"));
+          CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname"));
         } else
           goto handle_unusual;
         continue;
@@ -525,14 +525,14 @@ uint8_t* S_MYROOM_GET_ROOMINFO::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string roomInfo = 1;
-  if (!this->_internal_roominfo().empty()) {
+  // string ownerNickname = 1;
+  if (!this->_internal_ownernickname().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_roominfo().data(), static_cast<int>(this->_internal_roominfo().length()),
+      this->_internal_ownernickname().data(), static_cast<int>(this->_internal_ownernickname().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "Protocol.S_MYROOM_GET_ROOMINFO.roomInfo");
+      "Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_roominfo(), target);
+        1, this->_internal_ownernickname(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -551,11 +551,11 @@ size_t S_MYROOM_GET_ROOMINFO::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string roomInfo = 1;
-  if (!this->_internal_roominfo().empty()) {
+  // string ownerNickname = 1;
+  if (!this->_internal_ownernickname().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_roominfo());
+        this->_internal_ownernickname());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -576,8 +576,8 @@ void S_MYROOM_GET_ROOMINFO::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_roominfo().empty()) {
-    _this->_internal_set_roominfo(from._internal_roominfo());
+  if (!from._internal_ownernickname().empty()) {
+    _this->_internal_set_ownernickname(from._internal_ownernickname());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -599,8 +599,8 @@ void S_MYROOM_GET_ROOMINFO::InternalSwap(S_MYROOM_GET_ROOMINFO* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.roominfo_, lhs_arena,
-      &other->_impl_.roominfo_, rhs_arena
+      &_impl_.ownernickname_, lhs_arena,
+      &other->_impl_.ownernickname_, rhs_arena
   );
 }
 
