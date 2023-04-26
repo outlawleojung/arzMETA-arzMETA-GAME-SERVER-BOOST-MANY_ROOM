@@ -147,7 +147,7 @@ struct S_MYROOM_END_EDITDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_MYROOM_END_EDITDefaultTypeInternal _S_MYROOM_END_EDIT_default_instance_;
 PROTOBUF_CONSTEXPR C_MYROOM_KICK::C_MYROOM_KICK(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.sessionid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct C_MYROOM_KICKDefaultTypeInternal {
   PROTOBUF_CONSTEXPR C_MYROOM_KICKDefaultTypeInternal()
@@ -276,7 +276,7 @@ const uint32_t TableStruct_Packet_5f003_5fMyroom_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_MYROOM_KICK, _impl_.sessionid_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_MYROOM_KICK, _impl_.clientid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_MYROOM_KICK, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -344,15 +344,15 @@ const char descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto[] PROTOBUF_SE
   "\"\025\n\023C_MYROOM_START_EDIT\"\025\n\023S_MYROOM_STAR"
   "T_EDIT\"&\n\021C_MYROOM_END_EDIT\022\021\n\tisChanged"
   "\030\001 \001(\010\"&\n\021S_MYROOM_END_EDIT\022\021\n\tisChanged"
-  "\030\001 \001(\010\"\"\n\rC_MYROOM_KICK\022\021\n\tsessionId\030\001 \001"
-  "(\t\" \n\rS_MYROOM_KICK\022\017\n\007success\030\001 \001(\010\"\'\n\021"
-  "C_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001(\010\"\'\n"
-  "\021S_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001(\010b\006"
-  "proto3"
+  "\030\001 \001(\010\"!\n\rC_MYROOM_KICK\022\020\n\010clientId\030\001 \001("
+  "\t\" \n\rS_MYROOM_KICK\022\017\n\007success\030\001 \001(\010\"\'\n\021C"
+  "_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001(\010\"\'\n\021"
+  "S_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 \001(\010b\006p"
+  "roto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f003_5fMyroom_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f003_5fMyroom_2eproto = {
-    false, false, 566, descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto,
+    false, false, 565, descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto,
     "Packet_003_Myroom.proto",
     &descriptor_table_Packet_5f003_5fMyroom_2eproto_once, nullptr, 0, 14,
     schemas, file_default_instances, TableStruct_Packet_5f003_5fMyroom_2eproto::offsets,
@@ -1849,16 +1849,16 @@ C_MYROOM_KICK::C_MYROOM_KICK(const C_MYROOM_KICK& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   C_MYROOM_KICK* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.sessionid_){}
+      decltype(_impl_.clientid_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.sessionid_.InitDefault();
+  _impl_.clientid_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.sessionid_.Set("", GetArenaForAllocation());
+    _impl_.clientid_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_sessionid().empty()) {
-    _this->_impl_.sessionid_.Set(from._internal_sessionid(), 
+  if (!from._internal_clientid().empty()) {
+    _this->_impl_.clientid_.Set(from._internal_clientid(), 
       _this->GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.C_MYROOM_KICK)
@@ -1869,12 +1869,12 @@ inline void C_MYROOM_KICK::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.sessionid_){}
+      decltype(_impl_.clientid_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.sessionid_.InitDefault();
+  _impl_.clientid_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.sessionid_.Set("", GetArenaForAllocation());
+    _impl_.clientid_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -1889,7 +1889,7 @@ C_MYROOM_KICK::~C_MYROOM_KICK() {
 
 inline void C_MYROOM_KICK::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.sessionid_.Destroy();
+  _impl_.clientid_.Destroy();
 }
 
 void C_MYROOM_KICK::SetCachedSize(int size) const {
@@ -1902,7 +1902,7 @@ void C_MYROOM_KICK::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.sessionid_.ClearToEmpty();
+  _impl_.clientid_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1912,13 +1912,13 @@ const char* C_MYROOM_KICK::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string sessionId = 1;
+      // string clientId = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_sessionid();
+          auto str = _internal_mutable_clientid();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "Protocol.C_MYROOM_KICK.sessionId"));
+          CHK_(::_pbi::VerifyUTF8(str, "Protocol.C_MYROOM_KICK.clientId"));
         } else
           goto handle_unusual;
         continue;
@@ -1951,14 +1951,14 @@ uint8_t* C_MYROOM_KICK::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string sessionId = 1;
-  if (!this->_internal_sessionid().empty()) {
+  // string clientId = 1;
+  if (!this->_internal_clientid().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_sessionid().data(), static_cast<int>(this->_internal_sessionid().length()),
+      this->_internal_clientid().data(), static_cast<int>(this->_internal_clientid().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "Protocol.C_MYROOM_KICK.sessionId");
+      "Protocol.C_MYROOM_KICK.clientId");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_sessionid(), target);
+        1, this->_internal_clientid(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1977,11 +1977,11 @@ size_t C_MYROOM_KICK::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string sessionId = 1;
-  if (!this->_internal_sessionid().empty()) {
+  // string clientId = 1;
+  if (!this->_internal_clientid().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_sessionid());
+        this->_internal_clientid());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -2002,8 +2002,8 @@ void C_MYROOM_KICK::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_sessionid().empty()) {
-    _this->_internal_set_sessionid(from._internal_sessionid());
+  if (!from._internal_clientid().empty()) {
+    _this->_internal_set_clientid(from._internal_clientid());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -2025,8 +2025,8 @@ void C_MYROOM_KICK::InternalSwap(C_MYROOM_KICK* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.sessionid_, lhs_arena,
-      &other->_impl_.sessionid_, rhs_arena
+      &_impl_.clientid_, lhs_arena,
+      &other->_impl_.clientid_, rhs_arena
   );
 }
 

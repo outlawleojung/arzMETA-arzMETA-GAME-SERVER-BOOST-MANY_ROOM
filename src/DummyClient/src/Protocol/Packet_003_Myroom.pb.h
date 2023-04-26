@@ -1640,20 +1640,20 @@ class C_MYROOM_KICK final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSessionIdFieldNumber = 1,
+    kClientIdFieldNumber = 1,
   };
-  // string sessionId = 1;
-  void clear_sessionid();
-  const std::string& sessionid() const;
+  // string clientId = 1;
+  void clear_clientid();
+  const std::string& clientid() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_sessionid(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_sessionid();
-  PROTOBUF_NODISCARD std::string* release_sessionid();
-  void set_allocated_sessionid(std::string* sessionid);
+  void set_clientid(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_clientid();
+  PROTOBUF_NODISCARD std::string* release_clientid();
+  void set_allocated_clientid(std::string* clientid);
   private:
-  const std::string& _internal_sessionid() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_sessionid(const std::string& value);
-  std::string* _internal_mutable_sessionid();
+  const std::string& _internal_clientid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_clientid(const std::string& value);
+  std::string* _internal_mutable_clientid();
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.C_MYROOM_KICK)
@@ -1664,7 +1664,7 @@ class C_MYROOM_KICK final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sessionid_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientid_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2425,54 +2425,54 @@ inline void S_MYROOM_END_EDIT::set_ischanged(bool value) {
 
 // C_MYROOM_KICK
 
-// string sessionId = 1;
-inline void C_MYROOM_KICK::clear_sessionid() {
-  _impl_.sessionid_.ClearToEmpty();
+// string clientId = 1;
+inline void C_MYROOM_KICK::clear_clientid() {
+  _impl_.clientid_.ClearToEmpty();
 }
-inline const std::string& C_MYROOM_KICK::sessionid() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_MYROOM_KICK.sessionId)
-  return _internal_sessionid();
+inline const std::string& C_MYROOM_KICK::clientid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_MYROOM_KICK.clientId)
+  return _internal_clientid();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void C_MYROOM_KICK::set_sessionid(ArgT0&& arg0, ArgT... args) {
+void C_MYROOM_KICK::set_clientid(ArgT0&& arg0, ArgT... args) {
  
- _impl_.sessionid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.C_MYROOM_KICK.sessionId)
+ _impl_.clientid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_MYROOM_KICK.clientId)
 }
-inline std::string* C_MYROOM_KICK::mutable_sessionid() {
-  std::string* _s = _internal_mutable_sessionid();
-  // @@protoc_insertion_point(field_mutable:Protocol.C_MYROOM_KICK.sessionId)
+inline std::string* C_MYROOM_KICK::mutable_clientid() {
+  std::string* _s = _internal_mutable_clientid();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_MYROOM_KICK.clientId)
   return _s;
 }
-inline const std::string& C_MYROOM_KICK::_internal_sessionid() const {
-  return _impl_.sessionid_.Get();
+inline const std::string& C_MYROOM_KICK::_internal_clientid() const {
+  return _impl_.clientid_.Get();
 }
-inline void C_MYROOM_KICK::_internal_set_sessionid(const std::string& value) {
+inline void C_MYROOM_KICK::_internal_set_clientid(const std::string& value) {
   
-  _impl_.sessionid_.Set(value, GetArenaForAllocation());
+  _impl_.clientid_.Set(value, GetArenaForAllocation());
 }
-inline std::string* C_MYROOM_KICK::_internal_mutable_sessionid() {
+inline std::string* C_MYROOM_KICK::_internal_mutable_clientid() {
   
-  return _impl_.sessionid_.Mutable(GetArenaForAllocation());
+  return _impl_.clientid_.Mutable(GetArenaForAllocation());
 }
-inline std::string* C_MYROOM_KICK::release_sessionid() {
-  // @@protoc_insertion_point(field_release:Protocol.C_MYROOM_KICK.sessionId)
-  return _impl_.sessionid_.Release();
+inline std::string* C_MYROOM_KICK::release_clientid() {
+  // @@protoc_insertion_point(field_release:Protocol.C_MYROOM_KICK.clientId)
+  return _impl_.clientid_.Release();
 }
-inline void C_MYROOM_KICK::set_allocated_sessionid(std::string* sessionid) {
-  if (sessionid != nullptr) {
+inline void C_MYROOM_KICK::set_allocated_clientid(std::string* clientid) {
+  if (clientid != nullptr) {
     
   } else {
     
   }
-  _impl_.sessionid_.SetAllocated(sessionid, GetArenaForAllocation());
+  _impl_.clientid_.SetAllocated(clientid, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.sessionid_.IsDefault()) {
-    _impl_.sessionid_.Set("", GetArenaForAllocation());
+  if (_impl_.clientid_.IsDefault()) {
+    _impl_.clientid_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.C_MYROOM_KICK.sessionId)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_MYROOM_KICK.clientId)
 }
 
 // -------------------------------------------------------------------

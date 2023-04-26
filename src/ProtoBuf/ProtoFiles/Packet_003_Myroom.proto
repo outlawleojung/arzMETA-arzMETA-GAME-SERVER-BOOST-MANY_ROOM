@@ -50,7 +50,7 @@ message S_MYROOM_END_EDIT
 
 message C_MYROOM_KICK
 {
-	string sessionId = 1;
+	string clientId = 1;
 }
 
 message S_MYROOM_KICK
