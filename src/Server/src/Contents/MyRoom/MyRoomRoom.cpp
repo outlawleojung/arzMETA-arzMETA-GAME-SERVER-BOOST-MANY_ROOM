@@ -39,7 +39,11 @@ void MyRoomRoom::Init()
 	stmt = con->createStatement();
 	res = stmt->executeQuery("SELECT myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
 
-	isShutdown = res->getInt(0) == 4;
+	isShutdown = res->getInt(1) == 4;
+
+	delete res;
+	delete stmt;
+	delete con;
 
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {
