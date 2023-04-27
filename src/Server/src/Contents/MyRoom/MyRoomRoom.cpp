@@ -33,10 +33,10 @@ void MyRoomRoom::Init()
 		"frontishub@dev-arowana-mysql",
 		"rkskekfk123!@!@"
 	);
-	con->setClientOption("OPT_CHARSET_NAME", "utf8");
 	con->setSchema("dev_arzmeta_db");
-
+	
 	stmt = con->createStatement();
+	stmt->execute("SET NAMES 'utf8mb4'");
 	res = stmt->executeQuery("SELECT nickname, myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
 
 	while (res->next())
