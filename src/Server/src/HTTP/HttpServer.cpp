@@ -38,19 +38,21 @@ void HttpServer::start(string ip, int port)
 
         nlohmann::json body = nlohmann::json::parse(bodyStr);
 		
+		cout << body.dump() << endl;
+
 		auto type = stringToRoomType(body["roomType"].get<string>());
 
 		shared_ptr<RoomBase> room;
 
 		switch (type)
 		{
-		case RoomType::ArzLand :
-		case RoomType::GameZone :
-		case RoomType::CTFZone :
-		case RoomType::VoteZone :
-		case RoomType::StoreZone:
-		case RoomType::OfficeLobbyZone:
-		case RoomType::BusanLand :
+		case RoomType::Arz :
+		case RoomType::Game :
+		case RoomType::Conference :
+		case RoomType::Vote :
+		case RoomType::Store:
+		case RoomType::Office:
+		case RoomType::Busan :
 		{
 			room = make_shared<GameRoom>();
 			break;
@@ -74,10 +76,9 @@ void HttpServer::start(string ip, int port)
 
 			break;
 		}
-		case RoomType::Office :
 		case RoomType::Meeting :
 		case RoomType::Lecture :
-		case RoomType::Counsel :
+		case RoomType::Consulting :
 		{
 			room = make_shared<OfficeRoom>();
 
@@ -113,7 +114,7 @@ void HttpServer::start(string ip, int port)
 
 			break;
 		}
-		case RoomType::OX :
+		case RoomType::OXQuiz :
 		{
 			room = make_shared<OXRoom>();
 
@@ -133,6 +134,7 @@ void HttpServer::start(string ip, int port)
 		}
 
 		room->type = type;
+		room->sceneName = body["sceneName"];
 
 		GRoomManager->AddRoom(room);
 
@@ -141,9 +143,7 @@ void HttpServer::start(string ip, int port)
 		nlohmann::json resJson;
 		resJson["result"] = "SUCCESS";
 		resJson["roomId"] = room->roomId;
-
-		resJson["ip"] = localHostIp;
-		resJson["port"] = tcpPort;
+		resJson["sceneName"] = room->sceneName;
 
 		res.set_content(resJson.dump(), "application/json");
         });

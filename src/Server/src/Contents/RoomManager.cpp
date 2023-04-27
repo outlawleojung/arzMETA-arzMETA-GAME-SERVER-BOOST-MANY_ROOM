@@ -24,74 +24,69 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
 
     switch (room->type)
     {
-    case RoomType::ArzLand:
+    case RoomType::Arz:
     {
-        arzLandRooms.insert({ room->roomId, room });
+        ArzRooms.insert({ room->roomId, room });
         break;
     }
-    case RoomType::GameZone:
+    case RoomType::Busan:
     {
-        gameZoneRooms.insert({ room->roomId, room });
+        BusanRooms.insert({ room->roomId, room });
         break;
     }
-    case RoomType::CTFZone:
+    case RoomType::Conference:
     {
-        ctfZoneRooms.insert({ room->roomId, room });
+        ConferenceRooms.insert({ room->roomId, room });
         break;
     }
-    case RoomType::VoteZone:
+    case RoomType::Game:
     {
-        voteZoneRooms.insert({ room->roomId, room });
-        break;
-    }
-    case RoomType::StoreZone:
-    {
-        storeZoneRooms.insert({ room->roomId, room });
-        break;
-    }
-    case RoomType::OfficeLobbyZone:
-    {
-        officeLobbyZoneRooms.insert({ room->roomId, room });
-        break;
-    }
-    case RoomType::BusanLand:
-    {
-        busanLandRooms.insert({ room->roomId, room });
-        break;
-    }
-    case RoomType::MyRoom:
-    {
-        myRoomRooms.insert({ static_pointer_cast<MyRoomRoom>(room)->ownerId, room });
+        GameRooms.insert({ room->roomId, room });
         break;
     }
     case RoomType::Office:
     {
-        officeRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        OfficeRooms.insert({ room->roomId, room });
+        break;
+    }
+    case RoomType::Store:
+    {
+        StoreRooms.insert({ room->roomId, room });
+        break;
+    }
+    case RoomType::Vote:
+    {
+        VoteRooms.insert({ room->roomId, room });
+        break;
+    }
+    case RoomType::MyRoom:
+    {
+        MyRoomRooms.insert({ static_pointer_cast<MyRoomRoom>(room)->ownerId, room });
         break;
     }
     case RoomType::Meeting:
     {
-        meetingRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        MeetingRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
         break;
     }
     case RoomType::Lecture:
     {
-        lectureRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        LectureRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
         break;
     }
-    case RoomType::Counsel:
+    case RoomType::Consulting:
     {
-        counselRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        ConsultingRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
         break;
     }
     case RoomType::JumpingMatching:
     {
-        jumpingMatchingRooms.insert({ static_pointer_cast<MatchingRoom>(room)->roomCode, room });
+        JumpingMatchingRooms.insert({ static_pointer_cast<MatchingRoom>(room)->roomCode, room });
         break;
     }
-    case RoomType::OX:
+    case RoomType::OXQuiz:
     {
-        oxRooms.insert({ static_pointer_cast<OXRoom>(room)->roomCode, room });
+        OXQuizRooms.insert({ static_pointer_cast<OXRoom>(room)->roomCode, room });
         break;
     }
     default:
@@ -107,74 +102,69 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
 
     switch (room->type)
     {
-    case RoomType::ArzLand:
+    case RoomType::Arz:
     {
-        arzLandRooms.erase(room->roomId);
+        ArzRooms.erase(room->roomId);
         break;
     }
-    case RoomType::GameZone:
+    case RoomType::Busan:
     {
-        gameZoneRooms.erase(room->roomId);
+        BusanRooms.erase(room->roomId);
         break;
     }
-    case RoomType::CTFZone:
+    case RoomType::Conference:
     {
-        ctfZoneRooms.erase(room->roomId);
+        ConferenceRooms.erase(room->roomId);
         break;
     }
-    case RoomType::VoteZone:
+    case RoomType::Game:
     {
-        voteZoneRooms.erase(room->roomId);
-        break;
-    }
-    case RoomType::StoreZone:
-    {
-        storeZoneRooms.erase(room->roomId);
-        break;
-    }
-    case RoomType::OfficeLobbyZone:
-    {
-        officeLobbyZoneRooms.erase(room->roomId);
-        break;
-    }
-    case RoomType::BusanLand:
-    {
-        busanLandRooms.erase(room->roomId);
-        break;
-    }
-    case RoomType::MyRoom:
-    {
-        myRoomRooms.erase(static_pointer_cast<MyRoomRoom>(room)->ownerId);
+        GameRooms.erase(room->roomId);
         break;
     }
     case RoomType::Office:
     {
-        officeRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        OfficeRooms.erase(room->roomId);
+        break;
+    }
+    case RoomType::Store:
+    {
+        StoreRooms.erase(room->roomId);
+        break;
+    }
+    case RoomType::Vote:
+    {
+        VoteRooms.erase(room->roomId);
+        break;
+    }
+    case RoomType::MyRoom:
+    {
+        MyRoomRooms.erase(static_pointer_cast<MyRoomRoom>(room)->ownerId);
         break;
     }
     case RoomType::Meeting:
     {
-        meetingRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        MeetingRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
         break;
     }
     case RoomType::Lecture:
     {
-        lectureRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        LectureRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
         break;
     }
-    case RoomType::Counsel:
+    case RoomType::Consulting:
     {
-        counselRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        ConsultingRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
         break;
     }
     case RoomType::JumpingMatching:
     {
-        jumpingMatchingRooms.erase(static_pointer_cast<MatchingRoom>(room)->roomCode);
+        JumpingMatchingRooms.erase(static_pointer_cast<MatchingRoom>(room)->roomCode);
         break;
     }
-    case RoomType::OX:
+    case RoomType::OXQuiz:
     {
-        oxRooms.erase(static_pointer_cast<OXRoom>(room)->roomCode);
+        OXQuizRooms.erase(static_pointer_cast<OXRoom>(room)->roomCode);
         break;
     }
     default:
@@ -204,45 +194,45 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
 
     switch (type)
     {
-    case RoomType::ArzLand:
+    case RoomType::Arz:
     {
-        for (auto arzLandRoom = arzLandRooms.begin(); arzLandRoom != arzLandRooms.end(); arzLandRoom++)
+        for (auto arzLandRoom = ArzRooms.begin(); arzLandRoom != ArzRooms.end(); arzLandRoom++)
             res.push_back(arzLandRoom->second->roomInfo);
         break;
     }
-    case RoomType::GameZone:
+    case RoomType::Game:
     {
-        for (auto gameZoneRoom = gameZoneRooms.begin(); gameZoneRoom != gameZoneRooms.end(); gameZoneRoom++)
+        for (auto gameZoneRoom = GameRooms.begin(); gameZoneRoom != GameRooms.end(); gameZoneRoom++)
             res.push_back(gameZoneRoom->second->roomInfo);
         break;
     }
-    case RoomType::CTFZone:
+    case RoomType::Conference:
     {
-        for (auto ctfZoneRoom = ctfZoneRooms.begin(); ctfZoneRoom != ctfZoneRooms.end(); ctfZoneRoom++)
+        for (auto ctfZoneRoom = ConferenceRooms.begin(); ctfZoneRoom != ConferenceRooms.end(); ctfZoneRoom++)
             res.push_back(ctfZoneRoom->second->roomInfo);
         break;
     }
-    case RoomType::VoteZone:
+    case RoomType::Vote:
     {
-        for (auto voteZoneRoom = voteZoneRooms.begin(); voteZoneRoom != voteZoneRooms.end(); voteZoneRoom++)
+        for (auto voteZoneRoom = VoteRooms.begin(); voteZoneRoom != VoteRooms.end(); voteZoneRoom++)
             res.push_back(voteZoneRoom->second->roomInfo);
         break;
     }
-    case RoomType::StoreZone:
+    case RoomType::Store:
     {
-        for (auto storeZoneRoom = storeZoneRooms.begin(); storeZoneRoom != storeZoneRooms.end(); storeZoneRoom++)
+        for (auto storeZoneRoom = StoreRooms.begin(); storeZoneRoom != StoreRooms.end(); storeZoneRoom++)
             res.push_back(storeZoneRoom->second->roomInfo);
         break;
     }
-    case RoomType::OfficeLobbyZone:
+    case RoomType::Office:
     {
-        for (auto officeLobbyZoneRoom = officeLobbyZoneRooms.begin(); officeLobbyZoneRoom != officeLobbyZoneRooms.end(); officeLobbyZoneRoom++)
+        for (auto officeLobbyZoneRoom = OfficeRooms.begin(); officeLobbyZoneRoom != OfficeRooms.end(); officeLobbyZoneRoom++)
             res.push_back(officeLobbyZoneRoom->second->roomInfo);
         break;
     }
-    case RoomType::BusanLand:
+    case RoomType::Busan:
     {
-        for (auto busanLandRoom = busanLandRooms.begin(); busanLandRoom != busanLandRooms.end(); busanLandRoom++)
+        for (auto busanLandRoom = BusanRooms.begin(); busanLandRoom != BusanRooms.end(); busanLandRoom++)
             res.push_back(busanLandRoom->second->roomInfo);
         break;
     }
@@ -250,38 +240,25 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     {
         if (query.find("ownerId") != query.end())
         {
-            auto myroom = myRoomRooms.find(query["ownerId"]);
-            if (myroom != myRoomRooms.end())
+            auto myroom = MyRoomRooms.find(query["ownerId"]);
+            if (myroom != MyRoomRooms.end())
                 res.push_back(myroom->second->roomInfo);
         }
         else
-            for (auto myRoomRoom = myRoomRooms.begin(); myRoomRoom != myRoomRooms.end(); myRoomRoom++)
+            for (auto myRoomRoom = MyRoomRooms.begin(); myRoomRoom != MyRoomRooms.end(); myRoomRoom++)
                 res.push_back(myRoomRoom->second->roomInfo);
-        break;
-    }
-    case RoomType::Office:
-    {
-        if (query.find("roomCode") != query.end())
-        {
-            auto officeRoom = officeRooms.find(query["roomCode"]);
-            if (officeRoom != officeRooms.end())
-                res.push_back(officeRoom->second->roomInfo);
-        }
-        else
-            for (auto officeRoom = officeRooms.begin(); officeRoom != officeRooms.end(); officeRoom++)
-                res.push_back(officeRoom->second->roomInfo);
         break;
     }
     case RoomType::Meeting:
     {
         if (query.find("roomCode") != query.end())
         {
-            auto meetingRoom = meetingRooms.find(query["roomCode"]);
-            if (meetingRoom != meetingRooms.end())
+            auto meetingRoom = MeetingRooms.find(query["roomCode"]);
+            if (meetingRoom != MeetingRooms.end())
                 res.push_back(meetingRoom->second->roomInfo);
         }
         else
-            for (auto meetingRoom = meetingRooms.begin(); meetingRoom != meetingRooms.end(); meetingRoom++)
+            for (auto meetingRoom = MeetingRooms.begin(); meetingRoom != MeetingRooms.end(); meetingRoom++)
                 res.push_back(meetingRoom->second->roomInfo);
         break;
     }
@@ -289,25 +266,25 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     {
         if (query.find("roomCode") != query.end())
         {
-            auto lectureRoom = lectureRooms.find(query["roomCode"]);
-            if (lectureRoom != lectureRooms.end())
+            auto lectureRoom = LectureRooms.find(query["roomCode"]);
+            if (lectureRoom != LectureRooms.end())
                 res.push_back(lectureRoom->second->roomInfo);
         }
         else
-            for (auto lectureRoom = lectureRooms.begin(); lectureRoom != lectureRooms.end(); lectureRoom++)
+            for (auto lectureRoom = LectureRooms.begin(); lectureRoom != LectureRooms.end(); lectureRoom++)
                 res.push_back(lectureRoom->second->roomInfo);
         break;
     }
-    case RoomType::Counsel:
+    case RoomType::Consulting:
     {
         if (query.find("roomCode") != query.end())
         {
-            auto counselRoom = counselRooms.find(query["roomCode"]);
-            if (counselRoom != counselRooms.end())
+            auto counselRoom = ConsultingRooms.find(query["roomCode"]);
+            if (counselRoom != ConsultingRooms.end())
                 res.push_back(counselRoom->second->roomInfo);
         }
         else
-            for (auto counselRoom = counselRooms.begin(); counselRoom != counselRooms.end(); counselRoom++)
+            for (auto counselRoom = ConsultingRooms.begin(); counselRoom != ConsultingRooms.end(); counselRoom++)
                 res.push_back(counselRoom->second->roomInfo);
         break;
     }
@@ -315,25 +292,25 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     {
         if (query.find("roomCode") != query.end())
         {
-            auto jumpingMatchingRoom = jumpingMatchingRooms.find(query["roomCode"]);
-            if (jumpingMatchingRoom != jumpingMatchingRooms.end())
+            auto jumpingMatchingRoom = JumpingMatchingRooms.find(query["roomCode"]);
+            if (jumpingMatchingRoom != JumpingMatchingRooms.end())
                 res.push_back(jumpingMatchingRoom->second->roomInfo);
         }
         else
-            for (auto matchingRoom = jumpingMatchingRooms.begin(); matchingRoom != jumpingMatchingRooms.end(); matchingRoom++)
+            for (auto matchingRoom = JumpingMatchingRooms.begin(); matchingRoom != JumpingMatchingRooms.end(); matchingRoom++)
                 res.push_back(matchingRoom->second->roomInfo);
         break;
     }
-    case RoomType::OX:
+    case RoomType::OXQuiz:
     {
         if (query.find("roomCode") != query.end())
         {
-            auto oxRoom = oxRooms.find(query["roomCode"]);
-            if (oxRoom != oxRooms.end())
+            auto oxRoom = OXQuizRooms.find(query["roomCode"]);
+            if (oxRoom != OXQuizRooms.end())
                 res.push_back(oxRoom->second->roomInfo);
         }
         else
-            for (auto oxRoom = oxRooms.begin(); oxRoom != oxRooms.end(); oxRoom++)
+            for (auto oxRoom = OXQuizRooms.begin(); oxRoom != OXQuizRooms.end(); oxRoom++)
                 res.push_back(oxRoom->second->roomInfo);
         break;
     }

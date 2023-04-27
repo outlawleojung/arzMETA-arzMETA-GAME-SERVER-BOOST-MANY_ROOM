@@ -2,20 +2,26 @@
 
 RoomType stringToRoomType(const std::string& roomTypeStr) {
     static std::map<std::string, RoomType> stringToRoomType = {
-        {"ArzLand", RoomType::ArzLand},
-        {"GameZone", RoomType::GameZone},
-        {"CTFZone", RoomType::CTFZone},
-        {"VoteZone", RoomType::VoteZone},
-        {"StoreZone", RoomType::StoreZone},
-        {"OfficeLobbyZone", RoomType::OfficeLobbyZone},
-        {"BusanLand", RoomType::BusanLand},
-        {"MyRoom", RoomType::MyRoom},
-        {"Office", RoomType::Office},
-        {"Meeting", RoomType::Meeting},
-        {"Lecture", RoomType::Lecture},
-        {"Counsel", RoomType::Counsel},
+        {"Arz", RoomType::Arz},
+        {"Busan", RoomType::Busan},
+
         {"JumpingMatching", RoomType::JumpingMatching},
-        {"OX", RoomType::OX},
+        {"OXQuiz", RoomType::OXQuiz},
+
+        {"Lecture", RoomType::Lecture},
+        {"Meeting", RoomType::Meeting},
+        {"Consulting", RoomType::Consulting},
+
+        {"MyRoom", RoomType::MyRoom},
+
+        {"Conference", RoomType::Conference},
+        {"Game", RoomType::Game},
+        {"Office", RoomType::Office},
+        {"Store", RoomType::Store},
+        {"Vote", RoomType::Vote},
+
+        {"Hospital", RoomType::Hospital},
+         
         {"Unknown", RoomType::Unknown}
     };
 

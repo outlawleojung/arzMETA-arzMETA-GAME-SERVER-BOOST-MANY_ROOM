@@ -36,6 +36,7 @@ public:
 	
 	RoomType type;
 	string roomId;
+	string sceneName;
 	std::atomic<RoomState> state;
 	nlohmann::json roomInfo;
 

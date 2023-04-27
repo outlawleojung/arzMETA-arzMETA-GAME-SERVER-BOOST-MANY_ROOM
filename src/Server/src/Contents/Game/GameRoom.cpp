@@ -17,8 +17,7 @@ void GameRoom::Init()
 	state = RoomState::Running;
 
 	roomInfo["roomId"] = roomId;
-	roomInfo["ip"] = localHostIp;
-	roomInfo["port"] = tcpPort;
+	roomInfo["sceneName"] = sceneName;
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 

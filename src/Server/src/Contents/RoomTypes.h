@@ -5,20 +5,26 @@
 
 enum class RoomType
 {
-	ArzLand,
-	GameZone,
-	CTFZone,
-	VoteZone,
-	StoreZone,
-	OfficeLobbyZone,
-	BusanLand,
-	MyRoom,
-	Office,
-	Meeting,
-	Lecture,
-	Counsel,
-	JumpingMatching,
-	OX,
+    Arz,
+    Busan,
+
+    JumpingMatching,
+    OXQuiz,
+
+    Lecture,
+    Meeting,
+    Consulting,
+
+    MyRoom,
+
+    Conference,
+    Game,
+    Office,
+    Store,
+    Vote,
+
+    Hospital,
+
     Unknown
 };
 

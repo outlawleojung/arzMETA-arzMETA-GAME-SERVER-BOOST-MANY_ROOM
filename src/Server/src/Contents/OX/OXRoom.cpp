@@ -237,8 +237,7 @@ void OXRoom::Init()
 	roomInfo["currentPlayerNumber"] = 0;
 	roomInfo["host"] = "";
 	roomInfo["isPlaying"] = false;
-	roomInfo["ip"] = localHostIp;
-	roomInfo["port"] = tcpPort;
+	roomInfo["sceneName"] = sceneName;
 
 	DoTimer(30000, std::function<void()>(
 		[this]() {

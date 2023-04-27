@@ -40,8 +40,7 @@ void OfficeRoom::Init()
 	roomInfo["isAdvertising"] = isAdvertising;
 	roomInfo["isShutdown"] = isShutdown;
 	roomInfo["isObserver"] = (observer > 0) ? true : false;
-	roomInfo["ip"] = localHostIp;
-	roomInfo["port"] = tcpPort;
+	roomInfo["sceneName"] = sceneName;
 
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {
