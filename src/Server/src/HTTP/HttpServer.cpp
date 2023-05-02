@@ -78,7 +78,6 @@ void HttpServer::start(string ip, int port)
 		}
 		case RoomType::Meeting :
 		case RoomType::Lecture :
-		case RoomType::Consulting :
 		{
 			room = make_shared<OfficeRoom>();
 
@@ -102,6 +101,24 @@ void HttpServer::start(string ip, int port)
 			static_pointer_cast<OfficeRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
 			static_pointer_cast<OfficeRoom>(room)->isAdvertising = body["isAdvertising"];
 			static_pointer_cast<OfficeRoom>(room)->runningTime = body["runningTime"];
+
+			break;
+		}
+		case RoomType::Consulting:
+		{
+			room = make_shared<OfficeRoom>();
+
+			static_pointer_cast<OfficeRoom>(room)->roomCode = body["roomCode"];
+			static_pointer_cast<OfficeRoom>(room)->roomName = body["roomName"];
+			static_pointer_cast<OfficeRoom>(room)->description = body["description"];
+			
+			static_pointer_cast<OfficeRoom>(room)->creatorId = body["creatorId"];
+
+			static_pointer_cast<OfficeRoom>(room)->maxPlayerNumber = body["personnel"];
+			static_pointer_cast<OfficeRoom>(room)->runningTime = body["runningTime"];
+
+			static_pointer_cast<OfficeRoom>(room)->password = "";
+			static_pointer_cast<OfficeRoom>(room)->isPassword = false;
 
 			break;
 		}
