@@ -33,7 +33,7 @@ void OfficeRoom::Init()
 	roomInfo["modeType"] = modeType;
 	roomInfo["topicType"] = topicType;
 	roomInfo["thumbnail"] = thumbnail;
-	roomInfo["host"] = "";
+	roomInfo["roomCode"] = roomCode;
 	roomInfo["personnel"] = maxPlayerNumber;
 	roomInfo["currentPersonnel"] = 0;
 	roomInfo["isPassword"] = isPassword;
@@ -122,7 +122,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		currentPersonnel++;
 		currentHostId = pkt.clientid();
 
-		roomInfo["host"] = client->clientId;
+		roomInfo["hostName"] = client->nickname;
 		roomInfo["currentPersonnel"] = currentPersonnel;
 
 		res.set_result("SUCCESS");
@@ -143,6 +143,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 				char buffer[50];
 				strftime(buffer, 50, "%Y.%m.%d %p %I:%M", &bt);
 				createdTimeString = string(buffer);
+				roomInfo["createdTime"] = createdTimeString;
 			}
 		}
 
