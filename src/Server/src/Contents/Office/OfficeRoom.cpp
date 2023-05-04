@@ -151,7 +151,6 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
-
 		return;
 	}
 
@@ -253,6 +252,12 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		currentPersonnel++;
 		roomInfo["currentPersonnel"] = currentPersonnel;
+
+		Protocol::S_ADD_CLIENT addClient;
+		auto clientInfo = addClient.add_clientinfos();
+		clientInfo->set_clientid(pkt.clientid());
+		clientInfo->set_nickname(pkt.nickname());
+		Broadcast(PacketManager::MakeSendBuffer(addClient));
 	}
 }
 
