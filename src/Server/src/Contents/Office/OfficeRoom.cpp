@@ -56,7 +56,7 @@ void OfficeRoom::Init()
 void OfficeRoom::HandleClose()
 {
 	for (auto client = waitingList.begin(); client != waitingList.end(); client++)
-		client->second.second->DoAsync(&ClientBase::Leave, string("Closing"));
+		client->second.second->DoAsync(&ClientBase::Leave, string("CLOSING"));
 
 	GameRoom::HandleClose();
 }
@@ -335,7 +335,7 @@ void OfficeRoom::Kick(shared_ptr<ClientBase> client, string clientId)
 		return;
 	}
 
-	kickedClient->second->DoAsync(&ClientBase::Leave, string("Kicked"));
+	kickedClient->second->DoAsync(&ClientBase::Leave, string("KICKED"));
 
 	res.set_success(true);
 	client->Send(PacketManager::MakeSendBuffer(res));
@@ -630,7 +630,7 @@ void OfficeRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, boo
 	}
 
 	//대기열에서 대상 퇴장
-	client->second.second->DoAsync(&ClientBase::Leave, string("Waiting_Rejected"));
+	client->second.second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
 }
 
 void OfficeRoom::InstantiateObject(shared_ptr<ClientBase> _client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt)

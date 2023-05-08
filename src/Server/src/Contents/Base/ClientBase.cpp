@@ -63,6 +63,6 @@ void ClientBase::OnDisconnected()
 		if (session != nullptr)
 			return;
 
-		DoAsync(&ClientBase::Leave, string("Disconnected"));
+		DoAsync(&ClientBase::Leave, string("DISCONNECTED"));
 		});
 }
