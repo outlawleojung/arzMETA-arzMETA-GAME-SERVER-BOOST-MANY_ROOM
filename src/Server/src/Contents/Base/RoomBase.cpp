@@ -33,12 +33,12 @@ void RoomBase::Close()
 void RoomBase::HandleClose()
 {
 	for (auto client = clients.begin(); client != clients.end(); client++)
-		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
+		client->second->DoAsync(&ClientBase::Leave, string("Closing"));
 
 	state = RoomState::Closed;
 }
 
-void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE& pkt) { client->DoAsync(&ClientBase::Leave, string("LEAVED")); }
+void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE& pkt) { client->DoAsync(&ClientBase::Leave, string("Leaved")); }
 void RoomBase::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt) { DoAsync(&RoomBase::SetNickname, client, pkt.nickname()); }
 void RoomBase::Handle_C_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_GET_CLIENT& pkt) { DoAsync(&RoomBase::GetClient, client); }
 void RoomBase::Handle_C_CHAT(shared_ptr<ClientBase>& client, Protocol::C_CHAT& pkt) { DoAsync(&RoomBase::HandleChat, client, pkt.chat()); }
