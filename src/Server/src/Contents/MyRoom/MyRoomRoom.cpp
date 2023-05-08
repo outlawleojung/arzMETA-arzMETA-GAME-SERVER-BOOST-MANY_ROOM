@@ -157,7 +157,7 @@ void MyRoomRoom::Kick(shared_ptr<ClientBase> client, string kickedClientId)
 		return;
 	}
 
-	kickedClient->second->DoAsync(&ClientBase::Leave, string("Kicked"));
+	kickedClient->second->DoAsync(&ClientBase::Leave, string("KICKED"));
 
 	res.set_success(true);
 	client->Send(PacketManager::MakeSendBuffer(res));
