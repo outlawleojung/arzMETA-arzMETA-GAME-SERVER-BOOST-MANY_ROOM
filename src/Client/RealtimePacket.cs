@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using FrameWork.Network;
 
-public class PacketManager
+public class RealtimePacket
 {
 	// #region Singleton
 
@@ -12,7 +12,7 @@ public class PacketManager
 	// public static PacketManager Instance { get { return instance; } }
 	// #endregion
 
-	public PacketManager()
+	public RealtimePacket()
 	{
 		Register();
 	}
