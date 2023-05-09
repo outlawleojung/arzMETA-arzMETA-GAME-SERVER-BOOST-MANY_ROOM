@@ -494,14 +494,25 @@ void MatchingRoom::GameLogic()
 
 		gameData.roundCount++;
 
-		if (gameData.players.size() == 0 || (!gameData.isSoloplay && gameData.players.size() == 1) || gameData.roundCount >= gameData.roundTotal)
+		if (gameData.players.size() == 0)
 		{
 			Protocol::S_MATCHING_FINISH finish;
 			DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
 
-			gameData.Clear();
-
 			roomInfo["isPlaying"] = false;
+
+			gameData.Clear();
+		}
+		else if ((!gameData.isSoloplay && gameData.players.size() == 1) || gameData.roundCount >= gameData.roundTotal)
+		{
+			Protocol::S_MATCHING_AWARD award;
+			for (int i = 0; i < gameData.players.size(); i++)
+				award.add_winners(gameData.players[i]);
+
+			DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(award));
+
+			gameData.roundState = matching::RoundState::Award;
+			DoTimer(gameData.awardingTime, &MatchingRoom::GameLogic);
 		}
 		else
 		{
@@ -510,6 +521,17 @@ void MatchingRoom::GameLogic()
 			gameData.roundState = matching::RoundState::Start;
 		}
 		break;
+	}
+	case matching::RoundState::Award:
+	{
+		ClearObject();
+
+		Protocol::S_MATCHING_FINISH finish;
+		DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
+
+		roomInfo["isPlaying"] = false;
+
+		gameData.Clear();
 	}
 	}
 }

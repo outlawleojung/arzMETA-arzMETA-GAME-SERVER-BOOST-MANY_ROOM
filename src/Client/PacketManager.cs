@@ -107,17 +107,18 @@ public class PacketManager
 	    PKT_S_OFFICE_SHARE = 424,
 	    PKT_C_MATCHING_START = 500,
 	    PKT_S_MATCHING_START = 501,
-	    PKT_S_MATCHING_FINISH = 502,
-	    PKT_C_MATCHING_GET_HOST = 503,
-	    PKT_S_MATCHING_HOST = 504,
-	    PKT_S_MATCHING_ROUND_START = 505,
-	    PKT_S_MATCHING_ROUND_FINISH = 506,
-	    PKT_S_MATCHING_TILES = 507,
-	    PKT_S_MATCHING_HINT = 508,
-	    PKT_S_MATCHING_PROBLEM = 509,
-	    PKT_S_MATCHING_DESTROY = 510,
-	    PKT_S_MATCHING_QUIZ_DISAPPEAR = 511,
-	    PKT_C_MATCHING_DIE = 512,
+	    PKT_S_MATCHING_AWARD = 502,
+	    PKT_S_MATCHING_FINISH = 503,
+	    PKT_C_MATCHING_GET_HOST = 504,
+	    PKT_S_MATCHING_HOST = 505,
+	    PKT_S_MATCHING_ROUND_START = 506,
+	    PKT_S_MATCHING_ROUND_FINISH = 507,
+	    PKT_S_MATCHING_TILES = 508,
+	    PKT_S_MATCHING_HINT = 509,
+	    PKT_S_MATCHING_PROBLEM = 510,
+	    PKT_S_MATCHING_DESTROY = 511,
+	    PKT_S_MATCHING_QUIZ_DISAPPEAR = 512,
+	    PKT_C_MATCHING_DIE = 513,
 	    PKT_C_OX_START = 600,
 	    PKT_S_OX_START = 601,
 	    PKT_S_OX_FINISH = 602,
@@ -218,6 +219,8 @@ public class PacketManager
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_SHARE, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_START, MakePacket<S_MATCHING_START>);
 		_handler.Add((ushort)MsgId.PKT_S_MATCHING_START, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_AWARD, MakePacket<S_MATCHING_AWARD>);
+		_handler.Add((ushort)MsgId.PKT_S_MATCHING_AWARD, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_FINISH, MakePacket<S_MATCHING_FINISH>);
 		_handler.Add((ushort)MsgId.PKT_S_MATCHING_FINISH, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_MATCHING_HOST, MakePacket<S_MATCHING_HOST>);

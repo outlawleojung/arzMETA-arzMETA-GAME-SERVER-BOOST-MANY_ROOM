@@ -9,6 +9,11 @@ message S_MATCHING_START
 {
 }
 
+message S_MATCHING_AWARD
+{
+	repeated string winners = 1;
+}
+
 message S_MATCHING_FINISH
 {
 }

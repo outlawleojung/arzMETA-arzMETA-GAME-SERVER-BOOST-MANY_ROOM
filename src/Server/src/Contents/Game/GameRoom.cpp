@@ -223,3 +223,14 @@ void GameRoom::SetAnimationOnce(int objectId, string animationId, bool isLoop, f
 	Broadcast(sendBuffer);
 }
 
+void GameRoom::ClearObject()
+{
+	Protocol::S_BASE_REMOVE_OBJECT removeObject;
+
+	for (int i = 0; i < gameObjects.size(); i++)
+		removeObject.add_gameobjects(gameObjects[i]->objectId);
+
+	Broadcast(PacketManager::MakeSendBuffer(removeObject));
+	gameObjects.clear();
+}
+

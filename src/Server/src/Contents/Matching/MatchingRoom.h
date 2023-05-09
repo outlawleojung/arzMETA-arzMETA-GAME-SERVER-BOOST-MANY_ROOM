@@ -20,6 +20,7 @@ namespace matching
 		Hint,
 		Problem,
 		Destroy,
+		Award,
 		Finish
 	};
 
@@ -45,6 +46,7 @@ namespace matching
 		int destroyToFinishInterval; //문제 제시 후 라운드 종료까지의 시간
 		int toNextRoundInterval; //라운드 종료 후 다음 라운드 시작까지의 시간
 		int showQuizTime;
+		int awardingTime = 10000;
 
 		vector<int> hintToHintIntervals;
 		vector<int> quizToDestroyIntervals;
