@@ -78,8 +78,8 @@ void OfficeRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, P
 void OfficeRoom::Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_VIDEO_STREAM& pkt) { DoAsync(&OfficeRoom::HandleVideoStream, pkt.url(), pkt.volume(), pkt.time(), pkt.play(), pkt.seek(), pkt.mediaplayerstate()); }
 void OfficeRoom::Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SHARE& pkt) { DoAsync(&OfficeRoom::HandleShare, session, pkt.isshared(), pkt.userid()); }
 
-void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
-{
+//void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
+//{
 //	if (state != RoomState::Running) return;
 //
 //	Protocol::S_ENTER res;
@@ -233,7 +233,7 @@ void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 //		clientInfo->set_nickname(pkt.nickname());
 //		Broadcast(PacketManager::MakeSendBuffer(addClient));
 //	}
-}
+//}
 
 void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 {

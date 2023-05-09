@@ -66,44 +66,17 @@ void MyRoomRoom::Handle_C_MYROOM_END_EDIT(shared_ptr<ClientBase>& client, Protoc
 void MyRoomRoom::Handle_C_MYROOM_KICK(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_KICK& pkt) { DoAsync(&MyRoomRoom::Kick, client, pkt.clientid()); }
 void MyRoomRoom::Handle_C_MYROOM_SHUTDOWN(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_SHUTDOWN& pkt) { DoAsync(&MyRoomRoom::HandleShutdown, client, pkt.isshutdown()); }
 
-void MyRoomRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
+pair<bool, string> MyRoomRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 {
-	if (state != RoomState::Running) return;
-
-	Protocol::S_ENTER res;
-
 	if (isShutdown && pkt.clientid() != ownerId)
-	{
-		res.set_result("ROON_IS_SHUTDOWN");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
+		return { false, "ROON_IS_SHUTDOWN" };
 
 	//TODO : blacklist ±¸Çö
 
 	if (clients.size() >= maxPlayerNumber)
-	{
-		res.set_result("ROOM_IS_FULL");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
+		return { false, "ROOM_IS_FULL" };
 
-	auto client = MakeClient(pkt.clientid(), pkt.sessionid());
-	client->session = session;
-	client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
-	clients.insert({ pkt.clientid(), client });
-
-	res.set_result("SUCCESS");
-	session->Send(PacketManager::MakeSendBuffer(res));
-
-	Protocol::S_ADD_CLIENT addClient;
-	auto clientInfo = addClient.add_clientinfos();
-	clientInfo->set_clientid(pkt.clientid());
-	clientInfo->set_nickname(client->nickname);
-	clientInfo->set_nickname(client->stateMessage);
-	Broadcast(PacketManager::MakeSendBuffer(addClient));
+	return { true, "" };
 }
 
 void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)

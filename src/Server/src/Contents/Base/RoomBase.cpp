@@ -44,6 +44,40 @@ void RoomBase::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C
 void RoomBase::Handle_C_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_GET_CLIENT& pkt) { DoAsync(&RoomBase::GetClient, client); }
 void RoomBase::Handle_C_CHAT(shared_ptr<ClientBase>& client, Protocol::C_CHAT& pkt) { DoAsync(&RoomBase::HandleChat, client, pkt.chat()); }
 
+void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
+{
+	if (state != RoomState::Running) return;
+
+	auto [isEnterSucceed, errorCode] = HandleEnter(pkt);
+	if (isEnterSucceed)
+	{
+		auto client = MakeClient(pkt.clientid(), pkt.sessionid());
+
+		if (client == nullptr)
+		{
+			GLogManager->Log("MakeClient Fail! :			", pkt.clientid());
+			return;
+		}
+
+		client->session = session;
+		client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
+
+		session->owner = client;
+
+		SetDefaultClientData(client);
+		SetClientData(client);
+
+		OnEnterSuccess(client);
+	}
+	else
+	{
+		Protocol::S_ENTER res;
+		res.set_result(errorCode);
+		session->Send(PacketManager::MakeSendBuffer(res));
+		session->Disconnect();
+	}
+}
+
 void RoomBase::Leave(shared_ptr<ClientBase> _client)
 {
 	if (state != RoomState::Running) return;
@@ -119,8 +153,6 @@ void RoomBase::Broadcast(shared_ptr<SendBuffer> sendBuffer)
 shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
 {
 	auto client = GClientManager->MakeCilent<ClientBase>(clientId, sessionId);
-	SetClientData(client);
-
 	return client;
 }
 
@@ -130,7 +162,7 @@ shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
 
-void RoomBase::SetClientData(shared_ptr<ClientBase> client)
+void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 {
 	sql::Driver* driver;
 	sql::Connection* con;
@@ -159,4 +191,20 @@ void RoomBase::SetClientData(shared_ptr<ClientBase> client)
 	delete res;
 	delete stmt;
 	delete con;
+}
+
+void RoomBase::OnEnterSuccess(shared_ptr<ClientBase> client)
+{
+	clients.insert({ client->clientId, client });
+
+	Protocol::S_ENTER res;
+	res.set_result("SUCCESS");
+	client->Send(PacketManager::MakeSendBuffer(res));
+
+	Protocol::S_ADD_CLIENT addClient;
+	auto clientInfo = addClient.add_clientinfos();
+	clientInfo->set_clientid(client->clientId);
+	clientInfo->set_nickname(client->nickname);
+	clientInfo->set_nickname(client->stateMessage);
+	Broadcast(PacketManager::MakeSendBuffer(addClient));
 }

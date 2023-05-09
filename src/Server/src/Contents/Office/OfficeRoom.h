@@ -42,7 +42,7 @@ public:
 	virtual void Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_VIDEO_STREAM& pkt) override;
 	virtual void Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SHARE& pkt) override;
 
-	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
+	//virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
 	virtual void Leave(shared_ptr<ClientBase> session) override;
 
 	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId) override;

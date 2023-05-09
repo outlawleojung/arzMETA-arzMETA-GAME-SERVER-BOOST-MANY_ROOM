@@ -51,36 +51,6 @@ void GameRoom::Handle_C_BASE_SET_TRANSFORM(shared_ptr<ClientBase>& client, Proto
 void GameRoom::Handle_C_BASE_SET_ANIMATION(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_ANIMATION& pkt) { DoAsync(&GameRoom::SetAnimation, pkt.objectid(), pkt.animationid(), pkt.animation()); }
 void GameRoom::Handle_C_BASE_SET_ANIMATION_ONCE(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_ANIMATION_ONCE& pkt) { 	DoAsync(&GameRoom::SetAnimationOnce, pkt.objectid(), pkt.animationid(), pkt.isloop(), pkt.blend()); }
 
-void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
-{
-	if (state != RoomState::Running) return;
-
-	Protocol::S_ENTER res;
-
-	if (clients.size() >= maxPlayerNumber)
-	{
-		res.set_result("ROOM_IS_FULL");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	auto client = MakeClient(pkt.clientid(), pkt.sessionid());
-	client->session = session;
-	client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
-
-	clients.insert({ pkt.clientid(), client });
-
-	res.set_result("SUCCESS");
-	session->Send(PacketManager::MakeSendBuffer(res));
-
-	Protocol::S_ADD_CLIENT addClient;
-	auto clientInfo = addClient.add_clientinfos();
-	clientInfo->set_clientid(pkt.clientid());
-	clientInfo->set_nickname(client->nickname);
-	Broadcast(PacketManager::MakeSendBuffer(addClient));
-}
-
 void GameRoom::Leave(shared_ptr<ClientBase> client)
 {
 	if (state != RoomState::Running) return;
@@ -95,10 +65,16 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 shared_ptr<ClientBase> GameRoom::MakeClient(string clientId, int sessionId)
 {
 	auto client = GClientManager->MakeCilent<GameClient>(clientId, sessionId);
-
-	
-
+	SetClientData(client);
 	return client;
+}
+
+pair<bool, string> GameRoom::HandleEnter(const Protocol::C_ENTER& pkt)
+{
+	if (clients.size() >= maxPlayerNumber)
+		return { false, "ROOM_IS_FULL" };
+
+	return { true, "" };
 }
 
 void GameRoom::RemoveObject(shared_ptr<GameClient> client)

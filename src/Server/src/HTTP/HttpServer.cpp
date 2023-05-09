@@ -174,12 +174,16 @@ void HttpServer::start(string ip, int port)
 			return true;
 			});
 
+		cout << bodyStr << endl;
+
 		nlohmann::json body = nlohmann::json::parse(bodyStr);
 
 		int sessionId = GClientManager->SetSessionId(body["clientId"]);
 
 		nlohmann::json resJson;
 		resJson["sessionId"] = sessionId;
+
+		cout << "test!" << endl;
 
 		res.set_content(resJson.dump(), "application/json");
 		});

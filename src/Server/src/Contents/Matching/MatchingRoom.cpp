@@ -243,54 +243,6 @@ void MatchingRoom::Handle_C_MATCHING_GET_HOST(shared_ptr<ClientBase>& client, Pr
 void MatchingRoom::Handle_C_MATCHING_START(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_START& pkt) { DoAsync(&MatchingRoom::Start, client); }
 void MatchingRoom::Handle_C_MATCHING_DIE(shared_ptr<ClientBase>& client, Protocol::C_MATCHING_DIE& pkt) { DoAsync(&MatchingRoom::Die, client); }
 
-void MatchingRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
-{
-	if (state != RoomState::Running) return;
-
-	Protocol::S_ENTER res;
-
-	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
-
-	if (clients.size() >= maxPlayerNumber)
-	{
-		res.set_result("ROOM_IS_FULL");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	if (gameData.gameState != matching::GameState::Idle)
-	{
-		res.set_result("GAME_IS_PLAYING");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	auto client = MakeClient(pkt.clientid(), pkt.sessionid());
-	client->session = session;
-	client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
-	clients.insert({ pkt.clientid(), client });
-
-	res.set_result("SUCCESS");
-	session->Send(PacketManager::MakeSendBuffer(res));
-
-	Protocol::S_ADD_CLIENT addClient;
-	auto clientInfo = addClient.add_clientinfos();
-	clientInfo->set_clientid(pkt.clientid());
-	clientInfo->set_nickname(client->nickname);
-	clientInfo->set_statemessage(client->stateMessage);
-	Broadcast(PacketManager::MakeSendBuffer(addClient));
-
-	roomInfo["currentPlayerNumber"] = roomInfo["currentPlayerNumber"].get<int>() + 1;
-
-	if (currentHostId.empty())
-	{
-		SetHost(client->clientId);
-		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
-	}
-}
-
 void MatchingRoom::Leave(shared_ptr<ClientBase> client)
 {
 	if (state != RoomState::Running) return;
@@ -315,10 +267,36 @@ void MatchingRoom::Leave(shared_ptr<ClientBase> client)
 
 shared_ptr<ClientBase> MatchingRoom::MakeClient(string clientId, int sessionId)
 {
-	auto client = GClientManager->MakeCilent<MatchingClient>(clientId, sessionId);
+	return GClientManager->MakeCilent<MatchingClient>(clientId, sessionId);
+}
+
+pair<bool, string> MatchingRoom::HandleEnter(const Protocol::C_ENTER& pkt)
+{
+	if (clients.size() >= maxPlayerNumber)
+		return { false, "ROOM_IS_FULL" };
+
+	if (gameData.gameState != matching::GameState::Idle)
+		return { false, "GAME_IS_PLAYING" };
+
+	return { true, "" };
+}
+
+void MatchingRoom::SetClientData(shared_ptr<ClientBase> client)
+{
 	static_pointer_cast<MatchingClient>(client)->enteredTime = std::chrono::system_clock::now();
-	SetClientData(client);
-	return client;
+}
+
+void MatchingRoom::OnEnterSuccess(shared_ptr<ClientBase> client)
+{
+	GameRoom::OnEnterSuccess(client);
+
+	roomInfo["currentPlayerNumber"] = roomInfo["currentPlayerNumber"].get<int>() + 1;
+
+	if (currentHostId.empty())
+	{
+		SetHost(client->clientId);
+		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+	}
 }
 
 void MatchingRoom::GetHost(shared_ptr<ClientBase> client)
