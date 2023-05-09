@@ -227,10 +227,15 @@ void GameRoom::ClearObject()
 {
 	Protocol::S_BASE_REMOVE_OBJECT removeObject;
 
-	for (int i = 0; i < gameObjects.size(); i++)
-		removeObject.add_gameobjects(gameObjects[i]->objectId);
+	for (auto gameObject = gameObjects.begin(); gameObject != gameObjects.end(); gameObject++)
+		removeObject.add_gameobjects(gameObject->second->objectId);
 
 	Broadcast(PacketManager::MakeSendBuffer(removeObject));
 	gameObjects.clear();
+	for (auto client = clients.begin(); client != clients.end(); client++)
+	{
+		auto gClient = static_pointer_cast<GameClient>(client->second);
+		gClient->gameObjects.clear();
+	}
 }
 
