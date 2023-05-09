@@ -24,6 +24,8 @@ public :
 	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
 	virtual void Leave(shared_ptr<ClientBase> client) override;
 
+	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId) override;
+
 	void InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt);
 	void RemoveObject(shared_ptr<GameClient> client);
 	void GetObjects(shared_ptr<GameClient> client);

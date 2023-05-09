@@ -261,16 +261,6 @@ void OXRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 	Protocol::S_ENTER res;
 
-	{
-		auto client = clients.find(pkt.clientid());
-		if (client != clients.end())
-		{
-			client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
-			DoTimer(1000, &OXRoom::Enter, session, pkt);
-			return;
-		}
-	}
-
 	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
 
 	if (clients.size() >= maxPlayerNumber)
@@ -289,8 +279,9 @@ void OXRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		return;
 	}
 
-	auto client = static_pointer_cast<OXClient>(GClientManager->MakeCilent<OXClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-	client->enteredTime = std::chrono::system_clock::now();
+	auto client = MakeClient(pkt.clientid(), pkt.sessionid());
+	client->session = session;
+	client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
 	clients.insert({ pkt.clientid(), client });
 
 	res.set_result("SUCCESS");
@@ -299,7 +290,8 @@ void OXRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	Protocol::S_ADD_CLIENT addClient;
 	auto clientInfo = addClient.add_clientinfos();
 	clientInfo->set_clientid(pkt.clientid());
-	clientInfo->set_nickname(pkt.nickname());
+	clientInfo->set_nickname(client->nickname);
+	clientInfo->set_statemessage(client->stateMessage);
 	Broadcast(PacketManager::MakeSendBuffer(addClient));
 
 	roomInfo["currentPlayerNumber"] = roomInfo["currentPlayerNumber"].get<int>() + 1;
@@ -332,6 +324,14 @@ void OXRoom::Leave(shared_ptr<ClientBase> client)
 		if (nextHost != clients.end())
 			SetHost(nextHost->second->clientId);
 	}
+}
+
+shared_ptr<ClientBase> OXRoom::MakeClient(string clientId, int sessionId)
+{
+	auto client = GClientManager->MakeCilent<OXClient>(clientId, sessionId);
+	static_pointer_cast<OXClient>(client)->enteredTime = std::chrono::system_clock::now();
+	SetClientData(client);
+	return client;
 }
 
 void OXRoom::GetHost(shared_ptr<ClientBase> client)

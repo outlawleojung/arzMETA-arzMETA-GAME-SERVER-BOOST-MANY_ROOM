@@ -34,6 +34,9 @@ public:
 
 	virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer);
 	
+	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId);
+	void SetClientData(shared_ptr<ClientBase> client);
+
 	RoomType type;
 	string roomId;
 	string sceneName;

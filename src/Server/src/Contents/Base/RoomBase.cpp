@@ -2,6 +2,7 @@
 #include "../RoomManager.h"
 #include "ClientBase.h"
 #include "../../PacketManager.h"
+#include "../ClientManager.h"
 
 RoomBase::RoomBase()
 	: state(RoomState::Idle)
@@ -113,4 +114,49 @@ void RoomBase::Broadcast(shared_ptr<SendBuffer> sendBuffer)
 {
 	for (auto client = clients.begin(); client != clients.end(); client++)
 		client->second->Send(sendBuffer);
+}
+
+shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
+{
+	auto client = GClientManager->MakeCilent<ClientBase>(clientId, sessionId);
+	SetClientData(client);
+
+	return client;
+}
+
+#include <mysql_connection.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/statement.h>
+
+void RoomBase::SetClientData(shared_ptr<ClientBase> client)
+{
+	sql::Driver* driver;
+	sql::Connection* con;
+	sql::Statement* stmt;
+	sql::ResultSet* res;
+
+	driver = get_driver_instance();
+
+	con = driver->connect(
+		DBDomain,
+		DBUsername,
+		DBPassword
+	);
+	con->setSchema("dev_arzmeta_db");
+
+	stmt = con->createStatement();
+	stmt->execute("SET NAMES 'utf8mb4'");
+	res = stmt->executeQuery("SELECT nickname, stateMessage FROM member WHERE memberCode = '" + client->clientId + "'");
+
+	while (res->next())
+	{
+		client->nickname = res->getString(1);
+		client->stateMessage = res->getString(2);
+	}
+
+	delete res;
+	delete stmt;
+	delete con;
 }

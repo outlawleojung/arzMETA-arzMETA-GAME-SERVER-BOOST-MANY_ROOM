@@ -80,185 +80,159 @@ void OfficeRoom::Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol
 
 void OfficeRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 {
-	if (state != RoomState::Running) return;
-
-	Protocol::S_ENTER res;
-
-	{
-		auto client = waitingList.find(pkt.clientid());
-		if (client != waitingList.end())
-		{
-			client->second.second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
-			DoTimer(1000, &OfficeRoom::Enter, session, pkt);
-			return;
-		}
-	}
-
-	{
-		auto client = clients.find(pkt.clientid());
-		if (client != clients.end())
-		{
-			client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
-			DoTimer(1000, &OfficeRoom::Enter, session, pkt);
-			return;
-		}
-	}
-
-	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
-	
-	if (currentHostId.empty() && creatorId == pkt.clientid())
-	{
-		auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-
-		client->type = OfficeRoomUserType::Host;
-
-		client->chatPermission = true;
-		client->screenPermission = true;
-		client->videoPermission = true;
-		client->voicePermission = true;
-
-		clients.insert({ pkt.clientid(), client });
-
-		currentPersonnel++;
-		currentHostId = pkt.clientid();
-
-		roomInfo["hostName"] = client->nickname;
-		roomInfo["currentPersonnel"] = currentPersonnel;
-
-		res.set_result("SUCCESS");
-		session->Send(PacketManager::MakeSendBuffer(res));
-
-		{
-			auto now = std::chrono::system_clock::now();
-			std::time_t t = std::chrono::system_clock::to_time_t(now);
-			std::tm bt;
-
-			t += 32400;
-			{
-#ifdef linux
-				localtime_r(&t, &bt);
-#elif _WIN32
-				localtime_s(&bt, &t);
-#endif
-				char buffer[50];
-				strftime(buffer, 50, "%Y.%m.%d %p %I:%M", &bt);
-				createdTimeString = string(buffer);
-				roomInfo["createdTime"] = createdTimeString;
-			}
-		}
-
-		this->DoAsync(&OfficeRoom::Countdown);
-
-		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
-
-		return;
-	}
-
-	if (clients.size() == 0)
-	{
-		res.set_result("HOST_NOT_ENTERED");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	if (isShutdown)
-	{
-		res.set_result("ROOM_IS_SHUTDONW");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	if (isPassword && password != pkt.password())
-	{
-		res.set_result("PASSWORD_FAIL");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	if (isWaitingRoom)
-	{		
-		auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-
-		if (pkt.isobserver())
-			client->type = OfficeRoomUserType::Observer;
-		else
-			if (modeType == 1)
-				client->type = OfficeRoomUserType::Guest;
-			else if (modeType == 2)
-				client->type = OfficeRoomUserType::Audience;
-
-		client->chatPermission = false;
-		client->screenPermission = false;
-		client->videoPermission = false;
-		client->voicePermission = false;
-
-		waitingList.insert({ pkt.clientid(), { pkt.isobserver(),client } });
-
-		res.set_result("WAITING");
-		session->Send(PacketManager::MakeSendBuffer(res));
-
-		Protocol::S_OFFICE_ADD_WAITING_CLIENT addWaitingClient;
-		auto waitingClient = addWaitingClient.add_clients();
-		waitingClient->set_isobserver(pkt.isobserver());
-		waitingClient->set_clientid(pkt.clientid());
-		waitingClient->set_nickname(pkt.nickname());
-		clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(addWaitingClient));
-
-		return;	
-	}
-
-	if ((!pkt.isobserver() && (maxPlayerNumber <= currentPersonnel)) || (pkt.isobserver() && (observer <= currentObserver)))
-	{
-		res.set_result("ROOM_IS_FULL");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-
-	if (pkt.isobserver())
-	{
-		client->type = OfficeRoomUserType::Observer;
-		client->chatPermission = false;
-	}
-	else
-	{
-		if (modeType == 1)
-			client->type = OfficeRoomUserType::Guest;
-		else if (modeType == 2)
-			client->type = OfficeRoomUserType::Audience;
-
-		client->chatPermission = true;
-	}
-
-	client->screenPermission = false;
-	client->videoPermission = false;
-	client->voicePermission = false;
-
-	clients.insert({ pkt.clientid(), client });
-
-	res.set_result("SUCCESS");
-	session->Send(PacketManager::MakeSendBuffer(res));
-
-	if (pkt.isobserver())
-	{
-		currentObserver++;
-	}
-	else
-	{
-		currentPersonnel++;
-		roomInfo["currentPersonnel"] = currentPersonnel;
-
-		Protocol::S_ADD_CLIENT addClient;
-		auto clientInfo = addClient.add_clientinfos();
-		clientInfo->set_clientid(pkt.clientid());
-		clientInfo->set_nickname(pkt.nickname());
-		Broadcast(PacketManager::MakeSendBuffer(addClient));
-	}
+//	if (state != RoomState::Running) return;
+//
+//	Protocol::S_ENTER res;
+//
+//	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
+//	
+//	if (currentHostId.empty() && creatorId == pkt.clientid())
+//	{
+//		auto client = MakeClient(pkt.clientid(), pkt.sessionid());
+//		client->session = session;
+//		client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
+//		clients.insert({ pkt.clientid(), client });
+//
+//		currentPersonnel++;
+//		currentHostId = pkt.clientid();
+//
+//		roomInfo["hostName"] = client->nickname;
+//		roomInfo["currentPersonnel"] = currentPersonnel;
+//
+//		res.set_result("SUCCESS");
+//		session->Send(PacketManager::MakeSendBuffer(res));
+//
+//		{
+//			auto now = std::chrono::system_clock::now();
+//			std::time_t t = std::chrono::system_clock::to_time_t(now);
+//			std::tm bt;
+//
+//			t += 32400;
+//			{
+//#ifdef linux
+//				localtime_r(&t, &bt);
+//#elif _WIN32
+//				localtime_s(&bt, &t);
+//#endif
+//				char buffer[50];
+//				strftime(buffer, 50, "%Y.%m.%d %p %I:%M", &bt);
+//				createdTimeString = string(buffer);
+//				roomInfo["createdTime"] = createdTimeString;
+//			}
+//		}
+//
+//		this->DoAsync(&OfficeRoom::Countdown);
+//
+//		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+//
+//		return;
+//	}
+//
+//	if (clients.size() == 0)
+//	{
+//		res.set_result("HOST_NOT_ENTERED");
+//		session->Send(PacketManager::MakeSendBuffer(res));
+//		session->Disconnect();
+//		return;
+//	}
+//
+//	if (isShutdown)
+//	{
+//		res.set_result("ROOM_IS_SHUTDONW");
+//		session->Send(PacketManager::MakeSendBuffer(res));
+//		session->Disconnect();
+//		return;
+//	}
+//
+//	if (isPassword && password != pkt.password())
+//	{
+//		res.set_result("PASSWORD_FAIL");
+//		session->Send(PacketManager::MakeSendBuffer(res));
+//		session->Disconnect();
+//		return;
+//	}
+//
+//	if (isWaitingRoom)
+//	{		
+//		auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
+//
+//		if (pkt.isobserver())
+//			client->type = OfficeRoomUserType::Observer;
+//		else
+//			if (modeType == 1)
+//				client->type = OfficeRoomUserType::Guest;
+//			else if (modeType == 2)
+//				client->type = OfficeRoomUserType::Audience;
+//
+//		client->chatPermission = false;
+//		client->screenPermission = false;
+//		client->videoPermission = false;
+//		client->voicePermission = false;
+//
+//		waitingList.insert({ pkt.clientid(), { pkt.isobserver(),client } });
+//
+//		res.set_result("WAITING");
+//		session->Send(PacketManager::MakeSendBuffer(res));
+//
+//		Protocol::S_OFFICE_ADD_WAITING_CLIENT addWaitingClient;
+//		auto waitingClient = addWaitingClient.add_clients();
+//		waitingClient->set_isobserver(pkt.isobserver());
+//		waitingClient->set_clientid(pkt.clientid());
+//		waitingClient->set_nickname(pkt.nickname());
+//		clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(addWaitingClient));
+//
+//		return;	
+//	}
+//
+//	if ((!pkt.isobserver() && (maxPlayerNumber <= currentPersonnel)) || (pkt.isobserver() && (observer <= currentObserver)))
+//	{
+//		res.set_result("ROOM_IS_FULL");
+//		session->Send(PacketManager::MakeSendBuffer(res));
+//		session->Disconnect();
+//		return;
+//	}
+//
+//	auto client = static_pointer_cast<OfficeClient>(GClientManager->MakeCilent<OfficeClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
+//
+//	if (pkt.isobserver())
+//	{
+//		client->type = OfficeRoomUserType::Observer;
+//		client->chatPermission = false;
+//	}
+//	else
+//	{
+//		if (modeType == 1)
+//			client->type = OfficeRoomUserType::Guest;
+//		else if (modeType == 2)
+//			client->type = OfficeRoomUserType::Audience;
+//
+//		client->chatPermission = true;
+//	}
+//
+//	client->screenPermission = false;
+//	client->videoPermission = false;
+//	client->voicePermission = false;
+//
+//	clients.insert({ pkt.clientid(), client });
+//
+//	res.set_result("SUCCESS");
+//	session->Send(PacketManager::MakeSendBuffer(res));
+//
+//	if (pkt.isobserver())
+//	{
+//		currentObserver++;
+//	}
+//	else
+//	{
+//		currentPersonnel++;
+//		roomInfo["currentPersonnel"] = currentPersonnel;
+//
+//		Protocol::S_ADD_CLIENT addClient;
+//		auto clientInfo = addClient.add_clientinfos();
+//		clientInfo->set_clientid(pkt.clientid());
+//		clientInfo->set_nickname(pkt.nickname());
+//		Broadcast(PacketManager::MakeSendBuffer(addClient));
+//	}
 }
 
 void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
@@ -294,6 +268,21 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 
 	if (_client->clientId == currentHostId)
 		Close();
+}
+
+shared_ptr<ClientBase> OfficeRoom::MakeClient(string clientId, int sessionId)
+{
+	auto client = GClientManager->MakeCilent<OfficeClient>(clientId, sessionId);
+
+	static_pointer_cast<OfficeClient>(client)->type = OfficeRoomUserType::Host;
+
+	static_pointer_cast<OfficeClient>(client)->chatPermission = true;
+	static_pointer_cast<OfficeClient>(client)->screenPermission = true;
+	static_pointer_cast<OfficeClient>(client)->videoPermission = true;
+	static_pointer_cast<OfficeClient>(client)->voicePermission = true;
+
+	SetClientData(client);
+	return client;
 }
 
 void OfficeRoom::GetHost(shared_ptr<ClientBase> client)

@@ -57,16 +57,6 @@ void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 	Protocol::S_ENTER res;
 
-	{
-		auto client = clients.find(pkt.clientid());
-		if (client != clients.end())
-		{
-			client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
-			DoTimer(1000, &GameRoom::Enter, session, pkt);
-			return;
-		}
-	}
-
 	if (clients.size() >= maxPlayerNumber)
 	{
 		res.set_result("ROOM_IS_FULL");
@@ -75,7 +65,9 @@ void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		return;
 	}
 
-	auto client = static_pointer_cast<GameClient>(GClientManager->MakeCilent<GameClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
+	auto client = MakeClient(pkt.clientid(), pkt.sessionid());
+	client->session = session;
+	client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
 
 	clients.insert({ pkt.clientid(), client });
 
@@ -85,7 +77,7 @@ void GameRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	Protocol::S_ADD_CLIENT addClient;
 	auto clientInfo = addClient.add_clientinfos();
 	clientInfo->set_clientid(pkt.clientid());
-	clientInfo->set_nickname(pkt.nickname());
+	clientInfo->set_nickname(client->nickname);
 	Broadcast(PacketManager::MakeSendBuffer(addClient));
 }
 
@@ -98,6 +90,15 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 	RemoveObject(gClient);
 
 	RoomBase::Leave(client);
+}
+
+shared_ptr<ClientBase> GameRoom::MakeClient(string clientId, int sessionId)
+{
+	auto client = GClientManager->MakeCilent<GameClient>(clientId, sessionId);
+
+	
+
+	return client;
 }
 
 void GameRoom::RemoveObject(shared_ptr<GameClient> client)

@@ -3,6 +3,7 @@
 #include <nlohmann/json.hpp>
 
 #include "../Contents/GameContents.h"
+#include "../Contents/ClientManager.h"
 
 void HttpServer::start(string ip, int port)
 {
@@ -164,6 +165,24 @@ void HttpServer::start(string ip, int port)
 
 		res.set_content(resJson.dump(), "application/json");
         });
+
+	svr.Post("/Login", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
+
+		std::string bodyStr;
+		content_reader([&](const char* data, size_t data_length) {
+			bodyStr.append(data, data_length);
+			return true;
+			});
+
+		nlohmann::json body = nlohmann::json::parse(bodyStr);
+
+		int sessionId = GClientManager->SetSessionId(body["clientId"]);
+
+		nlohmann::json resJson;
+		resJson["sessionId"] = sessionId;
+
+		res.set_content(resJson.dump(), "application/json");
+		});
 
     svr.listen(ip.c_str(), port);
 }

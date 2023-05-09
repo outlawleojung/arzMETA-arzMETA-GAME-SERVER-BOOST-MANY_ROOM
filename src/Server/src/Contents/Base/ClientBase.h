@@ -29,7 +29,10 @@ public:
 
 public:
 	string clientId;
+	string sessionId;
 	string nickname;
+	string stateMessage;
+
 	shared_ptr<RoomBase> enteredRoom = nullptr;
 	ClientState state;
 
