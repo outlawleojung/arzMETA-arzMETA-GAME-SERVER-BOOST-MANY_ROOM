@@ -29,9 +29,9 @@ void MyRoomRoom::Init()
 	driver = get_driver_instance();
 
 	con = driver->connect(
-		"dev-arowana-mysql.mariadb.database.azure.com",
-		"frontishub@dev-arowana-mysql",
-		"rkskekfk123!@!@"
+		DBDomain,
+		DBUsername,
+		DBPassword
 	);
 	con->setSchema("dev_arzmeta_db");
 	
