@@ -4,6 +4,7 @@
 #include "MyRoom/MyRoomRoom.h"
 #include "Office/OfficeRoom.h"
 #include "Matching/MatchingRoom.h"
+#include "Meeting/MeetingRoom.h"
 #include "OX/OXRoom.h"
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
@@ -66,7 +67,7 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Meeting:
     {
-        MeetingRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        MeetingRooms.insert({ static_pointer_cast<MeetingRoom>(room)->roomCode, room });
         break;
     }
     case RoomType::Lecture:
@@ -76,7 +77,7 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Consulting:
     {
-        ConsultingRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        ConsultingRooms.insert({ static_pointer_cast<MeetingRoom>(room)->roomCode, room });
         break;
     }
     case RoomType::JumpingMatching:
@@ -144,7 +145,7 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Meeting:
     {
-        MeetingRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        MeetingRooms.erase(static_pointer_cast<MeetingRoom>(room)->roomCode);
         break;
     }
     case RoomType::Lecture:
@@ -154,7 +155,7 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Consulting:
     {
-        ConsultingRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        ConsultingRooms.erase(static_pointer_cast<MeetingRoom>(room)->roomCode);
         break;
     }
     case RoomType::JumpingMatching:

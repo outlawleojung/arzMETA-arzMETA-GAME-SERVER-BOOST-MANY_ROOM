@@ -78,6 +78,30 @@ void HttpServer::start(string ip, int port)
 			break;
 		}
 		case RoomType::Meeting :
+		{
+			room = make_shared<MeetingRoom>();
+
+			static_pointer_cast<MeetingRoom>(room)->roomCode = body["roomCode"];
+			static_pointer_cast<MeetingRoom>(room)->roomName = body["roomName"];
+			static_pointer_cast<MeetingRoom>(room)->description = body["description"];
+			static_pointer_cast<MeetingRoom>(room)->spaceInfoId = body["spaceInfoId"];
+			static_pointer_cast<MeetingRoom>(room)->thumbnail = body["thumbnail"];
+			static_pointer_cast<MeetingRoom>(room)->topicType = body["topicType"];
+			static_pointer_cast<MeetingRoom>(room)->creatorId = body["creatorId"];
+
+			static_pointer_cast<MeetingRoom>(room)->password = body["password"];
+			if (body["password"] == "")
+				static_pointer_cast<MeetingRoom>(room)->isPassword = false;
+			else
+				static_pointer_cast<MeetingRoom>(room)->isPassword = true;
+
+			static_pointer_cast<MeetingRoom>(room)->maxPlayerNumber = body["personnel"];
+			static_pointer_cast<MeetingRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
+			static_pointer_cast<MeetingRoom>(room)->isAdvertising = body["isAdvertising"];
+			static_pointer_cast<MeetingRoom>(room)->runningTime = body["runningTime"];
+
+			break;
+		}
 		case RoomType::Lecture :
 		{
 			room = make_shared<OfficeRoom>();

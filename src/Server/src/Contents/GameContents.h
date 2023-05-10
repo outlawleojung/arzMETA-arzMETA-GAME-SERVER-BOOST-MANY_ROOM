@@ -3,5 +3,6 @@
 #include "Game/GameRoom.h"
 #include "MyRoom/MyRoomRoom.h"
 #include "Office/OfficeRoom.h"
+#include "Meeting/MeetingRoom.h"
 #include "Matching/MatchingRoom.h"
 #include "OX/OXRoom.h"
