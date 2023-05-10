@@ -52,7 +52,7 @@ void MyRoomRoom::Init()
 	}
 	
 	{
-		res = stmt->executeQuery("SELECT avatarPartsType, itemId FROM member WHERE memberId = '" + ownerMemberId + "'");
+		res = stmt->executeQuery("SELECT avatarPartsType, itemId FROM memberavatarinfo WHERE memberId = '" + ownerMemberId + "'");
 
 		while (res->next())
 			ownerAvatarInfo[res->getString(1)] = res->getString(2);
@@ -97,6 +97,7 @@ void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	if (state != RoomState::Running) return;
 
 	Protocol::S_MYROOM_GET_ROOMINFO res;
+
 	res.set_ownerid(ownerId);
 	res.set_ownernickname(ownerNickname);
 	res.set_owneravatarinfo(ownerAvatarInfo.dump());
