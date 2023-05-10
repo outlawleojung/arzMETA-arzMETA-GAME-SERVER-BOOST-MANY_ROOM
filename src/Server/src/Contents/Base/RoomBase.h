@@ -26,7 +26,7 @@ public:
 	virtual void Close();
 	virtual void HandleClose();
 	
-	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) = 0;
+	void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt);
 	virtual void Leave(shared_ptr<ClientBase> session);
 	void SetNickname(shared_ptr<ClientBase> session, string nickname);
 	virtual void GetClient(shared_ptr<ClientBase> session);
@@ -34,6 +34,14 @@ public:
 
 	virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer);
 	
+	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId);
+	
+	void SetDefaultClientData(shared_ptr<ClientBase> client);
+	
+	virtual void SetClientData(shared_ptr<ClientBase> client) {};
+	virtual pair<bool, string> HandleEnter(const Protocol::C_ENTER& pkt) { return { false, "DEFAULT_HANDLE_ENTER" }; }
+	virtual void OnEnterSuccess(shared_ptr<ClientBase> client);
+
 	RoomType type;
 	string roomId;
 	string sceneName;

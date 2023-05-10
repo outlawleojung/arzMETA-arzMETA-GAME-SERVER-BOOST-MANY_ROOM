@@ -349,6 +349,7 @@ class S_MYROOM_GET_ROOMINFO final :
 
   enum : int {
     kOwnerNicknameFieldNumber = 1,
+    kOwnerAvatarInfoFieldNumber = 2,
   };
   // string ownerNickname = 1;
   void clear_ownernickname();
@@ -364,6 +365,20 @@ class S_MYROOM_GET_ROOMINFO final :
   std::string* _internal_mutable_ownernickname();
   public:
 
+  // string ownerAvatarInfo = 2;
+  void clear_owneravatarinfo();
+  const std::string& owneravatarinfo() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_owneravatarinfo(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_owneravatarinfo();
+  PROTOBUF_NODISCARD std::string* release_owneravatarinfo();
+  void set_allocated_owneravatarinfo(std::string* owneravatarinfo);
+  private:
+  const std::string& _internal_owneravatarinfo() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_owneravatarinfo(const std::string& value);
+  std::string* _internal_mutable_owneravatarinfo();
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_MYROOM_GET_ROOMINFO)
  private:
   class _Internal;
@@ -373,6 +388,7 @@ class S_MYROOM_GET_ROOMINFO final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ownernickname_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr owneravatarinfo_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2177,6 +2193,56 @@ inline void S_MYROOM_GET_ROOMINFO::set_allocated_ownernickname(std::string* owne
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname)
+}
+
+// string ownerAvatarInfo = 2;
+inline void S_MYROOM_GET_ROOMINFO::clear_owneravatarinfo() {
+  _impl_.owneravatarinfo_.ClearToEmpty();
+}
+inline const std::string& S_MYROOM_GET_ROOMINFO::owneravatarinfo() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_GET_ROOMINFO.ownerAvatarInfo)
+  return _internal_owneravatarinfo();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_MYROOM_GET_ROOMINFO::set_owneravatarinfo(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.owneravatarinfo_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_GET_ROOMINFO.ownerAvatarInfo)
+}
+inline std::string* S_MYROOM_GET_ROOMINFO::mutable_owneravatarinfo() {
+  std::string* _s = _internal_mutable_owneravatarinfo();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_MYROOM_GET_ROOMINFO.ownerAvatarInfo)
+  return _s;
+}
+inline const std::string& S_MYROOM_GET_ROOMINFO::_internal_owneravatarinfo() const {
+  return _impl_.owneravatarinfo_.Get();
+}
+inline void S_MYROOM_GET_ROOMINFO::_internal_set_owneravatarinfo(const std::string& value) {
+  
+  _impl_.owneravatarinfo_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_MYROOM_GET_ROOMINFO::_internal_mutable_owneravatarinfo() {
+  
+  return _impl_.owneravatarinfo_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_MYROOM_GET_ROOMINFO::release_owneravatarinfo() {
+  // @@protoc_insertion_point(field_release:Protocol.S_MYROOM_GET_ROOMINFO.ownerAvatarInfo)
+  return _impl_.owneravatarinfo_.Release();
+}
+inline void S_MYROOM_GET_ROOMINFO::set_allocated_owneravatarinfo(std::string* owneravatarinfo) {
+  if (owneravatarinfo != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.owneravatarinfo_.SetAllocated(owneravatarinfo, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.owneravatarinfo_.IsDefault()) {
+    _impl_.owneravatarinfo_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_GET_ROOMINFO.ownerAvatarInfo)
 }
 
 // -------------------------------------------------------------------

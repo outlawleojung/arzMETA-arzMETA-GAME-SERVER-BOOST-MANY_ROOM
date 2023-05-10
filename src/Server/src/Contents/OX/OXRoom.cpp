@@ -255,63 +255,6 @@ void OXRoom::Handle_C_OX_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_OX
 void OXRoom::Handle_C_OX_START(shared_ptr<ClientBase>& client, Protocol::C_OX_START& pkt) { DoAsync(&OXRoom::Start, client); }
 void OXRoom::Handle_C_OX_DIE(shared_ptr<ClientBase>& client, Protocol::C_OX_DIE& pkt) { DoAsync(&OXRoom::Die, client); }
 
-void OXRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
-{
-	if (state != RoomState::Running) return;
-
-	Protocol::S_ENTER res;
-
-	{
-		auto client = clients.find(pkt.clientid());
-		if (client != clients.end())
-		{
-			client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
-			DoTimer(1000, &OXRoom::Enter, session, pkt);
-			return;
-		}
-	}
-
-	GLogManager->Log("Session Try to Enter :		", pkt.clientid());
-
-	if (clients.size() >= maxPlayerNumber)
-	{
-		res.set_result("ROOM_IS_FULL");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	if (gameData.gameState != ox::GameState::Idle)
-	{
-		res.set_result("GAME_IS_PLAYING");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
-
-	auto client = static_pointer_cast<OXClient>(GClientManager->MakeCilent<OXClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-	client->enteredTime = std::chrono::system_clock::now();
-	clients.insert({ pkt.clientid(), client });
-
-	res.set_result("SUCCESS");
-	session->Send(PacketManager::MakeSendBuffer(res));
-
-	Protocol::S_ADD_CLIENT addClient;
-	auto clientInfo = addClient.add_clientinfos();
-	clientInfo->set_clientid(pkt.clientid());
-	clientInfo->set_nickname(pkt.nickname());
-	Broadcast(PacketManager::MakeSendBuffer(addClient));
-
-	roomInfo["currentPlayerNumber"] = roomInfo["currentPlayerNumber"].get<int>() + 1;
-
-	if (currentHostId.empty())
-	{
-		SetHost(client->clientId);
-		//set room visible
-		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
-	}
-}
-
 void OXRoom::Leave(shared_ptr<ClientBase> client)
 {
 	if (state != RoomState::Running) return;
@@ -331,6 +274,40 @@ void OXRoom::Leave(shared_ptr<ClientBase> client)
 
 		if (nextHost != clients.end())
 			SetHost(nextHost->second->clientId);
+	}
+}
+
+shared_ptr<ClientBase> OXRoom::MakeClient(string clientId, int sessionId)
+{
+	return GClientManager->MakeCilent<OXClient>(clientId, sessionId);
+}
+
+pair<bool, string> OXRoom::HandleEnter(const Protocol::C_ENTER& pkt)
+{
+	if (clients.size() >= maxPlayerNumber)
+		return { false, "ROOM_IS_FULL" };
+
+	if (gameData.gameState != ox::GameState::Idle)
+		return { false, "GAME_IS_PLAYING" };
+
+	return { true, "SUCCESS" };
+}
+
+void OXRoom::SetClientData(shared_ptr<ClientBase> client)
+{
+	static_pointer_cast<OXClient>(client)->enteredTime = std::chrono::system_clock::now();
+}
+
+void OXRoom::OnEnterSuccess(shared_ptr<ClientBase> client)
+{
+	GameRoom::OnEnterSuccess(client);
+
+	roomInfo["currentPlayerNumber"] = roomInfo["currentPlayerNumber"].get<int>() + 1;
+
+	if (currentHostId.empty())
+	{
+		SetHost(client->clientId);
+		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 	}
 }
 

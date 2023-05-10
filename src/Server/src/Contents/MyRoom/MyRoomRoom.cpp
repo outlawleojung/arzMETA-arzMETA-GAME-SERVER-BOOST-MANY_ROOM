@@ -37,12 +37,25 @@ void MyRoomRoom::Init()
 	
 	stmt = con->createStatement();
 	stmt->execute("SET NAMES 'utf8mb4'");
-	res = stmt->executeQuery("SELECT nickname, myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
+	
+	string ownerMemberId;
 
-	while (res->next())
 	{
-		ownerNickname = res->getString(1);
-		isShutdown = res->getInt(2) == 4;
+		res = stmt->executeQuery("SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
+
+		while (res->next())
+		{
+			ownerMemberId = res->getString(1);
+			ownerNickname = res->getString(2);
+			isShutdown = res->getInt(3) == 4;
+		}
+	}
+	
+	{
+		res = stmt->executeQuery("SELECT avatarPartsType, itemId FROM member WHERE memberId = '" + ownerMemberId + "'");
+
+		while (res->next())
+			ownerAvatarInfo[res->getString(1)] = res->getString(2);
 	}
 
 	delete res;
@@ -66,52 +79,17 @@ void MyRoomRoom::Handle_C_MYROOM_END_EDIT(shared_ptr<ClientBase>& client, Protoc
 void MyRoomRoom::Handle_C_MYROOM_KICK(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_KICK& pkt) { DoAsync(&MyRoomRoom::Kick, client, pkt.clientid()); }
 void MyRoomRoom::Handle_C_MYROOM_SHUTDOWN(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_SHUTDOWN& pkt) { DoAsync(&MyRoomRoom::HandleShutdown, client, pkt.isshutdown()); }
 
-void MyRoomRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
+pair<bool, string> MyRoomRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 {
-	if (state != RoomState::Running) return;
-
-	Protocol::S_ENTER res;
-
-	{
-		auto client = clients.find(pkt.clientid());
-		if (client != clients.end())
-		{
-			client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
-			DoTimer(1000, &GameRoom::Enter, session, pkt);
-			return;
-		}
-	}
-
 	if (isShutdown && pkt.clientid() != ownerId)
-	{
-		res.set_result("ROON_IS_SHUTDOWN");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
+		return { false, "ROON_IS_SHUTDOWN" };
 
 	//TODO : blacklist ±¸Çö
 
 	if (clients.size() >= maxPlayerNumber)
-	{
-		res.set_result("ROOM_IS_FULL");
-		session->Send(PacketManager::MakeSendBuffer(res));
-		session->Disconnect();
-		return;
-	}
+		return { false, "ROOM_IS_FULL" };
 
-	auto client = static_pointer_cast<GameClient>(GClientManager->MakeCilent<GameClient>(session, pkt.clientid(), pkt.nickname(), static_pointer_cast<RoomBase>(shared_from_this())));
-
-	clients.insert({ pkt.clientid(), client });
-
-	res.set_result("SUCCESS");
-	session->Send(PacketManager::MakeSendBuffer(res));
-
-	Protocol::S_ADD_CLIENT addClient;
-	auto clientInfo = addClient.add_clientinfos();
-	clientInfo->set_clientid(pkt.clientid());
-	clientInfo->set_nickname(pkt.nickname());
-	Broadcast(PacketManager::MakeSendBuffer(addClient));
+	return { true, "SUCCESS" };
 }
 
 void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)
@@ -120,6 +98,7 @@ void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 
 	Protocol::S_MYROOM_GET_ROOMINFO res;
 	res.set_ownernickname(ownerNickname);
+	res.set_owneravatarinfo(ownerAvatarInfo.dump());
 	client->Send(PacketManager::MakeSendBuffer(res));
 }
 

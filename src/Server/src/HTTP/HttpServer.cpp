@@ -3,6 +3,7 @@
 #include <nlohmann/json.hpp>
 
 #include "../Contents/GameContents.h"
+#include "../Contents/ClientManager.h"
 
 void HttpServer::start(string ip, int port)
 {
@@ -77,6 +78,30 @@ void HttpServer::start(string ip, int port)
 			break;
 		}
 		case RoomType::Meeting :
+		{
+			room = make_shared<MeetingRoom>();
+
+			static_pointer_cast<MeetingRoom>(room)->roomCode = body["roomCode"];
+			static_pointer_cast<MeetingRoom>(room)->roomName = body["roomName"];
+			static_pointer_cast<MeetingRoom>(room)->description = body["description"];
+			static_pointer_cast<MeetingRoom>(room)->spaceInfoId = body["spaceInfoId"];
+			static_pointer_cast<MeetingRoom>(room)->thumbnail = body["thumbnail"];
+			static_pointer_cast<MeetingRoom>(room)->topicType = body["topicType"];
+			static_pointer_cast<MeetingRoom>(room)->creatorId = body["creatorId"];
+
+			static_pointer_cast<MeetingRoom>(room)->password = body["password"];
+			if (body["password"] == "")
+				static_pointer_cast<MeetingRoom>(room)->isPassword = false;
+			else
+				static_pointer_cast<MeetingRoom>(room)->isPassword = true;
+
+			static_pointer_cast<MeetingRoom>(room)->maxPlayerNumber = body["personnel"];
+			static_pointer_cast<MeetingRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
+			static_pointer_cast<MeetingRoom>(room)->isAdvertising = body["isAdvertising"];
+			static_pointer_cast<MeetingRoom>(room)->runningTime = body["runningTime"];
+
+			break;
+		}
 		case RoomType::Lecture :
 		{
 			room = make_shared<OfficeRoom>();
@@ -164,6 +189,28 @@ void HttpServer::start(string ip, int port)
 
 		res.set_content(resJson.dump(), "application/json");
         });
+
+	svr.Post("/Login", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
+
+		std::string bodyStr;
+		content_reader([&](const char* data, size_t data_length) {
+			bodyStr.append(data, data_length);
+			return true;
+			});
+
+		cout << bodyStr << endl;
+
+		nlohmann::json body = nlohmann::json::parse(bodyStr);
+
+		int sessionId = GClientManager->SetSessionId(body["clientId"]);
+
+		nlohmann::json resJson;
+		resJson["sessionId"] = sessionId;
+
+		cout << "test!" << endl;
+
+		res.set_content(resJson.dump(), "application/json");
+		});
 
     svr.listen(ip.c_str(), port);
 }

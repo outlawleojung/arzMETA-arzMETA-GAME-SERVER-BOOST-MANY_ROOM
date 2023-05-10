@@ -25,23 +25,24 @@ namespace Protocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdQYWNrZXRfMDAzX015cm9vbS5wcm90bxIIUHJvdG9jb2wiFwoVQ19NWVJP",
-            "T01fR0VUX1JPT01JTkZPIi4KFVNfTVlST09NX0dFVF9ST09NSU5GTxIVCg1v",
-            "d25lck5pY2tuYW1lGAEgASgJIikKFUNfTVlST09NX1NFVF9ST09NSU5GTxIQ",
-            "Cghyb29tSW5mbxgBIAEoCSIoChVTX01ZUk9PTV9TRVRfUk9PTUlORk8SDwoH",
-            "c3VjY2VzcxgBIAEoCCIsChhDX01ZUk9PTV9PVEhFUl9ST09NX0xJU1QSEAoI",
-            "cm9vbUluZm8YASABKAkiLAoYU19NWVJPT01fT1RIRVJfUk9PTV9MSVNUEhAK",
-            "CHJvb21JbmZvGAEgASgJIhUKE0NfTVlST09NX1NUQVJUX0VESVQiFQoTU19N",
-            "WVJPT01fU1RBUlRfRURJVCImChFDX01ZUk9PTV9FTkRfRURJVBIRCglpc0No",
-            "YW5nZWQYASABKAgiJgoRU19NWVJPT01fRU5EX0VESVQSEQoJaXNDaGFuZ2Vk",
-            "GAEgASgIIiEKDUNfTVlST09NX0tJQ0sSEAoIY2xpZW50SWQYASABKAkiIAoN",
-            "U19NWVJPT01fS0lDSxIPCgdzdWNjZXNzGAEgASgIIicKEUNfTVlST09NX1NI",
-            "VVRET1dOEhIKCmlzU2h1dGRvd24YASABKAgiJwoRU19NWVJPT01fU0hVVERP",
-            "V04SEgoKaXNTaHV0ZG93bhgBIAEoCGIGcHJvdG8z"));
+            "T01fR0VUX1JPT01JTkZPIkcKFVNfTVlST09NX0dFVF9ST09NSU5GTxIVCg1v",
+            "d25lck5pY2tuYW1lGAEgASgJEhcKD293bmVyQXZhdGFySW5mbxgCIAEoCSIp",
+            "ChVDX01ZUk9PTV9TRVRfUk9PTUlORk8SEAoIcm9vbUluZm8YASABKAkiKAoV",
+            "U19NWVJPT01fU0VUX1JPT01JTkZPEg8KB3N1Y2Nlc3MYASABKAgiLAoYQ19N",
+            "WVJPT01fT1RIRVJfUk9PTV9MSVNUEhAKCHJvb21JbmZvGAEgASgJIiwKGFNf",
+            "TVlST09NX09USEVSX1JPT01fTElTVBIQCghyb29tSW5mbxgBIAEoCSIVChND",
+            "X01ZUk9PTV9TVEFSVF9FRElUIhUKE1NfTVlST09NX1NUQVJUX0VESVQiJgoR",
+            "Q19NWVJPT01fRU5EX0VESVQSEQoJaXNDaGFuZ2VkGAEgASgIIiYKEVNfTVlS",
+            "T09NX0VORF9FRElUEhEKCWlzQ2hhbmdlZBgBIAEoCCIhCg1DX01ZUk9PTV9L",
+            "SUNLEhAKCGNsaWVudElkGAEgASgJIiAKDVNfTVlST09NX0tJQ0sSDwoHc3Vj",
+            "Y2VzcxgBIAEoCCInChFDX01ZUk9PTV9TSFVURE9XThISCgppc1NodXRkb3du",
+            "GAEgASgIIicKEVNfTVlST09NX1NIVVRET1dOEhIKCmlzU2h1dGRvd24YASAB",
+            "KAhiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_MYROOM_GET_ROOMINFO), global::Protocol.C_MYROOM_GET_ROOMINFO.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MYROOM_GET_ROOMINFO), global::Protocol.S_MYROOM_GET_ROOMINFO.Parser, new[]{ "OwnerNickname" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MYROOM_GET_ROOMINFO), global::Protocol.S_MYROOM_GET_ROOMINFO.Parser, new[]{ "OwnerNickname", "OwnerAvatarInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_MYROOM_SET_ROOMINFO), global::Protocol.C_MYROOM_SET_ROOMINFO.Parser, new[]{ "RoomInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MYROOM_SET_ROOMINFO), global::Protocol.S_MYROOM_SET_ROOMINFO.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_MYROOM_OTHER_ROOM_LIST), global::Protocol.C_MYROOM_OTHER_ROOM_LIST.Parser, new[]{ "RoomInfo" }, null, null, null, null),
@@ -247,6 +248,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_MYROOM_GET_ROOMINFO(S_MYROOM_GET_ROOMINFO other) : this() {
       ownerNickname_ = other.ownerNickname_;
+      ownerAvatarInfo_ = other.ownerAvatarInfo_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -271,6 +273,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "ownerAvatarInfo" field.</summary>
+    public const int OwnerAvatarInfoFieldNumber = 2;
+    private string ownerAvatarInfo_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string OwnerAvatarInfo {
+      get { return ownerAvatarInfo_; }
+      set {
+        ownerAvatarInfo_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -287,6 +301,7 @@ namespace Protocol {
         return true;
       }
       if (OwnerNickname != other.OwnerNickname) return false;
+      if (OwnerAvatarInfo != other.OwnerAvatarInfo) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -295,6 +310,7 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (OwnerNickname.Length != 0) hash ^= OwnerNickname.GetHashCode();
+      if (OwnerAvatarInfo.Length != 0) hash ^= OwnerAvatarInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -317,6 +333,10 @@ namespace Protocol {
         output.WriteRawTag(10);
         output.WriteString(OwnerNickname);
       }
+      if (OwnerAvatarInfo.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(OwnerAvatarInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -331,6 +351,10 @@ namespace Protocol {
         output.WriteRawTag(10);
         output.WriteString(OwnerNickname);
       }
+      if (OwnerAvatarInfo.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(OwnerAvatarInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -343,6 +367,9 @@ namespace Protocol {
       int size = 0;
       if (OwnerNickname.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(OwnerNickname);
+      }
+      if (OwnerAvatarInfo.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(OwnerAvatarInfo);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -358,6 +385,9 @@ namespace Protocol {
       }
       if (other.OwnerNickname.Length != 0) {
         OwnerNickname = other.OwnerNickname;
+      }
+      if (other.OwnerAvatarInfo.Length != 0) {
+        OwnerAvatarInfo = other.OwnerAvatarInfo;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -378,6 +408,10 @@ namespace Protocol {
             OwnerNickname = input.ReadString();
             break;
           }
+          case 18: {
+            OwnerAvatarInfo = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -395,6 +429,10 @@ namespace Protocol {
             break;
           case 10: {
             OwnerNickname = input.ReadString();
+            break;
+          }
+          case 18: {
+            OwnerAvatarInfo = input.ReadString();
             break;
           }
         }

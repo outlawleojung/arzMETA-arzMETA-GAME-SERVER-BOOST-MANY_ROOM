@@ -21,8 +21,10 @@ public :
 	virtual void Handle_C_BASE_SET_ANIMATION(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_ANIMATION& pkt) override;
 	virtual void Handle_C_BASE_SET_ANIMATION_ONCE(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_ANIMATION_ONCE& pkt) override;
 
-	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
 	virtual void Leave(shared_ptr<ClientBase> client) override;
+	
+	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId) override;
+	virtual pair<bool, string> HandleEnter(const Protocol::C_ENTER& pkt) override;
 
 	void InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt);
 	void RemoveObject(shared_ptr<GameClient> client);

@@ -236,8 +236,8 @@ class C_ENTER final :
   enum : int {
     kRoomIdFieldNumber = 1,
     kClientIdFieldNumber = 2,
-    kNicknameFieldNumber = 3,
     kPasswordFieldNumber = 4,
+    kSessionIdFieldNumber = 3,
     kIsObserverFieldNumber = 5,
   };
   // string roomId = 1;
@@ -268,20 +268,6 @@ class C_ENTER final :
   std::string* _internal_mutable_clientid();
   public:
 
-  // string nickname = 3;
-  void clear_nickname();
-  const std::string& nickname() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nickname(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nickname();
-  PROTOBUF_NODISCARD std::string* release_nickname();
-  void set_allocated_nickname(std::string* nickname);
-  private:
-  const std::string& _internal_nickname() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nickname(const std::string& value);
-  std::string* _internal_mutable_nickname();
-  public:
-
   // string password = 4;
   void clear_password();
   const std::string& password() const;
@@ -294,6 +280,15 @@ class C_ENTER final :
   const std::string& _internal_password() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_password(const std::string& value);
   std::string* _internal_mutable_password();
+  public:
+
+  // int32 sessionId = 3;
+  void clear_sessionid();
+  int32_t sessionid() const;
+  void set_sessionid(int32_t value);
+  private:
+  int32_t _internal_sessionid() const;
+  void _internal_set_sessionid(int32_t value);
   public:
 
   // bool isObserver = 5;
@@ -315,8 +310,8 @@ class C_ENTER final :
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr roomid_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientid_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nickname_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+    int32_t sessionid_;
     bool isobserver_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1138,6 +1133,7 @@ class S_ADD_CLIENT_ClientInfo final :
   enum : int {
     kClientIdFieldNumber = 1,
     kNicknameFieldNumber = 2,
+    kStateMessageFieldNumber = 3,
   };
   // string clientId = 1;
   void clear_clientid();
@@ -1167,6 +1163,20 @@ class S_ADD_CLIENT_ClientInfo final :
   std::string* _internal_mutable_nickname();
   public:
 
+  // string stateMessage = 3;
+  void clear_statemessage();
+  const std::string& statemessage() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_statemessage(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_statemessage();
+  PROTOBUF_NODISCARD std::string* release_statemessage();
+  void set_allocated_statemessage(std::string* statemessage);
+  private:
+  const std::string& _internal_statemessage() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_statemessage(const std::string& value);
+  std::string* _internal_mutable_statemessage();
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_ADD_CLIENT.ClientInfo)
  private:
   class _Internal;
@@ -1177,6 +1187,7 @@ class S_ADD_CLIENT_ClientInfo final :
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientid_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nickname_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr statemessage_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2560,54 +2571,24 @@ inline void C_ENTER::set_allocated_clientid(std::string* clientid) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_ENTER.clientId)
 }
 
-// string nickname = 3;
-inline void C_ENTER::clear_nickname() {
-  _impl_.nickname_.ClearToEmpty();
+// int32 sessionId = 3;
+inline void C_ENTER::clear_sessionid() {
+  _impl_.sessionid_ = 0;
 }
-inline const std::string& C_ENTER::nickname() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_ENTER.nickname)
-  return _internal_nickname();
+inline int32_t C_ENTER::_internal_sessionid() const {
+  return _impl_.sessionid_;
 }
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void C_ENTER::set_nickname(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nickname_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.C_ENTER.nickname)
+inline int32_t C_ENTER::sessionid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_ENTER.sessionId)
+  return _internal_sessionid();
 }
-inline std::string* C_ENTER::mutable_nickname() {
-  std::string* _s = _internal_mutable_nickname();
-  // @@protoc_insertion_point(field_mutable:Protocol.C_ENTER.nickname)
-  return _s;
-}
-inline const std::string& C_ENTER::_internal_nickname() const {
-  return _impl_.nickname_.Get();
-}
-inline void C_ENTER::_internal_set_nickname(const std::string& value) {
+inline void C_ENTER::_internal_set_sessionid(int32_t value) {
   
-  _impl_.nickname_.Set(value, GetArenaForAllocation());
+  _impl_.sessionid_ = value;
 }
-inline std::string* C_ENTER::_internal_mutable_nickname() {
-  
-  return _impl_.nickname_.Mutable(GetArenaForAllocation());
-}
-inline std::string* C_ENTER::release_nickname() {
-  // @@protoc_insertion_point(field_release:Protocol.C_ENTER.nickname)
-  return _impl_.nickname_.Release();
-}
-inline void C_ENTER::set_allocated_nickname(std::string* nickname) {
-  if (nickname != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nickname_.SetAllocated(nickname, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nickname_.IsDefault()) {
-    _impl_.nickname_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.C_ENTER.nickname)
+inline void C_ENTER::set_sessionid(int32_t value) {
+  _internal_set_sessionid(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_ENTER.sessionId)
 }
 
 // string password = 4;
@@ -2922,6 +2903,56 @@ inline void S_ADD_CLIENT_ClientInfo::set_allocated_nickname(std::string* nicknam
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_ADD_CLIENT.ClientInfo.nickname)
+}
+
+// string stateMessage = 3;
+inline void S_ADD_CLIENT_ClientInfo::clear_statemessage() {
+  _impl_.statemessage_.ClearToEmpty();
+}
+inline const std::string& S_ADD_CLIENT_ClientInfo::statemessage() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_ADD_CLIENT.ClientInfo.stateMessage)
+  return _internal_statemessage();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_ADD_CLIENT_ClientInfo::set_statemessage(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.statemessage_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_ADD_CLIENT.ClientInfo.stateMessage)
+}
+inline std::string* S_ADD_CLIENT_ClientInfo::mutable_statemessage() {
+  std::string* _s = _internal_mutable_statemessage();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_ADD_CLIENT.ClientInfo.stateMessage)
+  return _s;
+}
+inline const std::string& S_ADD_CLIENT_ClientInfo::_internal_statemessage() const {
+  return _impl_.statemessage_.Get();
+}
+inline void S_ADD_CLIENT_ClientInfo::_internal_set_statemessage(const std::string& value) {
+  
+  _impl_.statemessage_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_ADD_CLIENT_ClientInfo::_internal_mutable_statemessage() {
+  
+  return _impl_.statemessage_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_ADD_CLIENT_ClientInfo::release_statemessage() {
+  // @@protoc_insertion_point(field_release:Protocol.S_ADD_CLIENT.ClientInfo.stateMessage)
+  return _impl_.statemessage_.Release();
+}
+inline void S_ADD_CLIENT_ClientInfo::set_allocated_statemessage(std::string* statemessage) {
+  if (statemessage != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.statemessage_.SetAllocated(statemessage, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.statemessage_.IsDefault()) {
+    _impl_.statemessage_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_ADD_CLIENT.ClientInfo.stateMessage)
 }
 
 // -------------------------------------------------------------------

@@ -24,31 +24,31 @@ namespace Protocol {
     static Packet000CommonReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdQYWNrZXRfMDAwX0NvbW1vbi5wcm90bxIIUHJvdG9jb2wiYwoHQ19FTlRF",
-            "UhIOCgZyb29tSWQYASABKAkSEAoIY2xpZW50SWQYAiABKAkSEAoIbmlja25h",
-            "bWUYAyABKAkSEAoIcGFzc3dvcmQYBCABKAkSEgoKaXNPYnNlcnZlchgFIAEo",
-            "CCIZCgdTX0VOVEVSEg4KBnJlc3VsdBgBIAEoCSIdCglDX1JFRU5URVISEAoI",
-            "Y2xpZW50SWQYASABKAkiHAoJU19SRUVOVEVSEg8KB3N1Y2Nlc3MYASABKAgi",
-            "CQoHQ19MRUFWRSIOCgxDX0dFVF9DTElFTlQieAoMU19BRERfQ0xJRU5UEjYK",
-            "C2NsaWVudEluZm9zGAEgAygLMiEuUHJvdG9jb2wuU19BRERfQ0xJRU5ULkNs",
-            "aWVudEluZm8aMAoKQ2xpZW50SW5mbxIQCghjbGllbnRJZBgBIAEoCRIQCghu",
-            "aWNrbmFtZRgCIAEoCSIkCg9TX1JFTU9WRV9DTElFTlQSEQoJY2xpZW50SWRz",
-            "GAEgAygJIiIKDkNfU0VUX05JQ0tOQU1FEhAKCG5pY2tuYW1lGAEgASgJIiEK",
-            "DlNfU0VUX05JQ0tOQU1FEg8KB3N1Y2Nlc3MYASABKAgiOwoVU19TRVRfTklD",
-            "S05BTUVfTk9USUNFEhAKCGNsaWVudElkGAEgASgJEhAKCG5pY2tuYW1lGAIg",
-            "ASgJIhYKBkNfQ0hBVBIMCgRjaGF0GAEgASgJIigKBlNfQ0hBVBIQCghjbGll",
-            "bnRJZBgBIAEoCRIMCgRjaGF0GAIgASgJIhwKDFNfRElTQ09OTkVDVBIMCgRj",
-            "b2RlGAEgASgJYgZwcm90bzM="));
+            "ChdQYWNrZXRfMDAwX0NvbW1vbi5wcm90bxIIUHJvdG9jb2wiZAoHQ19FTlRF",
+            "UhIOCgZyb29tSWQYASABKAkSEAoIY2xpZW50SWQYAiABKAkSEQoJc2Vzc2lv",
+            "bklkGAMgASgFEhAKCHBhc3N3b3JkGAQgASgJEhIKCmlzT2JzZXJ2ZXIYBSAB",
+            "KAgiGQoHU19FTlRFUhIOCgZyZXN1bHQYASABKAkiHQoJQ19SRUVOVEVSEhAK",
+            "CGNsaWVudElkGAEgASgJIhwKCVNfUkVFTlRFUhIPCgdzdWNjZXNzGAEgASgI",
+            "IgkKB0NfTEVBVkUiDgoMQ19HRVRfQ0xJRU5UIo4BCgxTX0FERF9DTElFTlQS",
+            "NgoLY2xpZW50SW5mb3MYASADKAsyIS5Qcm90b2NvbC5TX0FERF9DTElFTlQu",
+            "Q2xpZW50SW5mbxpGCgpDbGllbnRJbmZvEhAKCGNsaWVudElkGAEgASgJEhAK",
+            "CG5pY2tuYW1lGAIgASgJEhQKDHN0YXRlTWVzc2FnZRgDIAEoCSIkCg9TX1JF",
+            "TU9WRV9DTElFTlQSEQoJY2xpZW50SWRzGAEgAygJIiIKDkNfU0VUX05JQ0tO",
+            "QU1FEhAKCG5pY2tuYW1lGAEgASgJIiEKDlNfU0VUX05JQ0tOQU1FEg8KB3N1",
+            "Y2Nlc3MYASABKAgiOwoVU19TRVRfTklDS05BTUVfTk9USUNFEhAKCGNsaWVu",
+            "dElkGAEgASgJEhAKCG5pY2tuYW1lGAIgASgJIhYKBkNfQ0hBVBIMCgRjaGF0",
+            "GAEgASgJIigKBlNfQ0hBVBIQCghjbGllbnRJZBgBIAEoCRIMCgRjaGF0GAIg",
+            "ASgJIhwKDFNfRElTQ09OTkVDVBIMCgRjb2RlGAEgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER), global::Protocol.C_ENTER.Parser, new[]{ "RoomId", "ClientId", "Nickname", "Password", "IsObserver" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER), global::Protocol.C_ENTER.Parser, new[]{ "RoomId", "ClientId", "SessionId", "Password", "IsObserver" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER), global::Protocol.S_ENTER.Parser, new[]{ "Result" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_REENTER), global::Protocol.C_REENTER.Parser, new[]{ "ClientId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_REENTER), global::Protocol.S_REENTER.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_LEAVE), global::Protocol.C_LEAVE.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_GET_CLIENT), global::Protocol.C_GET_CLIENT.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ADD_CLIENT), global::Protocol.S_ADD_CLIENT.Parser, new[]{ "ClientInfos" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ADD_CLIENT.Types.ClientInfo), global::Protocol.S_ADD_CLIENT.Types.ClientInfo.Parser, new[]{ "ClientId", "Nickname" }, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ADD_CLIENT), global::Protocol.S_ADD_CLIENT.Parser, new[]{ "ClientInfos" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ADD_CLIENT.Types.ClientInfo), global::Protocol.S_ADD_CLIENT.Types.ClientInfo.Parser, new[]{ "ClientId", "Nickname", "StateMessage" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_REMOVE_CLIENT), global::Protocol.S_REMOVE_CLIENT.Parser, new[]{ "ClientIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_SET_NICKNAME), global::Protocol.C_SET_NICKNAME.Parser, new[]{ "Nickname" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_SET_NICKNAME), global::Protocol.S_SET_NICKNAME.Parser, new[]{ "Success" }, null, null, null, null),
@@ -98,7 +98,7 @@ namespace Protocol {
     public C_ENTER(C_ENTER other) : this() {
       roomId_ = other.roomId_;
       clientId_ = other.clientId_;
-      nickname_ = other.nickname_;
+      sessionId_ = other.sessionId_;
       password_ = other.password_;
       isObserver_ = other.isObserver_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -134,15 +134,15 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "nickname" field.</summary>
-    public const int NicknameFieldNumber = 3;
-    private string nickname_ = "";
+    /// <summary>Field number for the "sessionId" field.</summary>
+    public const int SessionIdFieldNumber = 3;
+    private int sessionId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Nickname {
-      get { return nickname_; }
+    public int SessionId {
+      get { return sessionId_; }
       set {
-        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        sessionId_ = value;
       }
     }
 
@@ -190,7 +190,7 @@ namespace Protocol {
       }
       if (RoomId != other.RoomId) return false;
       if (ClientId != other.ClientId) return false;
-      if (Nickname != other.Nickname) return false;
+      if (SessionId != other.SessionId) return false;
       if (Password != other.Password) return false;
       if (IsObserver != other.IsObserver) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -202,7 +202,7 @@ namespace Protocol {
       int hash = 1;
       if (RoomId.Length != 0) hash ^= RoomId.GetHashCode();
       if (ClientId.Length != 0) hash ^= ClientId.GetHashCode();
-      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+      if (SessionId != 0) hash ^= SessionId.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
       if (IsObserver != false) hash ^= IsObserver.GetHashCode();
       if (_unknownFields != null) {
@@ -231,9 +231,9 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(ClientId);
       }
-      if (Nickname.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Nickname);
+      if (SessionId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SessionId);
       }
       if (Password.Length != 0) {
         output.WriteRawTag(34);
@@ -261,9 +261,9 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(ClientId);
       }
-      if (Nickname.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Nickname);
+      if (SessionId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SessionId);
       }
       if (Password.Length != 0) {
         output.WriteRawTag(34);
@@ -289,8 +289,8 @@ namespace Protocol {
       if (ClientId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ClientId);
       }
-      if (Nickname.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+      if (SessionId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SessionId);
       }
       if (Password.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
@@ -316,8 +316,8 @@ namespace Protocol {
       if (other.ClientId.Length != 0) {
         ClientId = other.ClientId;
       }
-      if (other.Nickname.Length != 0) {
-        Nickname = other.Nickname;
+      if (other.SessionId != 0) {
+        SessionId = other.SessionId;
       }
       if (other.Password.Length != 0) {
         Password = other.Password;
@@ -348,8 +348,8 @@ namespace Protocol {
             ClientId = input.ReadString();
             break;
           }
-          case 26: {
-            Nickname = input.ReadString();
+          case 24: {
+            SessionId = input.ReadInt32();
             break;
           }
           case 34: {
@@ -383,8 +383,8 @@ namespace Protocol {
             ClientId = input.ReadString();
             break;
           }
-          case 26: {
-            Nickname = input.ReadString();
+          case 24: {
+            SessionId = input.ReadInt32();
             break;
           }
           case 34: {
@@ -1490,6 +1490,7 @@ namespace Protocol {
         public ClientInfo(ClientInfo other) : this() {
           clientId_ = other.clientId_;
           nickname_ = other.nickname_;
+          stateMessage_ = other.stateMessage_;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -1523,6 +1524,18 @@ namespace Protocol {
           }
         }
 
+        /// <summary>Field number for the "stateMessage" field.</summary>
+        public const int StateMessageFieldNumber = 3;
+        private string stateMessage_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public string StateMessage {
+          get { return stateMessage_; }
+          set {
+            stateMessage_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public override bool Equals(object other) {
@@ -1540,6 +1553,7 @@ namespace Protocol {
           }
           if (ClientId != other.ClientId) return false;
           if (Nickname != other.Nickname) return false;
+          if (StateMessage != other.StateMessage) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -1549,6 +1563,7 @@ namespace Protocol {
           int hash = 1;
           if (ClientId.Length != 0) hash ^= ClientId.GetHashCode();
           if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+          if (StateMessage.Length != 0) hash ^= StateMessage.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -1575,6 +1590,10 @@ namespace Protocol {
             output.WriteRawTag(18);
             output.WriteString(Nickname);
           }
+          if (StateMessage.Length != 0) {
+            output.WriteRawTag(26);
+            output.WriteString(StateMessage);
+          }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
           }
@@ -1593,6 +1612,10 @@ namespace Protocol {
             output.WriteRawTag(18);
             output.WriteString(Nickname);
           }
+          if (StateMessage.Length != 0) {
+            output.WriteRawTag(26);
+            output.WriteString(StateMessage);
+          }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(ref output);
           }
@@ -1608,6 +1631,9 @@ namespace Protocol {
           }
           if (Nickname.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+          }
+          if (StateMessage.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(StateMessage);
           }
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
@@ -1626,6 +1652,9 @@ namespace Protocol {
           }
           if (other.Nickname.Length != 0) {
             Nickname = other.Nickname;
+          }
+          if (other.StateMessage.Length != 0) {
+            StateMessage = other.StateMessage;
           }
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
@@ -1650,6 +1679,10 @@ namespace Protocol {
                 Nickname = input.ReadString();
                 break;
               }
+              case 26: {
+                StateMessage = input.ReadString();
+                break;
+              }
             }
           }
         #endif
@@ -1671,6 +1704,10 @@ namespace Protocol {
               }
               case 18: {
                 Nickname = input.ReadString();
+                break;
+              }
+              case 26: {
+                StateMessage = input.ReadString();
                 break;
               }
             }

@@ -5,7 +5,7 @@ message C_ENTER
 {
 	string roomId = 1;
 	string clientId = 2;
-	string nickname = 3;
+	int32 sessionId = 3;
 
 	//for office
 	string password = 4;
@@ -41,6 +41,7 @@ message S_ADD_CLIENT
 	{
 		string clientId = 1;
 		string nickname = 2;
+		string stateMessage = 3;
 	}
 	repeated ClientInfo clientInfos = 1;
 }

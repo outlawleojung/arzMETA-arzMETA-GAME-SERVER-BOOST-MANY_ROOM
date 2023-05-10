@@ -13,7 +13,7 @@ public:
 	virtual void Handle_C_MYROOM_KICK(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_KICK& pkt) override;
 	virtual void Handle_C_MYROOM_SHUTDOWN(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_SHUTDOWN& pkt) override;
 
-	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
+	virtual pair<bool, string> HandleEnter(const Protocol::C_ENTER& pkt) override;
 
 	void GetRoomInfo(shared_ptr<ClientBase> client);
 	void HandleStartEdit(shared_ptr<ClientBase> client);
@@ -23,6 +23,7 @@ public:
 
 	string ownerId;
 	string ownerNickname;
+	nlohmann::json ownerAvatarInfo;
 	string myroomInfo;
 	bool isShutdown;
 };

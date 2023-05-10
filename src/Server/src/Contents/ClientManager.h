@@ -13,19 +13,18 @@ class ClientManager
 {
 public:
 	template<typename T>
-	shared_ptr<ClientBase> MakeCilent(shared_ptr<GameSession> session, string clientId, string nickname, shared_ptr<RoomBase> room)
+	shared_ptr<ClientBase> MakeCilent(string clientId, int sessionId)
 	{
 		lock_guard<mutex> lock(mtx);
 
-		//session id 가 최신인지 확인
-		//최신이 아니라면 return nullptr
+		auto _sessionId = sessionIds.find(clientId);
+		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
+			return nullptr;
 
 		{
 			auto client = clients.find(clientId);
 			if (client != clients.end())
 			{
-				//client 의 session id 가 자신과 동일하지 않다면 Duplicated
-				//client 의 session id 가 자신과 동일하다면 뭐라고 하지?
 				client->second->DoAsync(&ClientBase::Leave, string("SERVER_CHANGE"));
 				clients.erase(client);
 			}
@@ -33,30 +32,24 @@ public:
 
 		shared_ptr<ClientBase> client = make_shared<T>();
 
-		client->session = session;
 		client->clientId = clientId;
-		client->nickname = nickname;
-		client->enteredRoom = room;
-
-		session->owner = client;
+		client->sessionId = sessionId;
 
 		clients.insert({ clientId, client });
 
 		return client;
 	}
 
-	void RemoveClient(shared_ptr<ClientBase> _client)
+	void RemoveClient(shared_ptr<ClientBase> client)
 	{
 		lock_guard<mutex> lock(mtx);
 
-		auto client = clients.find(_client->clientId);
-		if (client == clients.end())
-			return;
-
-		if (_client->enteredRoom->roomId != client->second->enteredRoom->roomId)
-			return;
-
-		clients.erase(client);
+		auto _client = clients.find(client->clientId);
+		if (_client->second.get() == client.get())
+		{
+			clients.erase(_client);
+			//sessionIds.erase(client->clientId);
+		}
 	}
 
 	shared_ptr<ClientBase> GetClient(string clientId)
@@ -70,8 +63,30 @@ public:
 		return client->second;
 	}
 
+	int SetSessionId(string clientId)
+	{
+		lock_guard<mutex> lock(mtx);
+		
+		auto sessionId = sessionIds.find(clientId);
+		if (sessionId == sessionIds.end())
+		{
+			sessionIds.insert({ clientId, 0 });
+			return 0;
+		}
+		else
+		{
+			auto client = clients.find(clientId);
+			if (client != clients.end())
+				client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
+
+			sessionId->second = sessionId->second + 1;
+			return sessionId->second;
+		}
+	}
+
 private:
 	map<string, shared_ptr<ClientBase>> clients;
+	map<string, int> sessionIds;
 
 	mutex mtx;
 };
