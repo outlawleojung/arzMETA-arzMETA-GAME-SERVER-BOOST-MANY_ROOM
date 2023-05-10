@@ -205,6 +205,6 @@ void RoomBase::OnEnterSuccess(shared_ptr<ClientBase> client)
 	auto clientInfo = addClient.add_clientinfos();
 	clientInfo->set_clientid(client->clientId);
 	clientInfo->set_nickname(client->nickname);
-	clientInfo->set_nickname(client->stateMessage);
+	clientInfo->set_statemessage(client->stateMessage);
 	Broadcast(PacketManager::MakeSendBuffer(addClient));
 }

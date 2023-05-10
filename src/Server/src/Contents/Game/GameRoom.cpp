@@ -74,7 +74,7 @@ pair<bool, string> GameRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 	if (clients.size() >= maxPlayerNumber)
 		return { false, "ROOM_IS_FULL" };
 
-	return { true, "" };
+	return { true, "SUCCESS" };
 }
 
 void GameRoom::RemoveObject(shared_ptr<GameClient> client)

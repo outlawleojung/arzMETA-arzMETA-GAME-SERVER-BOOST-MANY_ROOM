@@ -278,7 +278,7 @@ pair<bool, string> MatchingRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 	if (gameData.gameState != matching::GameState::Idle)
 		return { false, "GAME_IS_PLAYING" };
 
-	return { true, "" };
+	return { true, "SUCCESS" };
 }
 
 void MatchingRoom::SetClientData(shared_ptr<ClientBase> client)

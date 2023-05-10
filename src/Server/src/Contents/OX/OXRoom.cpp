@@ -290,7 +290,7 @@ pair<bool, string> OXRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 	if (gameData.gameState != ox::GameState::Idle)
 		return { false, "GAME_IS_PLAYING" };
 
-	return { true, "" };
+	return { true, "SUCCESS" };
 }
 
 void OXRoom::SetClientData(shared_ptr<ClientBase> client)

@@ -76,7 +76,7 @@ pair<bool, string> MyRoomRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 	if (clients.size() >= maxPlayerNumber)
 		return { false, "ROOM_IS_FULL" };
 
-	return { true, "" };
+	return { true, "SUCCESS" };
 }
 
 void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)

@@ -78,9 +78,9 @@ public:
 
 	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId) override;
 
-	virtual pair<bool, string> HandleEnter(const Protocol::C_ENTER& pkt);
-	virtual void SetClientData(shared_ptr<ClientBase> client);
-	virtual void OnEnterSuccess(shared_ptr<ClientBase> client);
+	virtual pair<bool, string> HandleEnter(const Protocol::C_ENTER& pkt) override;
+	virtual void SetClientData(shared_ptr<ClientBase> client) override;
+	virtual void OnEnterSuccess(shared_ptr<ClientBase> client) override;
 
 	void GetHost(shared_ptr<ClientBase> client);
 	void Start(shared_ptr<ClientBase> client);
