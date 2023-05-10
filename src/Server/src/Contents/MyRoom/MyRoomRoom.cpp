@@ -37,12 +37,25 @@ void MyRoomRoom::Init()
 	
 	stmt = con->createStatement();
 	stmt->execute("SET NAMES 'utf8mb4'");
-	res = stmt->executeQuery("SELECT nickname, myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
+	
+	string ownerMemberId;
 
-	while (res->next())
 	{
-		ownerNickname = res->getString(1);
-		isShutdown = res->getInt(2) == 4;
+		res = stmt->executeQuery("SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
+
+		while (res->next())
+		{
+			ownerMemberId = res->getString(1);
+			ownerNickname = res->getString(2);
+			isShutdown = res->getInt(3) == 4;
+		}
+	}
+	
+	{
+		res = stmt->executeQuery("SELECT avatarPartsType, itemId FROM member WHERE memberId = '" + ownerMemberId + "'");
+
+		while (res->next())
+			ownerAvatarInfo[res->getString(1)] = res->getString(2);
 	}
 
 	delete res;
@@ -85,6 +98,7 @@ void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 
 	Protocol::S_MYROOM_GET_ROOMINFO res;
 	res.set_ownernickname(ownerNickname);
+	res.set_owneravatarinfo(ownerAvatarInfo.dump());
 	client->Send(PacketManager::MakeSendBuffer(res));
 }
 

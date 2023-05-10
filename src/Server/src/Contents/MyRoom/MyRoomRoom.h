@@ -23,6 +23,7 @@ public:
 
 	string ownerId;
 	string ownerNickname;
+	nlohmann::json ownerAvatarInfo;
 	string myroomInfo;
 	bool isShutdown;
 };
