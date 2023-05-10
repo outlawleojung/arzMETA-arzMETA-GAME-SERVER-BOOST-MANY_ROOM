@@ -348,10 +348,25 @@ class S_MYROOM_GET_ROOMINFO final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kOwnerNicknameFieldNumber = 1,
-    kOwnerAvatarInfoFieldNumber = 2,
+    kOwnerIdFieldNumber = 1,
+    kOwnerNicknameFieldNumber = 2,
+    kOwnerAvatarInfoFieldNumber = 3,
   };
-  // string ownerNickname = 1;
+  // string ownerId = 1;
+  void clear_ownerid();
+  const std::string& ownerid() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_ownerid(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_ownerid();
+  PROTOBUF_NODISCARD std::string* release_ownerid();
+  void set_allocated_ownerid(std::string* ownerid);
+  private:
+  const std::string& _internal_ownerid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ownerid(const std::string& value);
+  std::string* _internal_mutable_ownerid();
+  public:
+
+  // string ownerNickname = 2;
   void clear_ownernickname();
   const std::string& ownernickname() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -365,7 +380,7 @@ class S_MYROOM_GET_ROOMINFO final :
   std::string* _internal_mutable_ownernickname();
   public:
 
-  // string ownerAvatarInfo = 2;
+  // string ownerAvatarInfo = 3;
   void clear_owneravatarinfo();
   const std::string& owneravatarinfo() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -387,6 +402,7 @@ class S_MYROOM_GET_ROOMINFO final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ownerid_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ownernickname_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr owneravatarinfo_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -2145,7 +2161,57 @@ class S_MYROOM_SHUTDOWN final :
 
 // S_MYROOM_GET_ROOMINFO
 
-// string ownerNickname = 1;
+// string ownerId = 1;
+inline void S_MYROOM_GET_ROOMINFO::clear_ownerid() {
+  _impl_.ownerid_.ClearToEmpty();
+}
+inline const std::string& S_MYROOM_GET_ROOMINFO::ownerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_GET_ROOMINFO.ownerId)
+  return _internal_ownerid();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_MYROOM_GET_ROOMINFO::set_ownerid(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.ownerid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_GET_ROOMINFO.ownerId)
+}
+inline std::string* S_MYROOM_GET_ROOMINFO::mutable_ownerid() {
+  std::string* _s = _internal_mutable_ownerid();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_MYROOM_GET_ROOMINFO.ownerId)
+  return _s;
+}
+inline const std::string& S_MYROOM_GET_ROOMINFO::_internal_ownerid() const {
+  return _impl_.ownerid_.Get();
+}
+inline void S_MYROOM_GET_ROOMINFO::_internal_set_ownerid(const std::string& value) {
+  
+  _impl_.ownerid_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_MYROOM_GET_ROOMINFO::_internal_mutable_ownerid() {
+  
+  return _impl_.ownerid_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_MYROOM_GET_ROOMINFO::release_ownerid() {
+  // @@protoc_insertion_point(field_release:Protocol.S_MYROOM_GET_ROOMINFO.ownerId)
+  return _impl_.ownerid_.Release();
+}
+inline void S_MYROOM_GET_ROOMINFO::set_allocated_ownerid(std::string* ownerid) {
+  if (ownerid != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.ownerid_.SetAllocated(ownerid, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.ownerid_.IsDefault()) {
+    _impl_.ownerid_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_GET_ROOMINFO.ownerId)
+}
+
+// string ownerNickname = 2;
 inline void S_MYROOM_GET_ROOMINFO::clear_ownernickname() {
   _impl_.ownernickname_.ClearToEmpty();
 }
@@ -2195,7 +2261,7 @@ inline void S_MYROOM_GET_ROOMINFO::set_allocated_ownernickname(std::string* owne
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname)
 }
 
-// string ownerAvatarInfo = 2;
+// string ownerAvatarInfo = 3;
 inline void S_MYROOM_GET_ROOMINFO::clear_owneravatarinfo() {
   _impl_.owneravatarinfo_.ClearToEmpty();
 }

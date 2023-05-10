@@ -34,7 +34,8 @@ struct C_MYROOM_GET_ROOMINFODefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_MYROOM_GET_ROOMINFODefaultTypeInternal _C_MYROOM_GET_ROOMINFO_default_instance_;
 PROTOBUF_CONSTEXPR S_MYROOM_GET_ROOMINFO::S_MYROOM_GET_ROOMINFO(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.ownernickname_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.ownerid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.ownernickname_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.owneravatarinfo_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct S_MYROOM_GET_ROOMINFODefaultTypeInternal {
@@ -216,6 +217,7 @@ const uint32_t TableStruct_Packet_5f003_5fMyroom_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_MYROOM_GET_ROOMINFO, _impl_.ownerid_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_MYROOM_GET_ROOMINFO, _impl_.ownernickname_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_MYROOM_GET_ROOMINFO, _impl_.owneravatarinfo_),
   ~0u,  // no _has_bits_
@@ -304,18 +306,18 @@ const uint32_t TableStruct_Packet_5f003_5fMyroom_2eproto::offsets[] PROTOBUF_SEC
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::C_MYROOM_GET_ROOMINFO)},
   { 6, -1, -1, sizeof(::Protocol::S_MYROOM_GET_ROOMINFO)},
-  { 14, -1, -1, sizeof(::Protocol::C_MYROOM_SET_ROOMINFO)},
-  { 21, -1, -1, sizeof(::Protocol::S_MYROOM_SET_ROOMINFO)},
-  { 28, -1, -1, sizeof(::Protocol::C_MYROOM_OTHER_ROOM_LIST)},
-  { 35, -1, -1, sizeof(::Protocol::S_MYROOM_OTHER_ROOM_LIST)},
-  { 42, -1, -1, sizeof(::Protocol::C_MYROOM_START_EDIT)},
-  { 48, -1, -1, sizeof(::Protocol::S_MYROOM_START_EDIT)},
-  { 54, -1, -1, sizeof(::Protocol::C_MYROOM_END_EDIT)},
-  { 61, -1, -1, sizeof(::Protocol::S_MYROOM_END_EDIT)},
-  { 68, -1, -1, sizeof(::Protocol::C_MYROOM_KICK)},
-  { 75, -1, -1, sizeof(::Protocol::S_MYROOM_KICK)},
-  { 82, -1, -1, sizeof(::Protocol::C_MYROOM_SHUTDOWN)},
-  { 89, -1, -1, sizeof(::Protocol::S_MYROOM_SHUTDOWN)},
+  { 15, -1, -1, sizeof(::Protocol::C_MYROOM_SET_ROOMINFO)},
+  { 22, -1, -1, sizeof(::Protocol::S_MYROOM_SET_ROOMINFO)},
+  { 29, -1, -1, sizeof(::Protocol::C_MYROOM_OTHER_ROOM_LIST)},
+  { 36, -1, -1, sizeof(::Protocol::S_MYROOM_OTHER_ROOM_LIST)},
+  { 43, -1, -1, sizeof(::Protocol::C_MYROOM_START_EDIT)},
+  { 49, -1, -1, sizeof(::Protocol::S_MYROOM_START_EDIT)},
+  { 55, -1, -1, sizeof(::Protocol::C_MYROOM_END_EDIT)},
+  { 62, -1, -1, sizeof(::Protocol::S_MYROOM_END_EDIT)},
+  { 69, -1, -1, sizeof(::Protocol::C_MYROOM_KICK)},
+  { 76, -1, -1, sizeof(::Protocol::S_MYROOM_KICK)},
+  { 83, -1, -1, sizeof(::Protocol::C_MYROOM_SHUTDOWN)},
+  { 90, -1, -1, sizeof(::Protocol::S_MYROOM_SHUTDOWN)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -337,24 +339,25 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\027Packet_003_Myroom.proto\022\010Protocol\"\027\n\025C"
-  "_MYROOM_GET_ROOMINFO\"G\n\025S_MYROOM_GET_ROO"
-  "MINFO\022\025\n\rownerNickname\030\001 \001(\t\022\027\n\017ownerAva"
-  "tarInfo\030\002 \001(\t\")\n\025C_MYROOM_SET_ROOMINFO\022\020"
-  "\n\010roomInfo\030\001 \001(\t\"(\n\025S_MYROOM_SET_ROOMINF"
-  "O\022\017\n\007success\030\001 \001(\010\",\n\030C_MYROOM_OTHER_ROO"
-  "M_LIST\022\020\n\010roomInfo\030\001 \001(\t\",\n\030S_MYROOM_OTH"
-  "ER_ROOM_LIST\022\020\n\010roomInfo\030\001 \001(\t\"\025\n\023C_MYRO"
-  "OM_START_EDIT\"\025\n\023S_MYROOM_START_EDIT\"&\n\021"
-  "C_MYROOM_END_EDIT\022\021\n\tisChanged\030\001 \001(\010\"&\n\021"
-  "S_MYROOM_END_EDIT\022\021\n\tisChanged\030\001 \001(\010\"!\n\r"
-  "C_MYROOM_KICK\022\020\n\010clientId\030\001 \001(\t\" \n\rS_MYR"
-  "OOM_KICK\022\017\n\007success\030\001 \001(\010\"\'\n\021C_MYROOM_SH"
-  "UTDOWN\022\022\n\nisShutdown\030\001 \001(\010\"\'\n\021S_MYROOM_S"
-  "HUTDOWN\022\022\n\nisShutdown\030\001 \001(\010b\006proto3"
+  "_MYROOM_GET_ROOMINFO\"X\n\025S_MYROOM_GET_ROO"
+  "MINFO\022\017\n\007ownerId\030\001 \001(\t\022\025\n\rownerNickname\030"
+  "\002 \001(\t\022\027\n\017ownerAvatarInfo\030\003 \001(\t\")\n\025C_MYRO"
+  "OM_SET_ROOMINFO\022\020\n\010roomInfo\030\001 \001(\t\"(\n\025S_M"
+  "YROOM_SET_ROOMINFO\022\017\n\007success\030\001 \001(\010\",\n\030C"
+  "_MYROOM_OTHER_ROOM_LIST\022\020\n\010roomInfo\030\001 \001("
+  "\t\",\n\030S_MYROOM_OTHER_ROOM_LIST\022\020\n\010roomInf"
+  "o\030\001 \001(\t\"\025\n\023C_MYROOM_START_EDIT\"\025\n\023S_MYRO"
+  "OM_START_EDIT\"&\n\021C_MYROOM_END_EDIT\022\021\n\tis"
+  "Changed\030\001 \001(\010\"&\n\021S_MYROOM_END_EDIT\022\021\n\tis"
+  "Changed\030\001 \001(\010\"!\n\rC_MYROOM_KICK\022\020\n\010client"
+  "Id\030\001 \001(\t\" \n\rS_MYROOM_KICK\022\017\n\007success\030\001 \001"
+  "(\010\"\'\n\021C_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001 "
+  "\001(\010\"\'\n\021S_MYROOM_SHUTDOWN\022\022\n\nisShutdown\030\001"
+  " \001(\010b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f003_5fMyroom_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f003_5fMyroom_2eproto = {
-    false, false, 595, descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto,
+    false, false, 612, descriptor_table_protodef_Packet_5f003_5fMyroom_2eproto,
     "Packet_003_Myroom.proto",
     &descriptor_table_Packet_5f003_5fMyroom_2eproto_once, nullptr, 0, 14,
     schemas, file_default_instances, TableStruct_Packet_5f003_5fMyroom_2eproto::offsets,
@@ -425,11 +428,20 @@ S_MYROOM_GET_ROOMINFO::S_MYROOM_GET_ROOMINFO(const S_MYROOM_GET_ROOMINFO& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   S_MYROOM_GET_ROOMINFO* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.ownernickname_){}
+      decltype(_impl_.ownerid_){}
+    , decltype(_impl_.ownernickname_){}
     , decltype(_impl_.owneravatarinfo_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.ownerid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.ownerid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_ownerid().empty()) {
+    _this->_impl_.ownerid_.Set(from._internal_ownerid(), 
+      _this->GetArenaForAllocation());
+  }
   _impl_.ownernickname_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.ownernickname_.Set("", GetArenaForAllocation());
@@ -454,10 +466,15 @@ inline void S_MYROOM_GET_ROOMINFO::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.ownernickname_){}
+      decltype(_impl_.ownerid_){}
+    , decltype(_impl_.ownernickname_){}
     , decltype(_impl_.owneravatarinfo_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.ownerid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.ownerid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.ownernickname_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.ownernickname_.Set("", GetArenaForAllocation());
@@ -479,6 +496,7 @@ S_MYROOM_GET_ROOMINFO::~S_MYROOM_GET_ROOMINFO() {
 
 inline void S_MYROOM_GET_ROOMINFO::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.ownerid_.Destroy();
   _impl_.ownernickname_.Destroy();
   _impl_.owneravatarinfo_.Destroy();
 }
@@ -493,6 +511,7 @@ void S_MYROOM_GET_ROOMINFO::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.ownerid_.ClearToEmpty();
   _impl_.ownernickname_.ClearToEmpty();
   _impl_.owneravatarinfo_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -504,9 +523,19 @@ const char* S_MYROOM_GET_ROOMINFO::_InternalParse(const char* ptr, ::_pbi::Parse
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string ownerNickname = 1;
+      // string ownerId = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_ownerid();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_MYROOM_GET_ROOMINFO.ownerId"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string ownerNickname = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_ownernickname();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -514,9 +543,9 @@ const char* S_MYROOM_GET_ROOMINFO::_InternalParse(const char* ptr, ::_pbi::Parse
         } else
           goto handle_unusual;
         continue;
-      // string ownerAvatarInfo = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+      // string ownerAvatarInfo = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           auto str = _internal_mutable_owneravatarinfo();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -553,24 +582,34 @@ uint8_t* S_MYROOM_GET_ROOMINFO::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string ownerNickname = 1;
+  // string ownerId = 1;
+  if (!this->_internal_ownerid().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_ownerid().data(), static_cast<int>(this->_internal_ownerid().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Protocol.S_MYROOM_GET_ROOMINFO.ownerId");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_ownerid(), target);
+  }
+
+  // string ownerNickname = 2;
   if (!this->_internal_ownernickname().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_ownernickname().data(), static_cast<int>(this->_internal_ownernickname().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_MYROOM_GET_ROOMINFO.ownerNickname");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_ownernickname(), target);
+        2, this->_internal_ownernickname(), target);
   }
 
-  // string ownerAvatarInfo = 2;
+  // string ownerAvatarInfo = 3;
   if (!this->_internal_owneravatarinfo().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_owneravatarinfo().data(), static_cast<int>(this->_internal_owneravatarinfo().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_MYROOM_GET_ROOMINFO.ownerAvatarInfo");
     target = stream->WriteStringMaybeAliased(
-        2, this->_internal_owneravatarinfo(), target);
+        3, this->_internal_owneravatarinfo(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -589,14 +628,21 @@ size_t S_MYROOM_GET_ROOMINFO::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string ownerNickname = 1;
+  // string ownerId = 1;
+  if (!this->_internal_ownerid().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_ownerid());
+  }
+
+  // string ownerNickname = 2;
   if (!this->_internal_ownernickname().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_ownernickname());
   }
 
-  // string ownerAvatarInfo = 2;
+  // string ownerAvatarInfo = 3;
   if (!this->_internal_owneravatarinfo().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
@@ -621,6 +667,9 @@ void S_MYROOM_GET_ROOMINFO::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_ownerid().empty()) {
+    _this->_internal_set_ownerid(from._internal_ownerid());
+  }
   if (!from._internal_ownernickname().empty()) {
     _this->_internal_set_ownernickname(from._internal_ownernickname());
   }
@@ -646,6 +695,10 @@ void S_MYROOM_GET_ROOMINFO::InternalSwap(S_MYROOM_GET_ROOMINFO* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.ownerid_, lhs_arena,
+      &other->_impl_.ownerid_, rhs_arena
+  );
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.ownernickname_, lhs_arena,
       &other->_impl_.ownernickname_, rhs_arena

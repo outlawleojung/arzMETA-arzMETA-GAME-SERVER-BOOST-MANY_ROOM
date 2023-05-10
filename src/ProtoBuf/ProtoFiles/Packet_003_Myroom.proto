@@ -8,8 +8,9 @@ message C_MYROOM_GET_ROOMINFO
 message S_MYROOM_GET_ROOMINFO
 {
 	//string roomInfo = 1;
-	string ownerNickname = 1;
-	string ownerAvatarInfo = 2;
+	string ownerId = 1;
+	string ownerNickname = 2;
+	string ownerAvatarInfo = 3;
 }
 
 message C_MYROOM_SET_ROOMINFO

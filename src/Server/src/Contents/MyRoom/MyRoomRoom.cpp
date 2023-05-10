@@ -97,6 +97,7 @@ void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	if (state != RoomState::Running) return;
 
 	Protocol::S_MYROOM_GET_ROOMINFO res;
+	res.set_ownerid(ownerId);
 	res.set_ownernickname(ownerNickname);
 	res.set_owneravatarinfo(ownerAvatarInfo.dump());
 	client->Send(PacketManager::MakeSendBuffer(res));
