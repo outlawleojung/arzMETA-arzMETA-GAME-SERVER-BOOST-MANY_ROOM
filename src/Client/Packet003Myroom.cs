@@ -25,24 +25,25 @@ namespace Protocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdQYWNrZXRfMDAzX015cm9vbS5wcm90bxIIUHJvdG9jb2wiFwoVQ19NWVJP",
-            "T01fR0VUX1JPT01JTkZPIlgKFVNfTVlST09NX0dFVF9ST09NSU5GTxIPCgdv",
+            "T01fR0VUX1JPT01JTkZPImwKFVNfTVlST09NX0dFVF9ST09NSU5GTxIPCgdv",
             "d25lcklkGAEgASgJEhUKDW93bmVyTmlja25hbWUYAiABKAkSFwoPb3duZXJB",
-            "dmF0YXJJbmZvGAMgASgJIikKFUNfTVlST09NX1NFVF9ST09NSU5GTxIQCghy",
-            "b29tSW5mbxgBIAEoCSIoChVTX01ZUk9PTV9TRVRfUk9PTUlORk8SDwoHc3Vj",
-            "Y2VzcxgBIAEoCCIsChhDX01ZUk9PTV9PVEhFUl9ST09NX0xJU1QSEAoIcm9v",
-            "bUluZm8YASABKAkiLAoYU19NWVJPT01fT1RIRVJfUk9PTV9MSVNUEhAKCHJv",
-            "b21JbmZvGAEgASgJIhUKE0NfTVlST09NX1NUQVJUX0VESVQiFQoTU19NWVJP",
-            "T01fU1RBUlRfRURJVCImChFDX01ZUk9PTV9FTkRfRURJVBIRCglpc0NoYW5n",
-            "ZWQYASABKAgiJgoRU19NWVJPT01fRU5EX0VESVQSEQoJaXNDaGFuZ2VkGAEg",
-            "ASgIIiEKDUNfTVlST09NX0tJQ0sSEAoIY2xpZW50SWQYASABKAkiIAoNU19N",
-            "WVJPT01fS0lDSxIPCgdzdWNjZXNzGAEgASgIIicKEUNfTVlST09NX1NIVVRE",
-            "T1dOEhIKCmlzU2h1dGRvd24YASABKAgiJwoRU19NWVJPT01fU0hVVERPV04S",
-            "EgoKaXNTaHV0ZG93bhgBIAEoCGIGcHJvdG8z"));
+            "dmF0YXJJbmZvGAMgASgJEhIKCmlzU2h1dGRvd24YBCABKAgiKQoVQ19NWVJP",
+            "T01fU0VUX1JPT01JTkZPEhAKCHJvb21JbmZvGAEgASgJIigKFVNfTVlST09N",
+            "X1NFVF9ST09NSU5GTxIPCgdzdWNjZXNzGAEgASgIIiwKGENfTVlST09NX09U",
+            "SEVSX1JPT01fTElTVBIQCghyb29tSW5mbxgBIAEoCSIsChhTX01ZUk9PTV9P",
+            "VEhFUl9ST09NX0xJU1QSEAoIcm9vbUluZm8YASABKAkiFQoTQ19NWVJPT01f",
+            "U1RBUlRfRURJVCIVChNTX01ZUk9PTV9TVEFSVF9FRElUIiYKEUNfTVlST09N",
+            "X0VORF9FRElUEhEKCWlzQ2hhbmdlZBgBIAEoCCImChFTX01ZUk9PTV9FTkRf",
+            "RURJVBIRCglpc0NoYW5nZWQYASABKAgiIQoNQ19NWVJPT01fS0lDSxIQCghj",
+            "bGllbnRJZBgBIAEoCSIgCg1TX01ZUk9PTV9LSUNLEg8KB3N1Y2Nlc3MYASAB",
+            "KAgiJwoRQ19NWVJPT01fU0hVVERPV04SEgoKaXNTaHV0ZG93bhgBIAEoCCIn",
+            "ChFTX01ZUk9PTV9TSFVURE9XThISCgppc1NodXRkb3duGAEgASgIYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_MYROOM_GET_ROOMINFO), global::Protocol.C_MYROOM_GET_ROOMINFO.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MYROOM_GET_ROOMINFO), global::Protocol.S_MYROOM_GET_ROOMINFO.Parser, new[]{ "OwnerId", "OwnerNickname", "OwnerAvatarInfo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MYROOM_GET_ROOMINFO), global::Protocol.S_MYROOM_GET_ROOMINFO.Parser, new[]{ "OwnerId", "OwnerNickname", "OwnerAvatarInfo", "IsShutdown" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_MYROOM_SET_ROOMINFO), global::Protocol.C_MYROOM_SET_ROOMINFO.Parser, new[]{ "RoomInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MYROOM_SET_ROOMINFO), global::Protocol.S_MYROOM_SET_ROOMINFO.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_MYROOM_OTHER_ROOM_LIST), global::Protocol.C_MYROOM_OTHER_ROOM_LIST.Parser, new[]{ "RoomInfo" }, null, null, null, null),
@@ -250,6 +251,7 @@ namespace Protocol {
       ownerId_ = other.ownerId_;
       ownerNickname_ = other.ownerNickname_;
       ownerAvatarInfo_ = other.ownerAvatarInfo_;
+      isShutdown_ = other.isShutdown_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -298,6 +300,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "isShutdown" field.</summary>
+    public const int IsShutdownFieldNumber = 4;
+    private bool isShutdown_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsShutdown {
+      get { return isShutdown_; }
+      set {
+        isShutdown_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -316,6 +330,7 @@ namespace Protocol {
       if (OwnerId != other.OwnerId) return false;
       if (OwnerNickname != other.OwnerNickname) return false;
       if (OwnerAvatarInfo != other.OwnerAvatarInfo) return false;
+      if (IsShutdown != other.IsShutdown) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -326,6 +341,7 @@ namespace Protocol {
       if (OwnerId.Length != 0) hash ^= OwnerId.GetHashCode();
       if (OwnerNickname.Length != 0) hash ^= OwnerNickname.GetHashCode();
       if (OwnerAvatarInfo.Length != 0) hash ^= OwnerAvatarInfo.GetHashCode();
+      if (IsShutdown != false) hash ^= IsShutdown.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -356,6 +372,10 @@ namespace Protocol {
         output.WriteRawTag(26);
         output.WriteString(OwnerAvatarInfo);
       }
+      if (IsShutdown != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(IsShutdown);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -378,6 +398,10 @@ namespace Protocol {
         output.WriteRawTag(26);
         output.WriteString(OwnerAvatarInfo);
       }
+      if (IsShutdown != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(IsShutdown);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -396,6 +420,9 @@ namespace Protocol {
       }
       if (OwnerAvatarInfo.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(OwnerAvatarInfo);
+      }
+      if (IsShutdown != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -417,6 +444,9 @@ namespace Protocol {
       }
       if (other.OwnerAvatarInfo.Length != 0) {
         OwnerAvatarInfo = other.OwnerAvatarInfo;
+      }
+      if (other.IsShutdown != false) {
+        IsShutdown = other.IsShutdown;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -445,6 +475,10 @@ namespace Protocol {
             OwnerAvatarInfo = input.ReadString();
             break;
           }
+          case 32: {
+            IsShutdown = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -470,6 +504,10 @@ namespace Protocol {
           }
           case 26: {
             OwnerAvatarInfo = input.ReadString();
+            break;
+          }
+          case 32: {
+            IsShutdown = input.ReadBool();
             break;
           }
         }

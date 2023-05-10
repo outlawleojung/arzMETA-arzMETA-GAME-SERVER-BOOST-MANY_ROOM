@@ -11,6 +11,7 @@ message S_MYROOM_GET_ROOMINFO
 	string ownerId = 1;
 	string ownerNickname = 2;
 	string ownerAvatarInfo = 3;
+	bool isShutdown = 4;
 }
 
 message C_MYROOM_SET_ROOMINFO
