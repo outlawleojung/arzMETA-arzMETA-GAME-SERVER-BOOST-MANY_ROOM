@@ -127,6 +127,7 @@ void RoomBase::GetClient(shared_ptr<ClientBase> _client)
 		auto clientInfo = res.add_clientinfos();
 		clientInfo->set_clientid(client.second->clientId);
 		clientInfo->set_nickname(client.second->nickname);
+		clientInfo->set_statemessage(client.second->stateMessage);
 	}
 
 	if (res.clientinfos_size() > 0)
