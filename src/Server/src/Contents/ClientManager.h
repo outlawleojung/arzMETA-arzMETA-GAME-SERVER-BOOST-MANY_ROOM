@@ -48,7 +48,7 @@ public:
 		if (_client->second.get() == client.get())
 		{
 			clients.erase(_client);
-			sessionIds.erase(client->clientId);
+			//sessionIds.erase(client->clientId);
 		}
 	}
 
