@@ -17,7 +17,7 @@ public:
 	template<typename T>
 	shared_ptr<ClientBase> MakeCilent(string clientId, int sessionId)
 	{
-		lock_guard<recursive_mutex> lock(mtx);
+		lock_guard<std::recursive_mutex> lock(mtx);
 
 		auto _sessionId = sessionIds.find(clientId);
 		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
@@ -44,7 +44,7 @@ public:
 
 	void RemoveClient(shared_ptr<ClientBase> client)
 	{
-		lock_guard<recursive_mutex> lock(mtx);
+		lock_guard<std::recursive_mutex> lock(mtx);
 
 		auto _client = clients.find(client->clientId);
 		if (_client != clients.end() && _client->second.get() == client.get())
@@ -56,7 +56,7 @@ public:
 
 	shared_ptr<ClientBase> GetClient(string clientId)
 	{
-		lock_guard<recursive_mutex> lock(mtx);
+		lock_guard<std::recursive_mutex> lock(mtx);
 
 		auto client = clients.find(clientId);
 		if (client == clients.end())
@@ -67,8 +67,8 @@ public:
 
 	int SetSessionId(string clientId)
 	{
-		lock_guard<recursive_mutex> lock(mtx);
-		
+		lock_guard<std::recursive_mutex> lock(mtx);
+
 		cout << "test1" << endl;
 
 		auto sessionId = sessionIds.find(clientId);

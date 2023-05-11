@@ -351,6 +351,7 @@ class S_MYROOM_GET_ROOMINFO final :
     kOwnerIdFieldNumber = 1,
     kOwnerNicknameFieldNumber = 2,
     kOwnerAvatarInfoFieldNumber = 3,
+    kIsShutdownFieldNumber = 4,
   };
   // string ownerId = 1;
   void clear_ownerid();
@@ -394,6 +395,15 @@ class S_MYROOM_GET_ROOMINFO final :
   std::string* _internal_mutable_owneravatarinfo();
   public:
 
+  // bool isShutdown = 4;
+  void clear_isshutdown();
+  bool isshutdown() const;
+  void set_isshutdown(bool value);
+  private:
+  bool _internal_isshutdown() const;
+  void _internal_set_isshutdown(bool value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_MYROOM_GET_ROOMINFO)
  private:
   class _Internal;
@@ -405,6 +415,7 @@ class S_MYROOM_GET_ROOMINFO final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ownerid_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ownernickname_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr owneravatarinfo_;
+    bool isshutdown_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2309,6 +2320,26 @@ inline void S_MYROOM_GET_ROOMINFO::set_allocated_owneravatarinfo(std::string* ow
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_MYROOM_GET_ROOMINFO.ownerAvatarInfo)
+}
+
+// bool isShutdown = 4;
+inline void S_MYROOM_GET_ROOMINFO::clear_isshutdown() {
+  _impl_.isshutdown_ = false;
+}
+inline bool S_MYROOM_GET_ROOMINFO::_internal_isshutdown() const {
+  return _impl_.isshutdown_;
+}
+inline bool S_MYROOM_GET_ROOMINFO::isshutdown() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_MYROOM_GET_ROOMINFO.isShutdown)
+  return _internal_isshutdown();
+}
+inline void S_MYROOM_GET_ROOMINFO::_internal_set_isshutdown(bool value) {
+  
+  _impl_.isshutdown_ = value;
+}
+inline void S_MYROOM_GET_ROOMINFO::set_isshutdown(bool value) {
+  _internal_set_isshutdown(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_MYROOM_GET_ROOMINFO.isShutdown)
 }
 
 // -------------------------------------------------------------------
