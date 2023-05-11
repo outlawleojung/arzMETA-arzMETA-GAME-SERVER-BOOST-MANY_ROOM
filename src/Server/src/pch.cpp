@@ -13,4 +13,4 @@ int httpPort = 8080;
 string DBDomain = std::getenv("DB_DOMAIN") != nullptr ? string(std::getenv("DB_DOMAIN")) : "dev-arowana-mysql.mariadb.database.azure.com";
 string DBUsername = std::getenv("DB_USERNAME") != nullptr ? string(std::getenv("DB_USERNAME")) : "frontishub@dev-arowana-mysql";
 string DBPassword = std::getenv("DB_PASSWORD") != nullptr ? string(std::getenv("DB_PASSWORD")) : "rkskekfk123!@!@";
-string DBSchema = std::getenv("DB_SCHEMA") != nullptr ? string(std::getenv("DB_PASSWORD")) : "dev_arzmeta_db";
+string DBSchema = std::getenv("DB_SCHEMA") != nullptr ? string(std::getenv("DB_SCHEMA")) : "dev_arzmeta_db";
