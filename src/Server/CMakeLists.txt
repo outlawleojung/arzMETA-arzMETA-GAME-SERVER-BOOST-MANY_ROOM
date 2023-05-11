@@ -26,5 +26,5 @@ if (UNIX)
     target_link_libraries(Server PRIVATE ${Protobuf_LIBRARIES})
 
     target_link_directories(Server PRIVATE /usr/lib/x86_64-linux-gnu)
-    target_link_libraries(Server PRIVATE mysqlcppconn)
+    target_link_libraries(Server PRIVATE mysqlcppconn ssl crypto)
 endif (UNIX)
