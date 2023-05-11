@@ -72,6 +72,8 @@ void DoWorkerJob(shared_ptr<Service>& service)
 
 int main()
 {
+	//입장 정보 테이블 리셋
+
 	PacketManager::Init();
 
 #ifdef linux
