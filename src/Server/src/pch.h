@@ -15,3 +15,4 @@ extern int httpPort;
 extern string DBDomain;
 extern string DBUsername;
 extern string DBPassword;
+extern string DBSchema;

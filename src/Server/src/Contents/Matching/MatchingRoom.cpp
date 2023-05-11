@@ -39,7 +39,7 @@ bool matching::GameData::Init()
 		DBUsername,
 		DBPassword
 	);
-	con->setSchema("dev_arzmeta_db");
+	con->setSchema(DBSchema);
 
 	stmt = con->createStatement();
 	res = stmt->executeQuery("SELECT * FROM jumpingmatchinglevel");

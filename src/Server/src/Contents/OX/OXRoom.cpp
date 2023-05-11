@@ -38,7 +38,7 @@ bool ox::GameData::Init()
 		DBUsername, 
 		DBPassword
 	);
-	con->setSchema("dev_arzmeta_db");
+	con->setSchema(DBSchema);
 
 	map<int, bool> answerTypes;
 	map<int, int> quizTimeTypes;
