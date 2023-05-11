@@ -45,7 +45,7 @@ bool matching::GameData::Init()
 	res = stmt->executeQuery("SELECT * FROM jumpingmatchinglevel");
 
 	//roundTotal = res->rowsCount();
-	roundTotal = 1;
+	roundTotal = 2;
 
 	hintToHintIntervals.clear();
 	quizToDestroyIntervals.clear();
