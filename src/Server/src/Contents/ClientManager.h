@@ -21,22 +21,19 @@ public:
 		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
 			return nullptr;
 
-		{
-			auto client = clients.find(clientId);
-			if (client != clients.end())
-			{
-				client->second->DoAsync(&ClientBase::Leave, string("SERVER_CHANGE"));
-				clients.erase(client);
-			}
-		}
-
 		shared_ptr<ClientBase> client = make_shared<T>();
 
 		client->clientId = clientId;
 		client->sessionId = sessionId;
 		client->enteredRoom = enteredRoom;
 
-		clients.insert({ clientId, client });
+		auto prevClient = clients.find(clientId);
+		if (prevClient != clients.end())
+			prevClient->second->DoTimer(0, &ClientBase::Leave, string("SERVER_CHANGE"));
+
+		clients[clientId] = client;
+
+		//입장 정보 등록or갱신
 
 		return client;
 	}
@@ -49,7 +46,7 @@ public:
 		if (_client->second.get() == client.get())
 		{
 			clients.erase(_client);
-			//sessionIds.erase(client->clientId);
+			//입장 정보 삭제
 		}
 	}
 
@@ -78,7 +75,7 @@ public:
 		{
 			auto client = clients.find(clientId);
 			if (client != clients.end())
-				client->second->DoAsync(&ClientBase::Leave, string("DUPLICATED"));
+				client->second->DoTimer(0, &ClientBase::Leave, string("DUPLICATED"));
 
 			sessionId->second = sessionId->second + 1;
 			return sessionId->second;
