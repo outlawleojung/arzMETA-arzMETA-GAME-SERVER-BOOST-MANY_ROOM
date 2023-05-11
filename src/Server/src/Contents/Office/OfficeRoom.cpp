@@ -272,7 +272,7 @@ void OfficeRoom::Leave(shared_ptr<ClientBase> _client)
 
 shared_ptr<ClientBase> OfficeRoom::MakeClient(string clientId, int sessionId)
 {
-	auto client = GClientManager->MakeCilent<OfficeClient>(clientId, sessionId);
+	auto client = GClientManager->MakeCilent<OfficeClient>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 
 	static_pointer_cast<OfficeClient>(client)->type = OfficeRoomUserType::Host;
 
