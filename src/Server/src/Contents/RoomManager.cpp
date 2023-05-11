@@ -191,6 +191,13 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
         return res;
     }
 
+    if (query.find("roomId") != query.end())
+    {
+        auto room = rooms.find(query["roomId"]);
+        if(room != rooms.end())
+            return room->second->roomInfo;
+    }
+
     auto type = stringToRoomType(query["type"]);
 
     switch (type)

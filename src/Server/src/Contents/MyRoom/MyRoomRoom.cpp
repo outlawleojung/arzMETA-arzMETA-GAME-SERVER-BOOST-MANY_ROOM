@@ -19,6 +19,8 @@ void MyRoomRoom::Init()
 	roomInfo["roomId"] = roomId;
 	roomInfo["sceneName"] = sceneName;
 
+	roomInfo["roomType"] = roomTypeToString(type);
+
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
 	sql::Driver* driver;

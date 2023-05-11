@@ -29,3 +29,4 @@ enum class RoomType
 };
 
 RoomType stringToRoomType(const std::string& roomTypeStr);
+std::string roomTypeToString(RoomType roomType);

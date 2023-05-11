@@ -32,3 +32,36 @@ RoomType stringToRoomType(const std::string& roomTypeStr) {
 
     return RoomType::Unknown;
 }
+
+std::string roomTypeToString(RoomType roomType) {
+    static std::map<RoomType, std::string> roomTypeToString = {
+        {RoomType::Arz, "Arz"},
+        {RoomType::Busan, "Busan"},
+
+        {RoomType::JumpingMatching, "JumpingMatching"},
+        {RoomType::OXQuiz, "OXQuiz"},
+
+        {RoomType::Lecture, "Lecture"},
+        {RoomType::Meeting, "Meeting"},
+        {RoomType::Consulting, "Consulting"},
+
+        {RoomType::MyRoom, "MyRoom"},
+
+        {RoomType::Conference, "Conference"},
+        {RoomType::Game, "Game"},
+        {RoomType::Office, "Office"},
+        {RoomType::Store, "Store"},
+        {RoomType::Vote, "Vote"},
+
+        {RoomType::Hospital, "Hospital"},
+
+        {RoomType::Unknown, "Unknown"}
+    };
+
+    auto it = roomTypeToString.find(roomType);
+    if (it != roomTypeToString.end()) {
+        return it->second;
+    }
+
+    return "Unknown";
+}

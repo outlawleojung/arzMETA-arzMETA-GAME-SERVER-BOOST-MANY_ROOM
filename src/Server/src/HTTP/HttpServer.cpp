@@ -186,6 +186,7 @@ void HttpServer::start(string ip, int port)
 		resJson["result"] = "SUCCESS";
 		resJson["roomId"] = room->roomId;
 		resJson["sceneName"] = room->sceneName;
+		resJson["roomType"] = roomTypeToString(room->type);
 
 		res.set_content(resJson.dump(), "application/json");
         });

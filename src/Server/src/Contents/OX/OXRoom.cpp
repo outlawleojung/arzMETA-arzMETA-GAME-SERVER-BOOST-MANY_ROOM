@@ -239,6 +239,8 @@ void OXRoom::Init()
 	roomInfo["isPlaying"] = false;
 	roomInfo["sceneName"] = sceneName;
 
+	roomInfo["roomType"] = roomTypeToString(type);
+
 	DoTimer(30000, std::function<void()>(
 		[this]() {
 			if (this->state != RoomState::Running)
