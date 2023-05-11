@@ -101,6 +101,7 @@ void MyRoomRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	res.set_ownerid(ownerId);
 	res.set_ownernickname(ownerNickname);
 	res.set_owneravatarinfo(ownerAvatarInfo.dump());
+	res.set_isshutdown(isShutdown);
 	client->Send(PacketManager::MakeSendBuffer(res));
 }
 
