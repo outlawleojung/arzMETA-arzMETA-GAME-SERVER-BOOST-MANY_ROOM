@@ -19,6 +19,8 @@ void MyRoomRoom::Init()
 	roomInfo["roomId"] = roomId;
 	roomInfo["sceneName"] = sceneName;
 
+	roomInfo["roomType"] = roomTypeToString(type);
+
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
 	sql::Driver* driver;
@@ -33,7 +35,7 @@ void MyRoomRoom::Init()
 		DBUsername,
 		DBPassword
 	);
-	con->setSchema("dev_arzmeta_db");
+	con->setSchema(DBSchema);
 	
 	stmt = con->createStatement();
 	stmt->execute("SET NAMES 'utf8mb4'");

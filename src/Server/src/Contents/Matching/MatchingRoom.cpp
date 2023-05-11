@@ -39,7 +39,7 @@ bool matching::GameData::Init()
 		DBUsername,
 		DBPassword
 	);
-	con->setSchema("dev_arzmeta_db");
+	con->setSchema(DBSchema);
 
 	stmt = con->createStatement();
 	res = stmt->executeQuery("SELECT * FROM jumpingmatchinglevel");
@@ -226,6 +226,8 @@ void MatchingRoom::Init()
 	roomInfo["host"] = "";
 	roomInfo["isPlaying"] = false;
 	roomInfo["sceneName"] = sceneName;
+
+	roomInfo["roomType"] = roomTypeToString(type);
 
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {

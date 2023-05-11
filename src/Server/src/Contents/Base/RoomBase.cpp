@@ -174,7 +174,7 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 		DBUsername,
 		DBPassword
 	);
-	con->setSchema("dev_arzmeta_db");
+	con->setSchema(DBSchema);
 
 	stmt = con->createStatement();
 	stmt->execute("SET NAMES 'utf8mb4'");

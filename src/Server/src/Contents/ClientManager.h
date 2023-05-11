@@ -7,7 +7,11 @@
 
 #include <boost/asio.hpp>
 
-#include <mutex>
+#include <mysql_connection.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/prepared_statement.h>
 
 class GameSession;
 
@@ -35,7 +39,26 @@ public:
 
 		clients[clientId] = client;
 
-		//입장 정보 등록or갱신
+		sql::Driver* driver;
+		sql::Connection* con;
+		sql::PreparedStatement* pstmt;
+
+		driver = get_driver_instance();
+
+		con = driver->connect(
+			DBDomain,
+			DBUsername,
+			DBPassword
+		);
+		con->setSchema(DBSchema);
+
+		pstmt = con->prepareStatement("INSERT INTO memberconnectinfo (membercode, roomId) VALUES (?, ?) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)");
+		pstmt->setString(1, clientId);
+		pstmt->setString(2, enteredRoom->roomId);
+		pstmt->executeUpdate();
+
+		delete pstmt;
+		delete con;
 
 		return client;
 	}
@@ -47,8 +70,27 @@ public:
 		auto _client = clients.find(client->clientId);
 		if (_client != clients.end() && _client->second.get() == client.get())
 		{
+			sql::Driver* driver;
+			sql::Connection* con;
+			sql::PreparedStatement* pstmt;
+
+			driver = get_driver_instance();
+
+			con = driver->connect(
+				DBDomain,
+				DBUsername,
+				DBPassword
+			);
+			con->setSchema(DBSchema);
+
+			pstmt = con->prepareStatement("DELETE FROM memberconnectinfo WHERE membercode = ?");
+			pstmt->setString(1, client->clientId);
+			pstmt->executeUpdate();
+
+			delete pstmt;
+			delete con;
+
 			clients.erase(_client);
-			//입장 정보 삭제
 		}
 	}
 

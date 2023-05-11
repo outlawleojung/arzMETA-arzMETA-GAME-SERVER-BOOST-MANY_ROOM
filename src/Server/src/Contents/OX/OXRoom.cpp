@@ -38,7 +38,7 @@ bool ox::GameData::Init()
 		DBUsername, 
 		DBPassword
 	);
-	con->setSchema("dev_arzmeta_db");
+	con->setSchema(DBSchema);
 
 	map<int, bool> answerTypes;
 	map<int, int> quizTimeTypes;
@@ -238,6 +238,8 @@ void OXRoom::Init()
 	roomInfo["host"] = "";
 	roomInfo["isPlaying"] = false;
 	roomInfo["sceneName"] = sceneName;
+
+	roomInfo["roomType"] = roomTypeToString(type);
 
 	DoTimer(30000, std::function<void()>(
 		[this]() {

@@ -7,6 +7,12 @@
 #include "../Contents/RoomManager.h"
 #include "../HTTP/HttpServer.h"
 
+#include <mysql_connection.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/statement.h>
+
 #ifdef linux
 #include <sys/types.h>
 #include <ifaddrs.h>
@@ -73,6 +79,24 @@ void DoWorkerJob(shared_ptr<Service>& service)
 int main()
 {
 	//입장 정보 테이블 리셋
+	sql::Driver* driver;
+	sql::Connection* con;
+	sql::Statement* stmt;
+
+	driver = get_driver_instance();
+
+	con = driver->connect(
+		DBDomain,
+		DBUsername,
+		DBPassword
+	);
+	con->setSchema(DBSchema);
+
+	stmt = con->createStatement();
+	stmt->execute("TRUNCATE TABLE memberconnectinfo");
+
+	delete stmt;
+	delete con;
 
 	PacketManager::Init();
 

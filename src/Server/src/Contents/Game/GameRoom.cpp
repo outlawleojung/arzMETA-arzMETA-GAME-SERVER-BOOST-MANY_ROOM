@@ -6,6 +6,7 @@
 #include "../RoomManager.h"
 #include "../../PacketManager.h"
 #include "../../Session/GameSession.h"
+#include "../RoomTypes.h"
 
 GameRoom::GameRoom()
 {
@@ -18,6 +19,8 @@ void GameRoom::Init()
 
 	roomInfo["roomId"] = roomId;
 	roomInfo["sceneName"] = sceneName;
+
+	roomInfo["roomType"] = roomTypeToString(type);
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
