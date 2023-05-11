@@ -222,7 +222,7 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 
 shared_ptr<ClientBase> MeetingRoom::MakeClient(string clientId, int sessionId)
 {
-	auto client = GClientManager->MakeCilent<MeetingClient>(clientId, sessionId);
+	auto client = GClientManager->MakeCilent<MeetingClient>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 
 	static_pointer_cast<MeetingClient>(client)->type = MeetingRoomUserType::Host;
 

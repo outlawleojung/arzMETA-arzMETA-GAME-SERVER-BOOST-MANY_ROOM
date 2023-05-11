@@ -279,7 +279,7 @@ void OXRoom::Leave(shared_ptr<ClientBase> client)
 
 shared_ptr<ClientBase> OXRoom::MakeClient(string clientId, int sessionId)
 {
-	return GClientManager->MakeCilent<OXClient>(clientId, sessionId);
+	return GClientManager->MakeCilent<OXClient>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
 pair<bool, string> OXRoom::HandleEnter(const Protocol::C_ENTER& pkt)

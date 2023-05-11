@@ -13,7 +13,7 @@ class ClientManager
 {
 public:
 	template<typename T>
-	shared_ptr<ClientBase> MakeCilent(string clientId, int sessionId)
+	shared_ptr<ClientBase> MakeCilent(string clientId, int sessionId, shared_ptr<RoomBase> enteredRoom)
 	{
 		lock_guard<std::recursive_mutex> lock(mtx);
 
@@ -34,6 +34,7 @@ public:
 
 		client->clientId = clientId;
 		client->sessionId = sessionId;
+		client->enteredRoom = enteredRoom;
 
 		clients.insert({ clientId, client });
 

@@ -13,8 +13,11 @@ void ClientBase::Leave(string code)
 
 	GClientManager->RemoveClient(static_pointer_cast<ClientBase>(shared_from_this()));
 
-	enteredRoom->DoAsync(&RoomBase::Leave, static_pointer_cast<ClientBase>(shared_from_this()));
-	enteredRoom = nullptr;
+	if (enteredRoom != nullptr)
+	{
+		enteredRoom->DoAsync(&RoomBase::Leave, static_pointer_cast<ClientBase>(shared_from_this()));
+		enteredRoom = nullptr;
+	}
 
 	Protocol::S_DISCONNECT disconnect;
 	disconnect.set_code(code);

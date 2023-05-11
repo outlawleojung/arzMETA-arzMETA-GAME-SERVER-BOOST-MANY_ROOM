@@ -64,9 +64,7 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 
 shared_ptr<ClientBase> GameRoom::MakeClient(string clientId, int sessionId)
 {
-	auto client = GClientManager->MakeCilent<GameClient>(clientId, sessionId);
-	SetClientData(client);
-	return client;
+	return GClientManager->MakeCilent<GameClient>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
 pair<bool, string> GameRoom::HandleEnter(const Protocol::C_ENTER& pkt)

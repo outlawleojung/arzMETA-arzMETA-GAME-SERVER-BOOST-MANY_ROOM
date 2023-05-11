@@ -60,8 +60,6 @@ void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		}
 
 		client->session = session;
-		client->enteredRoom = static_pointer_cast<RoomBase>(shared_from_this());
-
 		session->owner = client;
 
 		SetDefaultClientData(client);
@@ -153,8 +151,7 @@ void RoomBase::Broadcast(shared_ptr<SendBuffer> sendBuffer)
 
 shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
 {
-	auto client = GClientManager->MakeCilent<ClientBase>(clientId, sessionId);
-	return client;
+	return GClientManager->MakeCilent<ClientBase>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
 #include <mysql_connection.h>

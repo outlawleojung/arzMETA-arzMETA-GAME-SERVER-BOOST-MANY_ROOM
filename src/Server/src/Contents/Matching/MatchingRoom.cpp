@@ -267,7 +267,7 @@ void MatchingRoom::Leave(shared_ptr<ClientBase> client)
 
 shared_ptr<ClientBase> MatchingRoom::MakeClient(string clientId, int sessionId)
 {
-	return GClientManager->MakeCilent<MatchingClient>(clientId, sessionId);
+	return GClientManager->MakeCilent<MatchingClient>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
 pair<bool, string> MatchingRoom::HandleEnter(const Protocol::C_ENTER& pkt)
