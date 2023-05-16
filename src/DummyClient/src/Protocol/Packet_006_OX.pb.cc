@@ -107,7 +107,6 @@ PROTOBUF_CONSTEXPR S_OX_QUIZ::S_OX_QUIZ(
     /*decltype(_impl_.panel_)*/{}
   , /*decltype(_impl_._panel_cached_byte_size_)*/{0}
   , /*decltype(_impl_.quiz_)*/0
-  , /*decltype(_impl_.answer_)*/false
   , /*decltype(_impl_.timetodestory_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct S_OX_QUIZDefaultTypeInternal {
@@ -130,6 +129,19 @@ struct S_OX_DESTROYDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OX_DESTROYDefaultTypeInternal _S_OX_DESTROY_default_instance_;
+PROTOBUF_CONSTEXPR S_OX_AWARD::S_OX_AWARD(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.winners_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct S_OX_AWARDDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_OX_AWARDDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_OX_AWARDDefaultTypeInternal() {}
+  union {
+    S_OX_AWARD _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OX_AWARDDefaultTypeInternal _S_OX_AWARD_default_instance_;
 PROTOBUF_CONSTEXPR C_OX_DIE::C_OX_DIE(
     ::_pbi::ConstantInitialized) {}
 struct C_OX_DIEDefaultTypeInternal {
@@ -142,7 +154,7 @@ struct C_OX_DIEDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OX_DIEDefaultTypeInternal _C_OX_DIE_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_5f006_5fOX_2eproto[10];
+static ::_pb::Metadata file_level_metadata_Packet_5f006_5fOX_2eproto[11];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_5f006_5fOX_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_5f006_5fOX_2eproto = nullptr;
 
@@ -198,7 +210,6 @@ const uint32_t TableStruct_Packet_5f006_5fOX_2eproto::offsets[] PROTOBUF_SECTION
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OX_QUIZ, _impl_.quiz_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OX_QUIZ, _impl_.answer_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OX_QUIZ, _impl_.timetodestory_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OX_QUIZ, _impl_.panel_),
   ~0u,  // no _has_bits_
@@ -207,6 +218,13 @@ const uint32_t TableStruct_Packet_5f006_5fOX_2eproto::offsets[] PROTOBUF_SECTION
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OX_AWARD, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OX_AWARD, _impl_.winners_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_OX_DIE, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -223,8 +241,9 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 31, -1, -1, sizeof(::Protocol::S_OX_ROUND_START)},
   { 38, -1, -1, sizeof(::Protocol::S_OX_ROUND_FINISH)},
   { 44, -1, -1, sizeof(::Protocol::S_OX_QUIZ)},
-  { 54, -1, -1, sizeof(::Protocol::S_OX_DESTROY)},
-  { 60, -1, -1, sizeof(::Protocol::C_OX_DIE)},
+  { 53, -1, -1, sizeof(::Protocol::S_OX_DESTROY)},
+  { 59, -1, -1, sizeof(::Protocol::S_OX_AWARD)},
+  { 66, -1, -1, sizeof(::Protocol::C_OX_DIE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -237,6 +256,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_OX_ROUND_FINISH_default_instance_._instance,
   &::Protocol::_S_OX_QUIZ_default_instance_._instance,
   &::Protocol::_S_OX_DESTROY_default_instance_._instance,
+  &::Protocol::_S_OX_AWARD_default_instance_._instance,
   &::Protocol::_C_OX_DIE_default_instance_._instance,
 };
 
@@ -245,16 +265,16 @@ const char descriptor_table_protodef_Packet_5f006_5fOX_2eproto[] PROTOBUF_SECTIO
   "START\"\014\n\nS_OX_START\"\r\n\013S_OX_FINISH\"\017\n\rC_"
   "OX_GET_HOST\"\035\n\tS_OX_HOST\022\020\n\010clientId\030\001 \001"
   "(\t\" \n\020S_OX_ROUND_START\022\014\n\004mode\030\001 \001(\t\"\023\n\021"
-  "S_OX_ROUND_FINISH\"O\n\tS_OX_QUIZ\022\014\n\004quiz\030\001"
-  " \001(\005\022\016\n\006answer\030\002 \001(\010\022\025\n\rtimeToDestory\030\003 "
-  "\001(\005\022\r\n\005panel\030\004 \003(\005\"\016\n\014S_OX_DESTROY\"\n\n\010C_"
-  "OX_DIEb\006proto3"
+  "S_OX_ROUND_FINISH\"\?\n\tS_OX_QUIZ\022\014\n\004quiz\030\001"
+  " \001(\005\022\025\n\rtimeToDestory\030\003 \001(\005\022\r\n\005panel\030\004 \003"
+  "(\005\"\016\n\014S_OX_DESTROY\"\035\n\nS_OX_AWARD\022\017\n\007winn"
+  "ers\030\001 \003(\t\"\n\n\010C_OX_DIEb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f006_5fOX_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f006_5fOX_2eproto = {
-    false, false, 294, descriptor_table_protodef_Packet_5f006_5fOX_2eproto,
+    false, false, 309, descriptor_table_protodef_Packet_5f006_5fOX_2eproto,
     "Packet_006_OX.proto",
-    &descriptor_table_Packet_5f006_5fOX_2eproto_once, nullptr, 0, 10,
+    &descriptor_table_Packet_5f006_5fOX_2eproto_once, nullptr, 0, 11,
     schemas, file_default_instances, TableStruct_Packet_5f006_5fOX_2eproto::offsets,
     file_level_metadata_Packet_5f006_5fOX_2eproto, file_level_enum_descriptors_Packet_5f006_5fOX_2eproto,
     file_level_service_descriptors_Packet_5f006_5fOX_2eproto,
@@ -892,7 +912,6 @@ S_OX_QUIZ::S_OX_QUIZ(const S_OX_QUIZ& from)
       decltype(_impl_.panel_){from._impl_.panel_}
     , /*decltype(_impl_._panel_cached_byte_size_)*/{0}
     , decltype(_impl_.quiz_){}
-    , decltype(_impl_.answer_){}
     , decltype(_impl_.timetodestory_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -911,7 +930,6 @@ inline void S_OX_QUIZ::SharedCtor(
       decltype(_impl_.panel_){arena}
     , /*decltype(_impl_._panel_cached_byte_size_)*/{0}
     , decltype(_impl_.quiz_){0}
-    , decltype(_impl_.answer_){false}
     , decltype(_impl_.timetodestory_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -958,14 +976,6 @@ const char* S_OX_QUIZ::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           _impl_.quiz_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool answer = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.answer_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1024,12 +1034,6 @@ uint8_t* S_OX_QUIZ::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_quiz(), target);
   }
 
-  // bool answer = 2;
-  if (this->_internal_answer() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_answer(), target);
-  }
-
   // int32 timeToDestory = 3;
   if (this->_internal_timetodestory() != 0) {
     target = stream->EnsureSpace(target);
@@ -1080,11 +1084,6 @@ size_t S_OX_QUIZ::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_quiz());
   }
 
-  // bool answer = 2;
-  if (this->_internal_answer() != 0) {
-    total_size += 1 + 1;
-  }
-
   // int32 timeToDestory = 3;
   if (this->_internal_timetodestory() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_timetodestory());
@@ -1111,9 +1110,6 @@ void S_OX_QUIZ::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   _this->_impl_.panel_.MergeFrom(from._impl_.panel_);
   if (from._internal_quiz() != 0) {
     _this->_internal_set_quiz(from._internal_quiz());
-  }
-  if (from._internal_answer() != 0) {
-    _this->_internal_set_answer(from._internal_answer());
   }
   if (from._internal_timetodestory() != 0) {
     _this->_internal_set_timetodestory(from._internal_timetodestory());
@@ -1192,6 +1188,196 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_OX_DESTROY::GetClassData() c
 
 // ===================================================================
 
+class S_OX_AWARD::_Internal {
+ public:
+};
+
+S_OX_AWARD::S_OX_AWARD(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_OX_AWARD)
+}
+S_OX_AWARD::S_OX_AWARD(const S_OX_AWARD& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  S_OX_AWARD* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.winners_){from._impl_.winners_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_OX_AWARD)
+}
+
+inline void S_OX_AWARD::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.winners_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+S_OX_AWARD::~S_OX_AWARD() {
+  // @@protoc_insertion_point(destructor:Protocol.S_OX_AWARD)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void S_OX_AWARD::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.winners_.~RepeatedPtrField();
+}
+
+void S_OX_AWARD::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_OX_AWARD::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_OX_AWARD)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.winners_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_OX_AWARD::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated string winners = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            auto str = _internal_add_winners();
+            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            CHK_(ptr);
+            CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_OX_AWARD.winners"));
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_OX_AWARD::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_OX_AWARD)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated string winners = 1;
+  for (int i = 0, n = this->_internal_winners_size(); i < n; i++) {
+    const auto& s = this->_internal_winners(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Protocol.S_OX_AWARD.winners");
+    target = stream->WriteString(1, s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_OX_AWARD)
+  return target;
+}
+
+size_t S_OX_AWARD::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_OX_AWARD)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated string winners = 1;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.winners_.size());
+  for (int i = 0, n = _impl_.winners_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      _impl_.winners_.Get(i));
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_OX_AWARD::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_OX_AWARD::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_OX_AWARD::GetClassData() const { return &_class_data_; }
+
+
+void S_OX_AWARD::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_OX_AWARD*>(&to_msg);
+  auto& from = static_cast<const S_OX_AWARD&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_OX_AWARD)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.winners_.MergeFrom(from._impl_.winners_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_OX_AWARD::CopyFrom(const S_OX_AWARD& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_OX_AWARD)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool S_OX_AWARD::IsInitialized() const {
+  return true;
+}
+
+void S_OX_AWARD::InternalSwap(S_OX_AWARD* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.winners_.InternalSwap(&other->_impl_.winners_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata S_OX_AWARD::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f006_5fOX_2eproto_getter, &descriptor_table_Packet_5f006_5fOX_2eproto_once,
+      file_level_metadata_Packet_5f006_5fOX_2eproto[9]);
+}
+
+// ===================================================================
+
 class C_OX_DIE::_Internal {
  public:
 };
@@ -1227,7 +1413,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_OX_DIE::GetClassData() const
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OX_DIE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f006_5fOX_2eproto_getter, &descriptor_table_Packet_5f006_5fOX_2eproto_once,
-      file_level_metadata_Packet_5f006_5fOX_2eproto[9]);
+      file_level_metadata_Packet_5f006_5fOX_2eproto[10]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -1268,6 +1454,10 @@ Arena::CreateMaybeMessage< ::Protocol::S_OX_QUIZ >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Protocol::S_OX_DESTROY*
 Arena::CreateMaybeMessage< ::Protocol::S_OX_DESTROY >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_OX_DESTROY >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_OX_AWARD*
+Arena::CreateMaybeMessage< ::Protocol::S_OX_AWARD >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_OX_AWARD >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Protocol::C_OX_DIE*
 Arena::CreateMaybeMessage< ::Protocol::C_OX_DIE >(Arena* arena) {

@@ -108,7 +108,8 @@ enum : unsigned short
 	PKT_S_OX_ROUND_FINISH = 606,
 	PKT_S_OX_QUIZ = 607,
 	PKT_S_OX_DESTROY = 608,
-	PKT_C_OX_DIE = 609,
+	PKT_S_OX_AWARD = 609,
+	PKT_C_OX_DIE = 610,
 };
 
 bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int len);
@@ -265,6 +266,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OX_ROUND_FINISH& pkt) { return MakeSendBuffer(pkt, PKT_S_OX_ROUND_FINISH); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OX_QUIZ& pkt) { return MakeSendBuffer(pkt, PKT_S_OX_QUIZ); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OX_DESTROY& pkt) { return MakeSendBuffer(pkt, PKT_S_OX_DESTROY); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OX_AWARD& pkt) { return MakeSendBuffer(pkt, PKT_S_OX_AWARD); }
 
 private:
 	template<typename PacketType, typename ProcessFunc>

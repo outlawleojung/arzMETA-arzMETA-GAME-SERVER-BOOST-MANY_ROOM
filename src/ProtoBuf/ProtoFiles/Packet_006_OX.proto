@@ -34,13 +34,17 @@ message S_OX_ROUND_FINISH
 message S_OX_QUIZ
 {
 	int32 quiz = 1;
-	bool answer = 2;
 	int32 timeToDestory = 3;
 	repeated int32 panel = 4;
 }
 
 message S_OX_DESTROY
 {
+}
+
+message S_OX_AWARD
+{
+	repeated string winners = 1;
 }
 
 message C_OX_DIE

@@ -108,7 +108,8 @@ enum : unsigned short
 	PKT_S_OX_ROUND_FINISH = 606,
 	PKT_S_OX_QUIZ = 607,
 	PKT_S_OX_DESTROY = 608,
-	PKT_C_OX_DIE = 609,
+	PKT_S_OX_AWARD = 609,
+	PKT_C_OX_DIE = 610,
 };
 
 bool Handle_INVALID(shared_ptr<GameSession>& session, unsigned char* buffer, int len);
@@ -172,6 +173,7 @@ bool Handle_S_OX_ROUND_START(shared_ptr<GameSession>& session, Protocol::S_OX_RO
 bool Handle_S_OX_ROUND_FINISH(shared_ptr<GameSession>& session, Protocol::S_OX_ROUND_FINISH& pkt);
 bool Handle_S_OX_QUIZ(shared_ptr<GameSession>& session, Protocol::S_OX_QUIZ& pkt);
 bool Handle_S_OX_DESTROY(shared_ptr<GameSession>& session, Protocol::S_OX_DESTROY& pkt);
+bool Handle_S_OX_AWARD(shared_ptr<GameSession>& session, Protocol::S_OX_AWARD& pkt);
 
 class PacketManager
 {
@@ -240,6 +242,7 @@ public:
 		GPacketHandler[PKT_S_OX_ROUND_FINISH] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_OX_ROUND_FINISH > (Handle_S_OX_ROUND_FINISH, session, buffer, len); };
 		GPacketHandler[PKT_S_OX_QUIZ] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_OX_QUIZ > (Handle_S_OX_QUIZ, session, buffer, len); };
 		GPacketHandler[PKT_S_OX_DESTROY] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_OX_DESTROY > (Handle_S_OX_DESTROY, session, buffer, len); };
+		GPacketHandler[PKT_S_OX_AWARD] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::S_OX_AWARD > (Handle_S_OX_AWARD, session, buffer, len); };
 	}
 
 	static bool HandlePacket(shared_ptr<GameSession>& session, unsigned char* buffer, int len)
