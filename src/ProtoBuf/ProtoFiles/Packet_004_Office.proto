@@ -66,16 +66,6 @@ message S_OFFICE_KICK
 	bool success = 1;
 }
 
-message USER_PERMISSION
-{
-	string clientId = 1;
-	bool screenPermission = 2;
-	bool chatPermission = 3;
-	bool voicePermission = 4;
-	bool videoPermission = 5;
-	int32 authority = 6;
-}
-
 message C_OFFICE_GET_PERMISSION
 {
 	string clientId = 1;
@@ -92,7 +82,7 @@ message S_OFFICE_GET_PERMISSION
 		bool videoPermission = 5;
 		int32 authority = 6;
 	}
-	repeated ClientInfo permissions = 1;
+	repeated OfficeUserInfo permissions = 1;
 }
 
 message C_OFFICE_SET_AUTHORITY
