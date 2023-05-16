@@ -63,10 +63,7 @@ bool ox::GameData::Init()
 
 	{
 		stmt = con->createStatement();
-		res = stmt->executeQuery(
-			"SELECT quiztimetype.name"
-			"FROM quizroundtime"
-			"LEFT JOIN quiztimetype ON quizroundtime.timeType = quiztimetype.type");
+		res = stmt->executeQuery("SELECT quiztimetype.name FROM quizroundtime LEFT JOIN quiztimetype ON quizroundtime.timeType = quiztimetype.type");
 
 		while (res->next())
 			roundTimes.push_back(res->getInt(1));
@@ -86,6 +83,7 @@ void ox::GameData::Clear()
 	roundCount = 0;
 	isSoloplay = false;
 	players.clear();
+	quizIndex.clear();
 	mistModeRound = 0;
 	pieceModeRound = 0;
 	pieceModePanel.clear();
