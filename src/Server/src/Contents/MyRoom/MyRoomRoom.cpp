@@ -84,7 +84,7 @@ void MyRoomRoom::Handle_C_MYROOM_SHUTDOWN(shared_ptr<ClientBase>& client, Protoc
 pair<bool, string> MyRoomRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 {
 	if (isShutdown && pkt.clientid() != ownerId)
-		return { false, "ROON_IS_SHUTDOWN" };
+		return { false, "ROOM_IS_SHUTDOWN" };
 
 	//TODO : blacklist ±¸Çö
 
