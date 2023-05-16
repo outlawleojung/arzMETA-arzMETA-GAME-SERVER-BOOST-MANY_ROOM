@@ -66,6 +66,16 @@ message S_OFFICE_KICK
 	bool success = 1;
 }
 
+message OfficeUserInfo
+{
+	string clientId = 1;
+	bool screenPermission = 2;
+	bool chatPermission = 3;
+	bool voicePermission = 4;
+	bool videoPermission = 5;
+	int32 authority = 6;
+}
+
 message C_OFFICE_GET_PERMISSION
 {
 	string clientId = 1;
@@ -73,44 +83,12 @@ message C_OFFICE_GET_PERMISSION
 
 message S_OFFICE_GET_PERMISSION
 {
-	message OfficeUserInfo
-	{
-		string clientId = 1;
-		bool screenPermission = 2;
-		bool chatPermission = 3;
-		bool voicePermission = 4;
-		bool videoPermission = 5;
-		int32 authority = 6;
-	}
 	repeated OfficeUserInfo permissions = 1;
-}
-
-message C_OFFICE_SET_AUTHORITY
-{
-	message AuthorityInfo
-	{
-		string clientId = 1;
-		int32 authority = 2;
-	}
-	repeated AuthorityInfo authorities = 1;
-}
-
-message S_OFFICE_SET_AUTHORITY
-{
-	bool success = 1;
 }
 
 message C_OFFICE_SET_PERMISSION
 {
-	message PermissionInfo
-	{
-		string clientId = 1;
-		bool screenPermission = 2;
-		bool chatPermission = 3;
-		bool voicePermission = 4;
-		bool videoPermission = 5;
-	}
-	repeated PermissionInfo permissions = 1;
+	repeated OfficeUserInfo permissions = 1;
 }
 
 message S_OFFICE_SET_PERMISSION

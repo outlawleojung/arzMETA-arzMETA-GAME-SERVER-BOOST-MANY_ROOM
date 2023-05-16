@@ -94,18 +94,16 @@ public class RealtimePacket
 	    PKT_S_OFFICE_KICK = 411,
 	    PKT_C_OFFICE_GET_PERMISSION = 412,
 	    PKT_S_OFFICE_GET_PERMISSION = 413,
-	    PKT_C_OFFICE_SET_AUTHORITY = 414,
-	    PKT_S_OFFICE_SET_AUTHORITY = 415,
-	    PKT_C_OFFICE_SET_PERMISSION = 416,
-	    PKT_S_OFFICE_SET_PERMISSION = 417,
-	    PKT_C_OFFICE_SET_ROOM_INFO = 418,
-	    PKT_S_OFFICE_SET_ROOM_INFO = 419,
-	    PKT_C_OFFICE_GET_ROOM_INFO = 420,
-	    PKT_S_OFFICE_GET_ROOM_INFO = 421,
-	    PKT_C_OFFICE_VIDEO_STREAM = 422,
-	    PKT_S_OFFICE_VIDEO_STREAM = 423,
-	    PKT_C_OFFICE_SHARE = 424,
-	    PKT_S_OFFICE_SHARE = 425,
+	    PKT_C_OFFICE_SET_PERMISSION = 414,
+	    PKT_S_OFFICE_SET_PERMISSION = 415,
+	    PKT_C_OFFICE_SET_ROOM_INFO = 416,
+	    PKT_S_OFFICE_SET_ROOM_INFO = 417,
+	    PKT_C_OFFICE_GET_ROOM_INFO = 418,
+	    PKT_S_OFFICE_GET_ROOM_INFO = 419,
+	    PKT_C_OFFICE_VIDEO_STREAM = 420,
+	    PKT_S_OFFICE_VIDEO_STREAM = 421,
+	    PKT_C_OFFICE_SHARE = 422,
+	    PKT_S_OFFICE_SHARE = 423,
 	    PKT_C_MATCHING_START = 500,
 	    PKT_S_MATCHING_START = 501,
 	    PKT_S_MATCHING_AWARD = 502,
@@ -207,8 +205,6 @@ public class RealtimePacket
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_KICK, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_GET_PERMISSION, MakePacket<S_OFFICE_GET_PERMISSION>);
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_GET_PERMISSION, new Dictionary<object, Action<PacketSession, IMessage>>());
-        _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_SET_AUTHORITY, MakePacket<S_OFFICE_SET_AUTHORITY>);
-		_handler.Add((ushort)MsgId.PKT_S_OFFICE_SET_AUTHORITY, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_SET_PERMISSION, MakePacket<S_OFFICE_SET_PERMISSION>);
 		_handler.Add((ushort)MsgId.PKT_S_OFFICE_SET_PERMISSION, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OFFICE_SET_ROOM_INFO, MakePacket<S_OFFICE_SET_ROOM_INFO>);

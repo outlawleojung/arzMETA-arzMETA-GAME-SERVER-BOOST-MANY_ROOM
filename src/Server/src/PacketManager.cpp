@@ -275,15 +275,6 @@ bool Handle_C_OFFICE_GET_PERMISSION(shared_ptr<GameSession>& session, Protocol::
 
 	return true;
 }
-bool Handle_C_OFFICE_SET_AUTHORITY(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_AUTHORITY& pkt)
-{
-	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
-		return false;
-
-	session->owner->enteredRoom->Handle_C_OFFICE_SET_AUTHORITY(session->owner, pkt);
-
-	return true;
-}
 bool Handle_C_OFFICE_SET_PERMISSION(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_PERMISSION& pkt)
 {
 	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)

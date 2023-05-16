@@ -187,6 +187,24 @@ struct S_OFFICE_KICKDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_KICKDefaultTypeInternal _S_OFFICE_KICK_default_instance_;
+PROTOBUF_CONSTEXPR OfficeUserInfo::OfficeUserInfo(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.screenpermission_)*/false
+  , /*decltype(_impl_.chatpermission_)*/false
+  , /*decltype(_impl_.voicepermission_)*/false
+  , /*decltype(_impl_.videopermission_)*/false
+  , /*decltype(_impl_.authority_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct OfficeUserInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR OfficeUserInfoDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~OfficeUserInfoDefaultTypeInternal() {}
+  union {
+    OfficeUserInfo _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 OfficeUserInfoDefaultTypeInternal _OfficeUserInfo_default_instance_;
 PROTOBUF_CONSTEXPR C_OFFICE_GET_PERMISSION::C_OFFICE_GET_PERMISSION(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -200,24 +218,6 @@ struct C_OFFICE_GET_PERMISSIONDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_GET_PERMISSIONDefaultTypeInternal _C_OFFICE_GET_PERMISSION_default_instance_;
-PROTOBUF_CONSTEXPR S_OFFICE_GET_PERMISSION_OfficeUserInfo::S_OFFICE_GET_PERMISSION_OfficeUserInfo(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.screenpermission_)*/false
-  , /*decltype(_impl_.chatpermission_)*/false
-  , /*decltype(_impl_.voicepermission_)*/false
-  , /*decltype(_impl_.videopermission_)*/false
-  , /*decltype(_impl_.authority_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct S_OFFICE_GET_PERMISSION_OfficeUserInfoDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_OFFICE_GET_PERMISSION_OfficeUserInfoDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_OFFICE_GET_PERMISSION_OfficeUserInfoDefaultTypeInternal() {}
-  union {
-    S_OFFICE_GET_PERMISSION_OfficeUserInfo _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_GET_PERMISSION_OfficeUserInfoDefaultTypeInternal _S_OFFICE_GET_PERMISSION_OfficeUserInfo_default_instance_;
 PROTOBUF_CONSTEXPR S_OFFICE_GET_PERMISSION::S_OFFICE_GET_PERMISSION(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.permissions_)*/{}
@@ -231,63 +231,6 @@ struct S_OFFICE_GET_PERMISSIONDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_GET_PERMISSIONDefaultTypeInternal _S_OFFICE_GET_PERMISSION_default_instance_;
-PROTOBUF_CONSTEXPR C_OFFICE_SET_AUTHORITY_AuthorityInfo::C_OFFICE_SET_AUTHORITY_AuthorityInfo(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.authority_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct C_OFFICE_SET_AUTHORITY_AuthorityInfoDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR C_OFFICE_SET_AUTHORITY_AuthorityInfoDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~C_OFFICE_SET_AUTHORITY_AuthorityInfoDefaultTypeInternal() {}
-  union {
-    C_OFFICE_SET_AUTHORITY_AuthorityInfo _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_SET_AUTHORITY_AuthorityInfoDefaultTypeInternal _C_OFFICE_SET_AUTHORITY_AuthorityInfo_default_instance_;
-PROTOBUF_CONSTEXPR C_OFFICE_SET_AUTHORITY::C_OFFICE_SET_AUTHORITY(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.authorities_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct C_OFFICE_SET_AUTHORITYDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR C_OFFICE_SET_AUTHORITYDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~C_OFFICE_SET_AUTHORITYDefaultTypeInternal() {}
-  union {
-    C_OFFICE_SET_AUTHORITY _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_SET_AUTHORITYDefaultTypeInternal _C_OFFICE_SET_AUTHORITY_default_instance_;
-PROTOBUF_CONSTEXPR S_OFFICE_SET_AUTHORITY::S_OFFICE_SET_AUTHORITY(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.success_)*/false
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct S_OFFICE_SET_AUTHORITYDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_OFFICE_SET_AUTHORITYDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_OFFICE_SET_AUTHORITYDefaultTypeInternal() {}
-  union {
-    S_OFFICE_SET_AUTHORITY _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_SET_AUTHORITYDefaultTypeInternal _S_OFFICE_SET_AUTHORITY_default_instance_;
-PROTOBUF_CONSTEXPR C_OFFICE_SET_PERMISSION_PermissionInfo::C_OFFICE_SET_PERMISSION_PermissionInfo(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.screenpermission_)*/false
-  , /*decltype(_impl_.chatpermission_)*/false
-  , /*decltype(_impl_.voicepermission_)*/false
-  , /*decltype(_impl_.videopermission_)*/false
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct C_OFFICE_SET_PERMISSION_PermissionInfoDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR C_OFFICE_SET_PERMISSION_PermissionInfoDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~C_OFFICE_SET_PERMISSION_PermissionInfoDefaultTypeInternal() {}
-  union {
-    C_OFFICE_SET_PERMISSION_PermissionInfo _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_SET_PERMISSION_PermissionInfoDefaultTypeInternal _C_OFFICE_SET_PERMISSION_PermissionInfo_default_instance_;
 PROTOBUF_CONSTEXPR C_OFFICE_SET_PERMISSION::C_OFFICE_SET_PERMISSION(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.permissions_)*/{}
@@ -450,7 +393,7 @@ struct S_OFFICE_SHAREDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_SHAREDefaultTypeInternal _S_OFFICE_SHARE_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_5f004_5fOffice_2eproto[30];
+static ::_pb::Metadata file_level_metadata_Packet_5f004_5fOffice_2eproto[26];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_5f004_5fOffice_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_5f004_5fOffice_2eproto = nullptr;
 
@@ -547,6 +490,18 @@ const uint32_t TableStruct_Packet_5f004_5fOffice_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_KICK, _impl_.success_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::OfficeUserInfo, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::OfficeUserInfo, _impl_.clientid_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::OfficeUserInfo, _impl_.screenpermission_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::OfficeUserInfo, _impl_.chatpermission_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::OfficeUserInfo, _impl_.voicepermission_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::OfficeUserInfo, _impl_.videopermission_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::OfficeUserInfo, _impl_.authority_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_GET_PERMISSION, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -554,57 +509,12 @@ const uint32_t TableStruct_Packet_5f004_5fOffice_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_GET_PERMISSION, _impl_.clientid_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.clientid_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.screenpermission_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.chatpermission_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.voicepermission_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.videopermission_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.authority_),
-  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_PERMISSION, _impl_.permissions_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_AUTHORITY_AuthorityInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_AUTHORITY_AuthorityInfo, _impl_.clientid_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_AUTHORITY_AuthorityInfo, _impl_.authority_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_AUTHORITY, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_AUTHORITY, _impl_.authorities_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_SET_AUTHORITY, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_SET_AUTHORITY, _impl_.success_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo, _impl_.clientid_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo, _impl_.screenpermission_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo, _impl_.chatpermission_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo, _impl_.voicepermission_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo, _impl_.videopermission_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_PERMISSION, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -722,23 +632,19 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 70, -1, -1, sizeof(::Protocol::S_OFFICE_BREAK)},
   { 77, -1, -1, sizeof(::Protocol::C_OFFICE_KICK)},
   { 84, -1, -1, sizeof(::Protocol::S_OFFICE_KICK)},
-  { 91, -1, -1, sizeof(::Protocol::C_OFFICE_GET_PERMISSION)},
-  { 98, -1, -1, sizeof(::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo)},
+  { 91, -1, -1, sizeof(::Protocol::OfficeUserInfo)},
+  { 103, -1, -1, sizeof(::Protocol::C_OFFICE_GET_PERMISSION)},
   { 110, -1, -1, sizeof(::Protocol::S_OFFICE_GET_PERMISSION)},
-  { 117, -1, -1, sizeof(::Protocol::C_OFFICE_SET_AUTHORITY_AuthorityInfo)},
-  { 125, -1, -1, sizeof(::Protocol::C_OFFICE_SET_AUTHORITY)},
-  { 132, -1, -1, sizeof(::Protocol::S_OFFICE_SET_AUTHORITY)},
-  { 139, -1, -1, sizeof(::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo)},
-  { 150, -1, -1, sizeof(::Protocol::C_OFFICE_SET_PERMISSION)},
-  { 157, -1, -1, sizeof(::Protocol::S_OFFICE_SET_PERMISSION)},
-  { 164, -1, -1, sizeof(::Protocol::C_OFFICE_SET_ROOM_INFO)},
-  { 175, -1, -1, sizeof(::Protocol::S_OFFICE_SET_ROOM_INFO)},
-  { 182, -1, -1, sizeof(::Protocol::C_OFFICE_GET_ROOM_INFO)},
-  { 188, -1, -1, sizeof(::Protocol::S_OFFICE_GET_ROOM_INFO)},
-  { 210, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
-  { 223, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
-  { 236, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
-  { 244, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
+  { 117, -1, -1, sizeof(::Protocol::C_OFFICE_SET_PERMISSION)},
+  { 124, -1, -1, sizeof(::Protocol::S_OFFICE_SET_PERMISSION)},
+  { 131, -1, -1, sizeof(::Protocol::C_OFFICE_SET_ROOM_INFO)},
+  { 142, -1, -1, sizeof(::Protocol::S_OFFICE_SET_ROOM_INFO)},
+  { 149, -1, -1, sizeof(::Protocol::C_OFFICE_GET_ROOM_INFO)},
+  { 155, -1, -1, sizeof(::Protocol::S_OFFICE_GET_ROOM_INFO)},
+  { 177, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
+  { 190, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
+  { 203, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
+  { 211, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -755,13 +661,9 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_OFFICE_BREAK_default_instance_._instance,
   &::Protocol::_C_OFFICE_KICK_default_instance_._instance,
   &::Protocol::_S_OFFICE_KICK_default_instance_._instance,
+  &::Protocol::_OfficeUserInfo_default_instance_._instance,
   &::Protocol::_C_OFFICE_GET_PERMISSION_default_instance_._instance,
-  &::Protocol::_S_OFFICE_GET_PERMISSION_OfficeUserInfo_default_instance_._instance,
   &::Protocol::_S_OFFICE_GET_PERMISSION_default_instance_._instance,
-  &::Protocol::_C_OFFICE_SET_AUTHORITY_AuthorityInfo_default_instance_._instance,
-  &::Protocol::_C_OFFICE_SET_AUTHORITY_default_instance_._instance,
-  &::Protocol::_S_OFFICE_SET_AUTHORITY_default_instance_._instance,
-  &::Protocol::_C_OFFICE_SET_PERMISSION_PermissionInfo_default_instance_._instance,
   &::Protocol::_C_OFFICE_SET_PERMISSION_default_instance_._instance,
   &::Protocol::_S_OFFICE_SET_PERMISSION_default_instance_._instance,
   &::Protocol::_C_OFFICE_SET_ROOM_INFO_default_instance_._instance,
@@ -789,56 +691,47 @@ const char descriptor_table_protodef_Packet_5f004_5fOffice_2eproto[] PROTOBUF_SE
   "CE_GET_HOST\022\020\n\010clientId\030\001 \001(\t\"\020\n\016C_OFFIC"
   "E_BREAK\"!\n\016S_OFFICE_BREAK\022\017\n\007success\030\001 \001"
   "(\010\"!\n\rC_OFFICE_KICK\022\020\n\010clientId\030\001 \001(\t\" \n"
-  "\rS_OFFICE_KICK\022\017\n\007success\030\001 \001(\010\"+\n\027C_OFF"
-  "ICE_GET_PERMISSION\022\020\n\010clientId\030\001 \001(\t\"\374\001\n"
-  "\027S_OFFICE_GET_PERMISSION\022E\n\013permissions\030"
-  "\001 \003(\01320.Protocol.S_OFFICE_GET_PERMISSION"
-  ".OfficeUserInfo\032\231\001\n\016OfficeUserInfo\022\020\n\010cl"
-  "ientId\030\001 \001(\t\022\030\n\020screenPermission\030\002 \001(\010\022\026"
-  "\n\016chatPermission\030\003 \001(\010\022\027\n\017voicePermissio"
-  "n\030\004 \001(\010\022\027\n\017videoPermission\030\005 \001(\010\022\021\n\tauth"
-  "ority\030\006 \001(\005\"\223\001\n\026C_OFFICE_SET_AUTHORITY\022C"
-  "\n\013authorities\030\001 \003(\0132..Protocol.C_OFFICE_"
-  "SET_AUTHORITY.AuthorityInfo\0324\n\rAuthority"
-  "Info\022\020\n\010clientId\030\001 \001(\t\022\021\n\tauthority\030\002 \001("
-  "\005\")\n\026S_OFFICE_SET_AUTHORITY\022\017\n\007success\030\001"
-  " \001(\010\"\351\001\n\027C_OFFICE_SET_PERMISSION\022E\n\013perm"
-  "issions\030\001 \003(\01320.Protocol.C_OFFICE_SET_PE"
-  "RMISSION.PermissionInfo\032\206\001\n\016PermissionIn"
-  "fo\022\020\n\010clientId\030\001 \001(\t\022\030\n\020screenPermission"
-  "\030\002 \001(\010\022\026\n\016chatPermission\030\003 \001(\010\022\027\n\017voiceP"
-  "ermission\030\004 \001(\010\022\027\n\017videoPermission\030\005 \001(\010"
-  "\"*\n\027S_OFFICE_SET_PERMISSION\022\017\n\007success\030\001"
-  " \001(\010\"\177\n\026C_OFFICE_SET_ROOM_INFO\022\021\n\tperson"
-  "nel\030\001 \001(\005\022\020\n\010password\030\002 \001(\t\022\022\n\nisShutdow"
-  "n\030\003 \001(\010\022\025\n\risAdvertising\030\004 \001(\010\022\025\n\risWait"
-  "ingRoom\030\005 \001(\010\")\n\026S_OFFICE_SET_ROOM_INFO\022"
-  "\017\n\007success\030\001 \001(\010\"\030\n\026C_OFFICE_GET_ROOM_IN"
-  "FO\"\337\002\n\026S_OFFICE_GET_ROOM_INFO\022\020\n\010roomNam"
-  "e\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\022\021\n\ttopicTyp"
-  "e\030\003 \001(\005\022\020\n\010password\030\004 \001(\t\022\023\n\013spaceInfoId"
-  "\030\005 \001(\t\022\021\n\tpersonnel\030\006 \001(\005\022\030\n\020currentPers"
-  "onnel\030\007 \001(\005\022\025\n\risAdvertising\030\010 \001(\010\022\021\n\tth"
-  "umbnail\030\t \001(\t\022\025\n\risWaitingRoom\030\n \001(\010\022\022\n\n"
-  "isShutdown\030\013 \001(\010\022\023\n\013runningTime\030\014 \001(\005\022\022\n"
-  "\npassedTime\030\r \001(\005\022\021\n\tstartTime\030\016 \001(\t\022\020\n\010"
-  "roomcode\030\017 \001(\t\022\024\n\014hostNickname\030\020 \001(\t\"\212\001\n"
-  "\025C_OFFICE_VIDEO_STREAM\022\020\n\010clientid\030\001 \001(\t"
-  "\022\013\n\003url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time\030\004 "
-  "\001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020media"
-  "PlayerState\030\007 \001(\005\"\212\001\n\025S_OFFICE_VIDEO_STR"
-  "EAM\022\020\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006vo"
-  "lume\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014"
-  "\n\004seek\030\006 \001(\010\022\030\n\020mediaPlayerState\030\007 \001(\005\"2"
-  "\n\016C_OFFICE_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006us"
-  "erId\030\002 \001(\005\"2\n\016S_OFFICE_SHARE\022\020\n\010isShared"
-  "\030\001 \001(\010\022\016\n\006userId\030\002 \001(\005b\006proto3"
+  "\rS_OFFICE_KICK\022\017\n\007success\030\001 \001(\010\"\231\001\n\016Offi"
+  "ceUserInfo\022\020\n\010clientId\030\001 \001(\t\022\030\n\020screenPe"
+  "rmission\030\002 \001(\010\022\026\n\016chatPermission\030\003 \001(\010\022\027"
+  "\n\017voicePermission\030\004 \001(\010\022\027\n\017videoPermissi"
+  "on\030\005 \001(\010\022\021\n\tauthority\030\006 \001(\005\"+\n\027C_OFFICE_"
+  "GET_PERMISSION\022\020\n\010clientId\030\001 \001(\t\"H\n\027S_OF"
+  "FICE_GET_PERMISSION\022-\n\013permissions\030\001 \003(\013"
+  "2\030.Protocol.OfficeUserInfo\"H\n\027C_OFFICE_S"
+  "ET_PERMISSION\022-\n\013permissions\030\001 \003(\0132\030.Pro"
+  "tocol.OfficeUserInfo\"*\n\027S_OFFICE_SET_PER"
+  "MISSION\022\017\n\007success\030\001 \001(\010\"\177\n\026C_OFFICE_SET"
+  "_ROOM_INFO\022\021\n\tpersonnel\030\001 \001(\005\022\020\n\010passwor"
+  "d\030\002 \001(\t\022\022\n\nisShutdown\030\003 \001(\010\022\025\n\risAdverti"
+  "sing\030\004 \001(\010\022\025\n\risWaitingRoom\030\005 \001(\010\")\n\026S_O"
+  "FFICE_SET_ROOM_INFO\022\017\n\007success\030\001 \001(\010\"\030\n\026"
+  "C_OFFICE_GET_ROOM_INFO\"\337\002\n\026S_OFFICE_GET_"
+  "ROOM_INFO\022\020\n\010roomName\030\001 \001(\t\022\023\n\013descripti"
+  "on\030\002 \001(\t\022\021\n\ttopicType\030\003 \001(\005\022\020\n\010password\030"
+  "\004 \001(\t\022\023\n\013spaceInfoId\030\005 \001(\t\022\021\n\tpersonnel\030"
+  "\006 \001(\005\022\030\n\020currentPersonnel\030\007 \001(\005\022\025\n\risAdv"
+  "ertising\030\010 \001(\010\022\021\n\tthumbnail\030\t \001(\t\022\025\n\risW"
+  "aitingRoom\030\n \001(\010\022\022\n\nisShutdown\030\013 \001(\010\022\023\n\013"
+  "runningTime\030\014 \001(\005\022\022\n\npassedTime\030\r \001(\005\022\021\n"
+  "\tstartTime\030\016 \001(\t\022\020\n\010roomcode\030\017 \001(\t\022\024\n\014ho"
+  "stNickname\030\020 \001(\t\"\212\001\n\025C_OFFICE_VIDEO_STRE"
+  "AM\022\020\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006vol"
+  "ume\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n"
+  "\004seek\030\006 \001(\010\022\030\n\020mediaPlayerState\030\007 \001(\005\"\212\001"
+  "\n\025S_OFFICE_VIDEO_STREAM\022\020\n\010clientid\030\001 \001("
+  "\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time\030\004"
+  " \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020medi"
+  "aPlayerState\030\007 \001(\005\"2\n\016C_OFFICE_SHARE\022\020\n\010"
+  "isShared\030\001 \001(\010\022\016\n\006userId\030\002 \001(\005\"2\n\016S_OFFI"
+  "CE_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006userId\030\002 \001"
+  "(\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f004_5fOffice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f004_5fOffice_2eproto = {
-    false, false, 2310, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
+    false, false, 1930, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
     "Packet_004_Office.proto",
-    &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 30,
+    &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 26,
     schemas, file_default_instances, TableStruct_Packet_5f004_5fOffice_2eproto::offsets,
     file_level_metadata_Packet_5f004_5fOffice_2eproto, file_level_enum_descriptors_Packet_5f004_5fOffice_2eproto,
     file_level_service_descriptors_Packet_5f004_5fOffice_2eproto,
@@ -2976,6 +2869,341 @@ void S_OFFICE_KICK::InternalSwap(S_OFFICE_KICK* other) {
 
 // ===================================================================
 
+class OfficeUserInfo::_Internal {
+ public:
+};
+
+OfficeUserInfo::OfficeUserInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.OfficeUserInfo)
+}
+OfficeUserInfo::OfficeUserInfo(const OfficeUserInfo& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  OfficeUserInfo* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.clientid_){}
+    , decltype(_impl_.screenpermission_){}
+    , decltype(_impl_.chatpermission_){}
+    , decltype(_impl_.voicepermission_){}
+    , decltype(_impl_.videopermission_){}
+    , decltype(_impl_.authority_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.clientid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_clientid().empty()) {
+    _this->_impl_.clientid_.Set(from._internal_clientid(), 
+      _this->GetArenaForAllocation());
+  }
+  ::memcpy(&_impl_.screenpermission_, &from._impl_.screenpermission_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.authority_) -
+    reinterpret_cast<char*>(&_impl_.screenpermission_)) + sizeof(_impl_.authority_));
+  // @@protoc_insertion_point(copy_constructor:Protocol.OfficeUserInfo)
+}
+
+inline void OfficeUserInfo::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.clientid_){}
+    , decltype(_impl_.screenpermission_){false}
+    , decltype(_impl_.chatpermission_){false}
+    , decltype(_impl_.voicepermission_){false}
+    , decltype(_impl_.videopermission_){false}
+    , decltype(_impl_.authority_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.clientid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+OfficeUserInfo::~OfficeUserInfo() {
+  // @@protoc_insertion_point(destructor:Protocol.OfficeUserInfo)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void OfficeUserInfo::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.clientid_.Destroy();
+}
+
+void OfficeUserInfo::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void OfficeUserInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.OfficeUserInfo)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.clientid_.ClearToEmpty();
+  ::memset(&_impl_.screenpermission_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.authority_) -
+      reinterpret_cast<char*>(&_impl_.screenpermission_)) + sizeof(_impl_.authority_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* OfficeUserInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string clientId = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_clientid();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "Protocol.OfficeUserInfo.clientId"));
+        } else
+          goto handle_unusual;
+        continue;
+      // bool screenPermission = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.screenpermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool chatPermission = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.chatpermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool voicePermission = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          _impl_.voicepermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool videoPermission = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          _impl_.videopermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 authority = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          _impl_.authority_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* OfficeUserInfo::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.OfficeUserInfo)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string clientId = 1;
+  if (!this->_internal_clientid().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_clientid().data(), static_cast<int>(this->_internal_clientid().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Protocol.OfficeUserInfo.clientId");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_clientid(), target);
+  }
+
+  // bool screenPermission = 2;
+  if (this->_internal_screenpermission() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_screenpermission(), target);
+  }
+
+  // bool chatPermission = 3;
+  if (this->_internal_chatpermission() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(3, this->_internal_chatpermission(), target);
+  }
+
+  // bool voicePermission = 4;
+  if (this->_internal_voicepermission() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_voicepermission(), target);
+  }
+
+  // bool videoPermission = 5;
+  if (this->_internal_videopermission() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_videopermission(), target);
+  }
+
+  // int32 authority = 6;
+  if (this->_internal_authority() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(6, this->_internal_authority(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.OfficeUserInfo)
+  return target;
+}
+
+size_t OfficeUserInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.OfficeUserInfo)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string clientId = 1;
+  if (!this->_internal_clientid().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_clientid());
+  }
+
+  // bool screenPermission = 2;
+  if (this->_internal_screenpermission() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool chatPermission = 3;
+  if (this->_internal_chatpermission() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool voicePermission = 4;
+  if (this->_internal_voicepermission() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool videoPermission = 5;
+  if (this->_internal_videopermission() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // int32 authority = 6;
+  if (this->_internal_authority() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_authority());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData OfficeUserInfo::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    OfficeUserInfo::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*OfficeUserInfo::GetClassData() const { return &_class_data_; }
+
+
+void OfficeUserInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<OfficeUserInfo*>(&to_msg);
+  auto& from = static_cast<const OfficeUserInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.OfficeUserInfo)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_clientid().empty()) {
+    _this->_internal_set_clientid(from._internal_clientid());
+  }
+  if (from._internal_screenpermission() != 0) {
+    _this->_internal_set_screenpermission(from._internal_screenpermission());
+  }
+  if (from._internal_chatpermission() != 0) {
+    _this->_internal_set_chatpermission(from._internal_chatpermission());
+  }
+  if (from._internal_voicepermission() != 0) {
+    _this->_internal_set_voicepermission(from._internal_voicepermission());
+  }
+  if (from._internal_videopermission() != 0) {
+    _this->_internal_set_videopermission(from._internal_videopermission());
+  }
+  if (from._internal_authority() != 0) {
+    _this->_internal_set_authority(from._internal_authority());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void OfficeUserInfo::CopyFrom(const OfficeUserInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.OfficeUserInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool OfficeUserInfo::IsInitialized() const {
+  return true;
+}
+
+void OfficeUserInfo::InternalSwap(OfficeUserInfo* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.clientid_, lhs_arena,
+      &other->_impl_.clientid_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(OfficeUserInfo, _impl_.authority_)
+      + sizeof(OfficeUserInfo::_impl_.authority_)
+      - PROTOBUF_FIELD_OFFSET(OfficeUserInfo, _impl_.screenpermission_)>(
+          reinterpret_cast<char*>(&_impl_.screenpermission_),
+          reinterpret_cast<char*>(&other->_impl_.screenpermission_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata OfficeUserInfo::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[13]);
+}
+
+// ===================================================================
+
 class C_OFFICE_GET_PERMISSION::_Internal {
  public:
 };
@@ -3174,341 +3402,6 @@ void C_OFFICE_GET_PERMISSION::InternalSwap(C_OFFICE_GET_PERMISSION* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_GET_PERMISSION::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[13]);
-}
-
-// ===================================================================
-
-class S_OFFICE_GET_PERMISSION_OfficeUserInfo::_Internal {
- public:
-};
-
-S_OFFICE_GET_PERMISSION_OfficeUserInfo::S_OFFICE_GET_PERMISSION_OfficeUserInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-}
-S_OFFICE_GET_PERMISSION_OfficeUserInfo::S_OFFICE_GET_PERMISSION_OfficeUserInfo(const S_OFFICE_GET_PERMISSION_OfficeUserInfo& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  S_OFFICE_GET_PERMISSION_OfficeUserInfo* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.clientid_){}
-    , decltype(_impl_.screenpermission_){}
-    , decltype(_impl_.chatpermission_){}
-    , decltype(_impl_.voicepermission_){}
-    , decltype(_impl_.videopermission_){}
-    , decltype(_impl_.authority_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.clientid_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.clientid_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_clientid().empty()) {
-    _this->_impl_.clientid_.Set(from._internal_clientid(), 
-      _this->GetArenaForAllocation());
-  }
-  ::memcpy(&_impl_.screenpermission_, &from._impl_.screenpermission_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.authority_) -
-    reinterpret_cast<char*>(&_impl_.screenpermission_)) + sizeof(_impl_.authority_));
-  // @@protoc_insertion_point(copy_constructor:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-}
-
-inline void S_OFFICE_GET_PERMISSION_OfficeUserInfo::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.clientid_){}
-    , decltype(_impl_.screenpermission_){false}
-    , decltype(_impl_.chatpermission_){false}
-    , decltype(_impl_.voicepermission_){false}
-    , decltype(_impl_.videopermission_){false}
-    , decltype(_impl_.authority_){0}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.clientid_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.clientid_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-S_OFFICE_GET_PERMISSION_OfficeUserInfo::~S_OFFICE_GET_PERMISSION_OfficeUserInfo() {
-  // @@protoc_insertion_point(destructor:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void S_OFFICE_GET_PERMISSION_OfficeUserInfo::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.clientid_.Destroy();
-}
-
-void S_OFFICE_GET_PERMISSION_OfficeUserInfo::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void S_OFFICE_GET_PERMISSION_OfficeUserInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.clientid_.ClearToEmpty();
-  ::memset(&_impl_.screenpermission_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.authority_) -
-      reinterpret_cast<char*>(&_impl_.screenpermission_)) + sizeof(_impl_.authority_));
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* S_OFFICE_GET_PERMISSION_OfficeUserInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string clientId = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_clientid();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo.clientId"));
-        } else
-          goto handle_unusual;
-        continue;
-      // bool screenPermission = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.screenpermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool chatPermission = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.chatpermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool voicePermission = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
-          _impl_.voicepermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool videoPermission = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.videopermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 authority = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
-          _impl_.authority_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* S_OFFICE_GET_PERMISSION_OfficeUserInfo::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string clientId = 1;
-  if (!this->_internal_clientid().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_clientid().data(), static_cast<int>(this->_internal_clientid().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo.clientId");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_clientid(), target);
-  }
-
-  // bool screenPermission = 2;
-  if (this->_internal_screenpermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_screenpermission(), target);
-  }
-
-  // bool chatPermission = 3;
-  if (this->_internal_chatpermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(3, this->_internal_chatpermission(), target);
-  }
-
-  // bool voicePermission = 4;
-  if (this->_internal_voicepermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_voicepermission(), target);
-  }
-
-  // bool videoPermission = 5;
-  if (this->_internal_videopermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_videopermission(), target);
-  }
-
-  // int32 authority = 6;
-  if (this->_internal_authority() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(6, this->_internal_authority(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-  return target;
-}
-
-size_t S_OFFICE_GET_PERMISSION_OfficeUserInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string clientId = 1;
-  if (!this->_internal_clientid().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_clientid());
-  }
-
-  // bool screenPermission = 2;
-  if (this->_internal_screenpermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool chatPermission = 3;
-  if (this->_internal_chatpermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool voicePermission = 4;
-  if (this->_internal_voicepermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool videoPermission = 5;
-  if (this->_internal_videopermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // int32 authority = 6;
-  if (this->_internal_authority() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_authority());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_OFFICE_GET_PERMISSION_OfficeUserInfo::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    S_OFFICE_GET_PERMISSION_OfficeUserInfo::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_OFFICE_GET_PERMISSION_OfficeUserInfo::GetClassData() const { return &_class_data_; }
-
-
-void S_OFFICE_GET_PERMISSION_OfficeUserInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<S_OFFICE_GET_PERMISSION_OfficeUserInfo*>(&to_msg);
-  auto& from = static_cast<const S_OFFICE_GET_PERMISSION_OfficeUserInfo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_clientid().empty()) {
-    _this->_internal_set_clientid(from._internal_clientid());
-  }
-  if (from._internal_screenpermission() != 0) {
-    _this->_internal_set_screenpermission(from._internal_screenpermission());
-  }
-  if (from._internal_chatpermission() != 0) {
-    _this->_internal_set_chatpermission(from._internal_chatpermission());
-  }
-  if (from._internal_voicepermission() != 0) {
-    _this->_internal_set_voicepermission(from._internal_voicepermission());
-  }
-  if (from._internal_videopermission() != 0) {
-    _this->_internal_set_videopermission(from._internal_videopermission());
-  }
-  if (from._internal_authority() != 0) {
-    _this->_internal_set_authority(from._internal_authority());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void S_OFFICE_GET_PERMISSION_OfficeUserInfo::CopyFrom(const S_OFFICE_GET_PERMISSION_OfficeUserInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool S_OFFICE_GET_PERMISSION_OfficeUserInfo::IsInitialized() const {
-  return true;
-}
-
-void S_OFFICE_GET_PERMISSION_OfficeUserInfo::InternalSwap(S_OFFICE_GET_PERMISSION_OfficeUserInfo* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.clientid_, lhs_arena,
-      &other->_impl_.clientid_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.authority_)
-      + sizeof(S_OFFICE_GET_PERMISSION_OfficeUserInfo::_impl_.authority_)
-      - PROTOBUF_FIELD_OFFSET(S_OFFICE_GET_PERMISSION_OfficeUserInfo, _impl_.screenpermission_)>(
-          reinterpret_cast<char*>(&_impl_.screenpermission_),
-          reinterpret_cast<char*>(&other->_impl_.screenpermission_));
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_GET_PERMISSION_OfficeUserInfo::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
       file_level_metadata_Packet_5f004_5fOffice_2eproto[14]);
 }
 
@@ -3579,7 +3472,7 @@ const char* S_OFFICE_GET_PERMISSION::_InternalParse(const char* ptr, ::_pbi::Par
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo permissions = 1;
+      // repeated .Protocol.OfficeUserInfo permissions = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -3621,7 +3514,7 @@ uint8_t* S_OFFICE_GET_PERMISSION::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo permissions = 1;
+  // repeated .Protocol.OfficeUserInfo permissions = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_permissions_size()); i < n; i++) {
     const auto& repfield = this->_internal_permissions(i);
@@ -3645,7 +3538,7 @@ size_t S_OFFICE_GET_PERMISSION::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .Protocol.S_OFFICE_GET_PERMISSION.OfficeUserInfo permissions = 1;
+  // repeated .Protocol.OfficeUserInfo permissions = 1;
   total_size += 1UL * this->_internal_permissions_size();
   for (const auto& msg : this->_impl_.permissions_) {
     total_size +=
@@ -3695,910 +3588,6 @@ void S_OFFICE_GET_PERMISSION::InternalSwap(S_OFFICE_GET_PERMISSION* other) {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
       file_level_metadata_Packet_5f004_5fOffice_2eproto[15]);
-}
-
-// ===================================================================
-
-class C_OFFICE_SET_AUTHORITY_AuthorityInfo::_Internal {
- public:
-};
-
-C_OFFICE_SET_AUTHORITY_AuthorityInfo::C_OFFICE_SET_AUTHORITY_AuthorityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-}
-C_OFFICE_SET_AUTHORITY_AuthorityInfo::C_OFFICE_SET_AUTHORITY_AuthorityInfo(const C_OFFICE_SET_AUTHORITY_AuthorityInfo& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  C_OFFICE_SET_AUTHORITY_AuthorityInfo* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.clientid_){}
-    , decltype(_impl_.authority_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.clientid_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.clientid_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_clientid().empty()) {
-    _this->_impl_.clientid_.Set(from._internal_clientid(), 
-      _this->GetArenaForAllocation());
-  }
-  _this->_impl_.authority_ = from._impl_.authority_;
-  // @@protoc_insertion_point(copy_constructor:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-}
-
-inline void C_OFFICE_SET_AUTHORITY_AuthorityInfo::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.clientid_){}
-    , decltype(_impl_.authority_){0}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.clientid_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.clientid_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-C_OFFICE_SET_AUTHORITY_AuthorityInfo::~C_OFFICE_SET_AUTHORITY_AuthorityInfo() {
-  // @@protoc_insertion_point(destructor:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void C_OFFICE_SET_AUTHORITY_AuthorityInfo::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.clientid_.Destroy();
-}
-
-void C_OFFICE_SET_AUTHORITY_AuthorityInfo::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void C_OFFICE_SET_AUTHORITY_AuthorityInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.clientid_.ClearToEmpty();
-  _impl_.authority_ = 0;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* C_OFFICE_SET_AUTHORITY_AuthorityInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string clientId = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_clientid();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo.clientId"));
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 authority = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.authority_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* C_OFFICE_SET_AUTHORITY_AuthorityInfo::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string clientId = 1;
-  if (!this->_internal_clientid().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_clientid().data(), static_cast<int>(this->_internal_clientid().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo.clientId");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_clientid(), target);
-  }
-
-  // int32 authority = 2;
-  if (this->_internal_authority() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_authority(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-  return target;
-}
-
-size_t C_OFFICE_SET_AUTHORITY_AuthorityInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string clientId = 1;
-  if (!this->_internal_clientid().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_clientid());
-  }
-
-  // int32 authority = 2;
-  if (this->_internal_authority() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_authority());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_OFFICE_SET_AUTHORITY_AuthorityInfo::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    C_OFFICE_SET_AUTHORITY_AuthorityInfo::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_OFFICE_SET_AUTHORITY_AuthorityInfo::GetClassData() const { return &_class_data_; }
-
-
-void C_OFFICE_SET_AUTHORITY_AuthorityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<C_OFFICE_SET_AUTHORITY_AuthorityInfo*>(&to_msg);
-  auto& from = static_cast<const C_OFFICE_SET_AUTHORITY_AuthorityInfo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_clientid().empty()) {
-    _this->_internal_set_clientid(from._internal_clientid());
-  }
-  if (from._internal_authority() != 0) {
-    _this->_internal_set_authority(from._internal_authority());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void C_OFFICE_SET_AUTHORITY_AuthorityInfo::CopyFrom(const C_OFFICE_SET_AUTHORITY_AuthorityInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool C_OFFICE_SET_AUTHORITY_AuthorityInfo::IsInitialized() const {
-  return true;
-}
-
-void C_OFFICE_SET_AUTHORITY_AuthorityInfo::InternalSwap(C_OFFICE_SET_AUTHORITY_AuthorityInfo* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.clientid_, lhs_arena,
-      &other->_impl_.clientid_, rhs_arena
-  );
-  swap(_impl_.authority_, other->_impl_.authority_);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SET_AUTHORITY_AuthorityInfo::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[16]);
-}
-
-// ===================================================================
-
-class C_OFFICE_SET_AUTHORITY::_Internal {
- public:
-};
-
-C_OFFICE_SET_AUTHORITY::C_OFFICE_SET_AUTHORITY(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.C_OFFICE_SET_AUTHORITY)
-}
-C_OFFICE_SET_AUTHORITY::C_OFFICE_SET_AUTHORITY(const C_OFFICE_SET_AUTHORITY& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  C_OFFICE_SET_AUTHORITY* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.authorities_){from._impl_.authorities_}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:Protocol.C_OFFICE_SET_AUTHORITY)
-}
-
-inline void C_OFFICE_SET_AUTHORITY::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.authorities_){arena}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-}
-
-C_OFFICE_SET_AUTHORITY::~C_OFFICE_SET_AUTHORITY() {
-  // @@protoc_insertion_point(destructor:Protocol.C_OFFICE_SET_AUTHORITY)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void C_OFFICE_SET_AUTHORITY::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.authorities_.~RepeatedPtrField();
-}
-
-void C_OFFICE_SET_AUTHORITY::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void C_OFFICE_SET_AUTHORITY::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.C_OFFICE_SET_AUTHORITY)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.authorities_.Clear();
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* C_OFFICE_SET_AUTHORITY::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // repeated .Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo authorities = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_authorities(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* C_OFFICE_SET_AUTHORITY::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.C_OFFICE_SET_AUTHORITY)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo authorities = 1;
-  for (unsigned i = 0,
-      n = static_cast<unsigned>(this->_internal_authorities_size()); i < n; i++) {
-    const auto& repfield = this->_internal_authorities(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.C_OFFICE_SET_AUTHORITY)
-  return target;
-}
-
-size_t C_OFFICE_SET_AUTHORITY::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.C_OFFICE_SET_AUTHORITY)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // repeated .Protocol.C_OFFICE_SET_AUTHORITY.AuthorityInfo authorities = 1;
-  total_size += 1UL * this->_internal_authorities_size();
-  for (const auto& msg : this->_impl_.authorities_) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_OFFICE_SET_AUTHORITY::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    C_OFFICE_SET_AUTHORITY::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_OFFICE_SET_AUTHORITY::GetClassData() const { return &_class_data_; }
-
-
-void C_OFFICE_SET_AUTHORITY::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<C_OFFICE_SET_AUTHORITY*>(&to_msg);
-  auto& from = static_cast<const C_OFFICE_SET_AUTHORITY&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.C_OFFICE_SET_AUTHORITY)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  _this->_impl_.authorities_.MergeFrom(from._impl_.authorities_);
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void C_OFFICE_SET_AUTHORITY::CopyFrom(const C_OFFICE_SET_AUTHORITY& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.C_OFFICE_SET_AUTHORITY)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool C_OFFICE_SET_AUTHORITY::IsInitialized() const {
-  return true;
-}
-
-void C_OFFICE_SET_AUTHORITY::InternalSwap(C_OFFICE_SET_AUTHORITY* other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.authorities_.InternalSwap(&other->_impl_.authorities_);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SET_AUTHORITY::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[17]);
-}
-
-// ===================================================================
-
-class S_OFFICE_SET_AUTHORITY::_Internal {
- public:
-};
-
-S_OFFICE_SET_AUTHORITY::S_OFFICE_SET_AUTHORITY(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.S_OFFICE_SET_AUTHORITY)
-}
-S_OFFICE_SET_AUTHORITY::S_OFFICE_SET_AUTHORITY(const S_OFFICE_SET_AUTHORITY& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  S_OFFICE_SET_AUTHORITY* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.success_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _this->_impl_.success_ = from._impl_.success_;
-  // @@protoc_insertion_point(copy_constructor:Protocol.S_OFFICE_SET_AUTHORITY)
-}
-
-inline void S_OFFICE_SET_AUTHORITY::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.success_){false}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-}
-
-S_OFFICE_SET_AUTHORITY::~S_OFFICE_SET_AUTHORITY() {
-  // @@protoc_insertion_point(destructor:Protocol.S_OFFICE_SET_AUTHORITY)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void S_OFFICE_SET_AUTHORITY::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-}
-
-void S_OFFICE_SET_AUTHORITY::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void S_OFFICE_SET_AUTHORITY::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.S_OFFICE_SET_AUTHORITY)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.success_ = false;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* S_OFFICE_SET_AUTHORITY::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // bool success = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* S_OFFICE_SET_AUTHORITY::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_OFFICE_SET_AUTHORITY)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bool success = 1;
-  if (this->_internal_success() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_OFFICE_SET_AUTHORITY)
-  return target;
-}
-
-size_t S_OFFICE_SET_AUTHORITY::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.S_OFFICE_SET_AUTHORITY)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // bool success = 1;
-  if (this->_internal_success() != 0) {
-    total_size += 1 + 1;
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_OFFICE_SET_AUTHORITY::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    S_OFFICE_SET_AUTHORITY::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_OFFICE_SET_AUTHORITY::GetClassData() const { return &_class_data_; }
-
-
-void S_OFFICE_SET_AUTHORITY::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<S_OFFICE_SET_AUTHORITY*>(&to_msg);
-  auto& from = static_cast<const S_OFFICE_SET_AUTHORITY&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_OFFICE_SET_AUTHORITY)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from._internal_success() != 0) {
-    _this->_internal_set_success(from._internal_success());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void S_OFFICE_SET_AUTHORITY::CopyFrom(const S_OFFICE_SET_AUTHORITY& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_OFFICE_SET_AUTHORITY)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool S_OFFICE_SET_AUTHORITY::IsInitialized() const {
-  return true;
-}
-
-void S_OFFICE_SET_AUTHORITY::InternalSwap(S_OFFICE_SET_AUTHORITY* other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_.success_, other->_impl_.success_);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_SET_AUTHORITY::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[18]);
-}
-
-// ===================================================================
-
-class C_OFFICE_SET_PERMISSION_PermissionInfo::_Internal {
- public:
-};
-
-C_OFFICE_SET_PERMISSION_PermissionInfo::C_OFFICE_SET_PERMISSION_PermissionInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-}
-C_OFFICE_SET_PERMISSION_PermissionInfo::C_OFFICE_SET_PERMISSION_PermissionInfo(const C_OFFICE_SET_PERMISSION_PermissionInfo& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  C_OFFICE_SET_PERMISSION_PermissionInfo* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.clientid_){}
-    , decltype(_impl_.screenpermission_){}
-    , decltype(_impl_.chatpermission_){}
-    , decltype(_impl_.voicepermission_){}
-    , decltype(_impl_.videopermission_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.clientid_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.clientid_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_clientid().empty()) {
-    _this->_impl_.clientid_.Set(from._internal_clientid(), 
-      _this->GetArenaForAllocation());
-  }
-  ::memcpy(&_impl_.screenpermission_, &from._impl_.screenpermission_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.videopermission_) -
-    reinterpret_cast<char*>(&_impl_.screenpermission_)) + sizeof(_impl_.videopermission_));
-  // @@protoc_insertion_point(copy_constructor:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-}
-
-inline void C_OFFICE_SET_PERMISSION_PermissionInfo::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.clientid_){}
-    , decltype(_impl_.screenpermission_){false}
-    , decltype(_impl_.chatpermission_){false}
-    , decltype(_impl_.voicepermission_){false}
-    , decltype(_impl_.videopermission_){false}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.clientid_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.clientid_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-C_OFFICE_SET_PERMISSION_PermissionInfo::~C_OFFICE_SET_PERMISSION_PermissionInfo() {
-  // @@protoc_insertion_point(destructor:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void C_OFFICE_SET_PERMISSION_PermissionInfo::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.clientid_.Destroy();
-}
-
-void C_OFFICE_SET_PERMISSION_PermissionInfo::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void C_OFFICE_SET_PERMISSION_PermissionInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.clientid_.ClearToEmpty();
-  ::memset(&_impl_.screenpermission_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.videopermission_) -
-      reinterpret_cast<char*>(&_impl_.screenpermission_)) + sizeof(_impl_.videopermission_));
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* C_OFFICE_SET_PERMISSION_PermissionInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string clientId = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_clientid();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo.clientId"));
-        } else
-          goto handle_unusual;
-        continue;
-      // bool screenPermission = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.screenpermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool chatPermission = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.chatpermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool voicePermission = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
-          _impl_.voicepermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool videoPermission = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.videopermission_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* C_OFFICE_SET_PERMISSION_PermissionInfo::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string clientId = 1;
-  if (!this->_internal_clientid().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_clientid().data(), static_cast<int>(this->_internal_clientid().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo.clientId");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_clientid(), target);
-  }
-
-  // bool screenPermission = 2;
-  if (this->_internal_screenpermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_screenpermission(), target);
-  }
-
-  // bool chatPermission = 3;
-  if (this->_internal_chatpermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(3, this->_internal_chatpermission(), target);
-  }
-
-  // bool voicePermission = 4;
-  if (this->_internal_voicepermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_voicepermission(), target);
-  }
-
-  // bool videoPermission = 5;
-  if (this->_internal_videopermission() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_videopermission(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-  return target;
-}
-
-size_t C_OFFICE_SET_PERMISSION_PermissionInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string clientId = 1;
-  if (!this->_internal_clientid().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_clientid());
-  }
-
-  // bool screenPermission = 2;
-  if (this->_internal_screenpermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool chatPermission = 3;
-  if (this->_internal_chatpermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool voicePermission = 4;
-  if (this->_internal_voicepermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool videoPermission = 5;
-  if (this->_internal_videopermission() != 0) {
-    total_size += 1 + 1;
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_OFFICE_SET_PERMISSION_PermissionInfo::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    C_OFFICE_SET_PERMISSION_PermissionInfo::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_OFFICE_SET_PERMISSION_PermissionInfo::GetClassData() const { return &_class_data_; }
-
-
-void C_OFFICE_SET_PERMISSION_PermissionInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<C_OFFICE_SET_PERMISSION_PermissionInfo*>(&to_msg);
-  auto& from = static_cast<const C_OFFICE_SET_PERMISSION_PermissionInfo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_clientid().empty()) {
-    _this->_internal_set_clientid(from._internal_clientid());
-  }
-  if (from._internal_screenpermission() != 0) {
-    _this->_internal_set_screenpermission(from._internal_screenpermission());
-  }
-  if (from._internal_chatpermission() != 0) {
-    _this->_internal_set_chatpermission(from._internal_chatpermission());
-  }
-  if (from._internal_voicepermission() != 0) {
-    _this->_internal_set_voicepermission(from._internal_voicepermission());
-  }
-  if (from._internal_videopermission() != 0) {
-    _this->_internal_set_videopermission(from._internal_videopermission());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void C_OFFICE_SET_PERMISSION_PermissionInfo::CopyFrom(const C_OFFICE_SET_PERMISSION_PermissionInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool C_OFFICE_SET_PERMISSION_PermissionInfo::IsInitialized() const {
-  return true;
-}
-
-void C_OFFICE_SET_PERMISSION_PermissionInfo::InternalSwap(C_OFFICE_SET_PERMISSION_PermissionInfo* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.clientid_, lhs_arena,
-      &other->_impl_.clientid_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(C_OFFICE_SET_PERMISSION_PermissionInfo, _impl_.videopermission_)
-      + sizeof(C_OFFICE_SET_PERMISSION_PermissionInfo::_impl_.videopermission_)
-      - PROTOBUF_FIELD_OFFSET(C_OFFICE_SET_PERMISSION_PermissionInfo, _impl_.screenpermission_)>(
-          reinterpret_cast<char*>(&_impl_.screenpermission_),
-          reinterpret_cast<char*>(&other->_impl_.screenpermission_));
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SET_PERMISSION_PermissionInfo::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[19]);
 }
 
 // ===================================================================
@@ -4668,7 +3657,7 @@ const char* C_OFFICE_SET_PERMISSION::_InternalParse(const char* ptr, ::_pbi::Par
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo permissions = 1;
+      // repeated .Protocol.OfficeUserInfo permissions = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -4710,7 +3699,7 @@ uint8_t* C_OFFICE_SET_PERMISSION::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo permissions = 1;
+  // repeated .Protocol.OfficeUserInfo permissions = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_permissions_size()); i < n; i++) {
     const auto& repfield = this->_internal_permissions(i);
@@ -4734,7 +3723,7 @@ size_t C_OFFICE_SET_PERMISSION::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .Protocol.C_OFFICE_SET_PERMISSION.PermissionInfo permissions = 1;
+  // repeated .Protocol.OfficeUserInfo permissions = 1;
   total_size += 1UL * this->_internal_permissions_size();
   for (const auto& msg : this->_impl_.permissions_) {
     total_size +=
@@ -4783,7 +3772,7 @@ void C_OFFICE_SET_PERMISSION::InternalSwap(C_OFFICE_SET_PERMISSION* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SET_PERMISSION::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[20]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[16]);
 }
 
 // ===================================================================
@@ -4961,7 +3950,7 @@ void S_OFFICE_SET_PERMISSION::InternalSwap(S_OFFICE_SET_PERMISSION* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_SET_PERMISSION::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[21]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[17]);
 }
 
 // ===================================================================
@@ -5272,7 +4261,7 @@ void C_OFFICE_SET_ROOM_INFO::InternalSwap(C_OFFICE_SET_ROOM_INFO* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SET_ROOM_INFO::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[22]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[18]);
 }
 
 // ===================================================================
@@ -5450,7 +4439,7 @@ void S_OFFICE_SET_ROOM_INFO::InternalSwap(S_OFFICE_SET_ROOM_INFO* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_SET_ROOM_INFO::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[23]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[19]);
 }
 
 // ===================================================================
@@ -5490,7 +4479,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_OFFICE_GET_ROOM_INFO::GetCla
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_GET_ROOM_INFO::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[24]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[20]);
 }
 
 // ===================================================================
@@ -6247,7 +5236,7 @@ void S_OFFICE_GET_ROOM_INFO::InternalSwap(S_OFFICE_GET_ROOM_INFO* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_GET_ROOM_INFO::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[25]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[21]);
 }
 
 // ===================================================================
@@ -6656,7 +5645,7 @@ void C_OFFICE_VIDEO_STREAM::InternalSwap(C_OFFICE_VIDEO_STREAM* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_VIDEO_STREAM::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[26]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[22]);
 }
 
 // ===================================================================
@@ -7065,7 +6054,7 @@ void S_OFFICE_VIDEO_STREAM::InternalSwap(S_OFFICE_VIDEO_STREAM* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_VIDEO_STREAM::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[27]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[23]);
 }
 
 // ===================================================================
@@ -7276,7 +6265,7 @@ void C_OFFICE_SHARE::InternalSwap(C_OFFICE_SHARE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SHARE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[28]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[24]);
 }
 
 // ===================================================================
@@ -7487,7 +6476,7 @@ void S_OFFICE_SHARE::InternalSwap(S_OFFICE_SHARE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_SHARE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[29]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[25]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -7545,33 +6534,17 @@ template<> PROTOBUF_NOINLINE ::Protocol::S_OFFICE_KICK*
 Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_KICK >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_OFFICE_KICK >(arena);
 }
+template<> PROTOBUF_NOINLINE ::Protocol::OfficeUserInfo*
+Arena::CreateMaybeMessage< ::Protocol::OfficeUserInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::OfficeUserInfo >(arena);
+}
 template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_GET_PERMISSION*
 Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_GET_PERMISSION >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::C_OFFICE_GET_PERMISSION >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo*
-Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::S_OFFICE_GET_PERMISSION_OfficeUserInfo >(arena);
-}
 template<> PROTOBUF_NOINLINE ::Protocol::S_OFFICE_GET_PERMISSION*
 Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_GET_PERMISSION >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_OFFICE_GET_PERMISSION >(arena);
-}
-template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_SET_AUTHORITY_AuthorityInfo*
-Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_SET_AUTHORITY_AuthorityInfo >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::C_OFFICE_SET_AUTHORITY_AuthorityInfo >(arena);
-}
-template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_SET_AUTHORITY*
-Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_SET_AUTHORITY >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::C_OFFICE_SET_AUTHORITY >(arena);
-}
-template<> PROTOBUF_NOINLINE ::Protocol::S_OFFICE_SET_AUTHORITY*
-Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_SET_AUTHORITY >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::S_OFFICE_SET_AUTHORITY >(arena);
-}
-template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo*
-Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::C_OFFICE_SET_PERMISSION_PermissionInfo >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_SET_PERMISSION*
 Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_SET_PERMISSION >(Arena* arena) {
