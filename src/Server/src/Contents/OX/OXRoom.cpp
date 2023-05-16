@@ -40,43 +40,12 @@ bool ox::GameData::Init()
 	);
 	con->setSchema(DBSchema);
 
-	map<int, bool> answerTypes;
-	map<int, int> quizTimeTypes;
-
 	{
 		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT * FROM quizanswertype");
+		res = stmt->executeQuery("SELECT id FROM quizquestionanswer");
 
 		while (res->next())
-		{
-			int answerTypeId = res->getInt(1);
-			string answerType = res->getString(2);
-
-			if (answerType == "O")
-				answerTypes.insert({ answerTypeId, true });
-			else
-				answerTypes.insert({ answerTypeId, false });
-		}
-
-	}
-
-	{
-		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT * FROM quizquestionanswer");
-
-		while (res->next())
-		{
-			int quizId = res->getInt(2);
-			int answerTypeId = res->getInt(3);
-
-			auto answerType = answerTypes.find(answerTypeId);
-			if (answerType == answerTypes.end())
-				return false;
-
-			quiz.push_back(
-				std::pair<int, bool>(quizId, answerType->second)
-			);
-		}
+			quiz.push_back(res->getInt(1));
 	}
 
 	{
@@ -94,31 +63,10 @@ bool ox::GameData::Init()
 
 	{
 		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT * FROM quiztimetype");
+		res = stmt->executeQuery("SELECT quiztimetype.name FROM quizroundtime LEFT JOIN quiztimetype ON quizroundtime.timeType = quiztimetype.type");
 
 		while (res->next())
-		{
-			int quizTimeTypeId = res->getInt(1);
-			int quizTime = res->getInt(2);
-
-			quizTimeTypes.insert({ quizTimeTypeId , quizTime });
-		}
-	}
-
-	{
-		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT * FROM quizroundtime");
-
-		while (res->next())
-		{
-			int quizTimeTypeId = res->getInt(2);
-
-			auto quizTimeType = quizTimeTypes.find(quizTimeTypeId);
-			if (quizTimeType == quizTimeTypes.end())
-				return false;
-
-			roundTimes.push_back(quizTimeType->second);
-		}
+			roundTimes.push_back(res->getInt(1));
 	}
 
 	delete res;
@@ -428,8 +376,7 @@ void OXRoom::GameLogic()
 	case ox::RoundState::Playing:
 	{
 		Protocol::S_OX_QUIZ quiz;
-		quiz.set_quiz(gameData.currentQuiz.first);
-		quiz.set_answer(gameData.currentQuiz.second);
+		quiz.set_quiz(gameData.currentQuiz);
 		quiz.set_timetodestory(gameData.roundTime);
 
 		if (gameData.roundCount == gameData.pieceModeRound)
@@ -451,14 +398,25 @@ void OXRoom::GameLogic()
 
 		gameData.roundCount++;
 		
-		if (gameData.players.size() == 0 || (!gameData.isSoloplay && gameData.players.size() == 1) || gameData.roundCount >= gameData.roundTotal)
+		if (gameData.players.size() == 0)
 		{
 			Protocol::S_OX_FINISH finish;
 			DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
 
-			gameData.Clear();
-
 			roomInfo["isPlaying"] = false;
+
+			gameData.Clear();
+		}
+		else if ((!gameData.isSoloplay && gameData.players.size() == 1) || gameData.roundCount >= gameData.roundTotal)
+		{
+			Protocol::S_OX_AWARD award;
+			for (int i = 0; i < gameData.players.size(); i++)
+				award.add_winners(gameData.players[i]);
+
+			DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(award));
+
+			gameData.roundState = ox::RoundState::Award;
+			DoTimer(gameData.awardingTime, &OXRoom::GameLogic);
 		}
 		else
 		{
@@ -467,6 +425,17 @@ void OXRoom::GameLogic()
 			gameData.roundState = ox::RoundState::Start;
 		}
 		break;
+	}
+	case ox::RoundState::Award:
+	{
+		ClearObject();
+
+		Protocol::S_OX_FINISH finish;
+		DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
+
+		roomInfo["isPlaying"] = false;
+
+		gameData.Clear();
 	}
 	}
 }

@@ -128,7 +128,8 @@ public class RealtimePacket
 	    PKT_S_OX_ROUND_FINISH = 606,
 	    PKT_S_OX_QUIZ = 607,
 	    PKT_S_OX_DESTROY = 608,
-	    PKT_C_OX_DIE = 609,
+	    PKT_S_OX_AWARD = 609,
+	    PKT_C_OX_DIE = 610,
 	}
 
 	public void Register()
@@ -253,6 +254,8 @@ public class RealtimePacket
 		_handler.Add((ushort)MsgId.PKT_S_OX_QUIZ, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_OX_DESTROY, MakePacket<S_OX_DESTROY>);
 		_handler.Add((ushort)MsgId.PKT_S_OX_DESTROY, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_OX_AWARD, MakePacket<S_OX_AWARD>);
+		_handler.Add((ushort)MsgId.PKT_S_OX_AWARD, new Dictionary<object, Action<PacketSession, IMessage>>());
 	}
 
 	public void AddHandler(MsgId msgId, object obj, Action<PacketSession, IMessage> handler)

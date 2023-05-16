@@ -27,10 +27,10 @@ namespace Protocol {
             "ChNQYWNrZXRfMDA2X09YLnByb3RvEghQcm90b2NvbCIMCgpDX09YX1NUQVJU",
             "IgwKClNfT1hfU1RBUlQiDQoLU19PWF9GSU5JU0giDwoNQ19PWF9HRVRfSE9T",
             "VCIdCglTX09YX0hPU1QSEAoIY2xpZW50SWQYASABKAkiIAoQU19PWF9ST1VO",
-            "RF9TVEFSVBIMCgRtb2RlGAEgASgJIhMKEVNfT1hfUk9VTkRfRklOSVNIIk8K",
-            "CVNfT1hfUVVJWhIMCgRxdWl6GAEgASgFEg4KBmFuc3dlchgCIAEoCBIVCg10",
-            "aW1lVG9EZXN0b3J5GAMgASgFEg0KBXBhbmVsGAQgAygFIg4KDFNfT1hfREVT",
-            "VFJPWSIKCghDX09YX0RJRWIGcHJvdG8z"));
+            "RF9TVEFSVBIMCgRtb2RlGAEgASgJIhMKEVNfT1hfUk9VTkRfRklOSVNIIj8K",
+            "CVNfT1hfUVVJWhIMCgRxdWl6GAEgASgFEhUKDXRpbWVUb0Rlc3RvcnkYAyAB",
+            "KAUSDQoFcGFuZWwYBCADKAUiDgoMU19PWF9ERVNUUk9ZIh0KClNfT1hfQVdB",
+            "UkQSDwoHd2lubmVycxgBIAMoCSIKCghDX09YX0RJRWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -41,8 +41,9 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OX_HOST), global::Protocol.S_OX_HOST.Parser, new[]{ "ClientId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OX_ROUND_START), global::Protocol.S_OX_ROUND_START.Parser, new[]{ "Mode" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OX_ROUND_FINISH), global::Protocol.S_OX_ROUND_FINISH.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OX_QUIZ), global::Protocol.S_OX_QUIZ.Parser, new[]{ "Quiz", "Answer", "TimeToDestory", "Panel" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OX_QUIZ), global::Protocol.S_OX_QUIZ.Parser, new[]{ "Quiz", "TimeToDestory", "Panel" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OX_DESTROY), global::Protocol.S_OX_DESTROY.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OX_AWARD), global::Protocol.S_OX_AWARD.Parser, new[]{ "Winners" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OX_DIE), global::Protocol.C_OX_DIE.Parser, null, null, null, null, null)
           }));
     }
@@ -1223,7 +1224,6 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_OX_QUIZ(S_OX_QUIZ other) : this() {
       quiz_ = other.quiz_;
-      answer_ = other.answer_;
       timeToDestory_ = other.timeToDestory_;
       panel_ = other.panel_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -1244,18 +1244,6 @@ namespace Protocol {
       get { return quiz_; }
       set {
         quiz_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "answer" field.</summary>
-    public const int AnswerFieldNumber = 2;
-    private bool answer_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Answer {
-      get { return answer_; }
-      set {
-        answer_ = value;
       }
     }
 
@@ -1298,7 +1286,6 @@ namespace Protocol {
         return true;
       }
       if (Quiz != other.Quiz) return false;
-      if (Answer != other.Answer) return false;
       if (TimeToDestory != other.TimeToDestory) return false;
       if(!panel_.Equals(other.panel_)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -1309,7 +1296,6 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (Quiz != 0) hash ^= Quiz.GetHashCode();
-      if (Answer != false) hash ^= Answer.GetHashCode();
       if (TimeToDestory != 0) hash ^= TimeToDestory.GetHashCode();
       hash ^= panel_.GetHashCode();
       if (_unknownFields != null) {
@@ -1334,10 +1320,6 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(Quiz);
       }
-      if (Answer != false) {
-        output.WriteRawTag(16);
-        output.WriteBool(Answer);
-      }
       if (TimeToDestory != 0) {
         output.WriteRawTag(24);
         output.WriteInt32(TimeToDestory);
@@ -1357,10 +1339,6 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(Quiz);
       }
-      if (Answer != false) {
-        output.WriteRawTag(16);
-        output.WriteBool(Answer);
-      }
       if (TimeToDestory != 0) {
         output.WriteRawTag(24);
         output.WriteInt32(TimeToDestory);
@@ -1378,9 +1356,6 @@ namespace Protocol {
       int size = 0;
       if (Quiz != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Quiz);
-      }
-      if (Answer != false) {
-        size += 1 + 1;
       }
       if (TimeToDestory != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(TimeToDestory);
@@ -1400,9 +1375,6 @@ namespace Protocol {
       }
       if (other.Quiz != 0) {
         Quiz = other.Quiz;
-      }
-      if (other.Answer != false) {
-        Answer = other.Answer;
       }
       if (other.TimeToDestory != 0) {
         TimeToDestory = other.TimeToDestory;
@@ -1425,10 +1397,6 @@ namespace Protocol {
             break;
           case 8: {
             Quiz = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            Answer = input.ReadBool();
             break;
           }
           case 24: {
@@ -1457,10 +1425,6 @@ namespace Protocol {
             break;
           case 8: {
             Quiz = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            Answer = input.ReadBool();
             break;
           }
           case 24: {
@@ -1631,6 +1595,184 @@ namespace Protocol {
 
   }
 
+  public sealed partial class S_OX_AWARD : pb::IMessage<S_OX_AWARD>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_OX_AWARD> _parser = new pb::MessageParser<S_OX_AWARD>(() => new S_OX_AWARD());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_OX_AWARD> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.Packet006OXReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_OX_AWARD() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_OX_AWARD(S_OX_AWARD other) : this() {
+      winners_ = other.winners_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_OX_AWARD Clone() {
+      return new S_OX_AWARD(this);
+    }
+
+    /// <summary>Field number for the "winners" field.</summary>
+    public const int WinnersFieldNumber = 1;
+    private static readonly pb::FieldCodec<string> _repeated_winners_codec
+        = pb::FieldCodec.ForString(10);
+    private readonly pbc::RepeatedField<string> winners_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<string> Winners {
+      get { return winners_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_OX_AWARD);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_OX_AWARD other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!winners_.Equals(other.winners_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= winners_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      winners_.WriteTo(output, _repeated_winners_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      winners_.WriteTo(ref output, _repeated_winners_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += winners_.CalculateSize(_repeated_winners_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_OX_AWARD other) {
+      if (other == null) {
+        return;
+      }
+      winners_.Add(other.winners_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            winners_.AddEntriesFrom(input, _repeated_winners_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            winners_.AddEntriesFrom(ref input, _repeated_winners_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class C_OX_DIE : pb::IMessage<C_OX_DIE>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1645,7 +1787,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.Packet006OXReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Protocol.Packet006OXReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

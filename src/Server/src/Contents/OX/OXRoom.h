@@ -17,7 +17,8 @@ namespace ox
 		Idle,
 		Start,
 		Playing,
-		Finish
+		Finish,
+		Award
 	};
 
 	class GameData
@@ -29,9 +30,9 @@ namespace ox
 		GameState gameState;
 		RoundState roundState;
 
-		std::vector<std::pair<int, bool>> quiz;
+		std::vector<int> quiz;
 		std::vector<int> quizIndex;
-		std::pair<int, bool> currentQuiz;
+		int currentQuiz;
 
 		int roundTotal;
 		int roundCount;
@@ -49,6 +50,7 @@ namespace ox
 		int roundTime;
 		int modeWaitTime = 2000;
 		int firstRoundWaitTime = 6000;
+		int awardingTime = 15000;
 
 		vector<string> players;
 

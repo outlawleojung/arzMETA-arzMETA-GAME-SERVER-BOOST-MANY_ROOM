@@ -55,6 +55,9 @@ extern C_OX_GET_HOSTDefaultTypeInternal _C_OX_GET_HOST_default_instance_;
 class C_OX_START;
 struct C_OX_STARTDefaultTypeInternal;
 extern C_OX_STARTDefaultTypeInternal _C_OX_START_default_instance_;
+class S_OX_AWARD;
+struct S_OX_AWARDDefaultTypeInternal;
+extern S_OX_AWARDDefaultTypeInternal _S_OX_AWARD_default_instance_;
 class S_OX_DESTROY;
 struct S_OX_DESTROYDefaultTypeInternal;
 extern S_OX_DESTROYDefaultTypeInternal _S_OX_DESTROY_default_instance_;
@@ -81,6 +84,7 @@ PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::C_OX_DIE* Arena::CreateMaybeMessage<::Protocol::C_OX_DIE>(Arena*);
 template<> ::Protocol::C_OX_GET_HOST* Arena::CreateMaybeMessage<::Protocol::C_OX_GET_HOST>(Arena*);
 template<> ::Protocol::C_OX_START* Arena::CreateMaybeMessage<::Protocol::C_OX_START>(Arena*);
+template<> ::Protocol::S_OX_AWARD* Arena::CreateMaybeMessage<::Protocol::S_OX_AWARD>(Arena*);
 template<> ::Protocol::S_OX_DESTROY* Arena::CreateMaybeMessage<::Protocol::S_OX_DESTROY>(Arena*);
 template<> ::Protocol::S_OX_FINISH* Arena::CreateMaybeMessage<::Protocol::S_OX_FINISH>(Arena*);
 template<> ::Protocol::S_OX_HOST* Arena::CreateMaybeMessage<::Protocol::S_OX_HOST>(Arena*);
@@ -1112,7 +1116,6 @@ class S_OX_QUIZ final :
   enum : int {
     kPanelFieldNumber = 4,
     kQuizFieldNumber = 1,
-    kAnswerFieldNumber = 2,
     kTimeToDestoryFieldNumber = 3,
   };
   // repeated int32 panel = 4;
@@ -1146,15 +1149,6 @@ class S_OX_QUIZ final :
   void _internal_set_quiz(int32_t value);
   public:
 
-  // bool answer = 2;
-  void clear_answer();
-  bool answer() const;
-  void set_answer(bool value);
-  private:
-  bool _internal_answer() const;
-  void _internal_set_answer(bool value);
-  public:
-
   // int32 timeToDestory = 3;
   void clear_timetodestory();
   int32_t timetodestory() const;
@@ -1175,7 +1169,6 @@ class S_OX_QUIZ final :
     ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t > panel_;
     mutable std::atomic<int> _panel_cached_byte_size_;
     int32_t quiz_;
-    bool answer_;
     int32_t timetodestory_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1302,6 +1295,169 @@ class S_OX_DESTROY final :
 };
 // -------------------------------------------------------------------
 
+class S_OX_AWARD final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_OX_AWARD) */ {
+ public:
+  inline S_OX_AWARD() : S_OX_AWARD(nullptr) {}
+  ~S_OX_AWARD() override;
+  explicit PROTOBUF_CONSTEXPR S_OX_AWARD(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_OX_AWARD(const S_OX_AWARD& from);
+  S_OX_AWARD(S_OX_AWARD&& from) noexcept
+    : S_OX_AWARD() {
+    *this = ::std::move(from);
+  }
+
+  inline S_OX_AWARD& operator=(const S_OX_AWARD& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_OX_AWARD& operator=(S_OX_AWARD&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_OX_AWARD& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_OX_AWARD* internal_default_instance() {
+    return reinterpret_cast<const S_OX_AWARD*>(
+               &_S_OX_AWARD_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(S_OX_AWARD& a, S_OX_AWARD& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_OX_AWARD* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_OX_AWARD* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_OX_AWARD* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_OX_AWARD>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_OX_AWARD& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_OX_AWARD& from) {
+    S_OX_AWARD::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_OX_AWARD* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_OX_AWARD";
+  }
+  protected:
+  explicit S_OX_AWARD(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kWinnersFieldNumber = 1,
+  };
+  // repeated string winners = 1;
+  int winners_size() const;
+  private:
+  int _internal_winners_size() const;
+  public:
+  void clear_winners();
+  const std::string& winners(int index) const;
+  std::string* mutable_winners(int index);
+  void set_winners(int index, const std::string& value);
+  void set_winners(int index, std::string&& value);
+  void set_winners(int index, const char* value);
+  void set_winners(int index, const char* value, size_t size);
+  std::string* add_winners();
+  void add_winners(const std::string& value);
+  void add_winners(std::string&& value);
+  void add_winners(const char* value);
+  void add_winners(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& winners() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_winners();
+  private:
+  const std::string& _internal_winners(int index) const;
+  std::string* _internal_add_winners();
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_OX_AWARD)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> winners_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f006_5fOX_2eproto;
+};
+// -------------------------------------------------------------------
+
 class C_OX_DIE final :
     public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.C_OX_DIE) */ {
  public:
@@ -1349,7 +1505,7 @@ class C_OX_DIE final :
                &_C_OX_DIE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(C_OX_DIE& a, C_OX_DIE& b) {
     a.Swap(&b);
@@ -1577,26 +1733,6 @@ inline void S_OX_QUIZ::set_quiz(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_OX_QUIZ.quiz)
 }
 
-// bool answer = 2;
-inline void S_OX_QUIZ::clear_answer() {
-  _impl_.answer_ = false;
-}
-inline bool S_OX_QUIZ::_internal_answer() const {
-  return _impl_.answer_;
-}
-inline bool S_OX_QUIZ::answer() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OX_QUIZ.answer)
-  return _internal_answer();
-}
-inline void S_OX_QUIZ::_internal_set_answer(bool value) {
-  
-  _impl_.answer_ = value;
-}
-inline void S_OX_QUIZ::set_answer(bool value) {
-  _internal_set_answer(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OX_QUIZ.answer)
-}
-
 // int32 timeToDestory = 3;
 inline void S_OX_QUIZ::clear_timetodestory() {
   _impl_.timetodestory_ = 0;
@@ -1670,11 +1806,92 @@ S_OX_QUIZ::mutable_panel() {
 
 // -------------------------------------------------------------------
 
+// S_OX_AWARD
+
+// repeated string winners = 1;
+inline int S_OX_AWARD::_internal_winners_size() const {
+  return _impl_.winners_.size();
+}
+inline int S_OX_AWARD::winners_size() const {
+  return _internal_winners_size();
+}
+inline void S_OX_AWARD::clear_winners() {
+  _impl_.winners_.Clear();
+}
+inline std::string* S_OX_AWARD::add_winners() {
+  std::string* _s = _internal_add_winners();
+  // @@protoc_insertion_point(field_add_mutable:Protocol.S_OX_AWARD.winners)
+  return _s;
+}
+inline const std::string& S_OX_AWARD::_internal_winners(int index) const {
+  return _impl_.winners_.Get(index);
+}
+inline const std::string& S_OX_AWARD::winners(int index) const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OX_AWARD.winners)
+  return _internal_winners(index);
+}
+inline std::string* S_OX_AWARD::mutable_winners(int index) {
+  // @@protoc_insertion_point(field_mutable:Protocol.S_OX_AWARD.winners)
+  return _impl_.winners_.Mutable(index);
+}
+inline void S_OX_AWARD::set_winners(int index, const std::string& value) {
+  _impl_.winners_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_OX_AWARD.winners)
+}
+inline void S_OX_AWARD::set_winners(int index, std::string&& value) {
+  _impl_.winners_.Mutable(index)->assign(std::move(value));
+  // @@protoc_insertion_point(field_set:Protocol.S_OX_AWARD.winners)
+}
+inline void S_OX_AWARD::set_winners(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.winners_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:Protocol.S_OX_AWARD.winners)
+}
+inline void S_OX_AWARD::set_winners(int index, const char* value, size_t size) {
+  _impl_.winners_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Protocol.S_OX_AWARD.winners)
+}
+inline std::string* S_OX_AWARD::_internal_add_winners() {
+  return _impl_.winners_.Add();
+}
+inline void S_OX_AWARD::add_winners(const std::string& value) {
+  _impl_.winners_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:Protocol.S_OX_AWARD.winners)
+}
+inline void S_OX_AWARD::add_winners(std::string&& value) {
+  _impl_.winners_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:Protocol.S_OX_AWARD.winners)
+}
+inline void S_OX_AWARD::add_winners(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.winners_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:Protocol.S_OX_AWARD.winners)
+}
+inline void S_OX_AWARD::add_winners(const char* value, size_t size) {
+  _impl_.winners_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:Protocol.S_OX_AWARD.winners)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+S_OX_AWARD::winners() const {
+  // @@protoc_insertion_point(field_list:Protocol.S_OX_AWARD.winners)
+  return _impl_.winners_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+S_OX_AWARD::mutable_winners() {
+  // @@protoc_insertion_point(field_mutable_list:Protocol.S_OX_AWARD.winners)
+  return &_impl_.winners_;
+}
+
+// -------------------------------------------------------------------
+
 // C_OX_DIE
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
