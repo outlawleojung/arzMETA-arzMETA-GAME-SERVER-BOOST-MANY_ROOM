@@ -104,46 +104,44 @@ void HttpServer::start(string ip, int port)
 		}
 		case RoomType::Lecture :
 		{
-			room = make_shared<OfficeRoom>();
+			room = make_shared<LectureRoom>();
 
-			static_pointer_cast<OfficeRoom>(room)->roomCode = body["roomCode"];
-			static_pointer_cast<OfficeRoom>(room)->roomName = body["roomName"];
-			static_pointer_cast<OfficeRoom>(room)->description = body["description"];
-			static_pointer_cast<OfficeRoom>(room)->spaceInfoId = body["spaceInfoId"];
-			static_pointer_cast<OfficeRoom>(room)->thumbnail = body["thumbnail"];
-			static_pointer_cast<OfficeRoom>(room)->modeType = body["modeType"];
-			static_pointer_cast<OfficeRoom>(room)->topicType = body["topicType"];
-			static_pointer_cast<OfficeRoom>(room)->creatorId = body["creatorId"];
+			static_pointer_cast<LectureRoom>(room)->roomCode = body["roomCode"];
+			static_pointer_cast<LectureRoom>(room)->roomName = body["roomName"];
+			static_pointer_cast<LectureRoom>(room)->description = body["description"];
+			static_pointer_cast<LectureRoom>(room)->spaceInfoId = body["spaceInfoId"];
+			static_pointer_cast<LectureRoom>(room)->thumbnail = body["thumbnail"];
+			static_pointer_cast<LectureRoom>(room)->topicType = body["topicType"];
+			static_pointer_cast<LectureRoom>(room)->creatorId = body["creatorId"];
 
-			static_pointer_cast<OfficeRoom>(room)->password = body["password"];
+			static_pointer_cast<LectureRoom>(room)->password = body["password"];
 			if (body["password"] == "")
-				static_pointer_cast<OfficeRoom>(room)->isPassword = false;
+				static_pointer_cast<LectureRoom>(room)->isPassword = false;
 			else
-				static_pointer_cast<OfficeRoom>(room)->isPassword = true;
+				static_pointer_cast<LectureRoom>(room)->isPassword = true;
 
-			static_pointer_cast<OfficeRoom>(room)->maxPlayerNumber = body["personnel"];
-			static_pointer_cast<OfficeRoom>(room)->observer = body["observer"];
-			static_pointer_cast<OfficeRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
-			static_pointer_cast<OfficeRoom>(room)->isAdvertising = body["isAdvertising"];
-			static_pointer_cast<OfficeRoom>(room)->runningTime = body["runningTime"];
+			static_pointer_cast<LectureRoom>(room)->maxPlayerNumber = body["personnel"];
+			static_pointer_cast<LectureRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
+			static_pointer_cast<LectureRoom>(room)->isAdvertising = body["isAdvertising"];
+			static_pointer_cast<LectureRoom>(room)->runningTime = body["runningTime"];
 
 			break;
 		}
 		case RoomType::Consulting:
 		{
-			room = make_shared<OfficeRoom>();
+			room = make_shared<MeetingRoom>();
 
-			static_pointer_cast<OfficeRoom>(room)->roomCode = body["roomCode"];
-			static_pointer_cast<OfficeRoom>(room)->roomName = body["roomName"];
-			static_pointer_cast<OfficeRoom>(room)->description = body["description"];
+			static_pointer_cast<MeetingRoom>(room)->roomCode = body["roomCode"];
+			static_pointer_cast<MeetingRoom>(room)->roomName = body["roomName"];
+			static_pointer_cast<MeetingRoom>(room)->description = body["description"];
 			
-			static_pointer_cast<OfficeRoom>(room)->creatorId = body["creatorId"];
+			static_pointer_cast<MeetingRoom>(room)->creatorId = body["creatorId"];
 
-			static_pointer_cast<OfficeRoom>(room)->maxPlayerNumber = body["personnel"];
-			static_pointer_cast<OfficeRoom>(room)->runningTime = body["runningTime"];
+			static_pointer_cast<MeetingRoom>(room)->maxPlayerNumber = body["personnel"];
+			static_pointer_cast<MeetingRoom>(room)->runningTime = body["runningTime"];
 
-			static_pointer_cast<OfficeRoom>(room)->password = "";
-			static_pointer_cast<OfficeRoom>(room)->isPassword = false;
+			static_pointer_cast<MeetingRoom>(room)->password = "";
+			static_pointer_cast<MeetingRoom>(room)->isPassword = false;
 
 			break;
 		}

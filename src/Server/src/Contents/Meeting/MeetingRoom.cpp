@@ -7,7 +7,7 @@
 
 #include "../ClientManager.h"
 
-MeetingRoom::MeetingRoom() 
+MeetingRoom::MeetingRoom()
 	: isWaitingRoom(false)
 	, isPassword(false)
 	, isAdvertising(false)
@@ -54,7 +54,7 @@ void MeetingRoom::Init()
 
 void MeetingRoom::HandleClose()
 {
-	for (auto client = waitingList.begin(); client != waitingList.end(); client++)
+	for (auto client = waitingClients.begin(); client != waitingClients.end(); client++)
 		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
 
 	GameRoom::HandleClose();
@@ -63,7 +63,7 @@ void MeetingRoom::HandleClose()
 void MeetingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&MeetingRoom::Enter, session, pkt); }
 
 void MeetingRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&MeetingRoom::GetWaitingList, client); }
-void MeetingRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&MeetingRoom::AcceptWait, client, pkt.clientid(), pkt.isaccepted()); } 
+void MeetingRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&MeetingRoom::AcceptWait, client, pkt.clientid(), pkt.isaccepted()); }
 void MeetingRoom::Handle_C_OFFICE_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_HOST& pkt) { DoAsync(&MeetingRoom::GetHost, client); }
 void MeetingRoom::Handle_C_OFFICE_BREAK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_BREAK& pkt) { DoAsync(&MeetingRoom::Break, client); }
 void MeetingRoom::Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_KICK& pkt) { DoAsync(&MeetingRoom::Kick, client, pkt.clientid()); }
@@ -80,21 +80,22 @@ void MeetingRoom::Leave(shared_ptr<ClientBase> _client)
 
 	//대기열 먼저 확인, 존재했으면 지우고 호스트에게 알림
 	{
-		auto client = waitingList.find(_client->clientId);
-		if (client != waitingList.end())
+		auto waitingClient = waitingClients.find(_client->clientId);
+		if (waitingClient != waitingClients.end())
 		{
-			Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
-			removeWaitingClient.add_clients(client->second->clientId);
-			clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
+			Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removedWaitingClients;
+			auto removedWaitingClient = removedWaitingClients.add_clients();
+			removedWaitingClient->set_clientid(waitingClient->second->clientId);
+			clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(removedWaitingClients));
 
-			waitingList.erase(client);
+			waitingClients.erase(waitingClient);
 			return;
 		}
 	}
 
-	roomInfo["currentPersonnel"] = clients.size();
-
 	GameRoom::Leave(_client);
+
+	roomInfo["currentPersonnel"] = clients.size();
 
 	if (_client->clientId == currentHostId)
 		Close();
@@ -129,27 +130,27 @@ void MeetingRoom::SetClientData(shared_ptr<ClientBase> _client)
 
 	if (currentHostId.empty() && creatorId == client->clientId)
 	{
-		client->type = MeetingRoomUserType::Host;
-		client->chatPermission = true;
-		client->videoPermission = true;
-		client->voicePermission = true;
-		client->screenPermission = true;
+		client->data.type = MeetingRoomUserType::Host;
+		client->data.chatPermission = true;
+		client->data.videoPermission = true;
+		client->data.voicePermission = true;
+		client->data.screenPermission = true;
 	}
 	else if (isWaitingRoom)
 	{
-		client->type = MeetingRoomUserType::Waiting;
-		client->chatPermission = false;
-		client->videoPermission = false;
-		client->voicePermission = false;
-		client->screenPermission = false;
+		client->data.type = MeetingRoomUserType::Guest;
+		client->data.chatPermission = false;
+		client->data.videoPermission = false;
+		client->data.voicePermission = false;
+		client->data.screenPermission = false;
 	}
 	else
 	{
-		client->type = MeetingRoomUserType::Guest;
-		client->chatPermission = true;
-		client->videoPermission = false;
-		client->voicePermission = false;
-		client->screenPermission = false;
+		client->data.type = MeetingRoomUserType::Guest;
+		client->data.chatPermission = true;
+		client->data.videoPermission = false;
+		client->data.voicePermission = false;
+		client->data.screenPermission = false;
 	}
 }
 
@@ -157,9 +158,7 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 {
 	auto client = static_pointer_cast<MeetingClient>(_client);
 
-	switch (client->type)
-	{
-	case MeetingRoomUserType::Host:
+	if (client->data.type == MeetingRoomUserType::Host)
 	{
 		clients.insert({ client->clientId, client });
 		roomInfo["currentPersonnel"] = clients.size();
@@ -175,13 +174,31 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 		clientInfo->set_statemessage(client->stateMessage);
 		Broadcast(PacketManager::MakeSendBuffer(addClient));
 
-		SetHost(client->clientId);
+		currentHostId = client->clientId;
+		roomInfo["hostName"] = client->nickname;
+
+		createdTimeString = GetCurrentTimeString();
+		roomInfo["createdTime"] = GetCurrentTimeString();
+
+		DoAsync(&MeetingRoom::Countdown);
 
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
-
-		break;
 	}
-	case MeetingRoomUserType::Guest:
+	else if (isWaitingRoom)
+	{
+		waitingClients.insert({ client->clientId, client });
+
+		Protocol::S_ENTER res;
+		res.set_result("WAITING");
+		client->Send(PacketManager::MakeSendBuffer(res));
+
+		Protocol::S_OFFICE_ADD_WAITING_CLIENT addWaitingClient;
+		auto waitingClient = addWaitingClient.add_clients();
+		waitingClient->set_clientid(client->clientId);
+		waitingClient->set_nickname(client->nickname);
+		clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(addWaitingClient));
+	}
+	else
 	{
 		clients.insert({ client->clientId, client });
 		roomInfo["currentPersonnel"] = clients.size();
@@ -196,27 +213,6 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 		clientInfo->set_nickname(client->clientId);
 		clientInfo->set_statemessage(client->stateMessage);
 		Broadcast(PacketManager::MakeSendBuffer(addClient));
-
-		break;
-	}
-	case MeetingRoomUserType::Waiting:
-	{
-		waitingList.insert({ client->clientId, client });
-
-		Protocol::S_ENTER res;
-		res.set_result("WAITING");
-		client->Send(PacketManager::MakeSendBuffer(res));
-
-		Protocol::S_OFFICE_ADD_WAITING_CLIENT addWaitingClient;
-		auto waitingClient = addWaitingClient.add_clients();
-		waitingClient->set_clientid(client->clientId);
-		waitingClient->set_nickname(client->nickname);
-		clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(addWaitingClient));
-
-		break;
-	}
-	default:
-		break;
 	}
 }
 
@@ -224,12 +220,12 @@ shared_ptr<ClientBase> MeetingRoom::MakeClient(string clientId, int sessionId)
 {
 	auto client = GClientManager->MakeCilent<MeetingClient>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 
-	static_pointer_cast<MeetingClient>(client)->type = MeetingRoomUserType::Host;
+	static_pointer_cast<MeetingClient>(client)->data.type = MeetingRoomUserType::Host;
 
-	static_pointer_cast<MeetingClient>(client)->chatPermission = true;
-	static_pointer_cast<MeetingClient>(client)->screenPermission = true;
-	static_pointer_cast<MeetingClient>(client)->videoPermission = true;
-	static_pointer_cast<MeetingClient>(client)->voicePermission = true;
+	static_pointer_cast<MeetingClient>(client)->data.chatPermission = true;
+	static_pointer_cast<MeetingClient>(client)->data.screenPermission = true;
+	static_pointer_cast<MeetingClient>(client)->data.videoPermission = true;
+	static_pointer_cast<MeetingClient>(client)->data.voicePermission = true;
 
 	SetClientData(client);
 	return client;
@@ -244,66 +240,91 @@ void MeetingRoom::GetHost(shared_ptr<ClientBase> client)
 	client->Send(PacketManager::MakeSendBuffer(res));
 }
 
-string GetCurrentTimeString()
-{
-	auto now = std::chrono::system_clock::now();
-	std::time_t t = std::chrono::system_clock::to_time_t(now);
-	std::tm bt;
-
-	t += 32400;
-	
-#ifdef linux
-	localtime_r(&t, &bt);
-#elif _WIN32
-	localtime_s(&bt, &t);
-#endif
-	char buffer[50];
-	strftime(buffer, 50, "%Y.%m.%d %p %I:%M", &bt);
-	return string(buffer);
-}
-
-void MeetingRoom::SetHost(string clientId)
+void MeetingRoom::GetWaitingList(shared_ptr<ClientBase> _client)
 {
 	if (state != RoomState::Running) return;
 
-	if (currentHostId.empty())
+	Protocol::S_OFFICE_ADD_WAITING_CLIENT waitingListPkt;
+	for (auto wait = waitingClients.begin(); wait != waitingClients.end(); wait++)
 	{
-		auto host = clients.find(clientId);
-		if (host == clients.end())
-			return;
-		
-		currentHostId = clientId;
-		roomInfo["hostName"] = host->second->nickname;
+		auto client = waitingListPkt.add_clients();
+		client->set_clientid(wait->second->clientId);
+		client->set_nickname(wait->second->nickname);
+	}
 
-		createdTimeString = GetCurrentTimeString();
-		roomInfo["createdTime"] = GetCurrentTimeString();
+	_client->Send(PacketManager::MakeSendBuffer(waitingListPkt));
+}
 
-		DoAsync(&MeetingRoom::Countdown);
+void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bool isAccepted)
+{
+	if (state != RoomState::Running) return;
+
+	if (_client->clientId != currentHostId) return;
+
+	Protocol::S_OFFICE_ACCEPT_WAIT acceptWait;
+
+	//수락하려는 클라이언트가 없는 경우 실패 처리
+	auto waitingClient = waitingClients.find(clientId);
+	if (waitingClient == waitingClients.end())
+	{
+		acceptWait.set_success(false);
+		//set result as "no client with clientid ~"
+		_client->Send(PacketManager::MakeSendBuffer(acceptWait));
+		return;
+	}
+
+	//인원이 꽉 찬 상태에서 수락하려고 하는 경우 실패 처리
+	if (isAccepted && clients.size() >= maxPlayerNumber)
+	{
+		acceptWait.set_success(false);
+		//set result as "room is full"
+		_client->Send(PacketManager::MakeSendBuffer(acceptWait));
+		return;
+	}
+
+	//이외의 경우 성공, 호스트에게 관련 메시지 전송
+	acceptWait.set_success(true);
+	_client->Send(PacketManager::MakeSendBuffer(acceptWait));
+
+	Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
+	auto removedWaitingClient = removeWaitingClient.add_clients();
+	removedWaitingClient->set_clientid(waitingClient->second->clientId);
+	_client->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
+
+	//대상 클라이언트에게 성공/실패 메시지 전송
+	Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
+	acceptWaitNotice.set_isaccepted(isAccepted);
+	waitingClient->second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
+
+	//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
+	if (isAccepted)
+	{
+		waitingClient->second->data.type = MeetingRoomUserType::Guest;
+		waitingClient->second->data.chatPermission = true;
+		waitingClient->second->data.videoPermission = false;
+		waitingClient->second->data.voicePermission = false;
+		waitingClient->second->data.screenPermission = false;
+
+		clients.insert({ waitingClient->second->clientId, waitingClient->second });
+		roomInfo["currentPersonnel"] = clients.size();
+
+		Protocol::S_ENTER res;
+		res.set_result("SUCCESS");
+		waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+
+		Protocol::S_ADD_CLIENT addClient;
+		auto clientInfo = addClient.add_clientinfos();
+		clientInfo->set_clientid(waitingClient->second->clientId);
+		clientInfo->set_nickname(waitingClient->second->clientId);
+		clientInfo->set_statemessage(waitingClient->second->stateMessage);
+		Broadcast(PacketManager::MakeSendBuffer(addClient));
+
+		waitingClients.erase(waitingClient);
 	}
 	else
 	{
-		if (currentHostId == clientId)
-			return;
-
-		auto nextHost = clients.find(clientId);
-		if (nextHost == clients.end())
-			return;
-
-		auto currentHost = clients.find(currentHostId);
-
-		static_pointer_cast<MeetingClient>(currentHost->second)->type = MeetingRoomUserType::Guest;
-		static_pointer_cast<MeetingClient>(currentHost->second)->type = MeetingRoomUserType::Host;
-
-		//기본 권한 세팅은 어떻게?
-
-		currentHostId = clientId;
-		roomInfo["hostName"] = nextHost->second->nickname;
+		waitingClient->second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
 	}
-
-	//호스트 이전 알림
-	//Protocol::S_MATCHING_HOST hostPkt;
-	//hostPkt.set_clientid(currentHostId);
-	//Broadcast(PacketManager::MakeSendBuffer(hostPkt));
 }
 
 void MeetingRoom::Break(shared_ptr<ClientBase> client)
@@ -344,118 +365,162 @@ void MeetingRoom::Kick(shared_ptr<ClientBase> client, string clientId)
 
 void MeetingRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 {
-	//if (state != RoomState::Running) return;
+	if (state != RoomState::Running) return;
 
-	//if (_client->clientId != currentHostId) return;
+	Protocol::S_OFFICE_GET_PERMISSION getPermission;
 
-	//Protocol::S_OFFICE_GET_PERMISSION getPermission;
+	if (clientId.empty())
+	{
+		for (auto client = clients.begin(); client != clients.end(); client++)
+		{
+			auto permission = getPermission.add_permissions();
 
-	//if (clientId.empty())
-	//{
-	//	for (auto client = clients.begin(); client != clients.end(); client++)
-	//	{
-	//		auto permission = getPermission.add_permissions();
+			auto oClient = static_pointer_cast<MeetingClient>(client->second);
 
-	//		auto oClient = static_pointer_cast<MeetingClient>(client->second);
+			permission->set_clientid(oClient->clientId);
+			permission->set_screenpermission(oClient->data.screenPermission);
+			permission->set_chatpermission(oClient->data.chatPermission);
+			permission->set_voicepermission(oClient->data.voicePermission);
+			permission->set_videopermission(oClient->data.videoPermission);
+			permission->set_authority(static_cast<int>(oClient->data.type));
+		}
+	}
+	else
+	{
+		auto client = clients.find(clientId);
+		if (client != clients.end())
+		{
+			auto permission = getPermission.add_permissions();
+			
+			auto oClient = static_pointer_cast<MeetingClient>(client->second);
 
-	//		permission->set_clientid(oClient->clientId);
-	//		permission->set_screenpermission(oClient->screenPermission);
-	//		permission->set_chatpermission(oClient->chatPermission);
-	//		permission->set_voicepermission(oClient->voicePermission);
-	//		permission->set_videopermission(oClient->videoPermission);
-	//		permission->set_type(oClient->type);
-	//	}
-	//}
-	//else
-	//{
-	//	auto client = clients.find(clientId);
-	//	if (client != clients.end())
-	//	{
-	//		auto permission = getPermission.add_permissions();
-	//		
-	//		auto oClient = static_pointer_cast<MeetingClient>(client->second);
+			permission->set_clientid(oClient->clientId);
+			permission->set_screenpermission(oClient->data.screenPermission);
+			permission->set_chatpermission(oClient->data.chatPermission);
+			permission->set_voicepermission(oClient->data.voicePermission);
+			permission->set_videopermission(oClient->data.videoPermission);
+			permission->set_authority(static_cast<int>(oClient->data.type));
+		}
+	}
 
-	//		permission->set_clientid(oClient->clientId);
-	//		permission->set_screenpermission(oClient->screenPermission);
-	//		permission->set_chatpermission(oClient->chatPermission);
-	//		permission->set_voicepermission(oClient->voicePermission);
-	//		permission->set_videopermission(oClient->videoPermission);
-	//		permission->set_type(oClient->type);
-	//	}
-	//}
-
-	//if (getPermission.permissions_size() > 0)
-	//{
-	//	auto sendBuffer = PacketManager::MakeSendBuffer(getPermission);
-	//	_client->Send(sendBuffer);
-	//}
+	if (getPermission.permissions_size() > 0)
+	{
+		auto sendBuffer = PacketManager::MakeSendBuffer(getPermission);
+		_client->Send(sendBuffer);
+	}
 }
 
 void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_SET_PERMISSION pkt)
 {
-	//if (state != RoomState::Running) return;
+	if (state != RoomState::Running) return;
 
-	//if (_client->clientId != currentHostId) return;
+	if (_client->clientId != currentHostId) return;
 
-	////예외 상황에 대비해야 함
-	////예를 들어, 새로운 호스트를 설정하려고 했는데 그 호스트가 없던 상황이었던 경우 등
-	////이러한 경우 해당 작업을 수행하기 전과 동일한 상태를 유지해야 함
-	////따라서 로직 시작 전에 먼저 현재 상태를 백업, 예외 상황 발생 시 이전 상태로 되돌려야 함
-	////지금은 그러한 작업 없이 받은 대로 상태를 변경시킬 것
+	bool result = true;
 
-	////screen permission 이 하나가 되도록 할 것
+	map<string, MeetingRoomUserData> newUserData;
+	for (int i = 0; i < pkt.permissions_size(); i++)
+	{
+		if (clients.find(pkt.permissions()[i].clientid()) == clients.end())
+		{
+			result = false;
+			goto SET_PERMISSION_LOGIC;
+		}
 
-	//{
-	//	for (int i = 0; i < pkt.permissions_size(); i++)
-	//	{
-	//		auto permission = pkt.permissions().Get(i);
-	//		auto client = clients.find(permission.clientid());
-	//		if (client == clients.end())
-	//			continue;
+		MeetingRoomUserData userData;
+		userData.type = static_cast<MeetingRoomUserType>(pkt.permissions()[i].authority());
+		userData.screenPermission = pkt.permissions()[i].screenpermission();
+		userData.chatPermission = pkt.permissions()[i].chatpermission();
+		userData.videoPermission = pkt.permissions()[i].videopermission();
+		userData.voicePermission = pkt.permissions()[i].voicepermission();
+		newUserData.insert({ pkt.permissions()[i].clientid(), userData });
+	}
 
-	//		auto oClient = static_pointer_cast<MeetingClient>(client->second);
+	for (auto [clientId, client] : clients)
+	{
+		if (newUserData.find(clientId) != newUserData.end())
+			continue;
 
-	//		oClient->screenPermission = permission.screenpermission();
-	//		oClient->chatPermission = permission.chatpermission();
-	//		oClient->voicePermission = permission.voicepermission();
-	//		oClient->videoPermission = permission.videopermission();
-	//		oClient->type = static_cast<MeetingRoomUserType>(permission.type());
+		MeetingRoomUserData userData;
+		userData.type = static_pointer_cast<MeetingClient>(client)->data.type;
+		userData.screenPermission = static_pointer_cast<MeetingClient>(client)->data.screenPermission;
+		userData.chatPermission = static_pointer_cast<MeetingClient>(client)->data.chatPermission;
+		userData.videoPermission = static_pointer_cast<MeetingClient>(client)->data.videoPermission;
+		userData.voicePermission = static_pointer_cast<MeetingClient>(client)->data.voicePermission;
+		newUserData.insert({ client->clientId, userData });
+	}
 
-	//		if (oClient->type == MeetingRoomUserType::Host)
-	//			currentHostId = client->second->clientId;
-	//	}
-	//}
+	// 요청 검증
+	// 호스트가 하나인지, screen permission 이 하나인지 확인
+	// 호스트의 접속 여부는 위에서 확인됨
+	{
+		int hostCount = 0;
+		int screenCount = 0;
 
-	////문제가 없었을 경우
+		for (auto [clientId, userData] : newUserData)
+		{
+			if (userData.type == MeetingRoomUserType::Host)
+			{
+				hostCount++;
+				if (hostCount > 1)
+				{
+					result = false;
+					goto SET_PERMISSION_LOGIC;
+				}
+			}
 
-	//{
-	//	Protocol::S_OFFICE_SET_PERMISSION permission;
-	//	permission.set_success(true);
-	//	auto sendBuffer = PacketManager::MakeSendBuffer(permission);
-	//	_client->Send(sendBuffer);
-	//}
+			if (userData.screenPermission)
+			{
+				screenCount++;
+				if (screenCount > 1)
+				{
+					result = false;
+					goto SET_PERMISSION_LOGIC;
+				}
+			}
+		}
 
-	//{
-	//	for (int i = 0; i < pkt.permissions_size(); i++)
-	//	{
-	//		auto client = clients.find(pkt.permissions().Get(i).clientid());
-	//		if (client == clients.end())
-	//			continue;
+		if (hostCount == 0)
+		{
+			result = false;
+			goto SET_PERMISSION_LOGIC;
+		}
+	}
 
-	//		auto oClient = static_pointer_cast<MeetingClient>(client->second);
+SET_PERMISSION_LOGIC:
 
-	//		Protocol::S_OFFICE_SET_PERMISSION_NOTICE permissionNotice;
+	Protocol::S_OFFICE_SET_PERMISSION res;
+	res.set_success(result);
+	_client->Send(PacketManager::MakeSendBuffer(res));
 
-	//		permissionNotice.set_screenpermission(oClient->screenPermission);
-	//		permissionNotice.set_chatpermission(oClient->chatPermission);
-	//		permissionNotice.set_voicepermission(oClient->voicePermission);
-	//		permissionNotice.set_videopermission(oClient->videoPermission);
-	//		permissionNotice.set_type(oClient->type);
+	if (!result)
+		return;
+	
+	for (auto [clientId, userData] : newUserData)
+	{
+		auto client = static_pointer_cast<MeetingClient>(clients.find(clientId)->second);
+		if (client->data == userData) continue;
 
-	//		auto sendBuffer = PacketManager::MakeSendBuffer(permissionNotice);
-	//		client->second->Send(sendBuffer);
-	//	}
-	//}
+		client->data = userData;
+
+		Protocol::S_OFFICE_GET_PERMISSION permissionNotice;
+
+		auto permission = permissionNotice.add_permissions();
+
+		permission->set_screenpermission(client->data.screenPermission);
+		permission->set_chatpermission(client->data.chatPermission);
+		permission->set_voicepermission(client->data.voicePermission);
+		permission->set_videopermission(client->data.videoPermission);
+		permission->set_authority(static_cast<int>(client->data.type));
+
+		client->Send(PacketManager::MakeSendBuffer(permissionNotice));
+
+		if (client->data.type == MeetingRoomUserType::Host)
+		{
+			currentHostId = clientId;
+			roomInfo["hostName"] = client->nickname;
+		}
+	}
 }
 
 void MeetingRoom::GetRoomInfo(shared_ptr<ClientBase> client)
@@ -479,7 +544,7 @@ void MeetingRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_runningtime(runningTime);
 	roomInfo.set_passedtime(passedTime);
 	roomInfo.set_roomcode(roomId);
-		
+
 	auto host = clients.find(currentHostId);
 	if (host != clients.end())
 		roomInfo.set_hostnickname(host->second->nickname);
@@ -545,80 +610,6 @@ void MeetingRoom::HandleShare(shared_ptr<ClientBase> session, bool isShared, int
 			continue;
 
 		client->second->Send(sendBuffer);
-	}
-}
-
-void MeetingRoom::GetWaitingList(shared_ptr<ClientBase> _client)
-{
-	if (state != RoomState::Running) return;
-
-	Protocol::S_OFFICE_ADD_WAITING_CLIENT waitingListPkt;
-	for (auto wait = waitingList.begin(); wait != waitingList.end(); wait++)
-	{
-		auto client = waitingListPkt.add_clients();
-		client->set_clientid(wait->second->clientId);
-		client->set_nickname(wait->second->nickname);
-	}
-
-	_client->Send(PacketManager::MakeSendBuffer(waitingListPkt));
-}
-
-void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bool isAccepted)
-{
-	if (state != RoomState::Running) return;
-
-	if (_client->clientId != currentHostId) return;
-
-	Protocol::S_OFFICE_ACCEPT_WAIT acceptWait;
-
-	//수락하려는 클라이언트가 없는 경우 실패 처리
-	auto waitingClient = waitingList.find(clientId);
-	if (waitingClient == waitingList.end())
-	{
-		acceptWait.set_success(false);
-		//set result as "no client with clientid ~"
-		_client->Send(PacketManager::MakeSendBuffer(acceptWait));
-		return;
-	}
-	
-	//인원이 꽉 찬 상태에서 수락하려고 하는 경우 실패 처리
-	if (isAccepted && clients.size() >= maxPlayerNumber)
-	{
-		acceptWait.set_success(false);
-		//set result as "room is full"
-		_client->Send(PacketManager::MakeSendBuffer(acceptWait));
-		return;
-	}
-
-	//이외의 경우 성공, 호스트에게 관련 메시지 전송
-	acceptWait.set_success(true);
-	_client->Send(PacketManager::MakeSendBuffer(acceptWait));
-
-	Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
-	removeWaitingClient.add_clients(waitingClient->second->clientId);
-	_client->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
-
-	//대상 클라이언트에게 성공/실패 메시지 전송
-	Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
-	acceptWaitNotice.set_isaccepted(isAccepted);
-	waitingClient->second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
-
-	//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
-	if (isAccepted)
-	{
-		waitingClient->second->type = MeetingRoomUserType::Guest;
-		waitingClient->second->chatPermission = true;
-		waitingClient->second->videoPermission = false;
-		waitingClient->second->voicePermission = false;
-		waitingClient->second->screenPermission = false;
-
-		OnEnterSuccess(waitingClient->second);
-
-		waitingList.erase(waitingClient);
-	}
-	else
-	{
-		waitingClient->second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
 	}
 }
 

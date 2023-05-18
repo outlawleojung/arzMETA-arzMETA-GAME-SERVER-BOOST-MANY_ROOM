@@ -8,9 +8,30 @@ class MeetingClient;
 
 enum class MeetingRoomUserType : int
 {
-	Host,
-	Guest,
-	Waiting,
+	Host = 1,
+	Guest = 3
+};
+
+struct MeetingRoomUserData
+{
+public:
+	MeetingRoomUserType type;
+	bool screenPermission;
+	bool chatPermission;
+	bool voicePermission;
+	bool videoPermission;
+
+	bool operator==(const MeetingRoomUserData& other) const {
+		return type == other.type
+			&& screenPermission == other.screenPermission
+			&& chatPermission == other.chatPermission
+			&& voicePermission == other.voicePermission
+			&& videoPermission == other.videoPermission;
+	}
+
+	bool operator!=(const MeetingRoomUserData& other) const {
+		return !(*this == other);
+	}
 };
 
 class MeetingRoom : public GameRoom
@@ -45,7 +66,6 @@ public:
 	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId) override;
 
 	void GetHost(shared_ptr<ClientBase> client);
-	void SetHost(string clientId);
 	void Break(shared_ptr<ClientBase> client);
 	void Kick(shared_ptr<ClientBase> client, string clientId);
 	void GetPermission(shared_ptr<ClientBase> client, string clientId);
@@ -77,7 +97,7 @@ public:
 	bool isShutdown;
 
 	bool isWaitingRoom;
-	map<string, shared_ptr<MeetingClient>> waitingList;
+	map<string, shared_ptr<MeetingClient>> waitingClients;
 
 	int runningTime;
 	int passedTime;
