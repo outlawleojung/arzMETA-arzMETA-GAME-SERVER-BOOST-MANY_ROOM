@@ -67,6 +67,7 @@ void MyRoomRoom::Init()
 	}
 
 	delete res;
+	delete pstmt;
 	delete stmt;
 	delete con;
 
