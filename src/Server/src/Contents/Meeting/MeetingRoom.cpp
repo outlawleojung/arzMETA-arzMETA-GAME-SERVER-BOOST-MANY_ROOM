@@ -68,6 +68,7 @@ void MeetingRoom::Handle_C_OFFICE_GET_HOST(shared_ptr<ClientBase>& client, Proto
 void MeetingRoom::Handle_C_OFFICE_BREAK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_BREAK& pkt) { DoAsync(&MeetingRoom::Break, client); }
 void MeetingRoom::Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_KICK& pkt) { DoAsync(&MeetingRoom::Kick, client, pkt.clientid()); }
 void MeetingRoom::Handle_C_OFFICE_GET_PERMISSION(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_PERMISSION& pkt) { DoAsync(&MeetingRoom::GetPermission, client, pkt.clientid()); }
+void MeetingRoom::Handle_C_OFFICE_GET_PERMISSION_ALL(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_PERMISSION_ALL& pkt) { DoAsync(&MeetingRoom::GetPermissionAll, client); }
 void MeetingRoom::Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_PERMISSION& pkt) { DoAsync(&MeetingRoom::SetPermission, client, pkt); }
 void MeetingRoom::Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { DoAsync(&MeetingRoom::SetRoomInfo, client, pkt); }
 void MeetingRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { DoAsync(&MeetingRoom::GetRoomInfo, client); }
@@ -369,44 +370,49 @@ void MeetingRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 
 	Protocol::S_OFFICE_GET_PERMISSION getPermission;
 
-	if (clientId.empty())
+	auto client = clients.find(clientId);
+	if (client == clients.end())
+		return;
+
+	auto permission = getPermission.mutable_permission();
+
+	auto oClient = static_pointer_cast<MeetingClient>(client->second);
+
+	permission->set_clientid(oClient->clientId);
+	permission->set_screenpermission(oClient->data.screenPermission);
+	permission->set_chatpermission(oClient->data.chatPermission);
+	permission->set_voicepermission(oClient->data.voicePermission);
+	permission->set_videopermission(oClient->data.videoPermission);
+	permission->set_authority(static_cast<int>(oClient->data.type));
+
+	auto sendBuffer = PacketManager::MakeSendBuffer(getPermission);
+	_client->Send(sendBuffer);
+}
+
+void MeetingRoom::GetPermissionAll(shared_ptr<ClientBase> client)
+{
+	if (state != RoomState::Running) return;
+
+	Protocol::S_OFFICE_GET_PERMISSION_ALL getPermission;
+
+	for (auto client = clients.begin(); client != clients.end(); client++)
 	{
-		for (auto client = clients.begin(); client != clients.end(); client++)
-		{
-			auto permission = getPermission.add_permissions();
+		auto permission = getPermission.add_permissions();
 
-			auto oClient = static_pointer_cast<MeetingClient>(client->second);
+		auto oClient = static_pointer_cast<MeetingClient>(client->second);
 
-			permission->set_clientid(oClient->clientId);
-			permission->set_screenpermission(oClient->data.screenPermission);
-			permission->set_chatpermission(oClient->data.chatPermission);
-			permission->set_voicepermission(oClient->data.voicePermission);
-			permission->set_videopermission(oClient->data.videoPermission);
-			permission->set_authority(static_cast<int>(oClient->data.type));
-		}
-	}
-	else
-	{
-		auto client = clients.find(clientId);
-		if (client != clients.end())
-		{
-			auto permission = getPermission.add_permissions();
-			
-			auto oClient = static_pointer_cast<MeetingClient>(client->second);
-
-			permission->set_clientid(oClient->clientId);
-			permission->set_screenpermission(oClient->data.screenPermission);
-			permission->set_chatpermission(oClient->data.chatPermission);
-			permission->set_voicepermission(oClient->data.voicePermission);
-			permission->set_videopermission(oClient->data.videoPermission);
-			permission->set_authority(static_cast<int>(oClient->data.type));
-		}
+		permission->set_clientid(oClient->clientId);
+		permission->set_screenpermission(oClient->data.screenPermission);
+		permission->set_chatpermission(oClient->data.chatPermission);
+		permission->set_voicepermission(oClient->data.voicePermission);
+		permission->set_videopermission(oClient->data.videoPermission);
+		permission->set_authority(static_cast<int>(oClient->data.type));
 	}
 
 	if (getPermission.permissions_size() > 0)
 	{
 		auto sendBuffer = PacketManager::MakeSendBuffer(getPermission);
-		_client->Send(sendBuffer);
+		client->Send(sendBuffer);
 	}
 }
 
@@ -505,7 +511,7 @@ SET_PERMISSION_LOGIC:
 
 		Protocol::S_OFFICE_GET_PERMISSION permissionNotice;
 
-		auto permission = permissionNotice.add_permissions();
+		auto permission = permissionNotice.mutable_permission();
 
 		permission->set_screenpermission(client->data.screenPermission);
 		permission->set_chatpermission(client->data.chatPermission);

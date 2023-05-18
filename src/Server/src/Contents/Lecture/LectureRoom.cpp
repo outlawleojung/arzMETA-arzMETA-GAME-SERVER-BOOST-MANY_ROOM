@@ -259,7 +259,7 @@ void LectureRoom::SetHost(string clientId)
 		roomInfo["hostName"] = nextHost->second->nickname;
 
 		Protocol::S_OFFICE_GET_PERMISSION toCurrent;
-		auto currentHostInfo = toCurrent.add_permissions();
+		auto currentHostInfo = toCurrent.mutable_permission();
 		currentHostInfo->set_clientid(currentHost->second->clientId);
 		currentHostInfo->set_authority(static_cast<int>(static_pointer_cast<LectureClient>(currentHost->second)->type));
 		currentHostInfo->set_chatpermission(static_pointer_cast<LectureClient>(currentHost->second)->chatPermission);
@@ -269,7 +269,7 @@ void LectureRoom::SetHost(string clientId)
 		currentHost->second->Send(PacketManager::MakeSendBuffer(toCurrent));
 
 		Protocol::S_OFFICE_GET_PERMISSION toNext;
-		auto nextHostInfo = toNext.add_permissions();
+		auto nextHostInfo = toNext.mutable_permission();
 		nextHostInfo->set_clientid(nextHost->second->clientId);
 		nextHostInfo->set_authority(static_cast<int>(static_pointer_cast<LectureClient>(nextHost->second)->type));
 		nextHostInfo->set_chatpermission(static_pointer_cast<LectureClient>(nextHost->second)->chatPermission);
@@ -428,13 +428,13 @@ void LectureRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 
 	if (_client->clientId != currentHostId) return;
 
-	Protocol::S_OFFICE_GET_PERMISSION getPermission;
-
 	if (clientId.empty())
 	{
+		Protocol::S_OFFICE_GET_PERMISSION_ALL getPermissionAll;
+
 		for (auto client = clients.begin(); client != clients.end(); client++)
 		{
-			auto permission = getPermission.add_permissions();
+			auto permission = getPermissionAll.add_permissions();
 
 			auto oClient = static_pointer_cast<LectureClient>(client->second);
 
@@ -445,13 +445,20 @@ void LectureRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 			permission->set_videopermission(oClient->videoPermission);
 			permission->set_authority(static_cast<int>(oClient->type));
 		}
+
+		if (getPermissionAll.permissions_size() > 0)
+		{
+			auto sendBuffer = PacketManager::MakeSendBuffer(getPermissionAll);
+			_client->Send(sendBuffer);
+		}
 	}
 	else
 	{
 		auto client = clients.find(clientId);
 		if (client != clients.end())
 		{
-			auto permission = getPermission.add_permissions();
+			Protocol::S_OFFICE_GET_PERMISSION getPermission;
+			auto permission = getPermission.mutable_permission();
 			
 			auto oClient = static_pointer_cast<LectureClient>(client->second);
 
@@ -462,12 +469,6 @@ void LectureRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 			permission->set_videopermission(oClient->videoPermission);
 			permission->set_authority(static_cast<int>(oClient->type));
 		}
-	}
-
-	if (getPermission.permissions_size() > 0)
-	{
-		auto sendBuffer = PacketManager::MakeSendBuffer(getPermission);
-		_client->Send(sendBuffer);
 	}
 }
 
@@ -569,7 +570,7 @@ SET_PERMISSION_LOGIC:
 
 			Protocol::S_OFFICE_GET_PERMISSION permissionNotice;
 
-			auto permission = permissionNotice.add_permissions();
+			auto permission = permissionNotice.mutable_permission();
 
 			permission->set_screenpermission(oClient->screenPermission);
 			permission->set_chatpermission(oClient->chatPermission);

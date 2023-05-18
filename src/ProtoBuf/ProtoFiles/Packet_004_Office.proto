@@ -87,6 +87,15 @@ message C_OFFICE_GET_PERMISSION
 
 message S_OFFICE_GET_PERMISSION
 {
+	OfficeUserInfo permission = 1;
+}
+
+message C_OFFICE_GET_PERMISSION_ALL
+{
+}
+
+message S_OFFICE_GET_PERMISSION_ALL
+{
 	repeated OfficeUserInfo permissions = 1;
 }
 

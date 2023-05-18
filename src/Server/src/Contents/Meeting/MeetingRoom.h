@@ -51,6 +51,7 @@ public:
 	virtual void Handle_C_OFFICE_BREAK(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_BREAK& pkt) override;
 	virtual void Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_KICK& pkt) override;
 	virtual void Handle_C_OFFICE_GET_PERMISSION(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_PERMISSION& pkt) override;
+	virtual void Handle_C_OFFICE_GET_PERMISSION_ALL(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_PERMISSION_ALL& pkt) override;
 	virtual void Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SET_PERMISSION& pkt) override;
 	virtual void Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) override;
 	virtual void Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) override;
@@ -69,6 +70,7 @@ public:
 	void Break(shared_ptr<ClientBase> client);
 	void Kick(shared_ptr<ClientBase> client, string clientId);
 	void GetPermission(shared_ptr<ClientBase> client, string clientId);
+	void GetPermissionAll(shared_ptr<ClientBase> client);
 	void SetPermission(shared_ptr<ClientBase> client, Protocol::C_OFFICE_SET_PERMISSION pkt);
 	void GetRoomInfo(shared_ptr<ClientBase> client);
 	void SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_SET_ROOM_INFO pkt);
