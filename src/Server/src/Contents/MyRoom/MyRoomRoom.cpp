@@ -11,6 +11,7 @@
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 
 void MyRoomRoom::Init()
 {
@@ -26,6 +27,7 @@ void MyRoomRoom::Init()
 	sql::Driver* driver;
 	sql::Connection* con;
 	sql::Statement* stmt;
+	sql::PreparedStatement* pstmt;
 	sql::ResultSet* res;
 
 	driver = get_driver_instance();
@@ -43,7 +45,9 @@ void MyRoomRoom::Init()
 	string ownerMemberId;
 
 	{
-		res = stmt->executeQuery("SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = '" + ownerId + "'");
+		pstmt = con->prepareStatement("SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = ?");
+		pstmt->setString(1, ownerId);
+		res = pstmt->executeQuery();
 
 		while (res->next())
 		{
@@ -54,7 +58,9 @@ void MyRoomRoom::Init()
 	}
 	
 	{
-		res = stmt->executeQuery("SELECT avatarPartsType, itemId FROM memberavatarinfo WHERE memberId = '" + ownerMemberId + "'");
+		pstmt = con->prepareStatement("SELECT avatarPartsType, itemId FROM memberavatarinfo WHERE memberId = ?");
+		pstmt->setString(1, ownerMemberId);
+		res = pstmt->executeQuery();
 
 		while (res->next())
 			ownerAvatarInfo[res->getString(1)] = res->getString(2);

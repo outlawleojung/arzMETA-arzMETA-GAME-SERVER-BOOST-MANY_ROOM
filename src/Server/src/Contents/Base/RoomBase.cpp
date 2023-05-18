@@ -159,12 +159,14 @@ shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 
 void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 {
 	sql::Driver* driver;
 	sql::Connection* con;
 	sql::Statement* stmt;
+	sql::PreparedStatement* pstmt;
 	sql::ResultSet* res;
 
 	driver = get_driver_instance();
@@ -175,10 +177,12 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 		DBPassword
 	);
 	con->setSchema(DBSchema);
-
 	stmt = con->createStatement();
 	stmt->execute("SET NAMES 'utf8mb4'");
-	res = stmt->executeQuery("SELECT nickname, stateMessage FROM member WHERE memberCode = '" + client->clientId + "'");
+
+	pstmt = con->prepareStatement("SELECT nickname, stateMessage FROM member WHERE memberCode = ?");
+	pstmt->setString(1, client->clientId);
+	res = pstmt->executeQuery();
 
 	while (res->next())
 	{
@@ -188,6 +192,7 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 
 	delete res;
 	delete stmt;
+	delete pstmt;
 	delete con;
 }
 
