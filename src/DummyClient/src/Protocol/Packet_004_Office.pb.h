@@ -58,6 +58,9 @@ extern C_OFFICE_GET_HOSTDefaultTypeInternal _C_OFFICE_GET_HOST_default_instance_
 class C_OFFICE_GET_PERMISSION;
 struct C_OFFICE_GET_PERMISSIONDefaultTypeInternal;
 extern C_OFFICE_GET_PERMISSIONDefaultTypeInternal _C_OFFICE_GET_PERMISSION_default_instance_;
+class C_OFFICE_GET_PERMISSION_ALL;
+struct C_OFFICE_GET_PERMISSION_ALLDefaultTypeInternal;
+extern C_OFFICE_GET_PERMISSION_ALLDefaultTypeInternal _C_OFFICE_GET_PERMISSION_ALL_default_instance_;
 class C_OFFICE_GET_ROOM_INFO;
 struct C_OFFICE_GET_ROOM_INFODefaultTypeInternal;
 extern C_OFFICE_GET_ROOM_INFODefaultTypeInternal _C_OFFICE_GET_ROOM_INFO_default_instance_;
@@ -79,6 +82,9 @@ extern C_OFFICE_SHAREDefaultTypeInternal _C_OFFICE_SHARE_default_instance_;
 class C_OFFICE_VIDEO_STREAM;
 struct C_OFFICE_VIDEO_STREAMDefaultTypeInternal;
 extern C_OFFICE_VIDEO_STREAMDefaultTypeInternal _C_OFFICE_VIDEO_STREAM_default_instance_;
+class OfficeUserInfo;
+struct OfficeUserInfoDefaultTypeInternal;
+extern OfficeUserInfoDefaultTypeInternal _OfficeUserInfo_default_instance_;
 class S_OFFICE_ACCEPT_WAIT;
 struct S_OFFICE_ACCEPT_WAITDefaultTypeInternal;
 extern S_OFFICE_ACCEPT_WAITDefaultTypeInternal _S_OFFICE_ACCEPT_WAIT_default_instance_;
@@ -88,6 +94,9 @@ extern S_OFFICE_ACCEPT_WAIT_NOTICEDefaultTypeInternal _S_OFFICE_ACCEPT_WAIT_NOTI
 class S_OFFICE_ADD_WAITING_CLIENT;
 struct S_OFFICE_ADD_WAITING_CLIENTDefaultTypeInternal;
 extern S_OFFICE_ADD_WAITING_CLIENTDefaultTypeInternal _S_OFFICE_ADD_WAITING_CLIENT_default_instance_;
+class S_OFFICE_ADD_WAITING_CLIENT_WaitingClient;
+struct S_OFFICE_ADD_WAITING_CLIENT_WaitingClientDefaultTypeInternal;
+extern S_OFFICE_ADD_WAITING_CLIENT_WaitingClientDefaultTypeInternal _S_OFFICE_ADD_WAITING_CLIENT_WaitingClient_default_instance_;
 class S_OFFICE_BREAK;
 struct S_OFFICE_BREAKDefaultTypeInternal;
 extern S_OFFICE_BREAKDefaultTypeInternal _S_OFFICE_BREAK_default_instance_;
@@ -97,6 +106,9 @@ extern S_OFFICE_GET_HOSTDefaultTypeInternal _S_OFFICE_GET_HOST_default_instance_
 class S_OFFICE_GET_PERMISSION;
 struct S_OFFICE_GET_PERMISSIONDefaultTypeInternal;
 extern S_OFFICE_GET_PERMISSIONDefaultTypeInternal _S_OFFICE_GET_PERMISSION_default_instance_;
+class S_OFFICE_GET_PERMISSION_ALL;
+struct S_OFFICE_GET_PERMISSION_ALLDefaultTypeInternal;
+extern S_OFFICE_GET_PERMISSION_ALLDefaultTypeInternal _S_OFFICE_GET_PERMISSION_ALL_default_instance_;
 class S_OFFICE_GET_ROOM_INFO;
 struct S_OFFICE_GET_ROOM_INFODefaultTypeInternal;
 extern S_OFFICE_GET_ROOM_INFODefaultTypeInternal _S_OFFICE_GET_ROOM_INFO_default_instance_;
@@ -106,12 +118,12 @@ extern S_OFFICE_KICKDefaultTypeInternal _S_OFFICE_KICK_default_instance_;
 class S_OFFICE_REMOVE_WAITING_CLIENT;
 struct S_OFFICE_REMOVE_WAITING_CLIENTDefaultTypeInternal;
 extern S_OFFICE_REMOVE_WAITING_CLIENTDefaultTypeInternal _S_OFFICE_REMOVE_WAITING_CLIENT_default_instance_;
+class S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient;
+struct S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClientDefaultTypeInternal;
+extern S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClientDefaultTypeInternal _S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient_default_instance_;
 class S_OFFICE_SET_PERMISSION;
 struct S_OFFICE_SET_PERMISSIONDefaultTypeInternal;
 extern S_OFFICE_SET_PERMISSIONDefaultTypeInternal _S_OFFICE_SET_PERMISSION_default_instance_;
-class S_OFFICE_SET_PERMISSION_NOTICE;
-struct S_OFFICE_SET_PERMISSION_NOTICEDefaultTypeInternal;
-extern S_OFFICE_SET_PERMISSION_NOTICEDefaultTypeInternal _S_OFFICE_SET_PERMISSION_NOTICE_default_instance_;
 class S_OFFICE_SET_ROOM_INFO;
 struct S_OFFICE_SET_ROOM_INFODefaultTypeInternal;
 extern S_OFFICE_SET_ROOM_INFODefaultTypeInternal _S_OFFICE_SET_ROOM_INFO_default_instance_;
@@ -121,18 +133,13 @@ extern S_OFFICE_SHAREDefaultTypeInternal _S_OFFICE_SHARE_default_instance_;
 class S_OFFICE_VIDEO_STREAM;
 struct S_OFFICE_VIDEO_STREAMDefaultTypeInternal;
 extern S_OFFICE_VIDEO_STREAMDefaultTypeInternal _S_OFFICE_VIDEO_STREAM_default_instance_;
-class USER_PERMISSION;
-struct USER_PERMISSIONDefaultTypeInternal;
-extern USER_PERMISSIONDefaultTypeInternal _USER_PERMISSION_default_instance_;
-class WaitClient;
-struct WaitClientDefaultTypeInternal;
-extern WaitClientDefaultTypeInternal _WaitClient_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::C_OFFICE_ACCEPT_WAIT* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_ACCEPT_WAIT>(Arena*);
 template<> ::Protocol::C_OFFICE_BREAK* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_BREAK>(Arena*);
 template<> ::Protocol::C_OFFICE_GET_HOST* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_HOST>(Arena*);
 template<> ::Protocol::C_OFFICE_GET_PERMISSION* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_PERMISSION>(Arena*);
+template<> ::Protocol::C_OFFICE_GET_PERMISSION_ALL* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_PERMISSION_ALL>(Arena*);
 template<> ::Protocol::C_OFFICE_GET_ROOM_INFO* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_ROOM_INFO>(Arena*);
 template<> ::Protocol::C_OFFICE_GET_WAITING_LIST* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_WAITING_LIST>(Arena*);
 template<> ::Protocol::C_OFFICE_KICK* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_KICK>(Arena*);
@@ -140,22 +147,23 @@ template<> ::Protocol::C_OFFICE_SET_PERMISSION* Arena::CreateMaybeMessage<::Prot
 template<> ::Protocol::C_OFFICE_SET_ROOM_INFO* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_SET_ROOM_INFO>(Arena*);
 template<> ::Protocol::C_OFFICE_SHARE* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_SHARE>(Arena*);
 template<> ::Protocol::C_OFFICE_VIDEO_STREAM* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_VIDEO_STREAM>(Arena*);
+template<> ::Protocol::OfficeUserInfo* Arena::CreateMaybeMessage<::Protocol::OfficeUserInfo>(Arena*);
 template<> ::Protocol::S_OFFICE_ACCEPT_WAIT* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_ACCEPT_WAIT>(Arena*);
 template<> ::Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE>(Arena*);
 template<> ::Protocol::S_OFFICE_ADD_WAITING_CLIENT* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_ADD_WAITING_CLIENT>(Arena*);
+template<> ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient>(Arena*);
 template<> ::Protocol::S_OFFICE_BREAK* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_BREAK>(Arena*);
 template<> ::Protocol::S_OFFICE_GET_HOST* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_GET_HOST>(Arena*);
 template<> ::Protocol::S_OFFICE_GET_PERMISSION* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_GET_PERMISSION>(Arena*);
+template<> ::Protocol::S_OFFICE_GET_PERMISSION_ALL* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_GET_PERMISSION_ALL>(Arena*);
 template<> ::Protocol::S_OFFICE_GET_ROOM_INFO* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_GET_ROOM_INFO>(Arena*);
 template<> ::Protocol::S_OFFICE_KICK* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_KICK>(Arena*);
 template<> ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT>(Arena*);
+template<> ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient>(Arena*);
 template<> ::Protocol::S_OFFICE_SET_PERMISSION* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_SET_PERMISSION>(Arena*);
-template<> ::Protocol::S_OFFICE_SET_PERMISSION_NOTICE* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_SET_PERMISSION_NOTICE>(Arena*);
 template<> ::Protocol::S_OFFICE_SET_ROOM_INFO* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_SET_ROOM_INFO>(Arena*);
 template<> ::Protocol::S_OFFICE_SHARE* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_SHARE>(Arena*);
 template<> ::Protocol::S_OFFICE_VIDEO_STREAM* Arena::CreateMaybeMessage<::Protocol::S_OFFICE_VIDEO_STREAM>(Arena*);
-template<> ::Protocol::USER_PERMISSION* Arena::CreateMaybeMessage<::Protocol::USER_PERMISSION>(Arena*);
-template<> ::Protocol::WaitClient* Arena::CreateMaybeMessage<::Protocol::WaitClient>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
@@ -279,24 +287,24 @@ class C_OFFICE_GET_WAITING_LIST final :
 };
 // -------------------------------------------------------------------
 
-class WaitClient final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.WaitClient) */ {
+class S_OFFICE_ADD_WAITING_CLIENT_WaitingClient final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient) */ {
  public:
-  inline WaitClient() : WaitClient(nullptr) {}
-  ~WaitClient() override;
-  explicit PROTOBUF_CONSTEXPR WaitClient(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline S_OFFICE_ADD_WAITING_CLIENT_WaitingClient() : S_OFFICE_ADD_WAITING_CLIENT_WaitingClient(nullptr) {}
+  ~S_OFFICE_ADD_WAITING_CLIENT_WaitingClient() override;
+  explicit PROTOBUF_CONSTEXPR S_OFFICE_ADD_WAITING_CLIENT_WaitingClient(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  WaitClient(const WaitClient& from);
-  WaitClient(WaitClient&& from) noexcept
-    : WaitClient() {
+  S_OFFICE_ADD_WAITING_CLIENT_WaitingClient(const S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& from);
+  S_OFFICE_ADD_WAITING_CLIENT_WaitingClient(S_OFFICE_ADD_WAITING_CLIENT_WaitingClient&& from) noexcept
+    : S_OFFICE_ADD_WAITING_CLIENT_WaitingClient() {
     *this = ::std::move(from);
   }
 
-  inline WaitClient& operator=(const WaitClient& from) {
+  inline S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& operator=(const S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& from) {
     CopyFrom(from);
     return *this;
   }
-  inline WaitClient& operator=(WaitClient&& from) noexcept {
+  inline S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& operator=(S_OFFICE_ADD_WAITING_CLIENT_WaitingClient&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -319,20 +327,20 @@ class WaitClient final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const WaitClient& default_instance() {
+  static const S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& default_instance() {
     return *internal_default_instance();
   }
-  static inline const WaitClient* internal_default_instance() {
-    return reinterpret_cast<const WaitClient*>(
-               &_WaitClient_default_instance_);
+  static inline const S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* internal_default_instance() {
+    return reinterpret_cast<const S_OFFICE_ADD_WAITING_CLIENT_WaitingClient*>(
+               &_S_OFFICE_ADD_WAITING_CLIENT_WaitingClient_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(WaitClient& a, WaitClient& b) {
+  friend void swap(S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& a, S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& b) {
     a.Swap(&b);
   }
-  inline void Swap(WaitClient* other) {
+  inline void Swap(S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -345,7 +353,7 @@ class WaitClient final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(WaitClient* other) {
+  void UnsafeArenaSwap(S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -353,14 +361,14 @@ class WaitClient final :
 
   // implements Message ----------------------------------------------
 
-  WaitClient* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<WaitClient>(arena);
+  S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_OFFICE_ADD_WAITING_CLIENT_WaitingClient>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const WaitClient& from);
+  void CopyFrom(const S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const WaitClient& from) {
-    WaitClient::MergeImpl(*this, from);
+  void MergeFrom( const S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& from) {
+    S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -378,15 +386,15 @@ class WaitClient final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(WaitClient* other);
+  void InternalSwap(S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.WaitClient";
+    return "Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient";
   }
   protected:
-  explicit WaitClient(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit S_OFFICE_ADD_WAITING_CLIENT_WaitingClient(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -441,7 +449,7 @@ class WaitClient final :
   void _internal_set_isobserver(bool value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Protocol.WaitClient)
+  // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient)
  private:
   class _Internal;
 
@@ -577,27 +585,29 @@ class S_OFFICE_ADD_WAITING_CLIENT final :
 
   // nested types ----------------------------------------------------
 
+  typedef S_OFFICE_ADD_WAITING_CLIENT_WaitingClient WaitingClient;
+
   // accessors -------------------------------------------------------
 
   enum : int {
     kClientsFieldNumber = 1,
   };
-  // repeated .Protocol.WaitClient clients = 1;
+  // repeated .Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient clients = 1;
   int clients_size() const;
   private:
   int _internal_clients_size() const;
   public:
   void clear_clients();
-  ::Protocol::WaitClient* mutable_clients(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::WaitClient >*
+  ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* mutable_clients(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient >*
       mutable_clients();
   private:
-  const ::Protocol::WaitClient& _internal_clients(int index) const;
-  ::Protocol::WaitClient* _internal_add_clients();
+  const ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& _internal_clients(int index) const;
+  ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* _internal_add_clients();
   public:
-  const ::Protocol::WaitClient& clients(int index) const;
-  ::Protocol::WaitClient* add_clients();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::WaitClient >&
+  const ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& clients(int index) const;
+  ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* add_clients();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient >&
       clients() const;
 
   // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_ADD_WAITING_CLIENT)
@@ -608,7 +618,171 @@ class S_OFFICE_ADD_WAITING_CLIENT final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::WaitClient > clients_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient > clients_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f004_5fOffice_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient) */ {
+ public:
+  inline S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient() : S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient(nullptr) {}
+  ~S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient() override;
+  explicit PROTOBUF_CONSTEXPR S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient(const S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& from);
+  S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient(S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient&& from) noexcept
+    : S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient() {
+    *this = ::std::move(from);
+  }
+
+  inline S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& operator=(const S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& operator=(S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* internal_default_instance() {
+    return reinterpret_cast<const S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient*>(
+               &_S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& a, S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& from) {
+    S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient";
+  }
+  protected:
+  explicit S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kClientIdFieldNumber = 2,
+    kIsObserverFieldNumber = 1,
+  };
+  // string clientId = 2;
+  void clear_clientid();
+  const std::string& clientid() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_clientid(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_clientid();
+  PROTOBUF_NODISCARD std::string* release_clientid();
+  void set_allocated_clientid(std::string* clientid);
+  private:
+  const std::string& _internal_clientid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_clientid(const std::string& value);
+  std::string* _internal_mutable_clientid();
+  public:
+
+  // bool isObserver = 1;
+  void clear_isobserver();
+  bool isobserver() const;
+  void set_isobserver(bool value);
+  private:
+  bool _internal_isobserver() const;
+  void _internal_set_isobserver(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientid_;
+    bool isobserver_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -664,7 +838,7 @@ class S_OFFICE_REMOVE_WAITING_CLIENT final :
                &_S_OFFICE_REMOVE_WAITING_CLIENT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(S_OFFICE_REMOVE_WAITING_CLIENT& a, S_OFFICE_REMOVE_WAITING_CLIENT& b) {
     a.Swap(&b);
@@ -734,34 +908,30 @@ class S_OFFICE_REMOVE_WAITING_CLIENT final :
 
   // nested types ----------------------------------------------------
 
+  typedef S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient WaitingClient;
+
   // accessors -------------------------------------------------------
 
   enum : int {
     kClientsFieldNumber = 1,
   };
-  // repeated string clients = 1;
+  // repeated .Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient clients = 1;
   int clients_size() const;
   private:
   int _internal_clients_size() const;
   public:
   void clear_clients();
-  const std::string& clients(int index) const;
-  std::string* mutable_clients(int index);
-  void set_clients(int index, const std::string& value);
-  void set_clients(int index, std::string&& value);
-  void set_clients(int index, const char* value);
-  void set_clients(int index, const char* value, size_t size);
-  std::string* add_clients();
-  void add_clients(const std::string& value);
-  void add_clients(std::string&& value);
-  void add_clients(const char* value);
-  void add_clients(const char* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& clients() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_clients();
+  ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* mutable_clients(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient >*
+      mutable_clients();
   private:
-  const std::string& _internal_clients(int index) const;
-  std::string* _internal_add_clients();
+  const ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& _internal_clients(int index) const;
+  ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* _internal_add_clients();
   public:
+  const ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& clients(int index) const;
+  ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* add_clients();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient >&
+      clients() const;
 
   // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT)
  private:
@@ -771,7 +941,7 @@ class S_OFFICE_REMOVE_WAITING_CLIENT final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> clients_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient > clients_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -827,7 +997,7 @@ class C_OFFICE_ACCEPT_WAIT final :
                &_C_OFFICE_ACCEPT_WAIT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(C_OFFICE_ACCEPT_WAIT& a, C_OFFICE_ACCEPT_WAIT& b) {
     a.Swap(&b);
@@ -991,7 +1161,7 @@ class S_OFFICE_ACCEPT_WAIT final :
                &_S_OFFICE_ACCEPT_WAIT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(S_OFFICE_ACCEPT_WAIT& a, S_OFFICE_ACCEPT_WAIT& b) {
     a.Swap(&b);
@@ -1139,7 +1309,7 @@ class S_OFFICE_ACCEPT_WAIT_NOTICE final :
                &_S_OFFICE_ACCEPT_WAIT_NOTICE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(S_OFFICE_ACCEPT_WAIT_NOTICE& a, S_OFFICE_ACCEPT_WAIT_NOTICE& b) {
     a.Swap(&b);
@@ -1286,7 +1456,7 @@ class C_OFFICE_GET_HOST final :
                &_C_OFFICE_GET_HOST_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(C_OFFICE_GET_HOST& a, C_OFFICE_GET_HOST& b) {
     a.Swap(&b);
@@ -1405,7 +1575,7 @@ class S_OFFICE_GET_HOST final :
                &_S_OFFICE_GET_HOST_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(S_OFFICE_GET_HOST& a, S_OFFICE_GET_HOST& b) {
     a.Swap(&b);
@@ -1557,7 +1727,7 @@ class C_OFFICE_BREAK final :
                &_C_OFFICE_BREAK_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(C_OFFICE_BREAK& a, C_OFFICE_BREAK& b) {
     a.Swap(&b);
@@ -1676,7 +1846,7 @@ class S_OFFICE_BREAK final :
                &_S_OFFICE_BREAK_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(S_OFFICE_BREAK& a, S_OFFICE_BREAK& b) {
     a.Swap(&b);
@@ -1824,7 +1994,7 @@ class C_OFFICE_KICK final :
                &_C_OFFICE_KICK_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(C_OFFICE_KICK& a, C_OFFICE_KICK& b) {
     a.Swap(&b);
@@ -1977,7 +2147,7 @@ class S_OFFICE_KICK final :
                &_S_OFFICE_KICK_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(S_OFFICE_KICK& a, S_OFFICE_KICK& b) {
     a.Swap(&b);
@@ -2077,24 +2247,24 @@ class S_OFFICE_KICK final :
 };
 // -------------------------------------------------------------------
 
-class USER_PERMISSION final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.USER_PERMISSION) */ {
+class OfficeUserInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.OfficeUserInfo) */ {
  public:
-  inline USER_PERMISSION() : USER_PERMISSION(nullptr) {}
-  ~USER_PERMISSION() override;
-  explicit PROTOBUF_CONSTEXPR USER_PERMISSION(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline OfficeUserInfo() : OfficeUserInfo(nullptr) {}
+  ~OfficeUserInfo() override;
+  explicit PROTOBUF_CONSTEXPR OfficeUserInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  USER_PERMISSION(const USER_PERMISSION& from);
-  USER_PERMISSION(USER_PERMISSION&& from) noexcept
-    : USER_PERMISSION() {
+  OfficeUserInfo(const OfficeUserInfo& from);
+  OfficeUserInfo(OfficeUserInfo&& from) noexcept
+    : OfficeUserInfo() {
     *this = ::std::move(from);
   }
 
-  inline USER_PERMISSION& operator=(const USER_PERMISSION& from) {
+  inline OfficeUserInfo& operator=(const OfficeUserInfo& from) {
     CopyFrom(from);
     return *this;
   }
-  inline USER_PERMISSION& operator=(USER_PERMISSION&& from) noexcept {
+  inline OfficeUserInfo& operator=(OfficeUserInfo&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -2117,20 +2287,20 @@ class USER_PERMISSION final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const USER_PERMISSION& default_instance() {
+  static const OfficeUserInfo& default_instance() {
     return *internal_default_instance();
   }
-  static inline const USER_PERMISSION* internal_default_instance() {
-    return reinterpret_cast<const USER_PERMISSION*>(
-               &_USER_PERMISSION_default_instance_);
+  static inline const OfficeUserInfo* internal_default_instance() {
+    return reinterpret_cast<const OfficeUserInfo*>(
+               &_OfficeUserInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
-  friend void swap(USER_PERMISSION& a, USER_PERMISSION& b) {
+  friend void swap(OfficeUserInfo& a, OfficeUserInfo& b) {
     a.Swap(&b);
   }
-  inline void Swap(USER_PERMISSION* other) {
+  inline void Swap(OfficeUserInfo* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -2143,7 +2313,7 @@ class USER_PERMISSION final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(USER_PERMISSION* other) {
+  void UnsafeArenaSwap(OfficeUserInfo* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -2151,14 +2321,14 @@ class USER_PERMISSION final :
 
   // implements Message ----------------------------------------------
 
-  USER_PERMISSION* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<USER_PERMISSION>(arena);
+  OfficeUserInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<OfficeUserInfo>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const USER_PERMISSION& from);
+  void CopyFrom(const OfficeUserInfo& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const USER_PERMISSION& from) {
-    USER_PERMISSION::MergeImpl(*this, from);
+  void MergeFrom( const OfficeUserInfo& from) {
+    OfficeUserInfo::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -2176,15 +2346,15 @@ class USER_PERMISSION final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(USER_PERMISSION* other);
+  void InternalSwap(OfficeUserInfo* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.USER_PERMISSION";
+    return "Protocol.OfficeUserInfo";
   }
   protected:
-  explicit USER_PERMISSION(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit OfficeUserInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -2203,7 +2373,7 @@ class USER_PERMISSION final :
     kChatPermissionFieldNumber = 3,
     kVoicePermissionFieldNumber = 4,
     kVideoPermissionFieldNumber = 5,
-    kTypeFieldNumber = 6,
+    kAuthorityFieldNumber = 6,
   };
   // string clientId = 1;
   void clear_clientid();
@@ -2255,16 +2425,16 @@ class USER_PERMISSION final :
   void _internal_set_videopermission(bool value);
   public:
 
-  // int32 type = 6;
-  void clear_type();
-  int32_t type() const;
-  void set_type(int32_t value);
+  // int32 authority = 6;
+  void clear_authority();
+  int32_t authority() const;
+  void set_authority(int32_t value);
   private:
-  int32_t _internal_type() const;
-  void _internal_set_type(int32_t value);
+  int32_t _internal_authority() const;
+  void _internal_set_authority(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Protocol.USER_PERMISSION)
+  // @@protoc_insertion_point(class_scope:Protocol.OfficeUserInfo)
  private:
   class _Internal;
 
@@ -2277,7 +2447,7 @@ class USER_PERMISSION final :
     bool chatpermission_;
     bool voicepermission_;
     bool videopermission_;
-    int32_t type_;
+    int32_t authority_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2333,7 +2503,7 @@ class C_OFFICE_GET_PERMISSION final :
                &_C_OFFICE_GET_PERMISSION_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(C_OFFICE_GET_PERMISSION& a, C_OFFICE_GET_PERMISSION& b) {
     a.Swap(&b);
@@ -2486,7 +2656,7 @@ class S_OFFICE_GET_PERMISSION final :
                &_S_OFFICE_GET_PERMISSION_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   friend void swap(S_OFFICE_GET_PERMISSION& a, S_OFFICE_GET_PERMISSION& b) {
     a.Swap(&b);
@@ -2559,25 +2729,25 @@ class S_OFFICE_GET_PERMISSION final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPermissionsFieldNumber = 1,
+    kPermissionFieldNumber = 1,
   };
-  // repeated .Protocol.USER_PERMISSION permissions = 1;
-  int permissions_size() const;
+  // .Protocol.OfficeUserInfo permission = 1;
+  bool has_permission() const;
   private:
-  int _internal_permissions_size() const;
+  bool _internal_has_permission() const;
   public:
-  void clear_permissions();
-  ::Protocol::USER_PERMISSION* mutable_permissions(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >*
-      mutable_permissions();
+  void clear_permission();
+  const ::Protocol::OfficeUserInfo& permission() const;
+  PROTOBUF_NODISCARD ::Protocol::OfficeUserInfo* release_permission();
+  ::Protocol::OfficeUserInfo* mutable_permission();
+  void set_allocated_permission(::Protocol::OfficeUserInfo* permission);
   private:
-  const ::Protocol::USER_PERMISSION& _internal_permissions(int index) const;
-  ::Protocol::USER_PERMISSION* _internal_add_permissions();
+  const ::Protocol::OfficeUserInfo& _internal_permission() const;
+  ::Protocol::OfficeUserInfo* _internal_mutable_permission();
   public:
-  const ::Protocol::USER_PERMISSION& permissions(int index) const;
-  ::Protocol::USER_PERMISSION* add_permissions();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >&
-      permissions() const;
+  void unsafe_arena_set_allocated_permission(
+      ::Protocol::OfficeUserInfo* permission);
+  ::Protocol::OfficeUserInfo* unsafe_arena_release_permission();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_GET_PERMISSION)
  private:
@@ -2587,7 +2757,282 @@ class S_OFFICE_GET_PERMISSION final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION > permissions_;
+    ::Protocol::OfficeUserInfo* permission_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f004_5fOffice_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_OFFICE_GET_PERMISSION_ALL final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.C_OFFICE_GET_PERMISSION_ALL) */ {
+ public:
+  inline C_OFFICE_GET_PERMISSION_ALL() : C_OFFICE_GET_PERMISSION_ALL(nullptr) {}
+  explicit PROTOBUF_CONSTEXPR C_OFFICE_GET_PERMISSION_ALL(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_OFFICE_GET_PERMISSION_ALL(const C_OFFICE_GET_PERMISSION_ALL& from);
+  C_OFFICE_GET_PERMISSION_ALL(C_OFFICE_GET_PERMISSION_ALL&& from) noexcept
+    : C_OFFICE_GET_PERMISSION_ALL() {
+    *this = ::std::move(from);
+  }
+
+  inline C_OFFICE_GET_PERMISSION_ALL& operator=(const C_OFFICE_GET_PERMISSION_ALL& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_OFFICE_GET_PERMISSION_ALL& operator=(C_OFFICE_GET_PERMISSION_ALL&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_OFFICE_GET_PERMISSION_ALL& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_OFFICE_GET_PERMISSION_ALL* internal_default_instance() {
+    return reinterpret_cast<const C_OFFICE_GET_PERMISSION_ALL*>(
+               &_C_OFFICE_GET_PERMISSION_ALL_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    17;
+
+  friend void swap(C_OFFICE_GET_PERMISSION_ALL& a, C_OFFICE_GET_PERMISSION_ALL& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_OFFICE_GET_PERMISSION_ALL* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_OFFICE_GET_PERMISSION_ALL* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_OFFICE_GET_PERMISSION_ALL* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_OFFICE_GET_PERMISSION_ALL>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const C_OFFICE_GET_PERMISSION_ALL& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const C_OFFICE_GET_PERMISSION_ALL& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+  public:
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_OFFICE_GET_PERMISSION_ALL";
+  }
+  protected:
+  explicit C_OFFICE_GET_PERMISSION_ALL(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_OFFICE_GET_PERMISSION_ALL)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+  };
+  friend struct ::TableStruct_Packet_5f004_5fOffice_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_OFFICE_GET_PERMISSION_ALL final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_OFFICE_GET_PERMISSION_ALL) */ {
+ public:
+  inline S_OFFICE_GET_PERMISSION_ALL() : S_OFFICE_GET_PERMISSION_ALL(nullptr) {}
+  ~S_OFFICE_GET_PERMISSION_ALL() override;
+  explicit PROTOBUF_CONSTEXPR S_OFFICE_GET_PERMISSION_ALL(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_OFFICE_GET_PERMISSION_ALL(const S_OFFICE_GET_PERMISSION_ALL& from);
+  S_OFFICE_GET_PERMISSION_ALL(S_OFFICE_GET_PERMISSION_ALL&& from) noexcept
+    : S_OFFICE_GET_PERMISSION_ALL() {
+    *this = ::std::move(from);
+  }
+
+  inline S_OFFICE_GET_PERMISSION_ALL& operator=(const S_OFFICE_GET_PERMISSION_ALL& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_OFFICE_GET_PERMISSION_ALL& operator=(S_OFFICE_GET_PERMISSION_ALL&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_OFFICE_GET_PERMISSION_ALL& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_OFFICE_GET_PERMISSION_ALL* internal_default_instance() {
+    return reinterpret_cast<const S_OFFICE_GET_PERMISSION_ALL*>(
+               &_S_OFFICE_GET_PERMISSION_ALL_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  friend void swap(S_OFFICE_GET_PERMISSION_ALL& a, S_OFFICE_GET_PERMISSION_ALL& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_OFFICE_GET_PERMISSION_ALL* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_OFFICE_GET_PERMISSION_ALL* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_OFFICE_GET_PERMISSION_ALL* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_OFFICE_GET_PERMISSION_ALL>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_OFFICE_GET_PERMISSION_ALL& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_OFFICE_GET_PERMISSION_ALL& from) {
+    S_OFFICE_GET_PERMISSION_ALL::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_OFFICE_GET_PERMISSION_ALL* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_OFFICE_GET_PERMISSION_ALL";
+  }
+  protected:
+  explicit S_OFFICE_GET_PERMISSION_ALL(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPermissionsFieldNumber = 1,
+  };
+  // repeated .Protocol.OfficeUserInfo permissions = 1;
+  int permissions_size() const;
+  private:
+  int _internal_permissions_size() const;
+  public:
+  void clear_permissions();
+  ::Protocol::OfficeUserInfo* mutable_permissions(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >*
+      mutable_permissions();
+  private:
+  const ::Protocol::OfficeUserInfo& _internal_permissions(int index) const;
+  ::Protocol::OfficeUserInfo* _internal_add_permissions();
+  public:
+  const ::Protocol::OfficeUserInfo& permissions(int index) const;
+  ::Protocol::OfficeUserInfo* add_permissions();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >&
+      permissions() const;
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_GET_PERMISSION_ALL)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo > permissions_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2643,7 +3088,7 @@ class C_OFFICE_SET_PERMISSION final :
                &_C_OFFICE_SET_PERMISSION_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    19;
 
   friend void swap(C_OFFICE_SET_PERMISSION& a, C_OFFICE_SET_PERMISSION& b) {
     a.Swap(&b);
@@ -2718,22 +3163,22 @@ class C_OFFICE_SET_PERMISSION final :
   enum : int {
     kPermissionsFieldNumber = 1,
   };
-  // repeated .Protocol.USER_PERMISSION permissions = 1;
+  // repeated .Protocol.OfficeUserInfo permissions = 1;
   int permissions_size() const;
   private:
   int _internal_permissions_size() const;
   public:
   void clear_permissions();
-  ::Protocol::USER_PERMISSION* mutable_permissions(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >*
+  ::Protocol::OfficeUserInfo* mutable_permissions(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >*
       mutable_permissions();
   private:
-  const ::Protocol::USER_PERMISSION& _internal_permissions(int index) const;
-  ::Protocol::USER_PERMISSION* _internal_add_permissions();
+  const ::Protocol::OfficeUserInfo& _internal_permissions(int index) const;
+  ::Protocol::OfficeUserInfo* _internal_add_permissions();
   public:
-  const ::Protocol::USER_PERMISSION& permissions(int index) const;
-  ::Protocol::USER_PERMISSION* add_permissions();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >&
+  const ::Protocol::OfficeUserInfo& permissions(int index) const;
+  ::Protocol::OfficeUserInfo* add_permissions();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >&
       permissions() const;
 
   // @@protoc_insertion_point(class_scope:Protocol.C_OFFICE_SET_PERMISSION)
@@ -2744,7 +3189,7 @@ class C_OFFICE_SET_PERMISSION final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION > permissions_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo > permissions_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2800,7 +3245,7 @@ class S_OFFICE_SET_PERMISSION final :
                &_S_OFFICE_SET_PERMISSION_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    20;
 
   friend void swap(S_OFFICE_SET_PERMISSION& a, S_OFFICE_SET_PERMISSION& b) {
     a.Swap(&b);
@@ -2900,198 +3345,6 @@ class S_OFFICE_SET_PERMISSION final :
 };
 // -------------------------------------------------------------------
 
-class S_OFFICE_SET_PERMISSION_NOTICE final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_OFFICE_SET_PERMISSION_NOTICE) */ {
- public:
-  inline S_OFFICE_SET_PERMISSION_NOTICE() : S_OFFICE_SET_PERMISSION_NOTICE(nullptr) {}
-  ~S_OFFICE_SET_PERMISSION_NOTICE() override;
-  explicit PROTOBUF_CONSTEXPR S_OFFICE_SET_PERMISSION_NOTICE(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  S_OFFICE_SET_PERMISSION_NOTICE(const S_OFFICE_SET_PERMISSION_NOTICE& from);
-  S_OFFICE_SET_PERMISSION_NOTICE(S_OFFICE_SET_PERMISSION_NOTICE&& from) noexcept
-    : S_OFFICE_SET_PERMISSION_NOTICE() {
-    *this = ::std::move(from);
-  }
-
-  inline S_OFFICE_SET_PERMISSION_NOTICE& operator=(const S_OFFICE_SET_PERMISSION_NOTICE& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline S_OFFICE_SET_PERMISSION_NOTICE& operator=(S_OFFICE_SET_PERMISSION_NOTICE&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const S_OFFICE_SET_PERMISSION_NOTICE& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const S_OFFICE_SET_PERMISSION_NOTICE* internal_default_instance() {
-    return reinterpret_cast<const S_OFFICE_SET_PERMISSION_NOTICE*>(
-               &_S_OFFICE_SET_PERMISSION_NOTICE_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    18;
-
-  friend void swap(S_OFFICE_SET_PERMISSION_NOTICE& a, S_OFFICE_SET_PERMISSION_NOTICE& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(S_OFFICE_SET_PERMISSION_NOTICE* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(S_OFFICE_SET_PERMISSION_NOTICE* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  S_OFFICE_SET_PERMISSION_NOTICE* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<S_OFFICE_SET_PERMISSION_NOTICE>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const S_OFFICE_SET_PERMISSION_NOTICE& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const S_OFFICE_SET_PERMISSION_NOTICE& from) {
-    S_OFFICE_SET_PERMISSION_NOTICE::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(S_OFFICE_SET_PERMISSION_NOTICE* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.S_OFFICE_SET_PERMISSION_NOTICE";
-  }
-  protected:
-  explicit S_OFFICE_SET_PERMISSION_NOTICE(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kScreenPermissionFieldNumber = 1,
-    kChatPermissionFieldNumber = 2,
-    kVoicePermissionFieldNumber = 3,
-    kVideoPermissionFieldNumber = 4,
-    kTypeFieldNumber = 5,
-  };
-  // bool screenPermission = 1;
-  void clear_screenpermission();
-  bool screenpermission() const;
-  void set_screenpermission(bool value);
-  private:
-  bool _internal_screenpermission() const;
-  void _internal_set_screenpermission(bool value);
-  public:
-
-  // bool chatPermission = 2;
-  void clear_chatpermission();
-  bool chatpermission() const;
-  void set_chatpermission(bool value);
-  private:
-  bool _internal_chatpermission() const;
-  void _internal_set_chatpermission(bool value);
-  public:
-
-  // bool voicePermission = 3;
-  void clear_voicepermission();
-  bool voicepermission() const;
-  void set_voicepermission(bool value);
-  private:
-  bool _internal_voicepermission() const;
-  void _internal_set_voicepermission(bool value);
-  public:
-
-  // bool videoPermission = 4;
-  void clear_videopermission();
-  bool videopermission() const;
-  void set_videopermission(bool value);
-  private:
-  bool _internal_videopermission() const;
-  void _internal_set_videopermission(bool value);
-  public:
-
-  // int32 type = 5;
-  void clear_type();
-  int32_t type() const;
-  void set_type(int32_t value);
-  private:
-  int32_t _internal_type() const;
-  void _internal_set_type(int32_t value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_SET_PERMISSION_NOTICE)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    bool screenpermission_;
-    bool chatpermission_;
-    bool voicepermission_;
-    bool videopermission_;
-    int32_t type_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_Packet_5f004_5fOffice_2eproto;
-};
-// -------------------------------------------------------------------
-
 class C_OFFICE_SET_ROOM_INFO final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_OFFICE_SET_ROOM_INFO) */ {
  public:
@@ -3140,7 +3393,7 @@ class C_OFFICE_SET_ROOM_INFO final :
                &_C_OFFICE_SET_ROOM_INFO_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    21;
 
   friend void swap(C_OFFICE_SET_ROOM_INFO& a, C_OFFICE_SET_ROOM_INFO& b) {
     a.Swap(&b);
@@ -3337,7 +3590,7 @@ class S_OFFICE_SET_ROOM_INFO final :
                &_S_OFFICE_SET_ROOM_INFO_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    22;
 
   friend void swap(S_OFFICE_SET_ROOM_INFO& a, S_OFFICE_SET_ROOM_INFO& b) {
     a.Swap(&b);
@@ -3484,7 +3737,7 @@ class C_OFFICE_GET_ROOM_INFO final :
                &_C_OFFICE_GET_ROOM_INFO_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    23;
 
   friend void swap(C_OFFICE_GET_ROOM_INFO& a, C_OFFICE_GET_ROOM_INFO& b) {
     a.Swap(&b);
@@ -3603,7 +3856,7 @@ class S_OFFICE_GET_ROOM_INFO final :
                &_S_OFFICE_GET_ROOM_INFO_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    24;
 
   friend void swap(S_OFFICE_GET_ROOM_INFO& a, S_OFFICE_GET_ROOM_INFO& b) {
     a.Swap(&b);
@@ -3956,7 +4209,7 @@ class C_OFFICE_VIDEO_STREAM final :
                &_C_OFFICE_VIDEO_STREAM_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    25;
 
   friend void swap(C_OFFICE_VIDEO_STREAM& a, C_OFFICE_VIDEO_STREAM& b) {
     a.Swap(&b);
@@ -4180,7 +4433,7 @@ class S_OFFICE_VIDEO_STREAM final :
                &_S_OFFICE_VIDEO_STREAM_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    26;
 
   friend void swap(S_OFFICE_VIDEO_STREAM& a, S_OFFICE_VIDEO_STREAM& b) {
     a.Swap(&b);
@@ -4404,7 +4657,7 @@ class C_OFFICE_SHARE final :
                &_C_OFFICE_SHARE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    27;
 
   friend void swap(C_OFFICE_SHARE& a, C_OFFICE_SHARE& b) {
     a.Swap(&b);
@@ -4563,7 +4816,7 @@ class S_OFFICE_SHARE final :
                &_S_OFFICE_SHARE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    28;
 
   friend void swap(S_OFFICE_SHARE& a, S_OFFICE_SHARE& b) {
     a.Swap(&b);
@@ -4685,64 +4938,64 @@ class S_OFFICE_SHARE final :
 
 // -------------------------------------------------------------------
 
-// WaitClient
+// S_OFFICE_ADD_WAITING_CLIENT_WaitingClient
 
 // bool isObserver = 1;
-inline void WaitClient::clear_isobserver() {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::clear_isobserver() {
   _impl_.isobserver_ = false;
 }
-inline bool WaitClient::_internal_isobserver() const {
+inline bool S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_isobserver() const {
   return _impl_.isobserver_;
 }
-inline bool WaitClient::isobserver() const {
-  // @@protoc_insertion_point(field_get:Protocol.WaitClient.isObserver)
+inline bool S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::isobserver() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.isObserver)
   return _internal_isobserver();
 }
-inline void WaitClient::_internal_set_isobserver(bool value) {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_set_isobserver(bool value) {
   
   _impl_.isobserver_ = value;
 }
-inline void WaitClient::set_isobserver(bool value) {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::set_isobserver(bool value) {
   _internal_set_isobserver(value);
-  // @@protoc_insertion_point(field_set:Protocol.WaitClient.isObserver)
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.isObserver)
 }
 
 // string clientId = 2;
-inline void WaitClient::clear_clientid() {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::clear_clientid() {
   _impl_.clientid_.ClearToEmpty();
 }
-inline const std::string& WaitClient::clientid() const {
-  // @@protoc_insertion_point(field_get:Protocol.WaitClient.clientId)
+inline const std::string& S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::clientid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.clientId)
   return _internal_clientid();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void WaitClient::set_clientid(ArgT0&& arg0, ArgT... args) {
+void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::set_clientid(ArgT0&& arg0, ArgT... args) {
  
  _impl_.clientid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.WaitClient.clientId)
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.clientId)
 }
-inline std::string* WaitClient::mutable_clientid() {
+inline std::string* S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::mutable_clientid() {
   std::string* _s = _internal_mutable_clientid();
-  // @@protoc_insertion_point(field_mutable:Protocol.WaitClient.clientId)
+  // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.clientId)
   return _s;
 }
-inline const std::string& WaitClient::_internal_clientid() const {
+inline const std::string& S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_clientid() const {
   return _impl_.clientid_.Get();
 }
-inline void WaitClient::_internal_set_clientid(const std::string& value) {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_set_clientid(const std::string& value) {
   
   _impl_.clientid_.Set(value, GetArenaForAllocation());
 }
-inline std::string* WaitClient::_internal_mutable_clientid() {
+inline std::string* S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_mutable_clientid() {
   
   return _impl_.clientid_.Mutable(GetArenaForAllocation());
 }
-inline std::string* WaitClient::release_clientid() {
-  // @@protoc_insertion_point(field_release:Protocol.WaitClient.clientId)
+inline std::string* S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::release_clientid() {
+  // @@protoc_insertion_point(field_release:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.clientId)
   return _impl_.clientid_.Release();
 }
-inline void WaitClient::set_allocated_clientid(std::string* clientid) {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::set_allocated_clientid(std::string* clientid) {
   if (clientid != nullptr) {
     
   } else {
@@ -4754,45 +5007,45 @@ inline void WaitClient::set_allocated_clientid(std::string* clientid) {
     _impl_.clientid_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.WaitClient.clientId)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.clientId)
 }
 
 // string nickname = 3;
-inline void WaitClient::clear_nickname() {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::clear_nickname() {
   _impl_.nickname_.ClearToEmpty();
 }
-inline const std::string& WaitClient::nickname() const {
-  // @@protoc_insertion_point(field_get:Protocol.WaitClient.nickname)
+inline const std::string& S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::nickname() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.nickname)
   return _internal_nickname();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void WaitClient::set_nickname(ArgT0&& arg0, ArgT... args) {
+void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::set_nickname(ArgT0&& arg0, ArgT... args) {
  
  _impl_.nickname_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.WaitClient.nickname)
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.nickname)
 }
-inline std::string* WaitClient::mutable_nickname() {
+inline std::string* S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::mutable_nickname() {
   std::string* _s = _internal_mutable_nickname();
-  // @@protoc_insertion_point(field_mutable:Protocol.WaitClient.nickname)
+  // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.nickname)
   return _s;
 }
-inline const std::string& WaitClient::_internal_nickname() const {
+inline const std::string& S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_nickname() const {
   return _impl_.nickname_.Get();
 }
-inline void WaitClient::_internal_set_nickname(const std::string& value) {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_set_nickname(const std::string& value) {
   
   _impl_.nickname_.Set(value, GetArenaForAllocation());
 }
-inline std::string* WaitClient::_internal_mutable_nickname() {
+inline std::string* S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::_internal_mutable_nickname() {
   
   return _impl_.nickname_.Mutable(GetArenaForAllocation());
 }
-inline std::string* WaitClient::release_nickname() {
-  // @@protoc_insertion_point(field_release:Protocol.WaitClient.nickname)
+inline std::string* S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::release_nickname() {
+  // @@protoc_insertion_point(field_release:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.nickname)
   return _impl_.nickname_.Release();
 }
-inline void WaitClient::set_allocated_nickname(std::string* nickname) {
+inline void S_OFFICE_ADD_WAITING_CLIENT_WaitingClient::set_allocated_nickname(std::string* nickname) {
   if (nickname != nullptr) {
     
   } else {
@@ -4804,14 +5057,14 @@ inline void WaitClient::set_allocated_nickname(std::string* nickname) {
     _impl_.nickname_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.WaitClient.nickname)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient.nickname)
 }
 
 // -------------------------------------------------------------------
 
 // S_OFFICE_ADD_WAITING_CLIENT
 
-// repeated .Protocol.WaitClient clients = 1;
+// repeated .Protocol.S_OFFICE_ADD_WAITING_CLIENT.WaitingClient clients = 1;
 inline int S_OFFICE_ADD_WAITING_CLIENT::_internal_clients_size() const {
   return _impl_.clients_.size();
 }
@@ -4821,31 +5074,31 @@ inline int S_OFFICE_ADD_WAITING_CLIENT::clients_size() const {
 inline void S_OFFICE_ADD_WAITING_CLIENT::clear_clients() {
   _impl_.clients_.Clear();
 }
-inline ::Protocol::WaitClient* S_OFFICE_ADD_WAITING_CLIENT::mutable_clients(int index) {
+inline ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* S_OFFICE_ADD_WAITING_CLIENT::mutable_clients(int index) {
   // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_ADD_WAITING_CLIENT.clients)
   return _impl_.clients_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::WaitClient >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient >*
 S_OFFICE_ADD_WAITING_CLIENT::mutable_clients() {
   // @@protoc_insertion_point(field_mutable_list:Protocol.S_OFFICE_ADD_WAITING_CLIENT.clients)
   return &_impl_.clients_;
 }
-inline const ::Protocol::WaitClient& S_OFFICE_ADD_WAITING_CLIENT::_internal_clients(int index) const {
+inline const ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& S_OFFICE_ADD_WAITING_CLIENT::_internal_clients(int index) const {
   return _impl_.clients_.Get(index);
 }
-inline const ::Protocol::WaitClient& S_OFFICE_ADD_WAITING_CLIENT::clients(int index) const {
+inline const ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient& S_OFFICE_ADD_WAITING_CLIENT::clients(int index) const {
   // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_ADD_WAITING_CLIENT.clients)
   return _internal_clients(index);
 }
-inline ::Protocol::WaitClient* S_OFFICE_ADD_WAITING_CLIENT::_internal_add_clients() {
+inline ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* S_OFFICE_ADD_WAITING_CLIENT::_internal_add_clients() {
   return _impl_.clients_.Add();
 }
-inline ::Protocol::WaitClient* S_OFFICE_ADD_WAITING_CLIENT::add_clients() {
-  ::Protocol::WaitClient* _add = _internal_add_clients();
+inline ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* S_OFFICE_ADD_WAITING_CLIENT::add_clients() {
+  ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient* _add = _internal_add_clients();
   // @@protoc_insertion_point(field_add:Protocol.S_OFFICE_ADD_WAITING_CLIENT.clients)
   return _add;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::WaitClient >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_ADD_WAITING_CLIENT_WaitingClient >&
 S_OFFICE_ADD_WAITING_CLIENT::clients() const {
   // @@protoc_insertion_point(field_list:Protocol.S_OFFICE_ADD_WAITING_CLIENT.clients)
   return _impl_.clients_;
@@ -4853,9 +5106,83 @@ S_OFFICE_ADD_WAITING_CLIENT::clients() const {
 
 // -------------------------------------------------------------------
 
+// S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient
+
+// bool isObserver = 1;
+inline void S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::clear_isobserver() {
+  _impl_.isobserver_ = false;
+}
+inline bool S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::_internal_isobserver() const {
+  return _impl_.isobserver_;
+}
+inline bool S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::isobserver() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient.isObserver)
+  return _internal_isobserver();
+}
+inline void S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::_internal_set_isobserver(bool value) {
+  
+  _impl_.isobserver_ = value;
+}
+inline void S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::set_isobserver(bool value) {
+  _internal_set_isobserver(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient.isObserver)
+}
+
+// string clientId = 2;
+inline void S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::clear_clientid() {
+  _impl_.clientid_.ClearToEmpty();
+}
+inline const std::string& S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::clientid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient.clientId)
+  return _internal_clientid();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::set_clientid(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.clientid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient.clientId)
+}
+inline std::string* S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::mutable_clientid() {
+  std::string* _s = _internal_mutable_clientid();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient.clientId)
+  return _s;
+}
+inline const std::string& S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::_internal_clientid() const {
+  return _impl_.clientid_.Get();
+}
+inline void S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::_internal_set_clientid(const std::string& value) {
+  
+  _impl_.clientid_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::_internal_mutable_clientid() {
+  
+  return _impl_.clientid_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::release_clientid() {
+  // @@protoc_insertion_point(field_release:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient.clientId)
+  return _impl_.clientid_.Release();
+}
+inline void S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient::set_allocated_clientid(std::string* clientid) {
+  if (clientid != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.clientid_.SetAllocated(clientid, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.clientid_.IsDefault()) {
+    _impl_.clientid_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient.clientId)
+}
+
+// -------------------------------------------------------------------
+
 // S_OFFICE_REMOVE_WAITING_CLIENT
 
-// repeated string clients = 1;
+// repeated .Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.WaitingClient clients = 1;
 inline int S_OFFICE_REMOVE_WAITING_CLIENT::_internal_clients_size() const {
   return _impl_.clients_.size();
 }
@@ -4865,69 +5192,34 @@ inline int S_OFFICE_REMOVE_WAITING_CLIENT::clients_size() const {
 inline void S_OFFICE_REMOVE_WAITING_CLIENT::clear_clients() {
   _impl_.clients_.Clear();
 }
-inline std::string* S_OFFICE_REMOVE_WAITING_CLIENT::add_clients() {
-  std::string* _s = _internal_add_clients();
-  // @@protoc_insertion_point(field_add_mutable:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-  return _s;
-}
-inline const std::string& S_OFFICE_REMOVE_WAITING_CLIENT::_internal_clients(int index) const {
-  return _impl_.clients_.Get(index);
-}
-inline const std::string& S_OFFICE_REMOVE_WAITING_CLIENT::clients(int index) const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-  return _internal_clients(index);
-}
-inline std::string* S_OFFICE_REMOVE_WAITING_CLIENT::mutable_clients(int index) {
+inline ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* S_OFFICE_REMOVE_WAITING_CLIENT::mutable_clients(int index) {
   // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
   return _impl_.clients_.Mutable(index);
 }
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::set_clients(int index, const std::string& value) {
-  _impl_.clients_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::set_clients(int index, std::string&& value) {
-  _impl_.clients_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::set_clients(int index, const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _impl_.clients_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::set_clients(int index, const char* value, size_t size) {
-  _impl_.clients_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline std::string* S_OFFICE_REMOVE_WAITING_CLIENT::_internal_add_clients() {
-  return _impl_.clients_.Add();
-}
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::add_clients(const std::string& value) {
-  _impl_.clients_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::add_clients(std::string&& value) {
-  _impl_.clients_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::add_clients(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _impl_.clients_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline void S_OFFICE_REMOVE_WAITING_CLIENT::add_clients(const char* value, size_t size) {
-  _impl_.clients_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
-S_OFFICE_REMOVE_WAITING_CLIENT::clients() const {
-  // @@protoc_insertion_point(field_list:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
-  return _impl_.clients_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient >*
 S_OFFICE_REMOVE_WAITING_CLIENT::mutable_clients() {
   // @@protoc_insertion_point(field_mutable_list:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
   return &_impl_.clients_;
+}
+inline const ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& S_OFFICE_REMOVE_WAITING_CLIENT::_internal_clients(int index) const {
+  return _impl_.clients_.Get(index);
+}
+inline const ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient& S_OFFICE_REMOVE_WAITING_CLIENT::clients(int index) const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
+  return _internal_clients(index);
+}
+inline ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* S_OFFICE_REMOVE_WAITING_CLIENT::_internal_add_clients() {
+  return _impl_.clients_.Add();
+}
+inline ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* S_OFFICE_REMOVE_WAITING_CLIENT::add_clients() {
+  ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient* _add = _internal_add_clients();
+  // @@protoc_insertion_point(field_add:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_OFFICE_REMOVE_WAITING_CLIENT_WaitingClient >&
+S_OFFICE_REMOVE_WAITING_CLIENT::clients() const {
+  // @@protoc_insertion_point(field_list:Protocol.S_OFFICE_REMOVE_WAITING_CLIENT.clients)
+  return _impl_.clients_;
 }
 
 // -------------------------------------------------------------------
@@ -5218,44 +5510,44 @@ inline void S_OFFICE_KICK::set_success(bool value) {
 
 // -------------------------------------------------------------------
 
-// USER_PERMISSION
+// OfficeUserInfo
 
 // string clientId = 1;
-inline void USER_PERMISSION::clear_clientid() {
+inline void OfficeUserInfo::clear_clientid() {
   _impl_.clientid_.ClearToEmpty();
 }
-inline const std::string& USER_PERMISSION::clientid() const {
-  // @@protoc_insertion_point(field_get:Protocol.USER_PERMISSION.clientId)
+inline const std::string& OfficeUserInfo::clientid() const {
+  // @@protoc_insertion_point(field_get:Protocol.OfficeUserInfo.clientId)
   return _internal_clientid();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void USER_PERMISSION::set_clientid(ArgT0&& arg0, ArgT... args) {
+void OfficeUserInfo::set_clientid(ArgT0&& arg0, ArgT... args) {
  
  _impl_.clientid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.USER_PERMISSION.clientId)
+  // @@protoc_insertion_point(field_set:Protocol.OfficeUserInfo.clientId)
 }
-inline std::string* USER_PERMISSION::mutable_clientid() {
+inline std::string* OfficeUserInfo::mutable_clientid() {
   std::string* _s = _internal_mutable_clientid();
-  // @@protoc_insertion_point(field_mutable:Protocol.USER_PERMISSION.clientId)
+  // @@protoc_insertion_point(field_mutable:Protocol.OfficeUserInfo.clientId)
   return _s;
 }
-inline const std::string& USER_PERMISSION::_internal_clientid() const {
+inline const std::string& OfficeUserInfo::_internal_clientid() const {
   return _impl_.clientid_.Get();
 }
-inline void USER_PERMISSION::_internal_set_clientid(const std::string& value) {
+inline void OfficeUserInfo::_internal_set_clientid(const std::string& value) {
   
   _impl_.clientid_.Set(value, GetArenaForAllocation());
 }
-inline std::string* USER_PERMISSION::_internal_mutable_clientid() {
+inline std::string* OfficeUserInfo::_internal_mutable_clientid() {
   
   return _impl_.clientid_.Mutable(GetArenaForAllocation());
 }
-inline std::string* USER_PERMISSION::release_clientid() {
-  // @@protoc_insertion_point(field_release:Protocol.USER_PERMISSION.clientId)
+inline std::string* OfficeUserInfo::release_clientid() {
+  // @@protoc_insertion_point(field_release:Protocol.OfficeUserInfo.clientId)
   return _impl_.clientid_.Release();
 }
-inline void USER_PERMISSION::set_allocated_clientid(std::string* clientid) {
+inline void OfficeUserInfo::set_allocated_clientid(std::string* clientid) {
   if (clientid != nullptr) {
     
   } else {
@@ -5267,107 +5559,107 @@ inline void USER_PERMISSION::set_allocated_clientid(std::string* clientid) {
     _impl_.clientid_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.USER_PERMISSION.clientId)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.OfficeUserInfo.clientId)
 }
 
 // bool screenPermission = 2;
-inline void USER_PERMISSION::clear_screenpermission() {
+inline void OfficeUserInfo::clear_screenpermission() {
   _impl_.screenpermission_ = false;
 }
-inline bool USER_PERMISSION::_internal_screenpermission() const {
+inline bool OfficeUserInfo::_internal_screenpermission() const {
   return _impl_.screenpermission_;
 }
-inline bool USER_PERMISSION::screenpermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.USER_PERMISSION.screenPermission)
+inline bool OfficeUserInfo::screenpermission() const {
+  // @@protoc_insertion_point(field_get:Protocol.OfficeUserInfo.screenPermission)
   return _internal_screenpermission();
 }
-inline void USER_PERMISSION::_internal_set_screenpermission(bool value) {
+inline void OfficeUserInfo::_internal_set_screenpermission(bool value) {
   
   _impl_.screenpermission_ = value;
 }
-inline void USER_PERMISSION::set_screenpermission(bool value) {
+inline void OfficeUserInfo::set_screenpermission(bool value) {
   _internal_set_screenpermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.USER_PERMISSION.screenPermission)
+  // @@protoc_insertion_point(field_set:Protocol.OfficeUserInfo.screenPermission)
 }
 
 // bool chatPermission = 3;
-inline void USER_PERMISSION::clear_chatpermission() {
+inline void OfficeUserInfo::clear_chatpermission() {
   _impl_.chatpermission_ = false;
 }
-inline bool USER_PERMISSION::_internal_chatpermission() const {
+inline bool OfficeUserInfo::_internal_chatpermission() const {
   return _impl_.chatpermission_;
 }
-inline bool USER_PERMISSION::chatpermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.USER_PERMISSION.chatPermission)
+inline bool OfficeUserInfo::chatpermission() const {
+  // @@protoc_insertion_point(field_get:Protocol.OfficeUserInfo.chatPermission)
   return _internal_chatpermission();
 }
-inline void USER_PERMISSION::_internal_set_chatpermission(bool value) {
+inline void OfficeUserInfo::_internal_set_chatpermission(bool value) {
   
   _impl_.chatpermission_ = value;
 }
-inline void USER_PERMISSION::set_chatpermission(bool value) {
+inline void OfficeUserInfo::set_chatpermission(bool value) {
   _internal_set_chatpermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.USER_PERMISSION.chatPermission)
+  // @@protoc_insertion_point(field_set:Protocol.OfficeUserInfo.chatPermission)
 }
 
 // bool voicePermission = 4;
-inline void USER_PERMISSION::clear_voicepermission() {
+inline void OfficeUserInfo::clear_voicepermission() {
   _impl_.voicepermission_ = false;
 }
-inline bool USER_PERMISSION::_internal_voicepermission() const {
+inline bool OfficeUserInfo::_internal_voicepermission() const {
   return _impl_.voicepermission_;
 }
-inline bool USER_PERMISSION::voicepermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.USER_PERMISSION.voicePermission)
+inline bool OfficeUserInfo::voicepermission() const {
+  // @@protoc_insertion_point(field_get:Protocol.OfficeUserInfo.voicePermission)
   return _internal_voicepermission();
 }
-inline void USER_PERMISSION::_internal_set_voicepermission(bool value) {
+inline void OfficeUserInfo::_internal_set_voicepermission(bool value) {
   
   _impl_.voicepermission_ = value;
 }
-inline void USER_PERMISSION::set_voicepermission(bool value) {
+inline void OfficeUserInfo::set_voicepermission(bool value) {
   _internal_set_voicepermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.USER_PERMISSION.voicePermission)
+  // @@protoc_insertion_point(field_set:Protocol.OfficeUserInfo.voicePermission)
 }
 
 // bool videoPermission = 5;
-inline void USER_PERMISSION::clear_videopermission() {
+inline void OfficeUserInfo::clear_videopermission() {
   _impl_.videopermission_ = false;
 }
-inline bool USER_PERMISSION::_internal_videopermission() const {
+inline bool OfficeUserInfo::_internal_videopermission() const {
   return _impl_.videopermission_;
 }
-inline bool USER_PERMISSION::videopermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.USER_PERMISSION.videoPermission)
+inline bool OfficeUserInfo::videopermission() const {
+  // @@protoc_insertion_point(field_get:Protocol.OfficeUserInfo.videoPermission)
   return _internal_videopermission();
 }
-inline void USER_PERMISSION::_internal_set_videopermission(bool value) {
+inline void OfficeUserInfo::_internal_set_videopermission(bool value) {
   
   _impl_.videopermission_ = value;
 }
-inline void USER_PERMISSION::set_videopermission(bool value) {
+inline void OfficeUserInfo::set_videopermission(bool value) {
   _internal_set_videopermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.USER_PERMISSION.videoPermission)
+  // @@protoc_insertion_point(field_set:Protocol.OfficeUserInfo.videoPermission)
 }
 
-// int32 type = 6;
-inline void USER_PERMISSION::clear_type() {
-  _impl_.type_ = 0;
+// int32 authority = 6;
+inline void OfficeUserInfo::clear_authority() {
+  _impl_.authority_ = 0;
 }
-inline int32_t USER_PERMISSION::_internal_type() const {
-  return _impl_.type_;
+inline int32_t OfficeUserInfo::_internal_authority() const {
+  return _impl_.authority_;
 }
-inline int32_t USER_PERMISSION::type() const {
-  // @@protoc_insertion_point(field_get:Protocol.USER_PERMISSION.type)
-  return _internal_type();
+inline int32_t OfficeUserInfo::authority() const {
+  // @@protoc_insertion_point(field_get:Protocol.OfficeUserInfo.authority)
+  return _internal_authority();
 }
-inline void USER_PERMISSION::_internal_set_type(int32_t value) {
+inline void OfficeUserInfo::_internal_set_authority(int32_t value) {
   
-  _impl_.type_ = value;
+  _impl_.authority_ = value;
 }
-inline void USER_PERMISSION::set_type(int32_t value) {
-  _internal_set_type(value);
-  // @@protoc_insertion_point(field_set:Protocol.USER_PERMISSION.type)
+inline void OfficeUserInfo::set_authority(int32_t value) {
+  _internal_set_authority(value);
+  // @@protoc_insertion_point(field_set:Protocol.OfficeUserInfo.authority)
 }
 
 // -------------------------------------------------------------------
@@ -5428,43 +5720,141 @@ inline void C_OFFICE_GET_PERMISSION::set_allocated_clientid(std::string* clienti
 
 // S_OFFICE_GET_PERMISSION
 
-// repeated .Protocol.USER_PERMISSION permissions = 1;
-inline int S_OFFICE_GET_PERMISSION::_internal_permissions_size() const {
+// .Protocol.OfficeUserInfo permission = 1;
+inline bool S_OFFICE_GET_PERMISSION::_internal_has_permission() const {
+  return this != internal_default_instance() && _impl_.permission_ != nullptr;
+}
+inline bool S_OFFICE_GET_PERMISSION::has_permission() const {
+  return _internal_has_permission();
+}
+inline void S_OFFICE_GET_PERMISSION::clear_permission() {
+  if (GetArenaForAllocation() == nullptr && _impl_.permission_ != nullptr) {
+    delete _impl_.permission_;
+  }
+  _impl_.permission_ = nullptr;
+}
+inline const ::Protocol::OfficeUserInfo& S_OFFICE_GET_PERMISSION::_internal_permission() const {
+  const ::Protocol::OfficeUserInfo* p = _impl_.permission_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::OfficeUserInfo&>(
+      ::Protocol::_OfficeUserInfo_default_instance_);
+}
+inline const ::Protocol::OfficeUserInfo& S_OFFICE_GET_PERMISSION::permission() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_GET_PERMISSION.permission)
+  return _internal_permission();
+}
+inline void S_OFFICE_GET_PERMISSION::unsafe_arena_set_allocated_permission(
+    ::Protocol::OfficeUserInfo* permission) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.permission_);
+  }
+  _impl_.permission_ = permission;
+  if (permission) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_OFFICE_GET_PERMISSION.permission)
+}
+inline ::Protocol::OfficeUserInfo* S_OFFICE_GET_PERMISSION::release_permission() {
+  
+  ::Protocol::OfficeUserInfo* temp = _impl_.permission_;
+  _impl_.permission_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Protocol::OfficeUserInfo* S_OFFICE_GET_PERMISSION::unsafe_arena_release_permission() {
+  // @@protoc_insertion_point(field_release:Protocol.S_OFFICE_GET_PERMISSION.permission)
+  
+  ::Protocol::OfficeUserInfo* temp = _impl_.permission_;
+  _impl_.permission_ = nullptr;
+  return temp;
+}
+inline ::Protocol::OfficeUserInfo* S_OFFICE_GET_PERMISSION::_internal_mutable_permission() {
+  
+  if (_impl_.permission_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Protocol::OfficeUserInfo>(GetArenaForAllocation());
+    _impl_.permission_ = p;
+  }
+  return _impl_.permission_;
+}
+inline ::Protocol::OfficeUserInfo* S_OFFICE_GET_PERMISSION::mutable_permission() {
+  ::Protocol::OfficeUserInfo* _msg = _internal_mutable_permission();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_GET_PERMISSION.permission)
+  return _msg;
+}
+inline void S_OFFICE_GET_PERMISSION::set_allocated_permission(::Protocol::OfficeUserInfo* permission) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.permission_;
+  }
+  if (permission) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(permission);
+    if (message_arena != submessage_arena) {
+      permission = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, permission, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.permission_ = permission;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_GET_PERMISSION.permission)
+}
+
+// -------------------------------------------------------------------
+
+// C_OFFICE_GET_PERMISSION_ALL
+
+// -------------------------------------------------------------------
+
+// S_OFFICE_GET_PERMISSION_ALL
+
+// repeated .Protocol.OfficeUserInfo permissions = 1;
+inline int S_OFFICE_GET_PERMISSION_ALL::_internal_permissions_size() const {
   return _impl_.permissions_.size();
 }
-inline int S_OFFICE_GET_PERMISSION::permissions_size() const {
+inline int S_OFFICE_GET_PERMISSION_ALL::permissions_size() const {
   return _internal_permissions_size();
 }
-inline void S_OFFICE_GET_PERMISSION::clear_permissions() {
+inline void S_OFFICE_GET_PERMISSION_ALL::clear_permissions() {
   _impl_.permissions_.Clear();
 }
-inline ::Protocol::USER_PERMISSION* S_OFFICE_GET_PERMISSION::mutable_permissions(int index) {
-  // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_GET_PERMISSION.permissions)
+inline ::Protocol::OfficeUserInfo* S_OFFICE_GET_PERMISSION_ALL::mutable_permissions(int index) {
+  // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_GET_PERMISSION_ALL.permissions)
   return _impl_.permissions_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >*
-S_OFFICE_GET_PERMISSION::mutable_permissions() {
-  // @@protoc_insertion_point(field_mutable_list:Protocol.S_OFFICE_GET_PERMISSION.permissions)
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >*
+S_OFFICE_GET_PERMISSION_ALL::mutable_permissions() {
+  // @@protoc_insertion_point(field_mutable_list:Protocol.S_OFFICE_GET_PERMISSION_ALL.permissions)
   return &_impl_.permissions_;
 }
-inline const ::Protocol::USER_PERMISSION& S_OFFICE_GET_PERMISSION::_internal_permissions(int index) const {
+inline const ::Protocol::OfficeUserInfo& S_OFFICE_GET_PERMISSION_ALL::_internal_permissions(int index) const {
   return _impl_.permissions_.Get(index);
 }
-inline const ::Protocol::USER_PERMISSION& S_OFFICE_GET_PERMISSION::permissions(int index) const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_GET_PERMISSION.permissions)
+inline const ::Protocol::OfficeUserInfo& S_OFFICE_GET_PERMISSION_ALL::permissions(int index) const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_GET_PERMISSION_ALL.permissions)
   return _internal_permissions(index);
 }
-inline ::Protocol::USER_PERMISSION* S_OFFICE_GET_PERMISSION::_internal_add_permissions() {
+inline ::Protocol::OfficeUserInfo* S_OFFICE_GET_PERMISSION_ALL::_internal_add_permissions() {
   return _impl_.permissions_.Add();
 }
-inline ::Protocol::USER_PERMISSION* S_OFFICE_GET_PERMISSION::add_permissions() {
-  ::Protocol::USER_PERMISSION* _add = _internal_add_permissions();
-  // @@protoc_insertion_point(field_add:Protocol.S_OFFICE_GET_PERMISSION.permissions)
+inline ::Protocol::OfficeUserInfo* S_OFFICE_GET_PERMISSION_ALL::add_permissions() {
+  ::Protocol::OfficeUserInfo* _add = _internal_add_permissions();
+  // @@protoc_insertion_point(field_add:Protocol.S_OFFICE_GET_PERMISSION_ALL.permissions)
   return _add;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >&
-S_OFFICE_GET_PERMISSION::permissions() const {
-  // @@protoc_insertion_point(field_list:Protocol.S_OFFICE_GET_PERMISSION.permissions)
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >&
+S_OFFICE_GET_PERMISSION_ALL::permissions() const {
+  // @@protoc_insertion_point(field_list:Protocol.S_OFFICE_GET_PERMISSION_ALL.permissions)
   return _impl_.permissions_;
 }
 
@@ -5472,7 +5862,7 @@ S_OFFICE_GET_PERMISSION::permissions() const {
 
 // C_OFFICE_SET_PERMISSION
 
-// repeated .Protocol.USER_PERMISSION permissions = 1;
+// repeated .Protocol.OfficeUserInfo permissions = 1;
 inline int C_OFFICE_SET_PERMISSION::_internal_permissions_size() const {
   return _impl_.permissions_.size();
 }
@@ -5482,31 +5872,31 @@ inline int C_OFFICE_SET_PERMISSION::permissions_size() const {
 inline void C_OFFICE_SET_PERMISSION::clear_permissions() {
   _impl_.permissions_.Clear();
 }
-inline ::Protocol::USER_PERMISSION* C_OFFICE_SET_PERMISSION::mutable_permissions(int index) {
+inline ::Protocol::OfficeUserInfo* C_OFFICE_SET_PERMISSION::mutable_permissions(int index) {
   // @@protoc_insertion_point(field_mutable:Protocol.C_OFFICE_SET_PERMISSION.permissions)
   return _impl_.permissions_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >*
 C_OFFICE_SET_PERMISSION::mutable_permissions() {
   // @@protoc_insertion_point(field_mutable_list:Protocol.C_OFFICE_SET_PERMISSION.permissions)
   return &_impl_.permissions_;
 }
-inline const ::Protocol::USER_PERMISSION& C_OFFICE_SET_PERMISSION::_internal_permissions(int index) const {
+inline const ::Protocol::OfficeUserInfo& C_OFFICE_SET_PERMISSION::_internal_permissions(int index) const {
   return _impl_.permissions_.Get(index);
 }
-inline const ::Protocol::USER_PERMISSION& C_OFFICE_SET_PERMISSION::permissions(int index) const {
+inline const ::Protocol::OfficeUserInfo& C_OFFICE_SET_PERMISSION::permissions(int index) const {
   // @@protoc_insertion_point(field_get:Protocol.C_OFFICE_SET_PERMISSION.permissions)
   return _internal_permissions(index);
 }
-inline ::Protocol::USER_PERMISSION* C_OFFICE_SET_PERMISSION::_internal_add_permissions() {
+inline ::Protocol::OfficeUserInfo* C_OFFICE_SET_PERMISSION::_internal_add_permissions() {
   return _impl_.permissions_.Add();
 }
-inline ::Protocol::USER_PERMISSION* C_OFFICE_SET_PERMISSION::add_permissions() {
-  ::Protocol::USER_PERMISSION* _add = _internal_add_permissions();
+inline ::Protocol::OfficeUserInfo* C_OFFICE_SET_PERMISSION::add_permissions() {
+  ::Protocol::OfficeUserInfo* _add = _internal_add_permissions();
   // @@protoc_insertion_point(field_add:Protocol.C_OFFICE_SET_PERMISSION.permissions)
   return _add;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::USER_PERMISSION >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::OfficeUserInfo >&
 C_OFFICE_SET_PERMISSION::permissions() const {
   // @@protoc_insertion_point(field_list:Protocol.C_OFFICE_SET_PERMISSION.permissions)
   return _impl_.permissions_;
@@ -5534,110 +5924,6 @@ inline void S_OFFICE_SET_PERMISSION::_internal_set_success(bool value) {
 inline void S_OFFICE_SET_PERMISSION::set_success(bool value) {
   _internal_set_success(value);
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION.success)
-}
-
-// -------------------------------------------------------------------
-
-// S_OFFICE_SET_PERMISSION_NOTICE
-
-// bool screenPermission = 1;
-inline void S_OFFICE_SET_PERMISSION_NOTICE::clear_screenpermission() {
-  _impl_.screenpermission_ = false;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::_internal_screenpermission() const {
-  return _impl_.screenpermission_;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::screenpermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.screenPermission)
-  return _internal_screenpermission();
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::_internal_set_screenpermission(bool value) {
-  
-  _impl_.screenpermission_ = value;
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::set_screenpermission(bool value) {
-  _internal_set_screenpermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.screenPermission)
-}
-
-// bool chatPermission = 2;
-inline void S_OFFICE_SET_PERMISSION_NOTICE::clear_chatpermission() {
-  _impl_.chatpermission_ = false;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::_internal_chatpermission() const {
-  return _impl_.chatpermission_;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::chatpermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.chatPermission)
-  return _internal_chatpermission();
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::_internal_set_chatpermission(bool value) {
-  
-  _impl_.chatpermission_ = value;
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::set_chatpermission(bool value) {
-  _internal_set_chatpermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.chatPermission)
-}
-
-// bool voicePermission = 3;
-inline void S_OFFICE_SET_PERMISSION_NOTICE::clear_voicepermission() {
-  _impl_.voicepermission_ = false;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::_internal_voicepermission() const {
-  return _impl_.voicepermission_;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::voicepermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.voicePermission)
-  return _internal_voicepermission();
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::_internal_set_voicepermission(bool value) {
-  
-  _impl_.voicepermission_ = value;
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::set_voicepermission(bool value) {
-  _internal_set_voicepermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.voicePermission)
-}
-
-// bool videoPermission = 4;
-inline void S_OFFICE_SET_PERMISSION_NOTICE::clear_videopermission() {
-  _impl_.videopermission_ = false;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::_internal_videopermission() const {
-  return _impl_.videopermission_;
-}
-inline bool S_OFFICE_SET_PERMISSION_NOTICE::videopermission() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.videoPermission)
-  return _internal_videopermission();
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::_internal_set_videopermission(bool value) {
-  
-  _impl_.videopermission_ = value;
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::set_videopermission(bool value) {
-  _internal_set_videopermission(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.videoPermission)
-}
-
-// int32 type = 5;
-inline void S_OFFICE_SET_PERMISSION_NOTICE::clear_type() {
-  _impl_.type_ = 0;
-}
-inline int32_t S_OFFICE_SET_PERMISSION_NOTICE::_internal_type() const {
-  return _impl_.type_;
-}
-inline int32_t S_OFFICE_SET_PERMISSION_NOTICE::type() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.type)
-  return _internal_type();
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::_internal_set_type(int32_t value) {
-  
-  _impl_.type_ = value;
-}
-inline void S_OFFICE_SET_PERMISSION_NOTICE::set_type(int32_t value) {
-  _internal_set_type(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION_NOTICE.type)
 }
 
 // -------------------------------------------------------------------
@@ -6865,6 +7151,10 @@ inline void S_OFFICE_SHARE::set_userid(int32_t value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

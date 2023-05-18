@@ -26,7 +26,7 @@ public:
 	virtual void Close();
 	virtual void HandleClose();
 	
-	void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt);
+	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt);
 	virtual void Leave(shared_ptr<ClientBase> session);
 	void SetNickname(shared_ptr<ClientBase> session, string nickname);
 	virtual void GetClient(shared_ptr<ClientBase> session);

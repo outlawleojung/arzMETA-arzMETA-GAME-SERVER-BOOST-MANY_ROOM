@@ -74,17 +74,18 @@ enum : unsigned short
 	PKT_S_OFFICE_KICK = 411,
 	PKT_C_OFFICE_GET_PERMISSION = 412,
 	PKT_S_OFFICE_GET_PERMISSION = 413,
-	PKT_C_OFFICE_SET_PERMISSION = 414,
-	PKT_S_OFFICE_SET_PERMISSION = 415,
-	PKT_S_OFFICE_SET_PERMISSION_NOTICE = 416,
-	PKT_C_OFFICE_SET_ROOM_INFO = 417,
-	PKT_S_OFFICE_SET_ROOM_INFO = 418,
-	PKT_C_OFFICE_GET_ROOM_INFO = 419,
-	PKT_S_OFFICE_GET_ROOM_INFO = 420,
-	PKT_C_OFFICE_VIDEO_STREAM = 421,
-	PKT_S_OFFICE_VIDEO_STREAM = 422,
-	PKT_C_OFFICE_SHARE = 423,
-	PKT_S_OFFICE_SHARE = 424,
+	PKT_C_OFFICE_GET_PERMISSION_ALL = 414,
+	PKT_S_OFFICE_GET_PERMISSION_ALL = 415,
+	PKT_C_OFFICE_SET_PERMISSION = 416,
+	PKT_S_OFFICE_SET_PERMISSION = 417,
+	PKT_C_OFFICE_SET_ROOM_INFO = 418,
+	PKT_S_OFFICE_SET_ROOM_INFO = 419,
+	PKT_C_OFFICE_GET_ROOM_INFO = 420,
+	PKT_S_OFFICE_GET_ROOM_INFO = 421,
+	PKT_C_OFFICE_VIDEO_STREAM = 422,
+	PKT_S_OFFICE_VIDEO_STREAM = 423,
+	PKT_C_OFFICE_SHARE = 424,
+	PKT_S_OFFICE_SHARE = 425,
 	PKT_C_MATCHING_START = 500,
 	PKT_S_MATCHING_START = 501,
 	PKT_S_MATCHING_AWARD = 502,
@@ -141,6 +142,7 @@ bool Handle_C_OFFICE_GET_HOST(shared_ptr<GameSession>& session, Protocol::C_OFFI
 bool Handle_C_OFFICE_BREAK(shared_ptr<GameSession>& session, Protocol::C_OFFICE_BREAK& pkt);
 bool Handle_C_OFFICE_KICK(shared_ptr<GameSession>& session, Protocol::C_OFFICE_KICK& pkt);
 bool Handle_C_OFFICE_GET_PERMISSION(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_PERMISSION& pkt);
+bool Handle_C_OFFICE_GET_PERMISSION_ALL(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_PERMISSION_ALL& pkt);
 bool Handle_C_OFFICE_SET_PERMISSION(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_PERMISSION& pkt);
 bool Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SET_ROOM_INFO& pkt);
 bool Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt);
@@ -188,6 +190,7 @@ public:
 		GPacketHandler[PKT_C_OFFICE_BREAK] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_BREAK > (Handle_C_OFFICE_BREAK, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_KICK] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_KICK > (Handle_C_OFFICE_KICK, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_GET_PERMISSION] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_GET_PERMISSION > (Handle_C_OFFICE_GET_PERMISSION, session, buffer, len); };
+		GPacketHandler[PKT_C_OFFICE_GET_PERMISSION_ALL] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_GET_PERMISSION_ALL > (Handle_C_OFFICE_GET_PERMISSION_ALL, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_SET_PERMISSION] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_SET_PERMISSION > (Handle_C_OFFICE_SET_PERMISSION, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_SET_ROOM_INFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_SET_ROOM_INFO > (Handle_C_OFFICE_SET_ROOM_INFO, session, buffer, len); };
 		GPacketHandler[PKT_C_OFFICE_GET_ROOM_INFO] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_OFFICE_GET_ROOM_INFO > (Handle_C_OFFICE_GET_ROOM_INFO, session, buffer, len); };
@@ -242,8 +245,8 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_BREAK& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_BREAK); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_KICK& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_KICK); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_GET_PERMISSION& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_GET_PERMISSION); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_GET_PERMISSION_ALL& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_GET_PERMISSION_ALL); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_SET_PERMISSION& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_SET_PERMISSION); }
-	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_SET_PERMISSION_NOTICE& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_SET_PERMISSION_NOTICE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_SET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_SET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_GET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_GET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_OFFICE_VIDEO_STREAM& pkt) { return MakeSendBuffer(pkt, PKT_S_OFFICE_VIDEO_STREAM); }

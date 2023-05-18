@@ -6,9 +6,5 @@
 class MeetingClient : public GameClient
 {
 public:
-	MeetingRoomUserType type;
-	bool screenPermission;
-	bool chatPermission;
-	bool voicePermission;
-	bool videoPermission;
+	MeetingRoomUserData data;
 };

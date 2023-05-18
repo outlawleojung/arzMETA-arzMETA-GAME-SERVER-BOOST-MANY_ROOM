@@ -5,21 +5,25 @@ message C_OFFICE_GET_WAITING_LIST
 {
 }
 
-message WaitClient
-{
-	bool isObserver = 1;
-	string clientId = 2;
-	string nickname = 3;
-}
-
 message S_OFFICE_ADD_WAITING_CLIENT
 {
-	repeated WaitClient clients = 1;
+	message WaitingClient
+	{
+		bool isObserver = 1;
+		string clientId = 2;
+		string nickname = 3;
+	}
+	repeated WaitingClient clients = 1;
 }
 
 message S_OFFICE_REMOVE_WAITING_CLIENT
 {
-	repeated string clients = 1;
+	message WaitingClient
+	{
+		bool isObserver = 1;
+		string clientId = 2;
+	}
+	repeated WaitingClient clients = 1;
 }
 
 message C_OFFICE_ACCEPT_WAIT
@@ -66,14 +70,14 @@ message S_OFFICE_KICK
 	bool success = 1;
 }
 
-message USER_PERMISSION
+message OfficeUserInfo
 {
 	string clientId = 1;
 	bool screenPermission = 2;
 	bool chatPermission = 3;
 	bool voicePermission = 4;
 	bool videoPermission = 5;
-	int32 type = 6;
+	int32 authority = 6;
 }
 
 message C_OFFICE_GET_PERMISSION
@@ -83,26 +87,26 @@ message C_OFFICE_GET_PERMISSION
 
 message S_OFFICE_GET_PERMISSION
 {
-	repeated USER_PERMISSION permissions = 1;
+	OfficeUserInfo permission = 1;
+}
+
+message C_OFFICE_GET_PERMISSION_ALL
+{
+}
+
+message S_OFFICE_GET_PERMISSION_ALL
+{
+	repeated OfficeUserInfo permissions = 1;
 }
 
 message C_OFFICE_SET_PERMISSION
 {
-	repeated USER_PERMISSION permissions = 1;
+	repeated OfficeUserInfo permissions = 1;
 }
 
 message S_OFFICE_SET_PERMISSION
 {
 	bool success = 1;
-}
-
-message S_OFFICE_SET_PERMISSION_NOTICE
-{
-	bool screenPermission = 1;
-	bool chatPermission = 2;
-	bool voicePermission = 3;
-	bool videoPermission = 4;
-	int32 type = 5;
 }
 
 message C_OFFICE_SET_ROOM_INFO

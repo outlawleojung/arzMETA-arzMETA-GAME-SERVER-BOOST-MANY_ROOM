@@ -5,6 +5,7 @@
 #include "Office/OfficeRoom.h"
 #include "Matching/MatchingRoom.h"
 #include "Meeting/MeetingRoom.h"
+#include "Lecture/LectureRoom.h"
 #include "OX/OXRoom.h"
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
@@ -72,7 +73,7 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Lecture:
     {
-        LectureRooms.insert({ static_pointer_cast<OfficeRoom>(room)->roomCode, room });
+        LectureRooms.insert({ static_pointer_cast<LectureRoom>(room)->roomCode, room });
         break;
     }
     case RoomType::Consulting:
@@ -150,7 +151,7 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Lecture:
     {
-        LectureRooms.erase(static_pointer_cast<OfficeRoom>(room)->roomCode);
+        LectureRooms.erase(static_pointer_cast<LectureRoom>(room)->roomCode);
         break;
     }
     case RoomType::Consulting:
