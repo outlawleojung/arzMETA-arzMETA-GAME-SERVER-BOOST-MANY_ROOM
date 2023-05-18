@@ -442,7 +442,7 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 		newUserData.insert({ pkt.permissions()[i].clientid(), userData });
 	}
 
-	for (auto [clientId, client] : clients)
+	for (auto& [clientId, client] : clients)
 	{
 		if (newUserData.find(clientId) != newUserData.end())
 			continue;
@@ -463,7 +463,7 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 		int hostCount = 0;
 		int screenCount = 0;
 
-		for (auto [clientId, userData] : newUserData)
+		for (auto& [clientId, userData] : newUserData)
 		{
 			if (userData.type == MeetingRoomUserType::Host)
 			{
@@ -502,7 +502,7 @@ SET_PERMISSION_LOGIC:
 	if (!result)
 		return;
 	
-	for (auto [clientId, userData] : newUserData)
+	for (auto& [clientId, userData] : newUserData)
 	{
 		auto client = static_pointer_cast<MeetingClient>(clients.find(clientId)->second);
 		if (client->data == userData) continue;
