@@ -349,6 +349,9 @@ PROTOBUF_CONSTEXPR S_OFFICE_GET_ROOM_INFO::S_OFFICE_GET_ROOM_INFO(
   , /*decltype(_impl_.topictype_)*/0
   , /*decltype(_impl_.personnel_)*/0
   , /*decltype(_impl_.currentpersonnel_)*/0
+  , /*decltype(_impl_.observer_)*/0
+  , /*decltype(_impl_.currentobserver_)*/0
+  , /*decltype(_impl_.currentwaiting_)*/0
   , /*decltype(_impl_.isadvertising_)*/false
   , /*decltype(_impl_.iswaitingroom_)*/false
   , /*decltype(_impl_.isshutdown_)*/false
@@ -625,6 +628,9 @@ const uint32_t TableStruct_Packet_5f004_5fOffice_2eproto::offsets[] PROTOBUF_SEC
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.spaceinfoid_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.personnel_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.currentpersonnel_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.observer_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.currentobserver_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.currentwaiting_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.isadvertising_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.thumbnail_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_GET_ROOM_INFO, _impl_.iswaitingroom_),
@@ -703,10 +709,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 163, -1, -1, sizeof(::Protocol::S_OFFICE_SET_ROOM_INFO)},
   { 170, -1, -1, sizeof(::Protocol::C_OFFICE_GET_ROOM_INFO)},
   { 176, -1, -1, sizeof(::Protocol::S_OFFICE_GET_ROOM_INFO)},
-  { 198, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
-  { 211, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
-  { 224, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
-  { 232, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
+  { 201, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
+  { 214, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
+  { 227, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
+  { 235, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -777,30 +783,32 @@ const char descriptor_table_protodef_Packet_5f004_5fOffice_2eproto[] PROTOBUF_SE
   " \001(\005\022\020\n\010password\030\002 \001(\t\022\022\n\nisShutdown\030\003 \001"
   "(\010\022\025\n\risAdvertising\030\004 \001(\010\022\025\n\risWaitingRo"
   "om\030\005 \001(\010\")\n\026S_OFFICE_SET_ROOM_INFO\022\017\n\007su"
-  "ccess\030\001 \001(\010\"\030\n\026C_OFFICE_GET_ROOM_INFO\"\337\002"
+  "ccess\030\001 \001(\010\"\030\n\026C_OFFICE_GET_ROOM_INFO\"\242\003"
   "\n\026S_OFFICE_GET_ROOM_INFO\022\020\n\010roomName\030\001 \001"
   "(\t\022\023\n\013description\030\002 \001(\t\022\021\n\ttopicType\030\003 \001"
   "(\005\022\020\n\010password\030\004 \001(\t\022\023\n\013spaceInfoId\030\005 \001("
   "\t\022\021\n\tpersonnel\030\006 \001(\005\022\030\n\020currentPersonnel"
-  "\030\007 \001(\005\022\025\n\risAdvertising\030\010 \001(\010\022\021\n\tthumbna"
-  "il\030\t \001(\t\022\025\n\risWaitingRoom\030\n \001(\010\022\022\n\nisShu"
-  "tdown\030\013 \001(\010\022\023\n\013runningTime\030\014 \001(\005\022\022\n\npass"
-  "edTime\030\r \001(\005\022\021\n\tstartTime\030\016 \001(\t\022\020\n\010roomc"
-  "ode\030\017 \001(\t\022\024\n\014hostNickname\030\020 \001(\t\"\212\001\n\025C_OF"
-  "FICE_VIDEO_STREAM\022\020\n\010clientid\030\001 \001(\t\022\013\n\003u"
-  "rl\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014"
-  "\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020mediaPlaye"
-  "rState\030\007 \001(\005\"\212\001\n\025S_OFFICE_VIDEO_STREAM\022\020"
-  "\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volume\030"
-  "\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004see"
-  "k\030\006 \001(\010\022\030\n\020mediaPlayerState\030\007 \001(\005\"2\n\016C_O"
-  "FFICE_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006userId\030"
-  "\002 \001(\005\"2\n\016S_OFFICE_SHARE\022\020\n\010isShared\030\001 \001("
-  "\010\022\016\n\006userId\030\002 \001(\005b\006proto3"
+  "\030\007 \001(\005\022\020\n\010observer\030\010 \001(\005\022\027\n\017currentObser"
+  "ver\030\t \001(\005\022\026\n\016currentWaiting\030\n \001(\005\022\025\n\risA"
+  "dvertising\030\013 \001(\010\022\021\n\tthumbnail\030\014 \001(\t\022\025\n\ri"
+  "sWaitingRoom\030\r \001(\010\022\022\n\nisShutdown\030\016 \001(\010\022\023"
+  "\n\013runningTime\030\017 \001(\005\022\022\n\npassedTime\030\020 \001(\005\022"
+  "\021\n\tstartTime\030\021 \001(\t\022\020\n\010roomcode\030\022 \001(\t\022\024\n\014"
+  "hostNickname\030\023 \001(\t\"\212\001\n\025C_OFFICE_VIDEO_ST"
+  "REAM\022\020\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006v"
+  "olume\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022"
+  "\014\n\004seek\030\006 \001(\010\022\030\n\020mediaPlayerState\030\007 \001(\005\""
+  "\212\001\n\025S_OFFICE_VIDEO_STREAM\022\020\n\010clientid\030\001 "
+  "\001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time"
+  "\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020me"
+  "diaPlayerState\030\007 \001(\005\"2\n\016C_OFFICE_SHARE\022\020"
+  "\n\010isShared\030\001 \001(\010\022\016\n\006userId\030\002 \001(\005\"2\n\016S_OF"
+  "FICE_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006userId\030\002"
+  " \001(\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f004_5fOffice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f004_5fOffice_2eproto = {
-    false, false, 2185, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
+    false, false, 2252, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
     "Packet_004_Office.proto",
     &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 29,
     schemas, file_default_instances, TableStruct_Packet_5f004_5fOffice_2eproto::offsets,
@@ -5038,6 +5046,9 @@ S_OFFICE_GET_ROOM_INFO::S_OFFICE_GET_ROOM_INFO(const S_OFFICE_GET_ROOM_INFO& fro
     , decltype(_impl_.topictype_){}
     , decltype(_impl_.personnel_){}
     , decltype(_impl_.currentpersonnel_){}
+    , decltype(_impl_.observer_){}
+    , decltype(_impl_.currentobserver_){}
+    , decltype(_impl_.currentwaiting_){}
     , decltype(_impl_.isadvertising_){}
     , decltype(_impl_.iswaitingroom_){}
     , decltype(_impl_.isshutdown_){}
@@ -5132,6 +5143,9 @@ inline void S_OFFICE_GET_ROOM_INFO::SharedCtor(
     , decltype(_impl_.topictype_){0}
     , decltype(_impl_.personnel_){0}
     , decltype(_impl_.currentpersonnel_){0}
+    , decltype(_impl_.observer_){0}
+    , decltype(_impl_.currentobserver_){0}
+    , decltype(_impl_.currentwaiting_){0}
     , decltype(_impl_.isadvertising_){false}
     , decltype(_impl_.iswaitingroom_){false}
     , decltype(_impl_.isshutdown_){false}
@@ -5288,17 +5302,41 @@ const char* S_OFFICE_GET_ROOM_INFO::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
-      // bool isAdvertising = 8;
+      // int32 observer = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
+          _impl_.observer_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 currentObserver = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          _impl_.currentobserver_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 currentWaiting = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
+          _impl_.currentwaiting_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool isAdvertising = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
           _impl_.isadvertising_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // string thumbnail = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
+      // string thumbnail = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 98)) {
           auto str = _internal_mutable_thumbnail();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -5306,41 +5344,41 @@ const char* S_OFFICE_GET_ROOM_INFO::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
-      // bool isWaitingRoom = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
+      // bool isWaitingRoom = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 104)) {
           _impl_.iswaitingroom_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // bool isShutdown = 11;
-      case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
+      // bool isShutdown = 14;
+      case 14:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 112)) {
           _impl_.isshutdown_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 runningTime = 12;
-      case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 96)) {
+      // int32 runningTime = 15;
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 120)) {
           _impl_.runningtime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 passedTime = 13;
-      case 13:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 104)) {
+      // int32 passedTime = 16;
+      case 16:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 128)) {
           _impl_.passedtime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // string startTime = 14;
-      case 14:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 114)) {
+      // string startTime = 17;
+      case 17:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 138)) {
           auto str = _internal_mutable_starttime();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -5348,9 +5386,9 @@ const char* S_OFFICE_GET_ROOM_INFO::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
-      // string roomcode = 15;
-      case 15:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
+      // string roomcode = 18;
+      case 18:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 146)) {
           auto str = _internal_mutable_roomcode();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -5358,9 +5396,9 @@ const char* S_OFFICE_GET_ROOM_INFO::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
-      // string hostNickname = 16;
-      case 16:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 130)) {
+      // string hostNickname = 19;
+      case 19:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 154)) {
           auto str = _internal_mutable_hostnickname();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -5455,74 +5493,92 @@ uint8_t* S_OFFICE_GET_ROOM_INFO::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(7, this->_internal_currentpersonnel(), target);
   }
 
-  // bool isAdvertising = 8;
-  if (this->_internal_isadvertising() != 0) {
+  // int32 observer = 8;
+  if (this->_internal_observer() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(8, this->_internal_isadvertising(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(8, this->_internal_observer(), target);
   }
 
-  // string thumbnail = 9;
+  // int32 currentObserver = 9;
+  if (this->_internal_currentobserver() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(9, this->_internal_currentobserver(), target);
+  }
+
+  // int32 currentWaiting = 10;
+  if (this->_internal_currentwaiting() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(10, this->_internal_currentwaiting(), target);
+  }
+
+  // bool isAdvertising = 11;
+  if (this->_internal_isadvertising() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(11, this->_internal_isadvertising(), target);
+  }
+
+  // string thumbnail = 12;
   if (!this->_internal_thumbnail().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_thumbnail().data(), static_cast<int>(this->_internal_thumbnail().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_GET_ROOM_INFO.thumbnail");
     target = stream->WriteStringMaybeAliased(
-        9, this->_internal_thumbnail(), target);
+        12, this->_internal_thumbnail(), target);
   }
 
-  // bool isWaitingRoom = 10;
+  // bool isWaitingRoom = 13;
   if (this->_internal_iswaitingroom() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(10, this->_internal_iswaitingroom(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(13, this->_internal_iswaitingroom(), target);
   }
 
-  // bool isShutdown = 11;
+  // bool isShutdown = 14;
   if (this->_internal_isshutdown() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(11, this->_internal_isshutdown(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(14, this->_internal_isshutdown(), target);
   }
 
-  // int32 runningTime = 12;
+  // int32 runningTime = 15;
   if (this->_internal_runningtime() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(12, this->_internal_runningtime(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(15, this->_internal_runningtime(), target);
   }
 
-  // int32 passedTime = 13;
+  // int32 passedTime = 16;
   if (this->_internal_passedtime() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(13, this->_internal_passedtime(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(16, this->_internal_passedtime(), target);
   }
 
-  // string startTime = 14;
+  // string startTime = 17;
   if (!this->_internal_starttime().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_starttime().data(), static_cast<int>(this->_internal_starttime().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_GET_ROOM_INFO.startTime");
     target = stream->WriteStringMaybeAliased(
-        14, this->_internal_starttime(), target);
+        17, this->_internal_starttime(), target);
   }
 
-  // string roomcode = 15;
+  // string roomcode = 18;
   if (!this->_internal_roomcode().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_roomcode().data(), static_cast<int>(this->_internal_roomcode().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_GET_ROOM_INFO.roomcode");
     target = stream->WriteStringMaybeAliased(
-        15, this->_internal_roomcode(), target);
+        18, this->_internal_roomcode(), target);
   }
 
-  // string hostNickname = 16;
+  // string hostNickname = 19;
   if (!this->_internal_hostnickname().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_hostnickname().data(), static_cast<int>(this->_internal_hostnickname().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_GET_ROOM_INFO.hostNickname");
     target = stream->WriteStringMaybeAliased(
-        16, this->_internal_hostnickname(), target);
+        19, this->_internal_hostnickname(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -5569,28 +5625,28 @@ size_t S_OFFICE_GET_ROOM_INFO::ByteSizeLong() const {
         this->_internal_spaceinfoid());
   }
 
-  // string thumbnail = 9;
+  // string thumbnail = 12;
   if (!this->_internal_thumbnail().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_thumbnail());
   }
 
-  // string startTime = 14;
+  // string startTime = 17;
   if (!this->_internal_starttime().empty()) {
-    total_size += 1 +
+    total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_starttime());
   }
 
-  // string roomcode = 15;
+  // string roomcode = 18;
   if (!this->_internal_roomcode().empty()) {
-    total_size += 1 +
+    total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_roomcode());
   }
 
-  // string hostNickname = 16;
+  // string hostNickname = 19;
   if (!this->_internal_hostnickname().empty()) {
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
@@ -5612,29 +5668,46 @@ size_t S_OFFICE_GET_ROOM_INFO::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_currentpersonnel());
   }
 
-  // bool isAdvertising = 8;
+  // int32 observer = 8;
+  if (this->_internal_observer() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_observer());
+  }
+
+  // int32 currentObserver = 9;
+  if (this->_internal_currentobserver() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_currentobserver());
+  }
+
+  // int32 currentWaiting = 10;
+  if (this->_internal_currentwaiting() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_currentwaiting());
+  }
+
+  // bool isAdvertising = 11;
   if (this->_internal_isadvertising() != 0) {
     total_size += 1 + 1;
   }
 
-  // bool isWaitingRoom = 10;
+  // bool isWaitingRoom = 13;
   if (this->_internal_iswaitingroom() != 0) {
     total_size += 1 + 1;
   }
 
-  // bool isShutdown = 11;
+  // bool isShutdown = 14;
   if (this->_internal_isshutdown() != 0) {
     total_size += 1 + 1;
   }
 
-  // int32 runningTime = 12;
+  // int32 runningTime = 15;
   if (this->_internal_runningtime() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_runningtime());
   }
 
-  // int32 passedTime = 13;
+  // int32 passedTime = 16;
   if (this->_internal_passedtime() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_passedtime());
+    total_size += 2 +
+      ::_pbi::WireFormatLite::Int32Size(
+        this->_internal_passedtime());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -5687,6 +5760,15 @@ void S_OFFICE_GET_ROOM_INFO::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
   }
   if (from._internal_currentpersonnel() != 0) {
     _this->_internal_set_currentpersonnel(from._internal_currentpersonnel());
+  }
+  if (from._internal_observer() != 0) {
+    _this->_internal_set_observer(from._internal_observer());
+  }
+  if (from._internal_currentobserver() != 0) {
+    _this->_internal_set_currentobserver(from._internal_currentobserver());
+  }
+  if (from._internal_currentwaiting() != 0) {
+    _this->_internal_set_currentwaiting(from._internal_currentwaiting());
   }
   if (from._internal_isadvertising() != 0) {
     _this->_internal_set_isadvertising(from._internal_isadvertising());
