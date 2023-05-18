@@ -3933,18 +3933,21 @@ class S_OFFICE_GET_ROOM_INFO final :
     kDescriptionFieldNumber = 2,
     kPasswordFieldNumber = 4,
     kSpaceInfoIdFieldNumber = 5,
-    kThumbnailFieldNumber = 9,
-    kStartTimeFieldNumber = 14,
-    kRoomcodeFieldNumber = 15,
-    kHostNicknameFieldNumber = 16,
+    kThumbnailFieldNumber = 12,
+    kStartTimeFieldNumber = 17,
+    kRoomcodeFieldNumber = 18,
+    kHostNicknameFieldNumber = 19,
     kTopicTypeFieldNumber = 3,
     kPersonnelFieldNumber = 6,
     kCurrentPersonnelFieldNumber = 7,
-    kIsAdvertisingFieldNumber = 8,
-    kIsWaitingRoomFieldNumber = 10,
-    kIsShutdownFieldNumber = 11,
-    kRunningTimeFieldNumber = 12,
-    kPassedTimeFieldNumber = 13,
+    kObserverFieldNumber = 8,
+    kCurrentObserverFieldNumber = 9,
+    kCurrentWaitingFieldNumber = 10,
+    kIsAdvertisingFieldNumber = 11,
+    kIsWaitingRoomFieldNumber = 13,
+    kIsShutdownFieldNumber = 14,
+    kRunningTimeFieldNumber = 15,
+    kPassedTimeFieldNumber = 16,
   };
   // string roomName = 1;
   void clear_roomname();
@@ -4002,7 +4005,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   std::string* _internal_mutable_spaceinfoid();
   public:
 
-  // string thumbnail = 9;
+  // string thumbnail = 12;
   void clear_thumbnail();
   const std::string& thumbnail() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -4016,7 +4019,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   std::string* _internal_mutable_thumbnail();
   public:
 
-  // string startTime = 14;
+  // string startTime = 17;
   void clear_starttime();
   const std::string& starttime() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -4030,7 +4033,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   std::string* _internal_mutable_starttime();
   public:
 
-  // string roomcode = 15;
+  // string roomcode = 18;
   void clear_roomcode();
   const std::string& roomcode() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -4044,7 +4047,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   std::string* _internal_mutable_roomcode();
   public:
 
-  // string hostNickname = 16;
+  // string hostNickname = 19;
   void clear_hostnickname();
   const std::string& hostnickname() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -4085,7 +4088,34 @@ class S_OFFICE_GET_ROOM_INFO final :
   void _internal_set_currentpersonnel(int32_t value);
   public:
 
-  // bool isAdvertising = 8;
+  // int32 observer = 8;
+  void clear_observer();
+  int32_t observer() const;
+  void set_observer(int32_t value);
+  private:
+  int32_t _internal_observer() const;
+  void _internal_set_observer(int32_t value);
+  public:
+
+  // int32 currentObserver = 9;
+  void clear_currentobserver();
+  int32_t currentobserver() const;
+  void set_currentobserver(int32_t value);
+  private:
+  int32_t _internal_currentobserver() const;
+  void _internal_set_currentobserver(int32_t value);
+  public:
+
+  // int32 currentWaiting = 10;
+  void clear_currentwaiting();
+  int32_t currentwaiting() const;
+  void set_currentwaiting(int32_t value);
+  private:
+  int32_t _internal_currentwaiting() const;
+  void _internal_set_currentwaiting(int32_t value);
+  public:
+
+  // bool isAdvertising = 11;
   void clear_isadvertising();
   bool isadvertising() const;
   void set_isadvertising(bool value);
@@ -4094,7 +4124,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   void _internal_set_isadvertising(bool value);
   public:
 
-  // bool isWaitingRoom = 10;
+  // bool isWaitingRoom = 13;
   void clear_iswaitingroom();
   bool iswaitingroom() const;
   void set_iswaitingroom(bool value);
@@ -4103,7 +4133,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   void _internal_set_iswaitingroom(bool value);
   public:
 
-  // bool isShutdown = 11;
+  // bool isShutdown = 14;
   void clear_isshutdown();
   bool isshutdown() const;
   void set_isshutdown(bool value);
@@ -4112,7 +4142,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   void _internal_set_isshutdown(bool value);
   public:
 
-  // int32 runningTime = 12;
+  // int32 runningTime = 15;
   void clear_runningtime();
   int32_t runningtime() const;
   void set_runningtime(int32_t value);
@@ -4121,7 +4151,7 @@ class S_OFFICE_GET_ROOM_INFO final :
   void _internal_set_runningtime(int32_t value);
   public:
 
-  // int32 passedTime = 13;
+  // int32 passedTime = 16;
   void clear_passedtime();
   int32_t passedtime() const;
   void set_passedtime(int32_t value);
@@ -4149,6 +4179,9 @@ class S_OFFICE_GET_ROOM_INFO final :
     int32_t topictype_;
     int32_t personnel_;
     int32_t currentpersonnel_;
+    int32_t observer_;
+    int32_t currentobserver_;
+    int32_t currentwaiting_;
     bool isadvertising_;
     bool iswaitingroom_;
     bool isshutdown_;
@@ -6352,7 +6385,67 @@ inline void S_OFFICE_GET_ROOM_INFO::set_currentpersonnel(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.currentPersonnel)
 }
 
-// bool isAdvertising = 8;
+// int32 observer = 8;
+inline void S_OFFICE_GET_ROOM_INFO::clear_observer() {
+  _impl_.observer_ = 0;
+}
+inline int32_t S_OFFICE_GET_ROOM_INFO::_internal_observer() const {
+  return _impl_.observer_;
+}
+inline int32_t S_OFFICE_GET_ROOM_INFO::observer() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_GET_ROOM_INFO.observer)
+  return _internal_observer();
+}
+inline void S_OFFICE_GET_ROOM_INFO::_internal_set_observer(int32_t value) {
+  
+  _impl_.observer_ = value;
+}
+inline void S_OFFICE_GET_ROOM_INFO::set_observer(int32_t value) {
+  _internal_set_observer(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.observer)
+}
+
+// int32 currentObserver = 9;
+inline void S_OFFICE_GET_ROOM_INFO::clear_currentobserver() {
+  _impl_.currentobserver_ = 0;
+}
+inline int32_t S_OFFICE_GET_ROOM_INFO::_internal_currentobserver() const {
+  return _impl_.currentobserver_;
+}
+inline int32_t S_OFFICE_GET_ROOM_INFO::currentobserver() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_GET_ROOM_INFO.currentObserver)
+  return _internal_currentobserver();
+}
+inline void S_OFFICE_GET_ROOM_INFO::_internal_set_currentobserver(int32_t value) {
+  
+  _impl_.currentobserver_ = value;
+}
+inline void S_OFFICE_GET_ROOM_INFO::set_currentobserver(int32_t value) {
+  _internal_set_currentobserver(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.currentObserver)
+}
+
+// int32 currentWaiting = 10;
+inline void S_OFFICE_GET_ROOM_INFO::clear_currentwaiting() {
+  _impl_.currentwaiting_ = 0;
+}
+inline int32_t S_OFFICE_GET_ROOM_INFO::_internal_currentwaiting() const {
+  return _impl_.currentwaiting_;
+}
+inline int32_t S_OFFICE_GET_ROOM_INFO::currentwaiting() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_GET_ROOM_INFO.currentWaiting)
+  return _internal_currentwaiting();
+}
+inline void S_OFFICE_GET_ROOM_INFO::_internal_set_currentwaiting(int32_t value) {
+  
+  _impl_.currentwaiting_ = value;
+}
+inline void S_OFFICE_GET_ROOM_INFO::set_currentwaiting(int32_t value) {
+  _internal_set_currentwaiting(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.currentWaiting)
+}
+
+// bool isAdvertising = 11;
 inline void S_OFFICE_GET_ROOM_INFO::clear_isadvertising() {
   _impl_.isadvertising_ = false;
 }
@@ -6372,7 +6465,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_isadvertising(bool value) {
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.isAdvertising)
 }
 
-// string thumbnail = 9;
+// string thumbnail = 12;
 inline void S_OFFICE_GET_ROOM_INFO::clear_thumbnail() {
   _impl_.thumbnail_.ClearToEmpty();
 }
@@ -6422,7 +6515,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_allocated_thumbnail(std::string* thumbna
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_GET_ROOM_INFO.thumbnail)
 }
 
-// bool isWaitingRoom = 10;
+// bool isWaitingRoom = 13;
 inline void S_OFFICE_GET_ROOM_INFO::clear_iswaitingroom() {
   _impl_.iswaitingroom_ = false;
 }
@@ -6442,7 +6535,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_iswaitingroom(bool value) {
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.isWaitingRoom)
 }
 
-// bool isShutdown = 11;
+// bool isShutdown = 14;
 inline void S_OFFICE_GET_ROOM_INFO::clear_isshutdown() {
   _impl_.isshutdown_ = false;
 }
@@ -6462,7 +6555,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_isshutdown(bool value) {
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.isShutdown)
 }
 
-// int32 runningTime = 12;
+// int32 runningTime = 15;
 inline void S_OFFICE_GET_ROOM_INFO::clear_runningtime() {
   _impl_.runningtime_ = 0;
 }
@@ -6482,7 +6575,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_runningtime(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.runningTime)
 }
 
-// int32 passedTime = 13;
+// int32 passedTime = 16;
 inline void S_OFFICE_GET_ROOM_INFO::clear_passedtime() {
   _impl_.passedtime_ = 0;
 }
@@ -6502,7 +6595,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_passedtime(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_GET_ROOM_INFO.passedTime)
 }
 
-// string startTime = 14;
+// string startTime = 17;
 inline void S_OFFICE_GET_ROOM_INFO::clear_starttime() {
   _impl_.starttime_.ClearToEmpty();
 }
@@ -6552,7 +6645,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_allocated_starttime(std::string* startti
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_GET_ROOM_INFO.startTime)
 }
 
-// string roomcode = 15;
+// string roomcode = 18;
 inline void S_OFFICE_GET_ROOM_INFO::clear_roomcode() {
   _impl_.roomcode_.ClearToEmpty();
 }
@@ -6602,7 +6695,7 @@ inline void S_OFFICE_GET_ROOM_INFO::set_allocated_roomcode(std::string* roomcode
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_GET_ROOM_INFO.roomcode)
 }
 
-// string hostNickname = 16;
+// string hostNickname = 19;
 inline void S_OFFICE_GET_ROOM_INFO::clear_hostnickname() {
   _impl_.hostnickname_.ClearToEmpty();
 }

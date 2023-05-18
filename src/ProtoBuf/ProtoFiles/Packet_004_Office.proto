@@ -136,15 +136,18 @@ message S_OFFICE_GET_ROOM_INFO
 	string spaceInfoId = 5;
 	int32 personnel = 6;
 	int32 currentPersonnel = 7;
-	bool isAdvertising = 8;
-	string thumbnail = 9;
-	bool isWaitingRoom = 10;
-	bool isShutdown = 11;
-	int32 runningTime = 12;
-	int32 passedTime = 13;
-	string startTime = 14;
-	string roomcode = 15;
-	string hostNickname = 16;
+	int32 observer = 8;
+	int32 currentObserver = 9;
+	int32 currentWaiting = 10;
+	bool isAdvertising = 11;
+	string thumbnail = 12;
+	bool isWaitingRoom = 13;
+	bool isShutdown = 14;
+	int32 runningTime = 15;
+	int32 passedTime = 16;
+	string startTime = 17;
+	string roomcode = 18;
+	string hostNickname = 19;
 }
 
 message C_OFFICE_VIDEO_STREAM
