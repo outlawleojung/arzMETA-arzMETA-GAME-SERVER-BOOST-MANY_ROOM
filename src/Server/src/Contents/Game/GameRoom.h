@@ -16,6 +16,7 @@ public :
 	virtual void Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) override;
 
 	virtual void Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) override;
+	virtual void Handle_C_BASE_REMOVE_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_REMOVE_OBJECT& pkt) override;
 	virtual void Handle_C_BASE_GET_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_GET_OBJECT& pkt) override;
 	virtual void Handle_C_BASE_SET_TRANSFORM(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_TRANSFORM& pkt) override;
 	virtual void Handle_C_BASE_SET_ANIMATION(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_ANIMATION& pkt) override;
