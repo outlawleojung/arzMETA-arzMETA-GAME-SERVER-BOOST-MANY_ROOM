@@ -38,6 +38,7 @@ class MeetingRoom : public GameRoom
 {
 public:
 	MeetingRoom();
+	virtual ~MeetingRoom();
 
 	virtual void Init() override;
 
