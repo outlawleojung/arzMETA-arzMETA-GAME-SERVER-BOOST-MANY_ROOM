@@ -34,3 +34,21 @@ static string GetCurrentTimeString()
 	strftime(buffer, 50, "%Y.%m.%d %p %I:%M", &bt);
 	return string(buffer);
 }
+
+static int calculateMinutesSinceMidnight() {
+	auto now = std::chrono::system_clock::now();
+	std::time_t t = std::chrono::system_clock::to_time_t(now);
+	std::tm bt;
+
+	t += 32400; // 9시간을 초로 변환합니다.
+
+#ifdef linux
+	localtime_r(&t, &bt);
+#elif _WIN32
+	localtime_s(&bt, &t);
+#endif
+
+	int minutes = bt.tm_hour * 60 + bt.tm_min;
+
+	return minutes;
+}
