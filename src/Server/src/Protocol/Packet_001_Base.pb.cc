@@ -66,6 +66,17 @@ struct S_BASE_INSTANTIATE_OBJECTDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_BASE_INSTANTIATE_OBJECTDefaultTypeInternal _S_BASE_INSTANTIATE_OBJECT_default_instance_;
+PROTOBUF_CONSTEXPR C_BASE_REMOVE_OBJECT::C_BASE_REMOVE_OBJECT(
+    ::_pbi::ConstantInitialized) {}
+struct C_BASE_REMOVE_OBJECTDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_BASE_REMOVE_OBJECTDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_BASE_REMOVE_OBJECTDefaultTypeInternal() {}
+  union {
+    C_BASE_REMOVE_OBJECT _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_BASE_REMOVE_OBJECTDefaultTypeInternal _C_BASE_REMOVE_OBJECT_default_instance_;
 PROTOBUF_CONSTEXPR C_BASE_GET_OBJECT::C_BASE_GET_OBJECT(
     ::_pbi::ConstantInitialized) {}
 struct C_BASE_GET_OBJECTDefaultTypeInternal {
@@ -256,7 +267,7 @@ struct S_BASE_SET_ANIMATION_ONCEDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_BASE_SET_ANIMATION_ONCEDefaultTypeInternal _S_BASE_SET_ANIMATION_ONCE_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_5f001_5fBase_2eproto[16];
+static ::_pb::Metadata file_level_metadata_Packet_5f001_5fBase_2eproto[17];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_5f001_5fBase_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_5f001_5fBase_2eproto = nullptr;
 
@@ -288,6 +299,12 @@ const uint32_t TableStruct_Packet_5f001_5fBase_2eproto::offsets[] PROTOBUF_SECTI
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_BASE_INSTANTIATE_OBJECT, _impl_.success_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_BASE_INSTANTIATE_OBJECT, _impl_.objectid_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_BASE_REMOVE_OBJECT, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_BASE_GET_OBJECT, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -404,25 +421,27 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 0, -1, -1, sizeof(::Protocol::Vector3)},
   { 9, -1, -1, sizeof(::Protocol::C_BASE_INSTANTIATE_OBJECT)},
   { 19, -1, -1, sizeof(::Protocol::S_BASE_INSTANTIATE_OBJECT)},
-  { 27, -1, -1, sizeof(::Protocol::C_BASE_GET_OBJECT)},
-  { 33, -1, -1, sizeof(::Protocol::S_BASE_ADD_OBJECT_GameObjectInfo)},
-  { 45, -1, -1, sizeof(::Protocol::S_BASE_ADD_OBJECT)},
-  { 52, -1, -1, sizeof(::Protocol::S_BASE_REMOVE_OBJECT)},
-  { 59, -1, -1, sizeof(::Protocol::C_BASE_SET_OBJECT_DATA)},
-  { 67, -1, -1, sizeof(::Protocol::S_BASE_SET_OBJECT_DATA)},
-  { 74, -1, -1, sizeof(::Protocol::S_BASE_SET_OBJECT_DATA_NOTICE)},
-  { 82, -1, -1, sizeof(::Protocol::C_BASE_SET_TRANSFORM)},
-  { 91, -1, -1, sizeof(::Protocol::S_BASE_SET_TRANSFORM)},
-  { 100, -1, -1, sizeof(::Protocol::C_BASE_SET_ANIMATION)},
-  { 109, -1, -1, sizeof(::Protocol::S_BASE_SET_ANIMATION)},
-  { 118, -1, -1, sizeof(::Protocol::C_BASE_SET_ANIMATION_ONCE)},
-  { 128, -1, -1, sizeof(::Protocol::S_BASE_SET_ANIMATION_ONCE)},
+  { 27, -1, -1, sizeof(::Protocol::C_BASE_REMOVE_OBJECT)},
+  { 33, -1, -1, sizeof(::Protocol::C_BASE_GET_OBJECT)},
+  { 39, -1, -1, sizeof(::Protocol::S_BASE_ADD_OBJECT_GameObjectInfo)},
+  { 51, -1, -1, sizeof(::Protocol::S_BASE_ADD_OBJECT)},
+  { 58, -1, -1, sizeof(::Protocol::S_BASE_REMOVE_OBJECT)},
+  { 65, -1, -1, sizeof(::Protocol::C_BASE_SET_OBJECT_DATA)},
+  { 73, -1, -1, sizeof(::Protocol::S_BASE_SET_OBJECT_DATA)},
+  { 80, -1, -1, sizeof(::Protocol::S_BASE_SET_OBJECT_DATA_NOTICE)},
+  { 88, -1, -1, sizeof(::Protocol::C_BASE_SET_TRANSFORM)},
+  { 97, -1, -1, sizeof(::Protocol::S_BASE_SET_TRANSFORM)},
+  { 106, -1, -1, sizeof(::Protocol::C_BASE_SET_ANIMATION)},
+  { 115, -1, -1, sizeof(::Protocol::S_BASE_SET_ANIMATION)},
+  { 124, -1, -1, sizeof(::Protocol::C_BASE_SET_ANIMATION_ONCE)},
+  { 134, -1, -1, sizeof(::Protocol::S_BASE_SET_ANIMATION_ONCE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_Vector3_default_instance_._instance,
   &::Protocol::_C_BASE_INSTANTIATE_OBJECT_default_instance_._instance,
   &::Protocol::_S_BASE_INSTANTIATE_OBJECT_default_instance_._instance,
+  &::Protocol::_C_BASE_REMOVE_OBJECT_default_instance_._instance,
   &::Protocol::_C_BASE_GET_OBJECT_default_instance_._instance,
   &::Protocol::_S_BASE_ADD_OBJECT_GameObjectInfo_default_instance_._instance,
   &::Protocol::_S_BASE_ADD_OBJECT_default_instance_._instance,
@@ -446,40 +465,41 @@ const char descriptor_table_protodef_Packet_5f001_5fBase_2eproto[] PROTOBUF_SECT
   "(\0132\021.Protocol.Vector3\022\022\n\nprefabName\030\003 \001("
   "\t\022\022\n\nobjectData\030\004 \001(\t\">\n\031S_BASE_INSTANTI"
   "ATE_OBJECT\022\017\n\007success\030\001 \001(\010\022\020\n\010objectId\030"
-  "\002 \001(\005\"\023\n\021C_BASE_GET_OBJECT\"\374\001\n\021S_BASE_AD"
-  "D_OBJECT\022\?\n\013gameObjects\030\001 \003(\0132*.Protocol"
-  ".S_BASE_ADD_OBJECT.GameObjectInfo\032\245\001\n\016Ga"
-  "meObjectInfo\022\020\n\010objectId\030\001 \001(\005\022#\n\010positi"
-  "on\030\002 \001(\0132\021.Protocol.Vector3\022#\n\010rotation\030"
-  "\003 \001(\0132\021.Protocol.Vector3\022\022\n\nprefabName\030\004"
-  " \001(\t\022\022\n\nobjectData\030\005 \001(\t\022\017\n\007ownerId\030\006 \001("
-  "\t\"+\n\024S_BASE_REMOVE_OBJECT\022\023\n\013gameObjects"
-  "\030\001 \003(\005\">\n\026C_BASE_SET_OBJECT_DATA\022\020\n\010obje"
-  "ctId\030\001 \001(\005\022\022\n\nobjectData\030\002 \001(\t\")\n\026S_BASE"
-  "_SET_OBJECT_DATA\022\017\n\007success\030\001 \001(\010\"E\n\035S_B"
-  "ASE_SET_OBJECT_DATA_NOTICE\022\020\n\010objectId\030\001"
-  " \001(\005\022\022\n\nobjectData\030\002 \001(\t\"r\n\024C_BASE_SET_T"
-  "RANSFORM\022\020\n\010objectId\030\001 \001(\005\022#\n\010position\030\002"
-  " \001(\0132\021.Protocol.Vector3\022#\n\010rotation\030\003 \001("
-  "\0132\021.Protocol.Vector3\"r\n\024S_BASE_SET_TRANS"
-  "FORM\022\020\n\010objectId\030\001 \001(\005\022#\n\010position\030\002 \001(\013"
-  "2\021.Protocol.Vector3\022#\n\010rotation\030\003 \001(\0132\021."
-  "Protocol.Vector3\"P\n\024C_BASE_SET_ANIMATION"
-  "\022\020\n\010objectId\030\001 \001(\005\022\023\n\013animationId\030\002 \001(\t\022"
-  "\021\n\tanimation\030\003 \001(\t\"P\n\024S_BASE_SET_ANIMATI"
-  "ON\022\020\n\010objectId\030\001 \001(\005\022\023\n\013animationId\030\002 \001("
-  "\t\022\021\n\tanimation\030\003 \001(\t\"a\n\031C_BASE_SET_ANIMA"
-  "TION_ONCE\022\020\n\010objectId\030\001 \001(\005\022\023\n\013animation"
-  "Id\030\002 \001(\t\022\016\n\006isLoop\030\003 \001(\010\022\r\n\005blend\030\004 \001(\002\""
-  "a\n\031S_BASE_SET_ANIMATION_ONCE\022\020\n\010objectId"
-  "\030\001 \001(\005\022\023\n\013animationId\030\002 \001(\t\022\016\n\006isLoop\030\003 "
-  "\001(\010\022\r\n\005blend\030\004 \001(\002b\006proto3"
+  "\002 \001(\005\"\026\n\024C_BASE_REMOVE_OBJECT\"\023\n\021C_BASE_"
+  "GET_OBJECT\"\374\001\n\021S_BASE_ADD_OBJECT\022\?\n\013game"
+  "Objects\030\001 \003(\0132*.Protocol.S_BASE_ADD_OBJE"
+  "CT.GameObjectInfo\032\245\001\n\016GameObjectInfo\022\020\n\010"
+  "objectId\030\001 \001(\005\022#\n\010position\030\002 \001(\0132\021.Proto"
+  "col.Vector3\022#\n\010rotation\030\003 \001(\0132\021.Protocol"
+  ".Vector3\022\022\n\nprefabName\030\004 \001(\t\022\022\n\nobjectDa"
+  "ta\030\005 \001(\t\022\017\n\007ownerId\030\006 \001(\t\"+\n\024S_BASE_REMO"
+  "VE_OBJECT\022\023\n\013gameObjects\030\001 \003(\005\">\n\026C_BASE"
+  "_SET_OBJECT_DATA\022\020\n\010objectId\030\001 \001(\005\022\022\n\nob"
+  "jectData\030\002 \001(\t\")\n\026S_BASE_SET_OBJECT_DATA"
+  "\022\017\n\007success\030\001 \001(\010\"E\n\035S_BASE_SET_OBJECT_D"
+  "ATA_NOTICE\022\020\n\010objectId\030\001 \001(\005\022\022\n\nobjectDa"
+  "ta\030\002 \001(\t\"r\n\024C_BASE_SET_TRANSFORM\022\020\n\010obje"
+  "ctId\030\001 \001(\005\022#\n\010position\030\002 \001(\0132\021.Protocol."
+  "Vector3\022#\n\010rotation\030\003 \001(\0132\021.Protocol.Vec"
+  "tor3\"r\n\024S_BASE_SET_TRANSFORM\022\020\n\010objectId"
+  "\030\001 \001(\005\022#\n\010position\030\002 \001(\0132\021.Protocol.Vect"
+  "or3\022#\n\010rotation\030\003 \001(\0132\021.Protocol.Vector3"
+  "\"P\n\024C_BASE_SET_ANIMATION\022\020\n\010objectId\030\001 \001"
+  "(\005\022\023\n\013animationId\030\002 \001(\t\022\021\n\tanimation\030\003 \001"
+  "(\t\"P\n\024S_BASE_SET_ANIMATION\022\020\n\010objectId\030\001"
+  " \001(\005\022\023\n\013animationId\030\002 \001(\t\022\021\n\tanimation\030\003"
+  " \001(\t\"a\n\031C_BASE_SET_ANIMATION_ONCE\022\020\n\010obj"
+  "ectId\030\001 \001(\005\022\023\n\013animationId\030\002 \001(\t\022\016\n\006isLo"
+  "op\030\003 \001(\010\022\r\n\005blend\030\004 \001(\002\"a\n\031S_BASE_SET_AN"
+  "IMATION_ONCE\022\020\n\010objectId\030\001 \001(\005\022\023\n\013animat"
+  "ionId\030\002 \001(\t\022\016\n\006isLoop\030\003 \001(\010\022\r\n\005blend\030\004 \001"
+  "(\002b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f001_5fBase_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f001_5fBase_2eproto = {
-    false, false, 1386, descriptor_table_protodef_Packet_5f001_5fBase_2eproto,
+    false, false, 1410, descriptor_table_protodef_Packet_5f001_5fBase_2eproto,
     "Packet_001_Base.proto",
-    &descriptor_table_Packet_5f001_5fBase_2eproto_once, nullptr, 0, 16,
+    &descriptor_table_Packet_5f001_5fBase_2eproto_once, nullptr, 0, 17,
     schemas, file_default_instances, TableStruct_Packet_5f001_5fBase_2eproto::offsets,
     file_level_metadata_Packet_5f001_5fBase_2eproto, file_level_enum_descriptors_Packet_5f001_5fBase_2eproto,
     file_level_service_descriptors_Packet_5f001_5fBase_2eproto,
@@ -1317,6 +1337,46 @@ void S_BASE_INSTANTIATE_OBJECT::InternalSwap(S_BASE_INSTANTIATE_OBJECT* other) {
 
 // ===================================================================
 
+class C_BASE_REMOVE_OBJECT::_Internal {
+ public:
+};
+
+C_BASE_REMOVE_OBJECT::C_BASE_REMOVE_OBJECT(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
+  // @@protoc_insertion_point(arena_constructor:Protocol.C_BASE_REMOVE_OBJECT)
+}
+C_BASE_REMOVE_OBJECT::C_BASE_REMOVE_OBJECT(const C_BASE_REMOVE_OBJECT& from)
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  C_BASE_REMOVE_OBJECT* const _this = this; (void)_this;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:Protocol.C_BASE_REMOVE_OBJECT)
+}
+
+
+
+
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_BASE_REMOVE_OBJECT::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_BASE_REMOVE_OBJECT::GetClassData() const { return &_class_data_; }
+
+
+
+
+
+
+
+::PROTOBUF_NAMESPACE_ID::Metadata C_BASE_REMOVE_OBJECT::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
+      file_level_metadata_Packet_5f001_5fBase_2eproto[3]);
+}
+
+// ===================================================================
+
 class C_BASE_GET_OBJECT::_Internal {
  public:
 };
@@ -1352,7 +1412,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_BASE_GET_OBJECT::GetClassDat
 ::PROTOBUF_NAMESPACE_ID::Metadata C_BASE_GET_OBJECT::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[3]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[4]);
 }
 
 // ===================================================================
@@ -1769,7 +1829,7 @@ void S_BASE_ADD_OBJECT_GameObjectInfo::InternalSwap(S_BASE_ADD_OBJECT_GameObject
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_ADD_OBJECT_GameObjectInfo::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[4]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[5]);
 }
 
 // ===================================================================
@@ -1954,7 +2014,7 @@ void S_BASE_ADD_OBJECT::InternalSwap(S_BASE_ADD_OBJECT* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_ADD_OBJECT::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[5]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[6]);
 }
 
 // ===================================================================
@@ -2147,7 +2207,7 @@ void S_BASE_REMOVE_OBJECT::InternalSwap(S_BASE_REMOVE_OBJECT* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_REMOVE_OBJECT::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[6]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[7]);
 }
 
 // ===================================================================
@@ -2377,7 +2437,7 @@ void C_BASE_SET_OBJECT_DATA::InternalSwap(C_BASE_SET_OBJECT_DATA* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_BASE_SET_OBJECT_DATA::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[7]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[8]);
 }
 
 // ===================================================================
@@ -2555,7 +2615,7 @@ void S_BASE_SET_OBJECT_DATA::InternalSwap(S_BASE_SET_OBJECT_DATA* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_SET_OBJECT_DATA::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[8]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[9]);
 }
 
 // ===================================================================
@@ -2785,7 +2845,7 @@ void S_BASE_SET_OBJECT_DATA_NOTICE::InternalSwap(S_BASE_SET_OBJECT_DATA_NOTICE* 
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_SET_OBJECT_DATA_NOTICE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[9]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[10]);
 }
 
 // ===================================================================
@@ -3050,7 +3110,7 @@ void C_BASE_SET_TRANSFORM::InternalSwap(C_BASE_SET_TRANSFORM* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_BASE_SET_TRANSFORM::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[10]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[11]);
 }
 
 // ===================================================================
@@ -3315,7 +3375,7 @@ void S_BASE_SET_TRANSFORM::InternalSwap(S_BASE_SET_TRANSFORM* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_SET_TRANSFORM::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[11]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[12]);
 }
 
 // ===================================================================
@@ -3595,7 +3655,7 @@ void C_BASE_SET_ANIMATION::InternalSwap(C_BASE_SET_ANIMATION* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_BASE_SET_ANIMATION::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[12]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[13]);
 }
 
 // ===================================================================
@@ -3875,7 +3935,7 @@ void S_BASE_SET_ANIMATION::InternalSwap(S_BASE_SET_ANIMATION* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_SET_ANIMATION::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[13]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[14]);
 }
 
 // ===================================================================
@@ -4174,7 +4234,7 @@ void C_BASE_SET_ANIMATION_ONCE::InternalSwap(C_BASE_SET_ANIMATION_ONCE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_BASE_SET_ANIMATION_ONCE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[14]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[15]);
 }
 
 // ===================================================================
@@ -4473,7 +4533,7 @@ void S_BASE_SET_ANIMATION_ONCE::InternalSwap(S_BASE_SET_ANIMATION_ONCE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_BASE_SET_ANIMATION_ONCE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f001_5fBase_2eproto_getter, &descriptor_table_Packet_5f001_5fBase_2eproto_once,
-      file_level_metadata_Packet_5f001_5fBase_2eproto[15]);
+      file_level_metadata_Packet_5f001_5fBase_2eproto[16]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -4490,6 +4550,10 @@ Arena::CreateMaybeMessage< ::Protocol::C_BASE_INSTANTIATE_OBJECT >(Arena* arena)
 template<> PROTOBUF_NOINLINE ::Protocol::S_BASE_INSTANTIATE_OBJECT*
 Arena::CreateMaybeMessage< ::Protocol::S_BASE_INSTANTIATE_OBJECT >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_BASE_INSTANTIATE_OBJECT >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::C_BASE_REMOVE_OBJECT*
+Arena::CreateMaybeMessage< ::Protocol::C_BASE_REMOVE_OBJECT >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_BASE_REMOVE_OBJECT >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Protocol::C_BASE_GET_OBJECT*
 Arena::CreateMaybeMessage< ::Protocol::C_BASE_GET_OBJECT >(Arena* arena) {

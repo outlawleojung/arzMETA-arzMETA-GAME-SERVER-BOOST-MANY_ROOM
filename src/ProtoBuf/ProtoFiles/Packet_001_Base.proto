@@ -22,6 +22,10 @@ message S_BASE_INSTANTIATE_OBJECT
 	int32 objectId = 2;
 }
 
+message C_BASE_REMOVE_OBJECT
+{
+}
+
 message C_BASE_GET_OBJECT
 {
 }

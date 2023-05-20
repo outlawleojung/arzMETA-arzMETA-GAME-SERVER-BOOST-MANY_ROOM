@@ -41,6 +41,11 @@ void GameRoom::Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& client, 
 	auto gClient = static_pointer_cast<GameClient>(client);
 	DoAsync(&GameRoom::InstantiateObject, gClient, pkt);
 }
+void GameRoom::Handle_C_BASE_REMOVE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_REMOVE_OBJECT& pkt)
+{
+	auto gClient = static_pointer_cast<GameClient>(client);
+	DoAsync(&GameRoom::RemoveObject, gClient);
+}
 void GameRoom::Handle_C_BASE_GET_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_GET_OBJECT& pkt)
 {
 	auto gClient = static_pointer_cast<GameClient>(client);

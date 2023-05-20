@@ -26,18 +26,19 @@ enum : unsigned short
 	PKT_S_DISCONNECT = 13,
 	PKT_C_BASE_INSTANTIATE_OBJECT = 100,
 	PKT_S_BASE_INSTANTIATE_OBJECT = 101,
-	PKT_C_BASE_GET_OBJECT = 102,
-	PKT_S_BASE_ADD_OBJECT = 103,
-	PKT_S_BASE_REMOVE_OBJECT = 104,
-	PKT_C_BASE_SET_OBJECT_DATA = 105,
-	PKT_S_BASE_SET_OBJECT_DATA = 106,
-	PKT_S_BASE_SET_OBJECT_DATA_NOTICE = 107,
-	PKT_C_BASE_SET_TRANSFORM = 108,
-	PKT_S_BASE_SET_TRANSFORM = 109,
-	PKT_C_BASE_SET_ANIMATION = 110,
-	PKT_S_BASE_SET_ANIMATION = 111,
-	PKT_C_BASE_SET_ANIMATION_ONCE = 112,
-	PKT_S_BASE_SET_ANIMATION_ONCE = 113,
+	PKT_C_BASE_REMOVE_OBJECT = 102,
+	PKT_C_BASE_GET_OBJECT = 103,
+	PKT_S_BASE_ADD_OBJECT = 104,
+	PKT_S_BASE_REMOVE_OBJECT = 105,
+	PKT_C_BASE_SET_OBJECT_DATA = 106,
+	PKT_S_BASE_SET_OBJECT_DATA = 107,
+	PKT_S_BASE_SET_OBJECT_DATA_NOTICE = 108,
+	PKT_C_BASE_SET_TRANSFORM = 109,
+	PKT_S_BASE_SET_TRANSFORM = 110,
+	PKT_C_BASE_SET_ANIMATION = 111,
+	PKT_S_BASE_SET_ANIMATION = 112,
+	PKT_C_BASE_SET_ANIMATION_ONCE = 113,
+	PKT_S_BASE_SET_ANIMATION_ONCE = 114,
 	PKT_C_INTERACTION_GET_ITEMS = 200,
 	PKT_S_INTERACTION_GET_ITEMS = 201,
 	PKT_C_INTERACTION_SET_ITEM = 202,
@@ -258,6 +259,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_SET_NICKNAME& pkt) { return MakeSendBuffer(pkt, PKT_C_SET_NICKNAME); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_CHAT& pkt) { return MakeSendBuffer(pkt, PKT_C_CHAT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_INSTANTIATE_OBJECT); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_REMOVE_OBJECT& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_REMOVE_OBJECT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_GET_OBJECT& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_GET_OBJECT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_SET_OBJECT_DATA& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_SET_OBJECT_DATA); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_BASE_SET_TRANSFORM& pkt) { return MakeSendBuffer(pkt, PKT_C_BASE_SET_TRANSFORM); }
