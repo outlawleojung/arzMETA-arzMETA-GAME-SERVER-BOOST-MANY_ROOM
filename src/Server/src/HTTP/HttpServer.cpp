@@ -173,12 +173,18 @@ void HttpServer::start(string ip, int port)
 		}
 		}
 
+		GLogManager->Log("Room Create Complete");
+
 		room->type = type;
 		room->sceneName = body["sceneName"];
 
 		GRoomManager->AddRoom(room);
 
+		GLogManager->Log("Room Add Complete");
+
 		room->Init();
+
+		GLogManager->Log("Room Init Complete");
 
 		nlohmann::json resJson;
 		resJson["result"] = "SUCCESS";
