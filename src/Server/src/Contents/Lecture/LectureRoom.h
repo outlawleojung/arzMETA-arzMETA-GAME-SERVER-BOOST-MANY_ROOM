@@ -6,12 +6,35 @@
 
 class LectureClient;
 
-enum class LectureRoomUserType
+enum class LectureRoomUserType : int
 {
 	Host = 1,
 	Speaker = 4,
 	Audience = 5,
 	Observer = 6
+};
+
+struct LectureRoomUserData
+{
+	LectureRoomUserType type;
+	bool screenPermission;
+	bool chatPermission;
+	bool voicePermission;
+	bool videoPermission;
+	bool movePermission;
+
+	bool operator==(const LectureRoomUserData& other) const {
+		return type == other.type
+			&& screenPermission == other.screenPermission
+			&& chatPermission == other.chatPermission
+			&& voicePermission == other.voicePermission
+			&& videoPermission == other.videoPermission
+			&& movePermission == other.movePermission;
+	}
+
+	bool operator!=(const LectureRoomUserData& other) const {
+		return !(*this == other);
+	}
 };
 
 class LectureRoom : public GameRoom
@@ -29,6 +52,7 @@ public:
 	virtual void Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& session, Protocol::C_INTERACTION_SET_ITEM& pkt) override;
 
 	virtual void Handle_C_OFFICE_GET_PERMISSION(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_PERMISSION& pkt) override;
+	virtual void Handle_C_OFFICE_GET_PERMISSION_ALL(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_PERMISSION_ALL& pkt) override;
 	virtual void Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SET_PERMISSION& pkt) override;
 	virtual void Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) override;
 	virtual void Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) override;
@@ -47,11 +71,11 @@ public:
 	void SetState(shared_ptr<ClientBase> session, Protocol::C_INTERACTION_SET_ITEM pkt);
 	void RemoveState(shared_ptr<ClientBase> session, Protocol::C_INTERACTION_REMOVE_ITEM pkt);
 
-	void SetHost(string clientId);
 	//void GetHost(shared_ptr<ClientBase> session);
 	//void Break(shared_ptr<ClientBase> session);
 	void Kick(shared_ptr<ClientBase> session, string clientId);
 	void GetPermission(shared_ptr<ClientBase> session, string clientId);
+	void GetPermissionAll(shared_ptr<ClientBase> session);
 	void SetPermission(shared_ptr<ClientBase> session, Protocol::C_OFFICE_SET_PERMISSION pkt);
 	void GetRoomInfo(shared_ptr<ClientBase> session);
 	void SetRoomInfo(shared_ptr<ClientBase> session, Protocol::C_OFFICE_SET_ROOM_INFO pkt);
@@ -59,11 +83,11 @@ public:
 	void HandleShare(shared_ptr<ClientBase> session, bool isShared, int userId);
 
 	void GetWaitingList(shared_ptr<ClientBase> session);
-	void AcceptWait(shared_ptr<ClientBase> session, string clientId, bool isAccepted);
+	void AcceptWait(shared_ptr<ClientBase> session, Protocol::C_OFFICE_ACCEPT_WAIT pkt);
 
 	void Countdown();
 
-	virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer) override;
+	//virtual void Broadcast(shared_ptr<SendBuffer> sendBuffer) override;
 
 	//LectureRoom 에서는 사용하지 않음
 	virtual pair<bool, string> HandleEnter(const Protocol::C_ENTER& pkt) override { return { false, "" }; }
@@ -87,13 +111,15 @@ public:
 	bool isAdvertising;
 	bool isShutdown;
 
+	int currentPlayerNumber;
+
 	int maxObserverNumber;
 	int currentObserver;
-	map<string, shared_ptr<LectureClient>> observers;
+	//map<string, shared_ptr<LectureClient>> observers;
 
 	bool isWaitingRoom;
 	map<string, shared_ptr<LectureClient>> waitingClients;
-	map<string, shared_ptr<LectureClient>> waitingObservers;
+	//map<string, shared_ptr<LectureClient>> waitingObservers;
 
 	int runningTime;
 	int passedTime;

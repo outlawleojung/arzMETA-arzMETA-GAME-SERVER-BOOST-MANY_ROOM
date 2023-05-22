@@ -16,6 +16,8 @@ LectureRoom::LectureRoom()
 	, passedTime(0)
 	, topicType(0)
 	, currentHostId("")
+	, currentObserver(0)
+	, currentPlayerNumber(0)
 {
 	disconnectedSessionWaitTime = 10000;
 }
@@ -64,9 +66,10 @@ void LectureRoom::Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& clien
 void LectureRoom::Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_SET_ITEM& pkt) {}
 
 void LectureRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&LectureRoom::GetWaitingList, client); }
-void LectureRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&LectureRoom::AcceptWait, client, pkt.clientid(), pkt.isaccepted()); } 
+void LectureRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&LectureRoom::AcceptWait, client, pkt); } 
 void LectureRoom::Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_KICK& pkt) { DoAsync(&LectureRoom::Kick, client, pkt.clientid()); }
 void LectureRoom::Handle_C_OFFICE_GET_PERMISSION(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_PERMISSION& pkt) { DoAsync(&LectureRoom::GetPermission, client, pkt.clientid()); }
+void LectureRoom::Handle_C_OFFICE_GET_PERMISSION_ALL(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_PERMISSION_ALL& pkt) { DoAsync(&LectureRoom::GetPermissionAll, client); }
 void LectureRoom::Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_PERMISSION& pkt) { DoAsync(&LectureRoom::SetPermission, client, pkt); }
 void LectureRoom::Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { DoAsync(&LectureRoom::SetRoomInfo, client, pkt); }
 void LectureRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { DoAsync(&LectureRoom::GetRoomInfo, client); }
@@ -99,7 +102,7 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		enterResult = { true, "WAITING" };
 	}
-	else if ((!pkt.isobserver() && clients.size() >= maxPlayerNumber) || (pkt.isobserver() && observers.size() >= maxObserverNumber))
+	else if ((!pkt.isobserver() && currentPlayerNumber >= maxPlayerNumber) || (pkt.isobserver() && currentObserver >= maxObserverNumber))
 	{
 		enterResult = { true, "ROOM_IS_FULL" };
 	}
@@ -124,36 +127,36 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 	if (currentHostId.empty() && creatorId == client->clientId)
 	{
-		client->type = LectureRoomUserType::Host;
-		client->chatPermission = true;
-		client->videoPermission = true;
-		client->voicePermission = true;
-		client->screenPermission = true;
+		client->data.type = LectureRoomUserType::Host;
+		client->data.chatPermission = true;
+		client->data.videoPermission = true;
+		client->data.voicePermission = true;
+		client->data.screenPermission = true;
 	}
 	else
 	{
 		if (pkt.isobserver())
 		{
-			client->type = LectureRoomUserType::Observer;
-			client->chatPermission = false;
-			client->videoPermission = false;
-			client->voicePermission = false;
-			client->screenPermission = false;
+			client->data.type = LectureRoomUserType::Observer;
+			client->data.chatPermission = false;
+			client->data.videoPermission = false;
+			client->data.voicePermission = false;
+			client->data.screenPermission = false;
 		}
 		else
 		{
-			client->type = LectureRoomUserType::Audience;
-			client->chatPermission = true;
-			client->videoPermission = false;
-			client->voicePermission = false;
-			client->screenPermission = false;
+			client->data.type = LectureRoomUserType::Audience;
+			client->data.chatPermission = true;
+			client->data.videoPermission = false;
+			client->data.voicePermission = false;
+			client->data.screenPermission = false;
 		}
 	}
 
-	if (client->type == LectureRoomUserType::Host)
+	if (client->data.type == LectureRoomUserType::Host)
 	{
 		clients.insert({ client->clientId, client });
-		roomInfo["currentPersonnel"] = clients.size();
+		roomInfo["currentPersonnel"] = ++currentPlayerNumber;
 
 		res.set_result("SUCCESS");
 		client->Send(PacketManager::MakeSendBuffer(res));
@@ -165,18 +168,19 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		clientInfo->set_statemessage(client->stateMessage);
 		Broadcast(PacketManager::MakeSendBuffer(addClient));
 
-		SetHost(client->clientId);
+		currentHostId = client->clientId;
+		roomInfo["hostName"] = client->nickname;
+
+		createdTimeString = GetCurrentTimeString();
+		roomInfo["createdTime"] = GetCurrentTimeString();
+
+		DoAsync(&LectureRoom::Countdown);
+
+		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 	}
 	else if (isWaitingRoom)
 	{
-		if (pkt.isobserver())
-		{
-			waitingObservers.insert({ client->clientId, client });
-		}
-		else
-		{
-			waitingClients.insert({ client->clientId, client });
-		}
+		waitingClients.insert({ client->clientId, client });
 
 		res.set_result("WAITING");
 		client->Send(PacketManager::MakeSendBuffer(res));
@@ -192,13 +196,14 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		if (pkt.isobserver())
 		{
-			observers.insert({ client->clientId, client });
+			currentObserver++;
 		}
 		else
 		{
-			clients.insert({ client->clientId, client });
-			roomInfo["currentPersonnel"] = clients.size();
+			roomInfo["currentPersonnel"] = ++currentPlayerNumber;
 		}
+
+		clients.insert({ client->clientId, client });
 
 		res.set_result("SUCCESS");
 		client->Send(PacketManager::MakeSendBuffer(res));
@@ -212,74 +217,6 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	}
 }
 
-void LectureRoom::SetHost(string clientId)
-{
-	if (state != RoomState::Running) return;
-
-	if (currentHostId.empty())
-	{
-		auto host = clients.find(clientId);
-		if (host == clients.end())
-			return;
-
-		currentHostId = clientId;
-		roomInfo["hostName"] = host->second->nickname;
-
-		createdTimeString = GetCurrentTimeString();
-		roomInfo["createdTime"] = GetCurrentTimeString();
-
-		DoAsync(&LectureRoom::Countdown);
-
-		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
-	}
-	else
-	{
-		if (currentHostId == clientId)
-			return;
-
-		auto nextHost = clients.find(clientId);
-		if (nextHost == clients.end())
-			return;
-
-		auto currentHost = clients.find(currentHostId);
-
-		static_pointer_cast<LectureClient>(currentHost->second)->type = LectureRoomUserType::Audience;
-		static_pointer_cast<LectureClient>(currentHost->second)->chatPermission = true;
-		static_pointer_cast<LectureClient>(currentHost->second)->voicePermission = false;
-		static_pointer_cast<LectureClient>(currentHost->second)->videoPermission = false;
-		static_pointer_cast<LectureClient>(currentHost->second)->screenPermission = false;
-
-		static_pointer_cast<LectureClient>(nextHost->second)->type = LectureRoomUserType::Host;
-		static_pointer_cast<LectureClient>(nextHost->second)->chatPermission = true;
-		static_pointer_cast<LectureClient>(nextHost->second)->voicePermission = true;
-		static_pointer_cast<LectureClient>(nextHost->second)->videoPermission = true;
-		//screen permission 변경하지 않음
-
-		currentHostId = clientId;
-		roomInfo["hostName"] = nextHost->second->nickname;
-
-		Protocol::S_OFFICE_GET_PERMISSION toCurrent;
-		auto currentHostInfo = toCurrent.mutable_permission();
-		currentHostInfo->set_clientid(currentHost->second->clientId);
-		currentHostInfo->set_authority(static_cast<int>(static_pointer_cast<LectureClient>(currentHost->second)->type));
-		currentHostInfo->set_chatpermission(static_pointer_cast<LectureClient>(currentHost->second)->chatPermission);
-		currentHostInfo->set_voicepermission(static_pointer_cast<LectureClient>(currentHost->second)->voicePermission);
-		currentHostInfo->set_videopermission(static_pointer_cast<LectureClient>(currentHost->second)->videoPermission);
-		currentHostInfo->set_screenpermission(static_pointer_cast<LectureClient>(currentHost->second)->screenPermission);
-		currentHost->second->Send(PacketManager::MakeSendBuffer(toCurrent));
-
-		Protocol::S_OFFICE_GET_PERMISSION toNext;
-		auto nextHostInfo = toNext.mutable_permission();
-		nextHostInfo->set_clientid(nextHost->second->clientId);
-		nextHostInfo->set_authority(static_cast<int>(static_pointer_cast<LectureClient>(nextHost->second)->type));
-		nextHostInfo->set_chatpermission(static_pointer_cast<LectureClient>(nextHost->second)->chatPermission);
-		nextHostInfo->set_voicepermission(static_pointer_cast<LectureClient>(nextHost->second)->voicePermission);
-		nextHostInfo->set_videopermission(static_pointer_cast<LectureClient>(nextHost->second)->videoPermission);
-		nextHostInfo->set_screenpermission(static_pointer_cast<LectureClient>(nextHost->second)->screenPermission);
-		nextHost->second->Send(PacketManager::MakeSendBuffer(toNext));
-	}
-}
-
 void LectureRoom::Leave(shared_ptr<ClientBase> _client)
 {
 	if (state != RoomState::Running) return;
@@ -288,122 +225,155 @@ void LectureRoom::Leave(shared_ptr<ClientBase> _client)
 	
 	//대기열 먼저 확인, 존재했으면 지우고 호스트에게 알림
 	{
-		auto targetClients = client->type == LectureRoomUserType::Observer ? waitingObservers : waitingClients;
-
-		auto waitingClient = targetClients.find(client->clientId);
+		auto waitingClient = waitingClients.find(client->clientId);
 		if (waitingClient != waitingClients.end())
 		{
 			Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removedWaitingClients;
 			auto removedWaitingClient = removedWaitingClients.add_clients();
 			removedWaitingClient->set_clientid(waitingClient->second->clientId);
-			removedWaitingClient->set_isobserver(client->type == LectureRoomUserType::Observer);
+			removedWaitingClient->set_isobserver(client->data.type == LectureRoomUserType::Observer);
 			clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(removedWaitingClients));
 
-			targetClients.erase(waitingClient);
+			waitingClients.erase(waitingClient);
 			return;
 		}
 	}
 
 	GameRoom::Leave(_client);
 
-	if(client->type != LectureRoomUserType::Observer)
-		roomInfo["currentPersonnel"] = clients.size();
+	if (client->data.type != LectureRoomUserType::Observer)
+	{
+		roomInfo["currentPersonnel"] = --currentPlayerNumber;
+	}
+	else
+	{
+		currentObserver--;
+	}
 
 	if (_client->clientId == currentHostId)
 		Close();
 }
 
-void LectureRoom::GetWaitingList(shared_ptr<ClientBase> _client)
+void LectureRoom::GetWaitingList(shared_ptr<ClientBase> client)
 {
-	//if (state != RoomState::Running) return;
+	if (state != RoomState::Running) return;
 
-	//Protocol::S_OFFICE_ADD_WAITING_CLIENT waitingListPkt;
-	//for (auto wait = waitingList.begin(); wait != waitingList.end(); wait++)
-	//{
-	//	auto client = waitingListPkt.add_clients();
-	//	client->set_isobserver(wait->second.first);
-	//	client->set_clientid(wait->second.second->clientId);
-	//	client->set_nickname(wait->second.second->nickname);
-	//}
+	Protocol::S_OFFICE_ADD_WAITING_CLIENT waitingClientsPkt;
+	for (auto waitingClient = waitingClients.begin(); waitingClient != waitingClients.end(); waitingClient++)
+	{
+		auto waitingClientInfo = waitingClientsPkt.add_clients();
+		waitingClientInfo->set_isobserver(waitingClient->second->data.type == LectureRoomUserType::Observer);
+		waitingClientInfo->set_clientid(waitingClient->second->clientId);
+		waitingClientInfo->set_nickname(waitingClient->second->nickname);
+	}
 
-	//_client->Send(PacketManager::MakeSendBuffer(waitingListPkt));
+	client->Send(PacketManager::MakeSendBuffer(waitingClientsPkt));
 }
 
-void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bool isAccepted)
+void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_ACCEPT_WAIT pkt)
 {
-	//if (state != RoomState::Running) return;
+	if (state != RoomState::Running) return;
 
-	//if (_client->clientId != currentHostId) return;
+	if (_client->clientId != currentHostId) return;
 
-	//Protocol::S_OFFICE_ACCEPT_WAIT acceptWait;
+	Protocol::S_OFFICE_ACCEPT_WAIT acceptWait;
 
-	//auto client = waitingList.find(clientId);
-	//if (client == waitingList.end())
-	//{
-	//	acceptWait.set_success(false);
-	//	//set result as "no client with clientid ~"
-	//	_client->Send(PacketManager::MakeSendBuffer(acceptWait));
-	//	return;
-	//}
+	int observerCount = 0;
+	int nonObserverCount = 0;
 
-	////인원이 꽉 찬 상태에서 수락하려고 하는 경우 실패 처리
-	//if (!client->second.first && maxPlayerNumber <= currentPersonnel
-	//	|| client->second.first && maxObserverNumber <= currentObserver)
-	//{
-	//	if (isAccepted)
-	//	{
-	//		acceptWait.set_success(false);
-	//		//set result as "room is full"
-	//		_client->Send(PacketManager::MakeSendBuffer(acceptWait));
-	//		return;
-	//	}
-	//}
+	//수락하려는 클라이언트가 없는 경우 실패 처리
+	for (int i = 0; i < pkt.clientid_size(); i++)
+	{
+		auto waitingClient = waitingClients.find(pkt.clientid()[i]);
+		if (waitingClient == waitingClients.end())
+		{
+			acceptWait.set_success(false);
+			//set result as "no client with clientid ~"
+			_client->Send(PacketManager::MakeSendBuffer(acceptWait));
+			return;
+		}
 
-	////이외의 경우 성공, 호스트에게 관련 메시지 전송
-	//acceptWait.set_success(true);
-	//_client->Send(PacketManager::MakeSendBuffer(acceptWait));
+		if (waitingClient->second->data.type == LectureRoomUserType::Observer)
+		{
+			observerCount++;
+		}
+		else
+		{
+			nonObserverCount++;
+		}
+	}
 
-	//Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
-	//removeWaitingClient.add_clients(client->second.second->clientId);
-	//_client->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
+	//인원이 꽉 찬 상태에서 수락하려고 하는 경우 실패 처리
+	if (pkt.isaccepted()
+		&& (currentObserver + observerCount >= maxObserverNumber || currentPlayerNumber + nonObserverCount >= maxPlayerNumber))
+	{
+		acceptWait.set_success(false);
+		//set result as "room is full"
+		_client->Send(PacketManager::MakeSendBuffer(acceptWait));
+		return;
+	}
 
-	////대상 클라이언트에게 성공/실패 메시지 전송
-	//Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
-	//acceptWaitNotice.set_isaccepted(isAccepted);
-	//client->second.second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
+	//이외의 경우 성공, 호스트에게 관련 메시지 전송
+	acceptWait.set_success(true);
+	_client->Send(PacketManager::MakeSendBuffer(acceptWait));
 
-	////입장 허락이었을 경우의 처리, enter 시의 처리와 동일
-	//if (isAccepted)
-	//{
-	//	if (client->second.second->type == LectureRoomUserType::Observer)
-	//		client->second.second->chatPermission = false;
-	//	else
-	//		client->second.second->chatPermission = true;
+	for (int i = 0; i < pkt.clientid_size(); i++)
+	{
+		auto waitingClient = waitingClients.find(pkt.clientid()[i]);
 
-	//	client->second.second->screenPermission = false;
-	//	client->second.second->videoPermission = false;
-	//	client->second.second->voicePermission = false;
+		Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
+		auto removedWaitingClient = removeWaitingClient.add_clients();
+		removedWaitingClient->set_clientid(waitingClient->second->clientId);
+		removedWaitingClient->set_isobserver(waitingClient->second->data.type == LectureRoomUserType::Observer);
+		_client->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
 
-	//	clients.insert({ client->second.second->clientId, client->second.second });
+		//대상 클라이언트에게 성공/실패 메시지 전송
+		Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
+		acceptWaitNotice.set_isaccepted(pkt.isaccepted());
+		waitingClient->second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
 
-	//	if (client->second.first)
-	//		currentObserver++;
-	//	else
-	//	{
-	//		currentPersonnel++;
-	//		roomInfo["currentPersonnel"] = currentPersonnel;
-	//	}
-	//}
+		//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
+		if (pkt.isaccepted())
+		{
+			waitingClient->second->data.type = LectureRoomUserType::Audience;
+			waitingClient->second->data.chatPermission = true;
+			waitingClient->second->data.videoPermission = false;
+			waitingClient->second->data.voicePermission = false;
+			waitingClient->second->data.screenPermission = false;
+			waitingClient->second->data.movePermission = false;
 
-	////대기열에서 대상 퇴장
-	//client->second.second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
+			clients.insert({ waitingClient->second->clientId, waitingClient->second });
+			roomInfo["currentPersonnel"] = clients.size();
+
+			Protocol::S_ENTER res;
+			res.set_result("SUCCESS");
+			waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+
+			Protocol::S_ADD_CLIENT addClient;
+			auto clientInfo = addClient.add_clientinfos();
+			clientInfo->set_clientid(waitingClient->second->clientId);
+			clientInfo->set_nickname(waitingClient->second->clientId);
+			clientInfo->set_statemessage(waitingClient->second->stateMessage);
+			Broadcast(PacketManager::MakeSendBuffer(addClient));
+
+			waitingClients.erase(waitingClient);
+		}
+		else
+		{
+			//Protocol::S_ENTER res;
+			//res.set_result("WAITING_REJECTED");
+			//waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+
+			waitingClient->second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
+		}
+	}
 }
 
 void LectureRoom::Kick(shared_ptr<ClientBase> client, string clientId)
 {
 	if (state != RoomState::Running) return;
-
 	if (client->clientId != currentHostId) return;
+	if (clientId == currentHostId) return;
 
 	Protocol::S_OFFICE_KICK res;
 
@@ -426,49 +396,49 @@ void LectureRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 {
 	if (state != RoomState::Running) return;
 
-	if (_client->clientId != currentHostId) return;
+	auto client = clients.find(clientId);
+	if (client == clients.end())
+		return;
 
-	if (clientId.empty())
+	Protocol::S_OFFICE_GET_PERMISSION getPermission;
+	auto permission = getPermission.mutable_permission();
+
+	auto oClient = static_pointer_cast<LectureClient>(client->second);
+
+	permission->set_clientid(oClient->clientId);
+	permission->set_screenpermission(oClient->data.screenPermission);
+	permission->set_chatpermission(oClient->data.chatPermission);
+	permission->set_voicepermission(oClient->data.voicePermission);
+	permission->set_videopermission(oClient->data.videoPermission);
+	permission->set_authority(static_cast<int>(oClient->data.type));
+
+	_client->Send(PacketManager::MakeSendBuffer(getPermission));
+}
+
+void LectureRoom::GetPermissionAll(shared_ptr<ClientBase> _client)
+{
+	if (state != RoomState::Running) return;
+
+	Protocol::S_OFFICE_GET_PERMISSION_ALL getPermissionAll;
+
+	for (auto client = clients.begin(); client != clients.end(); client++)
 	{
-		Protocol::S_OFFICE_GET_PERMISSION_ALL getPermissionAll;
+		auto permission = getPermissionAll.add_permissions();
 
-		for (auto client = clients.begin(); client != clients.end(); client++)
-		{
-			auto permission = getPermissionAll.add_permissions();
+		auto oClient = static_pointer_cast<LectureClient>(client->second);
 
-			auto oClient = static_pointer_cast<LectureClient>(client->second);
-
-			permission->set_clientid(oClient->clientId);
-			permission->set_screenpermission(oClient->screenPermission);
-			permission->set_chatpermission(oClient->chatPermission);
-			permission->set_voicepermission(oClient->voicePermission);
-			permission->set_videopermission(oClient->videoPermission);
-			permission->set_authority(static_cast<int>(oClient->type));
-		}
-
-		if (getPermissionAll.permissions_size() > 0)
-		{
-			auto sendBuffer = PacketManager::MakeSendBuffer(getPermissionAll);
-			_client->Send(sendBuffer);
-		}
+		permission->set_clientid(oClient->clientId);
+		permission->set_screenpermission(oClient->data.screenPermission);
+		permission->set_chatpermission(oClient->data.chatPermission);
+		permission->set_voicepermission(oClient->data.voicePermission);
+		permission->set_videopermission(oClient->data.videoPermission);
+		permission->set_authority(static_cast<int>(oClient->data.type));
 	}
-	else
-	{
-		auto client = clients.find(clientId);
-		if (client != clients.end())
-		{
-			Protocol::S_OFFICE_GET_PERMISSION getPermission;
-			auto permission = getPermission.mutable_permission();
-			
-			auto oClient = static_pointer_cast<LectureClient>(client->second);
 
-			permission->set_clientid(oClient->clientId);
-			permission->set_screenpermission(oClient->screenPermission);
-			permission->set_chatpermission(oClient->chatPermission);
-			permission->set_voicepermission(oClient->voicePermission);
-			permission->set_videopermission(oClient->videoPermission);
-			permission->set_authority(static_cast<int>(oClient->type));
-		}
+	if (getPermissionAll.permissions_size() > 0)
+	{
+		auto sendBuffer = PacketManager::MakeSendBuffer(getPermissionAll);
+		_client->Send(sendBuffer);
 	}
 }
 
@@ -478,11 +448,42 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 
 	if (_client->clientId != currentHostId) return;
 
+	bool result = true;
+
+	map<string, LectureRoomUserData> newUserData;
+	for (int i = 0; i < pkt.permissions_size(); i++)
+	{
+		if (clients.find(pkt.permissions()[i].clientid()) == clients.end())
+		{
+			result = false;
+			goto SET_PERMISSION_LOGIC;
+		}
+
+		LectureRoomUserData userData;
+		userData.type = static_cast<LectureRoomUserType>(pkt.permissions()[i].authority());
+		userData.screenPermission = pkt.permissions()[i].screenpermission();
+		userData.chatPermission = pkt.permissions()[i].chatpermission();
+		userData.videoPermission = pkt.permissions()[i].videopermission();
+		userData.voicePermission = pkt.permissions()[i].voicepermission();
+		newUserData.insert({ pkt.permissions()[i].clientid(), userData });
+	}
+
+	for (auto& [clientId, client] : clients)
+	{
+		if (newUserData.find(clientId) != newUserData.end())
+			continue;
+
+		LectureRoomUserData userData(static_pointer_cast<LectureClient>(client)->data);
+		newUserData.insert({ client->clientId, userData });
+	}
+
 	// 요청 검증
 	// 호스트가 하나인지, 해당 호스트가 접속해 있는지 확인
 	// screen permission 이 하나인지 확인
+	// 관전자와 참가자의 수가 맞는지 확인
 
-	bool result = true;
+	int observerCount = 0;
+	int nonObserverCount = 0;
 	{
 		int hostCount = 0;
 		int screenCount = 0;
@@ -514,6 +515,25 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 					goto SET_PERMISSION_LOGIC;
 				}
 			}
+
+			if (pkt.permissions()[i].authority() == static_cast<int>(LectureRoomUserType::Observer))
+			{
+				observerCount++;
+				if (observerCount > maxObserverNumber)
+				{
+					result = false;
+					goto SET_PERMISSION_LOGIC;
+				}
+			}
+			else
+			{
+				nonObserverCount++;
+				if (nonObserverCount > maxPlayerNumber)
+				{
+					result = false;
+					goto SET_PERMISSION_LOGIC;
+				}
+			}
 		}
 
 		if (hostCount == 0)
@@ -532,55 +552,48 @@ SET_PERMISSION_LOGIC:
 	if (!result)
 		return;
 
-	//검증을 통과했을 경우
-	for (int i = 0; i < pkt.permissions_size(); i++)
+	currentObserver = observerCount;
+	currentPlayerNumber = nonObserverCount;
+	roomInfo["currentPersonnel"] = nonObserverCount;
+
+	for (auto& [clientId, userData] : newUserData)
 	{
-		auto permission = pkt.permissions().Get(i);
-		auto client = clients.find(permission.clientid());
-		if (client == clients.end())
-			continue;
+		auto client = static_pointer_cast<LectureClient>(clients.find(clientId)->second);
+		if (client->data == userData) continue;
 
-		auto oClient = static_pointer_cast<LectureClient>(client->second);
-
-		oClient->screenPermission = permission.screenpermission();
-		oClient->chatPermission = permission.chatpermission();
-		oClient->voicePermission = permission.voicepermission();
-		oClient->videoPermission = permission.videopermission();
-		oClient->type = static_cast<LectureRoomUserType>(permission.authority());
-
-		if (oClient->type == LectureRoomUserType::Host)
-			currentHostId = client->second->clientId;
-	}
-
-	{
-		Protocol::S_OFFICE_SET_PERMISSION permission;
-		permission.set_success(true);
-		auto sendBuffer = PacketManager::MakeSendBuffer(permission);
-		_client->Send(sendBuffer);
-	}
-
-	{
-		for (int i = 0; i < pkt.permissions_size(); i++)
+		if (client->data.type != LectureRoomUserType::Observer && userData.type == LectureRoomUserType::Observer)
 		{
-			auto client = clients.find(pkt.permissions().Get(i).clientid());
-			if (client == clients.end())
-				continue;
+			client->data.type = LectureRoomUserType::Observer;
+			client->data.chatPermission = false;
+			client->data.screenPermission = false;
+			client->data.videoPermission = false;
+			client->data.voicePermission = false;
+			client->data.movePermission = false;
 
-			auto oClient = static_pointer_cast<LectureClient>(client->second);
-
-			Protocol::S_OFFICE_GET_PERMISSION permissionNotice;
-
-			auto permission = permissionNotice.mutable_permission();
-
-			permission->set_screenpermission(oClient->screenPermission);
-			permission->set_chatpermission(oClient->chatPermission);
-			permission->set_voicepermission(oClient->voicePermission);
-			permission->set_videopermission(oClient->videoPermission);
-			permission->set_authority(static_cast<int>(oClient->type));
-
-			auto sendBuffer = PacketManager::MakeSendBuffer(permissionNotice);
-			client->second->Send(sendBuffer);
+			RemoveObject(client);
 		}
+		else
+		{
+			client->data = userData;
+		}
+
+		if (client->data.type == LectureRoomUserType::Host)
+		{
+			currentHostId = clientId;
+			roomInfo["hostName"] = client->nickname;
+		}
+
+		Protocol::S_OFFICE_GET_PERMISSION permissionNotice;
+
+		auto permission = permissionNotice.mutable_permission();
+
+		permission->set_screenpermission(client->data.screenPermission);
+		permission->set_chatpermission(client->data.chatPermission);
+		permission->set_voicepermission(client->data.voicePermission);
+		permission->set_videopermission(client->data.videoPermission);
+		permission->set_authority(static_cast<int>(client->data.type));
+
+		client->Send(PacketManager::MakeSendBuffer(permissionNotice));
 	}
 }
 
@@ -596,7 +609,7 @@ void LectureRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_password(password);
 	roomInfo.set_spaceinfoid(spaceInfoId);
 	roomInfo.set_personnel(maxPlayerNumber);
-	roomInfo.set_currentpersonnel(clients.size());
+	roomInfo.set_currentpersonnel(currentPlayerNumber);
 	roomInfo.set_isadvertising(isAdvertising);
 	roomInfo.set_thumbnail(thumbnail);
 	roomInfo.set_iswaitingroom(isWaitingRoom);
@@ -604,7 +617,7 @@ void LectureRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_starttime(createdTimeString);
 	roomInfo.set_runningtime(runningTime);
 	roomInfo.set_passedtime(passedTime);
-	roomInfo.set_roomcode(roomId);
+	roomInfo.set_roomcode(roomCode);
 		
 	auto host = clients.find(currentHostId);
 	if (host != clients.end())
@@ -684,7 +697,7 @@ void LectureRoom::InstantiateObject(shared_ptr<ClientBase> _client, Protocol::C_
 
 	auto oClient = static_pointer_cast<LectureClient>(client->second);
 
-	if (oClient->type == LectureRoomUserType::Observer)
+	if (oClient->data.type == LectureRoomUserType::Observer)
 		return;
 
 	GameRoom::Handle_C_BASE_INSTANTIATE_OBJECT(_client, pkt);
@@ -700,7 +713,7 @@ void LectureRoom::SetState(shared_ptr<ClientBase> _client, Protocol::C_INTERACTI
 
 	auto oClient = static_pointer_cast<LectureClient>(client->second);
 
-	if (oClient->type == LectureRoomUserType::Observer)
+	if (oClient->data.type == LectureRoomUserType::Observer)
 		return;
 
 	GameRoom::Handle_C_INTERACTION_SET_ITEM(_client, pkt);
@@ -716,7 +729,7 @@ void LectureRoom::RemoveState(shared_ptr<ClientBase> _client, Protocol::C_INTERA
 
 	auto oClient = static_pointer_cast<LectureClient>(client->second);
 
-	if (oClient->type == LectureRoomUserType::Observer)
+	if (oClient->data.type == LectureRoomUserType::Observer)
 		return;
 
 	GameRoom::Handle_C_INTERACTION_REMOVE_ITEM(_client, pkt);
@@ -737,10 +750,10 @@ void LectureRoom::Countdown()
 	this->DoTimer(60000, &LectureRoom::Countdown);
 }
 
-void LectureRoom::Broadcast(shared_ptr<SendBuffer> sendBuffer)
-{
-	RoomBase::Broadcast(sendBuffer);
-
-	for (const auto& [clientId, observer] : observers)
-		observer->Send(sendBuffer);
-}
+//void LectureRoom::Broadcast(shared_ptr<SendBuffer> sendBuffer)
+//{
+//	RoomBase::Broadcast(sendBuffer);
+//
+//	for (const auto& [clientId, observer] : observers)
+//		observer->Send(sendBuffer);
+//}

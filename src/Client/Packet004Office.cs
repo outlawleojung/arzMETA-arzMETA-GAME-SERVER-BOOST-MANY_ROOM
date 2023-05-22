@@ -33,7 +33,7 @@ namespace Protocol {
             "SUVOVBJHCgdjbGllbnRzGAEgAygLMjYuUHJvdG9jb2wuU19PRkZJQ0VfUkVN",
             "T1ZFX1dBSVRJTkdfQ0xJRU5ULldhaXRpbmdDbGllbnQaNQoNV2FpdGluZ0Ns",
             "aWVudBISCgppc09ic2VydmVyGAEgASgIEhAKCGNsaWVudElkGAIgASgJIjwK",
-            "FENfT0ZGSUNFX0FDQ0VQVF9XQUlUEhAKCGNsaWVudElkGAEgASgJEhIKCmlz",
+            "FENfT0ZGSUNFX0FDQ0VQVF9XQUlUEhAKCGNsaWVudElkGAEgAygJEhIKCmlz",
             "QWNjZXB0ZWQYAiABKAgiJwoUU19PRkZJQ0VfQUNDRVBUX1dBSVQSDwoHc3Vj",
             "Y2VzcxgBIAEoCCIxChtTX09GRklDRV9BQ0NFUFRfV0FJVF9OT1RJQ0USEgoK",
             "aXNBY2NlcHRlZBgBIAEoCCITChFDX09GRklDRV9HRVRfSE9TVCIlChFTX09G",
@@ -50,31 +50,31 @@ namespace Protocol {
             "U0lPTl9BTEwiTAobU19PRkZJQ0VfR0VUX1BFUk1JU1NJT05fQUxMEi0KC3Bl",
             "cm1pc3Npb25zGAEgAygLMhguUHJvdG9jb2wuT2ZmaWNlVXNlckluZm8iSAoX",
             "Q19PRkZJQ0VfU0VUX1BFUk1JU1NJT04SLQoLcGVybWlzc2lvbnMYASADKAsy",
-            "GC5Qcm90b2NvbC5PZmZpY2VVc2VySW5mbyIqChdTX09GRklDRV9TRVRfUEVS",
-            "TUlTU0lPThIPCgdzdWNjZXNzGAEgASgIIn8KFkNfT0ZGSUNFX1NFVF9ST09N",
-            "X0lORk8SEQoJcGVyc29ubmVsGAEgASgFEhAKCHBhc3N3b3JkGAIgASgJEhIK",
-            "CmlzU2h1dGRvd24YAyABKAgSFQoNaXNBZHZlcnRpc2luZxgEIAEoCBIVCg1p",
-            "c1dhaXRpbmdSb29tGAUgASgIIikKFlNfT0ZGSUNFX1NFVF9ST09NX0lORk8S",
-            "DwoHc3VjY2VzcxgBIAEoCCIYChZDX09GRklDRV9HRVRfUk9PTV9JTkZPIqID",
-            "ChZTX09GRklDRV9HRVRfUk9PTV9JTkZPEhAKCHJvb21OYW1lGAEgASgJEhMK",
-            "C2Rlc2NyaXB0aW9uGAIgASgJEhEKCXRvcGljVHlwZRgDIAEoBRIQCghwYXNz",
-            "d29yZBgEIAEoCRITCgtzcGFjZUluZm9JZBgFIAEoCRIRCglwZXJzb25uZWwY",
-            "BiABKAUSGAoQY3VycmVudFBlcnNvbm5lbBgHIAEoBRIQCghvYnNlcnZlchgI",
-            "IAEoBRIXCg9jdXJyZW50T2JzZXJ2ZXIYCSABKAUSFgoOY3VycmVudFdhaXRp",
-            "bmcYCiABKAUSFQoNaXNBZHZlcnRpc2luZxgLIAEoCBIRCgl0aHVtYm5haWwY",
-            "DCABKAkSFQoNaXNXYWl0aW5nUm9vbRgNIAEoCBISCgppc1NodXRkb3duGA4g",
-            "ASgIEhMKC3J1bm5pbmdUaW1lGA8gASgFEhIKCnBhc3NlZFRpbWUYECABKAUS",
-            "EQoJc3RhcnRUaW1lGBEgASgJEhAKCHJvb21jb2RlGBIgASgJEhQKDGhvc3RO",
-            "aWNrbmFtZRgTIAEoCSKKAQoVQ19PRkZJQ0VfVklERU9fU1RSRUFNEhAKCGNs",
-            "aWVudGlkGAEgASgJEgsKA3VybBgCIAEoCRIOCgZ2b2x1bWUYAyABKAISDAoE",
-            "dGltZRgEIAEoAhIMCgRwbGF5GAUgASgIEgwKBHNlZWsYBiABKAgSGAoQbWVk",
-            "aWFQbGF5ZXJTdGF0ZRgHIAEoBSKKAQoVU19PRkZJQ0VfVklERU9fU1RSRUFN",
-            "EhAKCGNsaWVudGlkGAEgASgJEgsKA3VybBgCIAEoCRIOCgZ2b2x1bWUYAyAB",
-            "KAISDAoEdGltZRgEIAEoAhIMCgRwbGF5GAUgASgIEgwKBHNlZWsYBiABKAgS",
-            "GAoQbWVkaWFQbGF5ZXJTdGF0ZRgHIAEoBSIyCg5DX09GRklDRV9TSEFSRRIQ",
-            "Cghpc1NoYXJlZBgBIAEoCBIOCgZ1c2VySWQYAiABKAUiMgoOU19PRkZJQ0Vf",
-            "U0hBUkUSEAoIaXNTaGFyZWQYASABKAgSDgoGdXNlcklkGAIgASgFYgZwcm90",
-            "bzM="));
+            "GC5Qcm90b2NvbC5PZmZpY2VVc2VySW5mbyI4ChdTX09GRklDRV9TRVRfUEVS",
+            "TUlTU0lPThIPCgdzdWNjZXNzGAEgASgIEgwKBGNvZGUYAiABKAkifwoWQ19P",
+            "RkZJQ0VfU0VUX1JPT01fSU5GTxIRCglwZXJzb25uZWwYASABKAUSEAoIcGFz",
+            "c3dvcmQYAiABKAkSEgoKaXNTaHV0ZG93bhgDIAEoCBIVCg1pc0FkdmVydGlz",
+            "aW5nGAQgASgIEhUKDWlzV2FpdGluZ1Jvb20YBSABKAgiKQoWU19PRkZJQ0Vf",
+            "U0VUX1JPT01fSU5GTxIPCgdzdWNjZXNzGAEgASgIIhgKFkNfT0ZGSUNFX0dF",
+            "VF9ST09NX0lORk8iogMKFlNfT0ZGSUNFX0dFVF9ST09NX0lORk8SEAoIcm9v",
+            "bU5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSEQoJdG9waWNUeXBl",
+            "GAMgASgFEhAKCHBhc3N3b3JkGAQgASgJEhMKC3NwYWNlSW5mb0lkGAUgASgJ",
+            "EhEKCXBlcnNvbm5lbBgGIAEoBRIYChBjdXJyZW50UGVyc29ubmVsGAcgASgF",
+            "EhAKCG9ic2VydmVyGAggASgFEhcKD2N1cnJlbnRPYnNlcnZlchgJIAEoBRIW",
+            "Cg5jdXJyZW50V2FpdGluZxgKIAEoBRIVCg1pc0FkdmVydGlzaW5nGAsgASgI",
+            "EhEKCXRodW1ibmFpbBgMIAEoCRIVCg1pc1dhaXRpbmdSb29tGA0gASgIEhIK",
+            "CmlzU2h1dGRvd24YDiABKAgSEwoLcnVubmluZ1RpbWUYDyABKAUSEgoKcGFz",
+            "c2VkVGltZRgQIAEoBRIRCglzdGFydFRpbWUYESABKAkSEAoIcm9vbWNvZGUY",
+            "EiABKAkSFAoMaG9zdE5pY2tuYW1lGBMgASgJIooBChVDX09GRklDRV9WSURF",
+            "T19TVFJFQU0SEAoIY2xpZW50aWQYASABKAkSCwoDdXJsGAIgASgJEg4KBnZv",
+            "bHVtZRgDIAEoAhIMCgR0aW1lGAQgASgCEgwKBHBsYXkYBSABKAgSDAoEc2Vl",
+            "axgGIAEoCBIYChBtZWRpYVBsYXllclN0YXRlGAcgASgFIooBChVTX09GRklD",
+            "RV9WSURFT19TVFJFQU0SEAoIY2xpZW50aWQYASABKAkSCwoDdXJsGAIgASgJ",
+            "Eg4KBnZvbHVtZRgDIAEoAhIMCgR0aW1lGAQgASgCEgwKBHBsYXkYBSABKAgS",
+            "DAoEc2VlaxgGIAEoCBIYChBtZWRpYVBsYXllclN0YXRlGAcgASgFIjIKDkNf",
+            "T0ZGSUNFX1NIQVJFEhAKCGlzU2hhcmVkGAEgASgIEg4KBnVzZXJJZBgCIAEo",
+            "BSIyCg5TX09GRklDRV9TSEFSRRIQCghpc1NoYXJlZBgBIAEoCBIOCgZ1c2Vy",
+            "SWQYAiABKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -96,7 +96,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_GET_PERMISSION_ALL), global::Protocol.C_OFFICE_GET_PERMISSION_ALL.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_GET_PERMISSION_ALL), global::Protocol.S_OFFICE_GET_PERMISSION_ALL.Parser, new[]{ "Permissions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SET_PERMISSION), global::Protocol.C_OFFICE_SET_PERMISSION.Parser, new[]{ "Permissions" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SET_PERMISSION), global::Protocol.S_OFFICE_SET_PERMISSION.Parser, new[]{ "Success" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SET_PERMISSION), global::Protocol.S_OFFICE_SET_PERMISSION.Parser, new[]{ "Success", "Code" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SET_ROOM_INFO), global::Protocol.C_OFFICE_SET_ROOM_INFO.Parser, new[]{ "Personnel", "Password", "IsShutdown", "IsAdvertising", "IsWaitingRoom" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SET_ROOM_INFO), global::Protocol.S_OFFICE_SET_ROOM_INFO.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_GET_ROOM_INFO), global::Protocol.C_OFFICE_GET_ROOM_INFO.Parser, null, null, null, null, null),
@@ -1158,7 +1158,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_OFFICE_ACCEPT_WAIT(C_OFFICE_ACCEPT_WAIT other) : this() {
-      clientId_ = other.clientId_;
+      clientId_ = other.clientId_.Clone();
       isAccepted_ = other.isAccepted_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1171,14 +1171,13 @@ namespace Protocol {
 
     /// <summary>Field number for the "clientId" field.</summary>
     public const int ClientIdFieldNumber = 1;
-    private string clientId_ = "";
+    private static readonly pb::FieldCodec<string> _repeated_clientId_codec
+        = pb::FieldCodec.ForString(10);
+    private readonly pbc::RepeatedField<string> clientId_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ClientId {
+    public pbc::RepeatedField<string> ClientId {
       get { return clientId_; }
-      set {
-        clientId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
     }
 
     /// <summary>Field number for the "isAccepted" field.</summary>
@@ -1208,7 +1207,7 @@ namespace Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ClientId != other.ClientId) return false;
+      if(!clientId_.Equals(other.clientId_)) return false;
       if (IsAccepted != other.IsAccepted) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1217,7 +1216,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (ClientId.Length != 0) hash ^= ClientId.GetHashCode();
+      hash ^= clientId_.GetHashCode();
       if (IsAccepted != false) hash ^= IsAccepted.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1237,10 +1236,7 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ClientId.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(ClientId);
-      }
+      clientId_.WriteTo(output, _repeated_clientId_codec);
       if (IsAccepted != false) {
         output.WriteRawTag(16);
         output.WriteBool(IsAccepted);
@@ -1255,10 +1251,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ClientId.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(ClientId);
-      }
+      clientId_.WriteTo(ref output, _repeated_clientId_codec);
       if (IsAccepted != false) {
         output.WriteRawTag(16);
         output.WriteBool(IsAccepted);
@@ -1273,9 +1266,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (ClientId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ClientId);
-      }
+      size += clientId_.CalculateSize(_repeated_clientId_codec);
       if (IsAccepted != false) {
         size += 1 + 1;
       }
@@ -1291,9 +1282,7 @@ namespace Protocol {
       if (other == null) {
         return;
       }
-      if (other.ClientId.Length != 0) {
-        ClientId = other.ClientId;
-      }
+      clientId_.Add(other.clientId_);
       if (other.IsAccepted != false) {
         IsAccepted = other.IsAccepted;
       }
@@ -1313,7 +1302,7 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            ClientId = input.ReadString();
+            clientId_.AddEntriesFrom(input, _repeated_clientId_codec);
             break;
           }
           case 16: {
@@ -1336,7 +1325,7 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            ClientId = input.ReadString();
+            clientId_.AddEntriesFrom(ref input, _repeated_clientId_codec);
             break;
           }
           case 16: {
@@ -4092,6 +4081,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_OFFICE_SET_PERMISSION(S_OFFICE_SET_PERMISSION other) : this() {
       success_ = other.success_;
+      code_ = other.code_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4113,6 +4103,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "code" field.</summary>
+    public const int CodeFieldNumber = 2;
+    private string code_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Code {
+      get { return code_; }
+      set {
+        code_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4129,6 +4131,7 @@ namespace Protocol {
         return true;
       }
       if (Success != other.Success) return false;
+      if (Code != other.Code) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4137,6 +4140,7 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (Success != false) hash ^= Success.GetHashCode();
+      if (Code.Length != 0) hash ^= Code.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4159,6 +4163,10 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteBool(Success);
       }
+      if (Code.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Code);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4173,6 +4181,10 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteBool(Success);
       }
+      if (Code.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Code);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4185,6 +4197,9 @@ namespace Protocol {
       int size = 0;
       if (Success != false) {
         size += 1 + 1;
+      }
+      if (Code.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Code);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4200,6 +4215,9 @@ namespace Protocol {
       }
       if (other.Success != false) {
         Success = other.Success;
+      }
+      if (other.Code.Length != 0) {
+        Code = other.Code;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4220,6 +4238,10 @@ namespace Protocol {
             Success = input.ReadBool();
             break;
           }
+          case 18: {
+            Code = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -4237,6 +4259,10 @@ namespace Protocol {
             break;
           case 8: {
             Success = input.ReadBool();
+            break;
+          }
+          case 18: {
+            Code = input.ReadString();
             break;
           }
         }

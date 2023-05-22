@@ -94,7 +94,7 @@ void MeetingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_E
 }
 
 void MeetingRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&MeetingRoom::GetWaitingList, client); }
-void MeetingRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&MeetingRoom::AcceptWait, client, pkt.clientid(), pkt.isaccepted()); }
+void MeetingRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&MeetingRoom::AcceptWait, client, pkt); }
 void MeetingRoom::Handle_C_OFFICE_GET_HOST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_HOST& pkt) { DoAsync(&MeetingRoom::GetHost, client); }
 void MeetingRoom::Handle_C_OFFICE_BREAK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_BREAK& pkt) { DoAsync(&MeetingRoom::Break, client); }
 void MeetingRoom::Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_KICK& pkt) { DoAsync(&MeetingRoom::Kick, client, pkt.clientid()); }
@@ -346,7 +346,7 @@ void MeetingRoom::GetWaitingList(shared_ptr<ClientBase> _client)
 	_client->Send(PacketManager::MakeSendBuffer(waitingListPkt));
 }
 
-void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bool isAccepted)
+void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_ACCEPT_WAIT pkt)
 {
 	if (state != RoomState::Running) return;
 
@@ -355,17 +355,20 @@ void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bo
 	Protocol::S_OFFICE_ACCEPT_WAIT acceptWait;
 
 	//수락하려는 클라이언트가 없는 경우 실패 처리
-	auto waitingClient = waitingClients.find(clientId);
-	if (waitingClient == waitingClients.end())
+	for (int i = 0; i < pkt.clientid_size(); i++)
 	{
-		acceptWait.set_success(false);
-		//set result as "no client with clientid ~"
-		_client->Send(PacketManager::MakeSendBuffer(acceptWait));
-		return;
+		auto waitingClient = waitingClients.find(pkt.clientid()[i]);
+		if (waitingClient == waitingClients.end())
+		{
+			acceptWait.set_success(false);
+			//set result as "no client with clientid ~"
+			_client->Send(PacketManager::MakeSendBuffer(acceptWait));
+			return;
+		}
 	}
 
 	//인원이 꽉 찬 상태에서 수락하려고 하는 경우 실패 처리
-	if (isAccepted && clients.size() >= maxPlayerNumber)
+	if (pkt.isaccepted() && pkt.clientid_size() + clients.size() > maxPlayerNumber)
 	{
 		acceptWait.set_success(false);
 		//set result as "room is full"
@@ -377,48 +380,53 @@ void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bo
 	acceptWait.set_success(true);
 	_client->Send(PacketManager::MakeSendBuffer(acceptWait));
 
-	Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
-	auto removedWaitingClient = removeWaitingClient.add_clients();
-	removedWaitingClient->set_clientid(waitingClient->second->clientId);
-	_client->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
-
-	//대상 클라이언트에게 성공/실패 메시지 전송
-	Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
-	acceptWaitNotice.set_isaccepted(isAccepted);
-	waitingClient->second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
-
-	//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
-	if (isAccepted)
+	for (int i = 0; i < pkt.clientid_size(); i++)
 	{
-		waitingClient->second->data.type = MeetingRoomUserType::Guest;
-		waitingClient->second->data.chatPermission = true;
-		waitingClient->second->data.videoPermission = false;
-		waitingClient->second->data.voicePermission = false;
-		waitingClient->second->data.screenPermission = false;
+		auto waitingClient = waitingClients.find(pkt.clientid()[i]);
 
-		clients.insert({ waitingClient->second->clientId, waitingClient->second });
-		roomInfo["currentPersonnel"] = clients.size();
+		Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removeWaitingClient;
+		auto removedWaitingClient = removeWaitingClient.add_clients();
+		removedWaitingClient->set_clientid(waitingClient->second->clientId);
+		_client->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
 
-		Protocol::S_ENTER res;
-		res.set_result("SUCCESS");
-		waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+		//대상 클라이언트에게 성공/실패 메시지 전송
+		Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
+		acceptWaitNotice.set_isaccepted(pkt.isaccepted());
+		waitingClient->second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
 
-		Protocol::S_ADD_CLIENT addClient;
-		auto clientInfo = addClient.add_clientinfos();
-		clientInfo->set_clientid(waitingClient->second->clientId);
-		clientInfo->set_nickname(waitingClient->second->clientId);
-		clientInfo->set_statemessage(waitingClient->second->stateMessage);
-		Broadcast(PacketManager::MakeSendBuffer(addClient));
+		//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
+		if (pkt.isaccepted())
+		{
+			waitingClient->second->data.type = MeetingRoomUserType::Guest;
+			waitingClient->second->data.chatPermission = true;
+			waitingClient->second->data.videoPermission = false;
+			waitingClient->second->data.voicePermission = false;
+			waitingClient->second->data.screenPermission = false;
 
-		waitingClients.erase(waitingClient);
-	}
-	else
-	{
-		//Protocol::S_ENTER res;
-		//res.set_result("WAITING_REJECTED");
-		//waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+			clients.insert({ waitingClient->second->clientId, waitingClient->second });
+			roomInfo["currentPersonnel"] = clients.size();
 
-		waitingClient->second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
+			Protocol::S_ENTER res;
+			res.set_result("SUCCESS");
+			waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+
+			Protocol::S_ADD_CLIENT addClient;
+			auto clientInfo = addClient.add_clientinfos();
+			clientInfo->set_clientid(waitingClient->second->clientId);
+			clientInfo->set_nickname(waitingClient->second->clientId);
+			clientInfo->set_statemessage(waitingClient->second->stateMessage);
+			Broadcast(PacketManager::MakeSendBuffer(addClient));
+
+			waitingClients.erase(waitingClient);
+		}
+		else
+		{
+			//Protocol::S_ENTER res;
+			//res.set_result("WAITING_REJECTED");
+			//waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+
+			waitingClient->second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
+		}
 	}
 }
 

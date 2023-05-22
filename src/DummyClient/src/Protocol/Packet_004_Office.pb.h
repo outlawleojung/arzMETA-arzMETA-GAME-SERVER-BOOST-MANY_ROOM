@@ -1073,18 +1073,28 @@ class C_OFFICE_ACCEPT_WAIT final :
     kClientIdFieldNumber = 1,
     kIsAcceptedFieldNumber = 2,
   };
-  // string clientId = 1;
-  void clear_clientid();
-  const std::string& clientid() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_clientid(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_clientid();
-  PROTOBUF_NODISCARD std::string* release_clientid();
-  void set_allocated_clientid(std::string* clientid);
+  // repeated string clientId = 1;
+  int clientid_size() const;
   private:
-  const std::string& _internal_clientid() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_clientid(const std::string& value);
-  std::string* _internal_mutable_clientid();
+  int _internal_clientid_size() const;
+  public:
+  void clear_clientid();
+  const std::string& clientid(int index) const;
+  std::string* mutable_clientid(int index);
+  void set_clientid(int index, const std::string& value);
+  void set_clientid(int index, std::string&& value);
+  void set_clientid(int index, const char* value);
+  void set_clientid(int index, const char* value, size_t size);
+  std::string* add_clientid();
+  void add_clientid(const std::string& value);
+  void add_clientid(std::string&& value);
+  void add_clientid(const char* value);
+  void add_clientid(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& clientid() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_clientid();
+  private:
+  const std::string& _internal_clientid(int index) const;
+  std::string* _internal_add_clientid();
   public:
 
   // bool isAccepted = 2;
@@ -1104,7 +1114,7 @@ class C_OFFICE_ACCEPT_WAIT final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientid_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> clientid_;
     bool isaccepted_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -3318,8 +3328,23 @@ class S_OFFICE_SET_PERMISSION final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kCodeFieldNumber = 2,
     kSuccessFieldNumber = 1,
   };
+  // string code = 2;
+  void clear_code();
+  const std::string& code() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_code(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_code();
+  PROTOBUF_NODISCARD std::string* release_code();
+  void set_allocated_code(std::string* code);
+  private:
+  const std::string& _internal_code() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_code(const std::string& value);
+  std::string* _internal_mutable_code();
+  public:
+
   // bool success = 1;
   void clear_success();
   bool success() const;
@@ -3337,6 +3362,7 @@ class S_OFFICE_SET_PERMISSION final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr code_;
     bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -5259,54 +5285,79 @@ S_OFFICE_REMOVE_WAITING_CLIENT::clients() const {
 
 // C_OFFICE_ACCEPT_WAIT
 
-// string clientId = 1;
+// repeated string clientId = 1;
+inline int C_OFFICE_ACCEPT_WAIT::_internal_clientid_size() const {
+  return _impl_.clientid_.size();
+}
+inline int C_OFFICE_ACCEPT_WAIT::clientid_size() const {
+  return _internal_clientid_size();
+}
 inline void C_OFFICE_ACCEPT_WAIT::clear_clientid() {
-  _impl_.clientid_.ClearToEmpty();
+  _impl_.clientid_.Clear();
 }
-inline const std::string& C_OFFICE_ACCEPT_WAIT::clientid() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
-  return _internal_clientid();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void C_OFFICE_ACCEPT_WAIT::set_clientid(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.clientid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
-}
-inline std::string* C_OFFICE_ACCEPT_WAIT::mutable_clientid() {
-  std::string* _s = _internal_mutable_clientid();
-  // @@protoc_insertion_point(field_mutable:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+inline std::string* C_OFFICE_ACCEPT_WAIT::add_clientid() {
+  std::string* _s = _internal_add_clientid();
+  // @@protoc_insertion_point(field_add_mutable:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
   return _s;
 }
-inline const std::string& C_OFFICE_ACCEPT_WAIT::_internal_clientid() const {
-  return _impl_.clientid_.Get();
+inline const std::string& C_OFFICE_ACCEPT_WAIT::_internal_clientid(int index) const {
+  return _impl_.clientid_.Get(index);
 }
-inline void C_OFFICE_ACCEPT_WAIT::_internal_set_clientid(const std::string& value) {
-  
-  _impl_.clientid_.Set(value, GetArenaForAllocation());
+inline const std::string& C_OFFICE_ACCEPT_WAIT::clientid(int index) const {
+  // @@protoc_insertion_point(field_get:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+  return _internal_clientid(index);
 }
-inline std::string* C_OFFICE_ACCEPT_WAIT::_internal_mutable_clientid() {
-  
-  return _impl_.clientid_.Mutable(GetArenaForAllocation());
+inline std::string* C_OFFICE_ACCEPT_WAIT::mutable_clientid(int index) {
+  // @@protoc_insertion_point(field_mutable:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+  return _impl_.clientid_.Mutable(index);
 }
-inline std::string* C_OFFICE_ACCEPT_WAIT::release_clientid() {
-  // @@protoc_insertion_point(field_release:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
-  return _impl_.clientid_.Release();
+inline void C_OFFICE_ACCEPT_WAIT::set_clientid(int index, const std::string& value) {
+  _impl_.clientid_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
 }
-inline void C_OFFICE_ACCEPT_WAIT::set_allocated_clientid(std::string* clientid) {
-  if (clientid != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.clientid_.SetAllocated(clientid, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.clientid_.IsDefault()) {
-    _impl_.clientid_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+inline void C_OFFICE_ACCEPT_WAIT::set_clientid(int index, std::string&& value) {
+  _impl_.clientid_.Mutable(index)->assign(std::move(value));
+  // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+}
+inline void C_OFFICE_ACCEPT_WAIT::set_clientid(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.clientid_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+}
+inline void C_OFFICE_ACCEPT_WAIT::set_clientid(int index, const char* value, size_t size) {
+  _impl_.clientid_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+}
+inline std::string* C_OFFICE_ACCEPT_WAIT::_internal_add_clientid() {
+  return _impl_.clientid_.Add();
+}
+inline void C_OFFICE_ACCEPT_WAIT::add_clientid(const std::string& value) {
+  _impl_.clientid_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+}
+inline void C_OFFICE_ACCEPT_WAIT::add_clientid(std::string&& value) {
+  _impl_.clientid_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+}
+inline void C_OFFICE_ACCEPT_WAIT::add_clientid(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.clientid_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+}
+inline void C_OFFICE_ACCEPT_WAIT::add_clientid(const char* value, size_t size) {
+  _impl_.clientid_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+C_OFFICE_ACCEPT_WAIT::clientid() const {
+  // @@protoc_insertion_point(field_list:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+  return _impl_.clientid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+C_OFFICE_ACCEPT_WAIT::mutable_clientid() {
+  // @@protoc_insertion_point(field_mutable_list:Protocol.C_OFFICE_ACCEPT_WAIT.clientId)
+  return &_impl_.clientid_;
 }
 
 // bool isAccepted = 2;
@@ -5957,6 +6008,56 @@ inline void S_OFFICE_SET_PERMISSION::_internal_set_success(bool value) {
 inline void S_OFFICE_SET_PERMISSION::set_success(bool value) {
   _internal_set_success(value);
   // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION.success)
+}
+
+// string code = 2;
+inline void S_OFFICE_SET_PERMISSION::clear_code() {
+  _impl_.code_.ClearToEmpty();
+}
+inline const std::string& S_OFFICE_SET_PERMISSION::code() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_SET_PERMISSION.code)
+  return _internal_code();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_OFFICE_SET_PERMISSION::set_code(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.code_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION.code)
+}
+inline std::string* S_OFFICE_SET_PERMISSION::mutable_code() {
+  std::string* _s = _internal_mutable_code();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_OFFICE_SET_PERMISSION.code)
+  return _s;
+}
+inline const std::string& S_OFFICE_SET_PERMISSION::_internal_code() const {
+  return _impl_.code_.Get();
+}
+inline void S_OFFICE_SET_PERMISSION::_internal_set_code(const std::string& value) {
+  
+  _impl_.code_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_OFFICE_SET_PERMISSION::_internal_mutable_code() {
+  
+  return _impl_.code_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_OFFICE_SET_PERMISSION::release_code() {
+  // @@protoc_insertion_point(field_release:Protocol.S_OFFICE_SET_PERMISSION.code)
+  return _impl_.code_.Release();
+}
+inline void S_OFFICE_SET_PERMISSION::set_allocated_code(std::string* code) {
+  if (code != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.code_.SetAllocated(code, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.code_.IsDefault()) {
+    _impl_.code_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_OFFICE_SET_PERMISSION.code)
 }
 
 // -------------------------------------------------------------------

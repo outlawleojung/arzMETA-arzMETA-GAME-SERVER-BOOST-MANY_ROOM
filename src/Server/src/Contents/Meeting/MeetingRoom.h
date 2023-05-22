@@ -79,7 +79,7 @@ public:
 	void HandleShare(shared_ptr<ClientBase> client, bool isShared, int userId);
 
 	void GetWaitingList(shared_ptr<ClientBase> client);
-	void AcceptWait(shared_ptr<ClientBase> client, string clientId, bool isAccepted);
+	void AcceptWait(shared_ptr<ClientBase> client, Protocol::C_OFFICE_ACCEPT_WAIT pkt);
 
 	void Countdown();
 
