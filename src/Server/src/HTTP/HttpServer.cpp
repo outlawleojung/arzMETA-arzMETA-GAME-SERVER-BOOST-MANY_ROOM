@@ -39,7 +39,7 @@ void HttpServer::start(string ip, int port)
 
         nlohmann::json body = nlohmann::json::parse(bodyStr);
 		
-		cout << body.dump() << endl;
+		GLogManager->Log("MakeRoom Request : ", body.dump());
 
 		auto type = stringToRoomType(body["roomType"].get<string>());
 
@@ -197,16 +197,14 @@ void HttpServer::start(string ip, int port)
 			return true;
 			});
 
-		cout << bodyStr << endl;
-
 		nlohmann::json body = nlohmann::json::parse(bodyStr);
+
+		GLogManager->Log("Login Request : ", body.dump());
 
 		int sessionId = GClientManager->SetSessionId(body["clientId"]);
 
 		nlohmann::json resJson;
 		resJson["sessionId"] = sessionId;
-
-		cout << "test!" << endl;
 
 		res.set_content(resJson.dump(), "application/json");
 		});
