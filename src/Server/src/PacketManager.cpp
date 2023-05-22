@@ -18,7 +18,6 @@ bool Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt)
 	if (room == GRoomManager->rooms.end())
 	{
 		Protocol::S_ENTER res;
-		GLogManager->Log("WRONG_ROOM_ID :	        	", pkt.roomid());
 		res.set_result("WRONG_ROOM_ID");
 		session->Send(PacketManager::MakeSendBuffer(res));
 		return false;
