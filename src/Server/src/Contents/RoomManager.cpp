@@ -17,6 +17,8 @@ void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 
     rooms.insert({ room->roomId, room });
 
+    GLogManager->Log("Room Added, Type :	        	", roomTypeToString(room->type));
+    GLogManager->Log("Room Added, Roomid :	        	", room->roomId);
     GLogManager->Log("Total Room Number :	        	", to_string(rooms.size()));
 }
 
