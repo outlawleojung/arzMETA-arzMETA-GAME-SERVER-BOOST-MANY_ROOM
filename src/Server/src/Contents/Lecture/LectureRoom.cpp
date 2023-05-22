@@ -449,6 +449,8 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 	if (_client->clientId != currentHostId) return;
 
 	bool result = true;
+	int observerCount = 0;
+	int nonObserverCount = 0;
 
 	map<string, LectureRoomUserData> newUserData;
 	for (int i = 0; i < pkt.permissions_size(); i++)
@@ -482,8 +484,6 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 	// screen permission 이 하나인지 확인
 	// 관전자와 참가자의 수가 맞는지 확인
 
-	int observerCount = 0;
-	int nonObserverCount = 0;
 	{
 		int hostCount = 0;
 		int screenCount = 0;
