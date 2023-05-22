@@ -89,7 +89,9 @@ void MeetingRoom::HandleClose()
 	GameRoom::HandleClose();
 }
 
-void MeetingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&MeetingRoom::Enter, session, pkt); }
+void MeetingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { 
+	DoAsync(&MeetingRoom::Enter, session, pkt); 
+}
 
 void MeetingRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&MeetingRoom::GetWaitingList, client); }
 void MeetingRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&MeetingRoom::AcceptWait, client, pkt.clientid(), pkt.isaccepted()); }
@@ -259,7 +261,7 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 				pstmt->setString(6, description);
 				pstmt->setString(7, password);
 				pstmt->setInt(8, runningTime);
-				pstmt->setInt(9, stoi(spaceInfoId)); //spaceInfoId 가 int 형식인지 확인할 것
+				pstmt->setInt(9, stoi(spaceInfoId));
 				pstmt->setInt(10, maxPlayerNumber);
 				//reservationAt
 				pstmt->setInt(11, calculateMinutesSinceMidnight());
@@ -412,6 +414,10 @@ void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, string clientId, bo
 	}
 	else
 	{
+		//Protocol::S_ENTER res;
+		//res.set_result("WAITING_REJECTED");
+		//waitingClient->second->Send(PacketManager::MakeSendBuffer(res));
+
 		waitingClient->second->DoAsync(&ClientBase::Leave, string("WAITING_REJECTED"));
 	}
 }
@@ -456,12 +462,11 @@ void MeetingRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 {
 	if (state != RoomState::Running) return;
 
-	Protocol::S_OFFICE_GET_PERMISSION getPermission;
-
 	auto client = clients.find(clientId);
 	if (client == clients.end())
 		return;
 
+	Protocol::S_OFFICE_GET_PERMISSION getPermission;
 	auto permission = getPermission.mutable_permission();
 
 	auto oClient = static_pointer_cast<MeetingClient>(client->second);
@@ -473,8 +478,7 @@ void MeetingRoom::GetPermission(shared_ptr<ClientBase> _client, string clientId)
 	permission->set_videopermission(oClient->data.videoPermission);
 	permission->set_authority(static_cast<int>(oClient->data.type));
 
-	auto sendBuffer = PacketManager::MakeSendBuffer(getPermission);
-	_client->Send(sendBuffer);
+	_client->Send(PacketManager::MakeSendBuffer(getPermission));
 }
 
 void MeetingRoom::GetPermissionAll(shared_ptr<ClientBase> client)
@@ -535,12 +539,7 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 		if (newUserData.find(clientId) != newUserData.end())
 			continue;
 
-		MeetingRoomUserData userData;
-		userData.type = static_pointer_cast<MeetingClient>(client)->data.type;
-		userData.screenPermission = static_pointer_cast<MeetingClient>(client)->data.screenPermission;
-		userData.chatPermission = static_pointer_cast<MeetingClient>(client)->data.chatPermission;
-		userData.videoPermission = static_pointer_cast<MeetingClient>(client)->data.videoPermission;
-		userData.voicePermission = static_pointer_cast<MeetingClient>(client)->data.voicePermission;
+		MeetingRoomUserData userData(static_pointer_cast<MeetingClient>(client)->data);
 		newUserData.insert({ client->clientId, userData });
 	}
 
@@ -640,7 +639,7 @@ void MeetingRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_starttime(createdTimeString);
 	roomInfo.set_runningtime(runningTime);
 	roomInfo.set_passedtime(passedTime);
-	roomInfo.set_roomcode(roomId);
+	roomInfo.set_roomcode(roomCode);
 
 	auto host = clients.find(currentHostId);
 	if (host != clients.end())
