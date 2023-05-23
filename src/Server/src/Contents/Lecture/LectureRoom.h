@@ -41,6 +41,7 @@ class LectureRoom : public GameRoom
 {
 public:
 	LectureRoom();
+	virtual ~LectureRoom();
 
 	virtual void Init() override;
 

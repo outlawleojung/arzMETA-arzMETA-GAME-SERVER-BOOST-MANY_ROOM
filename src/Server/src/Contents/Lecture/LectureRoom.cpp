@@ -8,6 +8,13 @@
 
 #include "../ClientManager.h"
 
+#include <mysql_connection.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
+
 LectureRoom::LectureRoom()
 	: isWaitingRoom(false)
 	, isPassword(false)
@@ -21,6 +28,28 @@ LectureRoom::LectureRoom()
 	, maxObserverNumber(0)
 {
 	disconnectedSessionWaitTime = 10000;
+}
+
+LectureRoom::~LectureRoom()
+{
+	sql::Driver* driver;
+	std::unique_ptr<sql::Connection> con;
+	std::unique_ptr<sql::ResultSet> res;
+	std::unique_ptr<sql::PreparedStatement> pstmt;
+
+	driver = get_driver_instance();
+
+	con.reset(driver->connect(
+		DBDomain,
+		DBUsername,
+		DBPassword
+	));
+
+	con->setSchema(DBSchema);
+
+	pstmt.reset(con->prepareStatement("DELETE FROM memberofficereservationinfo WHERE roomCode = ?"));
+	pstmt->setString(1, roomCode);
+	res.reset(pstmt->executeQuery());
 }
 
 void LectureRoom::Init()
@@ -178,6 +207,63 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		DoAsync(&LectureRoom::Countdown);
 
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+
+		{
+			sql::Driver* driver;
+			std::unique_ptr<sql::Connection> con;
+			std::unique_ptr<sql::Statement> stmt;
+			std::unique_ptr<sql::ResultSet> res;
+			std::unique_ptr<sql::PreparedStatement> pstmt;
+
+			driver = get_driver_instance();
+
+			con.reset(driver->connect(
+				DBDomain,
+				DBUsername,
+				DBPassword
+			));
+
+			con->setSchema(DBSchema);
+
+			stmt.reset(con->createStatement());
+			stmt->execute("SET NAMES 'utf8mb4'");
+
+			string memberId;
+			pstmt.reset(con->prepareStatement("SELECT memberId FROM member WHERE memberCode = ?"));
+			pstmt->setString(1, client->clientId);
+			res.reset(pstmt->executeQuery());
+			if (res->next())
+				memberId = res->getString(1);
+
+			pstmt.reset(con->prepareStatement("SELECT roomCode FROM memberofficereservationinfo WHERE roomCode = ?"));
+			pstmt->setString(1, roomCode);
+			res.reset(pstmt->executeQuery());
+
+			if (!res->next()) {
+				pstmt.reset(con->prepareStatement(
+					"INSERT INTO memberofficereservationinfo(roomCode, memberId, name, modeType, topicType, description, password, runningTime, spaceInfoId, personnel, reservationAt, startTime, repeatDay, alarmType, thumbnail, isAdvertising, isWaitingRoom, observer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ADDDATE(CURDATE(), INTERVAL 9 HOUR), ?, ?, ?, ?, ?, ?, ?)"
+				));
+				pstmt->setString(1, roomCode);
+				pstmt->setString(2, memberId);
+				pstmt->setString(3, roomName);
+				pstmt->setInt(4, 2);
+				pstmt->setInt(5, topicType);
+				pstmt->setString(6, description);
+				pstmt->setString(7, password);
+				pstmt->setInt(8, runningTime);
+				pstmt->setInt(9, stoi(spaceInfoId));
+				pstmt->setInt(10, maxPlayerNumber);
+				//reservationAt
+				pstmt->setInt(11, calculateMinutesSinceMidnight());
+				pstmt->setInt(12, 0);
+				pstmt->setInt(13, 0);
+				pstmt->setString(14, thumbnail);
+				pstmt->setBoolean(15, isAdvertising);
+				pstmt->setBoolean(16, isWaitingRoom);
+				pstmt->setInt(17, maxObserverNumber);
+				pstmt->executeUpdate();
+			}
+		}
 	}
 	else if (isWaitingRoom)
 	{
