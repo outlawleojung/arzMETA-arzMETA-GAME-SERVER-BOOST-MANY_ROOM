@@ -18,6 +18,7 @@ LectureRoom::LectureRoom()
 	, currentHostId("")
 	, currentObserver(0)
 	, currentPlayerNumber(0)
+	, maxObserverNumber(0)
 {
 	disconnectedSessionWaitTime = 10000;
 }
@@ -305,7 +306,7 @@ void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 
 	//인원이 꽉 찬 상태에서 수락하려고 하는 경우 실패 처리
 	if (pkt.isaccepted()
-		&& (currentObserver + observerCount >= maxObserverNumber || currentPlayerNumber + nonObserverCount >= maxPlayerNumber))
+		&& (currentObserver + observerCount > maxObserverNumber || currentPlayerNumber + nonObserverCount > maxPlayerNumber))
 	{
 		acceptWait.set_success(false);
 		//set result as "room is full"
@@ -352,7 +353,7 @@ void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 			Protocol::S_ADD_CLIENT addClient;
 			auto clientInfo = addClient.add_clientinfos();
 			clientInfo->set_clientid(waitingClient->second->clientId);
-			clientInfo->set_nickname(waitingClient->second->clientId);
+			clientInfo->set_nickname(waitingClient->second->nickname);
 			clientInfo->set_statemessage(waitingClient->second->stateMessage);
 			Broadcast(PacketManager::MakeSendBuffer(addClient));
 
@@ -613,6 +614,7 @@ void LectureRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_isadvertising(isAdvertising);
 	roomInfo.set_thumbnail(thumbnail);
 	roomInfo.set_iswaitingroom(isWaitingRoom);
+	roomInfo.set_currentwaiting(waitingClients.size());
 	roomInfo.set_isshutdown(isShutdown);
 	roomInfo.set_starttime(createdTimeString);
 	roomInfo.set_runningtime(runningTime);
