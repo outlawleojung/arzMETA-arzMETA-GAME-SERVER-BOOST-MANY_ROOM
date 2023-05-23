@@ -15,6 +15,7 @@ public:
 	virtual void Handle_C_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_GET_CLIENT& pkt) {};
 	virtual void Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt) {};
 	virtual void Handle_C_CHAT(shared_ptr<ClientBase>& client, Protocol::C_CHAT& pkt) {};
+	virtual void Handle_C_WILDCARD(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD& pkt) {};
 	virtual void Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) {};
 	virtual void Handle_C_BASE_REMOVE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_REMOVE_OBJECT& pkt) {};
 	virtual void Handle_C_BASE_GET_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_GET_OBJECT& pkt) {};
