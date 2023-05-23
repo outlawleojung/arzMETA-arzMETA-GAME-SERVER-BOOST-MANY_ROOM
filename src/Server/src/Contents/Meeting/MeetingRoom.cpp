@@ -290,7 +290,9 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 		auto waitingClient = addWaitingClient.add_clients();
 		waitingClient->set_clientid(client->clientId);
 		waitingClient->set_nickname(client->nickname);
-		clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(addWaitingClient));
+		auto host = clients.find(currentHostId);
+		if(host != clients.end())
+			host->second->session->Send(PacketManager::MakeSendBuffer(addWaitingClient));
 	}
 	else
 	{
