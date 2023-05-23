@@ -118,7 +118,10 @@ void MeetingRoom::Leave(shared_ptr<ClientBase> _client)
 			Protocol::S_OFFICE_REMOVE_WAITING_CLIENT removedWaitingClients;
 			auto removedWaitingClient = removedWaitingClients.add_clients();
 			removedWaitingClient->set_clientid(waitingClient->second->clientId);
-			clients.find(currentHostId)->second->session->Send(PacketManager::MakeSendBuffer(removedWaitingClients));
+			//host 가 먼저 나가서 방이 사라졌을 때, 남아있는 사람들이 나가려고 하는 경우 currenthostid 를 가진 client 가 없을 수 있다
+			auto host = clients.find(currentHostId);
+			if(host != clients.end())
+				host->second->session->Send(PacketManager::MakeSendBuffer(removedWaitingClients));
 
 			waitingClients.erase(waitingClient);
 			return;
