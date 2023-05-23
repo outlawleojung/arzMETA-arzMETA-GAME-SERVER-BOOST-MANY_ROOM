@@ -44,6 +44,8 @@ public class RealtimePacket
 	    PKT_C_CHAT = 11,
 	    PKT_S_CHAT = 12,
 	    PKT_S_DISCONNECT = 13,
+	    PKT_C_WILDCARD = 14,
+	    PKT_S_WILDCARD = 15,
 	    PKT_C_BASE_INSTANTIATE_OBJECT = 100,
 	    PKT_S_BASE_INSTANTIATE_OBJECT = 101,
 	    PKT_C_BASE_REMOVE_OBJECT = 102,
@@ -152,6 +154,8 @@ public class RealtimePacket
 		_handler.Add((ushort)MsgId.PKT_S_CHAT, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_DISCONNECT, MakePacket<S_DISCONNECT>);
 		_handler.Add((ushort)MsgId.PKT_S_DISCONNECT, new Dictionary<object, Action<PacketSession, IMessage>>());
+        _onRecv.Add((ushort)MsgId.PKT_S_WILDCARD, MakePacket<S_WILDCARD>);
+		_handler.Add((ushort)MsgId.PKT_S_WILDCARD, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_BASE_INSTANTIATE_OBJECT, MakePacket<S_BASE_INSTANTIATE_OBJECT>);
 		_handler.Add((ushort)MsgId.PKT_S_BASE_INSTANTIATE_OBJECT, new Dictionary<object, Action<PacketSession, IMessage>>());
         _onRecv.Add((ushort)MsgId.PKT_S_BASE_ADD_OBJECT, MakePacket<S_BASE_ADD_OBJECT>);

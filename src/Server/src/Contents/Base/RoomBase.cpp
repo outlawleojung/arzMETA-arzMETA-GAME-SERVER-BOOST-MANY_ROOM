@@ -43,6 +43,13 @@ void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE&
 void RoomBase::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt) { DoAsync(&RoomBase::SetNickname, client, pkt.nickname()); }
 void RoomBase::Handle_C_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_GET_CLIENT& pkt) { DoAsync(&RoomBase::GetClient, client); }
 void RoomBase::Handle_C_CHAT(shared_ptr<ClientBase>& client, Protocol::C_CHAT& pkt) { DoAsync(&RoomBase::HandleChat, client, pkt.chat()); }
+void RoomBase::Handle_C_WILDCARD(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD& pkt)
+{
+	Protocol::S_WILDCARD res;
+	res.set_code(pkt.code());
+	res.set_allocated_data(pkt.release_data());
+	Broadcast(PacketManager::MakeSendBuffer(res));
+}
 
 void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 {

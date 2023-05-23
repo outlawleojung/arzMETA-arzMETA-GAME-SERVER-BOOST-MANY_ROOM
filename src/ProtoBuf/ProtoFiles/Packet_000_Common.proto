@@ -82,3 +82,15 @@ message S_DISCONNECT
 {
 	string code = 1;
 }
+
+message C_WILDCARD
+{
+	int32 code = 1;
+	string data = 2;
+}
+
+message S_WILDCARD
+{
+	int32 code = 1;
+	string data = 2;
+}
