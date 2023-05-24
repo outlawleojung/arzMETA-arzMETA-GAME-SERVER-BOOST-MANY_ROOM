@@ -87,6 +87,9 @@ void LectureRoom::Init()
 
 void LectureRoom::HandleClose()
 {
+	for (auto client = waitingClients.begin(); client != waitingClients.end(); client++)
+		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
+
 	GameRoom::HandleClose();
 }
 
