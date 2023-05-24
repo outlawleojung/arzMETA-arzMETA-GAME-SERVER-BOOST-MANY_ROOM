@@ -136,6 +136,10 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 	{
 		enterResult = { true, "ROOM_IS_FULL" };
 	}
+	else
+	{
+		enterResult = { true, "SUCCESS" };
+	}
 
 	Protocol::S_ENTER res;
 	res.set_result(enterResult.second);
