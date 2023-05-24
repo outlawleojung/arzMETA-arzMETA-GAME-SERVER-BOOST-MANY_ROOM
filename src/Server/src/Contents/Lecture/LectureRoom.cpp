@@ -422,15 +422,28 @@ void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 		//입장 허락이었을 경우의 처리, enter 시의 처리와 동일
 		if (pkt.isaccepted())
 		{
-			waitingClient->second->data.type = LectureRoomUserType::Audience;
-			waitingClient->second->data.chatPermission = true;
-			waitingClient->second->data.videoPermission = false;
-			waitingClient->second->data.voicePermission = false;
-			waitingClient->second->data.screenPermission = false;
-			waitingClient->second->data.movePermission = false;
+			if (waitingClient->second->data.type == LectureRoomUserType::Observer)
+			{
+				waitingClient->second->data.chatPermission = false;
+				waitingClient->second->data.videoPermission = false;
+				waitingClient->second->data.voicePermission = false;
+				waitingClient->second->data.screenPermission = false;
+				waitingClient->second->data.movePermission = false;
+
+				currentObserver++;
+			}
+			else
+			{
+				waitingClient->second->data.chatPermission = true;
+				waitingClient->second->data.videoPermission = false;
+				waitingClient->second->data.voicePermission = false;
+				waitingClient->second->data.screenPermission = false;
+				waitingClient->second->data.movePermission = false;
+
+				roomInfo["currentPersonnel"] = ++currentPlayerNumber;
+			}
 
 			clients.insert({ waitingClient->second->clientId, waitingClient->second });
-			roomInfo["currentPersonnel"] = clients.size();
 
 			Protocol::S_ENTER res;
 			res.set_result("SUCCESS");
