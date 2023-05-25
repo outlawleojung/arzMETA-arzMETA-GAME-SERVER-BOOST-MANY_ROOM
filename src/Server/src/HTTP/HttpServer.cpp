@@ -121,6 +121,7 @@ void HttpServer::start(string ip, int port)
 				static_pointer_cast<LectureRoom>(room)->isPassword = true;
 
 			static_pointer_cast<LectureRoom>(room)->maxPlayerNumber = body["personnel"];
+			static_pointer_cast<LectureRoom>(room)->maxObserverNumber = body["observer"];
 			static_pointer_cast<LectureRoom>(room)->isWaitingRoom = body["isWaitingRoom"];
 			static_pointer_cast<LectureRoom>(room)->isAdvertising = body["isAdvertising"];
 			static_pointer_cast<LectureRoom>(room)->runningTime = body["runningTime"];
