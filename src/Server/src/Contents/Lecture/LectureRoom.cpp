@@ -609,16 +609,10 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 		int hostCount = 0;
 		int screenCount = 0;
 
-		for (int i = 0; i < pkt.permissions_size(); i++)
+		for (auto& [clientId, userData] : newUserData)
 		{
-			if (pkt.permissions()[i].authority() == static_cast<int>(LectureRoomUserType::Host))
+			if (userData.type == LectureRoomUserType::Host)
 			{
-				if (clients.find(pkt.permissions()[i].clientid()) == clients.end())
-				{
-					result = false;
-					goto SET_PERMISSION_LOGIC;
-				}
-
 				hostCount++;
 				if (hostCount > 1)
 				{
@@ -627,7 +621,7 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 				}
 			}
 
-			if (pkt.permissions()[i].screenpermission())
+			if (userData.screenPermission)
 			{
 				screenCount++;
 				if (screenCount > 1)
@@ -637,7 +631,7 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 				}
 			}
 
-			if (pkt.permissions()[i].authority() == static_cast<int>(LectureRoomUserType::Observer))
+			if (userData.type == LectureRoomUserType::Observer)
 			{
 				observerCount++;
 				if (observerCount > maxObserverNumber)
