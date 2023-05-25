@@ -25,7 +25,10 @@ public:
 
 		auto _sessionId = sessionIds.find(clientId);
 		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
+		{
+			GLogManager->Log("Make Client Fail! : ", clientId, " ", to_string(sessionId));
 			return nullptr;
+		}
 
 		shared_ptr<ClientBase> client = make_shared<T>();
 
