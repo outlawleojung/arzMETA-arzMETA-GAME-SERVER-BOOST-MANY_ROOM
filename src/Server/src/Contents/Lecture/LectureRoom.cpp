@@ -735,6 +735,8 @@ void LectureRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_runningtime(runningTime);
 	roomInfo.set_passedtime(passedTime);
 	roomInfo.set_roomcode(roomCode);
+	roomInfo.set_observer(maxObserverNumber);
+	roomInfo.set_currentobserver(currentObserver);
 		
 	auto host = clients.find(currentHostId);
 	if (host != clients.end())
