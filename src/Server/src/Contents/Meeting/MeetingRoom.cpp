@@ -28,24 +28,7 @@ MeetingRoom::MeetingRoom()
 
 MeetingRoom::~MeetingRoom()
 {
-	sql::Driver* driver;
-	std::unique_ptr<sql::Connection> con;
-	std::unique_ptr<sql::ResultSet> res;
-	std::unique_ptr<sql::PreparedStatement> pstmt;
-
-	driver = get_driver_instance();
-
-	con.reset(driver->connect(
-		DBDomain,
-		DBUsername,
-		DBPassword
-	));
-
-	con->setSchema(DBSchema);
-
-	pstmt.reset(con->prepareStatement("DELETE FROM memberofficereservationinfo WHERE roomCode = ?"));
-	pstmt->setString(1, roomCode);
-	res.reset(pstmt->executeQuery());
+	
 }
 
 void MeetingRoom::Init()
@@ -87,6 +70,28 @@ void MeetingRoom::HandleClose()
 		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
 
 	GameRoom::HandleClose();
+
+	if (repeatDay == 0)
+	{
+		sql::Driver* driver;
+		std::unique_ptr<sql::Connection> con;
+		std::unique_ptr<sql::ResultSet> res;
+		std::unique_ptr<sql::PreparedStatement> pstmt;
+
+		driver = get_driver_instance();
+
+		con.reset(driver->connect(
+			DBDomain,
+			DBUsername,
+			DBPassword
+		));
+
+		con->setSchema(DBSchema);
+
+		pstmt.reset(con->prepareStatement("DELETE FROM memberofficereservationinfo WHERE roomCode = ?"));
+		pstmt->setString(1, roomCode);
+		res.reset(pstmt->executeQuery());
+	}
 }
 
 void MeetingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { 
@@ -248,14 +253,14 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 			if (res->next())
 				memberId = res->getString(1);
 
-			pstmt.reset(con->prepareStatement("SELECT roomCode FROM memberofficereservationinfo WHERE roomCode = ?"));
+			pstmt.reset(con->prepareStatement("SELECT roomCode, repeatDay FROM memberofficereservationinfo WHERE roomCode = ?"));
 			pstmt->setString(1, roomCode);
 			res.reset(pstmt->executeQuery());
 
 			if (!res->next()) {
 				pstmt.reset(con->prepareStatement(
 					"INSERT INTO memberofficereservationinfo(roomCode, memberId, name, modeType, topicType, description, password, runningTime, spaceInfoId, personnel, reservationAt, startTime, repeatDay, alarmType, thumbnail, isAdvertising, isWaitingRoom, observer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ADDDATE(CURDATE(), INTERVAL 9 HOUR), ?, ?, ?, ?, ?, ?, ?)"
-					));
+				));
 				pstmt->setString(1, roomCode);
 				pstmt->setString(2, memberId);
 				pstmt->setString(3, roomName);
@@ -268,13 +273,17 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 				pstmt->setInt(10, maxPlayerNumber);
 				//reservationAt
 				pstmt->setInt(11, calculateMinutesSinceMidnight());
-				pstmt->setInt(12, 0);
+				pstmt->setInt(12, repeatDay);
 				pstmt->setInt(13, 0);
 				pstmt->setString(14, thumbnail);
 				pstmt->setBoolean(15, isAdvertising);
 				pstmt->setBoolean(16, isWaitingRoom);
 				pstmt->setInt(17, 0);
 				pstmt->executeUpdate();
+			}
+			else
+			{
+				repeatDay = res->getInt(2);
 			}
 		}
 	}
@@ -315,6 +324,9 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 shared_ptr<ClientBase> MeetingRoom::MakeClient(string clientId, int sessionId)
 {
 	auto client = GClientManager->MakeCilent<MeetingClient>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
+
+	if (client == nullptr)
+		return nullptr;
 
 	static_pointer_cast<MeetingClient>(client)->data.type = MeetingRoomUserType::Host;
 

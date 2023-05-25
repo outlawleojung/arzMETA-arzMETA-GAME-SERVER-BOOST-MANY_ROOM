@@ -32,24 +32,7 @@ LectureRoom::LectureRoom()
 
 LectureRoom::~LectureRoom()
 {
-	sql::Driver* driver;
-	std::unique_ptr<sql::Connection> con;
-	std::unique_ptr<sql::ResultSet> res;
-	std::unique_ptr<sql::PreparedStatement> pstmt;
-
-	driver = get_driver_instance();
-
-	con.reset(driver->connect(
-		DBDomain,
-		DBUsername,
-		DBPassword
-	));
-
-	con->setSchema(DBSchema);
-
-	pstmt.reset(con->prepareStatement("DELETE FROM memberofficereservationinfo WHERE roomCode = ?"));
-	pstmt->setString(1, roomCode);
-	res.reset(pstmt->executeQuery());
+	
 }
 
 void LectureRoom::Init()
@@ -91,6 +74,28 @@ void LectureRoom::HandleClose()
 		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
 
 	GameRoom::HandleClose();
+
+	if (repeatDay == 0)
+	{
+		sql::Driver* driver;
+		std::unique_ptr<sql::Connection> con;
+		std::unique_ptr<sql::ResultSet> res;
+		std::unique_ptr<sql::PreparedStatement> pstmt;
+
+		driver = get_driver_instance();
+
+		con.reset(driver->connect(
+			DBDomain,
+			DBUsername,
+			DBPassword
+		));
+
+		con->setSchema(DBSchema);
+
+		pstmt.reset(con->prepareStatement("DELETE FROM memberofficereservationinfo WHERE roomCode = ?"));
+		pstmt->setString(1, roomCode);
+		res.reset(pstmt->executeQuery());
+	}
 }
 
 void LectureRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&LectureRoom::Enter, session, pkt); }
@@ -153,9 +158,14 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		return;
 	}
 
-	auto client = static_pointer_cast<LectureClient>(
-		GClientManager->MakeCilent<LectureClient>(pkt.clientid(), pkt.sessionid(), static_pointer_cast<RoomBase>(shared_from_this()))
-	);
+	auto _client = GClientManager->MakeCilent<LectureClient>(pkt.clientid(), pkt.sessionid(), static_pointer_cast<RoomBase>(shared_from_this()));
+	if (_client == nullptr)
+	{
+		session->Disconnect();
+		return;
+	}
+
+	auto client = static_pointer_cast<LectureClient>(_client);
 
 	client->session = session;
 	session->owner = client;
@@ -242,7 +252,7 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 			if (res->next())
 				memberId = res->getString(1);
 
-			pstmt.reset(con->prepareStatement("SELECT roomCode FROM memberofficereservationinfo WHERE roomCode = ?"));
+			pstmt.reset(con->prepareStatement("SELECT roomCode, repeatDay FROM memberofficereservationinfo WHERE roomCode = ?"));
 			pstmt->setString(1, roomCode);
 			res.reset(pstmt->executeQuery());
 
@@ -262,13 +272,17 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 				pstmt->setInt(10, maxPlayerNumber);
 				//reservationAt
 				pstmt->setInt(11, calculateMinutesSinceMidnight());
-				pstmt->setInt(12, 0);
+				pstmt->setInt(12, repeatDay);
 				pstmt->setInt(13, 0);
 				pstmt->setString(14, thumbnail);
 				pstmt->setBoolean(15, isAdvertising);
 				pstmt->setBoolean(16, isWaitingRoom);
 				pstmt->setInt(17, maxObserverNumber);
 				pstmt->executeUpdate();
+			}
+			else
+			{
+				repeatDay = res->getInt(2);
 			}
 		}
 	}

@@ -62,7 +62,7 @@ void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 		if (client == nullptr)
 		{
-			GLogManager->Log("MakeClient Fail! :			", pkt.clientid());
+			session->Disconnect();
 			return;
 		}
 
