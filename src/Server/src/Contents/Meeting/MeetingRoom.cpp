@@ -625,6 +625,7 @@ SET_PERMISSION_LOGIC:
 
 		auto permission = permissionNotice.mutable_permission();
 
+		permission->set_clientid(client->clientId);
 		permission->set_screenpermission(client->data.screenPermission);
 		permission->set_chatpermission(client->data.chatPermission);
 		permission->set_voicepermission(client->data.voicePermission);
