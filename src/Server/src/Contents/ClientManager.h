@@ -115,6 +115,7 @@ public:
 		auto sessionId = sessionIds.find(clientId);
 		if (sessionId == sessionIds.end())
 		{
+			GLogManager->Log("From Login, Add to SessionIds : ", clientId);
 			sessionIds.insert({ clientId, 0 });
 			return 0;
 		}
@@ -122,9 +123,13 @@ public:
 		{
 			auto client = clients.find(clientId);
 			if (client != clients.end())
+			{
+				GLogManager->Log("From Login, Duplicated Client : ", clientId);
 				client->second->DoTimer(0, &ClientBase::Leave, string("DUPLICATED"));
+			}
 
 			sessionId->second = sessionId->second + 1;
+			GLogManager->Log("From Login, Session SessionId : ", clientId, " ", sessionId->second);
 			return sessionId->second;
 		}
 	}
