@@ -106,8 +106,7 @@ message C_OFFICE_SET_PERMISSION
 
 message S_OFFICE_SET_PERMISSION
 {
-	bool success = 1;
-	string code = 2;
+	string code = 1;
 }
 
 message C_OFFICE_SET_ROOM_INFO
