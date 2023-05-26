@@ -112,33 +112,25 @@ public:
 	{
 		lock_guard<std::recursive_mutex> lock(mtx);
 
-		cout << "test1" << endl;
-
 		auto sessionId = sessionIds.find(clientId);
-
-		cout << "test2" << endl;
 
 		if (sessionId == sessionIds.end())
 		{
-			cout << "test3" << endl;
-
+			GLogManager->Log("From Login, Add to SessionIds : ", clientId);
 			sessionIds.insert({ clientId, 0 });
-
-			cout << "test4" << endl;
-
 			return 0;
 		}
 		else
 		{
-			cout << "test4" << endl;
-
 			auto client = clients.find(clientId);
 			if (client != clients.end())
+			{
+				GLogManager->Log("From Login, Duplicated Client : ", clientId);
 				client->second->DoTimer(0, &ClientBase::Leave, string("DUPLICATED"));
-
-			cout << "test5" << endl;
+			}
 
 			sessionId->second = sessionId->second + 1;
+			GLogManager->Log("From Login, Session SessionId : ", clientId, " ", sessionId->second);
 			return sessionId->second;
 		}
 	}
