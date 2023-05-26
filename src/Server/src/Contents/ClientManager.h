@@ -129,7 +129,7 @@ public:
 			}
 
 			sessionId->second = sessionId->second + 1;
-			GLogManager->Log("From Login, Session SessionId : ", clientId, " ", sessionId->second);
+			GLogManager->Log("From Login, Session SessionId : ", clientId, " ", to_string(sessionId->second));
 			return sessionId->second;
 		}
 	}
