@@ -684,8 +684,6 @@ SET_PERMISSION_LOGIC:
 			client->data.videoPermission = false;
 			client->data.voicePermission = false;
 			client->data.movePermission = false;
-
-			RemoveObject(client);
 		}
 		else
 		{
@@ -710,6 +708,11 @@ SET_PERMISSION_LOGIC:
 		permission->set_authority(static_cast<int>(client->data.type));
 
 		client->Send(PacketManager::MakeSendBuffer(permissionNotice));
+
+		if (client->data.type == LectureRoomUserType::Observer)
+		{
+			RemoveObject(client);
+		}
 	}
 }
 
