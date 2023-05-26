@@ -3328,10 +3328,9 @@ class S_OFFICE_SET_PERMISSION final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kCodeFieldNumber = 2,
-    kSuccessFieldNumber = 1,
+    kCodeFieldNumber = 1,
   };
-  // string code = 2;
+  // string code = 1;
   void clear_code();
   const std::string& code() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -3345,15 +3344,6 @@ class S_OFFICE_SET_PERMISSION final :
   std::string* _internal_mutable_code();
   public:
 
-  // bool success = 1;
-  void clear_success();
-  bool success() const;
-  void set_success(bool value);
-  private:
-  bool _internal_success() const;
-  void _internal_set_success(bool value);
-  public:
-
   // @@protoc_insertion_point(class_scope:Protocol.S_OFFICE_SET_PERMISSION)
  private:
   class _Internal;
@@ -3363,7 +3353,6 @@ class S_OFFICE_SET_PERMISSION final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr code_;
-    bool success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -5990,27 +5979,7 @@ C_OFFICE_SET_PERMISSION::permissions() const {
 
 // S_OFFICE_SET_PERMISSION
 
-// bool success = 1;
-inline void S_OFFICE_SET_PERMISSION::clear_success() {
-  _impl_.success_ = false;
-}
-inline bool S_OFFICE_SET_PERMISSION::_internal_success() const {
-  return _impl_.success_;
-}
-inline bool S_OFFICE_SET_PERMISSION::success() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_OFFICE_SET_PERMISSION.success)
-  return _internal_success();
-}
-inline void S_OFFICE_SET_PERMISSION::_internal_set_success(bool value) {
-  
-  _impl_.success_ = value;
-}
-inline void S_OFFICE_SET_PERMISSION::set_success(bool value) {
-  _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_OFFICE_SET_PERMISSION.success)
-}
-
-// string code = 2;
+// string code = 1;
 inline void S_OFFICE_SET_PERMISSION::clear_code() {
   _impl_.code_.ClearToEmpty();
 }

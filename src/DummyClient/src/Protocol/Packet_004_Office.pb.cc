@@ -285,7 +285,6 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR S_OFFICE_SET_PERMISSION::S_OFFICE_SET_PERMISSION(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.code_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.success_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct S_OFFICE_SET_PERMISSIONDefaultTypeInternal {
   PROTOBUF_CONSTEXPR S_OFFICE_SET_PERMISSIONDefaultTypeInternal()
@@ -591,7 +590,6 @@ const uint32_t TableStruct_Packet_5f004_5fOffice_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_SET_PERMISSION, _impl_.success_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_SET_PERMISSION, _impl_.code_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_SET_ROOM_INFO, _internal_metadata_),
@@ -707,14 +705,14 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 131, -1, -1, sizeof(::Protocol::S_OFFICE_GET_PERMISSION_ALL)},
   { 138, -1, -1, sizeof(::Protocol::C_OFFICE_SET_PERMISSION)},
   { 145, -1, -1, sizeof(::Protocol::S_OFFICE_SET_PERMISSION)},
-  { 153, -1, -1, sizeof(::Protocol::C_OFFICE_SET_ROOM_INFO)},
-  { 164, -1, -1, sizeof(::Protocol::S_OFFICE_SET_ROOM_INFO)},
-  { 171, -1, -1, sizeof(::Protocol::C_OFFICE_GET_ROOM_INFO)},
-  { 177, -1, -1, sizeof(::Protocol::S_OFFICE_GET_ROOM_INFO)},
-  { 202, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
-  { 215, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
-  { 228, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
-  { 236, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
+  { 152, -1, -1, sizeof(::Protocol::C_OFFICE_SET_ROOM_INFO)},
+  { 163, -1, -1, sizeof(::Protocol::S_OFFICE_SET_ROOM_INFO)},
+  { 170, -1, -1, sizeof(::Protocol::C_OFFICE_GET_ROOM_INFO)},
+  { 176, -1, -1, sizeof(::Protocol::S_OFFICE_GET_ROOM_INFO)},
+  { 201, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
+  { 214, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
+  { 227, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
+  { 235, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -779,38 +777,38 @@ const char descriptor_table_protodef_Packet_5f004_5fOffice_2eproto[] PROTOBUF_SE
   "ALL\"L\n\033S_OFFICE_GET_PERMISSION_ALL\022-\n\013pe"
   "rmissions\030\001 \003(\0132\030.Protocol.OfficeUserInf"
   "o\"H\n\027C_OFFICE_SET_PERMISSION\022-\n\013permissi"
-  "ons\030\001 \003(\0132\030.Protocol.OfficeUserInfo\"8\n\027S"
-  "_OFFICE_SET_PERMISSION\022\017\n\007success\030\001 \001(\010\022"
-  "\014\n\004code\030\002 \001(\t\"\177\n\026C_OFFICE_SET_ROOM_INFO\022"
-  "\021\n\tpersonnel\030\001 \001(\005\022\020\n\010password\030\002 \001(\t\022\022\n\n"
-  "isShutdown\030\003 \001(\010\022\025\n\risAdvertising\030\004 \001(\010\022"
-  "\025\n\risWaitingRoom\030\005 \001(\010\")\n\026S_OFFICE_SET_R"
-  "OOM_INFO\022\017\n\007success\030\001 \001(\010\"\030\n\026C_OFFICE_GE"
-  "T_ROOM_INFO\"\242\003\n\026S_OFFICE_GET_ROOM_INFO\022\020"
-  "\n\010roomName\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\022\021\n"
-  "\ttopicType\030\003 \001(\005\022\020\n\010password\030\004 \001(\t\022\023\n\013sp"
-  "aceInfoId\030\005 \001(\t\022\021\n\tpersonnel\030\006 \001(\005\022\030\n\020cu"
-  "rrentPersonnel\030\007 \001(\005\022\020\n\010observer\030\010 \001(\005\022\027"
-  "\n\017currentObserver\030\t \001(\005\022\026\n\016currentWaitin"
-  "g\030\n \001(\005\022\025\n\risAdvertising\030\013 \001(\010\022\021\n\tthumbn"
-  "ail\030\014 \001(\t\022\025\n\risWaitingRoom\030\r \001(\010\022\022\n\nisSh"
-  "utdown\030\016 \001(\010\022\023\n\013runningTime\030\017 \001(\005\022\022\n\npas"
-  "sedTime\030\020 \001(\005\022\021\n\tstartTime\030\021 \001(\t\022\020\n\010room"
-  "code\030\022 \001(\t\022\024\n\014hostNickname\030\023 \001(\t\"\212\001\n\025C_O"
-  "FFICE_VIDEO_STREAM\022\020\n\010clientid\030\001 \001(\t\022\013\n\003"
-  "url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022"
-  "\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020mediaPlay"
-  "erState\030\007 \001(\005\"\212\001\n\025S_OFFICE_VIDEO_STREAM\022"
-  "\020\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volume"
-  "\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004se"
-  "ek\030\006 \001(\010\022\030\n\020mediaPlayerState\030\007 \001(\005\"2\n\016C_"
-  "OFFICE_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006userId"
-  "\030\002 \001(\005\"2\n\016S_OFFICE_SHARE\022\020\n\010isShared\030\001 \001"
-  "(\010\022\016\n\006userId\030\002 \001(\005b\006proto3"
+  "ons\030\001 \003(\0132\030.Protocol.OfficeUserInfo\"\'\n\027S"
+  "_OFFICE_SET_PERMISSION\022\014\n\004code\030\001 \001(\t\"\177\n\026"
+  "C_OFFICE_SET_ROOM_INFO\022\021\n\tpersonnel\030\001 \001("
+  "\005\022\020\n\010password\030\002 \001(\t\022\022\n\nisShutdown\030\003 \001(\010\022"
+  "\025\n\risAdvertising\030\004 \001(\010\022\025\n\risWaitingRoom\030"
+  "\005 \001(\010\")\n\026S_OFFICE_SET_ROOM_INFO\022\017\n\007succe"
+  "ss\030\001 \001(\010\"\030\n\026C_OFFICE_GET_ROOM_INFO\"\242\003\n\026S"
+  "_OFFICE_GET_ROOM_INFO\022\020\n\010roomName\030\001 \001(\t\022"
+  "\023\n\013description\030\002 \001(\t\022\021\n\ttopicType\030\003 \001(\005\022"
+  "\020\n\010password\030\004 \001(\t\022\023\n\013spaceInfoId\030\005 \001(\t\022\021"
+  "\n\tpersonnel\030\006 \001(\005\022\030\n\020currentPersonnel\030\007 "
+  "\001(\005\022\020\n\010observer\030\010 \001(\005\022\027\n\017currentObserver"
+  "\030\t \001(\005\022\026\n\016currentWaiting\030\n \001(\005\022\025\n\risAdve"
+  "rtising\030\013 \001(\010\022\021\n\tthumbnail\030\014 \001(\t\022\025\n\risWa"
+  "itingRoom\030\r \001(\010\022\022\n\nisShutdown\030\016 \001(\010\022\023\n\013r"
+  "unningTime\030\017 \001(\005\022\022\n\npassedTime\030\020 \001(\005\022\021\n\t"
+  "startTime\030\021 \001(\t\022\020\n\010roomcode\030\022 \001(\t\022\024\n\014hos"
+  "tNickname\030\023 \001(\t\"\212\001\n\025C_OFFICE_VIDEO_STREA"
+  "M\022\020\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volu"
+  "me\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004"
+  "seek\030\006 \001(\010\022\030\n\020mediaPlayerState\030\007 \001(\005\"\212\001\n"
+  "\025S_OFFICE_VIDEO_STREAM\022\020\n\010clientid\030\001 \001(\t"
+  "\022\013\n\003url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time\030\004 "
+  "\001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020media"
+  "PlayerState\030\007 \001(\005\"2\n\016C_OFFICE_SHARE\022\020\n\010i"
+  "sShared\030\001 \001(\010\022\016\n\006userId\030\002 \001(\005\"2\n\016S_OFFIC"
+  "E_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006userId\030\002 \001("
+  "\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f004_5fOffice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f004_5fOffice_2eproto = {
-    false, false, 2266, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
+    false, false, 2249, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
     "Packet_004_Office.proto",
     &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 29,
     schemas, file_default_instances, TableStruct_Packet_5f004_5fOffice_2eproto::offsets,
@@ -4318,7 +4316,6 @@ S_OFFICE_SET_PERMISSION::S_OFFICE_SET_PERMISSION(const S_OFFICE_SET_PERMISSION& 
   S_OFFICE_SET_PERMISSION* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.code_){}
-    , decltype(_impl_.success_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -4330,7 +4327,6 @@ S_OFFICE_SET_PERMISSION::S_OFFICE_SET_PERMISSION(const S_OFFICE_SET_PERMISSION& 
     _this->_impl_.code_.Set(from._internal_code(), 
       _this->GetArenaForAllocation());
   }
-  _this->_impl_.success_ = from._impl_.success_;
   // @@protoc_insertion_point(copy_constructor:Protocol.S_OFFICE_SET_PERMISSION)
 }
 
@@ -4340,7 +4336,6 @@ inline void S_OFFICE_SET_PERMISSION::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.code_){}
-    , decltype(_impl_.success_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.code_.InitDefault();
@@ -4374,7 +4369,6 @@ void S_OFFICE_SET_PERMISSION::Clear() {
   (void) cached_has_bits;
 
   _impl_.code_.ClearToEmpty();
-  _impl_.success_ = false;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4384,17 +4378,9 @@ const char* S_OFFICE_SET_PERMISSION::_InternalParse(const char* ptr, ::_pbi::Par
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // bool success = 1;
+      // string code = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string code = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_code();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -4431,20 +4417,14 @@ uint8_t* S_OFFICE_SET_PERMISSION::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool success = 1;
-  if (this->_internal_success() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
-  }
-
-  // string code = 2;
+  // string code = 1;
   if (!this->_internal_code().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_code().data(), static_cast<int>(this->_internal_code().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_OFFICE_SET_PERMISSION.code");
     target = stream->WriteStringMaybeAliased(
-        2, this->_internal_code(), target);
+        1, this->_internal_code(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4463,16 +4443,11 @@ size_t S_OFFICE_SET_PERMISSION::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string code = 2;
+  // string code = 1;
   if (!this->_internal_code().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_code());
-  }
-
-  // bool success = 1;
-  if (this->_internal_success() != 0) {
-    total_size += 1 + 1;
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -4495,9 +4470,6 @@ void S_OFFICE_SET_PERMISSION::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg
 
   if (!from._internal_code().empty()) {
     _this->_internal_set_code(from._internal_code());
-  }
-  if (from._internal_success() != 0) {
-    _this->_internal_set_success(from._internal_success());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -4522,7 +4494,6 @@ void S_OFFICE_SET_PERMISSION::InternalSwap(S_OFFICE_SET_PERMISSION* other) {
       &_impl_.code_, lhs_arena,
       &other->_impl_.code_, rhs_arena
   );
-  swap(_impl_.success_, other->_impl_.success_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_SET_PERMISSION::GetMetadata() const {
