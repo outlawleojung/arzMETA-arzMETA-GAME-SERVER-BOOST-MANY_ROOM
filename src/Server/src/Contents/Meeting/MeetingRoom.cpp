@@ -23,7 +23,7 @@ MeetingRoom::MeetingRoom()
 	, topicType(0)
 	, currentHostId("")
 {
-	disconnectedSessionWaitTime = 10000;
+	disconnectedSessionWaitTime = 30000;
 }
 
 MeetingRoom::~MeetingRoom()
@@ -539,14 +539,14 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 
 	if (_client->clientId != currentHostId) return;
 
-	bool result = true;
+	pair<bool, string> result = { true, "SUCCESS" };
 
 	map<string, MeetingRoomUserData> newUserData;
 	for (int i = 0; i < pkt.permissions_size(); i++)
 	{
 		if (clients.find(pkt.permissions()[i].clientid()) == clients.end())
 		{
-			result = false;
+			result = { false, "WRONG_CLIENT_ID" };
 			goto SET_PERMISSION_LOGIC;
 		}
 
@@ -582,7 +582,7 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 				hostCount++;
 				if (hostCount > 1)
 				{
-					result = false;
+					result = { false, "TOO_MANY_HOST" };
 					goto SET_PERMISSION_LOGIC;
 				}
 			}
@@ -592,7 +592,7 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 				screenCount++;
 				if (screenCount > 1)
 				{
-					result = false;
+					result = { false, "TOO_MANY_SCREEN_PERMISSION" };
 					goto SET_PERMISSION_LOGIC;
 				}
 			}
@@ -600,7 +600,7 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 
 		if (hostCount == 0)
 		{
-			result = false;
+			result = { false, "NO_HOST" };
 			goto SET_PERMISSION_LOGIC;
 		}
 	}
@@ -608,10 +608,10 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 SET_PERMISSION_LOGIC:
 
 	Protocol::S_OFFICE_SET_PERMISSION res;
-	res.set_success(result);
+	res.set_code(result.second);
 	_client->Send(PacketManager::MakeSendBuffer(res));
 
-	if (!result)
+	if (!result.first)
 		return;
 	
 	for (auto& [clientId, userData] : newUserData)
