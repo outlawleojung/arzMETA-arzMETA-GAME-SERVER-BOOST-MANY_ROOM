@@ -10,9 +10,6 @@ message C_ENTER
 	//for office
 	string password = 4;
 	bool isObserver = 5;
-
-	string nickname = 6;
-	bool isExpose = 7;
 }
 
 message S_ENTER

@@ -26,10 +26,8 @@ PROTOBUF_CONSTEXPR C_ENTER::C_ENTER(
     /*decltype(_impl_.roomid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.password_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.nickname_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.sessionid_)*/0
   , /*decltype(_impl_.isobserver_)*/false
-  , /*decltype(_impl_.isexpose_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct C_ENTERDefaultTypeInternal {
   PROTOBUF_CONSTEXPR C_ENTERDefaultTypeInternal()
@@ -317,8 +315,6 @@ const uint32_t TableStruct_Packet_5f000_5fCommon_2eproto::offsets[] PROTOBUF_SEC
   PROTOBUF_FIELD_OFFSET(::Protocol::C_ENTER, _impl_.sessionid_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_ENTER, _impl_.password_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_ENTER, _impl_.isobserver_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_ENTER, _impl_.nickname_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_ENTER, _impl_.isexpose_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_ENTER, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -474,26 +470,26 @@ const uint32_t TableStruct_Packet_5f000_5fCommon_2eproto::offsets[] PROTOBUF_SEC
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::C_ENTER)},
-  { 13, -1, -1, sizeof(::Protocol::S_ENTER)},
-  { 20, -1, -1, sizeof(::Protocol::C_REENTER)},
-  { 27, -1, -1, sizeof(::Protocol::S_REENTER)},
-  { 34, -1, -1, sizeof(::Protocol::C_LEAVE)},
-  { 40, -1, -1, sizeof(::Protocol::C_GET_CLIENT)},
-  { 46, -1, -1, sizeof(::Protocol::S_ADD_CLIENT_ClientInfo)},
-  { 55, -1, -1, sizeof(::Protocol::S_ADD_CLIENT)},
-  { 62, -1, -1, sizeof(::Protocol::S_REMOVE_CLIENT)},
-  { 69, -1, -1, sizeof(::Protocol::C_SET_NICKNAME)},
-  { 76, -1, -1, sizeof(::Protocol::S_SET_NICKNAME)},
-  { 83, -1, -1, sizeof(::Protocol::S_SET_NICKNAME_NOTICE)},
-  { 91, -1, -1, sizeof(::Protocol::C_CHAT)},
-  { 98, -1, -1, sizeof(::Protocol::S_CHAT)},
-  { 106, -1, -1, sizeof(::Protocol::S_DISCONNECT)},
-  { 113, -1, -1, sizeof(::Protocol::C_WILDCARD)},
-  { 121, -1, -1, sizeof(::Protocol::S_WILDCARD)},
-  { 129, 137, -1, sizeof(::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse)},
-  { 139, -1, -1, sizeof(::Protocol::C_WILDCARD_MAP)},
-  { 147, 155, -1, sizeof(::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse)},
-  { 157, -1, -1, sizeof(::Protocol::S_WILDCARD_MAP)},
+  { 11, -1, -1, sizeof(::Protocol::S_ENTER)},
+  { 18, -1, -1, sizeof(::Protocol::C_REENTER)},
+  { 25, -1, -1, sizeof(::Protocol::S_REENTER)},
+  { 32, -1, -1, sizeof(::Protocol::C_LEAVE)},
+  { 38, -1, -1, sizeof(::Protocol::C_GET_CLIENT)},
+  { 44, -1, -1, sizeof(::Protocol::S_ADD_CLIENT_ClientInfo)},
+  { 53, -1, -1, sizeof(::Protocol::S_ADD_CLIENT)},
+  { 60, -1, -1, sizeof(::Protocol::S_REMOVE_CLIENT)},
+  { 67, -1, -1, sizeof(::Protocol::C_SET_NICKNAME)},
+  { 74, -1, -1, sizeof(::Protocol::S_SET_NICKNAME)},
+  { 81, -1, -1, sizeof(::Protocol::S_SET_NICKNAME_NOTICE)},
+  { 89, -1, -1, sizeof(::Protocol::C_CHAT)},
+  { 96, -1, -1, sizeof(::Protocol::S_CHAT)},
+  { 104, -1, -1, sizeof(::Protocol::S_DISCONNECT)},
+  { 111, -1, -1, sizeof(::Protocol::C_WILDCARD)},
+  { 119, -1, -1, sizeof(::Protocol::S_WILDCARD)},
+  { 127, 135, -1, sizeof(::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse)},
+  { 137, -1, -1, sizeof(::Protocol::C_WILDCARD_MAP)},
+  { 145, 153, -1, sizeof(::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse)},
+  { 155, -1, -1, sizeof(::Protocol::S_WILDCARD_MAP)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -521,37 +517,36 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_Packet_5f000_5fCommon_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\027Packet_000_Common.proto\022\010Protocol\"\210\001\n\007"
-  "C_ENTER\022\016\n\006roomId\030\001 \001(\t\022\020\n\010clientId\030\002 \001("
-  "\t\022\021\n\tsessionId\030\003 \001(\005\022\020\n\010password\030\004 \001(\t\022\022"
-  "\n\nisObserver\030\005 \001(\010\022\020\n\010nickname\030\006 \001(\t\022\020\n\010"
-  "isExpose\030\007 \001(\010\"\031\n\007S_ENTER\022\016\n\006result\030\001 \001("
-  "\t\"\035\n\tC_REENTER\022\020\n\010clientId\030\001 \001(\t\"\034\n\tS_RE"
-  "ENTER\022\017\n\007success\030\001 \001(\010\"\t\n\007C_LEAVE\"\016\n\014C_G"
-  "ET_CLIENT\"\216\001\n\014S_ADD_CLIENT\0226\n\013clientInfo"
-  "s\030\001 \003(\0132!.Protocol.S_ADD_CLIENT.ClientIn"
-  "fo\032F\n\nClientInfo\022\020\n\010clientId\030\001 \001(\t\022\020\n\010ni"
-  "ckname\030\002 \001(\t\022\024\n\014stateMessage\030\003 \001(\t\"$\n\017S_"
-  "REMOVE_CLIENT\022\021\n\tclientIds\030\001 \003(\t\"\"\n\016C_SE"
-  "T_NICKNAME\022\020\n\010nickname\030\001 \001(\t\"!\n\016S_SET_NI"
-  "CKNAME\022\017\n\007success\030\001 \001(\010\";\n\025S_SET_NICKNAM"
-  "E_NOTICE\022\020\n\010clientId\030\001 \001(\t\022\020\n\010nickname\030\002"
-  " \001(\t\"\026\n\006C_CHAT\022\014\n\004chat\030\001 \001(\t\"(\n\006S_CHAT\022\020"
-  "\n\010clientId\030\001 \001(\t\022\014\n\004chat\030\002 \001(\t\"\034\n\014S_DISC"
-  "ONNECT\022\014\n\004code\030\001 \001(\t\"(\n\nC_WILDCARD\022\014\n\004co"
-  "de\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\"(\n\nS_WILDCARD\022\014\n\004"
-  "code\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\"}\n\016C_WILDCARD_M"
-  "AP\022\014\n\004code\030\001 \001(\005\0220\n\004data\030\002 \003(\0132\".Protoco"
-  "l.C_WILDCARD_MAP.DataEntry\032+\n\tDataEntry\022"
-  "\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\016S_WIL"
-  "DCARD_MAP\022\014\n\004code\030\001 \001(\005\0220\n\004data\030\002 \003(\0132\"."
-  "Protocol.S_WILDCARD_MAP.DataEntry\032+\n\tDat"
-  "aEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001b\006"
-  "proto3"
+  "\n\027Packet_000_Common.proto\022\010Protocol\"d\n\007C"
+  "_ENTER\022\016\n\006roomId\030\001 \001(\t\022\020\n\010clientId\030\002 \001(\t"
+  "\022\021\n\tsessionId\030\003 \001(\005\022\020\n\010password\030\004 \001(\t\022\022\n"
+  "\nisObserver\030\005 \001(\010\"\031\n\007S_ENTER\022\016\n\006result\030\001"
+  " \001(\t\"\035\n\tC_REENTER\022\020\n\010clientId\030\001 \001(\t\"\034\n\tS"
+  "_REENTER\022\017\n\007success\030\001 \001(\010\"\t\n\007C_LEAVE\"\016\n\014"
+  "C_GET_CLIENT\"\216\001\n\014S_ADD_CLIENT\0226\n\013clientI"
+  "nfos\030\001 \003(\0132!.Protocol.S_ADD_CLIENT.Clien"
+  "tInfo\032F\n\nClientInfo\022\020\n\010clientId\030\001 \001(\t\022\020\n"
+  "\010nickname\030\002 \001(\t\022\024\n\014stateMessage\030\003 \001(\t\"$\n"
+  "\017S_REMOVE_CLIENT\022\021\n\tclientIds\030\001 \003(\t\"\"\n\016C"
+  "_SET_NICKNAME\022\020\n\010nickname\030\001 \001(\t\"!\n\016S_SET"
+  "_NICKNAME\022\017\n\007success\030\001 \001(\010\";\n\025S_SET_NICK"
+  "NAME_NOTICE\022\020\n\010clientId\030\001 \001(\t\022\020\n\010nicknam"
+  "e\030\002 \001(\t\"\026\n\006C_CHAT\022\014\n\004chat\030\001 \001(\t\"(\n\006S_CHA"
+  "T\022\020\n\010clientId\030\001 \001(\t\022\014\n\004chat\030\002 \001(\t\"\034\n\014S_D"
+  "ISCONNECT\022\014\n\004code\030\001 \001(\t\"(\n\nC_WILDCARD\022\014\n"
+  "\004code\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\"(\n\nS_WILDCARD\022"
+  "\014\n\004code\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\"}\n\016C_WILDCAR"
+  "D_MAP\022\014\n\004code\030\001 \001(\005\0220\n\004data\030\002 \003(\0132\".Prot"
+  "ocol.C_WILDCARD_MAP.DataEntry\032+\n\tDataEnt"
+  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\016S_"
+  "WILDCARD_MAP\022\014\n\004code\030\001 \001(\005\0220\n\004data\030\002 \003(\013"
+  "2\".Protocol.S_WILDCARD_MAP.DataEntry\032+\n\t"
+  "DataEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028"
+  "\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f000_5fCommon_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f000_5fCommon_2eproto = {
-    false, false, 1046, descriptor_table_protodef_Packet_5f000_5fCommon_2eproto,
+    false, false, 1009, descriptor_table_protodef_Packet_5f000_5fCommon_2eproto,
     "Packet_000_Common.proto",
     &descriptor_table_Packet_5f000_5fCommon_2eproto_once, nullptr, 0, 21,
     schemas, file_default_instances, TableStruct_Packet_5f000_5fCommon_2eproto::offsets,
@@ -585,10 +580,8 @@ C_ENTER::C_ENTER(const C_ENTER& from)
       decltype(_impl_.roomid_){}
     , decltype(_impl_.clientid_){}
     , decltype(_impl_.password_){}
-    , decltype(_impl_.nickname_){}
     , decltype(_impl_.sessionid_){}
     , decltype(_impl_.isobserver_){}
-    , decltype(_impl_.isexpose_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -616,17 +609,9 @@ C_ENTER::C_ENTER(const C_ENTER& from)
     _this->_impl_.password_.Set(from._internal_password(), 
       _this->GetArenaForAllocation());
   }
-  _impl_.nickname_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.nickname_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_nickname().empty()) {
-    _this->_impl_.nickname_.Set(from._internal_nickname(), 
-      _this->GetArenaForAllocation());
-  }
   ::memcpy(&_impl_.sessionid_, &from._impl_.sessionid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.isexpose_) -
-    reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.isexpose_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.isobserver_) -
+    reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.isobserver_));
   // @@protoc_insertion_point(copy_constructor:Protocol.C_ENTER)
 }
 
@@ -638,10 +623,8 @@ inline void C_ENTER::SharedCtor(
       decltype(_impl_.roomid_){}
     , decltype(_impl_.clientid_){}
     , decltype(_impl_.password_){}
-    , decltype(_impl_.nickname_){}
     , decltype(_impl_.sessionid_){0}
     , decltype(_impl_.isobserver_){false}
-    , decltype(_impl_.isexpose_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.roomid_.InitDefault();
@@ -655,10 +638,6 @@ inline void C_ENTER::SharedCtor(
   _impl_.password_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.password_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.nickname_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.nickname_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -676,7 +655,6 @@ inline void C_ENTER::SharedDtor() {
   _impl_.roomid_.Destroy();
   _impl_.clientid_.Destroy();
   _impl_.password_.Destroy();
-  _impl_.nickname_.Destroy();
 }
 
 void C_ENTER::SetCachedSize(int size) const {
@@ -692,10 +670,9 @@ void C_ENTER::Clear() {
   _impl_.roomid_.ClearToEmpty();
   _impl_.clientid_.ClearToEmpty();
   _impl_.password_.ClearToEmpty();
-  _impl_.nickname_.ClearToEmpty();
   ::memset(&_impl_.sessionid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.isexpose_) -
-      reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.isexpose_));
+      reinterpret_cast<char*>(&_impl_.isobserver_) -
+      reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.isobserver_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -747,24 +724,6 @@ const char* C_ENTER::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           _impl_.isobserver_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string nickname = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_nickname();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "Protocol.C_ENTER.nickname"));
-        } else
-          goto handle_unusual;
-        continue;
-      // bool isExpose = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
-          _impl_.isexpose_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -840,22 +799,6 @@ uint8_t* C_ENTER::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_isobserver(), target);
   }
 
-  // string nickname = 6;
-  if (!this->_internal_nickname().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_nickname().data(), static_cast<int>(this->_internal_nickname().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "Protocol.C_ENTER.nickname");
-    target = stream->WriteStringMaybeAliased(
-        6, this->_internal_nickname(), target);
-  }
-
-  // bool isExpose = 7;
-  if (this->_internal_isexpose() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(7, this->_internal_isexpose(), target);
-  }
-
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -893,13 +836,6 @@ size_t C_ENTER::ByteSizeLong() const {
         this->_internal_password());
   }
 
-  // string nickname = 6;
-  if (!this->_internal_nickname().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_nickname());
-  }
-
   // int32 sessionId = 3;
   if (this->_internal_sessionid() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_sessionid());
@@ -907,11 +843,6 @@ size_t C_ENTER::ByteSizeLong() const {
 
   // bool isObserver = 5;
   if (this->_internal_isobserver() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool isExpose = 7;
-  if (this->_internal_isexpose() != 0) {
     total_size += 1 + 1;
   }
 
@@ -942,17 +873,11 @@ void C_ENTER::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   if (!from._internal_password().empty()) {
     _this->_internal_set_password(from._internal_password());
   }
-  if (!from._internal_nickname().empty()) {
-    _this->_internal_set_nickname(from._internal_nickname());
-  }
   if (from._internal_sessionid() != 0) {
     _this->_internal_set_sessionid(from._internal_sessionid());
   }
   if (from._internal_isobserver() != 0) {
     _this->_internal_set_isobserver(from._internal_isobserver());
-  }
-  if (from._internal_isexpose() != 0) {
-    _this->_internal_set_isexpose(from._internal_isexpose());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -985,13 +910,9 @@ void C_ENTER::InternalSwap(C_ENTER* other) {
       &_impl_.password_, lhs_arena,
       &other->_impl_.password_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.nickname_, lhs_arena,
-      &other->_impl_.nickname_, rhs_arena
-  );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(C_ENTER, _impl_.isexpose_)
-      + sizeof(C_ENTER::_impl_.isexpose_)
+      PROTOBUF_FIELD_OFFSET(C_ENTER, _impl_.isobserver_)
+      + sizeof(C_ENTER::_impl_.isobserver_)
       - PROTOBUF_FIELD_OFFSET(C_ENTER, _impl_.sessionid_)>(
           reinterpret_cast<char*>(&_impl_.sessionid_),
           reinterpret_cast<char*>(&other->_impl_.sessionid_));
