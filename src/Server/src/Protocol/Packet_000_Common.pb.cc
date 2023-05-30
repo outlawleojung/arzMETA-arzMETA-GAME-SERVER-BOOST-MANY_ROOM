@@ -248,8 +248,58 @@ struct S_WILDCARDDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_WILDCARDDefaultTypeInternal _S_WILDCARD_default_instance_;
+PROTOBUF_CONSTEXPR C_WILDCARD_MAP_DataEntry_DoNotUse::C_WILDCARD_MAP_DataEntry_DoNotUse(
+    ::_pbi::ConstantInitialized) {}
+struct C_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal() {}
+  union {
+    C_WILDCARD_MAP_DataEntry_DoNotUse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal _C_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_;
+PROTOBUF_CONSTEXPR C_WILDCARD_MAP::C_WILDCARD_MAP(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.data_)*/{::_pbi::ConstantInitialized()}
+  , /*decltype(_impl_.code_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct C_WILDCARD_MAPDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_WILDCARD_MAPDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_WILDCARD_MAPDefaultTypeInternal() {}
+  union {
+    C_WILDCARD_MAP _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_WILDCARD_MAPDefaultTypeInternal _C_WILDCARD_MAP_default_instance_;
+PROTOBUF_CONSTEXPR S_WILDCARD_MAP_DataEntry_DoNotUse::S_WILDCARD_MAP_DataEntry_DoNotUse(
+    ::_pbi::ConstantInitialized) {}
+struct S_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal() {}
+  union {
+    S_WILDCARD_MAP_DataEntry_DoNotUse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal _S_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_;
+PROTOBUF_CONSTEXPR S_WILDCARD_MAP::S_WILDCARD_MAP(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.data_)*/{::_pbi::ConstantInitialized()}
+  , /*decltype(_impl_.code_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct S_WILDCARD_MAPDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_WILDCARD_MAPDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_WILDCARD_MAPDefaultTypeInternal() {}
+  union {
+    S_WILDCARD_MAP _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_WILDCARD_MAPDefaultTypeInternal _S_WILDCARD_MAP_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_5f000_5fCommon_2eproto[17];
+static ::_pb::Metadata file_level_metadata_Packet_5f000_5fCommon_2eproto[21];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_5f000_5fCommon_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_5f000_5fCommon_2eproto = nullptr;
 
@@ -381,6 +431,42 @@ const uint32_t TableStruct_Packet_5f000_5fCommon_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD, _impl_.code_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD, _impl_.data_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse, value_),
+  0,
+  1,
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_WILDCARD_MAP, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_WILDCARD_MAP, _impl_.code_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_WILDCARD_MAP, _impl_.data_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse, value_),
+  0,
+  1,
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD_MAP, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD_MAP, _impl_.code_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_WILDCARD_MAP, _impl_.data_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::C_ENTER)},
@@ -400,6 +486,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 104, -1, -1, sizeof(::Protocol::S_DISCONNECT)},
   { 111, -1, -1, sizeof(::Protocol::C_WILDCARD)},
   { 119, -1, -1, sizeof(::Protocol::S_WILDCARD)},
+  { 127, 135, -1, sizeof(::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse)},
+  { 137, -1, -1, sizeof(::Protocol::C_WILDCARD_MAP)},
+  { 145, 153, -1, sizeof(::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse)},
+  { 155, -1, -1, sizeof(::Protocol::S_WILDCARD_MAP)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -420,6 +510,10 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_DISCONNECT_default_instance_._instance,
   &::Protocol::_C_WILDCARD_default_instance_._instance,
   &::Protocol::_S_WILDCARD_default_instance_._instance,
+  &::Protocol::_C_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_._instance,
+  &::Protocol::_C_WILDCARD_MAP_default_instance_._instance,
+  &::Protocol::_S_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_._instance,
+  &::Protocol::_S_WILDCARD_MAP_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Packet_5f000_5fCommon_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -441,13 +535,20 @@ const char descriptor_table_protodef_Packet_5f000_5fCommon_2eproto[] PROTOBUF_SE
   "T\022\020\n\010clientId\030\001 \001(\t\022\014\n\004chat\030\002 \001(\t\"\034\n\014S_D"
   "ISCONNECT\022\014\n\004code\030\001 \001(\t\"(\n\nC_WILDCARD\022\014\n"
   "\004code\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\"(\n\nS_WILDCARD\022"
-  "\014\n\004code\030\001 \001(\005\022\014\n\004data\030\002 \001(\tb\006proto3"
+  "\014\n\004code\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\"}\n\016C_WILDCAR"
+  "D_MAP\022\014\n\004code\030\001 \001(\005\0220\n\004data\030\002 \003(\0132\".Prot"
+  "ocol.C_WILDCARD_MAP.DataEntry\032+\n\tDataEnt"
+  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\016S_"
+  "WILDCARD_MAP\022\014\n\004code\030\001 \001(\005\0220\n\004data\030\002 \003(\013"
+  "2\".Protocol.S_WILDCARD_MAP.DataEntry\032+\n\t"
+  "DataEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028"
+  "\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f000_5fCommon_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f000_5fCommon_2eproto = {
-    false, false, 755, descriptor_table_protodef_Packet_5f000_5fCommon_2eproto,
+    false, false, 1009, descriptor_table_protodef_Packet_5f000_5fCommon_2eproto,
     "Packet_000_Common.proto",
-    &descriptor_table_Packet_5f000_5fCommon_2eproto_once, nullptr, 0, 17,
+    &descriptor_table_Packet_5f000_5fCommon_2eproto_once, nullptr, 0, 21,
     schemas, file_default_instances, TableStruct_Packet_5f000_5fCommon_2eproto::offsets,
     file_level_metadata_Packet_5f000_5fCommon_2eproto, file_level_enum_descriptors_Packet_5f000_5fCommon_2eproto,
     file_level_service_descriptors_Packet_5f000_5fCommon_2eproto,
@@ -3918,6 +4019,526 @@ void S_WILDCARD::InternalSwap(S_WILDCARD* other) {
       file_level_metadata_Packet_5f000_5fCommon_2eproto[16]);
 }
 
+// ===================================================================
+
+C_WILDCARD_MAP_DataEntry_DoNotUse::C_WILDCARD_MAP_DataEntry_DoNotUse() {}
+C_WILDCARD_MAP_DataEntry_DoNotUse::C_WILDCARD_MAP_DataEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+    : SuperType(arena) {}
+void C_WILDCARD_MAP_DataEntry_DoNotUse::MergeFrom(const C_WILDCARD_MAP_DataEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::PROTOBUF_NAMESPACE_ID::Metadata C_WILDCARD_MAP_DataEntry_DoNotUse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f000_5fCommon_2eproto_getter, &descriptor_table_Packet_5f000_5fCommon_2eproto_once,
+      file_level_metadata_Packet_5f000_5fCommon_2eproto[17]);
+}
+
+// ===================================================================
+
+class C_WILDCARD_MAP::_Internal {
+ public:
+};
+
+C_WILDCARD_MAP::C_WILDCARD_MAP(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  if (arena != nullptr && !is_message_owned) {
+    arena->OwnCustomDestructor(this, &C_WILDCARD_MAP::ArenaDtor);
+  }
+  // @@protoc_insertion_point(arena_constructor:Protocol.C_WILDCARD_MAP)
+}
+C_WILDCARD_MAP::C_WILDCARD_MAP(const C_WILDCARD_MAP& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  C_WILDCARD_MAP* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      /*decltype(_impl_.data_)*/{}
+    , decltype(_impl_.code_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.data_.MergeFrom(from._impl_.data_);
+  _this->_impl_.code_ = from._impl_.code_;
+  // @@protoc_insertion_point(copy_constructor:Protocol.C_WILDCARD_MAP)
+}
+
+inline void C_WILDCARD_MAP::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      /*decltype(_impl_.data_)*/{::_pbi::ArenaInitialized(), arena}
+    , decltype(_impl_.code_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+C_WILDCARD_MAP::~C_WILDCARD_MAP() {
+  // @@protoc_insertion_point(destructor:Protocol.C_WILDCARD_MAP)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    ArenaDtor(this);
+    return;
+  }
+  SharedDtor();
+}
+
+inline void C_WILDCARD_MAP::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.data_.Destruct();
+  _impl_.data_.~MapField();
+}
+
+void C_WILDCARD_MAP::ArenaDtor(void* object) {
+  C_WILDCARD_MAP* _this = reinterpret_cast< C_WILDCARD_MAP* >(object);
+  _this->_impl_.data_.Destruct();
+}
+void C_WILDCARD_MAP::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void C_WILDCARD_MAP::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.C_WILDCARD_MAP)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.data_.Clear();
+  _impl_.code_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* C_WILDCARD_MAP::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // int32 code = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.code_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // map<string, string> data = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(&_impl_.data_, ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* C_WILDCARD_MAP::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.C_WILDCARD_MAP)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 code = 1;
+  if (this->_internal_code() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_code(), target);
+  }
+
+  // map<string, string> data = 2;
+  if (!this->_internal_data().empty()) {
+    using MapType = ::_pb::Map<std::string, std::string>;
+    using WireHelper = C_WILDCARD_MAP_DataEntry_DoNotUse::Funcs;
+    const auto& map_field = this->_internal_data();
+    auto check_utf8 = [](const MapType::value_type& entry) {
+      (void)entry;
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+        entry.first.data(), static_cast<int>(entry.first.length()),
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+        "Protocol.C_WILDCARD_MAP.DataEntry.key");
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+        entry.second.data(), static_cast<int>(entry.second.length()),
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+        "Protocol.C_WILDCARD_MAP.DataEntry.value");
+    };
+
+    if (stream->IsSerializationDeterministic() && map_field.size() > 1) {
+      for (const auto& entry : ::_pbi::MapSorterPtr<MapType>(map_field)) {
+        target = WireHelper::InternalSerialize(2, entry.first, entry.second, target, stream);
+        check_utf8(entry);
+      }
+    } else {
+      for (const auto& entry : map_field) {
+        target = WireHelper::InternalSerialize(2, entry.first, entry.second, target, stream);
+        check_utf8(entry);
+      }
+    }
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.C_WILDCARD_MAP)
+  return target;
+}
+
+size_t C_WILDCARD_MAP::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.C_WILDCARD_MAP)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // map<string, string> data = 2;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_data_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >::const_iterator
+      it = this->_internal_data().begin();
+      it != this->_internal_data().end(); ++it) {
+    total_size += C_WILDCARD_MAP_DataEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+  }
+
+  // int32 code = 1;
+  if (this->_internal_code() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_code());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_WILDCARD_MAP::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    C_WILDCARD_MAP::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_WILDCARD_MAP::GetClassData() const { return &_class_data_; }
+
+
+void C_WILDCARD_MAP::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<C_WILDCARD_MAP*>(&to_msg);
+  auto& from = static_cast<const C_WILDCARD_MAP&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.C_WILDCARD_MAP)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.data_.MergeFrom(from._impl_.data_);
+  if (from._internal_code() != 0) {
+    _this->_internal_set_code(from._internal_code());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void C_WILDCARD_MAP::CopyFrom(const C_WILDCARD_MAP& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.C_WILDCARD_MAP)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool C_WILDCARD_MAP::IsInitialized() const {
+  return true;
+}
+
+void C_WILDCARD_MAP::InternalSwap(C_WILDCARD_MAP* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.data_.InternalSwap(&other->_impl_.data_);
+  swap(_impl_.code_, other->_impl_.code_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata C_WILDCARD_MAP::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f000_5fCommon_2eproto_getter, &descriptor_table_Packet_5f000_5fCommon_2eproto_once,
+      file_level_metadata_Packet_5f000_5fCommon_2eproto[18]);
+}
+
+// ===================================================================
+
+S_WILDCARD_MAP_DataEntry_DoNotUse::S_WILDCARD_MAP_DataEntry_DoNotUse() {}
+S_WILDCARD_MAP_DataEntry_DoNotUse::S_WILDCARD_MAP_DataEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+    : SuperType(arena) {}
+void S_WILDCARD_MAP_DataEntry_DoNotUse::MergeFrom(const S_WILDCARD_MAP_DataEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::PROTOBUF_NAMESPACE_ID::Metadata S_WILDCARD_MAP_DataEntry_DoNotUse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f000_5fCommon_2eproto_getter, &descriptor_table_Packet_5f000_5fCommon_2eproto_once,
+      file_level_metadata_Packet_5f000_5fCommon_2eproto[19]);
+}
+
+// ===================================================================
+
+class S_WILDCARD_MAP::_Internal {
+ public:
+};
+
+S_WILDCARD_MAP::S_WILDCARD_MAP(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  if (arena != nullptr && !is_message_owned) {
+    arena->OwnCustomDestructor(this, &S_WILDCARD_MAP::ArenaDtor);
+  }
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_WILDCARD_MAP)
+}
+S_WILDCARD_MAP::S_WILDCARD_MAP(const S_WILDCARD_MAP& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  S_WILDCARD_MAP* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      /*decltype(_impl_.data_)*/{}
+    , decltype(_impl_.code_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.data_.MergeFrom(from._impl_.data_);
+  _this->_impl_.code_ = from._impl_.code_;
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_WILDCARD_MAP)
+}
+
+inline void S_WILDCARD_MAP::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      /*decltype(_impl_.data_)*/{::_pbi::ArenaInitialized(), arena}
+    , decltype(_impl_.code_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+S_WILDCARD_MAP::~S_WILDCARD_MAP() {
+  // @@protoc_insertion_point(destructor:Protocol.S_WILDCARD_MAP)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    ArenaDtor(this);
+    return;
+  }
+  SharedDtor();
+}
+
+inline void S_WILDCARD_MAP::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.data_.Destruct();
+  _impl_.data_.~MapField();
+}
+
+void S_WILDCARD_MAP::ArenaDtor(void* object) {
+  S_WILDCARD_MAP* _this = reinterpret_cast< S_WILDCARD_MAP* >(object);
+  _this->_impl_.data_.Destruct();
+}
+void S_WILDCARD_MAP::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_WILDCARD_MAP::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_WILDCARD_MAP)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.data_.Clear();
+  _impl_.code_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_WILDCARD_MAP::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // int32 code = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.code_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // map<string, string> data = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(&_impl_.data_, ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_WILDCARD_MAP::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_WILDCARD_MAP)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 code = 1;
+  if (this->_internal_code() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_code(), target);
+  }
+
+  // map<string, string> data = 2;
+  if (!this->_internal_data().empty()) {
+    using MapType = ::_pb::Map<std::string, std::string>;
+    using WireHelper = S_WILDCARD_MAP_DataEntry_DoNotUse::Funcs;
+    const auto& map_field = this->_internal_data();
+    auto check_utf8 = [](const MapType::value_type& entry) {
+      (void)entry;
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+        entry.first.data(), static_cast<int>(entry.first.length()),
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+        "Protocol.S_WILDCARD_MAP.DataEntry.key");
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+        entry.second.data(), static_cast<int>(entry.second.length()),
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+        "Protocol.S_WILDCARD_MAP.DataEntry.value");
+    };
+
+    if (stream->IsSerializationDeterministic() && map_field.size() > 1) {
+      for (const auto& entry : ::_pbi::MapSorterPtr<MapType>(map_field)) {
+        target = WireHelper::InternalSerialize(2, entry.first, entry.second, target, stream);
+        check_utf8(entry);
+      }
+    } else {
+      for (const auto& entry : map_field) {
+        target = WireHelper::InternalSerialize(2, entry.first, entry.second, target, stream);
+        check_utf8(entry);
+      }
+    }
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_WILDCARD_MAP)
+  return target;
+}
+
+size_t S_WILDCARD_MAP::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_WILDCARD_MAP)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // map<string, string> data = 2;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_data_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >::const_iterator
+      it = this->_internal_data().begin();
+      it != this->_internal_data().end(); ++it) {
+    total_size += S_WILDCARD_MAP_DataEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+  }
+
+  // int32 code = 1;
+  if (this->_internal_code() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_code());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_WILDCARD_MAP::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_WILDCARD_MAP::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_WILDCARD_MAP::GetClassData() const { return &_class_data_; }
+
+
+void S_WILDCARD_MAP::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_WILDCARD_MAP*>(&to_msg);
+  auto& from = static_cast<const S_WILDCARD_MAP&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_WILDCARD_MAP)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.data_.MergeFrom(from._impl_.data_);
+  if (from._internal_code() != 0) {
+    _this->_internal_set_code(from._internal_code());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_WILDCARD_MAP::CopyFrom(const S_WILDCARD_MAP& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_WILDCARD_MAP)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool S_WILDCARD_MAP::IsInitialized() const {
+  return true;
+}
+
+void S_WILDCARD_MAP::InternalSwap(S_WILDCARD_MAP* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.data_.InternalSwap(&other->_impl_.data_);
+  swap(_impl_.code_, other->_impl_.code_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata S_WILDCARD_MAP::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f000_5fCommon_2eproto_getter, &descriptor_table_Packet_5f000_5fCommon_2eproto_once,
+      file_level_metadata_Packet_5f000_5fCommon_2eproto[20]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
@@ -3988,6 +4609,22 @@ Arena::CreateMaybeMessage< ::Protocol::C_WILDCARD >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Protocol::S_WILDCARD*
 Arena::CreateMaybeMessage< ::Protocol::S_WILDCARD >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_WILDCARD >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse*
+Arena::CreateMaybeMessage< ::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::C_WILDCARD_MAP*
+Arena::CreateMaybeMessage< ::Protocol::C_WILDCARD_MAP >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_WILDCARD_MAP >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse*
+Arena::CreateMaybeMessage< ::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_WILDCARD_MAP*
+Arena::CreateMaybeMessage< ::Protocol::S_WILDCARD_MAP >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_WILDCARD_MAP >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

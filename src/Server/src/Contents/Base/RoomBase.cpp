@@ -51,6 +51,14 @@ void RoomBase::Handle_C_WILDCARD(shared_ptr<ClientBase>& client, Protocol::C_WIL
 	Broadcast(PacketManager::MakeSendBuffer(res));
 }
 
+void RoomBase::Handle_C_WILDCARD_MAP(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD_MAP& pkt)
+{
+	Protocol::S_WILDCARD_MAP res;
+	res.set_code(pkt.code());
+	*res.mutable_data() = pkt.data();
+	Broadcast(PacketManager::MakeSendBuffer(res));
+}
+
 void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 {
 	if (state != RoomState::Running) return;
