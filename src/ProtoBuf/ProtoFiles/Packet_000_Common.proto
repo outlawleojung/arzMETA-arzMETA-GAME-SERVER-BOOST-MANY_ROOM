@@ -94,3 +94,15 @@ message S_WILDCARD
 	int32 code = 1;
 	string data = 2;
 }
+
+message C_WILDCARD_MAP
+{
+	int32 code = 1;
+	map<string, string> data = 2;
+}
+
+message S_WILDCARD_MAP
+{
+	int32 code = 1;
+	map<string, string> data = 2;
+}

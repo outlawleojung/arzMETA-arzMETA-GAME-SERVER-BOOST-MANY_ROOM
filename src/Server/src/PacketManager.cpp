@@ -86,6 +86,15 @@ bool Handle_C_WILDCARD(shared_ptr<GameSession>& session, Protocol::C_WILDCARD& p
 
 	return true;
 }
+bool Handle_C_WILDCARD_MAP(shared_ptr<GameSession>& session, Protocol::C_WILDCARD_MAP& pkt)
+{
+	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_WILDCARD_MAP(session->owner, pkt);
+
+	return true;
+}
 bool Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt)
 {
 	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)

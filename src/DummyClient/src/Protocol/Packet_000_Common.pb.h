@@ -30,6 +30,9 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/map.h>  // IWYU pragma: export
+#include <google/protobuf/map_entry.h>
+#include <google/protobuf/map_field_inl.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -67,6 +70,12 @@ extern C_SET_NICKNAMEDefaultTypeInternal _C_SET_NICKNAME_default_instance_;
 class C_WILDCARD;
 struct C_WILDCARDDefaultTypeInternal;
 extern C_WILDCARDDefaultTypeInternal _C_WILDCARD_default_instance_;
+class C_WILDCARD_MAP;
+struct C_WILDCARD_MAPDefaultTypeInternal;
+extern C_WILDCARD_MAPDefaultTypeInternal _C_WILDCARD_MAP_default_instance_;
+class C_WILDCARD_MAP_DataEntry_DoNotUse;
+struct C_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal;
+extern C_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal _C_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_;
 class S_ADD_CLIENT;
 struct S_ADD_CLIENTDefaultTypeInternal;
 extern S_ADD_CLIENTDefaultTypeInternal _S_ADD_CLIENT_default_instance_;
@@ -97,6 +106,12 @@ extern S_SET_NICKNAME_NOTICEDefaultTypeInternal _S_SET_NICKNAME_NOTICE_default_i
 class S_WILDCARD;
 struct S_WILDCARDDefaultTypeInternal;
 extern S_WILDCARDDefaultTypeInternal _S_WILDCARD_default_instance_;
+class S_WILDCARD_MAP;
+struct S_WILDCARD_MAPDefaultTypeInternal;
+extern S_WILDCARD_MAPDefaultTypeInternal _S_WILDCARD_MAP_default_instance_;
+class S_WILDCARD_MAP_DataEntry_DoNotUse;
+struct S_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal;
+extern S_WILDCARD_MAP_DataEntry_DoNotUseDefaultTypeInternal _S_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::C_CHAT* Arena::CreateMaybeMessage<::Protocol::C_CHAT>(Arena*);
@@ -106,6 +121,8 @@ template<> ::Protocol::C_LEAVE* Arena::CreateMaybeMessage<::Protocol::C_LEAVE>(A
 template<> ::Protocol::C_REENTER* Arena::CreateMaybeMessage<::Protocol::C_REENTER>(Arena*);
 template<> ::Protocol::C_SET_NICKNAME* Arena::CreateMaybeMessage<::Protocol::C_SET_NICKNAME>(Arena*);
 template<> ::Protocol::C_WILDCARD* Arena::CreateMaybeMessage<::Protocol::C_WILDCARD>(Arena*);
+template<> ::Protocol::C_WILDCARD_MAP* Arena::CreateMaybeMessage<::Protocol::C_WILDCARD_MAP>(Arena*);
+template<> ::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse* Arena::CreateMaybeMessage<::Protocol::C_WILDCARD_MAP_DataEntry_DoNotUse>(Arena*);
 template<> ::Protocol::S_ADD_CLIENT* Arena::CreateMaybeMessage<::Protocol::S_ADD_CLIENT>(Arena*);
 template<> ::Protocol::S_ADD_CLIENT_ClientInfo* Arena::CreateMaybeMessage<::Protocol::S_ADD_CLIENT_ClientInfo>(Arena*);
 template<> ::Protocol::S_CHAT* Arena::CreateMaybeMessage<::Protocol::S_CHAT>(Arena*);
@@ -116,6 +133,8 @@ template<> ::Protocol::S_REMOVE_CLIENT* Arena::CreateMaybeMessage<::Protocol::S_
 template<> ::Protocol::S_SET_NICKNAME* Arena::CreateMaybeMessage<::Protocol::S_SET_NICKNAME>(Arena*);
 template<> ::Protocol::S_SET_NICKNAME_NOTICE* Arena::CreateMaybeMessage<::Protocol::S_SET_NICKNAME_NOTICE>(Arena*);
 template<> ::Protocol::S_WILDCARD* Arena::CreateMaybeMessage<::Protocol::S_WILDCARD>(Arena*);
+template<> ::Protocol::S_WILDCARD_MAP* Arena::CreateMaybeMessage<::Protocol::S_WILDCARD_MAP>(Arena*);
+template<> ::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse* Arena::CreateMaybeMessage<::Protocol::S_WILDCARD_MAP_DataEntry_DoNotUse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
@@ -2796,6 +2815,410 @@ class S_WILDCARD final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_Packet_5f000_5fCommon_2eproto;
 };
+// -------------------------------------------------------------------
+
+class C_WILDCARD_MAP_DataEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<C_WILDCARD_MAP_DataEntry_DoNotUse, 
+    std::string, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<C_WILDCARD_MAP_DataEntry_DoNotUse, 
+    std::string, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> SuperType;
+  C_WILDCARD_MAP_DataEntry_DoNotUse();
+  explicit PROTOBUF_CONSTEXPR C_WILDCARD_MAP_DataEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit C_WILDCARD_MAP_DataEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const C_WILDCARD_MAP_DataEntry_DoNotUse& other);
+  static const C_WILDCARD_MAP_DataEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const C_WILDCARD_MAP_DataEntry_DoNotUse*>(&_C_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(std::string* s) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "Protocol.C_WILDCARD_MAP.DataEntry.key");
+ }
+  static bool ValidateValue(std::string* s) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "Protocol.C_WILDCARD_MAP.DataEntry.value");
+ }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  friend struct ::TableStruct_Packet_5f000_5fCommon_2eproto;
+};
+
+// -------------------------------------------------------------------
+
+class C_WILDCARD_MAP final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_WILDCARD_MAP) */ {
+ public:
+  inline C_WILDCARD_MAP() : C_WILDCARD_MAP(nullptr) {}
+  ~C_WILDCARD_MAP() override;
+  explicit PROTOBUF_CONSTEXPR C_WILDCARD_MAP(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_WILDCARD_MAP(const C_WILDCARD_MAP& from);
+  C_WILDCARD_MAP(C_WILDCARD_MAP&& from) noexcept
+    : C_WILDCARD_MAP() {
+    *this = ::std::move(from);
+  }
+
+  inline C_WILDCARD_MAP& operator=(const C_WILDCARD_MAP& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_WILDCARD_MAP& operator=(C_WILDCARD_MAP&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_WILDCARD_MAP& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_WILDCARD_MAP* internal_default_instance() {
+    return reinterpret_cast<const C_WILDCARD_MAP*>(
+               &_C_WILDCARD_MAP_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  friend void swap(C_WILDCARD_MAP& a, C_WILDCARD_MAP& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_WILDCARD_MAP* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_WILDCARD_MAP* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_WILDCARD_MAP* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_WILDCARD_MAP>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C_WILDCARD_MAP& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const C_WILDCARD_MAP& from) {
+    C_WILDCARD_MAP::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C_WILDCARD_MAP* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_WILDCARD_MAP";
+  }
+  protected:
+  explicit C_WILDCARD_MAP(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDataFieldNumber = 2,
+    kCodeFieldNumber = 1,
+  };
+  // map<string, string> data = 2;
+  int data_size() const;
+  private:
+  int _internal_data_size() const;
+  public:
+  void clear_data();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+      _internal_data() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+      _internal_mutable_data();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+      data() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+      mutable_data();
+
+  // int32 code = 1;
+  void clear_code();
+  int32_t code() const;
+  void set_code(int32_t value);
+  private:
+  int32_t _internal_code() const;
+  void _internal_set_code(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_WILDCARD_MAP)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+        C_WILDCARD_MAP_DataEntry_DoNotUse,
+        std::string, std::string,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> data_;
+    int32_t code_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f000_5fCommon_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_WILDCARD_MAP_DataEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<S_WILDCARD_MAP_DataEntry_DoNotUse, 
+    std::string, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<S_WILDCARD_MAP_DataEntry_DoNotUse, 
+    std::string, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> SuperType;
+  S_WILDCARD_MAP_DataEntry_DoNotUse();
+  explicit PROTOBUF_CONSTEXPR S_WILDCARD_MAP_DataEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit S_WILDCARD_MAP_DataEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const S_WILDCARD_MAP_DataEntry_DoNotUse& other);
+  static const S_WILDCARD_MAP_DataEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const S_WILDCARD_MAP_DataEntry_DoNotUse*>(&_S_WILDCARD_MAP_DataEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(std::string* s) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "Protocol.S_WILDCARD_MAP.DataEntry.key");
+ }
+  static bool ValidateValue(std::string* s) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "Protocol.S_WILDCARD_MAP.DataEntry.value");
+ }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  friend struct ::TableStruct_Packet_5f000_5fCommon_2eproto;
+};
+
+// -------------------------------------------------------------------
+
+class S_WILDCARD_MAP final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_WILDCARD_MAP) */ {
+ public:
+  inline S_WILDCARD_MAP() : S_WILDCARD_MAP(nullptr) {}
+  ~S_WILDCARD_MAP() override;
+  explicit PROTOBUF_CONSTEXPR S_WILDCARD_MAP(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_WILDCARD_MAP(const S_WILDCARD_MAP& from);
+  S_WILDCARD_MAP(S_WILDCARD_MAP&& from) noexcept
+    : S_WILDCARD_MAP() {
+    *this = ::std::move(from);
+  }
+
+  inline S_WILDCARD_MAP& operator=(const S_WILDCARD_MAP& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_WILDCARD_MAP& operator=(S_WILDCARD_MAP&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_WILDCARD_MAP& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_WILDCARD_MAP* internal_default_instance() {
+    return reinterpret_cast<const S_WILDCARD_MAP*>(
+               &_S_WILDCARD_MAP_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    20;
+
+  friend void swap(S_WILDCARD_MAP& a, S_WILDCARD_MAP& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_WILDCARD_MAP* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_WILDCARD_MAP* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_WILDCARD_MAP* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_WILDCARD_MAP>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_WILDCARD_MAP& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_WILDCARD_MAP& from) {
+    S_WILDCARD_MAP::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_WILDCARD_MAP* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_WILDCARD_MAP";
+  }
+  protected:
+  explicit S_WILDCARD_MAP(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDataFieldNumber = 2,
+    kCodeFieldNumber = 1,
+  };
+  // map<string, string> data = 2;
+  int data_size() const;
+  private:
+  int _internal_data_size() const;
+  public:
+  void clear_data();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+      _internal_data() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+      _internal_mutable_data();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+      data() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+      mutable_data();
+
+  // int32 code = 1;
+  void clear_code();
+  int32_t code() const;
+  void set_code(int32_t value);
+  private:
+  int32_t _internal_code() const;
+  void _internal_set_code(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_WILDCARD_MAP)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+        S_WILDCARD_MAP_DataEntry_DoNotUse,
+        std::string, std::string,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> data_;
+    int32_t code_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f000_5fCommon_2eproto;
+};
 // ===================================================================
 
 
@@ -3956,9 +4379,127 @@ inline void S_WILDCARD::set_allocated_data(std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_WILDCARD.data)
 }
 
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// C_WILDCARD_MAP
+
+// int32 code = 1;
+inline void C_WILDCARD_MAP::clear_code() {
+  _impl_.code_ = 0;
+}
+inline int32_t C_WILDCARD_MAP::_internal_code() const {
+  return _impl_.code_;
+}
+inline int32_t C_WILDCARD_MAP::code() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_WILDCARD_MAP.code)
+  return _internal_code();
+}
+inline void C_WILDCARD_MAP::_internal_set_code(int32_t value) {
+  
+  _impl_.code_ = value;
+}
+inline void C_WILDCARD_MAP::set_code(int32_t value) {
+  _internal_set_code(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_WILDCARD_MAP.code)
+}
+
+// map<string, string> data = 2;
+inline int C_WILDCARD_MAP::_internal_data_size() const {
+  return _impl_.data_.size();
+}
+inline int C_WILDCARD_MAP::data_size() const {
+  return _internal_data_size();
+}
+inline void C_WILDCARD_MAP::clear_data() {
+  _impl_.data_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+C_WILDCARD_MAP::_internal_data() const {
+  return _impl_.data_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+C_WILDCARD_MAP::data() const {
+  // @@protoc_insertion_point(field_map:Protocol.C_WILDCARD_MAP.data)
+  return _internal_data();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+C_WILDCARD_MAP::_internal_mutable_data() {
+  return _impl_.data_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+C_WILDCARD_MAP::mutable_data() {
+  // @@protoc_insertion_point(field_mutable_map:Protocol.C_WILDCARD_MAP.data)
+  return _internal_mutable_data();
+}
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// S_WILDCARD_MAP
+
+// int32 code = 1;
+inline void S_WILDCARD_MAP::clear_code() {
+  _impl_.code_ = 0;
+}
+inline int32_t S_WILDCARD_MAP::_internal_code() const {
+  return _impl_.code_;
+}
+inline int32_t S_WILDCARD_MAP::code() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_WILDCARD_MAP.code)
+  return _internal_code();
+}
+inline void S_WILDCARD_MAP::_internal_set_code(int32_t value) {
+  
+  _impl_.code_ = value;
+}
+inline void S_WILDCARD_MAP::set_code(int32_t value) {
+  _internal_set_code(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_WILDCARD_MAP.code)
+}
+
+// map<string, string> data = 2;
+inline int S_WILDCARD_MAP::_internal_data_size() const {
+  return _impl_.data_.size();
+}
+inline int S_WILDCARD_MAP::data_size() const {
+  return _internal_data_size();
+}
+inline void S_WILDCARD_MAP::clear_data() {
+  _impl_.data_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+S_WILDCARD_MAP::_internal_data() const {
+  return _impl_.data_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >&
+S_WILDCARD_MAP::data() const {
+  // @@protoc_insertion_point(field_map:Protocol.S_WILDCARD_MAP.data)
+  return _internal_data();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+S_WILDCARD_MAP::_internal_mutable_data() {
+  return _impl_.data_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
+S_WILDCARD_MAP::mutable_data() {
+  // @@protoc_insertion_point(field_mutable_map:Protocol.S_WILDCARD_MAP.data)
+  return _internal_mutable_data();
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

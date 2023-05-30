@@ -59,4 +59,5 @@ public:
 	virtual void Handle_C_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_GET_CLIENT& pkt);
 	virtual void Handle_C_CHAT(shared_ptr<ClientBase>& client, Protocol::C_CHAT& pkt);
 	virtual void Handle_C_WILDCARD(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD& pkt);
+	virtual void Handle_C_WILDCARD_MAP(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD_MAP& pkt);
 };
