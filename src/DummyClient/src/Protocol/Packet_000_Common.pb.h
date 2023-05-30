@@ -2610,10 +2610,12 @@ class C_WILDCARD final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kDataFieldNumber = 2,
+    kDataFieldNumber = 3,
+    kReceiverFieldNumber = 4,
     kCodeFieldNumber = 1,
+    kTypeFieldNumber = 2,
   };
-  // string data = 2;
+  // string data = 3;
   void clear_data();
   const std::string& data() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2627,6 +2629,20 @@ class C_WILDCARD final :
   std::string* _internal_mutable_data();
   public:
 
+  // string receiver = 4;
+  void clear_receiver();
+  const std::string& receiver() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_receiver(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_receiver();
+  PROTOBUF_NODISCARD std::string* release_receiver();
+  void set_allocated_receiver(std::string* receiver);
+  private:
+  const std::string& _internal_receiver() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_receiver(const std::string& value);
+  std::string* _internal_mutable_receiver();
+  public:
+
   // int32 code = 1;
   void clear_code();
   int32_t code() const;
@@ -2634,6 +2650,15 @@ class C_WILDCARD final :
   private:
   int32_t _internal_code() const;
   void _internal_set_code(int32_t value);
+  public:
+
+  // int32 type = 2;
+  void clear_type();
+  int32_t type() const;
+  void set_type(int32_t value);
+  private:
+  int32_t _internal_type() const;
+  void _internal_set_type(int32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.C_WILDCARD)
@@ -2645,7 +2670,9 @@ class C_WILDCARD final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr receiver_;
     int32_t code_;
+    int32_t type_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2774,10 +2801,25 @@ class S_WILDCARD final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kDataFieldNumber = 2,
-    kCodeFieldNumber = 1,
+    kSenderFieldNumber = 1,
+    kDataFieldNumber = 3,
+    kCodeFieldNumber = 2,
   };
-  // string data = 2;
+  // string sender = 1;
+  void clear_sender();
+  const std::string& sender() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_sender(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_sender();
+  PROTOBUF_NODISCARD std::string* release_sender();
+  void set_allocated_sender(std::string* sender);
+  private:
+  const std::string& _internal_sender() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_sender(const std::string& value);
+  std::string* _internal_mutable_sender();
+  public:
+
+  // string data = 3;
   void clear_data();
   const std::string& data() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2791,7 +2833,7 @@ class S_WILDCARD final :
   std::string* _internal_mutable_data();
   public:
 
-  // int32 code = 1;
+  // int32 code = 2;
   void clear_code();
   int32_t code() const;
   void set_code(int32_t value);
@@ -2808,6 +2850,7 @@ class S_WILDCARD final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sender_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
     int32_t code_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -2969,10 +3012,12 @@ class C_WILDCARD_MAP final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kDataFieldNumber = 2,
+    kDataFieldNumber = 3,
+    kReceiverFieldNumber = 4,
     kCodeFieldNumber = 1,
+    kTypeFieldNumber = 2,
   };
-  // map<string, string> data = 2;
+  // map<string, string> data = 3;
   int data_size() const;
   private:
   int _internal_data_size() const;
@@ -2989,6 +3034,20 @@ class C_WILDCARD_MAP final :
   ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
       mutable_data();
 
+  // string receiver = 4;
+  void clear_receiver();
+  const std::string& receiver() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_receiver(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_receiver();
+  PROTOBUF_NODISCARD std::string* release_receiver();
+  void set_allocated_receiver(std::string* receiver);
+  private:
+  const std::string& _internal_receiver() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_receiver(const std::string& value);
+  std::string* _internal_mutable_receiver();
+  public:
+
   // int32 code = 1;
   void clear_code();
   int32_t code() const;
@@ -2996,6 +3055,15 @@ class C_WILDCARD_MAP final :
   private:
   int32_t _internal_code() const;
   void _internal_set_code(int32_t value);
+  public:
+
+  // int32 type = 2;
+  void clear_type();
+  int32_t type() const;
+  void set_type(int32_t value);
+  private:
+  int32_t _internal_type() const;
+  void _internal_set_type(int32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.C_WILDCARD_MAP)
@@ -3011,7 +3079,9 @@ class C_WILDCARD_MAP final :
         std::string, std::string,
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> data_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr receiver_;
     int32_t code_;
+    int32_t type_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3171,10 +3241,11 @@ class S_WILDCARD_MAP final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kDataFieldNumber = 2,
-    kCodeFieldNumber = 1,
+    kDataFieldNumber = 3,
+    kSenderFieldNumber = 1,
+    kCodeFieldNumber = 2,
   };
-  // map<string, string> data = 2;
+  // map<string, string> data = 3;
   int data_size() const;
   private:
   int _internal_data_size() const;
@@ -3191,7 +3262,21 @@ class S_WILDCARD_MAP final :
   ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
       mutable_data();
 
-  // int32 code = 1;
+  // string sender = 1;
+  void clear_sender();
+  const std::string& sender() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_sender(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_sender();
+  PROTOBUF_NODISCARD std::string* release_sender();
+  void set_allocated_sender(std::string* sender);
+  private:
+  const std::string& _internal_sender() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_sender(const std::string& value);
+  std::string* _internal_mutable_sender();
+  public:
+
+  // int32 code = 2;
   void clear_code();
   int32_t code() const;
   void set_code(int32_t value);
@@ -3213,6 +3298,7 @@ class S_WILDCARD_MAP final :
         std::string, std::string,
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> data_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sender_;
     int32_t code_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -4255,7 +4341,27 @@ inline void C_WILDCARD::set_code(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.C_WILDCARD.code)
 }
 
-// string data = 2;
+// int32 type = 2;
+inline void C_WILDCARD::clear_type() {
+  _impl_.type_ = 0;
+}
+inline int32_t C_WILDCARD::_internal_type() const {
+  return _impl_.type_;
+}
+inline int32_t C_WILDCARD::type() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_WILDCARD.type)
+  return _internal_type();
+}
+inline void C_WILDCARD::_internal_set_type(int32_t value) {
+  
+  _impl_.type_ = value;
+}
+inline void C_WILDCARD::set_type(int32_t value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_WILDCARD.type)
+}
+
+// string data = 3;
 inline void C_WILDCARD::clear_data() {
   _impl_.data_.ClearToEmpty();
 }
@@ -4305,11 +4411,111 @@ inline void C_WILDCARD::set_allocated_data(std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_WILDCARD.data)
 }
 
+// string receiver = 4;
+inline void C_WILDCARD::clear_receiver() {
+  _impl_.receiver_.ClearToEmpty();
+}
+inline const std::string& C_WILDCARD::receiver() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_WILDCARD.receiver)
+  return _internal_receiver();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_WILDCARD::set_receiver(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.receiver_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_WILDCARD.receiver)
+}
+inline std::string* C_WILDCARD::mutable_receiver() {
+  std::string* _s = _internal_mutable_receiver();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_WILDCARD.receiver)
+  return _s;
+}
+inline const std::string& C_WILDCARD::_internal_receiver() const {
+  return _impl_.receiver_.Get();
+}
+inline void C_WILDCARD::_internal_set_receiver(const std::string& value) {
+  
+  _impl_.receiver_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_WILDCARD::_internal_mutable_receiver() {
+  
+  return _impl_.receiver_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_WILDCARD::release_receiver() {
+  // @@protoc_insertion_point(field_release:Protocol.C_WILDCARD.receiver)
+  return _impl_.receiver_.Release();
+}
+inline void C_WILDCARD::set_allocated_receiver(std::string* receiver) {
+  if (receiver != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.receiver_.SetAllocated(receiver, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.receiver_.IsDefault()) {
+    _impl_.receiver_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_WILDCARD.receiver)
+}
+
 // -------------------------------------------------------------------
 
 // S_WILDCARD
 
-// int32 code = 1;
+// string sender = 1;
+inline void S_WILDCARD::clear_sender() {
+  _impl_.sender_.ClearToEmpty();
+}
+inline const std::string& S_WILDCARD::sender() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_WILDCARD.sender)
+  return _internal_sender();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_WILDCARD::set_sender(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.sender_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_WILDCARD.sender)
+}
+inline std::string* S_WILDCARD::mutable_sender() {
+  std::string* _s = _internal_mutable_sender();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_WILDCARD.sender)
+  return _s;
+}
+inline const std::string& S_WILDCARD::_internal_sender() const {
+  return _impl_.sender_.Get();
+}
+inline void S_WILDCARD::_internal_set_sender(const std::string& value) {
+  
+  _impl_.sender_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_WILDCARD::_internal_mutable_sender() {
+  
+  return _impl_.sender_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_WILDCARD::release_sender() {
+  // @@protoc_insertion_point(field_release:Protocol.S_WILDCARD.sender)
+  return _impl_.sender_.Release();
+}
+inline void S_WILDCARD::set_allocated_sender(std::string* sender) {
+  if (sender != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.sender_.SetAllocated(sender, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.sender_.IsDefault()) {
+    _impl_.sender_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_WILDCARD.sender)
+}
+
+// int32 code = 2;
 inline void S_WILDCARD::clear_code() {
   _impl_.code_ = 0;
 }
@@ -4329,7 +4535,7 @@ inline void S_WILDCARD::set_code(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_WILDCARD.code)
 }
 
-// string data = 2;
+// string data = 3;
 inline void S_WILDCARD::clear_data() {
   _impl_.data_.ClearToEmpty();
 }
@@ -4405,7 +4611,27 @@ inline void C_WILDCARD_MAP::set_code(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.C_WILDCARD_MAP.code)
 }
 
-// map<string, string> data = 2;
+// int32 type = 2;
+inline void C_WILDCARD_MAP::clear_type() {
+  _impl_.type_ = 0;
+}
+inline int32_t C_WILDCARD_MAP::_internal_type() const {
+  return _impl_.type_;
+}
+inline int32_t C_WILDCARD_MAP::type() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_WILDCARD_MAP.type)
+  return _internal_type();
+}
+inline void C_WILDCARD_MAP::_internal_set_type(int32_t value) {
+  
+  _impl_.type_ = value;
+}
+inline void C_WILDCARD_MAP::set_type(int32_t value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_WILDCARD_MAP.type)
+}
+
+// map<string, string> data = 3;
 inline int C_WILDCARD_MAP::_internal_data_size() const {
   return _impl_.data_.size();
 }
@@ -4434,13 +4660,113 @@ C_WILDCARD_MAP::mutable_data() {
   return _internal_mutable_data();
 }
 
+// string receiver = 4;
+inline void C_WILDCARD_MAP::clear_receiver() {
+  _impl_.receiver_.ClearToEmpty();
+}
+inline const std::string& C_WILDCARD_MAP::receiver() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_WILDCARD_MAP.receiver)
+  return _internal_receiver();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_WILDCARD_MAP::set_receiver(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.receiver_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_WILDCARD_MAP.receiver)
+}
+inline std::string* C_WILDCARD_MAP::mutable_receiver() {
+  std::string* _s = _internal_mutable_receiver();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_WILDCARD_MAP.receiver)
+  return _s;
+}
+inline const std::string& C_WILDCARD_MAP::_internal_receiver() const {
+  return _impl_.receiver_.Get();
+}
+inline void C_WILDCARD_MAP::_internal_set_receiver(const std::string& value) {
+  
+  _impl_.receiver_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_WILDCARD_MAP::_internal_mutable_receiver() {
+  
+  return _impl_.receiver_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_WILDCARD_MAP::release_receiver() {
+  // @@protoc_insertion_point(field_release:Protocol.C_WILDCARD_MAP.receiver)
+  return _impl_.receiver_.Release();
+}
+inline void C_WILDCARD_MAP::set_allocated_receiver(std::string* receiver) {
+  if (receiver != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.receiver_.SetAllocated(receiver, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.receiver_.IsDefault()) {
+    _impl_.receiver_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_WILDCARD_MAP.receiver)
+}
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
 // S_WILDCARD_MAP
 
-// int32 code = 1;
+// string sender = 1;
+inline void S_WILDCARD_MAP::clear_sender() {
+  _impl_.sender_.ClearToEmpty();
+}
+inline const std::string& S_WILDCARD_MAP::sender() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_WILDCARD_MAP.sender)
+  return _internal_sender();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_WILDCARD_MAP::set_sender(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.sender_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_WILDCARD_MAP.sender)
+}
+inline std::string* S_WILDCARD_MAP::mutable_sender() {
+  std::string* _s = _internal_mutable_sender();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_WILDCARD_MAP.sender)
+  return _s;
+}
+inline const std::string& S_WILDCARD_MAP::_internal_sender() const {
+  return _impl_.sender_.Get();
+}
+inline void S_WILDCARD_MAP::_internal_set_sender(const std::string& value) {
+  
+  _impl_.sender_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_WILDCARD_MAP::_internal_mutable_sender() {
+  
+  return _impl_.sender_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_WILDCARD_MAP::release_sender() {
+  // @@protoc_insertion_point(field_release:Protocol.S_WILDCARD_MAP.sender)
+  return _impl_.sender_.Release();
+}
+inline void S_WILDCARD_MAP::set_allocated_sender(std::string* sender) {
+  if (sender != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.sender_.SetAllocated(sender, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.sender_.IsDefault()) {
+    _impl_.sender_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_WILDCARD_MAP.sender)
+}
+
+// int32 code = 2;
 inline void S_WILDCARD_MAP::clear_code() {
   _impl_.code_ = 0;
 }
@@ -4460,7 +4786,7 @@ inline void S_WILDCARD_MAP::set_code(int32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_WILDCARD_MAP.code)
 }
 
-// map<string, string> data = 2;
+// map<string, string> data = 3;
 inline int S_WILDCARD_MAP::_internal_data_size() const {
   return _impl_.data_.size();
 }

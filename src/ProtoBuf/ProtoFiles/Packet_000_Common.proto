@@ -86,23 +86,29 @@ message S_DISCONNECT
 message C_WILDCARD
 {
 	int32 code = 1;
-	string data = 2;
+	int32 type = 2;
+	string data = 3;
+	string receiver = 4;
 }
 
 message S_WILDCARD
 {
-	int32 code = 1;
-	string data = 2;
+	string sender = 1;
+	int32 code = 2;
+	string data = 3;
 }
 
 message C_WILDCARD_MAP
 {
 	int32 code = 1;
-	map<string, string> data = 2;
+	int32 type = 2;
+	map<string, string> data = 3;
+	string receiver = 4;
 }
 
 message S_WILDCARD_MAP
 {
-	int32 code = 1;
-	map<string, string> data = 2;
+	string sender = 1;
+	int32 code = 2;
+	map<string, string> data = 3;
 }
