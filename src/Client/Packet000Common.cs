@@ -24,33 +24,34 @@ namespace Protocol {
     static Packet000CommonReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdQYWNrZXRfMDAwX0NvbW1vbi5wcm90bxIIUHJvdG9jb2wiZAoHQ19FTlRF",
-            "UhIOCgZyb29tSWQYASABKAkSEAoIY2xpZW50SWQYAiABKAkSEQoJc2Vzc2lv",
-            "bklkGAMgASgFEhAKCHBhc3N3b3JkGAQgASgJEhIKCmlzT2JzZXJ2ZXIYBSAB",
-            "KAgiGQoHU19FTlRFUhIOCgZyZXN1bHQYASABKAkiHQoJQ19SRUVOVEVSEhAK",
-            "CGNsaWVudElkGAEgASgJIhwKCVNfUkVFTlRFUhIPCgdzdWNjZXNzGAEgASgI",
-            "IgkKB0NfTEVBVkUiDgoMQ19HRVRfQ0xJRU5UIo4BCgxTX0FERF9DTElFTlQS",
-            "NgoLY2xpZW50SW5mb3MYASADKAsyIS5Qcm90b2NvbC5TX0FERF9DTElFTlQu",
-            "Q2xpZW50SW5mbxpGCgpDbGllbnRJbmZvEhAKCGNsaWVudElkGAEgASgJEhAK",
-            "CG5pY2tuYW1lGAIgASgJEhQKDHN0YXRlTWVzc2FnZRgDIAEoCSIkCg9TX1JF",
-            "TU9WRV9DTElFTlQSEQoJY2xpZW50SWRzGAEgAygJIiIKDkNfU0VUX05JQ0tO",
-            "QU1FEhAKCG5pY2tuYW1lGAEgASgJIiEKDlNfU0VUX05JQ0tOQU1FEg8KB3N1",
-            "Y2Nlc3MYASABKAgiOwoVU19TRVRfTklDS05BTUVfTk9USUNFEhAKCGNsaWVu",
-            "dElkGAEgASgJEhAKCG5pY2tuYW1lGAIgASgJIhYKBkNfQ0hBVBIMCgRjaGF0",
-            "GAEgASgJIigKBlNfQ0hBVBIQCghjbGllbnRJZBgBIAEoCRIMCgRjaGF0GAIg",
-            "ASgJIhwKDFNfRElTQ09OTkVDVBIMCgRjb2RlGAEgASgJIigKCkNfV0lMRENB",
-            "UkQSDAoEY29kZRgBIAEoBRIMCgRkYXRhGAIgASgJIigKClNfV0lMRENBUkQS",
-            "DAoEY29kZRgBIAEoBRIMCgRkYXRhGAIgASgJIn0KDkNfV0lMRENBUkRfTUFQ",
-            "EgwKBGNvZGUYASABKAUSMAoEZGF0YRgCIAMoCzIiLlByb3RvY29sLkNfV0lM",
-            "RENBUkRfTUFQLkRhdGFFbnRyeRorCglEYXRhRW50cnkSCwoDa2V5GAEgASgJ",
-            "Eg0KBXZhbHVlGAIgASgJOgI4ASJ9Cg5TX1dJTERDQVJEX01BUBIMCgRjb2Rl",
-            "GAEgASgFEjAKBGRhdGEYAiADKAsyIi5Qcm90b2NvbC5TX1dJTERDQVJEX01B",
+            "ChdQYWNrZXRfMDAwX0NvbW1vbi5wcm90bxIIUHJvdG9jb2wiiAEKB0NfRU5U",
+            "RVISDgoGcm9vbUlkGAEgASgJEhAKCGNsaWVudElkGAIgASgJEhEKCXNlc3Np",
+            "b25JZBgDIAEoBRIQCghwYXNzd29yZBgEIAEoCRISCgppc09ic2VydmVyGAUg",
+            "ASgIEhAKCG5pY2tuYW1lGAYgASgJEhAKCGlzRXhwb3NlGAcgASgIIhkKB1Nf",
+            "RU5URVISDgoGcmVzdWx0GAEgASgJIh0KCUNfUkVFTlRFUhIQCghjbGllbnRJ",
+            "ZBgBIAEoCSIcCglTX1JFRU5URVISDwoHc3VjY2VzcxgBIAEoCCIJCgdDX0xF",
+            "QVZFIg4KDENfR0VUX0NMSUVOVCKOAQoMU19BRERfQ0xJRU5UEjYKC2NsaWVu",
+            "dEluZm9zGAEgAygLMiEuUHJvdG9jb2wuU19BRERfQ0xJRU5ULkNsaWVudElu",
+            "Zm8aRgoKQ2xpZW50SW5mbxIQCghjbGllbnRJZBgBIAEoCRIQCghuaWNrbmFt",
+            "ZRgCIAEoCRIUCgxzdGF0ZU1lc3NhZ2UYAyABKAkiJAoPU19SRU1PVkVfQ0xJ",
+            "RU5UEhEKCWNsaWVudElkcxgBIAMoCSIiCg5DX1NFVF9OSUNLTkFNRRIQCghu",
+            "aWNrbmFtZRgBIAEoCSIhCg5TX1NFVF9OSUNLTkFNRRIPCgdzdWNjZXNzGAEg",
+            "ASgIIjsKFVNfU0VUX05JQ0tOQU1FX05PVElDRRIQCghjbGllbnRJZBgBIAEo",
+            "CRIQCghuaWNrbmFtZRgCIAEoCSIWCgZDX0NIQVQSDAoEY2hhdBgBIAEoCSIo",
+            "CgZTX0NIQVQSEAoIY2xpZW50SWQYASABKAkSDAoEY2hhdBgCIAEoCSIcCgxT",
+            "X0RJU0NPTk5FQ1QSDAoEY29kZRgBIAEoCSIoCgpDX1dJTERDQVJEEgwKBGNv",
+            "ZGUYASABKAUSDAoEZGF0YRgCIAEoCSIoCgpTX1dJTERDQVJEEgwKBGNvZGUY",
+            "ASABKAUSDAoEZGF0YRgCIAEoCSJ9Cg5DX1dJTERDQVJEX01BUBIMCgRjb2Rl",
+            "GAEgASgFEjAKBGRhdGEYAiADKAsyIi5Qcm90b2NvbC5DX1dJTERDQVJEX01B",
             "UC5EYXRhRW50cnkaKwoJRGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1",
-            "ZRgCIAEoCToCOAFiBnByb3RvMw=="));
+            "ZRgCIAEoCToCOAEifQoOU19XSUxEQ0FSRF9NQVASDAoEY29kZRgBIAEoBRIw",
+            "CgRkYXRhGAIgAygLMiIuUHJvdG9jb2wuU19XSUxEQ0FSRF9NQVAuRGF0YUVu",
+            "dHJ5GisKCURhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6",
+            "AjgBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER), global::Protocol.C_ENTER.Parser, new[]{ "RoomId", "ClientId", "SessionId", "Password", "IsObserver" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER), global::Protocol.C_ENTER.Parser, new[]{ "RoomId", "ClientId", "SessionId", "Password", "IsObserver", "Nickname", "IsExpose" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER), global::Protocol.S_ENTER.Parser, new[]{ "Result" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_REENTER), global::Protocol.C_REENTER.Parser, new[]{ "ClientId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_REENTER), global::Protocol.S_REENTER.Parser, new[]{ "Success" }, null, null, null, null),
@@ -113,6 +114,8 @@ namespace Protocol {
       sessionId_ = other.sessionId_;
       password_ = other.password_;
       isObserver_ = other.isObserver_;
+      nickname_ = other.nickname_;
+      isExpose_ = other.isExpose_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -185,6 +188,30 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "nickname" field.</summary>
+    public const int NicknameFieldNumber = 6;
+    private string nickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Nickname {
+      get { return nickname_; }
+      set {
+        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "isExpose" field.</summary>
+    public const int IsExposeFieldNumber = 7;
+    private bool isExpose_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsExpose {
+      get { return isExpose_; }
+      set {
+        isExpose_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -205,6 +232,8 @@ namespace Protocol {
       if (SessionId != other.SessionId) return false;
       if (Password != other.Password) return false;
       if (IsObserver != other.IsObserver) return false;
+      if (Nickname != other.Nickname) return false;
+      if (IsExpose != other.IsExpose) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -217,6 +246,8 @@ namespace Protocol {
       if (SessionId != 0) hash ^= SessionId.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
       if (IsObserver != false) hash ^= IsObserver.GetHashCode();
+      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+      if (IsExpose != false) hash ^= IsExpose.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -255,6 +286,14 @@ namespace Protocol {
         output.WriteRawTag(40);
         output.WriteBool(IsObserver);
       }
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Nickname);
+      }
+      if (IsExpose != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(IsExpose);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -285,6 +324,14 @@ namespace Protocol {
         output.WriteRawTag(40);
         output.WriteBool(IsObserver);
       }
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Nickname);
+      }
+      if (IsExpose != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(IsExpose);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -308,6 +355,12 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
       }
       if (IsObserver != false) {
+        size += 1 + 1;
+      }
+      if (Nickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+      }
+      if (IsExpose != false) {
         size += 1 + 1;
       }
       if (_unknownFields != null) {
@@ -336,6 +389,12 @@ namespace Protocol {
       }
       if (other.IsObserver != false) {
         IsObserver = other.IsObserver;
+      }
+      if (other.Nickname.Length != 0) {
+        Nickname = other.Nickname;
+      }
+      if (other.IsExpose != false) {
+        IsExpose = other.IsExpose;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -372,6 +431,14 @@ namespace Protocol {
             IsObserver = input.ReadBool();
             break;
           }
+          case 50: {
+            Nickname = input.ReadString();
+            break;
+          }
+          case 56: {
+            IsExpose = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -405,6 +472,14 @@ namespace Protocol {
           }
           case 40: {
             IsObserver = input.ReadBool();
+            break;
+          }
+          case 50: {
+            Nickname = input.ReadString();
+            break;
+          }
+          case 56: {
+            IsExpose = input.ReadBool();
             break;
           }
         }

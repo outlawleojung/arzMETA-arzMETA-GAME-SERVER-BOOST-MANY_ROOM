@@ -264,8 +264,10 @@ class C_ENTER final :
     kRoomIdFieldNumber = 1,
     kClientIdFieldNumber = 2,
     kPasswordFieldNumber = 4,
+    kNicknameFieldNumber = 6,
     kSessionIdFieldNumber = 3,
     kIsObserverFieldNumber = 5,
+    kIsExposeFieldNumber = 7,
   };
   // string roomId = 1;
   void clear_roomid();
@@ -309,6 +311,20 @@ class C_ENTER final :
   std::string* _internal_mutable_password();
   public:
 
+  // string nickname = 6;
+  void clear_nickname();
+  const std::string& nickname() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nickname(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nickname();
+  PROTOBUF_NODISCARD std::string* release_nickname();
+  void set_allocated_nickname(std::string* nickname);
+  private:
+  const std::string& _internal_nickname() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nickname(const std::string& value);
+  std::string* _internal_mutable_nickname();
+  public:
+
   // int32 sessionId = 3;
   void clear_sessionid();
   int32_t sessionid() const;
@@ -327,6 +343,15 @@ class C_ENTER final :
   void _internal_set_isobserver(bool value);
   public:
 
+  // bool isExpose = 7;
+  void clear_isexpose();
+  bool isexpose() const;
+  void set_isexpose(bool value);
+  private:
+  bool _internal_isexpose() const;
+  void _internal_set_isexpose(bool value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_ENTER)
  private:
   class _Internal;
@@ -338,8 +363,10 @@ class C_ENTER final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr roomid_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientid_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nickname_;
     int32_t sessionid_;
     bool isobserver_;
+    bool isexpose_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3418,6 +3445,76 @@ inline void C_ENTER::_internal_set_isobserver(bool value) {
 inline void C_ENTER::set_isobserver(bool value) {
   _internal_set_isobserver(value);
   // @@protoc_insertion_point(field_set:Protocol.C_ENTER.isObserver)
+}
+
+// string nickname = 6;
+inline void C_ENTER::clear_nickname() {
+  _impl_.nickname_.ClearToEmpty();
+}
+inline const std::string& C_ENTER::nickname() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_ENTER.nickname)
+  return _internal_nickname();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_ENTER::set_nickname(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.nickname_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_ENTER.nickname)
+}
+inline std::string* C_ENTER::mutable_nickname() {
+  std::string* _s = _internal_mutable_nickname();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_ENTER.nickname)
+  return _s;
+}
+inline const std::string& C_ENTER::_internal_nickname() const {
+  return _impl_.nickname_.Get();
+}
+inline void C_ENTER::_internal_set_nickname(const std::string& value) {
+  
+  _impl_.nickname_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_ENTER::_internal_mutable_nickname() {
+  
+  return _impl_.nickname_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_ENTER::release_nickname() {
+  // @@protoc_insertion_point(field_release:Protocol.C_ENTER.nickname)
+  return _impl_.nickname_.Release();
+}
+inline void C_ENTER::set_allocated_nickname(std::string* nickname) {
+  if (nickname != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.nickname_.SetAllocated(nickname, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.nickname_.IsDefault()) {
+    _impl_.nickname_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_ENTER.nickname)
+}
+
+// bool isExpose = 7;
+inline void C_ENTER::clear_isexpose() {
+  _impl_.isexpose_ = false;
+}
+inline bool C_ENTER::_internal_isexpose() const {
+  return _impl_.isexpose_;
+}
+inline bool C_ENTER::isexpose() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_ENTER.isExpose)
+  return _internal_isexpose();
+}
+inline void C_ENTER::_internal_set_isexpose(bool value) {
+  
+  _impl_.isexpose_ = value;
+}
+inline void C_ENTER::set_isexpose(bool value) {
+  _internal_set_isexpose(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_ENTER.isExpose)
 }
 
 // -------------------------------------------------------------------
