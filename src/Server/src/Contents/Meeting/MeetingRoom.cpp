@@ -269,7 +269,13 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 				pstmt->setString(6, description);
 				pstmt->setString(7, password);
 				pstmt->setInt(8, runningTime);
-				pstmt->setInt(9, stoi(spaceInfoId));
+				try
+				{
+					pstmt->setInt(9, stoi(spaceInfoId));
+				}
+				catch (const std::invalid_argument& e) {
+					pstmt->setInt(9, 0);
+				}
 				pstmt->setInt(10, maxPlayerNumber);
 				//reservationAt
 				pstmt->setInt(11, calculateMinutesSinceMidnight());

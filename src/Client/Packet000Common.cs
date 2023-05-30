@@ -38,15 +38,17 @@ namespace Protocol {
             "Y2Nlc3MYASABKAgiOwoVU19TRVRfTklDS05BTUVfTk9USUNFEhAKCGNsaWVu",
             "dElkGAEgASgJEhAKCG5pY2tuYW1lGAIgASgJIhYKBkNfQ0hBVBIMCgRjaGF0",
             "GAEgASgJIigKBlNfQ0hBVBIQCghjbGllbnRJZBgBIAEoCRIMCgRjaGF0GAIg",
-            "ASgJIhwKDFNfRElTQ09OTkVDVBIMCgRjb2RlGAEgASgJIigKCkNfV0lMRENB",
-            "UkQSDAoEY29kZRgBIAEoBRIMCgRkYXRhGAIgASgJIigKClNfV0lMRENBUkQS",
-            "DAoEY29kZRgBIAEoBRIMCgRkYXRhGAIgASgJIn0KDkNfV0lMRENBUkRfTUFQ",
-            "EgwKBGNvZGUYASABKAUSMAoEZGF0YRgCIAMoCzIiLlByb3RvY29sLkNfV0lM",
+            "ASgJIhwKDFNfRElTQ09OTkVDVBIMCgRjb2RlGAEgASgJIkgKCkNfV0lMRENB",
+            "UkQSDAoEY29kZRgBIAEoBRIMCgR0eXBlGAIgASgFEgwKBGRhdGEYAyABKAkS",
+            "EAoIcmVjZWl2ZXIYBCABKAkiOAoKU19XSUxEQ0FSRBIOCgZzZW5kZXIYASAB",
+            "KAkSDAoEY29kZRgCIAEoBRIMCgRkYXRhGAMgASgJIp0BCg5DX1dJTERDQVJE",
+            "X01BUBIMCgRjb2RlGAEgASgFEgwKBHR5cGUYAiABKAUSMAoEZGF0YRgDIAMo",
+            "CzIiLlByb3RvY29sLkNfV0lMRENBUkRfTUFQLkRhdGFFbnRyeRIQCghyZWNl",
+            "aXZlchgEIAEoCRorCglEYXRhRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVl",
+            "GAIgASgJOgI4ASKNAQoOU19XSUxEQ0FSRF9NQVASDgoGc2VuZGVyGAEgASgJ",
+            "EgwKBGNvZGUYAiABKAUSMAoEZGF0YRgDIAMoCzIiLlByb3RvY29sLlNfV0lM",
             "RENBUkRfTUFQLkRhdGFFbnRyeRorCglEYXRhRW50cnkSCwoDa2V5GAEgASgJ",
-            "Eg0KBXZhbHVlGAIgASgJOgI4ASJ9Cg5TX1dJTERDQVJEX01BUBIMCgRjb2Rl",
-            "GAEgASgFEjAKBGRhdGEYAiADKAsyIi5Qcm90b2NvbC5TX1dJTERDQVJEX01B",
-            "UC5EYXRhRW50cnkaKwoJRGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1",
-            "ZRgCIAEoCToCOAFiBnByb3RvMw=="));
+            "Eg0KBXZhbHVlGAIgASgJOgI4AWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -64,10 +66,10 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CHAT), global::Protocol.C_CHAT.Parser, new[]{ "Chat" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_CHAT), global::Protocol.S_CHAT.Parser, new[]{ "ClientId", "Chat" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_DISCONNECT), global::Protocol.S_DISCONNECT.Parser, new[]{ "Code" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_WILDCARD), global::Protocol.C_WILDCARD.Parser, new[]{ "Code", "Data" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_WILDCARD), global::Protocol.S_WILDCARD.Parser, new[]{ "Code", "Data" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_WILDCARD_MAP), global::Protocol.C_WILDCARD_MAP.Parser, new[]{ "Code", "Data" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_WILDCARD_MAP), global::Protocol.S_WILDCARD_MAP.Parser, new[]{ "Code", "Data" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_WILDCARD), global::Protocol.C_WILDCARD.Parser, new[]{ "Code", "Type", "Data", "Receiver" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_WILDCARD), global::Protocol.S_WILDCARD.Parser, new[]{ "Sender", "Code", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_WILDCARD_MAP), global::Protocol.C_WILDCARD_MAP.Parser, new[]{ "Code", "Type", "Data", "Receiver" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_WILDCARD_MAP), global::Protocol.S_WILDCARD_MAP.Parser, new[]{ "Sender", "Code", "Data" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
           }));
     }
     #endregion
@@ -3155,7 +3157,9 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_WILDCARD(C_WILDCARD other) : this() {
       code_ = other.code_;
+      type_ = other.type_;
       data_ = other.data_;
+      receiver_ = other.receiver_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3177,8 +3181,20 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 2;
+    private int type_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
     /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 2;
+    public const int DataFieldNumber = 3;
     private string data_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3186,6 +3202,18 @@ namespace Protocol {
       get { return data_; }
       set {
         data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "receiver" field.</summary>
+    public const int ReceiverFieldNumber = 4;
+    private string receiver_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Receiver {
+      get { return receiver_; }
+      set {
+        receiver_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -3205,7 +3233,9 @@ namespace Protocol {
         return true;
       }
       if (Code != other.Code) return false;
+      if (Type != other.Type) return false;
       if (Data != other.Data) return false;
+      if (Receiver != other.Receiver) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3214,7 +3244,9 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (Code != 0) hash ^= Code.GetHashCode();
+      if (Type != 0) hash ^= Type.GetHashCode();
       if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3237,9 +3269,17 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(Code);
       }
+      if (Type != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Type);
+      }
       if (Data.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteString(Data);
+      }
+      if (Receiver.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Receiver);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3255,9 +3295,17 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(Code);
       }
+      if (Type != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Type);
+      }
       if (Data.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteString(Data);
+      }
+      if (Receiver.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Receiver);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -3272,8 +3320,14 @@ namespace Protocol {
       if (Code != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
       }
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
       if (Data.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Data);
+      }
+      if (Receiver.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Receiver);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3290,8 +3344,14 @@ namespace Protocol {
       if (other.Code != 0) {
         Code = other.Code;
       }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
       if (other.Data.Length != 0) {
         Data = other.Data;
+      }
+      if (other.Receiver.Length != 0) {
+        Receiver = other.Receiver;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3312,8 +3372,16 @@ namespace Protocol {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 16: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 26: {
             Data = input.ReadString();
+            break;
+          }
+          case 34: {
+            Receiver = input.ReadString();
             break;
           }
         }
@@ -3335,8 +3403,16 @@ namespace Protocol {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 16: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 26: {
             Data = input.ReadString();
+            break;
+          }
+          case 34: {
+            Receiver = input.ReadString();
             break;
           }
         }
@@ -3380,6 +3456,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_WILDCARD(S_WILDCARD other) : this() {
+      sender_ = other.sender_;
       code_ = other.code_;
       data_ = other.data_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -3391,8 +3468,20 @@ namespace Protocol {
       return new S_WILDCARD(this);
     }
 
+    /// <summary>Field number for the "sender" field.</summary>
+    public const int SenderFieldNumber = 1;
+    private string sender_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Sender {
+      get { return sender_; }
+      set {
+        sender_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "code" field.</summary>
-    public const int CodeFieldNumber = 1;
+    public const int CodeFieldNumber = 2;
     private int code_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3404,7 +3493,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 2;
+    public const int DataFieldNumber = 3;
     private string data_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3430,6 +3519,7 @@ namespace Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Sender != other.Sender) return false;
       if (Code != other.Code) return false;
       if (Data != other.Data) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -3439,6 +3529,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (Sender.Length != 0) hash ^= Sender.GetHashCode();
       if (Code != 0) hash ^= Code.GetHashCode();
       if (Data.Length != 0) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
@@ -3459,12 +3550,16 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (Sender.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Sender);
+      }
       if (Code != 0) {
-        output.WriteRawTag(8);
+        output.WriteRawTag(16);
         output.WriteInt32(Code);
       }
       if (Data.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteString(Data);
       }
       if (_unknownFields != null) {
@@ -3477,12 +3572,16 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Sender.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Sender);
+      }
       if (Code != 0) {
-        output.WriteRawTag(8);
+        output.WriteRawTag(16);
         output.WriteInt32(Code);
       }
       if (Data.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteString(Data);
       }
       if (_unknownFields != null) {
@@ -3495,6 +3594,9 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (Sender.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Sender);
+      }
       if (Code != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
       }
@@ -3512,6 +3614,9 @@ namespace Protocol {
     public void MergeFrom(S_WILDCARD other) {
       if (other == null) {
         return;
+      }
+      if (other.Sender.Length != 0) {
+        Sender = other.Sender;
       }
       if (other.Code != 0) {
         Code = other.Code;
@@ -3534,11 +3639,15 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
+          case 10: {
+            Sender = input.ReadString();
+            break;
+          }
+          case 16: {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 26: {
             Data = input.ReadString();
             break;
           }
@@ -3557,11 +3666,15 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
+          case 10: {
+            Sender = input.ReadString();
+            break;
+          }
+          case 16: {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 26: {
             Data = input.ReadString();
             break;
           }
@@ -3607,7 +3720,9 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_WILDCARD_MAP(C_WILDCARD_MAP other) : this() {
       code_ = other.code_;
+      type_ = other.type_;
       data_ = other.data_.Clone();
+      receiver_ = other.receiver_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3629,15 +3744,39 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 2;
+    private int type_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
     /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 2;
+    public const int DataFieldNumber = 3;
     private static readonly pbc::MapField<string, string>.Codec _map_data_codec
-        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 18);
+        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 26);
     private readonly pbc::MapField<string, string> data_ = new pbc::MapField<string, string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::MapField<string, string> Data {
       get { return data_; }
+    }
+
+    /// <summary>Field number for the "receiver" field.</summary>
+    public const int ReceiverFieldNumber = 4;
+    private string receiver_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Receiver {
+      get { return receiver_; }
+      set {
+        receiver_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3656,7 +3795,9 @@ namespace Protocol {
         return true;
       }
       if (Code != other.Code) return false;
+      if (Type != other.Type) return false;
       if (!Data.Equals(other.Data)) return false;
+      if (Receiver != other.Receiver) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3665,7 +3806,9 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (Code != 0) hash ^= Code.GetHashCode();
+      if (Type != 0) hash ^= Type.GetHashCode();
       hash ^= Data.GetHashCode();
+      if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3688,7 +3831,15 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(Code);
       }
+      if (Type != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Type);
+      }
       data_.WriteTo(output, _map_data_codec);
+      if (Receiver.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Receiver);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3703,7 +3854,15 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(Code);
       }
+      if (Type != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Type);
+      }
       data_.WriteTo(ref output, _map_data_codec);
+      if (Receiver.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Receiver);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3717,7 +3876,13 @@ namespace Protocol {
       if (Code != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
       }
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
       size += data_.CalculateSize(_map_data_codec);
+      if (Receiver.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Receiver);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3733,7 +3898,13 @@ namespace Protocol {
       if (other.Code != 0) {
         Code = other.Code;
       }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
       data_.Add(other.data_);
+      if (other.Receiver.Length != 0) {
+        Receiver = other.Receiver;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3753,8 +3924,16 @@ namespace Protocol {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 16: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 26: {
             data_.AddEntriesFrom(input, _map_data_codec);
+            break;
+          }
+          case 34: {
+            Receiver = input.ReadString();
             break;
           }
         }
@@ -3776,8 +3955,16 @@ namespace Protocol {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 16: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 26: {
             data_.AddEntriesFrom(ref input, _map_data_codec);
+            break;
+          }
+          case 34: {
+            Receiver = input.ReadString();
             break;
           }
         }
@@ -3821,6 +4008,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_WILDCARD_MAP(S_WILDCARD_MAP other) : this() {
+      sender_ = other.sender_;
       code_ = other.code_;
       data_ = other.data_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -3832,8 +4020,20 @@ namespace Protocol {
       return new S_WILDCARD_MAP(this);
     }
 
+    /// <summary>Field number for the "sender" field.</summary>
+    public const int SenderFieldNumber = 1;
+    private string sender_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Sender {
+      get { return sender_; }
+      set {
+        sender_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "code" field.</summary>
-    public const int CodeFieldNumber = 1;
+    public const int CodeFieldNumber = 2;
     private int code_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3845,9 +4045,9 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 2;
+    public const int DataFieldNumber = 3;
     private static readonly pbc::MapField<string, string>.Codec _map_data_codec
-        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 18);
+        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 26);
     private readonly pbc::MapField<string, string> data_ = new pbc::MapField<string, string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3870,6 +4070,7 @@ namespace Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Sender != other.Sender) return false;
       if (Code != other.Code) return false;
       if (!Data.Equals(other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -3879,6 +4080,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (Sender.Length != 0) hash ^= Sender.GetHashCode();
       if (Code != 0) hash ^= Code.GetHashCode();
       hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
@@ -3899,8 +4101,12 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (Sender.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Sender);
+      }
       if (Code != 0) {
-        output.WriteRawTag(8);
+        output.WriteRawTag(16);
         output.WriteInt32(Code);
       }
       data_.WriteTo(output, _map_data_codec);
@@ -3914,8 +4120,12 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Sender.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Sender);
+      }
       if (Code != 0) {
-        output.WriteRawTag(8);
+        output.WriteRawTag(16);
         output.WriteInt32(Code);
       }
       data_.WriteTo(ref output, _map_data_codec);
@@ -3929,6 +4139,9 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (Sender.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Sender);
+      }
       if (Code != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
       }
@@ -3944,6 +4157,9 @@ namespace Protocol {
     public void MergeFrom(S_WILDCARD_MAP other) {
       if (other == null) {
         return;
+      }
+      if (other.Sender.Length != 0) {
+        Sender = other.Sender;
       }
       if (other.Code != 0) {
         Code = other.Code;
@@ -3964,11 +4180,15 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
+          case 10: {
+            Sender = input.ReadString();
+            break;
+          }
+          case 16: {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 26: {
             data_.AddEntriesFrom(input, _map_data_codec);
             break;
           }
@@ -3987,11 +4207,15 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
+          case 10: {
+            Sender = input.ReadString();
+            break;
+          }
+          case 16: {
             Code = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 26: {
             data_.AddEntriesFrom(ref input, _map_data_codec);
             break;
           }

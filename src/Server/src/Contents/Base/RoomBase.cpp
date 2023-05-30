@@ -43,20 +43,88 @@ void RoomBase::Handle_C_LEAVE(shared_ptr<ClientBase>& client, Protocol::C_LEAVE&
 void RoomBase::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt) { DoAsync(&RoomBase::SetNickname, client, pkt.nickname()); }
 void RoomBase::Handle_C_GET_CLIENT(shared_ptr<ClientBase>& client, Protocol::C_GET_CLIENT& pkt) { DoAsync(&RoomBase::GetClient, client); }
 void RoomBase::Handle_C_CHAT(shared_ptr<ClientBase>& client, Protocol::C_CHAT& pkt) { DoAsync(&RoomBase::HandleChat, client, pkt.chat()); }
-void RoomBase::Handle_C_WILDCARD(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD& pkt)
+void RoomBase::Handle_C_WILDCARD(shared_ptr<ClientBase>& _client, Protocol::C_WILDCARD& pkt)
 {
 	Protocol::S_WILDCARD res;
+
 	res.set_code(pkt.code());
 	res.set_allocated_data(pkt.release_data());
-	Broadcast(PacketManager::MakeSendBuffer(res));
+	res.set_sender(_client->clientId);
+
+	switch (pkt.type())
+	{
+	case 1:
+	{
+		Broadcast(PacketManager::MakeSendBuffer(res));
+		break;
+	}
+	case 2:
+	{
+		auto sendBuffer = PacketManager::MakeSendBuffer(res);
+
+		for (auto& [clientId, client] : clients)
+		{
+			if (clientId == _client->clientId)
+				continue;
+
+			client->Send(sendBuffer);
+		}
+
+		break;
+	}
+	case 3:
+	{
+		auto client = clients.find(pkt.receiver());
+		if (client == clients.end())
+			return;
+
+		client->second->Send(PacketManager::MakeSendBuffer(res));
+
+		break;
+	}
+	}
 }
 
-void RoomBase::Handle_C_WILDCARD_MAP(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD_MAP& pkt)
+void RoomBase::Handle_C_WILDCARD_MAP(shared_ptr<ClientBase>& _client, Protocol::C_WILDCARD_MAP& pkt)
 {
 	Protocol::S_WILDCARD_MAP res;
+
 	res.set_code(pkt.code());
 	*res.mutable_data() = pkt.data();
-	Broadcast(PacketManager::MakeSendBuffer(res));
+	res.set_sender(_client->clientId);
+	
+	switch (pkt.type())
+	{
+	case 1:
+	{
+		Broadcast(PacketManager::MakeSendBuffer(res));
+		break;
+	}
+	case 2:
+	{
+		auto sendBuffer = PacketManager::MakeSendBuffer(res);
+
+		for (auto& [clientId, client] : clients)
+		{
+			if (clientId == _client->clientId)
+				continue;
+
+			client->Send(sendBuffer);
+		}
+
+		break;
+	}
+	case 3:
+	{
+		auto client = clients.find(pkt.receiver());
+		if (client == clients.end())
+			return;
+
+		client->second->Send(PacketManager::MakeSendBuffer(res));
+
+		break;
+	}
+	}
 }
 
 void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
