@@ -265,13 +265,19 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 				pstmt->setString(2, memberId);
 				pstmt->setString(3, roomName);
 				pstmt->setInt(4, 1);
-				pstmt->setInt(5, topicType);
+
+				if(topicType > 0)
+					pstmt->setInt(5, topicType);
+				else
+					pstmt->setInt(5, 1);
+
 				pstmt->setString(6, description);
 				pstmt->setString(7, password);
 				pstmt->setInt(8, runningTime);
 				try
 				{
-					pstmt->setInt(9, stoi(spaceInfoId));
+					int int_spaceInfoId = stoi(spaceInfoId);
+					pstmt->setInt(9, int_spaceInfoId);
 				}
 				catch (const std::invalid_argument& e) {
 					pstmt->setInt(9, 0);
