@@ -35,6 +35,9 @@ public:
 		client->clientId = clientId;
 		client->sessionId = sessionId;
 		client->enteredRoom = enteredRoom;
+		client->enteredRoomId = enteredRoom->roomId;
+
+		GLogManager->Log("Make Client Success : ", clientId, " to ", client->enteredRoomId);
 
 		auto prevClient = clients.find(clientId);
 		if (prevClient != clients.end())

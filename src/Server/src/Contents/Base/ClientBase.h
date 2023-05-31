@@ -17,7 +17,7 @@ class ClientBase : public JobQueue
 public:
 	~ClientBase()
 	{
-		GLogManager->Log("Client Destroyed :			", clientId);
+		GLogManager->Log("Client Destroyed :			", clientId, " from ", enteredRoomId);
 	}
 
 	void Leave(string code);
@@ -34,6 +34,7 @@ public:
 	string stateMessage;
 
 	shared_ptr<RoomBase> enteredRoom = nullptr;
+	string enteredRoomId;
 	ClientState state;
 
 	shared_ptr<GameSession> session;
