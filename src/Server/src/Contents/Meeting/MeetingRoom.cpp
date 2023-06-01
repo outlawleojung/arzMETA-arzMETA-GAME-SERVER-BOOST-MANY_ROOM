@@ -327,7 +327,7 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 		Protocol::S_ADD_CLIENT addClient;
 		auto clientInfo = addClient.add_clientinfos();
 		clientInfo->set_clientid(client->clientId);
-		clientInfo->set_nickname(client->clientId);
+		clientInfo->set_nickname(client->nickname);
 		clientInfo->set_statemessage(client->stateMessage);
 		Broadcast(PacketManager::MakeSendBuffer(addClient));
 	}
@@ -442,7 +442,7 @@ void MeetingRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 			Protocol::S_ADD_CLIENT addClient;
 			auto clientInfo = addClient.add_clientinfos();
 			clientInfo->set_clientid(waitingClient->second->clientId);
-			clientInfo->set_nickname(waitingClient->second->clientId);
+			clientInfo->set_nickname(waitingClient->second->nickname);
 			clientInfo->set_statemessage(waitingClient->second->stateMessage);
 			Broadcast(PacketManager::MakeSendBuffer(addClient));
 
