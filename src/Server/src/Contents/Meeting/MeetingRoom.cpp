@@ -710,7 +710,7 @@ void MeetingRoom::SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_
 
 	Protocol::S_OFFICE_SET_ROOM_INFO roomInfo;
 	roomInfo.set_success(true);
-	client->Send(PacketManager::MakeSendBuffer(roomInfo));
+	Broadcast(PacketManager::MakeSendBuffer(roomInfo));
 }
 
 void MeetingRoom::HandleVideoStream(string url, float volume, float time, bool play, bool seek, int mediaplayerstate)
