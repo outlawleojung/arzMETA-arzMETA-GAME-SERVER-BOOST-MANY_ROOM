@@ -3486,6 +3486,7 @@ class C_OFFICE_SET_ROOM_INFO final :
     kIsShutdownFieldNumber = 3,
     kIsAdvertisingFieldNumber = 4,
     kIsWaitingRoomFieldNumber = 5,
+    kRunningTimeFieldNumber = 6,
   };
   // string password = 2;
   void clear_password();
@@ -3537,6 +3538,15 @@ class C_OFFICE_SET_ROOM_INFO final :
   void _internal_set_iswaitingroom(bool value);
   public:
 
+  // int32 runningTime = 6;
+  void clear_runningtime();
+  int32_t runningtime() const;
+  void set_runningtime(int32_t value);
+  private:
+  int32_t _internal_runningtime() const;
+  void _internal_set_runningtime(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_OFFICE_SET_ROOM_INFO)
  private:
   class _Internal;
@@ -3550,6 +3560,7 @@ class C_OFFICE_SET_ROOM_INFO final :
     bool isshutdown_;
     bool isadvertising_;
     bool iswaitingroom_;
+    int32_t runningtime_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -6161,6 +6172,26 @@ inline void C_OFFICE_SET_ROOM_INFO::_internal_set_iswaitingroom(bool value) {
 inline void C_OFFICE_SET_ROOM_INFO::set_iswaitingroom(bool value) {
   _internal_set_iswaitingroom(value);
   // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_SET_ROOM_INFO.isWaitingRoom)
+}
+
+// int32 runningTime = 6;
+inline void C_OFFICE_SET_ROOM_INFO::clear_runningtime() {
+  _impl_.runningtime_ = 0;
+}
+inline int32_t C_OFFICE_SET_ROOM_INFO::_internal_runningtime() const {
+  return _impl_.runningtime_;
+}
+inline int32_t C_OFFICE_SET_ROOM_INFO::runningtime() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_OFFICE_SET_ROOM_INFO.runningTime)
+  return _internal_runningtime();
+}
+inline void C_OFFICE_SET_ROOM_INFO::_internal_set_runningtime(int32_t value) {
+  
+  _impl_.runningtime_ = value;
+}
+inline void C_OFFICE_SET_ROOM_INFO::set_runningtime(int32_t value) {
+  _internal_set_runningtime(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_SET_ROOM_INFO.runningTime)
 }
 
 // -------------------------------------------------------------------

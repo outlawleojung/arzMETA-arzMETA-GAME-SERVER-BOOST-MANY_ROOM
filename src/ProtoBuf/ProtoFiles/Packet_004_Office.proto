@@ -116,6 +116,7 @@ message C_OFFICE_SET_ROOM_INFO
 	bool isShutdown = 3; 
 	bool isAdvertising = 4;
 	bool isWaitingRoom = 5;
+	int32 runningTime = 6;
 }
 
 message S_OFFICE_SET_ROOM_INFO

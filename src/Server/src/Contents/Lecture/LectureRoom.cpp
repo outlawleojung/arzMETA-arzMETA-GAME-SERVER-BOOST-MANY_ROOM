@@ -763,6 +763,7 @@ void LectureRoom::SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_
 	isAdvertising = pkt.isadvertising();
 	isShutdown = pkt.isshutdown();
 	isWaitingRoom = pkt.iswaitingroom();
+	runningTime = pkt.runningtime();
 
 	roomInfo["personnel"] = maxPlayerNumber;
 	roomInfo["isPassword"] = isPassword;
