@@ -3482,6 +3482,7 @@ class C_OFFICE_SET_ROOM_INFO final :
 
   enum : int {
     kPasswordFieldNumber = 2,
+    kThumbnailFieldNumber = 7,
     kPersonnelFieldNumber = 1,
     kIsShutdownFieldNumber = 3,
     kIsAdvertisingFieldNumber = 4,
@@ -3500,6 +3501,20 @@ class C_OFFICE_SET_ROOM_INFO final :
   const std::string& _internal_password() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_password(const std::string& value);
   std::string* _internal_mutable_password();
+  public:
+
+  // string thumbnail = 7;
+  void clear_thumbnail();
+  const std::string& thumbnail() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_thumbnail(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_thumbnail();
+  PROTOBUF_NODISCARD std::string* release_thumbnail();
+  void set_allocated_thumbnail(std::string* thumbnail);
+  private:
+  const std::string& _internal_thumbnail() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_thumbnail(const std::string& value);
+  std::string* _internal_mutable_thumbnail();
   public:
 
   // int32 personnel = 1;
@@ -3556,6 +3571,7 @@ class C_OFFICE_SET_ROOM_INFO final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr thumbnail_;
     int32_t personnel_;
     bool isshutdown_;
     bool isadvertising_;
@@ -6192,6 +6208,56 @@ inline void C_OFFICE_SET_ROOM_INFO::_internal_set_runningtime(int32_t value) {
 inline void C_OFFICE_SET_ROOM_INFO::set_runningtime(int32_t value) {
   _internal_set_runningtime(value);
   // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_SET_ROOM_INFO.runningTime)
+}
+
+// string thumbnail = 7;
+inline void C_OFFICE_SET_ROOM_INFO::clear_thumbnail() {
+  _impl_.thumbnail_.ClearToEmpty();
+}
+inline const std::string& C_OFFICE_SET_ROOM_INFO::thumbnail() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_OFFICE_SET_ROOM_INFO.thumbnail)
+  return _internal_thumbnail();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_OFFICE_SET_ROOM_INFO::set_thumbnail(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.thumbnail_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_SET_ROOM_INFO.thumbnail)
+}
+inline std::string* C_OFFICE_SET_ROOM_INFO::mutable_thumbnail() {
+  std::string* _s = _internal_mutable_thumbnail();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_OFFICE_SET_ROOM_INFO.thumbnail)
+  return _s;
+}
+inline const std::string& C_OFFICE_SET_ROOM_INFO::_internal_thumbnail() const {
+  return _impl_.thumbnail_.Get();
+}
+inline void C_OFFICE_SET_ROOM_INFO::_internal_set_thumbnail(const std::string& value) {
+  
+  _impl_.thumbnail_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_OFFICE_SET_ROOM_INFO::_internal_mutable_thumbnail() {
+  
+  return _impl_.thumbnail_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_OFFICE_SET_ROOM_INFO::release_thumbnail() {
+  // @@protoc_insertion_point(field_release:Protocol.C_OFFICE_SET_ROOM_INFO.thumbnail)
+  return _impl_.thumbnail_.Release();
+}
+inline void C_OFFICE_SET_ROOM_INFO::set_allocated_thumbnail(std::string* thumbnail) {
+  if (thumbnail != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.thumbnail_.SetAllocated(thumbnail, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.thumbnail_.IsDefault()) {
+    _impl_.thumbnail_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_OFFICE_SET_ROOM_INFO.thumbnail)
 }
 
 // -------------------------------------------------------------------

@@ -117,6 +117,7 @@ message C_OFFICE_SET_ROOM_INFO
 	bool isAdvertising = 4;
 	bool isWaitingRoom = 5;
 	int32 runningTime = 6;
+	string thumbnail = 7;
 }
 
 message S_OFFICE_SET_ROOM_INFO
