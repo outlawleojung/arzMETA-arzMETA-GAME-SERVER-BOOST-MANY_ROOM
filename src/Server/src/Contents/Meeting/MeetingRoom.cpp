@@ -669,7 +669,7 @@ void MeetingRoom::GetRoomInfo(shared_ptr<ClientBase> client)
 	roomInfo.set_currentpersonnel(clients.size());
 	roomInfo.set_observer(0);
 	roomInfo.set_currentobserver(0);
-	roomInfo.set_currentwaiting(0);
+	roomInfo.set_currentwaiting(waitingClients.size());
 	roomInfo.set_isadvertising(isAdvertising);
 	roomInfo.set_thumbnail(thumbnail);
 	roomInfo.set_iswaitingroom(isWaitingRoom);
