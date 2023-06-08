@@ -6,7 +6,7 @@
 
 #include "../pch.h"
 
-#define LOG_SIZE 2000
+#define LOG_SIZE 1000
 
 class LogObj
 {
