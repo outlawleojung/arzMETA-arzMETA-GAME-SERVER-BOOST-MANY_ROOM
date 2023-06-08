@@ -39,7 +39,7 @@ void HttpServer::start(string ip, int port)
 
         nlohmann::json body = nlohmann::json::parse(bodyStr);
 		
-		GLogManager->Log("MakeRoom Request : ", body.dump());
+		//GLogManager->Log("MakeRoom Request : ", body.dump());
 
 		auto type = stringToRoomType(body["roomType"].get<string>());
 
