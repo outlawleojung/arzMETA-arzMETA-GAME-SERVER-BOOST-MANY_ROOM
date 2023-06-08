@@ -125,8 +125,6 @@ public:
 	int runningTime;
 	int passedTime;
 
-	int repeatDay = 0;
-
 	time_t createdTime;
 	string createdTimeString;
 	string endTimeString;

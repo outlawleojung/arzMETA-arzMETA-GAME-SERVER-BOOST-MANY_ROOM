@@ -75,23 +75,32 @@ void LectureRoom::HandleClose()
 
 	GameRoom::HandleClose();
 
+	sql::Driver* driver;
+	std::unique_ptr<sql::Connection> con;
+	std::unique_ptr<sql::ResultSet> res;
+	std::unique_ptr<sql::PreparedStatement> pstmt;
+
+	driver = get_driver_instance();
+
+	con.reset(driver->connect(
+		DBDomain,
+		DBUsername,
+		DBPassword
+	));
+
+	con->setSchema(DBSchema);
+
+	pstmt.reset(con->prepareStatement("SELECT repeatDay FROM memberofficereservationinfo WHERE roomCode = ?"));
+	pstmt->setString(1, roomCode);
+	res.reset(pstmt->executeQuery());
+
+	int repeatDay = -1;
+
+	if (res->next())
+		repeatDay = res->getInt(1);
+
 	if (repeatDay == 0)
 	{
-		sql::Driver* driver;
-		std::unique_ptr<sql::Connection> con;
-		std::unique_ptr<sql::ResultSet> res;
-		std::unique_ptr<sql::PreparedStatement> pstmt;
-
-		driver = get_driver_instance();
-
-		con.reset(driver->connect(
-			DBDomain,
-			DBUsername,
-			DBPassword
-		));
-
-		con->setSchema(DBSchema);
-
 		pstmt.reset(con->prepareStatement("DELETE FROM memberofficereservationinfo WHERE roomCode = ?"));
 		pstmt->setString(1, roomCode);
 		res.reset(pstmt->executeQuery());
@@ -225,66 +234,66 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
-		{
-			sql::Driver* driver;
-			std::unique_ptr<sql::Connection> con;
-			std::unique_ptr<sql::Statement> stmt;
-			std::unique_ptr<sql::ResultSet> res;
-			std::unique_ptr<sql::PreparedStatement> pstmt;
+		//{
+		//	sql::Driver* driver;
+		//	std::unique_ptr<sql::Connection> con;
+		//	std::unique_ptr<sql::Statement> stmt;
+		//	std::unique_ptr<sql::ResultSet> res;
+		//	std::unique_ptr<sql::PreparedStatement> pstmt;
 
-			driver = get_driver_instance();
+		//	driver = get_driver_instance();
 
-			con.reset(driver->connect(
-				DBDomain,
-				DBUsername,
-				DBPassword
-			));
+		//	con.reset(driver->connect(
+		//		DBDomain,
+		//		DBUsername,
+		//		DBPassword
+		//	));
 
-			con->setSchema(DBSchema);
+		//	con->setSchema(DBSchema);
 
-			stmt.reset(con->createStatement());
-			stmt->execute("SET NAMES 'utf8mb4'");
+		//	stmt.reset(con->createStatement());
+		//	stmt->execute("SET NAMES 'utf8mb4'");
 
-			string memberId;
-			pstmt.reset(con->prepareStatement("SELECT memberId FROM member WHERE memberCode = ?"));
-			pstmt->setString(1, client->clientId);
-			res.reset(pstmt->executeQuery());
-			if (res->next())
-				memberId = res->getString(1);
+		//	string memberId;
+		//	pstmt.reset(con->prepareStatement("SELECT memberId FROM member WHERE memberCode = ?"));
+		//	pstmt->setString(1, client->clientId);
+		//	res.reset(pstmt->executeQuery());
+		//	if (res->next())
+		//		memberId = res->getString(1);
 
-			pstmt.reset(con->prepareStatement("SELECT roomCode, repeatDay FROM memberofficereservationinfo WHERE roomCode = ?"));
-			pstmt->setString(1, roomCode);
-			res.reset(pstmt->executeQuery());
+		//	pstmt.reset(con->prepareStatement("SELECT roomCode, repeatDay FROM memberofficereservationinfo WHERE roomCode = ?"));
+		//	pstmt->setString(1, roomCode);
+		//	res.reset(pstmt->executeQuery());
 
-			if (!res->next()) {
-				pstmt.reset(con->prepareStatement(
-					"INSERT INTO memberofficereservationinfo(roomCode, memberId, name, modeType, topicType, description, password, runningTime, spaceInfoId, personnel, reservationAt, startTime, repeatDay, alarmType, thumbnail, isAdvertising, isWaitingRoom, observer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ADDDATE(CURDATE(), INTERVAL 9 HOUR), ?, ?, ?, ?, ?, ?, ?)"
-				));
-				pstmt->setString(1, roomCode);
-				pstmt->setString(2, memberId);
-				pstmt->setString(3, roomName);
-				pstmt->setInt(4, 2);
-				pstmt->setInt(5, topicType);
-				pstmt->setString(6, description);
-				pstmt->setString(7, password);
-				pstmt->setInt(8, runningTime);
-				pstmt->setInt(9, stoi(spaceInfoId));
-				pstmt->setInt(10, maxPlayerNumber);
-				//reservationAt
-				pstmt->setInt(11, calculateMinutesSinceMidnight());
-				pstmt->setInt(12, repeatDay);
-				pstmt->setInt(13, 0);
-				pstmt->setString(14, thumbnail);
-				pstmt->setBoolean(15, isAdvertising);
-				pstmt->setBoolean(16, isWaitingRoom);
-				pstmt->setInt(17, maxObserverNumber);
-				pstmt->executeUpdate();
-			}
-			else
-			{
-				repeatDay = res->getInt(2);
-			}
-		}
+		//	if (!res->next()) {
+		//		pstmt.reset(con->prepareStatement(
+		//			"INSERT INTO memberofficereservationinfo(roomCode, memberId, name, modeType, topicType, description, password, runningTime, spaceInfoId, personnel, reservationAt, startTime, repeatDay, alarmType, thumbnail, isAdvertising, isWaitingRoom, observer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ADDDATE(CURDATE(), INTERVAL 9 HOUR), ?, ?, ?, ?, ?, ?, ?)"
+		//		));
+		//		pstmt->setString(1, roomCode);
+		//		pstmt->setString(2, memberId);
+		//		pstmt->setString(3, roomName);
+		//		pstmt->setInt(4, 2);
+		//		pstmt->setInt(5, topicType);
+		//		pstmt->setString(6, description);
+		//		pstmt->setString(7, password);
+		//		pstmt->setInt(8, runningTime);
+		//		pstmt->setInt(9, stoi(spaceInfoId));
+		//		pstmt->setInt(10, maxPlayerNumber);
+		//		//reservationAt
+		//		pstmt->setInt(11, calculateMinutesSinceMidnight());
+		//		pstmt->setInt(12, repeatDay);
+		//		pstmt->setInt(13, 0);
+		//		pstmt->setString(14, thumbnail);
+		//		pstmt->setBoolean(15, isAdvertising);
+		//		pstmt->setBoolean(16, isWaitingRoom);
+		//		pstmt->setInt(17, maxObserverNumber);
+		//		pstmt->executeUpdate();
+		//	}
+		//	else
+		//	{
+		//		repeatDay = res->getInt(2);
+		//	}
+		//}
 	}
 	else if (isWaitingRoom)
 	{
