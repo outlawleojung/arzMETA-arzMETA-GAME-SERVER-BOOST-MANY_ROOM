@@ -51,30 +51,30 @@ namespace Protocol {
             "cm1pc3Npb25zGAEgAygLMhguUHJvdG9jb2wuT2ZmaWNlVXNlckluZm8iSAoX",
             "Q19PRkZJQ0VfU0VUX1BFUk1JU1NJT04SLQoLcGVybWlzc2lvbnMYASADKAsy",
             "GC5Qcm90b2NvbC5PZmZpY2VVc2VySW5mbyInChdTX09GRklDRV9TRVRfUEVS",
-            "TUlTU0lPThIMCgRjb2RlGAEgASgJIpQBChZDX09GRklDRV9TRVRfUk9PTV9J",
+            "TUlTU0lPThIMCgRjb2RlGAEgASgJIqcBChZDX09GRklDRV9TRVRfUk9PTV9J",
             "TkZPEhEKCXBlcnNvbm5lbBgBIAEoBRIQCghwYXNzd29yZBgCIAEoCRISCgpp",
             "c1NodXRkb3duGAMgASgIEhUKDWlzQWR2ZXJ0aXNpbmcYBCABKAgSFQoNaXNX",
-            "YWl0aW5nUm9vbRgFIAEoCBITCgtydW5uaW5nVGltZRgGIAEoBSIpChZTX09G",
-            "RklDRV9TRVRfUk9PTV9JTkZPEg8KB3N1Y2Nlc3MYASABKAgiGAoWQ19PRkZJ",
-            "Q0VfR0VUX1JPT01fSU5GTyKiAwoWU19PRkZJQ0VfR0VUX1JPT01fSU5GTxIQ",
-            "Cghyb29tTmFtZRgBIAEoCRITCgtkZXNjcmlwdGlvbhgCIAEoCRIRCgl0b3Bp",
-            "Y1R5cGUYAyABKAUSEAoIcGFzc3dvcmQYBCABKAkSEwoLc3BhY2VJbmZvSWQY",
-            "BSABKAkSEQoJcGVyc29ubmVsGAYgASgFEhgKEGN1cnJlbnRQZXJzb25uZWwY",
-            "ByABKAUSEAoIb2JzZXJ2ZXIYCCABKAUSFwoPY3VycmVudE9ic2VydmVyGAkg",
-            "ASgFEhYKDmN1cnJlbnRXYWl0aW5nGAogASgFEhUKDWlzQWR2ZXJ0aXNpbmcY",
-            "CyABKAgSEQoJdGh1bWJuYWlsGAwgASgJEhUKDWlzV2FpdGluZ1Jvb20YDSAB",
-            "KAgSEgoKaXNTaHV0ZG93bhgOIAEoCBITCgtydW5uaW5nVGltZRgPIAEoBRIS",
-            "CgpwYXNzZWRUaW1lGBAgASgFEhEKCXN0YXJ0VGltZRgRIAEoCRIQCghyb29t",
-            "Y29kZRgSIAEoCRIUCgxob3N0Tmlja25hbWUYEyABKAkiigEKFUNfT0ZGSUNF",
-            "X1ZJREVPX1NUUkVBTRIQCghjbGllbnRpZBgBIAEoCRILCgN1cmwYAiABKAkS",
-            "DgoGdm9sdW1lGAMgASgCEgwKBHRpbWUYBCABKAISDAoEcGxheRgFIAEoCBIM",
-            "CgRzZWVrGAYgASgIEhgKEG1lZGlhUGxheWVyU3RhdGUYByABKAUiigEKFVNf",
-            "T0ZGSUNFX1ZJREVPX1NUUkVBTRIQCghjbGllbnRpZBgBIAEoCRILCgN1cmwY",
-            "AiABKAkSDgoGdm9sdW1lGAMgASgCEgwKBHRpbWUYBCABKAISDAoEcGxheRgF",
-            "IAEoCBIMCgRzZWVrGAYgASgIEhgKEG1lZGlhUGxheWVyU3RhdGUYByABKAUi",
-            "MgoOQ19PRkZJQ0VfU0hBUkUSEAoIaXNTaGFyZWQYASABKAgSDgoGdXNlcklk",
-            "GAIgASgFIjIKDlNfT0ZGSUNFX1NIQVJFEhAKCGlzU2hhcmVkGAEgASgIEg4K",
-            "BnVzZXJJZBgCIAEoBWIGcHJvdG8z"));
+            "YWl0aW5nUm9vbRgFIAEoCBITCgtydW5uaW5nVGltZRgGIAEoBRIRCgl0aHVt",
+            "Ym5haWwYByABKAkiKQoWU19PRkZJQ0VfU0VUX1JPT01fSU5GTxIPCgdzdWNj",
+            "ZXNzGAEgASgIIhgKFkNfT0ZGSUNFX0dFVF9ST09NX0lORk8iogMKFlNfT0ZG",
+            "SUNFX0dFVF9ST09NX0lORk8SEAoIcm9vbU5hbWUYASABKAkSEwoLZGVzY3Jp",
+            "cHRpb24YAiABKAkSEQoJdG9waWNUeXBlGAMgASgFEhAKCHBhc3N3b3JkGAQg",
+            "ASgJEhMKC3NwYWNlSW5mb0lkGAUgASgJEhEKCXBlcnNvbm5lbBgGIAEoBRIY",
+            "ChBjdXJyZW50UGVyc29ubmVsGAcgASgFEhAKCG9ic2VydmVyGAggASgFEhcK",
+            "D2N1cnJlbnRPYnNlcnZlchgJIAEoBRIWCg5jdXJyZW50V2FpdGluZxgKIAEo",
+            "BRIVCg1pc0FkdmVydGlzaW5nGAsgASgIEhEKCXRodW1ibmFpbBgMIAEoCRIV",
+            "Cg1pc1dhaXRpbmdSb29tGA0gASgIEhIKCmlzU2h1dGRvd24YDiABKAgSEwoL",
+            "cnVubmluZ1RpbWUYDyABKAUSEgoKcGFzc2VkVGltZRgQIAEoBRIRCglzdGFy",
+            "dFRpbWUYESABKAkSEAoIcm9vbWNvZGUYEiABKAkSFAoMaG9zdE5pY2tuYW1l",
+            "GBMgASgJIooBChVDX09GRklDRV9WSURFT19TVFJFQU0SEAoIY2xpZW50aWQY",
+            "ASABKAkSCwoDdXJsGAIgASgJEg4KBnZvbHVtZRgDIAEoAhIMCgR0aW1lGAQg",
+            "ASgCEgwKBHBsYXkYBSABKAgSDAoEc2VlaxgGIAEoCBIYChBtZWRpYVBsYXll",
+            "clN0YXRlGAcgASgFIooBChVTX09GRklDRV9WSURFT19TVFJFQU0SEAoIY2xp",
+            "ZW50aWQYASABKAkSCwoDdXJsGAIgASgJEg4KBnZvbHVtZRgDIAEoAhIMCgR0",
+            "aW1lGAQgASgCEgwKBHBsYXkYBSABKAgSDAoEc2VlaxgGIAEoCBIYChBtZWRp",
+            "YVBsYXllclN0YXRlGAcgASgFIjIKDkNfT0ZGSUNFX1NIQVJFEhAKCGlzU2hh",
+            "cmVkGAEgASgIEg4KBnVzZXJJZBgCIAEoBSIyCg5TX09GRklDRV9TSEFSRRIQ",
+            "Cghpc1NoYXJlZBgBIAEoCBIOCgZ1c2VySWQYAiABKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -97,7 +97,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_GET_PERMISSION_ALL), global::Protocol.S_OFFICE_GET_PERMISSION_ALL.Parser, new[]{ "Permissions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SET_PERMISSION), global::Protocol.C_OFFICE_SET_PERMISSION.Parser, new[]{ "Permissions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SET_PERMISSION), global::Protocol.S_OFFICE_SET_PERMISSION.Parser, new[]{ "Code" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SET_ROOM_INFO), global::Protocol.C_OFFICE_SET_ROOM_INFO.Parser, new[]{ "Personnel", "Password", "IsShutdown", "IsAdvertising", "IsWaitingRoom", "RunningTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SET_ROOM_INFO), global::Protocol.C_OFFICE_SET_ROOM_INFO.Parser, new[]{ "Personnel", "Password", "IsShutdown", "IsAdvertising", "IsWaitingRoom", "RunningTime", "Thumbnail" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SET_ROOM_INFO), global::Protocol.S_OFFICE_SET_ROOM_INFO.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_GET_ROOM_INFO), global::Protocol.C_OFFICE_GET_ROOM_INFO.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_GET_ROOM_INFO), global::Protocol.S_OFFICE_GET_ROOM_INFO.Parser, new[]{ "RoomName", "Description", "TopicType", "Password", "SpaceInfoId", "Personnel", "CurrentPersonnel", "Observer", "CurrentObserver", "CurrentWaiting", "IsAdvertising", "Thumbnail", "IsWaitingRoom", "IsShutdown", "RunningTime", "PassedTime", "StartTime", "Roomcode", "HostNickname" }, null, null, null, null),
@@ -4275,6 +4275,7 @@ namespace Protocol {
       isAdvertising_ = other.isAdvertising_;
       isWaitingRoom_ = other.isWaitingRoom_;
       runningTime_ = other.runningTime_;
+      thumbnail_ = other.thumbnail_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4356,6 +4357,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "thumbnail" field.</summary>
+    public const int ThumbnailFieldNumber = 7;
+    private string thumbnail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Thumbnail {
+      get { return thumbnail_; }
+      set {
+        thumbnail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4377,6 +4390,7 @@ namespace Protocol {
       if (IsAdvertising != other.IsAdvertising) return false;
       if (IsWaitingRoom != other.IsWaitingRoom) return false;
       if (RunningTime != other.RunningTime) return false;
+      if (Thumbnail != other.Thumbnail) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4390,6 +4404,7 @@ namespace Protocol {
       if (IsAdvertising != false) hash ^= IsAdvertising.GetHashCode();
       if (IsWaitingRoom != false) hash ^= IsWaitingRoom.GetHashCode();
       if (RunningTime != 0) hash ^= RunningTime.GetHashCode();
+      if (Thumbnail.Length != 0) hash ^= Thumbnail.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4432,6 +4447,10 @@ namespace Protocol {
         output.WriteRawTag(48);
         output.WriteInt32(RunningTime);
       }
+      if (Thumbnail.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Thumbnail);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4466,6 +4485,10 @@ namespace Protocol {
         output.WriteRawTag(48);
         output.WriteInt32(RunningTime);
       }
+      if (Thumbnail.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Thumbnail);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4493,6 +4516,9 @@ namespace Protocol {
       }
       if (RunningTime != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RunningTime);
+      }
+      if (Thumbnail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Thumbnail);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4523,6 +4549,9 @@ namespace Protocol {
       }
       if (other.RunningTime != 0) {
         RunningTime = other.RunningTime;
+      }
+      if (other.Thumbnail.Length != 0) {
+        Thumbnail = other.Thumbnail;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4563,6 +4592,10 @@ namespace Protocol {
             RunningTime = input.ReadInt32();
             break;
           }
+          case 58: {
+            Thumbnail = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -4600,6 +4633,10 @@ namespace Protocol {
           }
           case 48: {
             RunningTime = input.ReadInt32();
+            break;
+          }
+          case 58: {
+            Thumbnail = input.ReadString();
             break;
           }
         }
