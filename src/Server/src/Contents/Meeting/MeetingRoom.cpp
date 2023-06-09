@@ -23,7 +23,7 @@ MeetingRoom::MeetingRoom()
 	, topicType(0)
 	, currentHostId("")
 {
-	disconnectedSessionWaitTime = 30000;
+	//disconnectedSessionWaitTime = 30000;
 }
 
 MeetingRoom::~MeetingRoom()
