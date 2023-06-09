@@ -27,7 +27,7 @@ LectureRoom::LectureRoom()
 	, currentPlayerNumber(0)
 	, maxObserverNumber(0)
 {
-	disconnectedSessionWaitTime = 10000;
+	//disconnectedSessionWaitTime = 30000;
 }
 
 LectureRoom::~LectureRoom()
