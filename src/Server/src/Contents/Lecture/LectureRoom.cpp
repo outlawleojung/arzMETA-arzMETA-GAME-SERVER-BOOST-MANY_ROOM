@@ -230,7 +230,7 @@ void LectureRoom::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 		createdTimeString = GetCurrentTimeString();
 		roomInfo["createdTime"] = GetCurrentTimeString();
 
-		DoAsync(&LectureRoom::Countdown);
+		DoTimer(60000, &LectureRoom::Countdown);
 
 		GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 	}
