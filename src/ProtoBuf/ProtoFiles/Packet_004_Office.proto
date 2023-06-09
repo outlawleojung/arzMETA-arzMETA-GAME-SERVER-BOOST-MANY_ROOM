@@ -118,6 +118,7 @@ message C_OFFICE_SET_ROOM_INFO
 	bool isWaitingRoom = 5;
 	int32 runningTime = 6;
 	string thumbnail = 7;
+	int32 observer = 8;
 }
 
 message S_OFFICE_SET_ROOM_INFO

@@ -3488,6 +3488,7 @@ class C_OFFICE_SET_ROOM_INFO final :
     kIsAdvertisingFieldNumber = 4,
     kIsWaitingRoomFieldNumber = 5,
     kRunningTimeFieldNumber = 6,
+    kObserverFieldNumber = 8,
   };
   // string password = 2;
   void clear_password();
@@ -3562,6 +3563,15 @@ class C_OFFICE_SET_ROOM_INFO final :
   void _internal_set_runningtime(int32_t value);
   public:
 
+  // int32 observer = 8;
+  void clear_observer();
+  int32_t observer() const;
+  void set_observer(int32_t value);
+  private:
+  int32_t _internal_observer() const;
+  void _internal_set_observer(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_OFFICE_SET_ROOM_INFO)
  private:
   class _Internal;
@@ -3577,6 +3587,7 @@ class C_OFFICE_SET_ROOM_INFO final :
     bool isadvertising_;
     bool iswaitingroom_;
     int32_t runningtime_;
+    int32_t observer_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -6258,6 +6269,26 @@ inline void C_OFFICE_SET_ROOM_INFO::set_allocated_thumbnail(std::string* thumbna
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_OFFICE_SET_ROOM_INFO.thumbnail)
+}
+
+// int32 observer = 8;
+inline void C_OFFICE_SET_ROOM_INFO::clear_observer() {
+  _impl_.observer_ = 0;
+}
+inline int32_t C_OFFICE_SET_ROOM_INFO::_internal_observer() const {
+  return _impl_.observer_;
+}
+inline int32_t C_OFFICE_SET_ROOM_INFO::observer() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_OFFICE_SET_ROOM_INFO.observer)
+  return _internal_observer();
+}
+inline void C_OFFICE_SET_ROOM_INFO::_internal_set_observer(int32_t value) {
+  
+  _impl_.observer_ = value;
+}
+inline void C_OFFICE_SET_ROOM_INFO::set_observer(int32_t value) {
+  _internal_set_observer(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_OFFICE_SET_ROOM_INFO.observer)
 }
 
 // -------------------------------------------------------------------
