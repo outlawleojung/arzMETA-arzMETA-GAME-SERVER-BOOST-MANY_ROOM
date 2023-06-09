@@ -230,7 +230,7 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 			createdTimeString = GetCurrentTimeString();
 			roomInfo["createdTime"] = GetCurrentTimeString();
 
-			DoAsync(&MeetingRoom::Countdown);
+			DoTimer(60000, &MeetingRoom::Countdown);
 
 			GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 		}
