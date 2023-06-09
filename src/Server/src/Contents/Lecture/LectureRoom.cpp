@@ -54,7 +54,7 @@ void LectureRoom::Init()
 	roomInfo["isObserver"] = (maxObserverNumber > 0) ? true : false;
 	roomInfo["sceneName"] = sceneName;
 
-	//³ªÁß¿¡ »èÁ¦
+	//ë‚˜ì¤‘ì— ì‚­ì œ
 	roomInfo["modeType"] = 2;
 
 	this->DoTimer(30000, std::function<void()>(
@@ -279,7 +279,7 @@ void LectureRoom::Leave(shared_ptr<ClientBase> _client)
 
 	auto client = static_pointer_cast<LectureClient>(_client);
 	
-	//´ë±â¿­ ¸ÕÀú È®ÀÎ, Á¸ÀçÇßÀ¸¸é Áö¿ì°í È£½ºÆ®¿¡°Ô ¾Ë¸²
+	//ëŒ€ê¸°ì—´ ë¨¼ì € í™•ì¸, ì¡´ì¬í–ˆìœ¼ë©´ ì§€ìš°ê³  í˜¸ìŠ¤íŠ¸ì—ê²Œ ì•Œë¦¼
 	{
 		auto waitingClient = waitingClients.find(client->clientId);
 		if (waitingClient != waitingClients.end())
@@ -337,7 +337,7 @@ void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 	int observerCount = 0;
 	int nonObserverCount = 0;
 
-	//¼ö¶ôÇÏ·Á´Â Å¬¶óÀÌ¾ğÆ®°¡ ¾ø´Â °æ¿ì ½ÇÆĞ Ã³¸®
+	//ìˆ˜ë½í•˜ë ¤ëŠ” í´ë¼ì´ì–¸íŠ¸ê°€ ì—†ëŠ” ê²½ìš° ì‹¤íŒ¨ ì²˜ë¦¬
 	for (int i = 0; i < pkt.clientid_size(); i++)
 	{
 		auto waitingClient = waitingClients.find(pkt.clientid()[i]);
@@ -359,7 +359,7 @@ void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 		}
 	}
 
-	//ÀÎ¿øÀÌ ²Ë Âù »óÅÂ¿¡¼­ ¼ö¶ôÇÏ·Á°í ÇÏ´Â °æ¿ì ½ÇÆĞ Ã³¸®
+	//ì¸ì›ì´ ê½‰ ì°¬ ìƒíƒœì—ì„œ ìˆ˜ë½í•˜ë ¤ê³  í•˜ëŠ” ê²½ìš° ì‹¤íŒ¨ ì²˜ë¦¬
 	if (pkt.isaccepted()
 		&& (currentObserver + observerCount > maxObserverNumber || currentPlayerNumber + nonObserverCount > maxPlayerNumber))
 	{
@@ -369,7 +369,7 @@ void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 		return;
 	}
 
-	//ÀÌ¿ÜÀÇ °æ¿ì ¼º°ø, È£½ºÆ®¿¡°Ô °ü·Ã ¸Ş½ÃÁö Àü¼Û
+	//ì´ì™¸ì˜ ê²½ìš° ì„±ê³µ, í˜¸ìŠ¤íŠ¸ì—ê²Œ ê´€ë ¨ ë©”ì‹œì§€ ì „ì†¡
 	acceptWait.set_success(true);
 	_client->Send(PacketManager::MakeSendBuffer(acceptWait));
 
@@ -383,12 +383,12 @@ void LectureRoom::AcceptWait(shared_ptr<ClientBase> _client, Protocol::C_OFFICE_
 		removedWaitingClient->set_isobserver(waitingClient->second->data.type == LectureRoomUserType::Observer);
 		_client->Send(PacketManager::MakeSendBuffer(removeWaitingClient));
 
-		//´ë»ó Å¬¶óÀÌ¾ğÆ®¿¡°Ô ¼º°ø/½ÇÆĞ ¸Ş½ÃÁö Àü¼Û
+		//ëŒ€ìƒ í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì„±ê³µ/ì‹¤íŒ¨ ë©”ì‹œì§€ ì „ì†¡
 		Protocol::S_OFFICE_ACCEPT_WAIT_NOTICE acceptWaitNotice;
 		acceptWaitNotice.set_isaccepted(pkt.isaccepted());
 		waitingClient->second->session->Send(PacketManager::MakeSendBuffer(acceptWaitNotice));
 
-		//ÀÔÀå Çã¶ôÀÌ¾úÀ» °æ¿ìÀÇ Ã³¸®, enter ½ÃÀÇ Ã³¸®¿Í µ¿ÀÏ
+		//ì…ì¥ í—ˆë½ì´ì—ˆì„ ê²½ìš°ì˜ ì²˜ë¦¬, enter ì‹œì˜ ì²˜ë¦¬ì™€ ë™ì¼
 		if (pkt.isaccepted())
 		{
 			if (waitingClient->second->data.type == LectureRoomUserType::Observer)
@@ -446,7 +446,7 @@ void LectureRoom::Kick(shared_ptr<ClientBase> client, string clientId)
 
 	Protocol::S_OFFICE_KICK res;
 
-	//Á¸ÀçÇÏ´ÂÁö È®ÀÎ
+	//ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸
 	auto kickedClient = clients.find(clientId);
 	if (kickedClient == clients.end())
 	{
@@ -548,10 +548,10 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 		newUserData.insert({ client->clientId, userData });
 	}
 
-	// ¿äÃ» °ËÁõ
-	// È£½ºÆ®°¡ ÇÏ³ªÀÎÁö, ÇØ´ç È£½ºÆ®°¡ Á¢¼ÓÇØ ÀÖ´ÂÁö È®ÀÎ
-	// screen permission ÀÌ ÇÏ³ªÀÎÁö È®ÀÎ
-	// °üÀüÀÚ¿Í Âü°¡ÀÚÀÇ ¼ö°¡ ¸Â´ÂÁö È®ÀÎ
+	// ìš”ì²­ ê²€ì¦
+	// í˜¸ìŠ¤íŠ¸ê°€ í•˜ë‚˜ì¸ì§€, í•´ë‹¹ í˜¸ìŠ¤íŠ¸ê°€ ì ‘ì†í•´ ìˆëŠ”ì§€ í™•ì¸
+	// screen permission ì´ í•˜ë‚˜ì¸ì§€ í™•ì¸
+	// ê´€ì „ìì™€ ì°¸ê°€ìì˜ ìˆ˜ê°€ ë§ëŠ”ì§€ í™•ì¸
 
 	{
 		int hostCount = 0;
@@ -714,6 +714,10 @@ void LectureRoom::SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_
 	runningTime = pkt.runningtime();
 	thumbnail = pkt.thumbnail();
 	maxObserverNumber = pkt.observer();
+	if(maxObserverNumber > 0)
+		roomInfo["isObserver"] = true;
+	else
+		roomInfo["isObserver"] = false;
 
 	roomInfo["personnel"] = maxPlayerNumber;
 	roomInfo["isPassword"] = isPassword;
