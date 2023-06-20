@@ -25,6 +25,8 @@ enum class RoomType
 
     Hospital,
 
+    Festival,
+
     Unknown
 };
 

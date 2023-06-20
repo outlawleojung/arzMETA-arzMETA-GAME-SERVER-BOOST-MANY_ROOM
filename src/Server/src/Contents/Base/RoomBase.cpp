@@ -24,11 +24,11 @@ void RoomBase::Close()
 {
 	if (state != RoomState::Running) return;
 
+	GRoomManager->RemoveRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+
 	state = RoomState::Closing;
 
 	HandleClose();
-
-	GRoomManager->RemoveRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
 void RoomBase::HandleClose()
