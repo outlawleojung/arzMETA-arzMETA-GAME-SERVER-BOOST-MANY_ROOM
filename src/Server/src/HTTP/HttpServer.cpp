@@ -54,6 +54,7 @@ void HttpServer::start(string ip, int port)
 		case RoomType::Store:
 		case RoomType::Office:
 		case RoomType::Busan :
+		case RoomType::Festival :
 		{
 			room = make_shared<GameRoom>();
 			break;

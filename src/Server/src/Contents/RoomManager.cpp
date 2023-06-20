@@ -48,6 +48,11 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
         GameRooms.insert({ room->roomId, room });
         break;
     }
+    case RoomType::Festival:
+    {
+        FestivalRooms.insert({ room->roomId, room });
+        break;
+    }
     case RoomType::Office:
     {
         OfficeRooms.insert({ room->roomId, room });
@@ -124,6 +129,11 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
     case RoomType::Game:
     {
         GameRooms.erase(room->roomId);
+        break;
+    }
+    case RoomType::Festival:
+    {
+        FestivalRooms.erase(room->roomId);
         break;
     }
     case RoomType::Office:
@@ -215,6 +225,12 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     {
         for (auto gameZoneRoom = GameRooms.begin(); gameZoneRoom != GameRooms.end(); gameZoneRoom++)
             res.push_back(gameZoneRoom->second->roomInfo);
+        break;
+    }
+    case RoomType::Festival:
+    {
+        for (auto festivalRoom = FestivalRooms.begin(); festivalRoom != FestivalRooms.end(); festivalRoom++)
+            res.push_back(festivalRoom->second->roomInfo);
         break;
     }
     case RoomType::Conference:

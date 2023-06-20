@@ -39,6 +39,8 @@ public:
 	map<string, shared_ptr<RoomBase>> StoreRooms;
 	map<string, shared_ptr<RoomBase>> VoteRooms;
 
+	map<string, shared_ptr<RoomBase>> FestivalRooms;
+
 	map<string, shared_ptr<RoomBase>> HospitalRooms;
 
 	shared_mutex _mutex;
