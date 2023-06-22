@@ -54,6 +54,8 @@ void LectureRoom::Init()
 	roomInfo["isObserver"] = (maxObserverNumber > 0) ? true : false;
 	roomInfo["sceneName"] = sceneName;
 
+	roomInfo["roomType"] = roomTypeToString(type);
+
 	//나중에 삭제
 	roomInfo["modeType"] = 2;
 

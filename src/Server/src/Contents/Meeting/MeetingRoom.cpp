@@ -53,6 +53,8 @@ void MeetingRoom::Init()
 	roomInfo["observer"] = 0;
 	roomInfo["modeType"] = 1;
 
+	roomInfo["roomType"] = roomTypeToString(type);
+
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {
 			if (this->state != RoomState::Running)
