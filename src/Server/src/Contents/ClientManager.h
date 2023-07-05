@@ -63,6 +63,8 @@ public:
 		pstmt->setString(2, enteredRoom->roomId);
 		pstmt->executeUpdate();
 
+		con->close();
+
 		delete pstmt;
 		delete con;
 
@@ -92,6 +94,8 @@ public:
 			pstmt = con->prepareStatement("DELETE FROM memberconnectinfo WHERE membercode = ?");
 			pstmt->setString(1, client->clientId);
 			pstmt->executeUpdate();
+
+			con->close();
 
 			delete pstmt;
 			delete con;
