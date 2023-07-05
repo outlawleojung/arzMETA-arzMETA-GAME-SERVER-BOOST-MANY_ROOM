@@ -66,6 +66,8 @@ void MyRoomRoom::Init()
 			ownerAvatarInfo[res->getString(1)] = res->getString(2);
 	}
 
+	con->close();
+
 	delete res;
 	delete pstmt;
 	delete stmt;

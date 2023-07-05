@@ -88,6 +88,8 @@ bool matching::GameData::Init()
 		hintTemplates.push_back(hintTemplatesForRound);
 	}
 
+	con->close();
+
 	delete res;
 	delete stmt;
 	delete con;

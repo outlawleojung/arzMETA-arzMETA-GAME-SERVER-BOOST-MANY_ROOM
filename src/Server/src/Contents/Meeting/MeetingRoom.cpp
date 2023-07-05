@@ -103,6 +103,8 @@ void MeetingRoom::HandleClose()
 		pstmt->setString(1, roomCode);
 		res.reset(pstmt->executeQuery());
 	}
+
+	con->close();
 }
 
 void MeetingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { 

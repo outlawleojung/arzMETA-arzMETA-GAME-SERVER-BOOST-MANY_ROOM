@@ -95,6 +95,8 @@ int main()
 	stmt = con->createStatement();
 	stmt->execute("TRUNCATE TABLE memberconnectinfo");
 
+	con->close();
+
 	delete stmt;
 	delete con;
 

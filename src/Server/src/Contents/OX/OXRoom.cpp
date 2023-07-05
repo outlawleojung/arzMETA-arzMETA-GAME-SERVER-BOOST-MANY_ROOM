@@ -69,6 +69,8 @@ bool ox::GameData::Init()
 			roundTimes.push_back(res->getInt(1));
 	}
 
+	con->close();
+
 	delete res;
 	delete stmt;
 	delete con;

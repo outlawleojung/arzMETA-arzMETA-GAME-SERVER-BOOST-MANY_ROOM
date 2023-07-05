@@ -107,6 +107,8 @@ void LectureRoom::HandleClose()
 		pstmt->setString(1, roomCode);
 		res.reset(pstmt->executeQuery());
 	}
+
+	con->close();
 }
 
 void LectureRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&LectureRoom::Enter, session, pkt); }

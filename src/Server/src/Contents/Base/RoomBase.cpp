@@ -273,6 +273,8 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 		client->stateMessage = res->getString(2);
 	}
 
+	con->close();
+
 	delete res;
 	delete stmt;
 	delete pstmt;
