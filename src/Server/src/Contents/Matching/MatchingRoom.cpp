@@ -25,27 +25,13 @@ matching::GameData::GameData()
 	gen = std::make_shared<std::mt19937>(rd());
 }
 
+#include <soci/soci.h>
+
 bool matching::GameData::Init()
 {
-	sql::Driver* driver;
-	sql::Connection* con;
-	sql::Statement* stmt;
-	sql::ResultSet* res;
+	soci::session sql(*DBConnectionPool);
 
-	driver = get_driver_instance();
-
-	con = driver->connect(
-		DBDomain,
-		DBUsername,
-		DBPassword
-	);
-	con->setSchema(DBSchema);
-
-	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT * FROM jumpingmatchinglevel");
-
-	roundTotal = res->rowsCount();
-	//roundTotal = 1;
+	soci::rowset<soci::row> rs = (sql.prepare << "SELECT * FROM jumpingmatchinglevel");
 
 	hintToHintIntervals.clear();
 	quizToDestroyIntervals.clear();
@@ -56,21 +42,23 @@ bool matching::GameData::Init()
 	paintConditions.clear();
 	hintTemplates.clear();
 
-	while (res->next())
+	for (auto it = rs.begin(); it != rs.end(); ++it)
 	{
-		hintToHintIntervals.push_back(res->getInt(3));
-		quizToDestroyIntervals.push_back(res->getInt(4));
-		destroyToFinishIntervals.push_back(res->getInt(5));
-		toNextRoundIntervals.push_back(res->getInt(6));
-		showQuizTimes.push_back(res->getInt(7));
+		const soci::row& row = *it;
 
-		int paintNumber = res->getInt(9);
+		hintToHintIntervals.push_back(row.get<int>(2));
+		quizToDestroyIntervals.push_back(row.get<int>(3));
+		destroyToFinishIntervals.push_back(row.get<int>(4));
+		toNextRoundIntervals.push_back(row.get<int>(5));
+		showQuizTimes.push_back(row.get<int>(6));
 
-		paintConditions.push_back({ paintNumber, res->getInt(10) });
+		int paintNumber = row.get<int>(8);
 
-		string hintTemplateString = string(res->getString(11));
+		paintConditions.push_back({ paintNumber, row.get<int>(9) });
 
-		vector<vector<bool>> hintTemplatesForRound;
+		string hintTemplateString = row.get<string>(10);
+
+		std::vector<std::vector<bool>> hintTemplatesForRound;
 
 		for (int i = 0; i < hintTemplateString.size(); i++)
 		{
@@ -88,11 +76,7 @@ bool matching::GameData::Init()
 		hintTemplates.push_back(hintTemplatesForRound);
 	}
 
-	con->close();
-
-	delete res;
-	delete stmt;
-	delete con;
+	roundTotal = hintTemplates.size();
 
 	for (int i = 1; i <= pictureNumber; i++)
 		pictureNames.push_back(std::to_string(i));

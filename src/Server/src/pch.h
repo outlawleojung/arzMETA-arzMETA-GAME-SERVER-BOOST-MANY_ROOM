@@ -8,6 +8,9 @@
 extern class RoomManager* GRoomManager;
 extern class ClientManager* GClientManager;
 
+#include <soci/soci.h>
+extern soci::connection_pool* DBConnectionPool;
+
 extern string localHostIp;
 extern int tcpPort;
 extern int httpPort;

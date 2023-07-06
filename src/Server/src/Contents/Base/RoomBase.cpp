@@ -237,48 +237,19 @@ shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
 	return GClientManager->MakeCilent<ClientBase>(clientId, sessionId, static_pointer_cast<RoomBase>(shared_from_this()));
 }
 
-#include <mysql_connection.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
+#include <soci/soci.h>
 
 void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 {
-	sql::Driver* driver;
-	sql::Connection* con;
-	sql::Statement* stmt;
-	sql::PreparedStatement* pstmt;
-	sql::ResultSet* res;
+	soci::session sql(*DBConnectionPool);
 
-	driver = get_driver_instance();
+	sql << "SET NAMES 'utf8mb4'";
 
-	con = driver->connect(
-		DBDomain,
-		DBUsername,
-		DBPassword
-	);
-	con->setSchema(DBSchema);
-	stmt = con->createStatement();
-	stmt->execute("SET NAMES 'utf8mb4'");
+	std::string nickname, stateMessage;
+	sql << "SELECT nickname, stateMessage FROM member WHERE memberCode = :id", soci::use(client->clientId), soci::into(nickname), soci::into(stateMessage);
 
-	pstmt = con->prepareStatement("SELECT nickname, stateMessage FROM member WHERE memberCode = ?");
-	pstmt->setString(1, client->clientId);
-	res = pstmt->executeQuery();
-
-	while (res->next())
-	{
-		client->nickname = res->getString(1);
-		client->stateMessage = res->getString(2);
-	}
-
-	con->close();
-
-	delete res;
-	delete stmt;
-	delete pstmt;
-	delete con;
+	client->nickname = nickname;
+	client->stateMessage = stateMessage;
 }
 
 void RoomBase::OnEnterSuccess(shared_ptr<ClientBase> client)

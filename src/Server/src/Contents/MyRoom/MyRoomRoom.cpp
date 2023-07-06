@@ -6,12 +6,7 @@
 #include "../ClientManager.h"
 #include "../RoomManager.h"
 
-#include <mysql_connection.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
+#include <soci/soci.h>
 
 void MyRoomRoom::Init()
 {
@@ -24,54 +19,35 @@ void MyRoomRoom::Init()
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
-	sql::Driver* driver;
-	sql::Connection* con;
-	sql::Statement* stmt;
-	sql::PreparedStatement* pstmt;
-	sql::ResultSet* res;
+	soci::session sql(*DBConnectionPool);
+	std::string ownerMemberId;
 
-	driver = get_driver_instance();
+	sql << "SET NAMES 'utf8mb4'";
 
-	con = driver->connect(
-		DBDomain,
-		DBUsername,
-		DBPassword
-	);
-	con->setSchema(DBSchema);
-	
-	stmt = con->createStatement();
-	stmt->execute("SET NAMES 'utf8mb4'");
-	
-	string ownerMemberId;
+	int myroomStateType = -1;
 
 	{
-		pstmt = con->prepareStatement("SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = ?");
-		pstmt->setString(1, ownerId);
-		res = pstmt->executeQuery();
+		sql << "SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = :ownerId",
+			soci::use(ownerId),
+			soci::into(ownerMemberId),
+			soci::into(ownerNickname),
+			soci::into(myroomStateType);
 
-		while (res->next())
-		{
-			ownerMemberId = res->getString(1);
-			ownerNickname = res->getString(2);
-			isShutdown = res->getInt(3) == 4;
+		// myRoomStateType 값이 4면 isShutdown이 true가 됩니다.
+		isShutdown = (myroomStateType == 4);
+	}
+
+	{
+		soci::rowset<soci::row> rs = (sql.prepare << "SELECT avatarPartsType, itemId FROM memberavatarinfo WHERE memberId = :ownerMemberId", soci::use(ownerMemberId));
+
+		for (auto it = rs.begin(); it != rs.end(); ++it) {
+			soci::row const& row = *it;
+			std::string avatarPartsType = row.get<std::string>(0);
+			std::string itemId = row.get<std::string>(1);
+
+			ownerAvatarInfo[avatarPartsType] = itemId;
 		}
 	}
-	
-	{
-		pstmt = con->prepareStatement("SELECT avatarPartsType, itemId FROM memberavatarinfo WHERE memberId = ?");
-		pstmt->setString(1, ownerMemberId);
-		res = pstmt->executeQuery();
-
-		while (res->next())
-			ownerAvatarInfo[res->getString(1)] = res->getString(2);
-	}
-
-	con->close();
-
-	delete res;
-	delete pstmt;
-	delete stmt;
-	delete con;
 
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {

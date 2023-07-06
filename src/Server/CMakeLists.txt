@@ -18,6 +18,14 @@ if (WIN32)
     endif()
 
     target_link_libraries(Server PRIVATE ${common_libs} ${platform_libs})
+
+    find_package(SOCI REQUIRED)
+    
+    target_include_directories(Server PRIVATE "C:/Program Files/MySQL/MySQL Connector C 6.1/include")
+    target_link_directories(Server PRIVATE "C:/Program Files/MySQL/MySQL Connector C 6.1/lib")
+    
+    target_link_libraries(Server PRIVATE SOCI::soci_core SOCI::soci_mysql)
+
 endif (WIN32)
 
 if (UNIX)
@@ -25,6 +33,6 @@ if (UNIX)
     target_include_directories(Server PRIVATE ${Protobuf_INCLUDE_DIRS})
     target_link_libraries(Server PRIVATE ${Protobuf_LIBRARIES})
 
-    target_link_directories(Server PRIVATE /usr/lib/x86_64-linux-gnu)
-    target_link_libraries(Server PRIVATE mysqlcppconn ssl crypto)
+    find_package(SOCI REQUIRED)
+    target_link_libraries(Server PRIVATE SOCI::soci_core SOCI::soci_mysql)
 endif (UNIX)

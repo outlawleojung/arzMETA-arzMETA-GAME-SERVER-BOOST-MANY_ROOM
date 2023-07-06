@@ -7,11 +7,7 @@
 
 #include <boost/asio.hpp>
 
-#include <mysql_connection.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/prepared_statement.h>
+#include <soci/soci.h>
 
 class GameSession;
 
@@ -45,28 +41,10 @@ public:
 
 		clients[clientId] = client;
 
-		sql::Driver* driver;
-		sql::Connection* con;
-		sql::PreparedStatement* pstmt;
+		soci::session sql(*DBConnectionPool);
 
-		driver = get_driver_instance();
-
-		con = driver->connect(
-			DBDomain,
-			DBUsername,
-			DBPassword
-		);
-		con->setSchema(DBSchema);
-
-		pstmt = con->prepareStatement("INSERT INTO memberconnectinfo (membercode, roomId) VALUES (?, ?) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)");
-		pstmt->setString(1, clientId);
-		pstmt->setString(2, enteredRoom->roomId);
-		pstmt->executeUpdate();
-
-		con->close();
-
-		delete pstmt;
-		delete con;
+		sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
+			soci::use(clientId), soci::use(enteredRoom->roomId);
 
 		return client;
 	}
@@ -78,27 +56,9 @@ public:
 		auto _client = clients.find(client->clientId);
 		if (_client->second.get() == client.get())
 		{
-			sql::Driver* driver;
-			sql::Connection* con;
-			sql::PreparedStatement* pstmt;
+			soci::session sql(*DBConnectionPool);
 
-			driver = get_driver_instance();
-
-			con = driver->connect(
-				DBDomain,
-				DBUsername,
-				DBPassword
-			);
-			con->setSchema(DBSchema);
-
-			pstmt = con->prepareStatement("DELETE FROM memberconnectinfo WHERE membercode = ?");
-			pstmt->setString(1, client->clientId);
-			pstmt->executeUpdate();
-
-			con->close();
-
-			delete pstmt;
-			delete con;
+			sql << "DELETE FROM memberconnectinfo WHERE membercode = :id", soci::use(client->clientId);
 
 			clients.erase(_client);
 		}

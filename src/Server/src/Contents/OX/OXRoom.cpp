@@ -9,12 +9,6 @@
 
 #include <functional>
 
-#include <mysql_connection.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-
 ox::GameData::GameData() 
 	: gameState(GameState::Idle)
 	, roundState(RoundState::Idle)
@@ -24,56 +18,50 @@ ox::GameData::GameData()
 	std::random_device rd;
 }
 
+#include <soci/soci.h>
+
 bool ox::GameData::Init()
 {
-	sql::Driver* driver;
-	sql::Connection* con;
-	sql::Statement* stmt;
-	sql::ResultSet* res;
+	soci::session sql(*DBConnectionPool);
 
-	driver = get_driver_instance();
+	sql << "SET NAMES 'utf8mb4'";
 
-	con = driver->connect(
-		DBDomain, 
-		DBUsername, 
-		DBPassword
-	);
-	con->setSchema(DBSchema);
-
+	// First query
 	{
-		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT id FROM quizquestionanswer");
+		soci::rowset<int> rs = (sql.prepare << "SELECT id FROM quizquestionanswer");
 
-		while (res->next())
-			quiz.push_back(res->getInt(1));
-	}
-
-	{
-		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT * FROM quizlevel");
-
-		roundTotal = res->rowsCount();
-
-		while (res->next())
-		{
-			waitingIntervals.push_back(res->getInt(2));
-			playingIntervals.push_back(res->getInt(3));
+		quiz.clear();
+		for (auto it = rs.begin(); it != rs.end(); ++it) {
+			quiz.push_back(*it);
 		}
 	}
 
+	// Second query
 	{
-		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT quiztimetype.name FROM quizroundtime LEFT JOIN quiztimetype ON quizroundtime.timeType = quiztimetype.type");
+		soci::rowset<soci::row> rs = (sql.prepare << "SELECT * FROM quizlevel");
 
-		while (res->next())
-			roundTimes.push_back(res->getInt(1));
+		waitingIntervals.clear();
+		playingIntervals.clear();
+
+		roundTotal = 0;
+
+		for (auto it = rs.begin(); it != rs.end(); ++it) {
+			soci::row const& row = *it;
+			waitingIntervals.push_back(row.get<int>(1));
+			playingIntervals.push_back(row.get<int>(2));
+			roundTotal++;
+		}
 	}
 
-	con->close();
+	// Third query
+	{
+		soci::rowset<int> rs = (sql.prepare << "SELECT quiztimetype.name FROM quizroundtime LEFT JOIN quiztimetype ON quizroundtime.timeType = quiztimetype.type");
 
-	delete res;
-	delete stmt;
-	delete con;
+		roundTimes.clear();
+		for (auto it = rs.begin(); it != rs.end(); ++it) {
+			roundTimes.push_back(*it);
+		}
+	}
 
 	return true;
 }
