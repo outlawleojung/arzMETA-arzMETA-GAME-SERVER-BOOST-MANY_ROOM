@@ -44,8 +44,8 @@ void MyRoomRoom::Init()
 
 			for (auto it = rs.begin(); it != rs.end(); ++it) {
 				soci::row const& row = *it;
-				std::string avatarPartsType = row.get<std::string>(0);
-				std::string itemId = row.get<std::string>(1);
+				std::string avatarPartsType = std::to_string(row.get<int>(0));
+				std::string itemId = std::to_string(row.get<int>(1));
 
 				ownerAvatarInfo[avatarPartsType] = itemId;
 			}
