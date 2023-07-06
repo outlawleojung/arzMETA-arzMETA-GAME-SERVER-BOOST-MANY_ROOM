@@ -49,6 +49,8 @@ void MyRoomRoom::Init()
 		}
 	}
 
+	sql.close();
+
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {
 			if (this->state != RoomState::Running)

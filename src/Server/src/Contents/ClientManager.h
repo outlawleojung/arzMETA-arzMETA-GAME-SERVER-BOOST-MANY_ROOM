@@ -46,6 +46,8 @@ public:
 		sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
 			soci::use(clientId), soci::use(enteredRoom->roomId);
 
+		sql.close();
+
 		return client;
 	}
 
@@ -59,6 +61,8 @@ public:
 			soci::session sql(*DBConnectionPool);
 
 			sql << "DELETE FROM memberconnectinfo WHERE membercode = :id", soci::use(client->clientId);
+
+			sql.close();
 
 			clients.erase(_client);
 		}

@@ -63,6 +63,8 @@ bool ox::GameData::Init()
 		}
 	}
 
+	sql.close();
+
 	return true;
 }
 

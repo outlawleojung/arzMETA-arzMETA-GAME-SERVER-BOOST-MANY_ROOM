@@ -84,6 +84,8 @@ void MeetingRoom::HandleClose()
 	{
 		sql << "DELETE FROM memberofficereservationinfo WHERE roomCode = :roomCode", soci::use(roomCode);
 	}
+
+	sql.close();
 }
 
 void MeetingRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { 
