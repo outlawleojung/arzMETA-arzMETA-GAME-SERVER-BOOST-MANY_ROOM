@@ -53,13 +53,13 @@ void MyRoomRoom::Init()
 	}
 	catch (const soci::soci_error& e)
 	{
-		std::cerr << "SOCI Error: " << e.what() << std::endl;
+		std::cerr << "From MyRoom, SOCI Error: " << e.what() << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cerr << "Standard Exception: " << e.what() << std::endl;
+		std::cerr << "From MyRoom, Standard Exception: " << e.what() << std::endl;
 	}
 	catch (...) {
-		std::cerr << "Unknown Exception Caught" << std::endl;
+		std::cerr << "From MyRoom, Unknown Exception Caught" << std::endl;
 	}
 	
 	this->DoTimer(30000, std::function<void()>(

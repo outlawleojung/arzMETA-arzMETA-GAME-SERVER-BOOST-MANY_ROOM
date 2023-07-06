@@ -50,13 +50,13 @@ public:
 		}
 		catch(soci::soci_error& e)
 		{
-			std::cerr << "SOCI Error: " << e.what() << std::endl;
+			std::cerr << "From ClientManager 1,SOCI Error: " << e.what() << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cerr << "Standard Exception: " << e.what() << std::endl;
+			std::cerr << "From ClientManager 1,Standard Exception: " << e.what() << std::endl;
 		}
 		catch (...) {
-			std::cerr << "Unknown Exception Caught" << std::endl;
+			std::cerr << "From ClientManager 1,Unknown Exception Caught" << std::endl;
 		}
 
 		return client;
@@ -77,13 +77,13 @@ public:
 			}
 			catch (soci::soci_error& e)
 			{
-				std::cerr << "SOCI Error: " << e.what() << std::endl;
+				std::cerr << "From ClientManager 2, SOCI Error: " << e.what() << std::endl;
 			}
 			catch (const std::exception& e) {
-				std::cerr << "Standard Exception: " << e.what() << std::endl;
+				std::cerr << "From ClientManager 2,Standard Exception: " << e.what() << std::endl;
 			}
 			catch (...) {
-				std::cerr << "Unknown Exception Caught" << std::endl;
+				std::cerr << "From ClientManager 2,Unknown Exception Caught" << std::endl;
 			}
 
 			clients.erase(_client);
