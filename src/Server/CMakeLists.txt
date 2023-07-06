@@ -33,6 +33,8 @@ if (UNIX)
     target_include_directories(Server PRIVATE ${Protobuf_INCLUDE_DIRS})
     target_link_libraries(Server PRIVATE ${Protobuf_LIBRARIES})
 
+    target_include_directories(Server PRIVATE "/usr/include/mysql")
     find_package(SOCI REQUIRED)
+    target_link_libraries(Server PRIVATE ssl crypto)
     target_link_libraries(Server PRIVATE SOCI::soci_core SOCI::soci_mysql)
 endif (UNIX)
