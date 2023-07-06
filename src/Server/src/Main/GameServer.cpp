@@ -76,29 +76,25 @@ void DoWorkerJob(shared_ptr<Service>& service)
 	}
 }
 
+#include <soci/soci.h>
+#include <soci/mysql/soci-mysql.h>
+
 int main()
 {
-	//입장 정보 테이블 리셋
-	sql::Driver* driver;
-	sql::Connection* con;
-	sql::Statement* stmt;
+	for (size_t i = 0; i != 5; ++i)
+	{
+		soci::session& sql = DBConnectionPool->at(i);
 
-	driver = get_driver_instance();
+		sql.open(*soci::factory_mysql(),
+			"user='" + DBUsername + "' password='" + DBPassword + "'"
+			" host='" + DBDomain + "' port=3306 dbname='" + DBSchema + "'"
+			//" application_name='soci_test_app' connect_timeout=10"
+			//" options='-c client_encoding=utf8'"
+		);
+	}
 
-	con = driver->connect(
-		DBDomain,
-		DBUsername,
-		DBPassword
-	);
-	con->setSchema(DBSchema);
-
-	stmt = con->createStatement();
-	stmt->execute("TRUNCATE TABLE memberconnectinfo");
-
-	con->close();
-
-	delete stmt;
-	delete con;
+	soci::session sql(*DBConnectionPool);
+	sql << "TRUNCATE TABLE memberconnectinfo";
 
 	PacketManager::Init();
 

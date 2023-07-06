@@ -70,6 +70,8 @@ void LectureRoom::Init()
 	));
 }
 
+#include <soci/soci.h>
+
 void LectureRoom::HandleClose()
 {
 	for (auto client = waitingClients.begin(); client != waitingClients.end(); client++)
@@ -77,38 +79,16 @@ void LectureRoom::HandleClose()
 
 	GameRoom::HandleClose();
 
-	sql::Driver* driver;
-	std::unique_ptr<sql::Connection> con;
-	std::unique_ptr<sql::ResultSet> res;
-	std::unique_ptr<sql::PreparedStatement> pstmt;
-
-	driver = get_driver_instance();
-
-	con.reset(driver->connect(
-		DBDomain,
-		DBUsername,
-		DBPassword
-	));
-
-	con->setSchema(DBSchema);
-
-	pstmt.reset(con->prepareStatement("SELECT repeatDay FROM memberofficereservationinfo WHERE roomCode = ?"));
-	pstmt->setString(1, roomCode);
-	res.reset(pstmt->executeQuery());
-
+	soci::session sql(*DBConnectionPool);
 	int repeatDay = -1;
 
-	if (res->next())
-		repeatDay = res->getInt(1);
+	sql << "SELECT repeatDay FROM memberofficereservationinfo WHERE roomCode = :roomCode",
+		soci::use(roomCode), soci::into(repeatDay);
 
 	if (repeatDay == 0)
 	{
-		pstmt.reset(con->prepareStatement("DELETE FROM memberofficereservationinfo WHERE roomCode = ?"));
-		pstmt->setString(1, roomCode);
-		res.reset(pstmt->executeQuery());
+		sql << "DELETE FROM memberofficereservationinfo WHERE roomCode = :roomCode", soci::use(roomCode);
 	}
-
-	con->close();
 }
 
 void LectureRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&LectureRoom::Enter, session, pkt); }
