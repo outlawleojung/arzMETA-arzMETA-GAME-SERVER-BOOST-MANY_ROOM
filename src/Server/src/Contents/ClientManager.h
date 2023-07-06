@@ -52,6 +52,12 @@ public:
 		{
 			std::cerr << "SOCI Error: " << e.what() << std::endl;
 		}
+		catch (const std::exception& e) {
+			std::cerr << "Standard Exception: " << e.what() << std::endl;
+		}
+		catch (...) {
+			std::cerr << "Unknown Exception Caught" << std::endl;
+		}
 
 		return client;
 	}
@@ -72,6 +78,12 @@ public:
 			catch (soci::soci_error& e)
 			{
 				std::cerr << "SOCI Error: " << e.what() << std::endl;
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Standard Exception: " << e.what() << std::endl;
+			}
+			catch (...) {
+				std::cerr << "Unknown Exception Caught" << std::endl;
 			}
 
 			clients.erase(_client);

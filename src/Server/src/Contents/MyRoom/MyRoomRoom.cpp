@@ -55,6 +55,12 @@ void MyRoomRoom::Init()
 	{
 		std::cerr << "SOCI Error: " << e.what() << std::endl;
 	}
+	catch (const std::exception& e) {
+		std::cerr << "Standard Exception: " << e.what() << std::endl;
+	}
+	catch (...) {
+		std::cerr << "Unknown Exception Caught" << std::endl;
+	}
 	
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {

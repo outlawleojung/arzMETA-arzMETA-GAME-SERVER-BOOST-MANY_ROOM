@@ -258,6 +258,12 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 		{
 			std::cerr << "SOCI Error: " << e.what() << std::endl;
 		}
+		catch (const std::exception& e) {
+			std::cerr << "Standard Exception: " << e.what() << std::endl;
+		}
+		catch (...) {
+			std::cerr << "Unknown Exception Caught" << std::endl;
+		}
 	}
 }
 
