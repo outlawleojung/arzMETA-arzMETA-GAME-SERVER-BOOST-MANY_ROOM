@@ -41,12 +41,12 @@ public:
 
 		clients[clientId] = client;
 
-		{
-			soci::session sql(*DBConnectionPool);
+		//{
+		//	soci::session sql(*DBConnectionPool);
 
-			sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
-				soci::use(clientId), soci::use(enteredRoom->roomId);
-		}
+		//	sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
+		//		soci::use(clientId), soci::use(enteredRoom->roomId);
+		//}
 
 		return client;
 	}
@@ -58,9 +58,9 @@ public:
 		auto _client = clients.find(client->clientId);
 		if (_client != clients.end() && _client->second.get() == client.get())
 		{
-			soci::session sql(*DBConnectionPool);
+			//soci::session sql(*DBConnectionPool);
 
-			sql << "DELETE FROM memberconnectinfo WHERE membercode = :id", soci::use(client->clientId);
+			//sql << "DELETE FROM memberconnectinfo WHERE membercode = :id", soci::use(client->clientId);
 
 			clients.erase(_client);
 		}
