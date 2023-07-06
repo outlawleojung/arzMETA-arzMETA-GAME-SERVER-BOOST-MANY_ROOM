@@ -96,8 +96,6 @@ int main()
 	soci::session sql(*DBConnectionPool);
 	sql << "TRUNCATE TABLE memberconnectinfo";
 
-	sql.close();
-
 	PacketManager::Init();
 
 #ifdef linux

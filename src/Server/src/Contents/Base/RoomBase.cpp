@@ -250,8 +250,6 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 
 	client->nickname = nickname;
 	client->stateMessage = stateMessage;
-
-	sql.close();
 }
 
 void RoomBase::OnEnterSuccess(shared_ptr<ClientBase> client)

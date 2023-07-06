@@ -81,8 +81,6 @@ bool matching::GameData::Init()
 	for (int i = 1; i <= pictureNumber; i++)
 		pictureNames.push_back(std::to_string(i));
 
-	sql.close();
-
 	return true;
 }
 
