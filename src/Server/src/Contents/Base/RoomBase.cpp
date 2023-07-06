@@ -241,15 +241,17 @@ shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
 
 void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 {
-	soci::session sql(*DBConnectionPool);
+	{
+		soci::session sql(*DBConnectionPool);
 
-	sql << "SET NAMES 'utf8mb4'";
+		sql << "SET NAMES 'utf8mb4'";
 
-	std::string nickname, stateMessage;
-	sql << "SELECT nickname, stateMessage FROM member WHERE memberCode = :id", soci::use(client->clientId), soci::into(nickname), soci::into(stateMessage);
+		std::string nickname, stateMessage;
+		sql << "SELECT nickname, stateMessage FROM member WHERE memberCode = :id", soci::use(client->clientId), soci::into(nickname), soci::into(stateMessage);
 
-	client->nickname = nickname;
-	client->stateMessage = stateMessage;
+		client->nickname = nickname;
+		client->stateMessage = stateMessage;
+	}
 }
 
 void RoomBase::OnEnterSuccess(shared_ptr<ClientBase> client)

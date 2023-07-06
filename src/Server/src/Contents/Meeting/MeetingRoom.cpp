@@ -75,14 +75,16 @@ void MeetingRoom::HandleClose()
 
 	GameRoom::HandleClose();
 
-	soci::session sql(*DBConnectionPool);
-	int repeatDay = -1;
-
-	sql << "SELECT repeatDay FROM memberofficereservationinfo WHERE roomCode = :roomCode", soci::into(repeatDay), soci::use(roomCode);
-
-	if (repeatDay == 0)
 	{
-		sql << "DELETE FROM memberofficereservationinfo WHERE roomCode = :roomCode", soci::use(roomCode);
+		soci::session sql(*DBConnectionPool);
+		int repeatDay = -1;
+
+		sql << "SELECT repeatDay FROM memberofficereservationinfo WHERE roomCode = :roomCode", soci::into(repeatDay), soci::use(roomCode);
+
+		if (repeatDay == 0)
+		{
+			sql << "DELETE FROM memberofficereservationinfo WHERE roomCode = :roomCode", soci::use(roomCode);
+		}
 	}
 }
 

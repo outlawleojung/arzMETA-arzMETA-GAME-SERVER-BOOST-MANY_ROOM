@@ -93,8 +93,10 @@ int main()
 		);
 	}
 
-	soci::session sql(*DBConnectionPool);
-	sql << "TRUNCATE TABLE memberconnectinfo";
+	{
+		soci::session sql(*DBConnectionPool);
+		sql << "TRUNCATE TABLE memberconnectinfo";
+	}
 
 	PacketManager::Init();
 

@@ -41,10 +41,12 @@ public:
 
 		clients[clientId] = client;
 
-		soci::session sql(*DBConnectionPool);
+		{
+			soci::session sql(*DBConnectionPool);
 
-		sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
-			soci::use(clientId), soci::use(enteredRoom->roomId);
+			sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
+				soci::use(clientId), soci::use(enteredRoom->roomId);
+		}
 
 		return client;
 	}

@@ -7,7 +7,7 @@ RoomManager* GRoomManager = new RoomManager;
 ClientManager* GClientManager = new ClientManager;
 
 #include <soci/soci.h>
-soci::connection_pool* DBConnectionPool = new soci::connection_pool(5);
+soci::connection_pool* DBConnectionPool = new soci::connection_pool(10);
 
 string localHostIp;
 int tcpPort = 7777;

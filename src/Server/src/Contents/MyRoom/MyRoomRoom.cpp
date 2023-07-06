@@ -19,33 +19,35 @@ void MyRoomRoom::Init()
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
-	soci::session sql(*DBConnectionPool);
-	std::string ownerMemberId;
-
-	sql << "SET NAMES 'utf8mb4'";
-
-	int myroomStateType = -1;
-
 	{
-		sql << "SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = :ownerId",
-			soci::use(ownerId),
-			soci::into(ownerMemberId),
-			soci::into(ownerNickname),
-			soci::into(myroomStateType);
+		soci::session sql(*DBConnectionPool);
+		std::string ownerMemberId;
 
-		// myRoomStateType 값이 4면 isShutdown이 true가 됩니다.
-		isShutdown = (myroomStateType == 4);
-	}
+		sql << "SET NAMES 'utf8mb4'";
 
-	{
-		soci::rowset<soci::row> rs = (sql.prepare << "SELECT avatarPartsType, itemId FROM memberavatarinfo WHERE memberId = :ownerMemberId", soci::use(ownerMemberId));
+		int myroomStateType = -1;
 
-		for (auto it = rs.begin(); it != rs.end(); ++it) {
-			soci::row const& row = *it;
-			std::string avatarPartsType = row.get<std::string>(0);
-			std::string itemId = row.get<std::string>(1);
+		{
+			sql << "SELECT memberId, nickname, myRoomStateType FROM member WHERE memberCode = :ownerId",
+				soci::use(ownerId),
+				soci::into(ownerMemberId),
+				soci::into(ownerNickname),
+				soci::into(myroomStateType);
 
-			ownerAvatarInfo[avatarPartsType] = itemId;
+			// myRoomStateType 값이 4면 isShutdown이 true가 됩니다.
+			isShutdown = (myroomStateType == 4);
+		}
+
+		{
+			soci::rowset<soci::row> rs = (sql.prepare << "SELECT avatarPartsType, itemId FROM memberavatarinfo WHERE memberId = :ownerMemberId", soci::use(ownerMemberId));
+
+			for (auto it = rs.begin(); it != rs.end(); ++it) {
+				soci::row const& row = *it;
+				std::string avatarPartsType = row.get<std::string>(0);
+				std::string itemId = row.get<std::string>(1);
+
+				ownerAvatarInfo[avatarPartsType] = itemId;
+			}
 		}
 	}
 
