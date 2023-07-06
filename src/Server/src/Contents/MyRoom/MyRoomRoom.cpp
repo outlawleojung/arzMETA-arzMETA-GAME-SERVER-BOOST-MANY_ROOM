@@ -19,6 +19,7 @@ void MyRoomRoom::Init()
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
+	try
 	{
 		soci::session sql(*DBConnectionPool);
 		std::string ownerMemberId;
@@ -50,7 +51,11 @@ void MyRoomRoom::Init()
 			}
 		}
 	}
-
+	catch (const soci::soci_error& e)
+	{
+		std::cerr << "SOCI Error: " << e.what() << std::endl;
+	}
+	
 	this->DoTimer(30000, std::function<void()>(
 		[this]() {
 			if (this->state != RoomState::Running)

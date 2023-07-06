@@ -244,13 +244,20 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 	{
 		soci::session sql(*DBConnectionPool);
 
-		sql << "SET NAMES 'utf8mb4'";
+		try
+		{
+			sql << "SET NAMES 'utf8mb4'";
 
-		std::string nickname, stateMessage;
-		sql << "SELECT nickname, stateMessage FROM member WHERE memberCode = :id", soci::use(client->clientId), soci::into(nickname), soci::into(stateMessage);
+			std::string nickname, stateMessage;
+			sql << "SELECT nickname, stateMessage FROM member WHERE memberCode = :id", soci::use(client->clientId), soci::into(nickname), soci::into(stateMessage);
 
-		client->nickname = nickname;
-		client->stateMessage = stateMessage;
+			client->nickname = nickname;
+			client->stateMessage = stateMessage;
+		}
+		catch (const soci::soci_error& e)
+		{
+			std::cerr << "SOCI Error: " << e.what() << std::endl;
+		}
 	}
 }
 
