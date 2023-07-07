@@ -81,7 +81,7 @@ void DoWorkerJob(shared_ptr<Service>& service)
 
 int main()
 {
-	for (size_t i = 0; i != 5; ++i)
+	for (size_t i = 0; i != 10; ++i)
 	{
 		soci::session& sql = DBConnectionPool->at(i);
 
