@@ -255,10 +255,14 @@ void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 			sql << "SET NAMES 'utf8mb4'";
 
 			std::string nickname, stateMessage;
-			sql << "SELECT nickname, stateMessage FROM member WHERE memberCode = :id", soci::use(client->clientId), soci::into(nickname), soci::into(stateMessage);
+			soci::indicator ind;
+			sql << "SELECT nickname, stateMessage FROM member WHERE memberCode = :id", soci::use(client->clientId), soci::into(nickname), soci::into(stateMessage, ind);
 
 			client->nickname = nickname;
-			client->stateMessage = stateMessage;
+			if(ind == soci::i_null)
+				client->stateMessage = "";
+			else
+				client->stateMessage = stateMessage;
 		}
 		catch (const soci::soci_error& e)
 		{
