@@ -22,6 +22,13 @@ void MyRoomRoom::Init()
 	try
 	{
 		soci::session sql(*DBConnectionPool);
+
+		if (!sql.is_connected())
+		{
+			GLogManager->Log("Mysql Connection Disconnected. Reconnect");
+			sql.reconnect();
+		}
+
 		std::string ownerMemberId;
 
 		sql << "SET NAMES 'utf8mb4'";

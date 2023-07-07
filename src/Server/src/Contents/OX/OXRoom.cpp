@@ -24,6 +24,12 @@ bool ox::GameData::Init()
 {
 	soci::session sql(*DBConnectionPool);
 
+	if (!sql.is_connected())
+	{
+		GLogManager->Log("Mysql Connection Disconnected. Reconnect");
+		sql.reconnect();
+	}
+
 	sql << "SET NAMES 'utf8mb4'";
 
 	// First query

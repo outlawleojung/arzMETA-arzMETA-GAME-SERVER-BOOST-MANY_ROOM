@@ -77,6 +77,13 @@ void MeetingRoom::HandleClose()
 
 	{
 		soci::session sql(*DBConnectionPool);
+
+		if (!sql.is_connected())
+		{
+			GLogManager->Log("Mysql Connection Disconnected. Reconnect");
+			sql.reconnect();
+		}
+
 		int repeatDay = -1;
 
 		sql << "SELECT repeatDay FROM memberofficereservationinfo WHERE roomCode = :roomCode", soci::into(repeatDay), soci::use(roomCode);

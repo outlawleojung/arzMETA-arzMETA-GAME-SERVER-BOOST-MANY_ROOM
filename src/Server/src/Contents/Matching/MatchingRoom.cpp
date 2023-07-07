@@ -31,6 +31,12 @@ bool matching::GameData::Init()
 {
 	soci::session sql(*DBConnectionPool);
 
+	if (!sql.is_connected())
+	{
+		GLogManager->Log("Mysql Connection Disconnected. Reconnect");
+		sql.reconnect();
+	}
+
 	soci::rowset<soci::row> rs = (sql.prepare << "SELECT * FROM jumpingmatchinglevel");
 
 	hintToHintIntervals.clear();

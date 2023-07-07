@@ -45,6 +45,12 @@ public:
 		{
 			soci::session sql(*DBConnectionPool);
 
+			if (!sql.is_connected())
+			{
+				GLogManager->Log("Mysql Connection Disconnected. Reconnect");
+				sql.reconnect();
+			}
+
 			sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
 				soci::use(clientId), soci::use(enteredRoom->roomId);
 		}
@@ -72,6 +78,12 @@ public:
 			try
 			{
 				soci::session sql(*DBConnectionPool);
+
+				if (!sql.is_connected())
+				{
+					GLogManager->Log("Mysql Connection Disconnected. Reconnect");
+					sql.reconnect();
+				}
 
 				sql << "DELETE FROM memberconnectinfo WHERE membercode = :id", soci::use(client->clientId);
 			}
