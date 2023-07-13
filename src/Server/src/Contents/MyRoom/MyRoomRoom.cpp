@@ -86,6 +86,25 @@ void MyRoomRoom::Handle_C_MYROOM_END_EDIT(shared_ptr<ClientBase>& client, Protoc
 void MyRoomRoom::Handle_C_MYROOM_KICK(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_KICK& pkt) { DoAsync(&MyRoomRoom::Kick, client, pkt.clientid()); }
 void MyRoomRoom::Handle_C_MYROOM_SHUTDOWN(shared_ptr<ClientBase>& client, Protocol::C_MYROOM_SHUTDOWN& pkt) { DoAsync(&MyRoomRoom::HandleShutdown, client, pkt.isshutdown()); }
 
+void MyRoomRoom::Handle_C_SET_NICKNAME(shared_ptr<ClientBase>& client, Protocol::C_SET_NICKNAME& pkt)
+{
+	DoAsync(&MyRoomRoom::SetNickname, client, pkt.nickname());
+	if (client->clientId == ownerId)
+	{
+		DoAsync(&MyRoomRoom::UpdateOnwerNickname, pkt.nickname());
+	}
+}
+
+void MyRoomRoom::Handle_C_BASE_SET_OBJECT_DATA(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_OBJECT_DATA& pkt)
+{
+	auto gClient = static_pointer_cast<GameClient>(client);
+	DoAsync(&GameRoom::SetObjectData, gClient, pkt.objectid(), pkt.objectdata());
+	if (client->clientId == ownerId)
+	{
+		DoAsync(&MyRoomRoom::UpdateOnwerAvatarInfo, pkt.objectdata());
+	}
+}
+
 pair<bool, string> MyRoomRoom::HandleEnter(const Protocol::C_ENTER& pkt)
 {
 	if (isShutdown && pkt.clientid() != ownerId)
@@ -161,5 +180,33 @@ void MyRoomRoom::HandleShutdown(shared_ptr<ClientBase> client, bool isShutdown)
 
 	Protocol::S_MYROOM_SHUTDOWN res;
 	res.set_isshutdown(isShutdown);
+	Broadcast(PacketManager::MakeSendBuffer(res));
+}
+
+void MyRoomRoom::UpdateOnwerNickname(string nickname)
+{
+	ownerNickname = nickname;
+
+	Protocol::S_MYROOM_GET_ROOMINFO res;
+
+	res.set_ownerid(ownerId);
+	res.set_ownernickname(ownerNickname);
+	res.set_owneravatarinfo(ownerAvatarInfo.dump());
+	res.set_isshutdown(isShutdown);
+
+	Broadcast(PacketManager::MakeSendBuffer(res));
+}
+
+void MyRoomRoom::UpdateOnwerAvatarInfo(string objectData)
+{
+	ownerAvatarInfo = nlohmann::json::parse(objectData);
+
+	Protocol::S_MYROOM_GET_ROOMINFO res;
+
+	res.set_ownerid(ownerId);
+	res.set_ownernickname(ownerNickname);
+	res.set_owneravatarinfo(ownerAvatarInfo.dump());
+	res.set_isshutdown(isShutdown);
+
 	Broadcast(PacketManager::MakeSendBuffer(res));
 }
