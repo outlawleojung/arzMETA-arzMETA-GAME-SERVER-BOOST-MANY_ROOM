@@ -51,6 +51,11 @@ void GameRoom::Handle_C_BASE_GET_OBJECT(shared_ptr<ClientBase>& client, Protocol
 	auto gClient = static_pointer_cast<GameClient>(client);
 	DoAsync(&GameRoom::GetObjects, gClient);
 }
+void GameRoom::Handle_C_BASE_SET_OBJECT_DATA(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_OBJECT_DATA& pkt)
+{
+	auto gClient = static_pointer_cast<GameClient>(client);
+	DoAsync(&GameRoom::SetObjectData, gClient, pkt.objectid(), pkt.objectdata());
+}
 void GameRoom::Handle_C_BASE_SET_TRANSFORM(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_TRANSFORM& pkt)
 { 
 	auto gClient = static_pointer_cast<GameClient>(client);
@@ -146,6 +151,30 @@ void GameRoom::GetObjects(shared_ptr<GameClient> client)
 
 	if (res.gameobjects_size() > 0)
 		client->Send(PacketManager::MakeSendBuffer(res));
+}
+
+void GameRoom::SetObjectData(shared_ptr<GameClient> client, int objectId, string objectData)
+{
+	Protocol::S_BASE_SET_OBJECT_DATA res;
+
+	if (!client->gameObjects.count(objectId) || !gameObjects.count(objectId))
+	{
+		res.set_success(false);
+		client->Send(PacketManager::MakeSendBuffer(res));
+		return;
+	}
+
+	res.set_success(true);
+	client->Send(PacketManager::MakeSendBuffer(res));
+
+	auto gameObject = gameObjects[objectId];
+	gameObject->objectData = objectData;
+
+	Protocol::S_BASE_SET_OBJECT_DATA_NOTICE setObjectDataNotice;
+	setObjectDataNotice.set_objectid(objectId);
+	setObjectDataNotice.set_objectdata(objectData);
+	auto sendBuffer = PacketManager::MakeSendBuffer(setObjectDataNotice);
+	Broadcast(sendBuffer);
 }
 
 void GameRoom::SetTransfrom(Protocol::C_BASE_SET_TRANSFORM pkt)
