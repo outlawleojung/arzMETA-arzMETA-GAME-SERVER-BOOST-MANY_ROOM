@@ -320,12 +320,15 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
         if (query.find("roomCode") != query.end())
         {
             auto jumpingMatchingRoom = JumpingMatchingRooms.find(query["roomCode"]);
-            if (jumpingMatchingRoom != JumpingMatchingRooms.end())
+            if (jumpingMatchingRoom != JumpingMatchingRooms.end() && jumpingMatchingRoom->second->roomInfo["isPlaying"] != true)
                 res.push_back(jumpingMatchingRoom->second->roomInfo);
         }
         else
             for (auto matchingRoom = JumpingMatchingRooms.begin(); matchingRoom != JumpingMatchingRooms.end(); matchingRoom++)
-                res.push_back(matchingRoom->second->roomInfo);
+            {
+                if(matchingRoom->second->roomInfo["isPlaying"] != true)
+                    res.push_back(matchingRoom->second->roomInfo);
+            }
         break;
     }
     case RoomType::OXQuiz:
@@ -333,12 +336,15 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
         if (query.find("roomCode") != query.end())
         {
             auto oxRoom = OXQuizRooms.find(query["roomCode"]);
-            if (oxRoom != OXQuizRooms.end())
+            if (oxRoom != OXQuizRooms.end() && oxRoom->second->roomInfo["isPlaying"] != true)
                 res.push_back(oxRoom->second->roomInfo);
         }
         else
             for (auto oxRoom = OXQuizRooms.begin(); oxRoom != OXQuizRooms.end(); oxRoom++)
-                res.push_back(oxRoom->second->roomInfo);
+            {
+                if(oxRoom->second->roomInfo["isPlaying"] != true)
+                    res.push_back(oxRoom->second->roomInfo);
+            }
         break;
     }
     default:
