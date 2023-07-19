@@ -64,6 +64,21 @@ void GameRoom::Handle_C_BASE_SET_TRANSFORM(shared_ptr<ClientBase>& client, Proto
 void GameRoom::Handle_C_BASE_SET_ANIMATION(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_ANIMATION& pkt) { DoAsync(&GameRoom::SetAnimation, pkt.objectid(), pkt.animationid(), pkt.animation()); }
 void GameRoom::Handle_C_BASE_SET_ANIMATION_ONCE(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_ANIMATION_ONCE& pkt) { 	DoAsync(&GameRoom::SetAnimationOnce, pkt.objectid(), pkt.animationid(), pkt.isloop(), pkt.blend()); }
 
+void GameRoom::Handle_C_INTERACTION_GET_ITEMS(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_GET_ITEMS& pkt)
+{
+	DoAsync(&GameRoom::GetInteraction, client);
+}
+
+void GameRoom::Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_SET_ITEM& pkt)
+{
+	DoAsync(&GameRoom::SetInteraction, client, pkt.id(), pkt.state());
+}
+
+void GameRoom::Handle_C_INTERACTION_REMOVE_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_REMOVE_ITEM& pkt)
+{
+	DoAsync(&GameRoom::RemoveInteraction, client, pkt.id());
+}
+
 void GameRoom::Leave(shared_ptr<ClientBase> client)
 {
 	if (state != RoomState::Running) return;
@@ -232,6 +247,66 @@ void GameRoom::SetAnimationOnce(int objectId, string animationId, bool isLoop, f
 	res.set_isloop(isLoop);
 	res.set_blend(blend);
 	auto sendBuffer = PacketManager::MakeSendBuffer(res);
+	Broadcast(sendBuffer);
+}
+
+void GameRoom::GetInteraction(shared_ptr<ClientBase> client)
+{
+	Protocol::S_INTERACTION_GET_ITEMS res;
+
+	for (auto& interaction : interactions)
+	{
+		auto item = res.add_items();
+		item->set_id(interaction.first);
+		item->set_state(interaction.second);
+	}
+
+	if(res.items_size() > 0)
+		client->Send(PacketManager::MakeSendBuffer(res));
+}
+
+void GameRoom::SetInteraction(shared_ptr<ClientBase> client, string interactionid, string interactionData)
+{
+	Protocol::S_INTERACTION_SET_ITEM res;
+
+	if (!interactions.count(interactionid))
+	{
+		res.set_success(false);
+		client->Send(PacketManager::MakeSendBuffer(res));
+		return;
+	}
+
+	res.set_success(true);
+	client->Send(PacketManager::MakeSendBuffer(res));
+
+	interactions[interactionid] = interactionData;
+
+	Protocol::S_INTERACTION_SET_ITEM_NOTICE setInteractionNotice;
+	setInteractionNotice.set_id(interactionid);
+	setInteractionNotice.set_state(interactionData);
+	auto sendBuffer = PacketManager::MakeSendBuffer(setInteractionNotice);
+	Broadcast(sendBuffer);
+}
+
+void GameRoom::RemoveInteraction(shared_ptr<ClientBase> client, string interactionid)
+{
+	Protocol::S_INTERACTION_REMOVE_ITEM res;
+
+	if (!interactions.count(interactionid))
+	{
+		res.set_success(false);
+		client->Send(PacketManager::MakeSendBuffer(res));
+		return;
+	}
+
+	res.set_success(true);
+	client->Send(PacketManager::MakeSendBuffer(res));
+
+	interactions.erase(interactionid);
+
+	Protocol::S_INTERACTION_REMOVE_ITEM_NOTICE removeInteractionNotice;
+	removeInteractionNotice.set_id(interactionid);
+	auto sendBuffer = PacketManager::MakeSendBuffer(removeInteractionNotice);
 	Broadcast(sendBuffer);
 }
 

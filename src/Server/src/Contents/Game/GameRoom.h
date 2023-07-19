@@ -23,6 +23,10 @@ public :
 	virtual void Handle_C_BASE_SET_ANIMATION(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_ANIMATION& pkt) override;
 	virtual void Handle_C_BASE_SET_ANIMATION_ONCE(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_ANIMATION_ONCE& pkt) override;
 
+	virtual void Handle_C_INTERACTION_GET_ITEMS(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_GET_ITEMS& pkt) override;
+	virtual void Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_SET_ITEM& pkt) override;
+	virtual void Handle_C_INTERACTION_REMOVE_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_REMOVE_ITEM& pkt) override;
+
 	virtual void Leave(shared_ptr<ClientBase> client) override;
 	
 	virtual shared_ptr<ClientBase> MakeClient(string clientId, int sessionId) override;
@@ -36,9 +40,15 @@ public :
 	void SetAnimation(int objectId, string animationId, string animation);
 	void SetAnimationOnce(int objectId, string animationId, bool isLoop, float blend);
 
+	void GetInteraction(shared_ptr<ClientBase> client);
+	void SetInteraction(shared_ptr<ClientBase> client, string interactionid, string interactionData);
+	void RemoveInteraction(shared_ptr<ClientBase> client, string interactionid);
+
 	void ClearObject();
 
 	map<int, shared_ptr<GameObject>> gameObjects;
+
+	map<string, string> interactions;
 
 	int idGenerator = 0;
 };
