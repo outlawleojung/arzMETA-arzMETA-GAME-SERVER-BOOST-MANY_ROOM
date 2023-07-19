@@ -20,6 +20,11 @@ bool Handle_S_ENTER(shared_ptr<GameSession>& session, Protocol::S_ENTER& pkt)
 	position->set_x(client->position_x);
 	position->set_y(client->position_y);
 	position->set_z(client->position_z);
+	
+	instantiate.set_prefabname("Addressable/Prefab/Player/Player_Realtime");
+
+	instantiate.set_objectdata("{\"1\":310007,\"4\":340036}");
+
 	client->Send(PacketManager::MakeSendBuffer(instantiate));
 
 	return true;
@@ -89,6 +94,16 @@ bool Handle_S_DISCONNECT(shared_ptr<GameSession>& session, Protocol::S_DISCONNEC
 	return true;
 }
 
+bool Handle_S_WILDCARD(shared_ptr<GameSession>& session, Protocol::S_WILDCARD& pkt)
+{
+	return true;
+}
+
+bool Handle_S_WILDCARD_MAP(shared_ptr<GameSession>& session, Protocol::S_WILDCARD_MAP& pkt)
+{
+	return true;
+}
+
 bool Handle_S_BASE_INSTANTIATE_OBJECT(shared_ptr<GameSession>& session, Protocol::S_BASE_INSTANTIATE_OBJECT& pkt) 
 {
 	auto client = session->owner;
@@ -96,6 +111,8 @@ bool Handle_S_BASE_INSTANTIATE_OBJECT(shared_ptr<GameSession>& session, Protocol
 	GLogManager->Log("Client ", client->clientId, " S_INSTANTIATE_OBJECT : ", to_string(pkt.objectid()));
 
 	client->objectId = pkt.objectid();
+
+	client->DoAsync(&Client::StartMove);
 
 	return true;
 }
@@ -150,14 +167,14 @@ bool Handle_S_BASE_SET_OBJECT_DATA_NOTICE(shared_ptr<GameSession>& session, Prot
 
 bool Handle_S_BASE_SET_TRANSFORM(shared_ptr<GameSession>& session, Protocol::S_BASE_SET_TRANSFORM& pkt) 
 {
-	auto client = session->owner;
+	//auto client = session->owner;
 
-	GLogManager->Log("Client ", client->clientId, " BASE_SET_TRANSFORM : ",
-		to_string(pkt.objectid()), " ",
-		to_string(pkt.position().x()), " ",
-		to_string(pkt.position().y()), " ",
-		to_string(pkt.position().z()), " "
-	);
+	//GLogManager->Log("Client ", client->clientId, " BASE_SET_TRANSFORM : ",
+	//	to_string(pkt.objectid()), " ",
+	//	to_string(pkt.position().x()), " ",
+	//	to_string(pkt.position().y()), " ",
+	//	to_string(pkt.position().z()), " "
+	//);
 
 	return true;
 }
@@ -272,12 +289,12 @@ bool Handle_S_OFFICE_GET_PERMISSION(shared_ptr<GameSession>& session, Protocol::
 	return true;
 }
 
-bool Handle_S_OFFICE_SET_PERMISSION(shared_ptr<GameSession>& session, Protocol::S_OFFICE_SET_PERMISSION& pkt) 
+bool Handle_S_OFFICE_GET_PERMISSION_ALL(shared_ptr<GameSession>& session, Protocol::S_OFFICE_GET_PERMISSION_ALL& pkt)
 {
 	return true;
 }
 
-bool Handle_S_OFFICE_SET_PERMISSION_NOTICE(shared_ptr<GameSession>& session, Protocol::S_OFFICE_SET_PERMISSION_NOTICE& pkt) 
+bool Handle_S_OFFICE_SET_PERMISSION(shared_ptr<GameSession>& session, Protocol::S_OFFICE_SET_PERMISSION& pkt) 
 {
 	return true;
 }
@@ -303,6 +320,11 @@ bool Handle_S_OFFICE_SHARE(shared_ptr<GameSession>& session, Protocol::S_OFFICE_
 }
 
 bool Handle_S_MATCHING_START(shared_ptr<GameSession>& session, Protocol::S_MATCHING_START& pkt) 
+{
+	return true;
+}
+
+bool Handle_S_MATCHING_AWARD(shared_ptr<GameSession>& session, Protocol::S_MATCHING_AWARD& pkt)
 {
 	return true;
 }
@@ -383,6 +405,11 @@ bool Handle_S_OX_QUIZ(shared_ptr<GameSession>& session, Protocol::S_OX_QUIZ& pkt
 }
 
 bool Handle_S_OX_DESTROY(shared_ptr<GameSession>& session, Protocol::S_OX_DESTROY& pkt) 
+{
+	return true;
+}
+
+bool Handle_S_OX_AWARD(shared_ptr<GameSession>& session, Protocol::S_OX_AWARD& pkt)
 {
 	return true;
 }

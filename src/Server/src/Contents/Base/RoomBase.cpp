@@ -241,6 +241,13 @@ shared_ptr<ClientBase> RoomBase::MakeClient(string clientId, int sessionId)
 
 void RoomBase::SetDefaultClientData(shared_ptr<ClientBase> client)
 {
+	if (client->clientId.find("Test_") == 0)
+	{
+		client->nickname = client->clientId;
+		client->stateMessage = "this is test client";
+		return;
+	}
+
 	{
 		soci::session sql(*DBConnectionPool);
 

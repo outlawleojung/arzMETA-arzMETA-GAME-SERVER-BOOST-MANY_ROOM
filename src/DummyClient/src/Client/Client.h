@@ -5,7 +5,7 @@
 class GameSession;
 class SendBuffer;
 
-class Client
+class Client : public JobQueue
 {
 public:
 	Client(string clientId)
@@ -18,6 +18,8 @@ public:
 
 	void Send(shared_ptr<SendBuffer> sendBuffer);
 	void OnDisconnected();
+
+	void StartMove();
 
 public:
 	string clientId;

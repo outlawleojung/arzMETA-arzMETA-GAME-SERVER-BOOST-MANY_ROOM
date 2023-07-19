@@ -19,6 +19,18 @@ public:
 	{
 		lock_guard<std::recursive_mutex> lock(mtx);
 
+		//if clientId starts with "Test_", return
+		if (clientId.find("Test_") == 0)
+		{
+			shared_ptr<ClientBase> client = make_shared<T>();
+
+			client->clientId = clientId;
+			client->enteredRoom = enteredRoom;
+			client->enteredRoomId = enteredRoom->roomId;
+
+			return client;
+		}
+
 		auto _sessionId = sessionIds.find(clientId);
 		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
 		{
@@ -71,6 +83,9 @@ public:
 	void RemoveClient(shared_ptr<ClientBase> client)
 	{
 		lock_guard<std::recursive_mutex> lock(mtx);
+
+		if (client->clientId.find("Test_") == 0)
+			return;
 
 		auto _client = clients.find(client->clientId);
 		if (_client != clients.end() && _client->second.get() == client.get())

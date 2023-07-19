@@ -13,7 +13,7 @@ enum
 	WORKER_TICK = 64
 };
 
-void DistributePendingJobs()
+void DoGlobalQueueWork()
 {
 	while (true)
 	{
@@ -33,6 +33,17 @@ void DistributePendingJobs()
 	}
 }
 
+void DistributeReservedJobs()
+{
+#ifdef linux
+	unsigned long long now = GetTickCount();
+#elif _WIN32
+	unsigned long long now = ::GetTickCount64();
+#endif
+
+	GJobTimer->Distribute(now);
+}
+
 void DoWorkerJob(io_context& ioc, bool& state)
 {
 	while (true)
@@ -43,7 +54,8 @@ void DoWorkerJob(io_context& ioc, bool& state)
 		LEndTickCount = ::GetTickCount64() + WORKER_TICK;
 #endif
 		ioc.run_for(std::chrono::milliseconds{10});
-		DistributePendingJobs(); 
+		DistributeReservedJobs(); // JobTimer 에 있는 Job 수행
+		DoGlobalQueueWork(); // GlobalQueue 에 있는 JobQueue 의 Job 수행
 	}
 }
 
@@ -108,6 +120,7 @@ int main()
 
 	io_context ioc;
 	ip::tcp::endpoint ep(ip::address_v4::from_string(localHostIp), tcpPort);
+	//ip::tcp::endpoint ep(ip::address_v4::from_string("20.214.186.69"), 45456);
 
 	bool state = true;
 
@@ -224,10 +237,17 @@ int main()
 			
 			Protocol::C_BASE_SET_TRANSFORM setTransform;
 			auto position = setTransform.mutable_position();
+			
 			client->second->position_x++;
 			position->set_x(client->second->position_x);
 			position->set_y(client->second->position_y);
 			position->set_z(client->second->position_z);
+			
+			auto rotation = setTransform.mutable_rotation();
+			rotation->set_x(0);
+			rotation->set_y(0);
+			rotation->set_z(0);
+			
 			setTransform.set_objectid(client->second->objectId);
 
 			client->second->Send(PacketManager::MakeSendBuffer(setTransform));
