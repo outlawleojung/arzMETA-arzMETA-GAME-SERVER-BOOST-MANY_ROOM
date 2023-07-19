@@ -43,5 +43,5 @@ public:
 
 	map<string, shared_ptr<RoomBase>> HospitalRooms;
 
-	shared_mutex _mutex;
+	recursive_mutex _mutex;
 };

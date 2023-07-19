@@ -10,7 +10,7 @@
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 {
-    std::unique_lock<shared_mutex> lock;
+    std::lock_guard<recursive_mutex> lock(_mutex);
 
     static int idGenerator = 0;
     room->roomId = to_string(idGenerator++);
@@ -24,7 +24,7 @@ void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 
 void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
 {
-    std::unique_lock<shared_mutex> lock;
+    std::lock_guard<recursive_mutex> lock(_mutex);
 
     switch (room->type)
     {
@@ -105,7 +105,7 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
 
 bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
 {
-    std::unique_lock<shared_mutex> lock;
+    std::lock_guard<recursive_mutex> lock(_mutex);
 
     rooms.erase(rooms.find(room->roomId));
 
@@ -192,7 +192,7 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
 
 nlohmann::json RoomManager::GetRoom(map<string, string> query)
 {
-    std::shared_lock<shared_mutex> lock;
+    std::lock_guard<recursive_mutex> lock(_mutex);
 
     nlohmann::json res = nlohmann::json::array();
 
