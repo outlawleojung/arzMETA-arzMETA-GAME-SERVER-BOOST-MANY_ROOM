@@ -29,7 +29,7 @@ public:
 				return nullptr;
 			}
 
-			shared_ptr<ClientBase> client = make_shared<T>();
+			client = make_shared<T>();
 
 			client->clientId = clientId;
 			client->sessionId = sessionId;
