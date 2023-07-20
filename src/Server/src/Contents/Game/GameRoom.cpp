@@ -136,6 +136,8 @@ void GameRoom::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE
 
 	client->gameObjects.insert(gameObject->objectId);
 
+	GLogManager->Log("GameObject Instantiate by ", client->clientId, " from ", roomId);
+
 	{
 		Protocol::S_BASE_INSTANTIATE_OBJECT res;
 		res.set_success(true);

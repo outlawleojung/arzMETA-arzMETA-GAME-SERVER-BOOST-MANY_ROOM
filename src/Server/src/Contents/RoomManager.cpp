@@ -17,9 +17,9 @@ void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 
     rooms.insert({ room->roomId, room });
 
-    GLogManager->Log("Room Added, Type :	        	", roomTypeToString(room->type));
-    GLogManager->Log("Room Added, Roomid :	        	", room->roomId);
-    GLogManager->Log("Total Room Number :	        	", to_string(rooms.size()));
+    GLogManager->Log("Room Added, Type : ", roomTypeToString(room->type));
+    GLogManager->Log("Room Added, Roomid : ", room->roomId);
+    GLogManager->Log("Total Room Number : ", to_string(rooms.size()));
 }
 
 void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
@@ -185,7 +185,7 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
         throw std::invalid_argument("Invalid RoomType value");
     }
 
-    GLogManager->Log("Total Room Number :	         	", to_string(rooms.size()));
+    GLogManager->Log("Total Room Number : ", to_string(rooms.size()));
 
     return true;
 }

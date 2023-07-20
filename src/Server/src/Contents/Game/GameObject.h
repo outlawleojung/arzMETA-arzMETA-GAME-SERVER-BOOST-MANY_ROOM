@@ -11,12 +11,9 @@ public:
 	{
 		position.resize(3);
 		rotation.resize(3);
-
-		GLogManager->Log("GameObject Created :			", to_string(objectId));
 	};
 	~GameObject()
 	{
-		GLogManager->Log("GameObject Destroyed :		", to_string(objectId));
 	}
 
 public:

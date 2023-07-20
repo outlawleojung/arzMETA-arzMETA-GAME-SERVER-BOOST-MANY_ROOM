@@ -17,29 +17,33 @@ public:
 	template<typename T>
 	shared_ptr<ClientBase> MakeCilent(string clientId, int sessionId, shared_ptr<RoomBase> enteredRoom)
 	{
-		lock_guard<std::recursive_mutex> lock(mtx);
-
-		auto _sessionId = sessionIds.find(clientId);
-		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
+		shared_ptr<ClientBase> client = nullptr;
+		
 		{
-			GLogManager->Log("Make Client Fail! : ", clientId, " ", to_string(sessionId));
-			return nullptr;
+			lock_guard<std::recursive_mutex> lock(mtx);
+
+			auto _sessionId = sessionIds.find(clientId);
+			if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
+			{
+				GLogManager->Log("Make Client Fail! : ", clientId, " ", to_string(sessionId));
+				return nullptr;
+			}
+
+			shared_ptr<ClientBase> client = make_shared<T>();
+
+			client->clientId = clientId;
+			client->sessionId = sessionId;
+			client->enteredRoom = enteredRoom;
+			client->enteredRoomId = enteredRoom->roomId;
+
+			GLogManager->Log("Make Client Success : ", clientId, " to ", client->enteredRoomId);
+
+			auto prevClient = clients.find(clientId);
+			if (prevClient != clients.end())
+				prevClient->second->DoTimer(0, &ClientBase::Leave, string("SERVER_CHANGE"));
+
+			clients[clientId] = client;
 		}
-
-		shared_ptr<ClientBase> client = make_shared<T>();
-
-		client->clientId = clientId;
-		client->sessionId = sessionId;
-		client->enteredRoom = enteredRoom;
-		client->enteredRoomId = enteredRoom->roomId;
-
-		GLogManager->Log("Make Client Success : ", clientId, " to ", client->enteredRoomId);
-
-		auto prevClient = clients.find(clientId);
-		if (prevClient != clients.end())
-			prevClient->second->DoTimer(0, &ClientBase::Leave, string("SERVER_CHANGE"));
-
-		clients[clientId] = client;
 
 		try
 		{
@@ -70,10 +74,22 @@ public:
 
 	void RemoveClient(shared_ptr<ClientBase> client)
 	{
-		lock_guard<std::recursive_mutex> lock(mtx);
+		bool flag = false;
+		string clientId;
 
-		auto _client = clients.find(client->clientId);
-		if (_client != clients.end() && _client->second.get() == client.get())
+		{
+			lock_guard<std::recursive_mutex> lock(mtx);
+
+			auto _client = clients.find(client->clientId);
+			if (_client != clients.end() && _client->second.get() == client.get())
+			{
+				flag = true;
+				clientId = _client->second->clientId;
+				clients.erase(_client);
+			}
+		}
+
+		if (flag)
 		{
 			try
 			{
@@ -97,8 +113,6 @@ public:
 			catch (...) {
 				std::cerr << "From ClientManager 2,Unknown Exception Caught" << std::endl;
 			}
-
-			clients.erase(_client);
 		}
 	}
 
