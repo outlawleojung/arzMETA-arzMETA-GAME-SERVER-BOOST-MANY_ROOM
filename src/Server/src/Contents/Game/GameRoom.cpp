@@ -87,6 +87,12 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 
 	RemoveObject(gClient);
 
+	for (auto& interaction : interactions)
+	{
+		if (interaction.second == client->clientId)
+			RemoveInteraction(client, interaction.first);
+	}
+
 	RoomBase::Leave(client);
 }
 
@@ -260,7 +266,7 @@ void GameRoom::GetInteraction(shared_ptr<ClientBase> client)
 	{
 		auto item = res.add_items();
 		item->set_id(interaction.first);
-		item->set_state(interaction.second);
+		//item->set_state(interaction.second);
 	}
 
 	if(res.items_size() > 0)
@@ -271,7 +277,8 @@ void GameRoom::SetInteraction(shared_ptr<ClientBase> client, string interactioni
 {
 	Protocol::S_INTERACTION_SET_ITEM res;
 
-	if (!interactions.count(interactionid))
+	auto interaction = interactions.find(interactionid);
+	if (interaction != interactions.end() && interaction->second != client->clientId)
 	{
 		res.set_success(false);
 		client->Send(PacketManager::MakeSendBuffer(res));
@@ -294,7 +301,8 @@ void GameRoom::RemoveInteraction(shared_ptr<ClientBase> client, string interacti
 {
 	Protocol::S_INTERACTION_REMOVE_ITEM res;
 
-	if (!interactions.count(interactionid))
+	auto interaction = interactions.find(interactionid);
+	if (interaction != interactions.end() && interaction->second != client->clientId)
 	{
 		res.set_success(false);
 		client->Send(PacketManager::MakeSendBuffer(res));
