@@ -276,8 +276,10 @@ void GameRoom::GetInteraction(shared_ptr<ClientBase> client)
 		//item->set_state(interaction.second);
 	}
 
-	if(res.items_size() > 0)
-		client->Send(PacketManager::MakeSendBuffer(res));
+	/*if(res.items_size() > 0)
+		client->Send(PacketManager::MakeSendBuffer(res));*/
+
+	client->Send(PacketManager::MakeSendBuffer(res));
 }
 
 void GameRoom::SetInteraction(shared_ptr<ClientBase> client, string interactionid, string interactionData)
