@@ -87,10 +87,17 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 
 	RemoveObject(gClient);
 
-	for (auto& interaction : interactions)
-	{
-		if (interaction.second == client->clientId)
-			RemoveInteraction(client, interaction.first);
+	for (auto it = interactions.begin(); it != interactions.end(); ) {
+		if (it->second == client->clientId) {
+			Protocol::S_INTERACTION_REMOVE_ITEM_NOTICE removeItem;
+			removeItem.set_id(it->first);
+			Broadcast(PacketManager::MakeSendBuffer(removeItem));
+
+			it = interactions.erase(it);
+		}
+		else {
+			++it;
+		}
 	}
 
 	RoomBase::Leave(client);
@@ -288,7 +295,7 @@ void GameRoom::SetInteraction(shared_ptr<ClientBase> client, string interactioni
 	res.set_success(true);
 	client->Send(PacketManager::MakeSendBuffer(res));
 
-	interactions[interactionid] = interactionData;
+	interactions[interactionid] = client->clientId;
 
 	Protocol::S_INTERACTION_SET_ITEM_NOTICE setInteractionNotice;
 	setInteractionNotice.set_id(interactionid);
