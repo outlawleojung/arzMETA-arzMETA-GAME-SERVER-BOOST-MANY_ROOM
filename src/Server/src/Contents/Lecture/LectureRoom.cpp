@@ -103,7 +103,7 @@ void LectureRoom::HandleClose()
 void LectureRoom::Handle_C_ENTER(shared_ptr<GameSession>& session, Protocol::C_ENTER& pkt) { DoAsync(&LectureRoom::Enter, session, pkt); }
 
 void LectureRoom::Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) { DoAsync(&LectureRoom::InstantiateObject, client, pkt); }
-void LectureRoom::Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_SET_ITEM& pkt) {}
+void LectureRoom::Handle_C_INTERACTION_SET_ITEM(shared_ptr<ClientBase>& client, Protocol::C_INTERACTION_SET_ITEM& pkt) { DoAsync(&LectureRoom::SetState, client, pkt); }
 
 void LectureRoom::Handle_C_OFFICE_GET_WAITING_LIST(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_WAITING_LIST& pkt) { DoAsync(&LectureRoom::GetWaitingList, client); }
 void LectureRoom::Handle_C_OFFICE_ACCEPT_WAIT(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_ACCEPT_WAIT& pkt) { DoAsync(&LectureRoom::AcceptWait, client, pkt); } 
