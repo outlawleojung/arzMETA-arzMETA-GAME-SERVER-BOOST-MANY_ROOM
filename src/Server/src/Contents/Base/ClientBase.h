@@ -17,7 +17,7 @@ class ClientBase : public JobQueue
 public:
 	~ClientBase()
 	{
-		GLogManager->Log("Client Destroyed :			", clientId, " from ", enteredRoomId);
+		GLogManager->Log("Client Destroyed : ", clientId, " from ", enteredRoomId);
 	}
 
 	void Leave(string code);

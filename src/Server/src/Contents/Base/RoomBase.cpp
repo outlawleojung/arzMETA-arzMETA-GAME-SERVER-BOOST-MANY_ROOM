@@ -7,12 +7,12 @@
 RoomBase::RoomBase()
 	: state(RoomState::Idle)
 {
-	GLogManager->Log("Room Created :			", roomId);
+	GLogManager->Log("Room Created : ", roomId);
 }
 
 RoomBase::~RoomBase()
 {
-	GLogManager->Log("Room Destroyed :			", roomId);
+	GLogManager->Log("Room Destroyed : ", roomId);
 }
 
 void RoomBase::Init()
@@ -131,6 +131,8 @@ void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 {
 	if (state != RoomState::Running) return;
 
+	GLogManager->Log("Client ", pkt.clientid(), " Try Enter : ", roomId);
+
 	auto [isEnterSucceed, errorCode] = HandleEnter(pkt);
 	if (isEnterSucceed)
 	{
@@ -141,6 +143,8 @@ void RoomBase::Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt)
 			session->Disconnect();
 			return;
 		}
+
+		GLogManager->Log("Client ", pkt.clientid(), " Enter Succeed : ", roomId);
 
 		client->session = session;
 		session->owner = client;

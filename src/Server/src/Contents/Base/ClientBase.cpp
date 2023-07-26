@@ -9,6 +9,8 @@ void ClientBase::Leave(string code)
 	if (state == ClientState::LEAVING)
 		return;
 
+	GLogManager->Log("Client ", clientId, " Leave from ", enteredRoomId, " ", code);
+
 	state = ClientState::LEAVING;
 
 	GClientManager->RemoveClient(static_pointer_cast<ClientBase>(shared_from_this()));

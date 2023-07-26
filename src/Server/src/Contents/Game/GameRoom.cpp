@@ -87,6 +87,19 @@ void GameRoom::Leave(shared_ptr<ClientBase> client)
 
 	RemoveObject(gClient);
 
+	for (auto it = interactions.begin(); it != interactions.end(); ) {
+		if (it->second == client->clientId) {
+			Protocol::S_INTERACTION_REMOVE_ITEM_NOTICE removeItem;
+			removeItem.set_id(it->first);
+			Broadcast(PacketManager::MakeSendBuffer(removeItem));
+
+			it = interactions.erase(it);
+		}
+		else {
+			++it;
+		}
+	}
+
 	RoomBase::Leave(client);
 }
 
@@ -135,6 +148,8 @@ void GameRoom::InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE
 	gameObjects.insert({ gameObject->objectId, gameObject });
 
 	client->gameObjects.insert(gameObject->objectId);
+
+	GLogManager->Log("GameObject Instantiate by ", client->clientId, " from ", roomId);
 
 	{
 		Protocol::S_BASE_INSTANTIATE_OBJECT res;
@@ -258,18 +273,21 @@ void GameRoom::GetInteraction(shared_ptr<ClientBase> client)
 	{
 		auto item = res.add_items();
 		item->set_id(interaction.first);
-		item->set_state(interaction.second);
+		//item->set_state(interaction.second);
 	}
 
-	if(res.items_size() > 0)
-		client->Send(PacketManager::MakeSendBuffer(res));
+	/*if(res.items_size() > 0)
+		client->Send(PacketManager::MakeSendBuffer(res));*/
+
+	client->Send(PacketManager::MakeSendBuffer(res));
 }
 
 void GameRoom::SetInteraction(shared_ptr<ClientBase> client, string interactionid, string interactionData)
 {
 	Protocol::S_INTERACTION_SET_ITEM res;
 
-	if (!interactions.count(interactionid))
+	auto interaction = interactions.find(interactionid);
+	if (interaction != interactions.end() && interaction->second != client->clientId)
 	{
 		res.set_success(false);
 		client->Send(PacketManager::MakeSendBuffer(res));
@@ -279,7 +297,7 @@ void GameRoom::SetInteraction(shared_ptr<ClientBase> client, string interactioni
 	res.set_success(true);
 	client->Send(PacketManager::MakeSendBuffer(res));
 
-	interactions[interactionid] = interactionData;
+	interactions[interactionid] = client->clientId;
 
 	Protocol::S_INTERACTION_SET_ITEM_NOTICE setInteractionNotice;
 	setInteractionNotice.set_id(interactionid);
@@ -292,7 +310,8 @@ void GameRoom::RemoveInteraction(shared_ptr<ClientBase> client, string interacti
 {
 	Protocol::S_INTERACTION_REMOVE_ITEM res;
 
-	if (!interactions.count(interactionid))
+	auto interaction = interactions.find(interactionid);
+	if (interaction != interactions.end() && interaction->second != client->clientId)
 	{
 		res.set_success(false);
 		client->Send(PacketManager::MakeSendBuffer(res));

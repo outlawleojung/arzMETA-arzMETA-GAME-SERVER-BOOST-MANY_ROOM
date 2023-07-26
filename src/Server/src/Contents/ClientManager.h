@@ -34,24 +34,30 @@ public:
 		auto _sessionId = sessionIds.find(clientId);
 		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
 		{
-			GLogManager->Log("Make Client Fail! : ", clientId, " ", to_string(sessionId));
-			return nullptr;
+			lock_guard<std::recursive_mutex> lock(mtx);
+
+			auto _sessionId = sessionIds.find(clientId);
+			if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
+			{
+				GLogManager->Log("Make Client Fail! : ", clientId, " ", to_string(sessionId));
+				return nullptr;
+			}
+
+			client = make_shared<T>();
+
+			client->clientId = clientId;
+			client->sessionId = sessionId;
+			client->enteredRoom = enteredRoom;
+			client->enteredRoomId = enteredRoom->roomId;
+
+			GLogManager->Log("Make Client Success : ", clientId, " to ", client->enteredRoomId);
+
+			auto prevClient = clients.find(clientId);
+			if (prevClient != clients.end())
+				prevClient->second->DoTimer(0, &ClientBase::Leave, string("SERVER_CHANGE"));
+
+			clients[clientId] = client;
 		}
-
-		shared_ptr<ClientBase> client = make_shared<T>();
-
-		client->clientId = clientId;
-		client->sessionId = sessionId;
-		client->enteredRoom = enteredRoom;
-		client->enteredRoomId = enteredRoom->roomId;
-
-		GLogManager->Log("Make Client Success : ", clientId, " to ", client->enteredRoomId);
-
-		auto prevClient = clients.find(clientId);
-		if (prevClient != clients.end())
-			prevClient->second->DoTimer(0, &ClientBase::Leave, string("SERVER_CHANGE"));
-
-		clients[clientId] = client;
 
 		try
 		{
@@ -82,7 +88,8 @@ public:
 
 	void RemoveClient(shared_ptr<ClientBase> client)
 	{
-		lock_guard<std::recursive_mutex> lock(mtx);
+		bool flag = false;
+		string clientId;
 
 		if (client->clientId.find("Test_") == 0)
 			return;
@@ -112,8 +119,6 @@ public:
 			catch (...) {
 				std::cerr << "From ClientManager 2,Unknown Exception Caught" << std::endl;
 			}
-
-			clients.erase(_client);
 		}
 	}
 
