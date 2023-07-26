@@ -254,6 +254,35 @@ int main()
 		
 			continue;
 		}
+
+		else if (command._Equal("connect_many"))
+		{
+			int count;
+			string roomId;
+			int x, y, z;
+			cin >> count >> roomId >> x >> y >> z;
+
+			for (int i = 0; i < count; i++)
+			{
+				string clientId = "Test_" + std::to_string(i);
+
+				auto client = MakeClient(ioc, ep, clientId);
+				if (client == nullptr)
+				{
+					GLogManager->Log("Duplicated Client Id : ", clientId);
+					continue;
+				}
+				clients.insert({ client->clientId, client });
+				client->position_x = x;
+				client->position_y = y;
+				client->position_z = z;
+				Protocol::C_ENTER enter;
+				enter.set_clientid(client->clientId);
+				enter.set_roomid(roomId);
+				client->Send(PacketManager::MakeSendBuffer(enter));
+			}
+			continue;
+		}
 	}
 
 	GThreadManager->Join();

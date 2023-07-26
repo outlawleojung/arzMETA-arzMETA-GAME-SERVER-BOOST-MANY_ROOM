@@ -17,9 +17,6 @@ public:
 	template<typename T>
 	shared_ptr<ClientBase> MakeCilent(string clientId, int sessionId, shared_ptr<RoomBase> enteredRoom)
 	{
-		lock_guard<std::recursive_mutex> lock(mtx);
-
-		//if clientId starts with "Test_", return
 		if (clientId.find("Test_") == 0)
 		{
 			shared_ptr<ClientBase> client = make_shared<T>();
@@ -30,9 +27,9 @@ public:
 
 			return client;
 		}
+		
+		shared_ptr<ClientBase> client = nullptr;
 
-		auto _sessionId = sessionIds.find(clientId);
-		if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
 		{
 			lock_guard<std::recursive_mutex> lock(mtx);
 
@@ -72,7 +69,7 @@ public:
 			sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
 				soci::use(clientId), soci::use(enteredRoom->roomId);
 		}
-		catch(soci::soci_error& e)
+		catch (soci::soci_error& e)
 		{
 			std::cerr << "From ClientManager 1,SOCI Error: " << e.what() << std::endl;
 		}
@@ -88,14 +85,25 @@ public:
 
 	void RemoveClient(shared_ptr<ClientBase> client)
 	{
-		bool flag = false;
-		string clientId;
-
 		if (client->clientId.find("Test_") == 0)
 			return;
 
-		auto _client = clients.find(client->clientId);
-		if (_client != clients.end() && _client->second.get() == client.get())
+		bool flag = false;
+		string clientId;
+
+		{
+			lock_guard<std::recursive_mutex> lock(mtx);
+
+			auto _client = clients.find(client->clientId);
+			if (_client != clients.end() && _client->second.get() == client.get())
+			{
+				flag = true;
+				clientId = _client->second->clientId;
+				clients.erase(_client);
+			}
+		}
+
+		if (flag)
 		{
 			try
 			{
