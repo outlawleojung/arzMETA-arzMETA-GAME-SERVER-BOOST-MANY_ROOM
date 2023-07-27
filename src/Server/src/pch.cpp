@@ -17,3 +17,5 @@ string DBDomain = std::getenv("DB_DOMAIN") != nullptr ? string(std::getenv("DB_D
 string DBUsername = std::getenv("DB_USERNAME") != nullptr ? string(std::getenv("DB_USERNAME")) : "frontishub@dev-arowana-mysql";
 string DBPassword = std::getenv("DB_PASSWORD") != nullptr ? string(std::getenv("DB_PASSWORD")) : "rkskekfk!!!123";
 string DBSchema = std::getenv("DB_SCHEMA") != nullptr ? string(std::getenv("DB_SCHEMA")) : "dev_arzmeta_db";
+
+string websocketUrl = std::getenv("WEBSOCKET_URL") != nullptr ? string(std::getenv("WEBSOCKET_URL")) : "http://20.41.116.6:3910";
