@@ -29,4 +29,12 @@ public:
 	float position_x = 0;
 	float position_y = 0;
 	float position_z = 0;
+
+	float start_x = 0;
+	float start_y = 0;
+	float start_z = 0;
+
+	float cap = 10;
+
+	bool isMoving = false;
 };

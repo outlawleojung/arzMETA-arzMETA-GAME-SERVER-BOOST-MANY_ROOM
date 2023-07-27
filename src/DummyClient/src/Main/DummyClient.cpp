@@ -273,6 +273,9 @@ int main()
 					continue;
 				}
 				clients.insert({ client->clientId, client });
+				client->start_x = x;
+				client->start_y = y;
+				client->start_z = z;
 				client->position_x = x;
 				client->position_y = y;
 				client->position_z = z;
