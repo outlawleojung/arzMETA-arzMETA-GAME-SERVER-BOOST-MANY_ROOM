@@ -20,6 +20,8 @@ extern string DBUsername;
 extern string DBPassword;
 extern string DBSchema;
 
+extern string websocketUrl;
+
 static string GetCurrentTimeString()
 {
 	auto now = std::chrono::system_clock::now();

@@ -7,12 +7,7 @@
 
 #include "../ClientManager.h"
 
-#include <mysql_connection.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
+#include "httplib.h"
 
 MeetingRoom::MeetingRoom()
 	: isWaitingRoom(false)
@@ -70,6 +65,13 @@ void MeetingRoom::Init()
 
 void MeetingRoom::HandleClose()
 {
+	{
+		httplib::Client cli(websocketUrl);
+		nlohmann::json reqBody;
+		reqBody["roomCode"] = roomCode;
+		cli.Post("/api/office/delete", reqBody.dump(), "application/json");
+	}
+
 	for (auto client = waitingClients.begin(); client != waitingClients.end(); client++)
 		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
 
@@ -225,6 +227,13 @@ void MeetingRoom::OnEnterSuccess(shared_ptr<ClientBase> _client)
 			DoTimer(60000, &MeetingRoom::Countdown);
 
 			GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
+
+			{
+				httplib::Client cli(websocketUrl);
+				nlohmann::json reqBody;
+				reqBody["roomCode"] = roomCode;
+				cli.Post("/api/office/create", reqBody.dump(), "application/json");
+			}
 		}
 
 		//{
