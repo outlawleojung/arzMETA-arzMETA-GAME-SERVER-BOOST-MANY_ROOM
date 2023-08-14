@@ -230,7 +230,11 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     case RoomType::Festival:
     {
         for (auto festivalRoom = FestivalRooms.begin(); festivalRoom != FestivalRooms.end(); festivalRoom++)
+        {
+            if(festivalRoom->second->clients.size() >= festivalRoom->second->maxPlayerNumber)
+				continue;
             res.push_back(festivalRoom->second->roomInfo);
+        }
         break;
     }
     case RoomType::Conference:

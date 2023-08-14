@@ -10,7 +10,6 @@
 
 GameRoom::GameRoom()
 {
-	maxPlayerNumber = 10;
 }
 
 void GameRoom::Init()
@@ -21,6 +20,15 @@ void GameRoom::Init()
 	roomInfo["sceneName"] = sceneName;
 
 	roomInfo["roomType"] = roomTypeToString(type);
+
+	if (type == RoomType::Festival)
+	{
+		maxPlayerNumber = 40;
+	}
+	else
+	{
+		maxPlayerNumber = 20;
+	}
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
