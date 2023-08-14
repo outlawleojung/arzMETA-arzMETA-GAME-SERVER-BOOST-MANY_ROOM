@@ -17,6 +17,8 @@ void MyRoomRoom::Init()
 
 	roomInfo["roomType"] = roomTypeToString(type);
 
+	maxPlayerNumber = 20;
+
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
 
 	try
