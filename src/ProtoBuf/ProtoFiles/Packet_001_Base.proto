@@ -26,6 +26,11 @@ message C_BASE_REMOVE_OBJECT
 {
 }
 
+message C_BASE_REMOVE_OBJECT_BY_ID
+{
+	int32 objectId = 1;
+}
+
 message C_BASE_GET_OBJECT
 {
 }

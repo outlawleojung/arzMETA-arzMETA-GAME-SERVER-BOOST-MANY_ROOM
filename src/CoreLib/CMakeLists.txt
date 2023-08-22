@@ -5,11 +5,11 @@ file(GLOB_RECURSE src ./src/*.h ./src/*.cpp)
 add_library (CoreLib STATIC ${src})
 
 if (WIN32)
-	set(BOOST_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/boost)
+	set(BOOST_ROOT "C:/Boost")
 	set(Boost_USE_STATIC_LIBS ON)
 endif (WIN32)
 
-find_package(Boost 1.81.0 COMPONENTS thread REQUIRED)
+find_package(Boost COMPONENTS thread REQUIRED)
 
 target_include_directories(CoreLib PUBLIC ${Boost_INCLUDE_DIRS})
 target_link_libraries(CoreLib PUBLIC ${Boost_LIBRARIES})

@@ -54,6 +54,11 @@ void GameRoom::Handle_C_BASE_REMOVE_OBJECT(shared_ptr<ClientBase>& client, Proto
 	auto gClient = static_pointer_cast<GameClient>(client);
 	DoAsync(&GameRoom::RemoveObject, gClient);
 }
+void GameRoom::Handle_C_BASE_REMOVE_OBJECT_BY_ID(shared_ptr<ClientBase>& client, Protocol::C_BASE_REMOVE_OBJECT_BY_ID& pkt)
+{
+	auto gClient = static_pointer_cast<GameClient>(client);
+	DoAsync(&GameRoom::RemoveObjectbyId, gClient, pkt.objectid());
+}
 void GameRoom::Handle_C_BASE_GET_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_GET_OBJECT& pkt)
 {
 	auto gClient = static_pointer_cast<GameClient>(client);
@@ -138,6 +143,29 @@ void GameRoom::RemoveObject(shared_ptr<GameClient> client)
 
 	if (removeObject.gameobjects_size() <= 0)
 		return;
+
+	Broadcast(PacketManager::MakeSendBuffer(removeObject));
+}
+
+void GameRoom::RemoveObjectbyId(shared_ptr<GameClient> client, int objectId)
+{
+	if (state != RoomState::Running) return;
+
+	if(clients.count(client->clientId) <= 0)
+		return;
+
+	if(gameObjects.count(objectId) <= 0)
+		return;
+
+	if(client->gameObjects.count(objectId) <= 0)
+		return;
+
+	Protocol::S_BASE_REMOVE_OBJECT removeObject;
+
+	gameObjects.erase(objectId);
+	client->gameObjects.erase(objectId);
+	
+	removeObject.add_gameobjects(objectId);
 
 	Broadcast(PacketManager::MakeSendBuffer(removeObject));
 }

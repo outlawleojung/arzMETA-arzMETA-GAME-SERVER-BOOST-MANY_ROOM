@@ -17,6 +17,7 @@ public :
 
 	virtual void Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) override;
 	virtual void Handle_C_BASE_REMOVE_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_REMOVE_OBJECT& pkt) override;
+	virtual void Handle_C_BASE_REMOVE_OBJECT_BY_ID(shared_ptr<ClientBase>& session, Protocol::C_BASE_REMOVE_OBJECT_BY_ID& pkt) override;
 	virtual void Handle_C_BASE_GET_OBJECT(shared_ptr<ClientBase>& session, Protocol::C_BASE_GET_OBJECT& pkt) override;
 	virtual void Handle_C_BASE_SET_OBJECT_DATA(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_OBJECT_DATA& pkt) override;
 	virtual void Handle_C_BASE_SET_TRANSFORM(shared_ptr<ClientBase>& session, Protocol::C_BASE_SET_TRANSFORM& pkt) override;
@@ -34,6 +35,7 @@ public :
 
 	void InstantiateObject(shared_ptr<GameClient> client, Protocol::C_BASE_INSTANTIATE_OBJECT pkt);
 	void RemoveObject(shared_ptr<GameClient> client);
+	void RemoveObjectbyId(shared_ptr<GameClient> client, int objectId);
 	void GetObjects(shared_ptr<GameClient> client);
 	void SetObjectData(shared_ptr<GameClient> client, int objectId, string objectData);
 	void SetTransfrom(Protocol::C_BASE_SET_TRANSFORM pkt);

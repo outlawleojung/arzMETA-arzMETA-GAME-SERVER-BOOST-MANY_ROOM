@@ -55,6 +55,9 @@ extern C_BASE_INSTANTIATE_OBJECTDefaultTypeInternal _C_BASE_INSTANTIATE_OBJECT_d
 class C_BASE_REMOVE_OBJECT;
 struct C_BASE_REMOVE_OBJECTDefaultTypeInternal;
 extern C_BASE_REMOVE_OBJECTDefaultTypeInternal _C_BASE_REMOVE_OBJECT_default_instance_;
+class C_BASE_REMOVE_OBJECT_BY_ID;
+struct C_BASE_REMOVE_OBJECT_BY_IDDefaultTypeInternal;
+extern C_BASE_REMOVE_OBJECT_BY_IDDefaultTypeInternal _C_BASE_REMOVE_OBJECT_BY_ID_default_instance_;
 class C_BASE_SET_ANIMATION;
 struct C_BASE_SET_ANIMATIONDefaultTypeInternal;
 extern C_BASE_SET_ANIMATIONDefaultTypeInternal _C_BASE_SET_ANIMATION_default_instance_;
@@ -102,6 +105,7 @@ PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::C_BASE_GET_OBJECT* Arena::CreateMaybeMessage<::Protocol::C_BASE_GET_OBJECT>(Arena*);
 template<> ::Protocol::C_BASE_INSTANTIATE_OBJECT* Arena::CreateMaybeMessage<::Protocol::C_BASE_INSTANTIATE_OBJECT>(Arena*);
 template<> ::Protocol::C_BASE_REMOVE_OBJECT* Arena::CreateMaybeMessage<::Protocol::C_BASE_REMOVE_OBJECT>(Arena*);
+template<> ::Protocol::C_BASE_REMOVE_OBJECT_BY_ID* Arena::CreateMaybeMessage<::Protocol::C_BASE_REMOVE_OBJECT_BY_ID>(Arena*);
 template<> ::Protocol::C_BASE_SET_ANIMATION* Arena::CreateMaybeMessage<::Protocol::C_BASE_SET_ANIMATION>(Arena*);
 template<> ::Protocol::C_BASE_SET_ANIMATION_ONCE* Arena::CreateMaybeMessage<::Protocol::C_BASE_SET_ANIMATION_ONCE>(Arena*);
 template<> ::Protocol::C_BASE_SET_OBJECT_DATA* Arena::CreateMaybeMessage<::Protocol::C_BASE_SET_OBJECT_DATA>(Arena*);
@@ -777,6 +781,154 @@ class C_BASE_REMOVE_OBJECT final :
 };
 // -------------------------------------------------------------------
 
+class C_BASE_REMOVE_OBJECT_BY_ID final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_BASE_REMOVE_OBJECT_BY_ID) */ {
+ public:
+  inline C_BASE_REMOVE_OBJECT_BY_ID() : C_BASE_REMOVE_OBJECT_BY_ID(nullptr) {}
+  ~C_BASE_REMOVE_OBJECT_BY_ID() override;
+  explicit PROTOBUF_CONSTEXPR C_BASE_REMOVE_OBJECT_BY_ID(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_BASE_REMOVE_OBJECT_BY_ID(const C_BASE_REMOVE_OBJECT_BY_ID& from);
+  C_BASE_REMOVE_OBJECT_BY_ID(C_BASE_REMOVE_OBJECT_BY_ID&& from) noexcept
+    : C_BASE_REMOVE_OBJECT_BY_ID() {
+    *this = ::std::move(from);
+  }
+
+  inline C_BASE_REMOVE_OBJECT_BY_ID& operator=(const C_BASE_REMOVE_OBJECT_BY_ID& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_BASE_REMOVE_OBJECT_BY_ID& operator=(C_BASE_REMOVE_OBJECT_BY_ID&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_BASE_REMOVE_OBJECT_BY_ID& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_BASE_REMOVE_OBJECT_BY_ID* internal_default_instance() {
+    return reinterpret_cast<const C_BASE_REMOVE_OBJECT_BY_ID*>(
+               &_C_BASE_REMOVE_OBJECT_BY_ID_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(C_BASE_REMOVE_OBJECT_BY_ID& a, C_BASE_REMOVE_OBJECT_BY_ID& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_BASE_REMOVE_OBJECT_BY_ID* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_BASE_REMOVE_OBJECT_BY_ID* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_BASE_REMOVE_OBJECT_BY_ID* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_BASE_REMOVE_OBJECT_BY_ID>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C_BASE_REMOVE_OBJECT_BY_ID& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const C_BASE_REMOVE_OBJECT_BY_ID& from) {
+    C_BASE_REMOVE_OBJECT_BY_ID::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C_BASE_REMOVE_OBJECT_BY_ID* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_BASE_REMOVE_OBJECT_BY_ID";
+  }
+  protected:
+  explicit C_BASE_REMOVE_OBJECT_BY_ID(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kObjectIdFieldNumber = 1,
+  };
+  // int32 objectId = 1;
+  void clear_objectid();
+  int32_t objectid() const;
+  void set_objectid(int32_t value);
+  private:
+  int32_t _internal_objectid() const;
+  void _internal_set_objectid(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_BASE_REMOVE_OBJECT_BY_ID)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    int32_t objectid_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_5f001_5fBase_2eproto;
+};
+// -------------------------------------------------------------------
+
 class C_BASE_GET_OBJECT final :
     public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.C_BASE_GET_OBJECT) */ {
  public:
@@ -824,7 +976,7 @@ class C_BASE_GET_OBJECT final :
                &_C_BASE_GET_OBJECT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(C_BASE_GET_OBJECT& a, C_BASE_GET_OBJECT& b) {
     a.Swap(&b);
@@ -943,7 +1095,7 @@ class S_BASE_ADD_OBJECT_GameObjectInfo final :
                &_S_BASE_ADD_OBJECT_GameObjectInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(S_BASE_ADD_OBJECT_GameObjectInfo& a, S_BASE_ADD_OBJECT_GameObjectInfo& b) {
     a.Swap(&b);
@@ -1179,7 +1331,7 @@ class S_BASE_ADD_OBJECT final :
                &_S_BASE_ADD_OBJECT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(S_BASE_ADD_OBJECT& a, S_BASE_ADD_OBJECT& b) {
     a.Swap(&b);
@@ -1338,7 +1490,7 @@ class S_BASE_REMOVE_OBJECT final :
                &_S_BASE_REMOVE_OBJECT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(S_BASE_REMOVE_OBJECT& a, S_BASE_REMOVE_OBJECT& b) {
     a.Swap(&b);
@@ -1500,7 +1652,7 @@ class C_BASE_SET_OBJECT_DATA final :
                &_C_BASE_SET_OBJECT_DATA_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(C_BASE_SET_OBJECT_DATA& a, C_BASE_SET_OBJECT_DATA& b) {
     a.Swap(&b);
@@ -1664,7 +1816,7 @@ class S_BASE_SET_OBJECT_DATA final :
                &_S_BASE_SET_OBJECT_DATA_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(S_BASE_SET_OBJECT_DATA& a, S_BASE_SET_OBJECT_DATA& b) {
     a.Swap(&b);
@@ -1812,7 +1964,7 @@ class S_BASE_SET_OBJECT_DATA_NOTICE final :
                &_S_BASE_SET_OBJECT_DATA_NOTICE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(S_BASE_SET_OBJECT_DATA_NOTICE& a, S_BASE_SET_OBJECT_DATA_NOTICE& b) {
     a.Swap(&b);
@@ -1976,7 +2128,7 @@ class C_BASE_SET_TRANSFORM final :
                &_C_BASE_SET_TRANSFORM_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(C_BASE_SET_TRANSFORM& a, C_BASE_SET_TRANSFORM& b) {
     a.Swap(&b);
@@ -2164,7 +2316,7 @@ class S_BASE_SET_TRANSFORM final :
                &_S_BASE_SET_TRANSFORM_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(S_BASE_SET_TRANSFORM& a, S_BASE_SET_TRANSFORM& b) {
     a.Swap(&b);
@@ -2352,7 +2504,7 @@ class C_BASE_SET_ANIMATION final :
                &_C_BASE_SET_ANIMATION_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   friend void swap(C_BASE_SET_ANIMATION& a, C_BASE_SET_ANIMATION& b) {
     a.Swap(&b);
@@ -2532,7 +2684,7 @@ class S_BASE_SET_ANIMATION final :
                &_S_BASE_SET_ANIMATION_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(S_BASE_SET_ANIMATION& a, S_BASE_SET_ANIMATION& b) {
     a.Swap(&b);
@@ -2712,7 +2864,7 @@ class C_BASE_SET_ANIMATION_ONCE final :
                &_C_BASE_SET_ANIMATION_ONCE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   friend void swap(C_BASE_SET_ANIMATION_ONCE& a, C_BASE_SET_ANIMATION_ONCE& b) {
     a.Swap(&b);
@@ -2898,7 +3050,7 @@ class S_BASE_SET_ANIMATION_ONCE final :
                &_S_BASE_SET_ANIMATION_ONCE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    17;
 
   friend void swap(S_BASE_SET_ANIMATION_ONCE& a, S_BASE_SET_ANIMATION_ONCE& b) {
     a.Swap(&b);
@@ -3436,6 +3588,30 @@ inline void S_BASE_INSTANTIATE_OBJECT::set_objectid(int32_t value) {
 // -------------------------------------------------------------------
 
 // C_BASE_REMOVE_OBJECT
+
+// -------------------------------------------------------------------
+
+// C_BASE_REMOVE_OBJECT_BY_ID
+
+// int32 objectId = 1;
+inline void C_BASE_REMOVE_OBJECT_BY_ID::clear_objectid() {
+  _impl_.objectid_ = 0;
+}
+inline int32_t C_BASE_REMOVE_OBJECT_BY_ID::_internal_objectid() const {
+  return _impl_.objectid_;
+}
+inline int32_t C_BASE_REMOVE_OBJECT_BY_ID::objectid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_BASE_REMOVE_OBJECT_BY_ID.objectId)
+  return _internal_objectid();
+}
+inline void C_BASE_REMOVE_OBJECT_BY_ID::_internal_set_objectid(int32_t value) {
+  
+  _impl_.objectid_ = value;
+}
+inline void C_BASE_REMOVE_OBJECT_BY_ID::set_objectid(int32_t value) {
+  _internal_set_objectid(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_BASE_REMOVE_OBJECT_BY_ID.objectId)
+}
 
 // -------------------------------------------------------------------
 
@@ -4949,6 +5125,8 @@ inline void S_BASE_SET_ANIMATION_ONCE::set_blend(float value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

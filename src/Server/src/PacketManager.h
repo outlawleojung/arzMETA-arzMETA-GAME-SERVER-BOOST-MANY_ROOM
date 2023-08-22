@@ -31,18 +31,19 @@ enum : unsigned short
 	PKT_C_BASE_INSTANTIATE_OBJECT = 100,
 	PKT_S_BASE_INSTANTIATE_OBJECT = 101,
 	PKT_C_BASE_REMOVE_OBJECT = 102,
-	PKT_C_BASE_GET_OBJECT = 103,
-	PKT_S_BASE_ADD_OBJECT = 104,
-	PKT_S_BASE_REMOVE_OBJECT = 105,
-	PKT_C_BASE_SET_OBJECT_DATA = 106,
-	PKT_S_BASE_SET_OBJECT_DATA = 107,
-	PKT_S_BASE_SET_OBJECT_DATA_NOTICE = 108,
-	PKT_C_BASE_SET_TRANSFORM = 109,
-	PKT_S_BASE_SET_TRANSFORM = 110,
-	PKT_C_BASE_SET_ANIMATION = 111,
-	PKT_S_BASE_SET_ANIMATION = 112,
-	PKT_C_BASE_SET_ANIMATION_ONCE = 113,
-	PKT_S_BASE_SET_ANIMATION_ONCE = 114,
+	PKT_C_BASE_REMOVE_OBJECT_BY_ID = 103,
+	PKT_C_BASE_GET_OBJECT = 104,
+	PKT_S_BASE_ADD_OBJECT = 105,
+	PKT_S_BASE_REMOVE_OBJECT = 106,
+	PKT_C_BASE_SET_OBJECT_DATA = 107,
+	PKT_S_BASE_SET_OBJECT_DATA = 108,
+	PKT_S_BASE_SET_OBJECT_DATA_NOTICE = 109,
+	PKT_C_BASE_SET_TRANSFORM = 110,
+	PKT_S_BASE_SET_TRANSFORM = 111,
+	PKT_C_BASE_SET_ANIMATION = 112,
+	PKT_S_BASE_SET_ANIMATION = 113,
+	PKT_C_BASE_SET_ANIMATION_ONCE = 114,
+	PKT_S_BASE_SET_ANIMATION_ONCE = 115,
 	PKT_C_INTERACTION_GET_ITEMS = 200,
 	PKT_S_INTERACTION_GET_ITEMS = 201,
 	PKT_C_INTERACTION_SET_ITEM = 202,
@@ -129,6 +130,7 @@ bool Handle_C_WILDCARD(shared_ptr<GameSession>& session, Protocol::C_WILDCARD& p
 bool Handle_C_WILDCARD_MAP(shared_ptr<GameSession>& session, Protocol::C_WILDCARD_MAP& pkt);
 bool Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt);
 bool Handle_C_BASE_REMOVE_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_REMOVE_OBJECT& pkt);
+bool Handle_C_BASE_REMOVE_OBJECT_BY_ID(shared_ptr<GameSession>& session, Protocol::C_BASE_REMOVE_OBJECT_BY_ID& pkt);
 bool Handle_C_BASE_GET_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_GET_OBJECT& pkt);
 bool Handle_C_BASE_SET_OBJECT_DATA(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_OBJECT_DATA& pkt);
 bool Handle_C_BASE_SET_TRANSFORM(shared_ptr<GameSession>& session, Protocol::C_BASE_SET_TRANSFORM& pkt);
@@ -180,6 +182,7 @@ public:
 		GPacketHandler[PKT_C_WILDCARD_MAP] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_WILDCARD_MAP > (Handle_C_WILDCARD_MAP, session, buffer, len); };
 		GPacketHandler[PKT_C_BASE_INSTANTIATE_OBJECT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_BASE_INSTANTIATE_OBJECT > (Handle_C_BASE_INSTANTIATE_OBJECT, session, buffer, len); };
 		GPacketHandler[PKT_C_BASE_REMOVE_OBJECT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_BASE_REMOVE_OBJECT > (Handle_C_BASE_REMOVE_OBJECT, session, buffer, len); };
+		GPacketHandler[PKT_C_BASE_REMOVE_OBJECT_BY_ID] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_BASE_REMOVE_OBJECT_BY_ID > (Handle_C_BASE_REMOVE_OBJECT_BY_ID, session, buffer, len); };
 		GPacketHandler[PKT_C_BASE_GET_OBJECT] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_BASE_GET_OBJECT > (Handle_C_BASE_GET_OBJECT, session, buffer, len); };
 		GPacketHandler[PKT_C_BASE_SET_OBJECT_DATA] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_BASE_SET_OBJECT_DATA > (Handle_C_BASE_SET_OBJECT_DATA, session, buffer, len); };
 		GPacketHandler[PKT_C_BASE_SET_TRANSFORM] = [](shared_ptr<GameSession>& session, unsigned char* buffer, int len) { return HandlePacket < Protocol::C_BASE_SET_TRANSFORM > (Handle_C_BASE_SET_TRANSFORM, session, buffer, len); };

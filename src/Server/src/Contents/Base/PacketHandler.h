@@ -19,6 +19,7 @@ public:
 	virtual void Handle_C_WILDCARD_MAP(shared_ptr<ClientBase>& client, Protocol::C_WILDCARD_MAP& pkt) {};
 	virtual void Handle_C_BASE_INSTANTIATE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_INSTANTIATE_OBJECT& pkt) {};
 	virtual void Handle_C_BASE_REMOVE_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_REMOVE_OBJECT& pkt) {};
+	virtual void Handle_C_BASE_REMOVE_OBJECT_BY_ID(shared_ptr<ClientBase>& client, Protocol::C_BASE_REMOVE_OBJECT_BY_ID& pkt) {};
 	virtual void Handle_C_BASE_GET_OBJECT(shared_ptr<ClientBase>& client, Protocol::C_BASE_GET_OBJECT& pkt) {};
 	virtual void Handle_C_BASE_SET_OBJECT_DATA(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_OBJECT_DATA& pkt) {};
 	virtual void Handle_C_BASE_SET_TRANSFORM(shared_ptr<ClientBase>& client, Protocol::C_BASE_SET_TRANSFORM& pkt) {};

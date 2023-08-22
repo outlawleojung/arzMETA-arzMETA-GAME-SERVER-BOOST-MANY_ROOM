@@ -113,6 +113,15 @@ bool Handle_C_BASE_REMOVE_OBJECT(shared_ptr<GameSession>& session, Protocol::C_B
 
 	return true;
 }
+bool Handle_C_BASE_REMOVE_OBJECT_BY_ID(shared_ptr<GameSession>& session, Protocol::C_BASE_REMOVE_OBJECT_BY_ID& pkt)
+{
+	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_BASE_REMOVE_OBJECT_BY_ID(session->owner, pkt);
+
+	return true;
+}
 bool Handle_C_BASE_GET_OBJECT(shared_ptr<GameSession>& session, Protocol::C_BASE_GET_OBJECT& pkt)
 {
 	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
