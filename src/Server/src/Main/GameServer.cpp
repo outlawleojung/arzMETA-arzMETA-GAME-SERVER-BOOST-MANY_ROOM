@@ -7,12 +7,6 @@
 #include "../Contents/RoomManager.h"
 #include "../HTTP/HttpServer.h"
 
-#include <mysql_connection.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-
 #ifdef linux
 #include <sys/types.h>
 #include <ifaddrs.h>

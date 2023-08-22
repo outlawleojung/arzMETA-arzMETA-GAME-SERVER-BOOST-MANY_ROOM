@@ -14,6 +14,8 @@ if (WIN32)
 endif (WIN32)
 
 if (WIN32)
+    target_include_directories(Server PRIVATE "C:/Program Files/OpenSSL-Win64/include")
+
     target_link_directories(Server PRIVATE "C:/Program Files/OpenSSL-Win64/lib")
     target_link_libraries(Server PRIVATE libssl.lib libcrypto.lib)
 endif (WIN32)
