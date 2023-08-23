@@ -63,6 +63,7 @@ public:
 	virtual void Handle_C_OFFICE_KICK(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_KICK& pkt) override;
 	
 	virtual void Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_VIDEO_STREAM& pkt) override;
+	virtual void Handle_C_OFFICE_GET_VIDEO_STREAM(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_VIDEO_STREAM& pkt) override;
 	virtual void Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SHARE& pkt) override;
 
 	virtual void Enter(shared_ptr<GameSession> session, Protocol::C_ENTER pkt) override;
@@ -81,6 +82,7 @@ public:
 	void GetRoomInfo(shared_ptr<ClientBase> session);
 	void SetRoomInfo(shared_ptr<ClientBase> session, Protocol::C_OFFICE_SET_ROOM_INFO pkt);
 	void HandleVideoStream(string url, float volume, float time, bool play, bool seek, int mediaplayerstate);
+	void HandleGetVideoStream(shared_ptr<ClientBase> session);
 	void HandleShare(shared_ptr<ClientBase> session, bool isShared, int userId);
 
 	void GetWaitingList(shared_ptr<ClientBase> session);
@@ -128,5 +130,13 @@ public:
 	time_t createdTime;
 	string createdTimeString;
 	string endTimeString;
+
+	string url;
+	float volume;
+	float time;
+	bool play;
+	bool seek;
+	int mediaPlayerState;
+	long long lastUpdateTime;
 };
 

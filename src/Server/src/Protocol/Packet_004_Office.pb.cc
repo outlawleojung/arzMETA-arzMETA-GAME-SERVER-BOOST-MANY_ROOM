@@ -389,6 +389,17 @@ struct C_OFFICE_VIDEO_STREAMDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_VIDEO_STREAMDefaultTypeInternal _C_OFFICE_VIDEO_STREAM_default_instance_;
+PROTOBUF_CONSTEXPR C_OFFICE_GET_VIDEO_STREAM::C_OFFICE_GET_VIDEO_STREAM(
+    ::_pbi::ConstantInitialized) {}
+struct C_OFFICE_GET_VIDEO_STREAMDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_OFFICE_GET_VIDEO_STREAMDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_OFFICE_GET_VIDEO_STREAMDefaultTypeInternal() {}
+  union {
+    C_OFFICE_GET_VIDEO_STREAM _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_OFFICE_GET_VIDEO_STREAMDefaultTypeInternal _C_OFFICE_GET_VIDEO_STREAM_default_instance_;
 PROTOBUF_CONSTEXPR S_OFFICE_VIDEO_STREAM::S_OFFICE_VIDEO_STREAM(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.clientid_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -437,7 +448,7 @@ struct S_OFFICE_SHAREDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_OFFICE_SHAREDefaultTypeInternal _S_OFFICE_SHARE_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_5f004_5fOffice_2eproto[29];
+static ::_pb::Metadata file_level_metadata_Packet_5f004_5fOffice_2eproto[30];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_5f004_5fOffice_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_5f004_5fOffice_2eproto = nullptr;
 
@@ -660,6 +671,12 @@ const uint32_t TableStruct_Packet_5f004_5fOffice_2eproto::offsets[] PROTOBUF_SEC
   PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_VIDEO_STREAM, _impl_.seek_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_VIDEO_STREAM, _impl_.mediaplayerstate_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_OFFICE_GET_VIDEO_STREAM, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_OFFICE_VIDEO_STREAM, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -716,9 +733,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 173, -1, -1, sizeof(::Protocol::C_OFFICE_GET_ROOM_INFO)},
   { 179, -1, -1, sizeof(::Protocol::S_OFFICE_GET_ROOM_INFO)},
   { 204, -1, -1, sizeof(::Protocol::C_OFFICE_VIDEO_STREAM)},
-  { 217, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
-  { 230, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
-  { 238, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
+  { 217, -1, -1, sizeof(::Protocol::C_OFFICE_GET_VIDEO_STREAM)},
+  { 223, -1, -1, sizeof(::Protocol::S_OFFICE_VIDEO_STREAM)},
+  { 236, -1, -1, sizeof(::Protocol::C_OFFICE_SHARE)},
+  { 244, -1, -1, sizeof(::Protocol::S_OFFICE_SHARE)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -748,6 +766,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_C_OFFICE_GET_ROOM_INFO_default_instance_._instance,
   &::Protocol::_S_OFFICE_GET_ROOM_INFO_default_instance_._instance,
   &::Protocol::_C_OFFICE_VIDEO_STREAM_default_instance_._instance,
+  &::Protocol::_C_OFFICE_GET_VIDEO_STREAM_default_instance_._instance,
   &::Protocol::_S_OFFICE_VIDEO_STREAM_default_instance_._instance,
   &::Protocol::_C_OFFICE_SHARE_default_instance_._instance,
   &::Protocol::_S_OFFICE_SHARE_default_instance_._instance,
@@ -805,19 +824,20 @@ const char descriptor_table_protodef_Packet_5f004_5fOffice_2eproto[] PROTOBUF_SE
   "_OFFICE_VIDEO_STREAM\022\020\n\010clientid\030\001 \001(\t\022\013"
   "\n\003url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n\004time\030\004 \001("
   "\002\022\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022\030\n\020mediaPl"
-  "ayerState\030\007 \001(\005\"\212\001\n\025S_OFFICE_VIDEO_STREA"
-  "M\022\020\n\010clientid\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volu"
-  "me\030\003 \001(\002\022\014\n\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004"
-  "seek\030\006 \001(\010\022\030\n\020mediaPlayerState\030\007 \001(\005\"2\n\016"
-  "C_OFFICE_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006user"
-  "Id\030\002 \001(\005\"2\n\016S_OFFICE_SHARE\022\020\n\010isShared\030\001"
-  " \001(\010\022\016\n\006userId\030\002 \001(\005b\006proto3"
+  "ayerState\030\007 \001(\005\"\033\n\031C_OFFICE_GET_VIDEO_ST"
+  "REAM\"\212\001\n\025S_OFFICE_VIDEO_STREAM\022\020\n\010client"
+  "id\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\022\016\n\006volume\030\003 \001(\002\022\014\n"
+  "\004time\030\004 \001(\002\022\014\n\004play\030\005 \001(\010\022\014\n\004seek\030\006 \001(\010\022"
+  "\030\n\020mediaPlayerState\030\007 \001(\005\"2\n\016C_OFFICE_SH"
+  "ARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006userId\030\002 \001(\005\"2\n"
+  "\016S_OFFICE_SHARE\022\020\n\010isShared\030\001 \001(\010\022\016\n\006use"
+  "rId\030\002 \001(\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Packet_5f004_5fOffice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_5f004_5fOffice_2eproto = {
-    false, false, 2308, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
+    false, false, 2337, descriptor_table_protodef_Packet_5f004_5fOffice_2eproto,
     "Packet_004_Office.proto",
-    &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 29,
+    &descriptor_table_Packet_5f004_5fOffice_2eproto_once, nullptr, 0, 30,
     schemas, file_default_instances, TableStruct_Packet_5f004_5fOffice_2eproto::offsets,
     file_level_metadata_Packet_5f004_5fOffice_2eproto, file_level_enum_descriptors_Packet_5f004_5fOffice_2eproto,
     file_level_service_descriptors_Packet_5f004_5fOffice_2eproto,
@@ -6378,6 +6398,46 @@ void C_OFFICE_VIDEO_STREAM::InternalSwap(C_OFFICE_VIDEO_STREAM* other) {
 
 // ===================================================================
 
+class C_OFFICE_GET_VIDEO_STREAM::_Internal {
+ public:
+};
+
+C_OFFICE_GET_VIDEO_STREAM::C_OFFICE_GET_VIDEO_STREAM(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
+  // @@protoc_insertion_point(arena_constructor:Protocol.C_OFFICE_GET_VIDEO_STREAM)
+}
+C_OFFICE_GET_VIDEO_STREAM::C_OFFICE_GET_VIDEO_STREAM(const C_OFFICE_GET_VIDEO_STREAM& from)
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  C_OFFICE_GET_VIDEO_STREAM* const _this = this; (void)_this;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:Protocol.C_OFFICE_GET_VIDEO_STREAM)
+}
+
+
+
+
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_OFFICE_GET_VIDEO_STREAM::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_OFFICE_GET_VIDEO_STREAM::GetClassData() const { return &_class_data_; }
+
+
+
+
+
+
+
+::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_GET_VIDEO_STREAM::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[26]);
+}
+
+// ===================================================================
+
 class S_OFFICE_VIDEO_STREAM::_Internal {
  public:
 };
@@ -6782,7 +6842,7 @@ void S_OFFICE_VIDEO_STREAM::InternalSwap(S_OFFICE_VIDEO_STREAM* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_VIDEO_STREAM::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[26]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[27]);
 }
 
 // ===================================================================
@@ -6993,7 +7053,7 @@ void C_OFFICE_SHARE::InternalSwap(C_OFFICE_SHARE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_OFFICE_SHARE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[27]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[28]);
 }
 
 // ===================================================================
@@ -7204,7 +7264,7 @@ void S_OFFICE_SHARE::InternalSwap(S_OFFICE_SHARE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_OFFICE_SHARE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_5f004_5fOffice_2eproto_getter, &descriptor_table_Packet_5f004_5fOffice_2eproto_once,
-      file_level_metadata_Packet_5f004_5fOffice_2eproto[28]);
+      file_level_metadata_Packet_5f004_5fOffice_2eproto[29]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -7313,6 +7373,10 @@ Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_GET_ROOM_INFO >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_VIDEO_STREAM*
 Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_VIDEO_STREAM >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::C_OFFICE_VIDEO_STREAM >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::C_OFFICE_GET_VIDEO_STREAM*
+Arena::CreateMaybeMessage< ::Protocol::C_OFFICE_GET_VIDEO_STREAM >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_OFFICE_GET_VIDEO_STREAM >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Protocol::S_OFFICE_VIDEO_STREAM*
 Arena::CreateMaybeMessage< ::Protocol::S_OFFICE_VIDEO_STREAM >(Arena* arena) {

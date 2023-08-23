@@ -164,6 +164,10 @@ message C_OFFICE_VIDEO_STREAM
 	int32 mediaPlayerState = 7;
 }
 
+message C_OFFICE_GET_VIDEO_STREAM
+{
+}
+
 message S_OFFICE_VIDEO_STREAM
 {
 	string clientid = 1;

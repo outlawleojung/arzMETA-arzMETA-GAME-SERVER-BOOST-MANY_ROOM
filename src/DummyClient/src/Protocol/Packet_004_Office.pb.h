@@ -64,6 +64,9 @@ extern C_OFFICE_GET_PERMISSION_ALLDefaultTypeInternal _C_OFFICE_GET_PERMISSION_A
 class C_OFFICE_GET_ROOM_INFO;
 struct C_OFFICE_GET_ROOM_INFODefaultTypeInternal;
 extern C_OFFICE_GET_ROOM_INFODefaultTypeInternal _C_OFFICE_GET_ROOM_INFO_default_instance_;
+class C_OFFICE_GET_VIDEO_STREAM;
+struct C_OFFICE_GET_VIDEO_STREAMDefaultTypeInternal;
+extern C_OFFICE_GET_VIDEO_STREAMDefaultTypeInternal _C_OFFICE_GET_VIDEO_STREAM_default_instance_;
 class C_OFFICE_GET_WAITING_LIST;
 struct C_OFFICE_GET_WAITING_LISTDefaultTypeInternal;
 extern C_OFFICE_GET_WAITING_LISTDefaultTypeInternal _C_OFFICE_GET_WAITING_LIST_default_instance_;
@@ -141,6 +144,7 @@ template<> ::Protocol::C_OFFICE_GET_HOST* Arena::CreateMaybeMessage<::Protocol::
 template<> ::Protocol::C_OFFICE_GET_PERMISSION* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_PERMISSION>(Arena*);
 template<> ::Protocol::C_OFFICE_GET_PERMISSION_ALL* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_PERMISSION_ALL>(Arena*);
 template<> ::Protocol::C_OFFICE_GET_ROOM_INFO* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_ROOM_INFO>(Arena*);
+template<> ::Protocol::C_OFFICE_GET_VIDEO_STREAM* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_VIDEO_STREAM>(Arena*);
 template<> ::Protocol::C_OFFICE_GET_WAITING_LIST* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_GET_WAITING_LIST>(Arena*);
 template<> ::Protocol::C_OFFICE_KICK* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_KICK>(Arena*);
 template<> ::Protocol::C_OFFICE_SET_PERMISSION* Arena::CreateMaybeMessage<::Protocol::C_OFFICE_SET_PERMISSION>(Arena*);
@@ -4471,6 +4475,124 @@ class C_OFFICE_VIDEO_STREAM final :
 };
 // -------------------------------------------------------------------
 
+class C_OFFICE_GET_VIDEO_STREAM final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.C_OFFICE_GET_VIDEO_STREAM) */ {
+ public:
+  inline C_OFFICE_GET_VIDEO_STREAM() : C_OFFICE_GET_VIDEO_STREAM(nullptr) {}
+  explicit PROTOBUF_CONSTEXPR C_OFFICE_GET_VIDEO_STREAM(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_OFFICE_GET_VIDEO_STREAM(const C_OFFICE_GET_VIDEO_STREAM& from);
+  C_OFFICE_GET_VIDEO_STREAM(C_OFFICE_GET_VIDEO_STREAM&& from) noexcept
+    : C_OFFICE_GET_VIDEO_STREAM() {
+    *this = ::std::move(from);
+  }
+
+  inline C_OFFICE_GET_VIDEO_STREAM& operator=(const C_OFFICE_GET_VIDEO_STREAM& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_OFFICE_GET_VIDEO_STREAM& operator=(C_OFFICE_GET_VIDEO_STREAM&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_OFFICE_GET_VIDEO_STREAM& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_OFFICE_GET_VIDEO_STREAM* internal_default_instance() {
+    return reinterpret_cast<const C_OFFICE_GET_VIDEO_STREAM*>(
+               &_C_OFFICE_GET_VIDEO_STREAM_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    26;
+
+  friend void swap(C_OFFICE_GET_VIDEO_STREAM& a, C_OFFICE_GET_VIDEO_STREAM& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_OFFICE_GET_VIDEO_STREAM* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_OFFICE_GET_VIDEO_STREAM* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_OFFICE_GET_VIDEO_STREAM* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_OFFICE_GET_VIDEO_STREAM>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const C_OFFICE_GET_VIDEO_STREAM& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const C_OFFICE_GET_VIDEO_STREAM& from) {
+    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+  public:
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_OFFICE_GET_VIDEO_STREAM";
+  }
+  protected:
+  explicit C_OFFICE_GET_VIDEO_STREAM(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_OFFICE_GET_VIDEO_STREAM)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+  };
+  friend struct ::TableStruct_Packet_5f004_5fOffice_2eproto;
+};
+// -------------------------------------------------------------------
+
 class S_OFFICE_VIDEO_STREAM final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_OFFICE_VIDEO_STREAM) */ {
  public:
@@ -4519,7 +4641,7 @@ class S_OFFICE_VIDEO_STREAM final :
                &_S_OFFICE_VIDEO_STREAM_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    27;
 
   friend void swap(S_OFFICE_VIDEO_STREAM& a, S_OFFICE_VIDEO_STREAM& b) {
     a.Swap(&b);
@@ -4743,7 +4865,7 @@ class C_OFFICE_SHARE final :
                &_C_OFFICE_SHARE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    28;
 
   friend void swap(C_OFFICE_SHARE& a, C_OFFICE_SHARE& b) {
     a.Swap(&b);
@@ -4902,7 +5024,7 @@ class S_OFFICE_SHARE final :
                &_S_OFFICE_SHARE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    29;
 
   friend void swap(S_OFFICE_SHARE& a, S_OFFICE_SHARE& b) {
     a.Swap(&b);
@@ -7149,6 +7271,10 @@ inline void C_OFFICE_VIDEO_STREAM::set_mediaplayerstate(int32_t value) {
 
 // -------------------------------------------------------------------
 
+// C_OFFICE_GET_VIDEO_STREAM
+
+// -------------------------------------------------------------------
+
 // S_OFFICE_VIDEO_STREAM
 
 // string clientid = 1;
@@ -7442,6 +7568,8 @@ inline void S_OFFICE_SHARE::set_userid(int32_t value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

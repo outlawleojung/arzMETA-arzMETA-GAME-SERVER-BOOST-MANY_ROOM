@@ -69,13 +69,13 @@ namespace Protocol {
             "KAkSFAoMaG9zdE5pY2tuYW1lGBMgASgJIooBChVDX09GRklDRV9WSURFT19T",
             "VFJFQU0SEAoIY2xpZW50aWQYASABKAkSCwoDdXJsGAIgASgJEg4KBnZvbHVt",
             "ZRgDIAEoAhIMCgR0aW1lGAQgASgCEgwKBHBsYXkYBSABKAgSDAoEc2VlaxgG",
-            "IAEoCBIYChBtZWRpYVBsYXllclN0YXRlGAcgASgFIooBChVTX09GRklDRV9W",
-            "SURFT19TVFJFQU0SEAoIY2xpZW50aWQYASABKAkSCwoDdXJsGAIgASgJEg4K",
-            "BnZvbHVtZRgDIAEoAhIMCgR0aW1lGAQgASgCEgwKBHBsYXkYBSABKAgSDAoE",
-            "c2VlaxgGIAEoCBIYChBtZWRpYVBsYXllclN0YXRlGAcgASgFIjIKDkNfT0ZG",
-            "SUNFX1NIQVJFEhAKCGlzU2hhcmVkGAEgASgIEg4KBnVzZXJJZBgCIAEoBSIy",
-            "Cg5TX09GRklDRV9TSEFSRRIQCghpc1NoYXJlZBgBIAEoCBIOCgZ1c2VySWQY",
-            "AiABKAViBnByb3RvMw=="));
+            "IAEoCBIYChBtZWRpYVBsYXllclN0YXRlGAcgASgFIhsKGUNfT0ZGSUNFX0dF",
+            "VF9WSURFT19TVFJFQU0iigEKFVNfT0ZGSUNFX1ZJREVPX1NUUkVBTRIQCghj",
+            "bGllbnRpZBgBIAEoCRILCgN1cmwYAiABKAkSDgoGdm9sdW1lGAMgASgCEgwK",
+            "BHRpbWUYBCABKAISDAoEcGxheRgFIAEoCBIMCgRzZWVrGAYgASgIEhgKEG1l",
+            "ZGlhUGxheWVyU3RhdGUYByABKAUiMgoOQ19PRkZJQ0VfU0hBUkUSEAoIaXNT",
+            "aGFyZWQYASABKAgSDgoGdXNlcklkGAIgASgFIjIKDlNfT0ZGSUNFX1NIQVJF",
+            "EhAKCGlzU2hhcmVkGAEgASgIEg4KBnVzZXJJZBgCIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -103,6 +103,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_GET_ROOM_INFO), global::Protocol.C_OFFICE_GET_ROOM_INFO.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_GET_ROOM_INFO), global::Protocol.S_OFFICE_GET_ROOM_INFO.Parser, new[]{ "RoomName", "Description", "TopicType", "Password", "SpaceInfoId", "Personnel", "CurrentPersonnel", "Observer", "CurrentObserver", "CurrentWaiting", "IsAdvertising", "Thumbnail", "IsWaitingRoom", "IsShutdown", "RunningTime", "PassedTime", "StartTime", "Roomcode", "HostNickname" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_VIDEO_STREAM), global::Protocol.C_OFFICE_VIDEO_STREAM.Parser, new[]{ "Clientid", "Url", "Volume", "Time", "Play", "Seek", "MediaPlayerState" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_GET_VIDEO_STREAM), global::Protocol.C_OFFICE_GET_VIDEO_STREAM.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_VIDEO_STREAM), global::Protocol.S_OFFICE_VIDEO_STREAM.Parser, new[]{ "Clientid", "Url", "Volume", "Time", "Play", "Seek", "MediaPlayerState" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_OFFICE_SHARE), global::Protocol.C_OFFICE_SHARE.Parser, new[]{ "IsShared", "UserId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_OFFICE_SHARE), global::Protocol.S_OFFICE_SHARE.Parser, new[]{ "IsShared", "UserId" }, null, null, null, null)
@@ -6291,6 +6292,158 @@ namespace Protocol {
 
   }
 
+  public sealed partial class C_OFFICE_GET_VIDEO_STREAM : pb::IMessage<C_OFFICE_GET_VIDEO_STREAM>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<C_OFFICE_GET_VIDEO_STREAM> _parser = new pb::MessageParser<C_OFFICE_GET_VIDEO_STREAM>(() => new C_OFFICE_GET_VIDEO_STREAM());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<C_OFFICE_GET_VIDEO_STREAM> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[24]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_OFFICE_GET_VIDEO_STREAM() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_OFFICE_GET_VIDEO_STREAM(C_OFFICE_GET_VIDEO_STREAM other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_OFFICE_GET_VIDEO_STREAM Clone() {
+      return new C_OFFICE_GET_VIDEO_STREAM(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as C_OFFICE_GET_VIDEO_STREAM);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(C_OFFICE_GET_VIDEO_STREAM other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(C_OFFICE_GET_VIDEO_STREAM other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class S_OFFICE_VIDEO_STREAM : pb::IMessage<S_OFFICE_VIDEO_STREAM>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -6305,7 +6458,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6716,7 +6869,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6942,7 +7095,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Protocol.Packet004OfficeReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

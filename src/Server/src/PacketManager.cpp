@@ -356,6 +356,15 @@ bool Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::C_
 
 	return true;
 }
+bool Handle_C_OFFICE_GET_VIDEO_STREAM(shared_ptr<GameSession>& session, Protocol::C_OFFICE_GET_VIDEO_STREAM& pkt)
+{
+	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)
+		return false;
+
+	session->owner->enteredRoom->Handle_C_OFFICE_GET_VIDEO_STREAM(session->owner, pkt);
+
+	return true;
+}
 bool Handle_C_OFFICE_SHARE(shared_ptr<GameSession>& session, Protocol::C_OFFICE_SHARE& pkt)
 {
 	if (session->owner == nullptr || session->owner->enteredRoom == nullptr || session->owner->enteredRoom->state != RoomState::Running)

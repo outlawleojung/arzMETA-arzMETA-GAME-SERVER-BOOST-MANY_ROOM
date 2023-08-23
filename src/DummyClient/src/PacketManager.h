@@ -89,9 +89,10 @@ enum : unsigned short
 	PKT_C_OFFICE_GET_ROOM_INFO = 420,
 	PKT_S_OFFICE_GET_ROOM_INFO = 421,
 	PKT_C_OFFICE_VIDEO_STREAM = 422,
-	PKT_S_OFFICE_VIDEO_STREAM = 423,
-	PKT_C_OFFICE_SHARE = 424,
-	PKT_S_OFFICE_SHARE = 425,
+	PKT_C_OFFICE_GET_VIDEO_STREAM = 423,
+	PKT_S_OFFICE_VIDEO_STREAM = 424,
+	PKT_C_OFFICE_SHARE = 425,
+	PKT_S_OFFICE_SHARE = 426,
 	PKT_C_MATCHING_START = 500,
 	PKT_S_MATCHING_START = 501,
 	PKT_S_MATCHING_AWARD = 502,
@@ -298,6 +299,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_SET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_GET_ROOM_INFO); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_VIDEO_STREAM& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_VIDEO_STREAM); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_GET_VIDEO_STREAM& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_GET_VIDEO_STREAM); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_OFFICE_SHARE& pkt) { return MakeSendBuffer(pkt, PKT_C_OFFICE_SHARE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_START& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_START); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MATCHING_GET_HOST& pkt) { return MakeSendBuffer(pkt, PKT_C_MATCHING_GET_HOST); }
