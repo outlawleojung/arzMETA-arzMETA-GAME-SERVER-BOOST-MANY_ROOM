@@ -56,7 +56,9 @@ public:
 	virtual void Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SET_PERMISSION& pkt) override;
 	virtual void Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) override;
 	virtual void Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) override;
+	
 	virtual void Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_VIDEO_STREAM& pkt) override;
+	virtual void Handle_C_OFFICE_GET_VIDEO_STREAM(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_VIDEO_STREAM& pkt) override;
 	virtual void Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SHARE& pkt) override;
 
 	virtual void Leave(shared_ptr<ClientBase> client) override;
@@ -76,6 +78,7 @@ public:
 	void GetRoomInfo(shared_ptr<ClientBase> client);
 	void SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_SET_ROOM_INFO pkt);
 	void HandleVideoStream(string url, float volume, float time, bool play, bool seek, int mediaplayerstate);
+	void HandleGetVideoStream(shared_ptr<ClientBase> session);
 	void HandleShare(shared_ptr<ClientBase> client, bool isShared, int userId);
 
 	void GetWaitingList(shared_ptr<ClientBase> client);
@@ -108,5 +111,13 @@ public:
 	time_t createdTime;
 	string createdTimeString;
 	string endTimeString;
+
+	string url;
+	float volume;
+	float time;
+	bool play;
+	bool seek;
+	int mediaPlayerState;
+	long long lastUpdateTime;
 };
 

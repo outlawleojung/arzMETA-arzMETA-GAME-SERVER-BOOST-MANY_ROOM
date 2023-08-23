@@ -112,6 +112,7 @@ void MeetingRoom::Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& client,
 void MeetingRoom::Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { DoAsync(&MeetingRoom::SetRoomInfo, client, pkt); }
 void MeetingRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { DoAsync(&MeetingRoom::GetRoomInfo, client); }
 void MeetingRoom::Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_VIDEO_STREAM& pkt) { DoAsync(&MeetingRoom::HandleVideoStream, pkt.url(), pkt.volume(), pkt.time(), pkt.play(), pkt.seek(), pkt.mediaplayerstate()); }
+void MeetingRoom::Handle_C_OFFICE_GET_VIDEO_STREAM(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_VIDEO_STREAM& pkt) { DoAsync(&MeetingRoom::HandleGetVideoStream, session); }
 void MeetingRoom::Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SHARE& pkt) { DoAsync(&MeetingRoom::HandleShare, session, pkt.isshared(), pkt.userid()); }
 
 void MeetingRoom::Leave(shared_ptr<ClientBase> _client)
@@ -738,8 +739,35 @@ void MeetingRoom::HandleVideoStream(string url, float volume, float time, bool p
 	videoStream.set_seek(seek);
 	videoStream.set_mediaplayerstate(mediaplayerstate);
 
+	this->url = url;
+	this->volume = volume;
+	this->time = time;
+	this->play = play;
+	this->seek = seek;
+	this->mediaPlayerState = mediaplayerstate;
+
+	lastUpdateTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
 	auto sendBuffer = PacketManager::MakeSendBuffer(videoStream);
 	this->DoAsync(&MeetingRoom::Broadcast, sendBuffer);
+}
+
+void MeetingRoom::HandleGetVideoStream(shared_ptr<ClientBase> client)
+{
+	if (play)
+	{
+		Protocol::S_OFFICE_VIDEO_STREAM videoStream;
+		videoStream.set_url(url);
+		videoStream.set_volume(volume);
+		videoStream.set_play(play);
+		videoStream.set_seek(seek);
+		videoStream.set_mediaplayerstate(mediaPlayerState);
+
+		long long elaped = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - lastUpdateTime;
+		videoStream.set_time(time + ((float)elaped / 1000));
+
+		client->Send(PacketManager::MakeSendBuffer(videoStream));
+	}
 }
 
 void MeetingRoom::HandleShare(shared_ptr<ClientBase> session, bool isShared, int userId)
