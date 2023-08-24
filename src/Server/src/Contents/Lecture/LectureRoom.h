@@ -81,7 +81,7 @@ public:
 	void SetPermission(shared_ptr<ClientBase> session, Protocol::C_OFFICE_SET_PERMISSION pkt);
 	void GetRoomInfo(shared_ptr<ClientBase> session);
 	void SetRoomInfo(shared_ptr<ClientBase> session, Protocol::C_OFFICE_SET_ROOM_INFO pkt);
-	void HandleVideoStream(string url, float volume, float time, bool play, bool seek, int mediaplayerstate);
+	void HandleVideoStream(shared_ptr<ClientBase> client, string url, float volume, float time, bool play, bool seek, int mediaplayerstate);
 	void HandleGetVideoStream(shared_ptr<ClientBase> session);
 	void HandleShare(shared_ptr<ClientBase> session, bool isShared, int userId);
 
@@ -131,6 +131,7 @@ public:
 	string createdTimeString;
 	string endTimeString;
 
+	string videoSender;
 	string url;
 	float volume;
 	float time;

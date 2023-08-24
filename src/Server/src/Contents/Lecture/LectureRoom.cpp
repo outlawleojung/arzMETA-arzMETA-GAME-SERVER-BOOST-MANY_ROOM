@@ -106,7 +106,7 @@ void LectureRoom::Handle_C_OFFICE_GET_PERMISSION_ALL(shared_ptr<ClientBase>& cli
 void LectureRoom::Handle_C_OFFICE_SET_PERMISSION(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_PERMISSION& pkt) { DoAsync(&LectureRoom::SetPermission, client, pkt); }
 void LectureRoom::Handle_C_OFFICE_SET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_SET_ROOM_INFO& pkt) { DoAsync(&LectureRoom::SetRoomInfo, client, pkt); }
 void LectureRoom::Handle_C_OFFICE_GET_ROOM_INFO(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_GET_ROOM_INFO& pkt) { DoAsync(&LectureRoom::GetRoomInfo, client); }
-void LectureRoom::Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_VIDEO_STREAM& pkt) { DoAsync(&LectureRoom::HandleVideoStream, pkt.url(), pkt.volume(), pkt.time(), pkt.play(), pkt.seek(), pkt.mediaplayerstate()); }
+void LectureRoom::Handle_C_OFFICE_VIDEO_STREAM(shared_ptr<ClientBase>& client, Protocol::C_OFFICE_VIDEO_STREAM& pkt) { DoAsync(&LectureRoom::HandleVideoStream, client, pkt.url(), pkt.volume(), pkt.time(), pkt.play(), pkt.seek(), pkt.mediaplayerstate()); }
 void LectureRoom::Handle_C_OFFICE_GET_VIDEO_STREAM(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_GET_VIDEO_STREAM& pkt) { DoAsync(&LectureRoom::HandleGetVideoStream, session); }
 void LectureRoom::Handle_C_OFFICE_SHARE(shared_ptr<ClientBase>& session, Protocol::C_OFFICE_SHARE& pkt) { DoAsync(&LectureRoom::HandleShare, session, pkt.isshared(), pkt.userid()); }
 
@@ -717,12 +717,13 @@ void LectureRoom::SetRoomInfo(shared_ptr<ClientBase> client, Protocol::C_OFFICE_
 	Broadcast(PacketManager::MakeSendBuffer(roomInfo));
 }
 
-void LectureRoom::HandleVideoStream(string url, float volume, float time, bool play, bool seek, int mediaplayerstate)
+void LectureRoom::HandleVideoStream(shared_ptr<ClientBase> client, string url, float volume, float time, bool play, bool seek, int mediaplayerstate)
 {
 	if (state != RoomState::Running) return;
 
 	Protocol::S_OFFICE_VIDEO_STREAM videoStream;
 
+	videoStream.set_clientid(client->clientId);
 	videoStream.set_url(url);
 	videoStream.set_volume(volume);
 	videoStream.set_time(time);
@@ -730,6 +731,7 @@ void LectureRoom::HandleVideoStream(string url, float volume, float time, bool p
 	videoStream.set_seek(seek);
 	videoStream.set_mediaplayerstate(mediaplayerstate);
 
+	this->videoSender = client->clientId;
 	this->url = url;
 	this->volume = volume;
 	this->time = time;
@@ -748,6 +750,7 @@ void LectureRoom::HandleGetVideoStream(shared_ptr<ClientBase> client)
 	if (play)
 	{
 		Protocol::S_OFFICE_VIDEO_STREAM videoStream;
+		videoStream.set_clientid(videoSender);
 		videoStream.set_url(url);
 		videoStream.set_volume(volume);
 		videoStream.set_play(play);
