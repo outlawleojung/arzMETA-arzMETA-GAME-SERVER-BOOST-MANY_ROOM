@@ -560,7 +560,10 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 {
 	if (state != RoomState::Running) return;
 
-	if (_client->clientId != currentHostId) return;
+	shared_ptr<MeetingClient> requestor = static_pointer_cast<MeetingClient>(_client);
+
+	if (requestor->data.type != MeetingRoomUserType::Host && requestor->data.type != MeetingRoomUserType::SubHost)
+		return;
 
 	pair<bool, string> result = { true, "SUCCESS" };
 
@@ -596,6 +599,7 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 	// 호스트의 접속 여부는 위에서 확인됨
 	{
 		int hostCount = 0;
+		int subHostCount = 0;
 		int screenCount = 0;
 
 		for (auto& [clientId, userData] : newUserData)
@@ -606,6 +610,22 @@ void MeetingRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 				if (hostCount > 1)
 				{
 					result = { false, "TOO_MANY_HOST" };
+					goto SET_PERMISSION_LOGIC;
+				}
+
+				if (requestor->data.type == MeetingRoomUserType::SubHost && clientId != currentHostId)
+				{
+					result = { false, "SUBHOST_CHANGE_HOST" };
+					goto SET_PERMISSION_LOGIC;
+				}
+			}
+
+			if (userData.type == MeetingRoomUserType::SubHost)
+			{
+				subHostCount++;
+				if (subHostCount > 1)
+				{
+					result = { false, "TOO_MANY_SUBHOST" };
 					goto SET_PERMISSION_LOGIC;
 				}
 			}

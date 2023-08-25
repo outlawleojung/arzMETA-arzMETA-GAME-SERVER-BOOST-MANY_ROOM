@@ -9,6 +9,7 @@ class LectureClient;
 enum class LectureRoomUserType : int
 {
 	Host = 1,
+	SubHost = 2,
 	Speaker = 4,
 	Audience = 5,
 	Observer = 6

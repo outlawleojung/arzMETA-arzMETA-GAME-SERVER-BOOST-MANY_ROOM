@@ -502,7 +502,10 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 {
 	if (state != RoomState::Running) return;
 
-	if (_client->clientId != currentHostId) return;
+	shared_ptr<LectureClient> requestor = static_pointer_cast<LectureClient>(_client);
+	
+	if(requestor->data.type != LectureRoomUserType::Host && requestor->data.type != LectureRoomUserType::SubHost)
+		return;
 
 	pair<bool, string> result = { true, "SUCCESS" };
 	int observerCount = 0;
@@ -542,6 +545,7 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 
 	{
 		int hostCount = 0;
+		int subHostCount = 0;
 		int screenCount = 0;
 
 		for (auto& [clientId, userData] : newUserData)
@@ -552,6 +556,22 @@ void LectureRoom::SetPermission(shared_ptr<ClientBase> _client, Protocol::C_OFFI
 				if (hostCount > 1)
 				{
 					result = { false, "TOO_MANY_HOST" };
+					goto SET_PERMISSION_LOGIC;
+				}
+
+				if(requestor->data.type == LectureRoomUserType::SubHost && clientId != currentHostId)
+				{
+					result = { false, "SUBHOST_CHANGE_HOST" };
+					goto SET_PERMISSION_LOGIC;
+				}
+			}
+
+			if (userData.type == LectureRoomUserType::SubHost)
+			{
+				subHostCount++;
+				if (subHostCount > 1)
+				{
+					result = { false, "TOO_MANY_SUBHOST" };
 					goto SET_PERMISSION_LOGIC;
 				}
 			}

@@ -9,6 +9,7 @@ class MeetingClient;
 enum class MeetingRoomUserType : int
 {
 	Host = 1,
+	SubHost = 2,
 	Guest = 3
 };
 
