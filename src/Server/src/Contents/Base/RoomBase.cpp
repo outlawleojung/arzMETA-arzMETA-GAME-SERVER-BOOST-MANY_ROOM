@@ -33,6 +33,8 @@ void RoomBase::Close()
 
 void RoomBase::HandleClose()
 {
+	GLogManager->Log("Send Closing to All Client");
+
 	for (auto client = clients.begin(); client != clients.end(); client++)
 		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
 

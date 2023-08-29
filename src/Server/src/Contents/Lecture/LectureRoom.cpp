@@ -70,6 +70,8 @@ void LectureRoom::HandleClose()
 	for (auto client = waitingClients.begin(); client != waitingClients.end(); client++)
 		client->second->DoAsync(&ClientBase::Leave, string("CLOSING"));
 
+	GLogManager->Log("Lecture Room Handle Close");
+
 	GameRoom::HandleClose();
 
 	{
@@ -294,7 +296,10 @@ void LectureRoom::Leave(shared_ptr<ClientBase> _client)
 	}
 
 	if (_client->clientId == currentHostId)
+	{
+		GLogManager->Log("Host Leaved, Room Close");
 		Close();
+	}
 }
 
 void LectureRoom::GetWaitingList(shared_ptr<ClientBase> client)

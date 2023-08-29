@@ -274,6 +274,7 @@ void OXRoom::Start(shared_ptr<ClientBase> client)
 		return;
 
 	Protocol::S_OX_START start;
+	GLogManager->Log("Game Start");
 	DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(start));
 
 	gameData.gameState = ox::GameState::Playing;
@@ -353,11 +354,13 @@ void OXRoom::GameLogic()
 
 		if (gameData.roundCount == 0)
 		{
+			GLogManager->Log("Round Start");
 			DoTimer(gameData.firstRoundWaitTime, &OXRoom::Broadcast, PacketManager::MakeSendBuffer(roundStart));
 			DoTimer(gameData.firstRoundWaitTime + gameData.waitingInterval, &OXRoom::GameLogic);
 		}
 		else
 		{
+			GLogManager->Log("Round Start");
 			DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(roundStart));
 			if (gameData.roundCount == gameData.mistModeRound || gameData.roundCount == gameData.pieceModeRound || gameData.roundCount == gameData.mistModeRound + 1 || gameData.roundCount == gameData.pieceModeRound + 1)
 				DoTimer(gameData.waitingInterval + gameData.modeWaitTime, &OXRoom::GameLogic);
@@ -390,6 +393,7 @@ void OXRoom::GameLogic()
 	case ox::RoundState::Finish:
 	{
 		Protocol::S_OX_ROUND_FINISH roundFinish;
+		GLogManager->Log("Round Finish");
 		DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(roundFinish));
 
 		gameData.roundCount++;
@@ -397,6 +401,7 @@ void OXRoom::GameLogic()
 		if (gameData.players.size() == 0)
 		{
 			Protocol::S_OX_FINISH finish;
+			GLogManager->Log("Game Finish");
 			DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
 
 			roomInfo["isPlaying"] = false;
@@ -406,6 +411,7 @@ void OXRoom::GameLogic()
 		else if ((!gameData.isSoloplay && gameData.players.size() == 1) || gameData.roundCount >= gameData.roundTotal)
 		{
 			Protocol::S_OX_AWARD award;
+			GLogManager->Log("Award");
 			for (int i = 0; i < gameData.players.size(); i++)
 				award.add_winners(gameData.players[i]);
 
@@ -427,6 +433,7 @@ void OXRoom::GameLogic()
 		ClearObject();
 
 		Protocol::S_OX_FINISH finish;
+		GLogManager->Log("Game Finish");
 		DoAsync(&OXRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
 
 		roomInfo["isPlaying"] = false;
