@@ -304,6 +304,7 @@ void MatchingRoom::Start(shared_ptr<ClientBase> client)
 
 	Protocol::S_MATCHING_START start;
 	DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(start));
+	GLogManager->Log("Matching : Game Start");
 
 	gameData.gameState = matching::GameState::Playing;
 	gameData.roundState = matching::RoundState::Idle;
@@ -374,11 +375,13 @@ void MatchingRoom::GameLogic()
 		{
 			this->DoTimer(gameData.firstRoundInterval, &MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(roundStart));
 			this->DoTimer(gameData.firstRoundInterval, &MatchingRoom::GameLogic);
+			GLogManager->Log("Matching : Round Start");
 		}
 		else
 		{
 			DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(roundStart));
 			DoAsync(&MatchingRoom::GameLogic);
+			GLogManager->Log("Matching : Round Start");
 		}
 
 		gameData.roundState = matching::RoundState::Tile;
@@ -394,6 +397,7 @@ void MatchingRoom::GameLogic()
 			tilesPkt.add_tiles(tiles[i]);
 
 		DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(tilesPkt));
+		GLogManager->Log("Matching : Tile");
 
 		this->DoTimer(gameData.tileToHintInterval, &MatchingRoom::GameLogic);
 
@@ -412,6 +416,7 @@ void MatchingRoom::GameLogic()
 				hintsPkt.add_hints(hints[i]);
 
 			DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(hintsPkt));
+			GLogManager->Log("Matching : Hint");
 
 			this->DoTimer(gameData.hintToHintInterval, &MatchingRoom::GameLogic);
 
@@ -433,9 +438,11 @@ void MatchingRoom::GameLogic()
 		problemPkt.set_problem(problem);
 		problemPkt.set_timetodestroy(gameData.quizToDestroyInterval);
 		DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(problemPkt));
+		GLogManager->Log("Matching : Problem");
 
 		Protocol::S_MATCHING_QUIZ_DISAPPEAR disappear;
 		this->DoTimer(gameData.showQuizTime, &MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(disappear));
+		GLogManager->Log("Matching : Disappear");
 
 		this->DoTimer(gameData.quizToDestroyInterval, &MatchingRoom::GameLogic);
 
@@ -447,6 +454,7 @@ void MatchingRoom::GameLogic()
 	{
 		Protocol::S_MATCHING_DESTROY destroy;
 		DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(destroy));
+		GLogManager->Log("Matching : Destroy");
 
 		this->DoTimer(gameData.destroyToFinishInterval, &MatchingRoom::GameLogic);
 
@@ -458,6 +466,7 @@ void MatchingRoom::GameLogic()
 	{
 		Protocol::S_MATCHING_ROUND_FINISH roundFinish;
 		DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(roundFinish));
+		GLogManager->Log("Matching : Round Finish");
 
 		gameData.roundCount++;
 
@@ -465,6 +474,7 @@ void MatchingRoom::GameLogic()
 		{
 			Protocol::S_MATCHING_FINISH finish;
 			DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
+			GLogManager->Log("Matching : Game Finish");
 
 			roomInfo["isPlaying"] = false;
 
@@ -477,6 +487,7 @@ void MatchingRoom::GameLogic()
 				award.add_winners(gameData.players[i]);
 
 			DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(award));
+			GLogManager->Log("Matching : Award");
 
 			gameData.roundState = matching::RoundState::Award;
 			DoTimer(gameData.awardingTime, &MatchingRoom::GameLogic);
@@ -495,6 +506,7 @@ void MatchingRoom::GameLogic()
 
 		Protocol::S_MATCHING_FINISH finish;
 		DoAsync(&MatchingRoom::Broadcast, PacketManager::MakeSendBuffer(finish));
+		GLogManager->Log("Matching : Game Finish");
 
 		roomInfo["isPlaying"] = false;
 
