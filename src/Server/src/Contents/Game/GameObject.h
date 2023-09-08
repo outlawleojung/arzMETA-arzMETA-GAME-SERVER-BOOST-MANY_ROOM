@@ -31,5 +31,9 @@ public:
 	string objectData;
 
 	string ownerId;
+
+	string animationId;
+	bool isLoop;
+	float blend;
 };
 

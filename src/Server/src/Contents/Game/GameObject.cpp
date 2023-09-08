@@ -14,6 +14,9 @@ void GameObject::MakeGameObjectInfo(Protocol::S_BASE_ADD_OBJECT_GameObjectInfo* 
 	_rotation->set_y(rotation[1]);
 	_rotation->set_z(rotation[2]);
 	gameObjectInfo->set_ownerid(ownerId);
+	gameObjectInfo->set_animationid(animationId);
+	gameObjectInfo->set_isloop(isLoop);
+	gameObjectInfo->set_blend(blend);
 }
 
 void GameObject::MakeTransform(Protocol::S_BASE_SET_TRANSFORM& transform)

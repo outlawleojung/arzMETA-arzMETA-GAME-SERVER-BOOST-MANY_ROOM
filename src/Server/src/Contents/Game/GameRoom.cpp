@@ -292,6 +292,10 @@ void GameRoom::SetAnimationOnce(int objectId, string animationId, bool isLoop, f
 	if (gameObject == gameObjects.end())
 		return;
 
+	gameObject->second->animationId = animationId;
+	gameObject->second->isLoop = isLoop;
+	gameObject->second->blend = blend;
+
 	Protocol::S_BASE_SET_ANIMATION_ONCE res;
 	res.set_objectid(objectId);
 	res.set_animationid(animationId);

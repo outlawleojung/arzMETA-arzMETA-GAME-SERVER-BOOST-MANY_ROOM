@@ -45,6 +45,10 @@ message S_BASE_ADD_OBJECT
 		string prefabName = 4;
 		string objectData = 5;
 		string ownerId = 6;
+
+		string animationId = 7;
+		bool isLoop = 8;
+		float blend = 9;
 	}
 	repeated GameObjectInfo gameObjects = 1;
 }

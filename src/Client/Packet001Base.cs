@@ -32,31 +32,32 @@ namespace Protocol {
             "U19CQVNFX0lOU1RBTlRJQVRFX09CSkVDVBIPCgdzdWNjZXNzGAEgASgIEhAK",
             "CG9iamVjdElkGAIgASgFIhYKFENfQkFTRV9SRU1PVkVfT0JKRUNUIi4KGkNf",
             "QkFTRV9SRU1PVkVfT0JKRUNUX0JZX0lEEhAKCG9iamVjdElkGAEgASgFIhMK",
-            "EUNfQkFTRV9HRVRfT0JKRUNUIvwBChFTX0JBU0VfQUREX09CSkVDVBI/Cgtn",
+            "EUNfQkFTRV9HRVRfT0JKRUNUIrACChFTX0JBU0VfQUREX09CSkVDVBI/Cgtn",
             "YW1lT2JqZWN0cxgBIAMoCzIqLlByb3RvY29sLlNfQkFTRV9BRERfT0JKRUNU",
-            "LkdhbWVPYmplY3RJbmZvGqUBCg5HYW1lT2JqZWN0SW5mbxIQCghvYmplY3RJ",
+            "LkdhbWVPYmplY3RJbmZvGtkBCg5HYW1lT2JqZWN0SW5mbxIQCghvYmplY3RJ",
             "ZBgBIAEoBRIjCghwb3NpdGlvbhgCIAEoCzIRLlByb3RvY29sLlZlY3RvcjMS",
             "IwoIcm90YXRpb24YAyABKAsyES5Qcm90b2NvbC5WZWN0b3IzEhIKCnByZWZh",
             "Yk5hbWUYBCABKAkSEgoKb2JqZWN0RGF0YRgFIAEoCRIPCgdvd25lcklkGAYg",
-            "ASgJIisKFFNfQkFTRV9SRU1PVkVfT0JKRUNUEhMKC2dhbWVPYmplY3RzGAEg",
-            "AygFIj4KFkNfQkFTRV9TRVRfT0JKRUNUX0RBVEESEAoIb2JqZWN0SWQYASAB",
-            "KAUSEgoKb2JqZWN0RGF0YRgCIAEoCSIpChZTX0JBU0VfU0VUX09CSkVDVF9E",
-            "QVRBEg8KB3N1Y2Nlc3MYASABKAgiRQodU19CQVNFX1NFVF9PQkpFQ1RfREFU",
-            "QV9OT1RJQ0USEAoIb2JqZWN0SWQYASABKAUSEgoKb2JqZWN0RGF0YRgCIAEo",
-            "CSJyChRDX0JBU0VfU0VUX1RSQU5TRk9STRIQCghvYmplY3RJZBgBIAEoBRIj",
-            "Cghwb3NpdGlvbhgCIAEoCzIRLlByb3RvY29sLlZlY3RvcjMSIwoIcm90YXRp",
-            "b24YAyABKAsyES5Qcm90b2NvbC5WZWN0b3IzInIKFFNfQkFTRV9TRVRfVFJB",
-            "TlNGT1JNEhAKCG9iamVjdElkGAEgASgFEiMKCHBvc2l0aW9uGAIgASgLMhEu",
-            "UHJvdG9jb2wuVmVjdG9yMxIjCghyb3RhdGlvbhgDIAEoCzIRLlByb3RvY29s",
-            "LlZlY3RvcjMiUAoUQ19CQVNFX1NFVF9BTklNQVRJT04SEAoIb2JqZWN0SWQY",
-            "ASABKAUSEwoLYW5pbWF0aW9uSWQYAiABKAkSEQoJYW5pbWF0aW9uGAMgASgJ",
-            "IlAKFFNfQkFTRV9TRVRfQU5JTUFUSU9OEhAKCG9iamVjdElkGAEgASgFEhMK",
-            "C2FuaW1hdGlvbklkGAIgASgJEhEKCWFuaW1hdGlvbhgDIAEoCSJhChlDX0JB",
-            "U0VfU0VUX0FOSU1BVElPTl9PTkNFEhAKCG9iamVjdElkGAEgASgFEhMKC2Fu",
-            "aW1hdGlvbklkGAIgASgJEg4KBmlzTG9vcBgDIAEoCBINCgVibGVuZBgEIAEo",
-            "AiJhChlTX0JBU0VfU0VUX0FOSU1BVElPTl9PTkNFEhAKCG9iamVjdElkGAEg",
-            "ASgFEhMKC2FuaW1hdGlvbklkGAIgASgJEg4KBmlzTG9vcBgDIAEoCBINCgVi",
-            "bGVuZBgEIAEoAmIGcHJvdG8z"));
+            "ASgJEhMKC2FuaW1hdGlvbklkGAcgASgJEg4KBmlzTG9vcBgIIAEoCBINCgVi",
+            "bGVuZBgJIAEoAiIrChRTX0JBU0VfUkVNT1ZFX09CSkVDVBITCgtnYW1lT2Jq",
+            "ZWN0cxgBIAMoBSI+ChZDX0JBU0VfU0VUX09CSkVDVF9EQVRBEhAKCG9iamVj",
+            "dElkGAEgASgFEhIKCm9iamVjdERhdGEYAiABKAkiKQoWU19CQVNFX1NFVF9P",
+            "QkpFQ1RfREFUQRIPCgdzdWNjZXNzGAEgASgIIkUKHVNfQkFTRV9TRVRfT0JK",
+            "RUNUX0RBVEFfTk9USUNFEhAKCG9iamVjdElkGAEgASgFEhIKCm9iamVjdERh",
+            "dGEYAiABKAkicgoUQ19CQVNFX1NFVF9UUkFOU0ZPUk0SEAoIb2JqZWN0SWQY",
+            "ASABKAUSIwoIcG9zaXRpb24YAiABKAsyES5Qcm90b2NvbC5WZWN0b3IzEiMK",
+            "CHJvdGF0aW9uGAMgASgLMhEuUHJvdG9jb2wuVmVjdG9yMyJyChRTX0JBU0Vf",
+            "U0VUX1RSQU5TRk9STRIQCghvYmplY3RJZBgBIAEoBRIjCghwb3NpdGlvbhgC",
+            "IAEoCzIRLlByb3RvY29sLlZlY3RvcjMSIwoIcm90YXRpb24YAyABKAsyES5Q",
+            "cm90b2NvbC5WZWN0b3IzIlAKFENfQkFTRV9TRVRfQU5JTUFUSU9OEhAKCG9i",
+            "amVjdElkGAEgASgFEhMKC2FuaW1hdGlvbklkGAIgASgJEhEKCWFuaW1hdGlv",
+            "bhgDIAEoCSJQChRTX0JBU0VfU0VUX0FOSU1BVElPThIQCghvYmplY3RJZBgB",
+            "IAEoBRITCgthbmltYXRpb25JZBgCIAEoCRIRCglhbmltYXRpb24YAyABKAki",
+            "YQoZQ19CQVNFX1NFVF9BTklNQVRJT05fT05DRRIQCghvYmplY3RJZBgBIAEo",
+            "BRITCgthbmltYXRpb25JZBgCIAEoCRIOCgZpc0xvb3AYAyABKAgSDQoFYmxl",
+            "bmQYBCABKAIiYQoZU19CQVNFX1NFVF9BTklNQVRJT05fT05DRRIQCghvYmpl",
+            "Y3RJZBgBIAEoBRITCgthbmltYXRpb25JZBgCIAEoCRIOCgZpc0xvb3AYAyAB",
+            "KAgSDQoFYmxlbmQYBCABKAJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -66,7 +67,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BASE_REMOVE_OBJECT), global::Protocol.C_BASE_REMOVE_OBJECT.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BASE_REMOVE_OBJECT_BY_ID), global::Protocol.C_BASE_REMOVE_OBJECT_BY_ID.Parser, new[]{ "ObjectId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BASE_GET_OBJECT), global::Protocol.C_BASE_GET_OBJECT.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BASE_ADD_OBJECT), global::Protocol.S_BASE_ADD_OBJECT.Parser, new[]{ "GameObjects" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BASE_ADD_OBJECT.Types.GameObjectInfo), global::Protocol.S_BASE_ADD_OBJECT.Types.GameObjectInfo.Parser, new[]{ "ObjectId", "Position", "Rotation", "PrefabName", "ObjectData", "OwnerId" }, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BASE_ADD_OBJECT), global::Protocol.S_BASE_ADD_OBJECT.Parser, new[]{ "GameObjects" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BASE_ADD_OBJECT.Types.GameObjectInfo), global::Protocol.S_BASE_ADD_OBJECT.Types.GameObjectInfo.Parser, new[]{ "ObjectId", "Position", "Rotation", "PrefabName", "ObjectData", "OwnerId", "AnimationId", "IsLoop", "Blend" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BASE_REMOVE_OBJECT), global::Protocol.S_BASE_REMOVE_OBJECT.Parser, new[]{ "GameObjects" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BASE_SET_OBJECT_DATA), global::Protocol.C_BASE_SET_OBJECT_DATA.Parser, new[]{ "ObjectId", "ObjectData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BASE_SET_OBJECT_DATA), global::Protocol.S_BASE_SET_OBJECT_DATA.Parser, new[]{ "Success" }, null, null, null, null),
@@ -1604,6 +1605,9 @@ namespace Protocol {
           prefabName_ = other.prefabName_;
           objectData_ = other.objectData_;
           ownerId_ = other.ownerId_;
+          animationId_ = other.animationId_;
+          isLoop_ = other.isLoop_;
+          blend_ = other.blend_;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -1685,6 +1689,42 @@ namespace Protocol {
           }
         }
 
+        /// <summary>Field number for the "animationId" field.</summary>
+        public const int AnimationIdFieldNumber = 7;
+        private string animationId_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public string AnimationId {
+          get { return animationId_; }
+          set {
+            animationId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "isLoop" field.</summary>
+        public const int IsLoopFieldNumber = 8;
+        private bool isLoop_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public bool IsLoop {
+          get { return isLoop_; }
+          set {
+            isLoop_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "blend" field.</summary>
+        public const int BlendFieldNumber = 9;
+        private float blend_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public float Blend {
+          get { return blend_; }
+          set {
+            blend_ = value;
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public override bool Equals(object other) {
@@ -1706,6 +1746,9 @@ namespace Protocol {
           if (PrefabName != other.PrefabName) return false;
           if (ObjectData != other.ObjectData) return false;
           if (OwnerId != other.OwnerId) return false;
+          if (AnimationId != other.AnimationId) return false;
+          if (IsLoop != other.IsLoop) return false;
+          if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Blend, other.Blend)) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -1719,6 +1762,9 @@ namespace Protocol {
           if (PrefabName.Length != 0) hash ^= PrefabName.GetHashCode();
           if (ObjectData.Length != 0) hash ^= ObjectData.GetHashCode();
           if (OwnerId.Length != 0) hash ^= OwnerId.GetHashCode();
+          if (AnimationId.Length != 0) hash ^= AnimationId.GetHashCode();
+          if (IsLoop != false) hash ^= IsLoop.GetHashCode();
+          if (Blend != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Blend);
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -1761,6 +1807,18 @@ namespace Protocol {
             output.WriteRawTag(50);
             output.WriteString(OwnerId);
           }
+          if (AnimationId.Length != 0) {
+            output.WriteRawTag(58);
+            output.WriteString(AnimationId);
+          }
+          if (IsLoop != false) {
+            output.WriteRawTag(64);
+            output.WriteBool(IsLoop);
+          }
+          if (Blend != 0F) {
+            output.WriteRawTag(77);
+            output.WriteFloat(Blend);
+          }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
           }
@@ -1795,6 +1853,18 @@ namespace Protocol {
             output.WriteRawTag(50);
             output.WriteString(OwnerId);
           }
+          if (AnimationId.Length != 0) {
+            output.WriteRawTag(58);
+            output.WriteString(AnimationId);
+          }
+          if (IsLoop != false) {
+            output.WriteRawTag(64);
+            output.WriteBool(IsLoop);
+          }
+          if (Blend != 0F) {
+            output.WriteRawTag(77);
+            output.WriteFloat(Blend);
+          }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(ref output);
           }
@@ -1822,6 +1892,15 @@ namespace Protocol {
           }
           if (OwnerId.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeStringSize(OwnerId);
+          }
+          if (AnimationId.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(AnimationId);
+          }
+          if (IsLoop != false) {
+            size += 1 + 1;
+          }
+          if (Blend != 0F) {
+            size += 1 + 4;
           }
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
@@ -1858,6 +1937,15 @@ namespace Protocol {
           }
           if (other.OwnerId.Length != 0) {
             OwnerId = other.OwnerId;
+          }
+          if (other.AnimationId.Length != 0) {
+            AnimationId = other.AnimationId;
+          }
+          if (other.IsLoop != false) {
+            IsLoop = other.IsLoop;
+          }
+          if (other.Blend != 0F) {
+            Blend = other.Blend;
           }
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
@@ -1904,6 +1992,18 @@ namespace Protocol {
                 OwnerId = input.ReadString();
                 break;
               }
+              case 58: {
+                AnimationId = input.ReadString();
+                break;
+              }
+              case 64: {
+                IsLoop = input.ReadBool();
+                break;
+              }
+              case 77: {
+                Blend = input.ReadFloat();
+                break;
+              }
             }
           }
         #endif
@@ -1947,6 +2047,18 @@ namespace Protocol {
               }
               case 50: {
                 OwnerId = input.ReadString();
+                break;
+              }
+              case 58: {
+                AnimationId = input.ReadString();
+                break;
+              }
+              case 64: {
+                IsLoop = input.ReadBool();
+                break;
+              }
+              case 77: {
+                Blend = input.ReadFloat();
                 break;
               }
             }

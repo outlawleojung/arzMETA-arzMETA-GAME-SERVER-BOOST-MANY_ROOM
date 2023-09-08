@@ -1171,9 +1171,12 @@ class S_BASE_ADD_OBJECT_GameObjectInfo final :
     kPrefabNameFieldNumber = 4,
     kObjectDataFieldNumber = 5,
     kOwnerIdFieldNumber = 6,
+    kAnimationIdFieldNumber = 7,
     kPositionFieldNumber = 2,
     kRotationFieldNumber = 3,
     kObjectIdFieldNumber = 1,
+    kIsLoopFieldNumber = 8,
+    kBlendFieldNumber = 9,
   };
   // string prefabName = 4;
   void clear_prefabname();
@@ -1215,6 +1218,20 @@ class S_BASE_ADD_OBJECT_GameObjectInfo final :
   const std::string& _internal_ownerid() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_ownerid(const std::string& value);
   std::string* _internal_mutable_ownerid();
+  public:
+
+  // string animationId = 7;
+  void clear_animationid();
+  const std::string& animationid() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_animationid(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_animationid();
+  PROTOBUF_NODISCARD std::string* release_animationid();
+  void set_allocated_animationid(std::string* animationid);
+  private:
+  const std::string& _internal_animationid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_animationid(const std::string& value);
+  std::string* _internal_mutable_animationid();
   public:
 
   // .Protocol.Vector3 position = 2;
@@ -1262,6 +1279,24 @@ class S_BASE_ADD_OBJECT_GameObjectInfo final :
   void _internal_set_objectid(int32_t value);
   public:
 
+  // bool isLoop = 8;
+  void clear_isloop();
+  bool isloop() const;
+  void set_isloop(bool value);
+  private:
+  bool _internal_isloop() const;
+  void _internal_set_isloop(bool value);
+  public:
+
+  // float blend = 9;
+  void clear_blend();
+  float blend() const;
+  void set_blend(float value);
+  private:
+  float _internal_blend() const;
+  void _internal_set_blend(float value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo)
  private:
   class _Internal;
@@ -1273,9 +1308,12 @@ class S_BASE_ADD_OBJECT_GameObjectInfo final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr prefabname_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr objectdata_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ownerid_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr animationid_;
     ::Protocol::Vector3* position_;
     ::Protocol::Vector3* rotation_;
     int32_t objectid_;
+    bool isloop_;
+    float blend_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3969,6 +4007,96 @@ inline void S_BASE_ADD_OBJECT_GameObjectInfo::set_allocated_ownerid(std::string*
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.ownerId)
+}
+
+// string animationId = 7;
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::clear_animationid() {
+  _impl_.animationid_.ClearToEmpty();
+}
+inline const std::string& S_BASE_ADD_OBJECT_GameObjectInfo::animationid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.animationId)
+  return _internal_animationid();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_BASE_ADD_OBJECT_GameObjectInfo::set_animationid(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.animationid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.animationId)
+}
+inline std::string* S_BASE_ADD_OBJECT_GameObjectInfo::mutable_animationid() {
+  std::string* _s = _internal_mutable_animationid();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.animationId)
+  return _s;
+}
+inline const std::string& S_BASE_ADD_OBJECT_GameObjectInfo::_internal_animationid() const {
+  return _impl_.animationid_.Get();
+}
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::_internal_set_animationid(const std::string& value) {
+  
+  _impl_.animationid_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_BASE_ADD_OBJECT_GameObjectInfo::_internal_mutable_animationid() {
+  
+  return _impl_.animationid_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_BASE_ADD_OBJECT_GameObjectInfo::release_animationid() {
+  // @@protoc_insertion_point(field_release:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.animationId)
+  return _impl_.animationid_.Release();
+}
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::set_allocated_animationid(std::string* animationid) {
+  if (animationid != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.animationid_.SetAllocated(animationid, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.animationid_.IsDefault()) {
+    _impl_.animationid_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.animationId)
+}
+
+// bool isLoop = 8;
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::clear_isloop() {
+  _impl_.isloop_ = false;
+}
+inline bool S_BASE_ADD_OBJECT_GameObjectInfo::_internal_isloop() const {
+  return _impl_.isloop_;
+}
+inline bool S_BASE_ADD_OBJECT_GameObjectInfo::isloop() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.isLoop)
+  return _internal_isloop();
+}
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::_internal_set_isloop(bool value) {
+  
+  _impl_.isloop_ = value;
+}
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::set_isloop(bool value) {
+  _internal_set_isloop(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.isLoop)
+}
+
+// float blend = 9;
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::clear_blend() {
+  _impl_.blend_ = 0;
+}
+inline float S_BASE_ADD_OBJECT_GameObjectInfo::_internal_blend() const {
+  return _impl_.blend_;
+}
+inline float S_BASE_ADD_OBJECT_GameObjectInfo::blend() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.blend)
+  return _internal_blend();
+}
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::_internal_set_blend(float value) {
+  
+  _impl_.blend_ = value;
+}
+inline void S_BASE_ADD_OBJECT_GameObjectInfo::set_blend(float value) {
+  _internal_set_blend(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_BASE_ADD_OBJECT.GameObjectInfo.blend)
 }
 
 // -------------------------------------------------------------------
