@@ -1,0 +1,1 @@
+#include "ExpositionBoothRoom.h"

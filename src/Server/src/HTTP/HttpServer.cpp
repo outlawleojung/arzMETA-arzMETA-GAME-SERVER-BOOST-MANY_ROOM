@@ -165,6 +165,22 @@ void HttpServer::start(string ip, int port)
 
 			break;
 		}
+		case RoomType::Exposition :
+		{
+			room = make_shared<ExpositionRoom>();
+
+			static_pointer_cast<ExpositionRoom>(room)->roomCode = body["roomCode"];
+
+			break;
+		}
+		case RoomType::Exposition_Booth :
+		{
+			room = make_shared<ExpositionBoothRoom>();
+
+			static_pointer_cast<ExpositionBoothRoom>(room)->roomCode = body["roomCode"];
+
+			break;
+		}
 		default :
 		{
 			nlohmann::json resJson;

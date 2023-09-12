@@ -7,3 +7,5 @@
 #include "Lecture/LectureRoom.h"
 #include "Matching/MatchingRoom.h"
 #include "OX/OXRoom.h"
+#include "Exposition/ExpositionRoom.h"
+#include "Exposition_Booth/ExpositionBoothRoom.h"

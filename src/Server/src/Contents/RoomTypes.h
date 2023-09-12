@@ -27,6 +27,9 @@ enum class RoomType
 
     Festival,
 
+    Exposition,
+    Exposition_Booth,
+
     Unknown
 };
 

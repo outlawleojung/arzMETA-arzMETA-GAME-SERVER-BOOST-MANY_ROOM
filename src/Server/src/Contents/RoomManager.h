@@ -43,5 +43,8 @@ public:
 
 	map<string, shared_ptr<RoomBase>> HospitalRooms;
 
+	map<string, shared_ptr<RoomBase>> ExpositionRooms;
+	map<string, shared_ptr<RoomBase>> ExpositionBoothRooms;
+
 	recursive_mutex _mutex;
 };

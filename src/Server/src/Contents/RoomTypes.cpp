@@ -24,6 +24,9 @@ RoomType stringToRoomType(const std::string& roomTypeStr) {
         
         {"Festival", RoomType::Festival},
 
+        {"Exposition", RoomType::Exposition},
+		{"Exposition_Booth", RoomType::Exposition_Booth},
+
         {"Unknown", RoomType::Unknown}
     };
 
@@ -58,6 +61,9 @@ std::string roomTypeToString(RoomType roomType) {
         {RoomType::Hospital, "Hospital"},
 
         {RoomType::Festival, "Festival"},
+
+        {RoomType::Exposition, "Exposition"},
+        {RoomType::Exposition_Booth, "Exposition_Booth"},
 
         {RoomType::Unknown, "Unknown"}
     };

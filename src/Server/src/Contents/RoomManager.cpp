@@ -7,6 +7,8 @@
 #include "Meeting/MeetingRoom.h"
 #include "Lecture/LectureRoom.h"
 #include "OX/OXRoom.h"
+#include "Exposition/ExpositionRoom.h"
+#include "Exposition_Booth/ExpositionBoothRoom.h"
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
 {
@@ -98,6 +100,16 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
         OXQuizRooms.insert({ static_pointer_cast<OXRoom>(room)->roomCode, room });
         break;
     }
+    case RoomType::Exposition:
+    {
+        ExpositionRooms.insert({ static_pointer_cast<ExpositionRoom>(room)->roomCode, room });
+        break;
+    }
+    case RoomType::Exposition_Booth:
+    {
+        ExpositionBoothRooms.insert({ static_pointer_cast<ExpositionBoothRoom>(room)->roomCode, room });
+		break;
+    }
     default:
         throw std::invalid_argument("Invalid RoomType value");
     }
@@ -179,6 +191,16 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
     case RoomType::OXQuiz:
     {
         OXQuizRooms.erase(static_pointer_cast<OXRoom>(room)->roomCode);
+        break;
+    }
+    case RoomType::Exposition:
+    {
+		ExpositionRooms.erase(static_pointer_cast<ExpositionRoom>(room)->roomCode);
+		break;
+	}
+    case RoomType::Exposition_Booth:
+    {
+        ExpositionBoothRooms.erase(static_pointer_cast<ExpositionBoothRoom>(room)->roomCode);
         break;
     }
     default:
@@ -349,6 +371,32 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
                 if(oxRoom->second->roomInfo["isPlaying"] != true)
                     res.push_back(oxRoom->second->roomInfo);
             }
+        break;
+    }
+    case RoomType::Exposition:
+    {
+        if (query.find("roomCode") != query.end())
+        {
+            auto expositionRoom = ExpositionRooms.find(query["roomCode"]);
+            if (expositionRoom != ExpositionRooms.end())
+                res.push_back(expositionRoom->second->roomInfo);
+        }
+        else
+            for (auto expositionRoom = ExpositionRooms.begin(); expositionRoom != ExpositionRooms.end(); expositionRoom++)
+                res.push_back(expositionRoom->second->roomInfo);
+        break;
+    }
+    case RoomType::Exposition_Booth:
+    {
+        if (query.find("roomCode") != query.end())
+        {
+            auto expositionBooth = ExpositionBoothRooms.find(query["roomCode"]);
+            if (expositionBooth != ExpositionBoothRooms.end())
+                res.push_back(expositionBooth->second->roomInfo);
+        }
+        else
+            for (auto expositionBooth = ExpositionBoothRooms.begin(); expositionBooth != ExpositionBoothRooms.end(); expositionBooth++)
+                res.push_back(expositionBooth->second->roomInfo);
         break;
     }
     default:
