@@ -28,7 +28,7 @@ void Client::StartMove()
 			Protocol::C_BASE_SET_ANIMATION setAnimation;
 			setAnimation.set_objectid(objectId);
 			setAnimation.set_animationid("Avatar");
-			setAnimation.set_animation("M9AzAAIFEDQEAA==");
+			setAnimation.set_animation("M9AzAAIFA1QKCA0B");
 			Send(PacketManager::MakeSendBuffer(setAnimation));
 		}
 
@@ -41,7 +41,7 @@ void Client::StartMove()
 			isMoving = true;
 			Protocol::C_BASE_SET_ANIMATION setAnimation;
 			setAnimation.set_objectid(objectId);
-			setAnimation.set_animation("M9MzAAIFEDQEAA==");
+			setAnimation.set_animation("M9MzAAIFA1QKCA0B");
 			Send(PacketManager::MakeSendBuffer(setAnimation));
 		}
 

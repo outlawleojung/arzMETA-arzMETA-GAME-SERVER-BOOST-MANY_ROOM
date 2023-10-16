@@ -23,7 +23,7 @@ void GameRoom::Init()
 
 	if (type == RoomType::Festival)
 	{
-		maxPlayerNumber = 40;
+		maxPlayerNumber = 100;
 	}
 	else
 	{

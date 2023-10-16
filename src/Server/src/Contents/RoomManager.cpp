@@ -7,7 +7,6 @@
 #include "Meeting/MeetingRoom.h"
 #include "Lecture/LectureRoom.h"
 #include "OX/OXRoom.h"
-#include "Exposition/ExpositionRoom.h"
 #include "Exposition_Booth/ExpositionBoothRoom.h"
 
 void RoomManager::AddRoom(shared_ptr<RoomBase> room)
@@ -102,7 +101,7 @@ void RoomManager::IndexRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Exposition:
     {
-        ExpositionRooms.insert({ static_pointer_cast<ExpositionRoom>(room)->roomCode, room });
+        ExpositionRooms.insert({ room->roomId, room });
         break;
     }
     case RoomType::Exposition_Booth:
@@ -195,7 +194,7 @@ bool RoomManager::RemoveRoom(shared_ptr<RoomBase> room)
     }
     case RoomType::Exposition:
     {
-		ExpositionRooms.erase(static_pointer_cast<ExpositionRoom>(room)->roomCode);
+		ExpositionRooms.erase(room->roomId);
 		break;
 	}
     case RoomType::Exposition_Booth:
@@ -375,15 +374,8 @@ nlohmann::json RoomManager::GetRoom(map<string, string> query)
     }
     case RoomType::Exposition:
     {
-        if (query.find("roomCode") != query.end())
-        {
-            auto expositionRoom = ExpositionRooms.find(query["roomCode"]);
-            if (expositionRoom != ExpositionRooms.end())
-                res.push_back(expositionRoom->second->roomInfo);
-        }
-        else
-            for (auto expositionRoom = ExpositionRooms.begin(); expositionRoom != ExpositionRooms.end(); expositionRoom++)
-                res.push_back(expositionRoom->second->roomInfo);
+        for (auto expositionRoom = ExpositionRooms.begin(); expositionRoom != ExpositionRooms.end(); expositionRoom++)
+            res.push_back(expositionRoom->second->roomInfo);
         break;
     }
     case RoomType::Exposition_Booth:

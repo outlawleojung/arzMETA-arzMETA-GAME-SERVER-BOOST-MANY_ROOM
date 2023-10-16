@@ -257,14 +257,17 @@ int main()
 
 		else if (command._Equal("connect_many"))
 		{
+			static int idGenerator = 0;
 			int count;
 			string roomId;
-			int x, y, z;
+			float x, y, z;
 			cin >> count >> roomId >> x >> y >> z;
+
+			y = 0.45f;
 
 			for (int i = 0; i < count; i++)
 			{
-				string clientId = "Test_" + std::to_string(i);
+				string clientId = "Test_" + std::to_string(idGenerator++);
 
 				auto client = MakeClient(ioc, ep, clientId);
 				if (client == nullptr)

@@ -29,6 +29,8 @@ enum class RoomType
 
     Exposition,
     Exposition_Booth,
+    //상담실 추가
+    Exposition_Counsulting,
 
     Unknown
 };

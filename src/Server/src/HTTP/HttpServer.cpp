@@ -29,6 +29,42 @@ void HttpServer::start(string ip, int port)
 		res.set_content(GRoomManager->GetRoom(query).dump(), "application/json");
 		});
 
+	svr.Get("/ExpositionBoothPlayerNumber", [](const httplib::Request& req, httplib::Response& res) {
+
+		map<string, string> query;
+
+		for (auto param = req.params.begin(); param != req.params.end(); param++)
+			query[param->first] = param->second;
+
+		nlohmann::json resJson;
+
+		auto room = GRoomManager->ExpositionBoothRooms.find(query["boothId"]);
+		if(room == GRoomManager->ExpositionBoothRooms.end())
+			resJson["PlayerNumber"] = 0;
+		else
+			resJson["PlayerNumber"] = room->second->clients.size();
+
+		res.set_content(resJson.dump(), "application/json");
+		});
+
+	svr.Post("/ExpositionBoothPlayerNumber", [](const httplib::Request& req, httplib::Response& res) {
+
+		map<string, string> query;
+
+		for (auto param = req.params.begin(); param != req.params.end(); param++)
+			query[param->first] = param->second;
+
+		nlohmann::json resJson;
+
+		auto room = GRoomManager->ExpositionBoothRooms.find(query["roomCode"]);
+		if (room == GRoomManager->ExpositionBoothRooms.end())
+			resJson["PlayerNumber"] = 0;
+		else
+			resJson["PlayerNumber"] = room->second->clients.size();
+
+		res.set_content(resJson.dump(), "application/json");
+		});
+
     svr.Post("/MakeRoom", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
 
         std::string bodyStr;
@@ -39,6 +75,8 @@ void HttpServer::start(string ip, int port)
 
         nlohmann::json body = nlohmann::json::parse(bodyStr);
 		
+		std::cout << body.dump() << std::endl;
+
 		//GLogManager->Log("MakeRoom Request : ", body.dump());
 
 		auto type = stringToRoomType(body["roomType"].get<string>());
@@ -55,6 +93,7 @@ void HttpServer::start(string ip, int port)
 		case RoomType::Office:
 		case RoomType::Busan :
 		case RoomType::Festival :
+		case RoomType::Exposition:
 		{
 			room = make_shared<GameRoom>();
 			break;
@@ -165,14 +204,6 @@ void HttpServer::start(string ip, int port)
 
 			break;
 		}
-		case RoomType::Exposition :
-		{
-			room = make_shared<ExpositionRoom>();
-
-			static_pointer_cast<ExpositionRoom>(room)->roomCode = body["roomCode"];
-
-			break;
-		}
 		case RoomType::Exposition_Booth :
 		{
 			room = make_shared<ExpositionBoothRoom>();
@@ -226,6 +257,8 @@ void HttpServer::start(string ip, int port)
 
 		res.set_content(resJson.dump(), "application/json");
 		});
+
+
 
     svr.listen(ip.c_str(), port);
 }

@@ -9,16 +9,12 @@ target_include_directories(DummyClient PRIVATE ../CoreLib/src ./Include)
 target_link_libraries(DummyClient PRIVATE CoreLib)
 
 if (WIN32)
-    file(GLOB common_libs ./Lib/Win/*.lib)
-
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        file(GLOB platform_libs ./Lib/Win/Debug/*.lib)
-    elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-        file(GLOB platform_libs ./Lib/Win/Release/*.lib)
-    endif()
-
-    target_link_libraries(DummyClient PRIVATE ${common_libs} ${platform_libs})
+    set(CMAKE_PREFIX_PATH "C:/Program Files/gRPC" ${CMAKE_PREFIX_PATH})
+    set(CMAKE_PREFIX_PATH "C:/Program Files/agones" ${CMAKE_PREFIX_PATH})
 endif (WIN32)
+
+find_package(Protobuf CONFIG REQUIRED)
+target_link_libraries(DummyClient PRIVATE protobuf::libprotobuf protobuf::libprotoc)
 
 if (UNIX)
     find_package(Protobuf REQUIRED)
