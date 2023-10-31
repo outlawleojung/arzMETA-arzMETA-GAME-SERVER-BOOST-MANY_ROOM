@@ -2,8 +2,12 @@
 
 #include "../pch.h"
 
+#include <sio_client.h>
+
 class GameSession;
 class SendBuffer;
+
+class connection_listener;
 
 class Client : public JobQueue
 {
@@ -37,4 +41,22 @@ public:
 	float cap = 10;
 
 	bool isMoving = false;
+
+	//web socket
+public:
+	void ConnectWS();
+	void CloseWS();
+	void Register();
+	void TestSend();
+
+	void SendWS(string name, sio::message::list list);
+
+private:
+	sio::client h;
+
+	std::shared_ptr<connection_listener> l;
+
+	std::mutex _lock;
+	std::condition_variable_any _cond;
+	bool connect_finish = false;
 };

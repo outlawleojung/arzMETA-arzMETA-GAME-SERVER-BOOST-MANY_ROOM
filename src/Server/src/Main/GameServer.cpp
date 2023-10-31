@@ -87,11 +87,6 @@ int main()
 		);
 	}
 
-	{
-		soci::session sql(*DBConnectionPool);
-		sql << "TRUNCATE TABLE memberconnectinfo";
-	}
-
 	PacketManager::Init();
 
 #ifdef linux

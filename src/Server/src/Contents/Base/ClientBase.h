@@ -23,6 +23,8 @@ public:
 	void Leave(string code);
 	void Send(shared_ptr<SendBuffer> sendBuffer);
 
+	void Test_Send(shared_ptr<SendBuffer> sendBuffer);
+
 	void ReEnter(shared_ptr<GameSession> session);
 
 	void OnDisconnected();

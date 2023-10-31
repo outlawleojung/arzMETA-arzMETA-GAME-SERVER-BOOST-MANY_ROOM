@@ -7,8 +7,6 @@
 
 #include <boost/asio.hpp>
 
-#include <soci/soci.h>
-
 class GameSession;
 
 class ClientManager
@@ -16,30 +14,22 @@ class ClientManager
 public:
 	template<typename T>
 	shared_ptr<ClientBase> MakeCilent(string clientId, int sessionId, shared_ptr<RoomBase> enteredRoom)
-	{
-		if (clientId.find("Test_") == 0)
-		{
-			shared_ptr<ClientBase> client = make_shared<T>();
-
-			client->clientId = clientId;
-			client->enteredRoom = enteredRoom;
-			client->enteredRoomId = enteredRoom->roomId;
-
-			return client;
-		}
-		
+	{	
 		shared_ptr<ClientBase> client = nullptr;
 
 		{
 			lock_guard<std::recursive_mutex> lock(mtx);
 
-			auto _sessionId = sessionIds.find(clientId);
-			if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
+			if (clientId.find("Test_") != 0)
 			{
-				GLogManager->Log("Make Client Fail! : ", clientId, " ", to_string(sessionId));
-				return nullptr;
+				auto _sessionId = sessionIds.find(clientId);
+				if (_sessionId == sessionIds.end() || _sessionId->second != sessionId)
+				{
+					GLogManager->Log("Make Client Fail! : ", clientId, " ", to_string(sessionId));
+					return nullptr;
+				}
 			}
-
+			
 			client = make_shared<T>();
 
 			client->clientId = clientId;
@@ -56,77 +46,17 @@ public:
 			clients[clientId] = client;
 		}
 
-		try
-		{
-			soci::session sql(*DBConnectionPool);
-
-			if (!sql.is_connected())
-			{
-				GLogManager->Log("Mysql Connection Disconnected. Reconnect");
-				sql.reconnect();
-			}
-
-			sql << "INSERT INTO memberconnectinfo (membercode, roomId) VALUES (:id, :room) ON DUPLICATE KEY UPDATE roomId = VALUES(roomId)",
-				soci::use(clientId), soci::use(enteredRoom->roomId);
-		}
-		catch (soci::soci_error& e)
-		{
-			std::cerr << "From ClientManager 1,SOCI Error: " << e.what() << std::endl;
-		}
-		catch (const std::exception& e) {
-			std::cerr << "From ClientManager 1,Standard Exception: " << e.what() << std::endl;
-		}
-		catch (...) {
-			std::cerr << "From ClientManager 1,Unknown Exception Caught" << std::endl;
-		}
-
 		return client;
 	}
 
 	void RemoveClient(shared_ptr<ClientBase> client)
 	{
-		if (client->clientId.find("Test_") == 0)
-			return;
+		lock_guard<std::recursive_mutex> lock(mtx);
 
-		bool flag = false;
-		string clientId;
-
+		auto _client = clients.find(client->clientId);
+		if (_client != clients.end() && _client->second.get() == client.get())
 		{
-			lock_guard<std::recursive_mutex> lock(mtx);
-
-			auto _client = clients.find(client->clientId);
-			if (_client != clients.end() && _client->second.get() == client.get())
-			{
-				flag = true;
-				clientId = _client->second->clientId;
-				clients.erase(_client);
-			}
-		}
-
-		if (flag)
-		{
-			try
-			{
-				soci::session sql(*DBConnectionPool);
-
-				if (!sql.is_connected())
-				{
-					GLogManager->Log("Mysql Connection Disconnected. Reconnect");
-					sql.reconnect();
-				}
-
-				sql << "DELETE FROM memberconnectinfo WHERE membercode = :id", soci::use(client->clientId);
-			}
-			catch (soci::soci_error& e)
-			{
-				std::cerr << "From ClientManager 2, SOCI Error: " << e.what() << std::endl;
-			}
-			catch (const std::exception& e) {
-				std::cerr << "From ClientManager 2,Standard Exception: " << e.what() << std::endl;
-			}
-			catch (...) {
-				std::cerr << "From ClientManager 2,Unknown Exception Caught" << std::endl;
-			}
+			clients.erase(_client);
 		}
 	}
 

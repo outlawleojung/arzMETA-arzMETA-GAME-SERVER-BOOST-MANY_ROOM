@@ -32,6 +32,19 @@ void ClientBase::Leave(string code)
 	}
 }
 
+//void ClientBase::Send(shared_ptr<SendBuffer> sendBuffer)
+//{
+//	DoTimer(100, &ClientBase::Test_Send, sendBuffer);
+//}
+//
+//void ClientBase::Test_Send(shared_ptr<SendBuffer> sendBuffer)
+//{
+//	if (session == nullptr)
+//		return;
+//
+//	session->Send(sendBuffer);
+//}
+
 void ClientBase::Send(shared_ptr<SendBuffer> sendBuffer)
 {
 	if (session == nullptr)

@@ -15,17 +15,32 @@ bool Handle_S_ENTER(shared_ptr<GameSession>& session, Protocol::S_ENTER& pkt)
 
 	GLogManager->Log("Client ", client->clientId, " S_ENTER : ", pkt.result());
 
-	Protocol::C_BASE_INSTANTIATE_OBJECT instantiate;
-	auto position = instantiate.mutable_position();
-	position->set_x(client->position_x);
-	position->set_y(client->position_y);
-	position->set_z(client->position_z);
-	
-	instantiate.set_prefabname("Addressable/Prefab/Player/Player_Realtime");
+	if(pkt.result() != "SUCCESS")
+		return false;
 
-	instantiate.set_objectdata("{\"1\":310007,\"4\":340036}");
+	client->ConnectWS();
 
-	client->Send(PacketManager::MakeSendBuffer(instantiate));
+	{
+		auto msg = std::static_pointer_cast<sio::object_message>(sio::object_message::create());
+		msg->insert("roomId", "testRoomId");
+		msg->insert("sceneName", "testScene");
+		sio::message::list list;
+		list.push(msg);
+		client->SendWS("C_Test_EnterRoom", list);
+	}
+
+	{
+		auto msg = std::static_pointer_cast<sio::object_message>(sio::object_message::create());
+		msg->insert("px", "0.0000");
+		msg->insert("py", "0.0000");
+		msg->insert("pz", "0.0000");
+		msg->insert("euler", "0.0000");
+		msg->insert("prefabName", "Addressable/Prefab/Player/Player_Realtime");
+		msg->insert("objectInfo", "{\"1\":310007,\"4\":340036}");
+		sio::message::list list;
+		list.push(msg);
+		client->SendWS("C_Test_Instantiate", list);
+	}
 
 	return true;
 }
@@ -37,7 +52,7 @@ bool Handle_S_REENTER(shared_ptr<GameSession>& session, Protocol::S_REENTER& pkt
 
 bool Handle_S_ADD_CLIENT(shared_ptr<GameSession>& session, Protocol::S_ADD_CLIENT& pkt) 
 {
-	auto client = session->owner;
+	/*auto client = session->owner;
 
 	string log = "";
 
@@ -49,14 +64,14 @@ bool Handle_S_ADD_CLIENT(shared_ptr<GameSession>& session, Protocol::S_ADD_CLIEN
 		log.append(clientInfo.clientid()).append(" ");
 	}
 
-	GLogManager->Log(log);
+	GLogManager->Log(log);*/
 
 	return true;
 }
 
 bool Handle_S_REMOVE_CLIENT(shared_ptr<GameSession>& session, Protocol::S_REMOVE_CLIENT& pkt) 
 {
-	auto client = session->owner;
+	/*auto client = session->owner;
 
 	string log = "";
 
@@ -65,7 +80,7 @@ bool Handle_S_REMOVE_CLIENT(shared_ptr<GameSession>& session, Protocol::S_REMOVE
 	for (int i = 0; i < pkt.clientids_size(); i++)
 		log.append(pkt.clientids(i)).append(" ");
 
-	GLogManager->Log(log);
+	GLogManager->Log(log);*/
 
 	return true;
 }

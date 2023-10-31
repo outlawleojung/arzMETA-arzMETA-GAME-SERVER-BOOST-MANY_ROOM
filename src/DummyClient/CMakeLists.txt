@@ -21,3 +21,8 @@ if (UNIX)
     include_directories(${Protobuf_INCLUDE_DIRS})
     target_link_libraries(DummyClient PRIVATE ${Protobuf_LIBRARIES})
 endif (UNIX)
+
+if (WIN32)
+    find_package(sioclient CONFIG REQUIRED)
+    target_link_libraries(DummyClient PRIVATE sioclient::sioclient)
+endif (WIN32)

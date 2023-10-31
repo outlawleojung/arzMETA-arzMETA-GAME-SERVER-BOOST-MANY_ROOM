@@ -6,6 +6,10 @@
 
 #include <boost/asio.hpp>
 
+#include <sio_client.h>
+#include <sio_socket.h>
+#include <sio_message.h>
+
 using namespace boost::asio;
 
 enum
@@ -120,7 +124,7 @@ int main()
 
 	io_context ioc;
 	ip::tcp::endpoint ep(ip::address_v4::from_string(localHostIp), tcpPort);
-	//ip::tcp::endpoint ep(ip::address_v4::from_string("20.214.186.69"), 45456);
+	//ip::tcp::endpoint ep(ip::address_v4::from_string("20.200.216.69"), 45456);
 
 	bool state = true;
 
@@ -171,6 +175,7 @@ int main()
 			string roomId;
 			cin >> roomId;
 
+			clientId = "Test_" + clientId;
 			auto client = MakeClient(ioc, ep, clientId);
 			if (client == nullptr)
 			{
