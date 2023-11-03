@@ -27,7 +27,7 @@ void GameRoom::Init()
 	}
 	else
 	{
-		maxPlayerNumber = 20;
+		maxPlayerNumber = 16001;
 	}
 
 	GRoomManager->IndexRoom(static_pointer_cast<RoomBase>(shared_from_this()));
