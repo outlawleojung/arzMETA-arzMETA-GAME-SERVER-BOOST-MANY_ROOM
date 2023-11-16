@@ -9,6 +9,10 @@ void HttpServer::start(string ip, int port)
 {
     httplib::Server svr;
 
+	svr.Get("/test", [](const httplib::Request& req, httplib::Response& res) {
+		res.set_content("this is test", "text/plain");
+		});
+
     svr.Get("/Rooms", [](const httplib::Request& req, httplib::Response& res) {
 
 		map<string, string> query;
