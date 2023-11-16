@@ -241,6 +241,9 @@ void HttpServer::start(string ip, int port)
 	svr.Post("/Login", [](const httplib::Request& req, httplib::Response& res, const httplib::ContentReader& content_reader) {
 
 		std::string bodyStr;
+
+		std::cout << "Login Request : " << bodyStr << std::endl;
+
 		content_reader([&](const char* data, size_t data_length) {
 			bodyStr.append(data, data_length);
 			return true;
